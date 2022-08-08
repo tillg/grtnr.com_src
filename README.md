@@ -2,7 +2,7 @@
 
 The content of my website. Can be reached under...
 
-* https://github.io/tillg/grtnr.com_jekyll_2022
+* https://tillg.github.io/grtnr.com_jekyll_2022/
 
 ## Todo
 
