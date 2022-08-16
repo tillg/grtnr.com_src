@@ -28,7 +28,7 @@ twitter_username: tillg
 github_username:  tillg
 
 # Build settings
-theme: minima
+theme: minima # minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
 
