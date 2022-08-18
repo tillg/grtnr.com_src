@@ -6,7 +6,7 @@ date_published: 2021-12-05T12:31:19.000Z
 date_updated: 2021-12-13T10:47:01.000Z
 tags: Recettes / Recipes / Rezepte
 ---
-
+![](plaetzchen.jpeg)
 **** For our international friends, find the English recipe below. ****
 
 Die heiligen Plätzchen-Rezepte meiner Großmutter Muini. Die PLätzchen, die sie immer für mich gebacken hatte, und die im engeren Familienkreis sogar nach mir benannt wurden 😍
@@ -16,9 +16,9 @@ Vielen Dank an Juju, der in seinem alten Kochbuch aus Schulzeiten die von mir ha
 Neben der Tatsache, dass sie wahnsinnig gut schmecken und mir Muini in Erinnerung rufen, passen sie auch optimal zusammen: Die einen verarbeiten die Eigelb, die anderen die Eiweiß 😜
 
 **Bemerkung**: Das Plätzchenfoto oben ist auch von Juju - Merci!
-![](../assets/images/2021/12/66007305577__8AEF25D1-6F72-4E41-BD48-F7738D2C2EB1.jpeg)
+![](rezept_till_plaetzchen.jpeg)
 
-![](/assets/images/2021/12/66007307874__C51243FF-34F0-4B85-8E73-6F1AAC1C5A0A.jpeg)
+![](rezept_haselnussbusserl.jpeg)
 
 ### Till Plätzchen
 
