@@ -44,6 +44,7 @@ jobs:
           directory: ./_site
           check_opengraph: false
           check_favicon: false
+          external_only: true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1 # This will automatically upload an artifact from the '/_site' directory
 
