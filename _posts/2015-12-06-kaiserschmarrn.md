@@ -7,7 +7,7 @@ date_updated: 2021-12-06T10:50:45.000Z
 tags: Recettes / Recipes / Rezepte
 ---
 
-Angeblich das beste Kaiserschmarrn-Rezept, vom [Schuhbeck Alfons](https://www.schuhbeck.de/rezepte/karamellisierter-kaiserschmarren/)...
+Angeblich das beste Kaiserschmarrn-Rezept, vom [Schuhbeck Alfons](https://kochclub.schuhbeck.de/karamellisierter-kaiserschmarren-mit-rosinen-und-mandeln/)...
 
 ## Zutaten für 4 Personen
 

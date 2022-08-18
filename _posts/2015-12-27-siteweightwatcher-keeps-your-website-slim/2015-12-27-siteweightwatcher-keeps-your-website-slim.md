@@ -32,7 +32,7 @@ So here is what my SiteWeightWatcher should do:
 - How much time does it take searching for products? Over time...  
 - How well connected is the site for users in Germany, UK, US or Asia? Over time, because those things change without us having done anything.
 
-I could imagine a dashboard for an online shop like [KICKZ.com](http://kickz.com) to look may this way:
+I could imagine a dashboard for an online shop like [KICKZ.com](https://www.kickz.com/de) to look may this way:
 ![](kickz_dashboard.png)A Dashboard that shows how page sizes evolve
 
 And just as the normal test teams do, these tests should also evolve and become more and more adapted to the site, it's functionality and its users. Whenever we have a real problem or bug out there, we have to make sure that our WeightWatcher will find it in case it should appear or happen again. 
