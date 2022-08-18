@@ -41,7 +41,7 @@ jobs:
       - name: Check for broken links
         uses: anishathalye/proof-html@v1
         with:
-          directory: /_site
+          directory: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1 # This will automatically upload an artifact from the '/_site' directory
 
