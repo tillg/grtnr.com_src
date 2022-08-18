@@ -32,8 +32,11 @@ and then tun the site locally with `bundle exec jekyll serve`.
 ## Problems 
 
 A list of problems I met and how I delt with them.
+### Check links
 
+[How to Check for Broken Links in Jekyll](https://www.supertechcrew.com/jekyll-check-for-broken-links/)
 ### Image location
+
 Typically Jekyll wants it's images to be in `assets/images/...`. When referring images in posts or pages, usually one references `/assets/images/image.jpg`. In my case the site might be rendered not in the root directory, so for example to `https://tillg.github.io/jekyll_test/`. Thus, referencing `/assets` points to `https://tillg.github.io/assets` rather than to `https://tillg.github.io/jekyll_test/assets`.
 
 Other criteria that I have:

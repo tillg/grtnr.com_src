@@ -37,3 +37,7 @@ gem "webrick", "~> 1.7"
 gem "minimal-mistakes-jekyll", "~> 4.24"
 
 gem "jekyll-postfiles", "~> 3.1"
+
+gem "rake", "~> 13.0"
+
+gem "html-proofer", "~> 4.4"
