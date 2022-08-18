@@ -8,14 +8,14 @@ tags: Recettes / Recipes / Rezepte
 ---
 
 **Zutaten für 4 Portionen**
-•	500 g Tomate(n), grüne, zerkleinert
-•	1 Paprikaschote(n), grüne, zerkleinert
-•	5 kleine Chilischote(n), ganze(!)
-•	4 EL Essig (Weinessig)
-•	100 g Zucker (brauner oder weißer Kandis)
-•	3 Nelken
-•	Salz und Pfeffer, nach Bedarf
-•	Ingwer, nach Bedarf
+- 500 g Tomate(n), grüne, zerkleinert
+- 1 Paprikaschote(n), grüne, zerkleinert
+- 5 kleine Chilischote(n), ganze(!)
+- 4 EL Essig (Weinessig)
+- 100 g Zucker (brauner oder weißer Kandis)
+- 3 Nelken
+- Salz und Pfeffer, nach Bedarf
+- Ingwer, nach Bedarf
 
 **Zubereitung**
 Die gesamten Zutaten in einen Topf geben und ca. 30 - 45 Min. langsam einkochen lassen. Man kann es auch pürieren und dann einkochen lassen, nur die Chilischoten ganz lassen, sonst wird es verdammt scharf. Heiß in Gläser füllen.

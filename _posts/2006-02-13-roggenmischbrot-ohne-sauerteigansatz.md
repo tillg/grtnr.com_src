@@ -8,13 +8,13 @@ tags: Recettes / Recipes / Rezepte
 ---
 
 **Zutaten** für ein rundes Brot
-500g	Roggenmehl (Typ 815)	žitná mouka
-400g	Weizenmehl (Typ 812)	pšeničná mouka
-15g	Trockensauerteig	Kvas suchý
-1 Beutel	Trockenhefe	Kvasnice suchý
-2 TL	Salz	sůl
-1 TL	Zucker	cukr
-Mehl zum Bearbeiten	mouka
+500g Roggenmehl (Typ 815) žitná mouka
+400g Weizenmehl (Typ 812) pšeničná mouka
+15g	Trockensauerteig Kvas suchý
+1 Beutel Trockenhefe	Kvasnice suchý
+2 TL Salz sůl
+1 TL Zucker cukr
+Mehl zum Bearbeiten mouka
 
 **Zubereitung**
 

@@ -8,13 +8,13 @@ tags: Recettes / Recipes / Rezepte
 ---
 
 **Zutaten**
-•	1000g Mehl-Mischung (Roggen + Weizen, max. 700g Roggen)
-•	150g Seitenbacher Natur-Sauerteig (oder selbstgemachter Sauerteigansatz)
-•	1 Würfel Hefe
-•	500-600 ml Wasser
-•	2 Teelöffel Salz
-•	2 Teelöffel Zucker oder Honig
-•	Gewürze nach Belieben (Kümmel, Pfeffer, Knoblauch, Zwiebeln, Rosmarin, Basilikum, Wacholder etc.)
+- 1000g Mehl-Mischung (Roggen + Weizen, max. 700g Roggen)
+- 150g Seitenbacher Natur-Sauerteig (oder selbstgemachter Sauerteigansatz)
+- 1 Würfel Hefe
+- 500-600 ml Wasser
+- 2 Teelöffel Salz
+- 2 Teelöffel Zucker oder Honig
+- Gewürze nach Belieben (Kümmel, Pfeffer, Knoblauch, Zwiebeln, Rosmarin, Basilikum, Wacholder etc.)
 
 **Zubereitung**
 

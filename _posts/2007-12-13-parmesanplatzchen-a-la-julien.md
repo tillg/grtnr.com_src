@@ -8,10 +8,10 @@ tags: Recettes / Recipes / Rezepte
 ---
 
 **Ingrédients** pour env. 30 pièces :
-•	200g beurre
-•	200g Parmesan
-•	200g farine
-•	Sel
+- 200g beurre
+- 200g Parmesan
+- 200g farine
+- Sel
 
 **Préparation**
 Mélanger le tout, bien malaxer. En faire un boudin d’environ 5cm de diamètre. En couper des tranches de 3 mm. Au four à 200°, 8-10 minutes.

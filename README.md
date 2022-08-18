@@ -16,6 +16,7 @@ and then tun the site locally with `bundle exec jekyll serve`.
 
 ## Todo
 
+* ~~Fix: Images are not visible~~
 * Find a more pleasant layout
 * Have actions that test before publishing:
   * Can all the content be properly translated to HTML?
