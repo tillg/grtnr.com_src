@@ -15,7 +15,7 @@ Spicherenstr. 12
 Vertreten durch: Till Gartner
 
 Kontakt: Telefon: 0152-54616547
-	E-Mail: [till.gartner [at] gmail.com](till.gartner [at] gmail.com)
+	E-Mail: till.gartner at gmail.com
 
 Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:
 Till Gartner

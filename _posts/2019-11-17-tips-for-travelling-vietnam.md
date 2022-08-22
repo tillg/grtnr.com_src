@@ -44,7 +44,7 @@ Highlights in Sachen Natur war für uns der Norden: **Berge**, **Dschungel**, wu
 ---
 
 Unsere Gegend war Strand: Zentralvietnam, mit **Đà Nẵng** und **Hội An**. Đà Nẵng ist vietnamesisch, mittlere Stadt. Hội An ist UNESCO Weltkulturerbe, dementsprechend voll mit Touristen. Neben den typischen Landmarks aus dem Reiseführer war unser Highlight **Tauchen**. Kann man auch als nicht-Taucher, quasi reinschnuppern und mal probieren. Wenn tauchen, dann sagen dass man von Till kommt - dann wird der Service netter & günstiger. Jeder Dive Master reagiert auf den Namen 😀
-[Vietnam Scuba Diving](http://vietnamscubadiving.com)
+[Vietnam Scuba Diving](https://vietnamscubadiving.com)
 
 ---
 

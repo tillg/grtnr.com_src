@@ -19,7 +19,7 @@ What's missing with most of the test approaches I have seen in the past are the 
 
 So I am looking for a tool to test (web based) software once it's out in the wild and throughout the entire user experience. Imagine a website, a simple blog. It might be perfect when it got launched, but over time it just degrades: the designers have added so many bells and whistles, the volume of the content has grown, it was tweaked to be more useable on mobiles... And eventually the site is bloated, heavy and slow. Why do I have to wait for my users to tell me (that would be complaining)? 
 
-At [mgm technology partners](http://mgm-tp.com) we have automated test suites that run every night. So developers that built in code that slows down the software have a report that tells them every morning in their inbox. 
+At [mgm technology partners](https://mgm-tp.com) we have automated test suites that run every night. So developers that built in code that slows down the software have a report that tells them every morning in their inbox. 
 
 So here is what my SiteWeightWatcher should do:
 
