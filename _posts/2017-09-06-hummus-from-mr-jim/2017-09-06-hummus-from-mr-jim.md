@@ -22,4 +22,6 @@ It's rather simple:
 *BLEND*! And yes, you can eat it right away, no need to wait...
 
 The original writing from the chef:
-![](/assets/images/2021/12/hummus-recipe.png)
+![Hummus recipy](hummus-recipe.png)
+
+

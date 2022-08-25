@@ -10,7 +10,8 @@ tags: Recettes / Recipes / Rezepte
 Vanillekipferl are a German / Bavarian traditional cookie that we all love 😜
 
 This receipe is from Katja, and her Kipferl are the world best ones.
-![](/assets/images/2021/12/vanillekipferl-rezept.jpg)
+![Vanillekipferl Rezept](vanillekipferl-rezept.jpg)
+
 Translated that would be:
 
 - 60g icing sugar
