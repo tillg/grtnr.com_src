@@ -38,6 +38,9 @@ jobs:
         uses: actions/configure-pages@v1
       - name: Build Jekyll 
         run: ./build.sh
+      - name: Post build check - must pass
+        run: ./post_build_check_hard.sh
+        continue-on-error: false
       - name: Post build check - allowed to fail
         run: ./post_build_check_soft.sh
         continue-on-error: true
