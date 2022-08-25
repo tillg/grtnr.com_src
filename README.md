@@ -20,20 +20,23 @@ and then tun the site locally with `bundle exec jekyll serve`.
 * ~~Fix: Images are not visible~~ 2022-08
 * ~~2022-08-20 Link it to grtnr.com (with CNAME) --> Using https://new.grtnr.de instead.~~
 * Build process should check if all links work: external, pictures, etc.
+  * Make sure we build with the same scripts locally and within the github actions
+* Have Google tracking
 * Find a more pleasant layout
+* **--- Go live ---**
+* Navigation with categories, i.e. recipes, tech, family, travel...
+* Lint & format HTML before commit (commit hooks)
 * Have recipes as extra collection & extra layout
 * Have actions that test before publishing:
   * Can all the content be properly translated to HTML?
   * Are all the links valid?
   * Are all the images available?
-* Have Google tracking
 * Have sitemap
-* Navigation with categories, i.e. recipes, tech, family, travel...
 * Integrate search
 * Integrate comments
 * Differentiate posts and pages (i.e. about, impressum...)
 
-## Problems 
+## Problems & findings
 
 A list of problems I met and how I delt with them.
 
@@ -67,7 +70,20 @@ tillg.github.io.	3600	IN	A	185.199.111.153
 For the time being I switched over to the domain https://new.grtnr.de .
 ### Check links
 
-[How to Check for Broken Links in Jekyll](https://www.supertechcrew.com/jekyll-check-for-broken-links/)
+[How to Check for Broken Links in Jekyll](https://www.supertechcrew.com/jekyll-check-for-broken-links/).
+
+This works somehow locally: 
+
+```bash
+bundle exec jekyll build
+bundle exec htmlproofer ./_site
+```
+
+Problems so far:
+
+* http links are considered a _bug_ or are reported as such. But some pages don't offer https and I still want to link them --> how to switch off this test?
+
+
 ### Image location
 
 Typically Jekyll wants it's images to be in `assets/images/...`. When referring images in posts or pages, usually one references `/assets/images/image.jpg`. In my case the site might be rendered not in the root directory, so for example to `https://tillg.github.io/jekyll_test/`. Thus, referencing `/assets` points to `https://tillg.github.io/assets` rather than to `https://tillg.github.io/jekyll_test/assets`.

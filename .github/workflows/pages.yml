@@ -37,7 +37,8 @@ jobs:
         id: pages
         uses: actions/configure-pages@v1
       - name: Build Jekyll 
-        run: bundle exec jekyll build --baseurl ${{ steps.pages.outputs.base_path }} # defaults output to '/_site'
+        run: ./build.sh
+      #  run: bundle exec jekyll build --baseurl ${{ steps.pages.outputs.base_path }} # defaults output to '/_site'
       # - name: Check for broken links
       #   uses: anishathalye/proof-html@v1
       #   with:
