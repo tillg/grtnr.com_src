@@ -15,7 +15,11 @@ For a side project I would like to have a nice, moving SVG Logo. While searching
 - **[SVG Path Tutorial](http://xahlee.info/js/svg_path_spec.html)**, an old, but very well presented tutorial on SVG. The Path is just one part, but an interesting one...
 
 For my personal design (i.e. what I want to design), this [Google Maps Pin as SVG](https://upload.wikimedia.org/wikipedia/commons/d/d1/Google_Maps_pin.svg) is also helpful: 
-![](/assets/images/2021/12/google_map.svg)
+
+![Google pointer](google_map.svg)
 
 And this is what I built (V1 from May 24th 2019 - subject to change 😀)
-![](/assets/images/2021/12/spotz.svg)My moving pin
+
+![My spotz SVG](spotz.svg)
+
+My moving pin
