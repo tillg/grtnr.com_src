@@ -19,13 +19,13 @@ and then tun the site locally with `bundle exec jekyll serve`.
 
 * ~~Fix: Images are not visible~~ 2022-08
 * ~~2022-08-20 Link it to grtnr.com (with CNAME) --> Using https://new.grtnr.de instead.~~
-* Build process should check if all links work: external, pictures, etc.
-  * Make sure we build with the same scripts locally and within the github actions
+* ~~2022-08-25 Build process should check if all links work: external, pictures, etc.~~
+  * ~~Make sure we build with the same scripts locally and within the github actions~~
 * Have Google tracking
 * Find a more pleasant layout
 * **--- Go live ---**
 * Navigation with categories, i.e. recipes, tech, family, travel...
-* Lint & format HTML before commit (commit hooks)
+* Lint & format Markdown before commit (commit hooks)
 * Have recipes as extra collection & extra layout
 * Have actions that test before publishing:
   * Can all the content be properly translated to HTML?
