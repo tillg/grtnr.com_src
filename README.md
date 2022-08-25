@@ -15,6 +15,12 @@ bundle install
 
 and then tun the site locally with `bundle exec jekyll serve`.
 
+Once all dependies are installed, it is best to use the standard scripts that are also used by the github actions:
+
+* **`./build.sh`** - gues what this does... ;)
+* **`./post_build_check_soft.sh`**: Runs checks on the built `_site` directory. If errors are found they are reported but don't break the build.
+* **`./post_build_check_hard.sh`**: Runs checks on the built `_site`directory that have to succeed, otherwise the build is considered to be broken.
+
 ## Todo & done
 
 * ~~Fix: Images are not visible~~ 2022-08
@@ -39,6 +45,18 @@ and then tun the site locally with `bundle exec jekyll serve`.
 ## Problems & findings
 
 A list of problems I met and how I delt with them.
+
+### Jekyll Themes
+
+Jekyll themes I looked at:
+
+**[Hydejack](https://hydejack.com)**: For nerds & academics (so that could fit ;) ), a bit more colorful.
+
+![Hydejack](hydejack-9.jpg)
+
+**[al-folio](https://github.com/alshedivat/al-folio)**: **Too dry, REALLY for academics...** For academics, maybe a bit black-anbd-white-ish, but coiuld fit every content.
+
+![Theme preview](al-folio-preview.png)
 
 ### Domain grtnr.com
 

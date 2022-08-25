@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: new.grtnr.de
+title: grtnr.de
 email: till.gartner@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Things that keep me busy...
@@ -27,8 +27,15 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tillg
 github_username:  tillg
 
+# For Hydejack theme
+accent_image: /assets/images/wooden_desk.jpeg
+accent_color: gray
+theme_color: gray
+#google_fonts: no
+
 # Build settings
-theme: minima # minimal-mistakes-jekyll
+#theme: minima # minimal-mistakes-jekyll
+theme: jekyll-theme-hydejack
 plugins:
   - jekyll-feed
   - jekyll-postfiles
@@ -53,4 +60,4 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
-permalink: /:year/:month/:day/:title.html
+permalink: /:year-:month-:day-:title.html

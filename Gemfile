@@ -41,3 +41,5 @@ gem "jekyll-postfiles", "~> 3.1"
 gem "rake", "~> 13.0"
 
 gem "html-proofer", "~> 4.4"
+
+gem "jekyll-theme-hydejack", "~> 9.1"
