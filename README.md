@@ -27,10 +27,12 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * ~~2022-08-20 Link it to grtnr.com (with CNAME) --> Using https://new.grtnr.de instead.~~
 * ~~2022-08-25 Build process should check if all links work: external, pictures, etc.~~
   * ~~Make sure we build with the same scripts locally and within the github actions~~
+* ~~2022-08-27 Find a more pleasant layout~~
 * Have Google tracking
-* Find a more pleasant layout
+* Make the recipes an extra category, also not listed in the overall blog list.
 * **--- Go live ---**
 * Navigation with categories, i.e. recipes, tech, family, travel...
+* Have pages really as pages, not as blog posts: About, IMpressum...
 * Lint & format Markdown before commit (commit hooks)
 * Have recipes as extra collection & extra layout
 * Have actions that test before publishing:

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: recipe
 title: Tuna melt toast / baguette
 slug: tuna-melt-toast-baguette
 date_published: 2022-01-20T16:38:57.000Z
