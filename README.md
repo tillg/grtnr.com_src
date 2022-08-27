@@ -47,22 +47,6 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 
 A list of topics I worked on, details I found out, problems I solved.
 
-### Overriding theme
-
-I wanted to override certain aspects of my theme (Hydejack): Maybe the footer, create a new layout for recipes that is based on blog layouts etc.
-
-A very good description on [how to override certain aspects of themes](https://jekyllrb.com/docs/themes/) - including a way on how to do it while still using the gem based theme, which allows future updates.
-
-```bash
-# Find where the theme gem is located 
-bundle info --path jekyll-theme-hydejack
-/usr/local/lib/ruby/gems/3.1.0/gems/jekyll-theme-hydejack-9.1.6
-```
-
-### Google Analytics
-
-Go check for analytics data [here](https://analytics.google.com).
-
 ### Going live
 
 **Target**: Publish under https://grtnr.de
@@ -70,7 +54,7 @@ Go check for analytics data [here](https://analytics.google.com).
 * Redirect DNS to point to Github - **DONE**
 * Fix CNAME file in repo & re-built & deploy **DONE**
 * Fix settings of github repo **DONE**
-* --> New site should be visible, maybe wait a bit...
+* --> New site should be visible, maybe wait a bit... **DONE**
 * Adjust google tracking
 * Decommission the old blog on AWS
 
@@ -88,6 +72,22 @@ grtnr.de.		600	IN	A	185.199.111.153
 
 # Looks good...
 ```
+
+### Overriding theme
+
+I wanted to override certain aspects of my theme (Hydejack): Maybe the footer, create a new layout for recipes that is based on blog layouts etc.
+
+A very good description on [how to override certain aspects of themes](https://jekyllrb.com/docs/themes/) - including a way on how to do it while still using the gem based theme, which allows future updates.
+
+```bash
+# Find where the theme gem is located 
+bundle info --path jekyll-theme-hydejack
+/usr/local/lib/ruby/gems/3.1.0/gems/jekyll-theme-hydejack-9.1.6
+```
+
+### Google Analytics
+
+Go check for analytics data [here](https://analytics.google.com).
 
 ### Using Theme Hydejack
 
