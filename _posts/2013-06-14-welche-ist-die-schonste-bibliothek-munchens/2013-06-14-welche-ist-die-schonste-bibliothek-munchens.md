@@ -6,6 +6,7 @@ date_published: 2013-06-14T00:00:00.000Z
 date_updated: 2021-12-06T10:13:10.000Z
 tags: Life
 excerpt: Ich war in letzter Zeit häufiger in Münchner Bibliotheken, und habe hier ein paar aufgelistet.
+image: jur_bib.jpg
 ---
 
 In letzter Zeit war ich einige Male (bisher sind es nur 3x) in der Bibliothek zum Arbeiten. Nein nein, ich bin schon noch bei [mgm technology partners](https://mgm-tp.com) angestellt, und habe dort auch noch mein Büro – sogar ein sehr schönes. Aber gelegentlich muss ich längere Dokumente schreiben. Oder ich habe Termine in der Stadt, bin mit dem Fahrrad unterwegs, und möchte nicht für eine Stunde zu mgm und dann wieder nach hause fahren.
@@ -17,7 +18,9 @@ Hier nehme ich mal die Bibliotheken auf, die ich schon besucht habe. Und wenn Ih
 - **[Deutsches Museum](https://www.deutsches-museum.de/bibliothek/)**: Mein aktueller Favorit: Große Tische zum Arbeiten, schöne Räumlichkeiten, meistens gut Platz.Juristische Bib, LMU: Da scheint es wohl mehrere zu geben. Die eine, in der ich war, war alles andere als schön. Da hatte ich mehr erwartet von den Juristen…
 - **[Juristische Bib im Rathaus, Stadtbibliothek](https://www.muenchen.de/rathaus/Stadtinfos/Rundgang-durch-das-Neue-Rathaus/Juristische-Bibliothek.html)**: OK, die Juristen können doch Bibliothek! Diese Bib ist eine Schmuckstück! Die Lage ist zentral, die Atmosphäre arbeitsam. Der Zugang ist OKish (Schließfächer vor der Bib, Notebook darf rein, Notebook-Tasche nicht). nett: Es gibt hier ein WLAN-Zugang! 
 
-![](jur_bib.jpg)Juristische Bib im Rathaus
+![](jur_bib.jpg)
+
+Juristische Bib im Rathaus
 - **Mathematisches Institut der LMU**: Die Bücher dort sind schön (Mathe-Bücher halt…). Die Bib war schon abgegrabbelt als ich noch studiert habe, und seitdem haben sie nichts renoviert oder repariert glaube ich.
 - **StaBi, Staatsbibliothek**: Groß, ganz nett, schöne Tische, schöner Raum. Etwas anonym.
 
@@ -27,5 +30,6 @@ Außer Konkurrenz sind folgende Bibs:
 - **Nationale Technische Bibliothek, Prag**: Die schönste Bib, in der ich je war. Sehr modern, toll zum Arbeiten. Vielleicht etwas groß und voll…
 
 Was sind Eure Favoriten? Lasst es mich wissen, ich bin neugierig.
+
 LG,
 Till.

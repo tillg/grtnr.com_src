@@ -28,9 +28,11 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * ~~2022-08-25 Build process should check if all links work: external, pictures, etc.~~
   * ~~Make sure we build with the same scripts locally and within the github actions~~
 * ~~2022-08-27 Find a more pleasant layout~~
-* Have Google tracking
+* Have Google tracking - to be checked
+* ~~2022-08-27 **--- Go live under grtnr.de ---**~~
 * Make the recipes an extra category, also not listed in the overall blog list.
-* **--- Go live ---**
+  * ~~2022-08-27: Made the recipes a special collection, took it out the front blog page~~
+  * 2022-08-27: Missing: A menu entry that points to the recipes collection
 * Add a build no or build date & time so that I know which version I am looking at in production
 * Move all images from the old asset directory to the per-blog structure
 * Make sure images are minimized during build process
@@ -55,8 +57,8 @@ A list of topics I worked on, details I found out, problems I solved.
 * Fix CNAME file in repo & re-built & deploy **DONE**
 * Fix settings of github repo **DONE**
 * --> New site should be visible, maybe wait a bit... **DONE**
-* Adjust google tracking
-* Decommission the old blog on AWS
+* Adjust google tracking **DONE**
+* Decommission the old blog on AWS **DONE**
 
 ```bash
 # Checking if the DNS settings are visible

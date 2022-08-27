@@ -17,18 +17,25 @@
 layout: base
 ---
 
-{% assign plugins = site.plugins | default:site.gems %}
+{% assign version = jekyll.version | split:'.' %}
+{% assign major = version[0] | plus:0 %}
+{% assign minor = version[1] | plus:0 %}
+{% assign patch = version[2] | plus:0 %}
 
-{% if plugins contains 'jekyll-paginate' %}
-  {% assign posts = paginator.posts %}
-{% else %}
-  {% assign posts = site.categories[page.slug] | default:site.tags[page.slug] | default:site.posts %}
-{% endif %}
-  
-{% for post in posts %}
-  {% include_cached components/post.html post=post no_link_title=page.no_link_title no_excerpt=page.no_excerpt hide_image=page.hide_image %}
+{% include_cached components/post.html post=page no_link_title=true no_excerpt=true hide_image=page.hide_image hide_description=page.hide_description %}
+
+{% include components/dingbat.html %}
+
+{% assign addons = page.addons | default:site.hydejack.post_addons %}
+{% unless addons %}{% assign addons = "about,newsletter,related,random" | split:"," %}{% endunless %}
+{% for addon in addons %}
+  {% case addon %}
+  {% when 'about' %}
+     {% include_cached components/about.html author=page.author %}
+  {% when 'related' %}
+    {% include if-non-null try="components/related-posts.html" %}
+  {% when 'comments' %}
+    {% include body/comments.html %}
+  {% else %}
+  {% endcase %}
 {% endfor %}
-
-{% if plugins contains 'jekyll-paginate' %}
-  {% include components/pagination.html %}
-{% endif %}

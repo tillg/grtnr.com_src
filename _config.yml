@@ -34,6 +34,10 @@ theme_color: gray
 google_analytics: G-Z5G9Y56Y4F
 #google_fonts: no
 
+collections:
+  recipes:
+    output: true
+
 # Build settings
 #theme: minima # minimal-mistakes-jekyll
 theme: jekyll-theme-hydejack
