@@ -68,11 +68,26 @@ Go check for analytics data [here](https://analytics.google.com).
 **Target**: Publish under https://grtnr.de
 
 * Redirect DNS to point to Github - **DONE**
-* Fix CNAME file in repo & re-built & deploy
+* Fix CNAME file in repo & re-built & deploy **DONE**
+* Fix settings of github repo **DONE**
 * --> New site should be visible, maybe wait a bit...
 * Adjust google tracking
 * Decommission the old blog on AWS
 
+```bash
+# Checking if the DNS settings are visible
+ dig grtnr.de +nostats +nocomments +nocmd
+
+; <<>> DiG 9.10.6 <<>> grtnr.de +nostats +nocomments +nocmd
+;; global options: +cmd
+;grtnr.de.			IN	A
+grtnr.de.		600	IN	A	185.199.108.153
+grtnr.de.		600	IN	A	185.199.109.153
+grtnr.de.		600	IN	A	185.199.110.153
+grtnr.de.		600	IN	A	185.199.111.153
+
+# Looks good...
+```
 
 ### Using Theme Hydejack
 
