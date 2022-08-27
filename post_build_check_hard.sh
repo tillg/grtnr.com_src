@@ -5,5 +5,5 @@
 # Check that links are working
 # Comments:
 # - allow_missing_href: I had to switch it off as otherwise it would fail and I couldn't find the solution. 
-bundle exec htmlproofer --disable_external true --enforce_https false --check_internal_hash false --allow_missing_href true ./_site
+bundle exec htmlproofer --disable_external true --enforce_https false --check_internal_hash false --allow_missing_href false ./_site
 

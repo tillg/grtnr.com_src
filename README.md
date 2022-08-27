@@ -31,22 +31,60 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * Have Google tracking
 * Make the recipes an extra category, also not listed in the overall blog list.
 * **--- Go live ---**
+* Add a build no or build date & time so that I know which version I am looking at in production
+* Move all images from the old asset directory to the per-blog structure
+* Make sure images are minimized during build process
 * Navigation with categories, i.e. recipes, tech, family, travel...
-* Have pages really as pages, not as blog posts: About, IMpressum...
 * Lint & format Markdown before commit (commit hooks)
 * Have recipes as extra collection & extra layout
-* Have actions that test before publishing:
-  * Can all the content be properly translated to HTML?
-  * Are all the links valid?
-  * Are all the images available?
 * Have sitemap
 * Integrate search
 * Integrate comments
 * Differentiate posts and pages (i.e. about, impressum...)
+* Make Google analytics visible within the website - so visitors can see how many visitors there are
 
-## Problems & findings
+##  Findings, Readings, Problems
 
-A list of problems I met and how I delt with them.
+A list of topics I worked on, details I found out, problems I solved.
+
+### Overriding theme
+
+I wanted to override certain aspects of my theme (Hydejack): Maybe the footer, create a new layout for recipes that is based on blog layouts etc.
+
+A very good description on [how to override certain aspects of themes](https://jekyllrb.com/docs/themes/) - including a way on how to do it while still using the gem based theme, which allows future updates.
+
+```bash
+# Find where the theme gem is located 
+bundle info --path jekyll-theme-hydejack
+/usr/local/lib/ruby/gems/3.1.0/gems/jekyll-theme-hydejack-9.1.6
+```
+
+### Google Analytics
+
+Go check for analytics data [here](https://analytics.google.com).
+
+### Using Theme Hydejack
+
+I used the theme [Hydejack](https://hydejack.com) (as of 2022-08). It looks nice, hase some images that don't get in your way, is responsive - so I give it a try. Configuration was straight forward.
+
+But it seems to have a bug: When building the site and running my `htmlproofer` check, the check raised an error in every HTML file: ` 'a' tag is missing a reference`.
+
+Tracking down the source I ended up in the the following file in the theme's gem: `_includes/templates/error.html`:
+
+```liquid
+<template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">{{ strings.error.title | default:"Error" }}</h1>
+    {% capture link %}<a class="this-link" href=""></a>{% endcapture %}
+    {% assign text = strings.error.message | default:"Sorry, an error occurred while loading: <!--link-->." %}
+    <p class="lead">
+      {{ text | replace:"<!--link-->",link }}
+    </p>
+  </div>
+</template>
+```
+
+When looking at it, it is obvious that the `href=""` will always stay empty... So I replaced it with an overridden `error.html` file in my repo. 
 
 ### Jekyll Themes
 
