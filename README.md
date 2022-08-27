@@ -63,6 +63,17 @@ bundle info --path jekyll-theme-hydejack
 
 Go check for analytics data [here](https://analytics.google.com).
 
+### Going live
+
+**Target**: Publish under https://grtnr.de
+
+* Redirect DNS to point to Github - **DONE**
+* Fix CNAME file in repo & re-built & deploy
+* --> New site should be visible, maybe wait a bit...
+* Adjust google tracking
+* Decommission the old blog on AWS
+
+
 ### Using Theme Hydejack
 
 I used the theme [Hydejack](https://hydejack.com) (as of 2022-08). It looks nice, hase some images that don't get in your way, is responsive - so I give it a try. Configuration was straight forward.
