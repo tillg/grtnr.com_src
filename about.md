@@ -13,3 +13,5 @@ This is the website of Till Gartner. I'm a simple guy with simple hobbies, like
 - Some programming (yes, even though by now I rather manage IT than code): Play around with stuff that is new to me. 
 
 Find me on [Twitter](https://twitter.com/tillg) or [Instagram](https://www.instagram.com/tillg/).
+
+![Till](/images/till-comic.png)

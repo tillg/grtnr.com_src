@@ -33,6 +33,7 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * ~~Make the recipes an extra category, also not listed in the overall blog list.~~
   * ~~2022-08-27: Made the recipes a special collection, took it out the front blog page~~
   * ~~2022-08-27:Added a menu entry that points to the recipes collection~~
+* ~~2022-08-28: Added a favicon~~
 * Sort out tags in theme hydejack
 * Add a build no or build date & time so that I know which version I am looking at in production
 * Move all images from the old asset directory to the per-blog structure
@@ -120,11 +121,11 @@ Jekyll themes I looked at:
 
 **[Hydejack](https://hydejack.com)**: For nerds & academics (so that could fit ;) ), a bit more colorful.
 
-![Hydejack](hydejack-9.jpg)
+![Hydejack](/images/hydejack-9.jpg)
 
 **[al-folio](https://github.com/alshedivat/al-folio)**: **Too dry, REALLY for academics...** For academics, maybe a bit black-anbd-white-ish, but coiuld fit every content.
 
-![Theme preview](al-folio-preview.png)
+![Theme preview](/images/al-folio-preview.png)
 
 ### Domain grtnr.com
 

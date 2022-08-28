@@ -32,6 +32,9 @@ accent_image: /assets/images/wooden_desk.jpeg
 accent_color: gray
 theme_color: gray
 google_analytics: G-Z5G9Y56Y4F
+logo: /images/logo.png
+favicon: /images/grtnr-logo_60x60.png
+apple_touch_icon: /images/grtnr-logo_60x60.png
 menu:
   - title: Blog
     url:   /
