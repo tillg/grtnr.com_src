@@ -4,7 +4,7 @@ title: Von Crêpes bis Pancake
 slug: von-crepes-bis-pancake
 date_published: 2019-04-18T00:00:00.000Z
 date_updated: 2021-12-06T10:46:17.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 Nachdem uns unsere großen Kinder heute früh zum Frühstück mit Crêpes überrascht haben, hier das Rezept, was sie sich selber im Internet rausgesucht hatten.

@@ -4,7 +4,7 @@ title: Crème de moules safranée
 slug: creme-de-moules-safranee
 date_published: 2006-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:05:09.000Z
-tags: Recettes / Recipes / Rezepte
+tags:
 ---
 
 **Source:** D'un livre de retettes,  raffiné par Juju.

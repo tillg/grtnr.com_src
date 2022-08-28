@@ -4,7 +4,7 @@ title: Ramen noodles deluxe
 slug: ramen-noodles-deluxe
 date_published: 2022-01-20T16:40:47.000Z
 date_updated: 2022-01-20T16:40:47.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 From Spartacus' series of fast recipes for non-skilled cooks.

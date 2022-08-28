@@ -4,7 +4,7 @@ title: Böhmischer Gulasch
 slug: bohmischer-gulasch
 date_published: 2009-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:09:30.000Z
-tags: Recettes / Recipes / Rezepte
+tags:
 ---
 
 **Zutaten** für 5 Portionen

@@ -4,7 +4,7 @@ title: Roggenmischbrot – Ohne Sauerteigansatz
 slug: roggenmischbrot-ohne-sauerteigansatz
 date_published: 2006-02-13T00:00:00.000Z
 date_updated: 2021-12-13T11:23:01.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 **Zutaten** für ein rundes Brot

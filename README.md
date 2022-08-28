@@ -30,16 +30,15 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * ~~2022-08-27 Find a more pleasant layout~~
 * Have Google tracking - to be checked
 * ~~2022-08-27 **--- Go live under grtnr.de ---**~~
-* Make the recipes an extra category, also not listed in the overall blog list.
+* ~~Make the recipes an extra category, also not listed in the overall blog list.~~
   * ~~2022-08-27: Made the recipes a special collection, took it out the front blog page~~
-  * 2022-08-27: Missing: A menu entry that points to the recipes collection
+  * ~~2022-08-27:Added a menu entry that points to the recipes collection~~
 * Sort out tags in theme hydejack
 * Add a build no or build date & time so that I know which version I am looking at in production
 * Move all images from the old asset directory to the per-blog structure
 * Make sure images are minimized during build process
 * Navigation with categories, i.e. recipes, tech, family, travel...
 * Lint & format Markdown before commit (commit hooks)
-* Have recipes as extra collection & extra layout
 * Have sitemap
 * Integrate search
 * Integrate comments

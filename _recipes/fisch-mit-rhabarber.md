@@ -4,7 +4,7 @@ title: Fisch mit Rhabarber
 slug: fisch-mit-rhabarber
 date_published: 2009-12-13T00:00:00.000Z
 date_updated: 2022-01-22T17:26:52.000Z
-tags: Recettes / Recipes / Rezepte
+tags:
 ---
 
 Beim Aufräumen von alten Files, bin ich auf dieses Rezept gestossen. Normalerweise hätte ich es einfach gelöscht - aber Rezepte von Juju hebt man auf!

@@ -4,7 +4,7 @@ title: Chutney - Relish aus grünen Tomaten
 slug: chutney-relish-aus-grunen-tomaten
 date_published: 2006-03-13T00:00:00.000Z
 date_updated: 2021-12-13T11:28:35.000Z
-tags: Recettes / Recipes / Rezepte
+tags:
 ---
 
 **Zutaten für 4 Portionen**

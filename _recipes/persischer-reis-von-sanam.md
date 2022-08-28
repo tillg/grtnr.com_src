@@ -4,7 +4,7 @@ title: Persischer Reis – Von Sanam
 slug: persischer-reis-von-sanam
 date_published: 2004-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:11:49.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 **Zutaten für 4 Personen**

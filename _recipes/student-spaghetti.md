@@ -4,7 +4,7 @@ title: Student spaghetti
 slug: student-spaghetti
 date_published: 2022-01-20T16:42:16.000Z
 date_updated: 2022-01-20T16:42:16.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 From Spartacus' series of fast recipes for non-skilled cooks.

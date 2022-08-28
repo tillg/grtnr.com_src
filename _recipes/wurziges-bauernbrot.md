@@ -4,7 +4,7 @@ title: Würziges Bauernbrot
 slug: wurziges-bauernbrot
 date_published: 2005-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:26:45.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 **Zutaten Vorteig**

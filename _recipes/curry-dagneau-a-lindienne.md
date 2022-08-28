@@ -4,7 +4,7 @@ title: Curry d’agneau à l’indienne
 slug: curry-dagneau-a-lindienne
 date_published: 2009-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:13:15.000Z
-tags: Recettes / Recipes / Rezepte
+tags:
 ---
 
 Pour 4 personnes

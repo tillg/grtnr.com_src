@@ -4,7 +4,7 @@ title: Vanillekipferl
 slug: vanillekipferl
 date_published: 2017-11-04T00:00:00.000Z
 date_updated: 2021-12-06T11:32:30.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 image: vanillekipferl-rezept.jpg
 ---
 

@@ -4,7 +4,7 @@ title: Parmesanplätzchen à la Julien
 slug: parmesanplatzchen-a-la-julien
 date_published: 2007-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:06:39.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 **Ingrédients** pour env. 30 pièces :

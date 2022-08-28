@@ -4,7 +4,7 @@ title: Mandelkuchen
 slug: mandelkuchen
 date_published: 2019-12-06T00:00:00.000Z
 date_updated: 2021-12-06T11:13:38.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 excerpt: 
 image: mandelkuchen.jpg
 ---

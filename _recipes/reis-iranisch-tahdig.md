@@ -4,7 +4,7 @@ title: Reis Iranisch - Tahdig
 slug: reis-iranisch-tahdig
 date_published: 2009-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:10:54.000Z
-tags: Recettes / Recipes / Rezepte
+tags:
 ---
 
 **Zutaten für 4 Personen**

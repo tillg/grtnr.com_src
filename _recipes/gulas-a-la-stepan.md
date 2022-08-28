@@ -4,7 +4,7 @@ title: Guláš à la Štepan
 slug: gulas-a-la-stepan
 date_published: 2021-03-13T00:00:00.000Z
 date_updated: 2022-01-10T13:22:46.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 **Ingrediences** for 5 people

@@ -4,7 +4,7 @@ title: Leinsamenbrot
 slug: leinsamenbrot
 date_published: 2018-12-04T00:00:00.000Z
 date_updated: 2021-12-06T11:17:58.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 Roggenmischbrot, auch für Anfänger geeignet

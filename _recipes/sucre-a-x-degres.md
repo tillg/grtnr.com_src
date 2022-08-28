@@ -4,7 +4,8 @@ title: Sucre à x degrées
 slug: sucre-a-x-degres
 date_published: 2015-12-06T00:00:00.000Z
 date_updated: 2021-12-06T11:28:40.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
+
 ---
 
 Encore une recette de Juju qui trainait au fond d'un fichier Dropbox...

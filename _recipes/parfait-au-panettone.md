@@ -4,7 +4,7 @@ title: Parfait au Panettone
 slug: parfait-au-panettone
 date_published: 2011-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:21:12.000Z
-tags: Recettes / Recipes / Rezepte
+tags: 
 ---
 
 **Ingrédients pour 2 moules à cake**

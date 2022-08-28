@@ -4,7 +4,7 @@ title: Crème anglaise au Earl Gray
 slug: creme-anglaise-au-earl-gray
 date_published: 2010-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:19:56.000Z
-tags: Recettes / Recipes / Rezepte
+tags:
 ---
 
 **Ingrédients**
