@@ -92,6 +92,12 @@ bundle info --path jekyll-theme-hydejack
 
 Go check for analytics data [here](https://analytics.google.com).
 
+As no data became visible even after a couple of days, I started looking into the [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna?hl=en).
+
+It seems that Google changed the way they track traffic. They used to have _Universal Analytics IDs_ (of the shape `UA-...`) and switched to _Analytics 4 IDs_ of the shape `G-...`. Since hydejack currently only supports UA-type IDs, I created one like [explained here](https://support.google.com/analytics/answer/10269537). 
+
+Note: **Universal Analytics properties will stop collecting data starting 1 July 2023. It’s recommended that you create a Google Analytics 4 property instead.**
+
 ### Using Theme Hydejack
 
 I used the theme [Hydejack](https://hydejack.com) (as of 2022-08). It looks nice, hase some images that don't get in your way, is responsive - so I give it a try. Configuration was straight forward.
