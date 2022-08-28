@@ -15,3 +15,5 @@ This is the website of Till Gartner. I'm a simple guy with simple hobbies, like
 Find me on [Twitter](https://twitter.com/tillg) or [Instagram](https://www.instagram.com/tillg/).
 
 ![Till](/images/till-comic.png)
+
+This page was last built at {{ "now" | date: "%Y-%m-%d %H:%M:%S" }}.
