@@ -25,6 +25,8 @@ layout: base
   {% assign posts = site.categories[page.slug] | default:site.tags[page.slug] | default:site.posts %}
 {% endif %}
   
+![food](recipes.jpeg)
+
 {% for post in site.recipes %}
   {% include_cached components/post.html post=post no_link_title=page.no_link_title no_excerpt=page.no_excerpt hide_image=page.hide_image %}
 {% endfor %}
