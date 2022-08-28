@@ -33,6 +33,7 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * Make the recipes an extra category, also not listed in the overall blog list.
   * ~~2022-08-27: Made the recipes a special collection, took it out the front blog page~~
   * 2022-08-27: Missing: A menu entry that points to the recipes collection
+* Sort out tags in theme hydejack
 * Add a build no or build date & time so that I know which version I am looking at in production
 * Move all images from the old asset directory to the per-blog structure
 * Make sure images are minimized during build process
@@ -183,3 +184,24 @@ Other criteria that I have:
 Therefore I decided keep the images close to the posts: For every post I create a subdirectory with the name of the post, i.e. `2021-12-05-till-plaetzchen/`. Inside this dir I put the markdown file with the post and the images, i.e. `2021-12-05-till-plaetzchen.md` and `plaetzchen.jpg`.
 
 In order for Jekyll to copy the image files to the apropriate location, I have to use [jekyll-postfiles](https://nhoizey.github.io/jekyll-postfiles/).
+
+**Update** (2022-08-28): When separating the recipes from the blog posts I had another problem:
+
+* Recipes are Jekyll collection, so trheir respective md files are located in `/_recipes`.
+* If I put the images next to the recipe, the path in the source is as follows: `/_recipes/sandwiches/<here are the MD file and images>`.
+* When referring images from the MD file as `sandwich.jpg` it works fine when being called from the recipe page itself, but fails when being called from the list of recipes...
+
+Solution:
+
+* I defined the output path for recipe documents like so:
+
+```yaml
+collections:
+  recipes:
+    output: true
+    permalink: /:name
+```
+
+This way the recipes are rendered in the root directory, alongside with their images. So the pic references within the recipes work well.
+
+Furthermore I created a recipe list: `/recipes.md`. This is rendered to `/recipes.html`. In this overview the header images are shown if there are any (i.e. imges referenced in the front matter). And they are referenced as `sandwich.jpg` - and are located within the same directory ;)
