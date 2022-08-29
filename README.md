@@ -35,15 +35,15 @@ Once all dependies are installed, it is best to use the standard scripts that ar
   * ~~2022-08-27:Added a menu entry that points to the recipes collection~~
 * ~~2022-08-28: Added a favicon~~
 * ~~Add a build no or build date & time so that I know which version I am looking at in production (Shown on https://grtnr.de/about)~~
+* ~~Differentiate posts and pages (i.e. about, impressum...) With page's images being in `/images`~~
+* ~~2022-08-29 Move all images from the old asset directory to the per-blog structure~~
 * Sort out tags in theme hydejack
-* Move all images from the old asset directory to the per-blog structure
 * Make sure images are minimized during build process
 * Navigation with categories, i.e. recipes, tech, family, travel...
 * Lint & format Markdown before commit (commit hooks)
 * Have sitemap
 * Integrate search
 * Integrate comments
-* Differentiate posts and pages (i.e. about, impressum...)
 * Make Google analytics visible within the website - so visitors can see how many visitors there are
 
 ##  Findings, Readings, Problems
