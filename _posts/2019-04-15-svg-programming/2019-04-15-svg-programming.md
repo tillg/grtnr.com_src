@@ -5,7 +5,8 @@ slug: svg-programming
 date_published: 2019-04-15T00:00:00.000Z
 date_updated: 2021-12-06T09:47:26.000Z
 tags: Tech
-excerpt: For a side project I would like to have a nice, moving SVG Logo. While searching for tutorials, I found a couple that might be helpful
+image: spotz.svg
+excerpt: For a side project I would like to have a nice, moving SVG Logo. While searching for tutorials, I found a couple that might be helpful.
 ---
 
 For a side project I would like to have a nice, moving SVG Logo. While searching for tutorials, I found a couple that might be helpful:

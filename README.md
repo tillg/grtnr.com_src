@@ -40,6 +40,8 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * Test: If I remove the accent image (wooden_desk.jpg), my link tests should fail - why didn't they?
 * Make a gradle based build pipeline
 * Build pipeline: Check that posts have the right structure: Have a layout, a date etc.
+* Build pipeline: Make sure that posts have the proper file names: YYYY-MM-DD-xyz.md
+* Build pipeline: Test that the no of posts corresponds to the number of entries in the posts directory
 * Sort out tags in theme hydejack
 * Make sure images are minimized during build process
 * Navigation with categories, i.e. recipes, tech, family, travel...
