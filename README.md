@@ -37,6 +37,9 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * ~~Add a build no or build date & time so that I know which version I am looking at in production (Shown on https://grtnr.de/about)~~
 * ~~Differentiate posts and pages (i.e. about, impressum...) With page's images being in `/images`~~
 * ~~2022-08-29 Move all images from the old asset directory to the per-blog structure~~
+* Test: If I remove the accent image (wooden_desk.jpg), my link tests should fail - why didn't they?
+* Make a gradle based build pipeline
+* Build pipeline: Check that posts have the right structure: Have a layout, a date etc.
 * Sort out tags in theme hydejack
 * Make sure images are minimized during build process
 * Navigation with categories, i.e. recipes, tech, family, travel...
@@ -49,6 +52,25 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 ##  Findings, Readings, Problems
 
 A list of topics I worked on, details I found out, problems I solved.
+
+### Linting
+
+Requirements:
+
+* Linting in my VScode
+* Automatic repair where possible
+* Linting as commit-gate. I.e. commits fail if linting failed.
+* Same rules are used when linting in VScode and when linting when committing - sourced from the same configuration! So that config changes are just to be made in one place and become effective everywhere automatically.
+
+Reading:
+
+* [How to use ESLint in VSCode](https://www.robinwieruch.de/vscode-eslint/)
+* [Automatically format and lint code with pre-commit](https://interrupt.memfault.com/blog/pre-commit)
+* [A Guide to Order: Setting up Prettier and Eslint with Husky, Lint-staged and Commitizen](https://folafunmi.hashnode.dev/a-guide-to-order-setting-up-prettier-and-eslint-with-husky-lint-staged-and-commitizen)
+
+### Resizing images
+
+* A Jekyll plugin that seems to do exactly that: [Jekyll Resize 🖼 🤏 🔬](https://github.com/MichaelCurrin/jekyll-resize)
 
 ### Going live
 
