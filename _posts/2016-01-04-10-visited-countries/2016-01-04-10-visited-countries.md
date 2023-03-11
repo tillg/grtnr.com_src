@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Visited countries
 tag: [tech]
 ---

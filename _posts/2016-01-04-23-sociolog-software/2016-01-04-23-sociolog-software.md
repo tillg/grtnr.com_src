@@ -1,10 +1,9 @@
 ---
 title: sociolog - Your trail across social media
 tags: [softwareWeNeed]
-article_header:
-  type: cover
-  image:
-    src: /img/2016-01/sociolog.png
+layout: post
+date: 2016-01-04
+image: sociolog.png
 ---
 
 I write or blog in different media:
