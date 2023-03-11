@@ -3,7 +3,7 @@
 The content of my website. Can be reached under...
 
 * https://tillg.github.io/grtnr.com_jekyll_2022/
-* https://new.grtnr.de
+* https://grtnr.de
 
 ## Installing & running locally
 
@@ -21,24 +21,9 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * **`./post_build_check_soft.sh`**: Runs checks on the built `_site` directory. If errors are found they are reported but don't break the build.
 * **`./post_build_check_hard.sh`**: Runs checks on the built `_site`directory that have to succeed, otherwise the build is considered to be broken.
 
-## Todo & done
+## Todo 
 
-* ~~Fix: Images are not visible~~ 2022-08
-* ~~2022-08-20 Link it to grtnr.com (with CNAME) --> Using https://new.grtnr.de instead.~~
-* ~~2022-08-25 Build process should check if all links work: external, pictures, etc.~~
-  * ~~Make sure we build with the same scripts locally and within the github actions~~
-* ~~2022-08-27 Find a more pleasant layout~~
-* ~~2022-08-27 Have Google tracking - Checked and re-worked on 2022-08-28~~
-* ~~2022-08-27 **--- Go live under grtnr.de ---**~~
-* ~~Make the recipes an extra category, also not listed in the overall blog list.~~
-  * ~~2022-08-27: Made the recipes a special collection, took it out the front blog page~~
-  * ~~2022-08-27:Added a menu entry that points to the recipes collection~~
-* ~~2022-08-28: Added a favicon~~
-* ~~Add a build no or build date & time so that I know which version I am looking at in production (Shown on https://grtnr.de/about)~~
-* ~~Differentiate posts and pages (i.e. about, impressum...) With page's images being in `/images`~~
-* ~~2022-08-29 Move all images from the old asset directory to the per-blog structure~~
 * Test: If I remove the accent image (wooden_desk.jpg), my link tests should fail - why didn't they?
-* Make a gradle based build pipeline
 * Build pipeline: Check that posts have the right structure: Have a layout, a date etc.
 * Build pipeline: Make sure that posts have the proper file names: YYYY-MM-DD-xyz.md
 * Build pipeline: Test that the no of posts corresponds to the number of entries in the posts directory
@@ -51,9 +36,36 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * Integrate comments
 * Make Google analytics visible within the website - so visitors can see how many visitors there are
 
+## Done
+
+* 2023-03-10: Moved over content from tillgartner.com
+* 2022-08: Fix: Images are not visible
+* 2022-08-20 Link it to grtnr.com (with CNAME) --> Using https://new.grtnr.de instead.
+* 2022-08-25 Build process should check if all links work: external, pictures, etc.
+  * Make sure we build with the same scripts locally and within the github actions
+* 2022-08-27 Find a more pleasant layout
+* 2022-08-27 Have Google tracking - Checked and re-worked on 2022-08-28
+* 2022-08-27 **--- Go live as https://grtnr.de ---**~~
+* ~~Make the recipes an extra category, also not listed in the overall blog list.~~
+  * ~~2022-08-27: Made the recipes a special collection, took it out the front blog page~~
+  * ~~2022-08-27:Added a menu entry that points to the recipes collection~~
+* ~~2022-08-28: Added a favicon~~
+* ~~Add a build no or build date & time so that I know which version I am looking at in production (Shown on https://grtnr.de/about)~~
+* ~~Differentiate posts and pages (i.e. about, impressum...) With page's images being in `/images`~~
+* ~~2022-08-29 Move all images from the old asset directory to the per-blog structure~~
+
 ##  Findings, Readings, Problems
 
 A list of topics I worked on, details I found out, problems I solved.
+
+### User trarcking
+
+After a short research I decided to use [Piwik Pro](https://piwik.pro): It's hosted, free for my volume, close to what matomol is, and that's what I would like to learn anyways 😜
+
+Steps to cover:
+* How to run it in DEV vs PROD?
+* How to add the link
+* How to avoid getting a consent form? Rumors are, with a data privacy policy I could avoid it...
 
 ### Linting
 
