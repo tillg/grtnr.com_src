@@ -1,6 +1,7 @@
 ---
 title: Crowdsourcing! Zahle 100,- € für Wappen
 tags: [tech]
+image: gartner_wappen.jpg
 ---
 
 Diese Webseite heißt gartnerich.com weil sie von der Familie Gartner ist. Und wir Gartners sind adelig – also so bissi zumindest… An sich ist das noch nicht spektakulär, weil solange man kein von im Namen trägt (oder noch besser einen Graf) bringt das nix.
