@@ -36,36 +36,24 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * Integrate comments
 * Make Google analytics visible within the website - so visitors can see how many visitors there are
 
-## Done
-
-* 2023-03-10: Moved over content from tillgartner.com
-* 2022-08: Fix: Images are not visible
-* 2022-08-20 Link it to grtnr.com (with CNAME) --> Using https://new.grtnr.de instead.
-* 2022-08-25 Build process should check if all links work: external, pictures, etc.
-  * Make sure we build with the same scripts locally and within the github actions
-* 2022-08-27 Find a more pleasant layout
-* 2022-08-27 Have Google tracking - Checked and re-worked on 2022-08-28
-* 2022-08-27 **--- Go live as https://grtnr.de ---**~~
-* ~~Make the recipes an extra category, also not listed in the overall blog list.~~
-  * ~~2022-08-27: Made the recipes a special collection, took it out the front blog page~~
-  * ~~2022-08-27:Added a menu entry that points to the recipes collection~~
-* ~~2022-08-28: Added a favicon~~
-* ~~Add a build no or build date & time so that I know which version I am looking at in production (Shown on https://grtnr.de/about)~~
-* ~~Differentiate posts and pages (i.e. about, impressum...) With page's images being in `/images`~~
-* ~~2022-08-29 Move all images from the old asset directory to the per-blog structure~~
-
 ##  Findings, Readings, Problems
 
 A list of topics I worked on, details I found out, problems I solved.
 
-### User trarcking
+### Ruby versions
 
-After a short research I decided to use [Piwik Pro](https://piwik.pro): It's hosted, free for my volume, close to what matomol is, and that's what I would like to learn anyways 😜
+Getting the right ruby version running locally can be a mess! Everything worked fine on my Mac, then I tried to add content 6 months later, and nothing worked anymore: The updated ruby version that I got via my usual `brew upgrade` didn't support some features that jekyll needed.
 
-Steps to cover:
-* How to run it in DEV vs PROD?
-* How to add the link
-* How to avoid getting a consent form? Rumors are, with a data privacy policy I could avoid it...
+So I went for `chruby`: A tool to _change ruby_ versions. Installing ruby versions so that chruby can switch between them needs `ruby-install`. And installing versions failed, because... [This stackoverflow article](https://stackoverflow.com/questions/74353384/installing-ruby-but-getting-error-linker-command-failed-with-exit-code-1) fixed it.
+
+Cheatsheet:
+```bash
+# See what ruby versions are installed
+> chruby
+
+# Install another versions
+> ruby-install 3.1.2 -- --enable-shared # See the article mentioned above why...
+```
 
 ### Linting
 

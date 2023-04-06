@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: grtnr.de
+title: grtnr.com
 email: till.gartner@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Things that keep me busy...
@@ -52,14 +52,15 @@ collections:
 #theme: minima # minimal-mistakes-jekyll
 theme: jekyll-theme-hydejack
 plugins:
-  - jekyll-feed
-  - jekyll-postfiles
+ - jekyll-feed
+ - jekyll-postfiles
 
 # Setting defaults for post
 defaults:
   -
     scope:
       path: "" # an empty string here means all files in the project
+      type: "posts" # previously `post` in Jekyll 2.2.
     values:
       layout: "post"
 
