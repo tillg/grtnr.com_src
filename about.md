@@ -20,8 +20,7 @@ This page was last built at {{ "now" | date: "%Y-%m-%d %H:%M:%S" }}.
 
 ## Log
 
-* 2023-04-06: Fixed a problem with CSS 
-* 2023-03-10: Moved over content from tillgartner.com
+
 * 2022-08: Fix: Images are not visible
 * 2022-08-20: Link it to grtnr.com (with CNAME) --> Using https://new.grtnr.de instead.
 * 2022-08-25: Build process should check if all links work: external, pictures, etc.
@@ -33,6 +32,9 @@ This page was last built at {{ "now" | date: "%Y-%m-%d %H:%M:%S" }}.
 * 2022-08-27: Made the recipes a special collection, took it out the front blog page
 * 2022-08-27:Added a menu entry that points to the recipes collection
 * 2022-08-28: Added a favicon
-* Add a build no or build date & time so that I know which version I am looking at in production (Shown on https://grtnr.de/about)
-* Differentiate posts and pages (i.e. about, impressum...) With page's images being in /images
+    * Add a build no or build date & time so that I know which version I am looking at in production (Shown on https://grtnr.de/about)
+    * Differentiate posts and pages (i.e. about, impressum...) With page's images being in /images
 * 2022-08-29 Move all images from the old asset directory to the per-blog structure
+* 2023-03-10: Moved over content from tillgartner.com
+* 2023-04-06: Fixed a problem with CSS 
+* 2023-05-07: Added an article about my AI chat and the AI Chat UI.
