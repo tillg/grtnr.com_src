@@ -1,16 +1,35 @@
 {
   "files": {
-    "main.css": "/ai-chat/static/css/main.7f0bf783.css",
-    "main.js": "/ai-chat/static/js/main.4e0a9c73.js",
-    "static/js/787.93a71698.chunk.js": "/ai-chat/static/js/787.93a71698.chunk.js",
+    "main.css": "/ai-chat/static/css/main.20b8d575.css",
+    "main.js": "/ai-chat/static/js/main.fbbdf1f7.js",
     "static/media/robots.png": "/ai-chat/static/media/robots.5d393b18e387363ade97.png",
+    "static/media/materialicons-outlined-regular.woff": "/ai-chat/static/media/materialicons-outlined-regular.2b0e027b56a843931d0e.woff",
+    "static/media/materialicons-regular.woff": "/ai-chat/static/media/materialicons-regular.8ddce2d7d9c22031b076.woff",
+    "static/media/materialicons-outlined-regular.woff2": "/ai-chat/static/media/materialicons-outlined-regular.5d7deb03b9cecba7d247.woff2",
+    "static/media/materialicons-regular.woff2": "/ai-chat/static/media/materialicons-regular.97b9b1857a2af7322eba.woff2",
+    "static/media/open-sans-v13-latin-700.woff": "/ai-chat/static/media/open-sans-v13-latin-700.6437d5f4c14e01aaf480.woff",
+    "static/media/open-sans-v13-latin-600.woff": "/ai-chat/static/media/open-sans-v13-latin-600.573e9313e05d89f4acb5.woff",
+    "static/media/open-sans-v13-latin-300.woff": "/ai-chat/static/media/open-sans-v13-latin-300.d0b483ce9717b92b4bf8.woff",
+    "static/media/open-sans-v13-latin-regular.woff": "/ai-chat/static/media/open-sans-v13-latin-regular.7dafb1a4bab4938a38b2.woff",
+    "static/media/open-sans-v13-latin-italic-300.woff": "/ai-chat/static/media/open-sans-v13-latin-italic-300.3ab0502d6136886180cd.woff",
+    "static/media/open-sans-v13-latin-italic-600.woff": "/ai-chat/static/media/open-sans-v13-latin-italic-600.8d513ad94829ef391cd1.woff",
+    "static/media/open-sans-v13-latin-italic-700.woff": "/ai-chat/static/media/open-sans-v13-latin-italic-700.e961bdb476db6860f20f.woff",
+    "static/media/open-sans-v13-latin-italic.woff": "/ai-chat/static/media/open-sans-v13-latin-italic.56bdf84751634e8deaff.woff",
+    "static/media/open-sans-v13-latin-700.woff2": "/ai-chat/static/media/open-sans-v13-latin-700.00fb2fb77ba911c3cabc.woff2",
+    "static/media/open-sans-v13-latin-600.woff2": "/ai-chat/static/media/open-sans-v13-latin-600.c5dd4adf257ad349ef4b.woff2",
+    "static/media/open-sans-v13-latin-300.woff2": "/ai-chat/static/media/open-sans-v13-latin-300.bf89c60125f0f0df34b8.woff2",
+    "static/media/open-sans-v13-latin-regular.woff2": "/ai-chat/static/media/open-sans-v13-latin-regular.53ea6dd630c9834ba13c.woff2",
+    "static/media/open-sans-v13-latin-italic-700.woff2": "/ai-chat/static/media/open-sans-v13-latin-italic-700.2a0783bd1c6c1469558b.woff2",
+    "static/media/open-sans-v13-latin-italic-300.woff2": "/ai-chat/static/media/open-sans-v13-latin-italic-300.b45d9997b704ab3daad1.woff2",
+    "static/media/open-sans-v13-latin-italic-600.woff2": "/ai-chat/static/media/open-sans-v13-latin-italic-600.cc4bf5b2955147801c02.woff2",
+    "static/media/open-sans-v13-latin-italic.woff2": "/ai-chat/static/media/open-sans-v13-latin-italic.bb915319f59c02c348a6.woff2",
+    "static/media/custom-icons.woff": "/ai-chat/static/media/custom-icons.03623ca3f06bd121d4ff.woff",
     "index.html": "/ai-chat/index.html",
-    "main.7f0bf783.css.map": "/ai-chat/static/css/main.7f0bf783.css.map",
-    "main.4e0a9c73.js.map": "/ai-chat/static/js/main.4e0a9c73.js.map",
-    "787.93a71698.chunk.js.map": "/ai-chat/static/js/787.93a71698.chunk.js.map"
+    "main.20b8d575.css.map": "/ai-chat/static/css/main.20b8d575.css.map",
+    "main.fbbdf1f7.js.map": "/ai-chat/static/js/main.fbbdf1f7.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f0bf783.css",
-    "static/js/main.4e0a9c73.js"
+    "static/css/main.20b8d575.css",
+    "static/js/main.fbbdf1f7.js"
   ]
 }
