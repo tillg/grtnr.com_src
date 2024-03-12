@@ -1,6 +1,7 @@
 ---
 title: Playing with Highcharts
 tags: [tech]
+date: 2015-12-16
 ---
 
 Today I discovered Highcharts: A tool to easily create charts online. It actually lets you create the chart on their website (you litteraly need less than 5 minutes!) and publish it from there.
