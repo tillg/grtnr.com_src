@@ -1,8 +1,11 @@
 ---
+layout: post
 title: iPad Hologram
-date: 2011-03-31
+slug: ipad-hologram
+date_published: 2011-03-31T00:00:00.000Z
+date_updated: 2021-12-06T10:21:31.000Z
+tags: Tech
+excerpt: Hidden features of the iPad 😜
 ---
 
-Diese hidden Features sind schon toll!
-
-<iframe width="853" height="480" src="https://www.youtube.com/embed/z1magCv4LtM?rel=0" frameborder="0" allowfullscreen></iframe>
+I love the hidden features!

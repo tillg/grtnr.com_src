@@ -23,6 +23,7 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 
 ## Todo 
 
+* DNS Setup: Forwart tillgartner.com --> grtnr.com
 * Test: If I remove the accent image (wooden_desk.jpg), my link tests should fail - why didn't they?
 * Build pipeline: Check that posts have the right structure: Have a layout, a date etc.
 * Build pipeline: Make sure that posts have the proper file names: YYYY-MM-DD-xyz.md
