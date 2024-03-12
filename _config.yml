@@ -84,4 +84,7 @@ defaults:
 #   - vendor/gems/
 #   - vendor/ruby/
 
+exclude:
+  - assets
+  
 permalink: /:year-:month-:day-:title.html
