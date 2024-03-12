@@ -5,6 +5,7 @@ date_published: 2019-04-15T00:00:00.000Z
 date_updated: 2021-12-06T09:47:26.000Z
 tags: Tech
 image: base64.png
+excerpt: When dealing with images in a node application I had to learn on how to read and potentially decode image data.
 ---
 
 **This article is work in progress!**
