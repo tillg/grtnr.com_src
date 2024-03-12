@@ -4,6 +4,7 @@ tags: [softwareWeNeed]
 layout: post
 date: 2016-01-04
 image: sociolog.png
+excerpt: A tool that tracks my activities across all social media platforms.
 ---
 
 I write or blog in different media:

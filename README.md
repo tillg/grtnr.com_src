@@ -27,6 +27,7 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * Build pipeline: Check that posts have the right structure: Have a layout, a date etc.
 * Build pipeline: Make sure that posts have the proper file names: YYYY-MM-DD-xyz.md
 * Build pipeline: Test that the no of posts corresponds to the number of entries in the posts directory
+* Build pipeline: Create a warning if a blog entry has no excerpt
 * Sort out tags in theme hydejack
 * Make sure images are minimized during build process
 * Navigation with categories, i.e. recipes, tech, family, travel...
