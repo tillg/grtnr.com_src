@@ -13,12 +13,13 @@ There are many ways to install Python on Mac and to manage it's versions:
 * `brew`
 * Anaconda
 * `pyenv`
+* ...
 
 What worked best for me is **pyenv**:
-* Install it: `brew install pyenv`
+* Install it: `brew install pyenv`. I assume you have [Homebrew](https://brew.sh) installed...
 * See the options and commands offered: `pyenv`
 * List all Python versions available to pyenv: `pyenv versions`
-* Install a version: `pyenv install 3.12`
+* Install a version: `pyenv install 3.12`  (That's the Python version I currently use)
 * Set the version that is globally used: `pyenv global 3.12`
 * Check what version is globally set: `pyenv global` or `python --version`
 
@@ -33,7 +34,7 @@ cd my_python_project
 ```
   
 ## Create a local env
-In order to provide my project it's own python environment:
+In order to provide my project it's own python environment I use [Python's Virtual Environments](https://docs.python.org/3/library/venv.html):
 
 ```bash
 cd ~/git/my_python_project
@@ -47,10 +48,11 @@ This way I have created an environement inside the `.env` sub-dir. To activate i
 ## Install Jupyter Lab
 Now that I have the Python environment I can install Jupyter. Make sure I am in the right directory and the Python environment is activated:
 ```bash
+# Go in my project dir and activate it's Python environment
 cd ~/git/my_python_project
 source .venv/bin/activate
 
-# Now install Jupyter Lab in this environment
+# Install Jupyter Lab in this environment
 pip install jupyterlab
 
 # Very often it asks me to upgrade pip itself
