@@ -51,6 +51,7 @@ collections:
 # Build settings
 #theme: minima # minimal-mistakes-jekyll
 theme: jekyll-theme-hydejack
+#theme: al-folio
 plugins:
  - jekyll-feed
  - jekyll-postfiles
