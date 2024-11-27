@@ -7,9 +7,10 @@ The content of my website. Can be reached under...
 
 ## Installing & running locally
 
-To install & run the site locally, you need to install the bundles from the `gemfile`:
+To install & run the site locally, you need to install the bundles from the `gemfile`. Make sure you have an up-to-date ruby version on your system (see below for tips for Mac users).
 
 ```bash
+gem install bundler jekyll
 bundle install
 ```
 
@@ -17,7 +18,7 @@ and then tun the site locally with `bundle exec jekyll serve`.
 
 Once all dependies are installed, it is best to use the standard scripts that are also used by the github actions:
 
-* **`./build.sh`** - gues what this does... ;)
+* **`./build.sh`** - guess what this does... ;)
 * **`./post_build_check_soft.sh`**: Runs checks on the built `_site` directory. If errors are found they are reported but don't break the build.
 * **`./post_build_check_hard.sh`**: Runs checks on the built `_site`directory that have to succeed, otherwise the build is considered to be broken.
 
@@ -44,7 +45,12 @@ A list of topics I worked on, details I found out, problems I solved.
 
 ### Ruby versions
 
-Getting the right ruby version running locally can be a mess! Everything worked fine on my Mac, then I tried to add content 6 months later, and nothing worked anymore: The updated ruby version that I got via my usual `brew upgrade` didn't support some features that jekyll needed.
+**Update 27.11.2024**: New Mac, new problems. After (re-)reading lots of ruby installationb guides, I decided that I only need ONE ruby version on my Mac, thus there is no need to use a ruby version manager 😉
+Therefore I use `brew install ruby`. The problem is, that ruby is installed _keg only_, i.e. it is not symlinked: brew does not override the system ruby, as this could break some usages. 
+In order to find how to use the new, brew-installed ruby, run `brew info ruby` and follow the guide.
+
+
+**Old explanation**: Getting the right ruby version running locally can be a mess! Everything worked fine on my Mac, then I tried to add content 6 months later, and nothing worked anymore: The updated ruby version that I got via my usual `brew upgrade` didn't support some features that jekyll needed.
 
 So I went for `chruby`: A tool to _change ruby_ versions. Installing ruby versions so that chruby can switch between them needs `ruby-install`. And installing versions failed, because... [This stackoverflow article](https://stackoverflow.com/questions/74353384/installing-ruby-but-getting-error-linker-command-failed-with-exit-code-1) fixed it.
 
