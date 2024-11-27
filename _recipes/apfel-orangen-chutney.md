@@ -4,6 +4,7 @@ title: Äpfel-Orangen-Chutney
 slug: apfel-orangen-chutney
 date_published: 2009-12-13T00:00:00.000Z
 date_updated: 2022-01-22T17:24:10.000Z
+date: 2022-01-22
 tags: 
 ---
 

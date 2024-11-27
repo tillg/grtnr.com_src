@@ -24,6 +24,7 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 
 ## Todo 
 
+* Check that every enntry has a date
 * DNS Setup: Forwart tillgartner.com --> grtnr.com
 * Test: If I remove the accent image (wooden_desk.jpg), my link tests should fail - why didn't they?
 * Build pipeline: Check that posts have the right structure: Have a layout, a date etc.

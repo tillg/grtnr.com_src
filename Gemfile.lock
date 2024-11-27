@@ -201,10 +201,10 @@ PLATFORMS
 DEPENDENCIES
   html-proofer (~> 4.4)
   http_parser.rb (~> 0.6.0)
-  jekyll (~> 4.3.2)
+  jekyll (~> 4.3.4)
   jekyll-feed (~> 0.15)
   jekyll-postfiles (~> 3.1)
-  jekyll-theme-hydejack (~> 9.1)
+  jekyll-theme-hydejack (~> 9.2)
   minima (~> 2.5)
   minimal-mistakes-jekyll (~> 4.24)
   rake (~> 13.0)

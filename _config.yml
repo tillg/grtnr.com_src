@@ -51,10 +51,11 @@ collections:
 # Build settings
 #theme: minima # minimal-mistakes-jekyll
 theme: jekyll-theme-hydejack
-#theme: al-folio
+#theme: minima
 plugins:
  - jekyll-feed
  - jekyll-postfiles
+ - jekyll-include-cache
 
 # Setting defaults for post
 defaults:
