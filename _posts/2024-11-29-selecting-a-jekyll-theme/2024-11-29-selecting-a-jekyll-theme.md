@@ -1,7 +1,7 @@
 ---
 date: 2024-11-29
 excerpt: It's been a while that I haven't worked on my site. Now I upgraded to the up-to-date technical tools - and as usual the theme is being reworked again... 
-image: hydejack.png
+image: hydejack.jpg
 ---
 
 Themes that I looked at with my working notes.
