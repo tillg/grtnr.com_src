@@ -16,6 +16,8 @@ Themes that I looked at with my working notes.
 * It has too many bells & whistles - yes, taste changes over time
 * I got fed up with the entry page that I have to slide left
 
+---
+
 ## al-folio
 **Rejected** b/o too complex.
 
@@ -24,6 +26,8 @@ Themes that I looked at with my working notes.
 
 [al-folio](https://github.com/alshedivat/al-folio) looks good - with the picture of Einstein. It looks far less attractive with my face, it has too many areas I don't need. I played around with it (i.e. created a little personalized demo), and it feels complex.
 
+---
+
 ## Mediumish
 **Watched**
 
@@ -31,11 +35,15 @@ Themes that I looked at with my working notes.
 
 [Mediumish](https://github.com/wowthemesnet/mediumish-theme-jekyll?tab=readme-ov-file)
 
+---
+
 ## Minimal Theme
 **Watched**
 
 ![Minimal](minimal.png)
-[Minimal](https://pages-themes.github.io/minimal/)
+[Minimal](https://github.com/orderedlist/minimal)
+
+---
 
 ## Cayman
 **Watched**
@@ -43,11 +51,15 @@ Themes that I looked at with my working notes.
 ![Cayman](cayman.png)
 [Caysman](https://github.com/pages-themes/cayman)
 
+---
+
 ## Poole
 **Wacthed**
 
 ![Poole](poole.png)
 [Poole](https://github.com/poole/poole)
+
+---
 
 ## Lanyon
 **Watched - Hot candidate**
@@ -57,14 +69,30 @@ Themes that I looked at with my working notes.
 
 [Lanyon](https://github.com/poole/lanyon)
 
+---
+
 ## Celeste
 **Watched**
 
 ![Celeste](celeste.png)
 [Celeste](https://github.com/nicoelayda/celeste)
 
+---
+
 ## Hyde
 **Watched**
 
 ![Hyde](hyde.png)
 [Hyde](https://github.com/poole/hyde)
+
+---
+
+## Minimal Mistakes
+***Watched**
+
+![Minimal Mistakes](minimal_mistakes0.png)
+![Minimal Mistakes](minimal_mistakes1.png)
+![Minimal Mistakes](minimal_mistakes2.png)
+
+[Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes)
+
