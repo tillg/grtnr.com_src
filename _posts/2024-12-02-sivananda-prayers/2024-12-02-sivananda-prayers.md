@@ -37,7 +37,7 @@ Pūrnasya Pūrnam Ādāya
 Pūrnamevāvaśisyate
 ```
 
-[Get it as PDF](Om_Trayambakam.pdf)
+[Get it as PDF](om_trayambakam.pdf)
 
 Copied from [here](https://bodymindlight.com/opening-and-closing-prayers-in-sivananda-yoga)
 
