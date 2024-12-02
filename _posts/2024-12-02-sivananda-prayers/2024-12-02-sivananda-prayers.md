@@ -1,14 +1,14 @@
 ---
 date: 2024-12-02
 excerpt: I do sivananda Yoga since over 30 years, yet still can't remember the songs at the end of the yoga classes. So I collected them...
-image: yogi_lotus.jpg
+image: yogi-lotus.jpg
 ---
 
 I do Sivananda Yoga since over 30 years in [Munich](https://muenchen.sivananda.yoga), yet still can't remember the songs at the end of the yoga classes. So I collected them in order to have them in a printable manner.
 
 ## The Om Tryambakam
 
-Our classical song at the end of a class
+Our classical song at the end of a class 
 
 ```
 Om Tryambakam Yajāmahe
@@ -41,4 +41,4 @@ Pūrnamevāvaśisyate
 
 Copied from [here](https://bodymindlight.com/opening-and-closing-prayers-in-sivananda-yoga)
 
-![Yogi doing the lotus](yogi_lotus.JPG)
+![Yogi doing the lotus](yogi-lotus.jpg)
