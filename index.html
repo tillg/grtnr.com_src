@@ -1,0 +1,35 @@
+---
+layout: default
+title: Home
+---
+
+<ul style="list-style-type: none; padding: 0;">
+  {% for post in site.posts %}
+  <li>
+    <a href="{{ post.url }}" style="display: block; margin-bottom: 5px; color: inherit;">
+      {% include post_preview.html %}
+    </a>
+    <!-- <h1><a href="{{ post.url }}" style="display: block;">{{ post.title }}    </h1>
+        <div class="post-date" style="display: inline-block; margin-left: 0px; margin-top: 0px;">{{ post.date | date_to_string }}</div>
+      </a> -->
+  </li>
+  {% endfor %}
+</ul>
+
+
+<!-- <div class="pagination">
+  {% if paginator.next_page %}
+  <a class="pagination-item older" href="{{ paginator.next_page_path | absolute_url }}">Older</a>
+  {% else %}
+  <span class="pagination-item older">Older</span>
+  {% endif %}
+  {% if paginator.previous_page %}
+  {% if paginator.page == 2 %}
+  <a class="pagination-item newer" href="{{ '/' | absolute_url }}">Newer</a>
+  {% else %}
+  <a class="pagination-item newer" href="{{ paginator.previous_page_path | absolute_url }}">Newer</a>
+  {% endif %}
+  {% else %}
+  <span class="pagination-item newer">Newer</span>
+  {% endif %}
+</div> -->
