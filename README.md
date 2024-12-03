@@ -46,17 +46,17 @@ A list of topics I worked on, details I found out, problems I solved.
 
 ### Changing theme
 
-In Nov/Dec I changed from the [Hydejack theme](https://hydejack.com) to [Lanyon](https://github.com/poole/lanyon). The Hydejack theme was pretty much packaged as gem, wjereas Lanyon come along as preset Jekyll installation. These were the things I had to take care of:
+In Nov/Dec 2024 I changed from the [Hydejack theme](https://hydejack.com) to [Lanyon](https://github.com/poole/lanyon). The Hydejack theme was pretty much packaged as gem, wjereas Lanyon come along as preset Jekyll installation. These were the things I had to take care of:
 
 * Set up a new site from scratch
 * Copy over the posts
 * Home page with a list of posts
 * Generate the site with pictures from within sub-dirs per post. See [jekyll-postfiles](https://github.com/nhoizey/jekyll-postfiles) plugin
 * Fix the posts so that they render well.
+* Recipes: Make a `recipes.html` page (similar to my `index.html`). Set the link to the image as `src="/{{ post.image }}"` so it picks the images in the root.
 
 These are the things I still need to deal with ion order to be on par with the old site:
 
-* Recipes
 * Go thru all the old commit messages and check we have not lost any functionality...
 * Deploy via github actions
 
