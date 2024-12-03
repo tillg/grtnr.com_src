@@ -2,7 +2,7 @@
 title:               grtnr.com
 tagline:             
 description:         'Stuff that keeps me busy, like family, coding, math, mountains and more.'
-url:                 http://grtnr.com
+url:                 https://grtnr.com
 baseurl:             ''
 paginate:            5
 permalink:           pretty
