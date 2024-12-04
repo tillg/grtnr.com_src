@@ -1,5 +1,9 @@
 # grtnr.com_jekyll_2022
 
+****** This repository is retired and has been replaced by [grtnr.com,_2024](https://github.com/tillg/grtnr.com_2024) ******
+In Dec 2024 I reworked the setup of my site and moved to a new repo.
+
+
 The content of my website. Can be reached under...
 
 * https://tillg.github.io/grtnr.com_jekyll_2022/
