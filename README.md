@@ -24,8 +24,8 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 
 ## Todo 
 
-* Check that every enntry has a date
-* DNS Setup: Forwart tillgartner.com --> grtnr.com
+* Check that every entry has a date
+* Check that images are resized properly with my current setup
 * Test: If I remove the accent image (wooden_desk.jpg), my link tests should fail - why didn't they?
 * Build pipeline: Check that posts have the right structure: Have a layout, a date etc.
 * Build pipeline: Make sure that posts have the proper file names: YYYY-MM-DD-xyz.md
@@ -138,7 +138,9 @@ bundle info --path jekyll-theme-hydejack
 ```
 
 ### Google Analytics
+Decembre 2024: Added Google tracking by adding the gtag.js snippet to [head.html](_includes/head.html).
 
+#### Pre-2023
 Go check for analytics data [here](https://analytics.google.com).
 
 As no data became visible even after a couple of days, I started looking into the [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna?hl=en).
