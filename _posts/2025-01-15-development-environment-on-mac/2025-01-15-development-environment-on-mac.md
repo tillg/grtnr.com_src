@@ -72,5 +72,19 @@ Reason: `brew install gradle` installed Gradle Version 8.12.1, but for the curre
 
 ## Python
 
+* I use [pyenv](https://github.com/pyenv/pyenv)
+* To install pyenv: `brew install pyenv`
+
+**Mini-Cheatsheet**
+
+Select a Pyenv-installed Python as the version to use, run one of the following commands:
+
+```shell
+pyenv shell <version> -- select just for current shell session
+pyenv local <version> -- automatically select whenever you are in the current directory (or its subdirectories)
+pyenv global <version> -- select globally for your user account
+```
+
 ## Ruby
 
+TBD
