@@ -21,7 +21,6 @@ Find me on <a href="https://x.com/tillg" target="blank"><img src="/public/images
 
 ## Log
 
-
 * 2022-08: Fix: Images are not visible
 * 2022-08-20: Link it to grtnr.com (with CNAME) --> Using https://new.grtnr.de instead.
 * 2022-08-25: Build process should check if all links work: external, pictures, etc.
@@ -39,3 +38,10 @@ Find me on <a href="https://x.com/tillg" target="blank"><img src="/public/images
 * 2023-03-10: Moved over content from tillgartner.com
 * 2023-04-06: Fixed a problem with CSS 
 * 2023-05-07: Added an article about my AI chat and the AI Chat UI.
+
+## Traffic
+
+<div>
+    <iframe src="https://lookerstudio.google.com/reporting/323a553e-802f-429f-927e-c335e44d6f75/page/kIV1C?s=ik0Dq42y9yQ" height="315" width="560" allowfullscreen="" frameborder="0">
+    </iframe>
+</div>
