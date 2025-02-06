@@ -1,5 +1,6 @@
 ---
 date: 2025-02-05
+image: david_cursor_magic.png
 excerpt: I found this video of a dev with LOTS of helpful tips on how to use Cursor - here are my take aways.
 ---
 
