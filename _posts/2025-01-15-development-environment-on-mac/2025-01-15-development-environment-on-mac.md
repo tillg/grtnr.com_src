@@ -22,7 +22,7 @@ As the way how certain packages are installed might change over time, I will add
 **January 2025:** I switched away from [Docker Desktop](https://www.docker.com/products/docker-desktop/) to [Rancher Desktop](https://rancherdesktop.io).
 
 Installation note: Downloaded the Apple Silicon version, opened the DMG and copied it into my Applications directory. The only detail I needed to do, is tick the "Administrative Access" checkbox in the setting.
-![alt text](image.png)
+![alt text](rancher_prefs.png)
 
 *Registry*: I use different registries when working on different projects. 
 

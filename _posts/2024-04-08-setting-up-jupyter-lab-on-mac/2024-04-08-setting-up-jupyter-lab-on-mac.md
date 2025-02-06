@@ -65,10 +65,10 @@ jupyter lab
 
 ## Create a new notebook
 Your browser should be open in a fresh Jupyter Lab environment:
-![An empty Lab environment](image.png)
+![An empty Lab environment](jupyter_overview.png)
 
 Click on *Notebook > Python 3* and your first Notebook should be up & running:
 
-![A fresh nbotebook](image-1.png)
+![A fresh nbotebook](jupyter_detail.png)
 
 To get going within Jupyter Lab, follow their [User Guide](https://jupyterlab.readthedocs.io/en/latest/user/interface.html).
