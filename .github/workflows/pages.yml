@@ -37,7 +37,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Build Jekyll 
-        run: ./build.sh
+        run: JEKYLL_ENV=production ./build.sh
       - name: Post build check - must pass
         run: ./post_build_check_hard.sh
         continue-on-error: false

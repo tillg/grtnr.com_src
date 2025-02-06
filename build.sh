@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Building the site in mode $JEKYLL_ENV"
+
 # Building the site
 bundle exec jekyll build
 
