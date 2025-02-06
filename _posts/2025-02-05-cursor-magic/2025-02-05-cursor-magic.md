@@ -156,6 +156,7 @@ Besides Cursor David uses many other tools. Some of what he mentioned:
 * [ChatGPT](https://chatgpt.com) 
 * [Claude](https://claude.ai) for side discussions with an advanced AI.
 * [Perplexity](https://www.perplexity.ai) for smart web searches.
+* [WisprFlow](https://wisprflow.ai) to speak rather than typing
 * [v0](https://v0.dev) a tool to create Web Apps in the browser by chatting withj an AI.
 * [Lovable](https://lovable.dev) for building backends, especially with [Supabase](https://supabase.com)
 * [Bolt](https://bolt.new) to build web sites.
