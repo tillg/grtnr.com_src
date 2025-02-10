@@ -24,6 +24,7 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 
 ## Todo 
 
+* Add comments with [Giscuss](https://github.com/giscus/giscus), as suggested by [ChatGPT Deep Research](https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776)
 * Check that every entry has a date
 * Check that images are resized properly with my current setup
 * Test: If I remove the accent image (wooden_desk.jpg), my link tests should fail - why didn't they?
@@ -31,13 +32,11 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * Build pipeline: Make sure that posts have the proper file names: YYYY-MM-DD-xyz.md
 * Build pipeline: Test that the no of posts corresponds to the number of entries in the posts directory
 * Build pipeline: Create a warning if a blog entry has no excerpt
-* Sort out tags in theme hydejack
 * Make sure images are minimized during build process
-* Navigation with categories, i.e. recipes, tech, family, travel...
+* Navigation with categories, i.e. recipes, tech, family, travel... Use the guidance from [ChatGPT](https://chatgpt.com/share/67a8afb7-3ba4-8009-b8a3-c96d023f8526)
 * Lint & format Markdown before commit (commit hooks)
 * Have sitemap
 * Integrate search
-* Integrate comments
 * Make Google analytics visible within the website - so visitors can see how many visitors there are
 
 ##  Findings, Readings, Problems
