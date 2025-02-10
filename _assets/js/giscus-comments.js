@@ -4,12 +4,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     // GitHub API request function
     async function fetchCommentCount(postPath) {
         const repo = "tillg/grtnr.com_2024"; // Your repo
-        const discussionCategory = "Comments"; // Your Giscus discussion category
 
         const query = `
         {
             repository(owner: "tillg", name: "grtnr.com_2024") {
-                discussions(first: 100, category: "${discussionCategory}") {
+                discussions(first: 100, categoryId: "Q&A") {  
                     nodes {
                         title
                         url
@@ -31,7 +30,11 @@ document.addEventListener("DOMContentLoaded", async function () {
                 body: JSON.stringify({ query }),
             });
 
-            if (!response.ok) throw new Error("GitHub API error");
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("GitHub API error details:", errorData);
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
 
             const result = await response.json();
             if (!result.data) return null;
