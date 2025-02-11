@@ -3,10 +3,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // GitHub API request function
     async function fetchCommentCount(postPath) {
-        const repo = "tillg/grtnr.com_2024"; // Your repo
 
         const query = `
-        {
+        query {
             repository(owner: "tillg", name: "grtnr.com_2024") {
                 discussions(first: 100, categoryId: "Q&A") {  
                     nodes {
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "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"
+                    "Authorization": "Bearer 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"
                 },
                 body: JSON.stringify({ query }),
             });
@@ -34,6 +33,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                 const errorData = await response.json();
                 console.error("GitHub API error details:", errorData);
                 throw new Error(`GitHub API error: ${response.status}`);
+            } else {
+                console.log("We got an OK! GitHub API response as JSON:", response.json());
             }
 
             const result = await response.json();

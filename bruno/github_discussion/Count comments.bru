@@ -1,0 +1,35 @@
+meta {
+  name: Count comments
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://api.github.com/graphql
+  body: json
+  auth: bearer
+}
+
+headers {
+  Content-Type: application/json
+}
+
+auth:bearer {
+  token: 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
+}
+
+body:json {
+  {
+              repository(owner: "tillg", name: "grtnr.com_2024") {
+                  discussions(first: 100, categoryId: "Q&A") {  
+                      nodes {
+                          title
+                          url
+                          comments {
+                              totalCount
+                          }
+                      }
+                  }
+              }
+          }
+}

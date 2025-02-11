@@ -21,13 +21,14 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * **`./build.sh`** - guess what this does... ;)
 * **`./post_build_check_soft.sh`**: Runs checks on the built `_site` directory. If errors are found they are reported but don't break the build.
 * **`./post_build_check_hard.sh`**: Runs checks on the built `_site`directory that have to succeed, otherwise the build is considered to be broken.
+* **To run it locally** you obviously need to have the dependencies installed. Then launch `bundle exec jekyll serve`.
 
 ## Todo 
 
-* Add comments with [Giscuss](https://github.com/giscus/giscus), as suggested by [ChatGPT Deep Research](https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776)
+* _In the making_: Add comments with [Giscuss](https://github.com/giscus/giscus), as suggested by [ChatGPT Deep Research](https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776)
 * Check that every entry has a date
 * Check that images are resized properly with my current setup
-* Test: If I remove the accent image (wooden_desk.jpg), my link tests should fail - why didn't they?
+* Test: If I remove an image that is used, my link tests should fail - why don't they?
 * Build pipeline: Check that posts have the right structure: Have a layout, a date etc.
 * Build pipeline: Make sure that posts have the proper file names: YYYY-MM-DD-xyz.md
 * Build pipeline: Test that the no of posts corresponds to the number of entries in the posts directory
@@ -38,6 +39,7 @@ Once all dependies are installed, it is best to use the standard scripts that ar
 * Have sitemap
 * Integrate search
 * Make Google analytics visible within the website - so visitors can see how many visitors there are
+* Make the git history visible on the site - so visitors can see the commit history.
 
 ##  Findings, Readings, Problems
 
