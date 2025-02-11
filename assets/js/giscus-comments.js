@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const query = `
         query {
             repository(owner: "tillg", name: "grtnr.com_2024") {
-                discussions(first: 100, categoryId: "Q&A") {  
+                discussions(first: 100, categoryId: "DIC_kwDONYRp_c4Cm0cH") {  
                     nodes {
                         title
                         url
@@ -29,15 +29,14 @@ document.addEventListener("DOMContentLoaded", async function () {
                 body: JSON.stringify({ query }),
             });
 
+            // Parse response body only once and store in result.
+            const result = await response.json();
+
             if (!response.ok) {
-                const errorData = await response.json();
-                console.error("GitHub API error details:", errorData);
+                console.error("GitHub API error details:", result);
                 throw new Error(`GitHub API error: ${response.status}`);
-            } else {
-                console.log("We got an OK! GitHub API response as JSON:", response.json());
             }
 
-            const result = await response.json();
             if (!result.data) return null;
 
             const discussions = result.data.repository.discussions.nodes;
@@ -56,6 +55,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     commentElements.forEach(async (el) => {
         const postPath = el.getAttribute("data-giscus-comments");
         const count = await fetchCommentCount(postPath);
-        el.querySelector(".comment-num").textContent = count;
+        if (count == 1) {
+            el.querySelector(".comment-num").textContent = "1 comment ";
+        } else if (count > 1) {
+            el.querySelector(".comment-num").textContent = count + " comments ";
+        } else {
+            el.querySelector(".comment-num").textContent = "";
+        }
     });
 });

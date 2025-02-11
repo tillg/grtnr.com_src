@@ -15,10 +15,26 @@ headers {
 }
 
 auth:bearer {
-  token: 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
+  token: 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
 }
 
 body:json {
+  repository(owner: "tillg", name: "grtnr.com_2024") 
+    {
+        discussions(first: 100, categoryId: "Q&A") 
+      {  
+            nodes {
+                          title
+                          url
+                          comments {
+                              totalCount
+        }
+      }
+    }
+  }
+}
+
+body:text {
   {
               repository(owner: "tillg", name: "grtnr.com_2024") {
                   discussions(first: 100, categoryId: "Q&A") {  
