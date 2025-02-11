@@ -1,4 +1,9 @@
+---
+---
+
+
 document.addEventListener("DOMContentLoaded", async function () {
+    const accessToken = "{{ site.env.GH_API_TOKEN }}";
     const commentElements = document.querySelectorAll(".comment-count");
 
     // GitHub API request function
@@ -24,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${process.env.GH_API_TOKEN}`
+                    "Authorization": `Bearer ` + accessToken
                 },
                 body: JSON.stringify({ query }),
             });
