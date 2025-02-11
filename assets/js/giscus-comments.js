@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer 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"
+                    "Authorization": `Bearer ${process.env.GH_API_TOKEN}`
                 },
                 body: JSON.stringify({ query }),
             });

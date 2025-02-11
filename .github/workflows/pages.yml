@@ -37,7 +37,10 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
       - name: Build Jekyll 
-        run: JEKYLL_ENV=production ./build.sh
+        env:
+          GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}
+          JEKYLL_ENV: production
+        run: ./build.sh
       - name: Post build check - must pass
         run: ./post_build_check_hard.sh
         continue-on-error: false
