@@ -1,8 +1,8 @@
-—
+——-
 date: 2025-03-14
 image: pools.png
 excerpt: I’d love to build a little website that optimizes my swimming slots in Munich’s public pools.
-—
+——-
 
 As Most of u probably know I live in Munich/Germany. And since we lived in Vietnam I got hooked on swimming - maybe not really hooked, but I enjoy it. I learned to freestyle for over 1 km in the sea in Vietnam, and from time to time I work on keeping alive this skill here in Munich. 
 
