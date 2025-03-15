@@ -4,7 +4,9 @@ image: pools.png
 excerpt: I’d love to build a little website that optimizes my swimming slots in Munich’s public pools.
 ---
 
-As Most of u probably know I live in Munich/Germany. And since we lived in Vietnam I got hooked on swimming - maybe not really hooked, but I enjoy it. I learned to freestyle for over 1 km in the sea in Vietnam, and from time to time I work on keeping alive this skill here in Munich. 
+![Pools](pools.png)
+
+As Most of u probably know I live in [Munich/Germany](https://maps.app.goo.gl/QXy56tXkBf6tJ2s98). And since we lived in Vietnam I got hooked on swimming - maybe not really hooked, but I enjoy it. I learned to freestyle for over 1 km in the sea in Vietnam, and from time to time I work on keeping alive this skill here in Munich.
 
 The problem is, in Munich u need a public pool (because I don’t have a private one 😉), and public pools tend to be full & crowded. Luckily, the SWM (the Munich public services) provide a [website](https://www.swm.de/baeder/auslastung) that tells us how busy the different public swimming pools are. 
 

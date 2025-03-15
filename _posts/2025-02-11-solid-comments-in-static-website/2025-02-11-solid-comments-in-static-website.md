@@ -47,7 +47,7 @@ Here is the executive summary (the details are in the [chat I had with the AI](h
 
 After fiddling around a bit and smoothing the edges everything worked fine. But there was one feature I miussed: I wanted to see the number of comments a blog post has in the post overview page.
 
-![Comment counter](screenshot_comment_counter.jpg)
+![Comment counter](screenshot_comment_counter.jpg){: style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"}
 
 So I spun up ChatGPT again and got another [research result](https://chatgpt.com/share/67ab5f69-4ddc-8009-8471-a35e00cb6a43). The rough steps are:
 
