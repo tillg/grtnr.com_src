@@ -108,6 +108,7 @@ PLATFORMS
 
 DEPENDENCIES
   base64 (~> 0.2.0)
+  bundler (~> 2.6)
   csv (~> 3.2.8)
   jekyll (~> 4.3)
   jekyll-dotenv
@@ -118,4 +119,4 @@ DEPENDENCIES
   jekyll-sitemap (~> 1.4)
 
 BUNDLED WITH
-   2.5.23
+   2.6.6

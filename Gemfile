@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "bundler", "~> 2.6"
 gem "jekyll", "~> 4.3"
 gem "jekyll-gist", "~> 1.5"
 gem "csv", "~> 3.2.8"
