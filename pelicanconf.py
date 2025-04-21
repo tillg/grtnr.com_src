@@ -4,7 +4,7 @@ SITEURL = ""
 
 PATH = "content"
 ARTICLE_PATHS = ['.']
-STATIC_PATHS = [] 
+STATIC_PATHS = ['static'] 
 ARTICLE_EXCLUDES = []
 
 ARTICLE_SAVE_AS = '{slug}/index.html'
