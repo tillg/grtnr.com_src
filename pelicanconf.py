@@ -27,7 +27,7 @@ DATE_FORMATS = {
 
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['auto_title', 'copy_adjacent_images']
+PLUGINS = ['auto_title', 'copy_adjacent_images', 'excerpt_to_summary']
 
 USE_FOLDER_AS_CATEGORY = False  # Don't categorize by folder name
 

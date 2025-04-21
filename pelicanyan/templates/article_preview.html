@@ -3,7 +3,7 @@
         <h1 class="post-title" style="color: black !important;">{{ article.title }}</h1>
         <span class="post-date">{{ article.locale_date }}</span>
         {% if article.image %}
-        <img src="{{ SITEURL }}/{{ article.url }}/{{ article.image }}" style="height: 100px; float: left; margin-right: 10px; margin-top: 0px;">
+        <img src="{% if article.image.startswith('http') %}{{ article.image }}{% else %}{{ SITEURL }}/{{ article.url }}/{{ article.image }}{% endif %}" style="height: 100px; float: left; margin-right: 10px; margin-top: 0px;">
         {% endif %}
         {% if article.summary %}
         <div style="overflow: hidden; margin-top: 5px;">
