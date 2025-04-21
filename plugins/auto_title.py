@@ -23,9 +23,9 @@ class AutoTitleReader(MarkdownReader):
             
             # Convert to title case
             title = ' '.join(title_parts).replace('_', ' ').title()
-            print(f"Setting title to: {title}")
+            #print(f"Setting title to: {title}")
             metadata['title'] = title
-            print(f"Metadata after setting title:\n{json.dumps(metadata, indent=2, default=str)}")
+            #print(f"Metadata after setting title:\n{json.dumps(metadata, indent=2, default=str)}")
 
         return content, metadata
 

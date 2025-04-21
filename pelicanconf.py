@@ -4,7 +4,7 @@ SITEURL = ""
 
 PATH = "content"
 ARTICLE_PATHS = ['.']
-STATIC_PATHS = ['.'] 
+STATIC_PATHS = [] 
 ARTICLE_EXCLUDES = []
 
 ARTICLE_SAVE_AS = '{slug}/index.html'
@@ -27,7 +27,7 @@ DATE_FORMATS = {
 
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['auto_title']
+PLUGINS = ['auto_title', 'copy_adjacent_images']
 
 USE_FOLDER_AS_CATEGORY = False  # Don't categorize by folder name
 
