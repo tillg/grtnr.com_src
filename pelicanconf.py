@@ -17,11 +17,13 @@ SLUGIFY_SOURCE = 'title'
 STATIC_CREATE_LINKS = True
 EXTRA_PATH_METADATA = {}
 
-DELETE_OUTPUT_DIRECTORY = True
-
 TIMEZONE = 'Europe/Rome'
 
 DEFAULT_LANG = 'en'
+DATE_FORMATS = {
+    'en': '%B %-d, %Y',
+    'de': '%-d %b %Y',
+}
 
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
@@ -35,6 +37,7 @@ USE_FOLDER_AS_CATEGORY = False  # Don't categorize by folder name
 # }
 
 DEBUG = True
+DELETE_OUTPUT_DIRECTORY = True
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -61,3 +64,12 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
+
+THEME = 'pelicanyan'
+#GA_ACCOUNT = 'UA-12344321-1'
+TWITTER_ACCOUNT = 'tillg'
+DIRECT_TEMPLATES = ('index', 'categories', 'authors', 'archives', 'sitemap', 'robots', 'humans')
+ROBOTS_SAVE_AS = 'robots.txt'
+HUMANS_SAVE_AS = 'humans.txt'
+SITEMAP_SAVE_AS = 'sitemap.xml'
+TYPOGRIFY=True

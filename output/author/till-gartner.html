@@ -1,263 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-        <head>
-                        <meta charset="utf-8" />
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                        <meta name="generator" content="Pelican" />
-                        <title>grtnr.com - Till Gartner</title>
-                        <link rel="stylesheet" href="../theme/css/main.css" />
-        </head>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-        <body id="index" class="home">
-                <header id="banner" class="body">
-                        <h1><a href="../">grtnr.com</a></h1>
-                        <nav><ul>
-                                                <li><a href="../category/misc.html">misc</a></li>
-                        </ul></nav>
-                </header><!-- /#banner -->
+    <title>grtnr.com - Articles by Till Gartner</title>
 
-                <aside id="featured" class="body">
-                    <article>
-                        <h1 class="entry-title"><a href="../digital-garden/">Digital Garden</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2025-04-18T00:00:00+02:00">
-                Published: Fri 18 April 2025
-        </abbr>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../theme/css/poole.css"/>
+    <link rel="stylesheet" href="../theme/css/syntax.css"/>
+    <link rel="stylesheet" href="../theme/css/lanyon.css"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+    <link rel="stylesheet" href="../theme/css/styles.css"/>
+  </head>
 
-                <address class="vcard author">
-                        By                                 <a class="url fn" href="../author/till-gartner.html">Till Gartner</a>
-                </address>
-        <p>In <a href="../category/misc.html">misc</a>.</p>
-        
-</footer><!-- /.post-info --><p><img alt="Digital garden" src="digital-garden.jpg"></p>
-<ul>
-<li><a href="#requirements">Requirements</a></li>
-<li><a href="#technology-and-architecture">Technology and Architecture</a></li>
-<li><a href="#chatgpt-building-a-python-powered-digital-garden-stack--architecture">ChatGPT: Building a Python-Powered Digital Garden: Stack \&amp; Architecture</a></li>
-<li><a href="#static-site-generator--content-organization">Static Site Generator \&amp; Content Organization</a></li>
-<li><a href="#markdown-editing--local-preview">Markdown Editing \&amp; Local Preview</a></li>
-<li><a href="#wiki-style-internal-linking--backlinks">Wiki-Style Internal Linking \&amp; Backlinks</a></li>
-<li><a href="#custom-content-types--templates">Custom Content Types \&amp; Templates</a></li>
-<li><a href="#beautiful-theming-ghost-inspired-design">Beautiful Theming (Ghost-Inspired Design)</a></li>
-<li><a href="#multi-language-support--ai-translations">Multi-Language Support \&amp; AI Translations</a></li>
-<li><a href="#content-access-control-roles--authentication">Content Access Control (Roles \&amp; Authentication)</a></li>
-<li><a href="#tags-indexes-and-navigation-pages">Tags, Indexes, and Navigation Pages</a></li>
-<li><a href="#build-pipeline--link-validation">Build Pipeline \&amp; Link Validation</a></li>
-<li><a href="#summary-of-the-recommended-stack">Summary of the Recommended Stack</a></li>
-<li><a href="#follow-up-questions">Follow up questions</a></li>
-<li><a href="#changing-the-structure">Changing the structure</a></li>
-<li><a href="#articles-or-pages">Articles or Pages?</a></li>
-<li><a href="#playing-around">Playing around</a></li>
-</ul>
-<p>I read about Digital Gardens on <a href="https://www.heise.de/hintergrund/Nerd-Trend-Digitaler-Garten-Die-eigene-Website-als-persoenliches-Wissensarchiv-10344169.html">heise (in German)</a> and really liked the idea. The key differences to my current blog that I thought of are</p>
-<ul>
-<li>The idea of writing down ideas and starting articles right away - and having them in the garden immediatly. That's a big digfference to the attidude of "I need to finish the article before I publish it".</li>
-<li>The idea of linking to other articles and creating a network of articles. That's something I can already do in my blog, but the process is delicate: If I rename or move an article around, the links to it are broken. Also the idea of backlinks is striking.</li>
-<li>Putting the topics more to the front rather than the date: My blog is primarely structured and presented by date. Having the topic(s) more as navigation structure seems compelling. Of course I would still löeave the date of creation, as well as the date of the last modification.</li>
-</ul>
-<h1>Requirements</h1>
-<p>As usual I tend to start by looking at the technical side 😀. So I jotted down my requirements and asked ChatGPT for help.</p>
-<p>My requirements for a digital garden system:</p>
-<ul>
-<li>Articles are based on markdown files.</li>
-<li>Built as static generated website.</li>
-<li>One article in one directory together with its resources: pictures, PDFs, other files. This way local rendering per article makes sense, very helpful while editing. I would edit the articles with VScode or another editor that has markdown support.</li>
-<li>Articles (i.e. their directories) can be in a directory tree structure. Their directory structure describes the category. For example/tech/dev/data_science</li>
-<li>Written in Python, so I can tinker around.</li>
-<li>Build pipeline can be completed: a stage to check internal links.</li>
-<li>Internal links as <em>[ [links] ]</em>. And show backlinks in linked articles.</li>
-<li>I want to easily create specific article types with special structure, fields, rendering. Examples are RECIPE, PLACE or LOCATION, TRIP ADVENTURE, …</li>
-<li>Beautiful site! Not like a messy nerdy garden! Take inspiration from beautiful blogs like ghost.</li>
-<li>Multilingual, with languages filled up by AI if not provided by author.</li>
-<li>Different access rights: some content is public, other for family &amp; friends or other user groups.</li>
-<li>Access roles, for example: articles that are unpublished can only be seen by users with role EDITOR.</li>
-<li>Allow multiple index pages: tags, historical index (maybe also per tag), most read, most starred… Index pages can be generated but also hand crafted. Specifically the home page.</li>
-</ul>
-<h1>Technology and Architecture</h1>
-<p><a href="https://chatgpt.com/share/68026bb5-d040-8009-9f79-ec0fd35880f4">This is what ChatGPT produced</a> (I thionk it's really good, so I paste it all here):</p>
-<p>Great. I’ll explore the best Python-based static site generators and architecture for building a beautifully styled, markdown-driven digital garden with support for access control, internal link checking, multilingual support, and article-type customization. I’ll also ensure the system supports your preferred local editing flow, generates plain HTML, and works well with GitHub Pages.</p>
-<p>I’ll get back to you with a recommended stack, architecture diagram, and suggestions on how to implement your requirements smoothly.</p>
-<p><em>Researched for 11m 16s * 23 sources</em></p>
-<h1>ChatGPT: Building a Python-Powered Digital Garden: Stack &amp; Architecture</h1>
-<h2>Static Site Generator &amp; Content Organization</h2>
-<p>For a <strong>Python-based static site generator</strong>, <strong>Pelican</strong> is an excellent choice. Pelican is actively maintained and well-documented, supporting Markdown content and multi-language publishing out-of-the-box (<a href="https://github.com/getpelican/pelican#:~:text=,rich%20plugin%20ecosystem%3A%20Pelican%20Plugins">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>). It generates a plain HTML site (no need for React/Vue) and has a rich plugin ecosystem for extending functionality (<a href="https://github.com/getpelican/pelican#:~:text=,rich%20plugin%20ecosystem%3A%20Pelican%20Plugins">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>). </p>
-<p><strong>Content Structure:</strong> Organize the digital garden’s content in a logical directory hierarchy under Pelican’s <code>content/</code> folder. Each article lives in its own subdirectory alongside its assets. For example: </p>
-<div class="highlight"><pre><span></span><code>content/
-├── tech/
-│   └── dev/
-│        └── data_science/
-│             └── my-article/ 
-│                  ├── index.md        # Article in Markdown
-│                  ├── figure1.png     # Images/PDFs related to article
-│                  └── data.pdf
-└── travel/
-    └── trip-to-paris/
-         ├── index.md
-         └── eiffel.jpg
-</code></pre></div>
+  <body>
+<!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <div class="profile">
+      <img src="../theme/img/profile.png"/>
+    </div>
+  </div>
 
-<p>In this layout, every article (<code>index.md</code>) is grouped with its media. Pelican can handle “page bundles” like this by treating those subfolders as both content and static paths. We configure Pelican’s settings to include each folder in <code>ARTICLE_PATHS</code> and <code>STATIC_PATHS</code> so that markdown files are processed and assets are copied through to output (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=Starting%20with%20Pelican%203,directory%20reserved%20for%20static%20files">Writing content - PELICAN 4.11.0</a>) (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=generated%20site,in%20earlier%20versions%20of%20Pelican">Writing content - PELICAN 4.11.0</a>). Pelican’s <strong>attach syntax</strong> allows linking to local files easily: in Markdown, use <code>{attach}</code> to reference files in the same folder. For example: <code>![Figure]({attach}figure1.png)</code> in <code>my-article/index.md</code> will copy <em>figure1.png</em> into the article’s output directory and link to it (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=Starting%20with%20Pelican%203,sibling%20of%20the%20linking%20document">Writing content - PELICAN 4.11.0</a>) (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=Title%3A%20Test%20Post%20Category%3A%20test,31">Writing content - PELICAN 4.11.0</a>). This keeps images/PDFs co-located with their article and ensures links aren’t broken after the static build (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=output%20%E2%94%94%E2%94%80%E2%94%80%202014%20%E2%94%9C%E2%94%80%E2%94%80%20archive,post.html">Writing content - PELICAN 4.11.0</a>). </p>
-<p>Pelican also supports using folder names as categories automatically. By default, the immediate parent folder becomes the category (e.g. “data_science” in the path above) (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=Note%20that%2C%20aside%20from%20the,W3C%E2%80%99s%20suggested%20subset%20ISO%208601">Writing content - PELICAN 4.11.0</a>). We can preserve deeper nesting in URLs by customizing the save path. For instance, setting <code>ARTICLE_SAVE_AS = '{category}/{slug}/index.html'</code> and similar <code>ARTICLE_URL</code> will output each post as an <code>index.html</code> inside a folder matching its category/slug. This yields clean URLs like <code>/tech/dev/data_science/my-article/</code> reflecting the directory structure. (Pelican’s <code>USE_FOLDER_AS_CATEGORY=True</code> by default uses the lowest folder as category; for multi-level taxonomy, one can either combine the path into one category or treat top folders as sections and use tags for sub-classification.) </p>
-<h2>Markdown Editing &amp; Local Preview</h2>
-<p>All articles are written in plain <strong>Markdown</strong> (with YAML/TOML front matter for metadata) so you can comfortably author content in VS Code or any editor. Each Markdown file begins with metadata like title, date, tags, etc. Pelican only requires a title (it can derive others if needed) (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=Note%20that%2C%20aside%20from%20the,W3C%E2%80%99s%20suggested%20subset%20ISO%208601">Writing content - PELICAN 4.11.0</a>), but we’ll use metadata extensively for custom behavior (more on this later). A sample front matter for an article might be: </p>
-<div class="highlight"><pre><span></span><code>Title: My Data Science Journey  
-Date: 2025-04-10  
-Category: data_science  
-Tags: python, analytics  
-Slug: my-data-science-journey  
-Status: published  
-</code></pre></div>
+  <nav class="sidebar-nav">
+  <a class="sidebar-nav-item" href="../">All</a>
 
-<p><strong>Local Preview:</strong> To enable per-article preview while editing, use Pelican’s built-in development server. Pelican’s CLI/Makefile supports an auto-reload server (e.g. <code>make devserver</code> or <code>pelican --autoreload --listen</code>) that watches for file changes and rebuilds as you write. This way, you can navigate to <code>http://localhost:8000/tech/dev/data_science/my-article/</code> and see the rendered HTML update on each save. Because Pelican does selective output writing and caching, rebuilds are fast even for large sites (<a href="https://github.com/getpelican/pelican#:~:text=,rich%20plugin%20ecosystem%3A%20Pelican%20Plugins">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>). This gives a near real-time preview of the article in the context of the actual theme/template. For quick iteration on a single page, Pelican’s incremental build will detect only <em>my-article</em> has changed and regenerate just that page, making the feedback loop quick. VS Code can also preview Markdown, but using Pelican’s server ensures the content is seen with the final site’s styling and layout. </p>
-<h2>Wiki-Style Internal Linking &amp; Backlinks</h2>
-<p>To interconnect notes in wiki fashion, we enable <strong>[[Wiki-Style]] linking</strong> in Markdown. Pelican has a community plugin called <strong>Wikilinks</strong> that automatically converts <code>[[Page Name]]</code> syntax into proper hyperlinks between pages (<a href="https://github.com/MinchinWeb/minchin.pelican.plugins.wikilinks/#:~:text=Usage%20Notes">GitHub - minchinweb/minchin.pelican.plugins.wikilinks: Support Wikilinks when generating Pelican sites</a>). For example, writing <code>We build on ideas from [[My Data Science Journey]]</code> in another article will link to the “My Data Science Journey” page (resolving to its slug or filename). The Wikilinks plugin supports optional display text (e.g. <code>[[Page Name|custom text]]</code>) (<a href="https://github.com/MinchinWeb/minchin.pelican.plugins.wikilinks/#:~:text=Usage%20Notes">GitHub - minchinweb/minchin.pelican.plugins.wikilinks: Support Wikilinks when generating Pelican sites</a>). Under the hood, it scans for <code>[[...]]</code> patterns after markdown processing and replaces them with <code>&lt;a&gt;</code> links to the target page’s URL (<a href="https://github.com/MinchinWeb/minchin.pelican.plugins.wikilinks/#:~:text=In%20basic%20usage%2C%20this%20allow,is%20finished">GitHub - minchinweb/minchin.pelican.plugins.wikilinks: Support Wikilinks when generating Pelican sites</a>). This makes cross-referencing content as easy as in tools like Obsidian or Roam. (We will enforce unique filenames for notes to avoid ambiguous links (<a href="https://github.com/MinchinWeb/minchin.pelican.plugins.wikilinks/#:~:text=Known%20Issues">GitHub - minchinweb/minchin.pelican.plugins.wikilinks: Support Wikilinks when generating Pelican sites</a>).) </p>
-<p><strong>Backlinks:</strong> To achieve bi-directional linking (seeing what links back to a page), we can create a custom Pelican plugin or utilize the site’s metadata. During the build, we can collect all the wiki link references: e.g. maintain a dictionary mapping each target page to a list of pages that mentioned it. Then extend Pelican’s article context to include a “backlinks” list for each article. Finally, in the article template, if backlinks exist, render a section “<strong>Linked from:</strong> …” listing those referring pages. This requires a custom plugin that hooks into Pelican’s generation phase (using signals like <code>article_generator_finalized</code>) to gather links and inject the data. The effort is manageable given Pelican’s plugin API (Python hooks), and ensures every page ends with a list of other notes that link to it, reinforcing the wiki-like navigation. If writing a plugin from scratch, we’d parse each article’s HTML (or use the internal link map from the Wikilinks plugin) to identify outgoing <code>href</code>s pointing inside the site, then invert that mapping. </p>
-<p>Pelican’s standard linking syntax (<code>{filename}target.md</code>) could also be used for internal links (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=the%20other%20content%20will%20be,placed%20after%20site%20generation">Writing content - PELICAN 4.11.0</a>) (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=,filename%7D%2Farticle2.md">Writing content - PELICAN 4.11.0</a>), but the wiki-style is more intuitive for a digital garden workflow. With the Wikilinks plugin and a backlinks plugin, the site will have <strong>fully connected pages</strong> with automatic references. </p>
-<h2>Custom Content Types &amp; Templates</h2>
-<p>One strength of Pelican is its flexible metadata and templating, which we leverage to define <strong>custom article types</strong> like <code>RECIPE</code> or <code>TRIP</code>. All Markdown files can include arbitrary front-matter fields (as long as they don’t conflict with reserved keywords) (<a href="https://docs.getpelican.com/en/4.7.2/content.html#file-metadata#:~:text=This%20is%20the%20content%20of,my%20super%20blog%20post">Writing content — Pelican 4.7.2 documentation</a>) (<a href="https://docs.getpelican.com/en/4.7.2/content.html#file-metadata#:~:text=,false">Writing content — Pelican 4.7.2 documentation</a>). We define a metadata field <code>Type</code> (or use a tag/category) to denote the content type, and add any custom fields needed. For example, a recipe might have: </p>
-<div class="highlight"><pre><span></span><code>Title: Chocolate Chip Cookies  
-Date: 2025-03-01  
-Type: recipe  
-Servings: 4  
-Prep_Time: 15 min  
-Cook_Time: 10 min  
-Ingredients: 
-<span class="w">  </span><span class="k">-</span><span class="w"> </span>Flour 
-<span class="w">  </span><span class="k">-</span><span class="w"> </span>Sugar 
-<span class="w">  </span><span class="k">-</span><span class="w"> </span>Chocolate chips 
-Steps: 
-<span class="w">  </span><span class="k">1.</span> Preheat oven…  
-<span class="w">  </span><span class="k">2.</span> Mix ingredients…  
-Template: recipe  &lt;!-- use a custom Jinja template --&gt;
-</code></pre></div>
+      <a class="sidebar-nav-item" href="../category/misc.html">misc</a>
 
-<p>In this case, we set <code>Template: recipe</code> which tells Pelican to render this page with <code>recipe.html</code> instead of the default template (<a href="https://docs.getpelican.com/en/4.7.2/content.html#file-metadata#:~:text=match%20at%20L131%20,to%20use%20for%20this%20article%2Fpage">Writing content — Pelican 4.7.2 documentation</a>). We will create separate Jinja2 templates (e.g., <code>recipe.html</code>, <code>trip.html</code>) in the theme. These templates extend the base layout but present the content in a specialized way. For instance, <strong><code>recipe.html</code></strong> can format the Ingredients list as a checklist, show Prep/Cook time in a sidebar, etc., whereas <strong><code>trip.html</code></strong> might display location info, dates, and an image gallery differently. Pelican will pass all front-matter fields into the template context, so fields like <code>Ingredients</code> or <code>Location</code> become accessible variables. We can thus iterate over <code>recipe.ingredients</code> in Jinja to output an HTML list, for example. This approach gives us <strong>structured content</strong> without needing a database – essentially a lightweight CMS defined via markdown metadata. </p>
-<p>Pelican’s flexibility here means we can support any number of content types. If needed, we could also write a Pelican plugin to validate that required fields are present for each type (ensuring, say, every <code>Type: recipe</code> file has an Ingredients list) or even generate additional pages (e.g., an index of all recipes). But even without extra plugins, using Jinja templates keyed on a metadata flag is sufficient and keeps things simple. </p>
-<h2>Beautiful Theming (Ghost-Inspired Design)</h2>
-<p>We want the site to look modern and polished – more like a blog or magazine than a raw wiki. Pelican supports theming with Jinja2 templates and static CSS, allowing full control over design (<a href="https://github.com/getpelican/pelican#:~:text=,rich%20plugin%20ecosystem%3A%20Pelican%20Plugins">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>). We can start from an existing <strong>Ghost-inspired theme</strong> for Pelican to save time. For example, the <em>Casper</em> theme (Ghost’s default) has been ported to Pelican as <strong>Casper2Pelican</strong> (<a href="https://github.com/abr4xas/Casper2Pelican#:~:text=Casper2Pelican">GitHub - abr4xas/Casper2Pelican: The default personal blogging theme for pelican</a>), and others like <em>Nicholas</em> or <em>Ghastly</em> offer clean Ghost-like aesthetics. These themes feature modern typography, responsive layout, and support for cover images and author profiles. The Casper2Pelican README notes it’s based on Ghost’s default and even supports author bios, social sharing, and header images via metadata (<a href="https://github.com/abr4xas/Casper2Pelican#:~:text=,and%20share%20buttons%20on%20article">GitHub - abr4xas/Casper2Pelican: The default personal blogging theme for pelican</a>). Using such a theme (or a similar Pelican theme) gives us a head start with a <strong>beautiful design</strong> consistent with popular blogs. </p>
-<p>We can customize the theme further to match our vision. This might include: 
-- <strong>Header images</strong> for articles: e.g. using a metadata field <code>Image: path/to/cover.jpg</code> which the template uses as a banner at the top of a post (Casper2Pelican already checks an <code>image</code> field for header image (<a href="https://github.com/abr4xas/Casper2Pelican#:~:text=,and%20share%20buttons%20on%20article">GitHub - abr4xas/Casper2Pelican: The default personal blogging theme for pelican</a>)). 
-- <strong>Navigation and Home Page:</strong> We’ll create a custom home page instead of a simple blog index. For instance, design a welcome page (<code>content/pages/home.md</code>) with an overview and featured posts. Using Pelican’s pages feature, we set <code>SAVE_AS = 'index.html'</code> for that page so it becomes the landing page. The normal blog index (listing latest notes) can be generated at <code>/archive/</code> or a different URL. 
-- <strong>CSS Framework:</strong> Optionally, incorporate a modern CSS framework or utility library (e.g. Tailwind or Bootstrap) to easily achieve a clean look for elements like tables, code blocks, callouts, etc., if the chosen theme doesn’t already handle it. Many Pelican themes use Bootstrap 4/5 or pure CSS. We should ensure the styling for wiki link references and backlinks section is cohesive (e.g., backlinks as a small italicized list at bottom). 
-- <strong>Mobile-friendly design:</strong> The theme should be responsive; Ghost-based themes typically are. We’ll verify that navigation (category lists, tag pages) collapses nicely on mobile. </p>
-<p>By leveraging an existing theme and tweaking it, we meet the requirement of a <strong>“beautiful design inspired by modern blogs”</strong>. Pelican’s theme system separates content from presentation, so we can iterate on the look independently. The end result won’t feel like a bare-bones dev wiki – instead, it will have polished typography, spacing, and visuals similar to a Ghost blog (as evidenced by the Casper2Pelican screenshot and demo blogs (<a href="https://github.com/abr4xas/Casper2Pelican#:~:text=Demo">GitHub - abr4xas/Casper2Pelican: The default personal blogging theme for pelican</a>)). </p>
-<h2>Multi-Language Support &amp; AI Translations</h2>
-<p>The digital garden will be <strong>multilingual</strong>, serving content in (for example) English and Spanish. Pelican, with the <strong><code>i18n_subsites</code></strong> plugin, can generate a multi-language site where each language is a sub-site. We organize content by language – e.g. <code>content/en/...</code> and <code>content/es/...</code> – or include a <code>Lang</code> metadata on each file. Pelican’s multi-language support allows each article to have translated counterparts identified by the same slug and a <code>lang</code> code (<a href="https://docs.getpelican.com/en/4.7.2/content.html#file-metadata#:~:text=,without%20extension">Writing content — Pelican 4.7.2 documentation</a>). At build time, the i18n plugin produces separate output folders for each language (or language-specific paths) and can generate a language switcher. The Pelican docs highlight <em>“publication of articles in multiple languages”</em> as a core feature (<a href="https://github.com/getpelican/pelican#:~:text=,rich%20plugin%20ecosystem%3A%20Pelican%20Plugins">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>). In practice, you might have <code>my-article.en.md</code> and <code>my-article.es.md</code>. If a translation is missing, Pelican can default to the original or we can configure fallback behavior.</p>
-<p><strong>Auto-fill with AI:</strong> To meet the requirement of filling untranslated content using AI, we introduce a <strong>translation pipeline step</strong>. This would run <em>before</em> or <em>during</em> the build. For any article that lacks a manual translation, a script can automatically generate one via an AI translation service. For example, we could use a translation API (like DeepL or Google Cloud Translate) or an AI model (like GPT-4) through their Python SDKs to translate English Markdown to Spanish Markdown. The build workflow could be:
-1. Detect articles that exist in English but not in Spanish (perhaps by scanning the <code>content/en</code> vs <code>content/es</code> directories).
-2. For each missing translation, call the AI API to produce a translated Markdown text. Preserve the front matter (with <code>lang: es</code> and a note that it’s auto-generated) and have the body translated. 
-3. Save these generated files in <code>content/es/...</code> so that Pelican includes them in the site generation. Optionally mark them with a flag (e.g. <code>Translation: machine</code>) that the template can use to display a disclaimer banner like “🤖 This is an AI-translated version; it may contain errors.” </p>
-<p>Because this process can be time-consuming or cost API usage, we’d integrate it as an optional step (only generate if the file isn’t already there, and possibly commit the result to the repo so it’s reused). This way, untranslated content is automatically populated, ensuring the Spanish site is never missing a page – it will either have a human-written translation or an AI-provided one. </p>
-<p>Pelican’s i18n plugin will link between language versions of each page (it adds link rel="alternate" and allows template language switchers). We can thus have a language toggle on each page. Users will see a fully bilingual site, largely maintained by writing primarily in one language and letting AI assist with the other. </p>
-<p>All tools here are Python-friendly: Pelican’s plugin is Python, and calling an AI translation (via requests or an SDK) is straightforward to script. This setup future-proofs the site – content creators can focus on one language, and AI can help keep other languages up-to-date. </p>
-<h2>Content Access Control (Roles &amp; Authentication)</h2>
-<p>Even though the site is static, we need <strong>access roles</strong> for certain content (public vs friends/family vs private drafts). We can handle this by a combination of build-time filtering and client-side authentication using Auth0. </p>
-<p><strong>Drafts &amp; Unlisted Posts:</strong> Pelican supports a <code>Status</code> metadata. If we mark an article <code>Status: draft</code>, Pelican will not publish it (by default (<a href="https://docs.getpelican.com/en/4.7.2/content.html#file-metadata#:~:text=,without%20extension">Writing content — Pelican 4.7.2 documentation</a>) (<a href="https://docs.getpelican.com/en/4.7.2/content.html#file-metadata#:~:text=If%20your%20articles%20should%20be,include%20the%20status%20in%20the">Writing content — Pelican 4.7.2 documentation</a>)】, so drafts remain excluded from the generated site. For “friends/family” posts that are finished but should not be public, we can use Pelican’s <code>hidden</code> status (or simply exclude them from indexes). A <code>Status: hidden</code> post <em>is</em> generated as an HTML page but is omitted from feeds and listing (<a href="https://docs.getpelican.com/en/4.7.2/content.html#file-metadata#:~:text=on%20the%20index%20page%20nor,any%20category%20or%20tag%20page">Writing content — Pelican 4.7.2 documentation</a>)】. This creates an <strong>unlisted page</strong> – only accessible if you know the URL. We can distribute those URLs privately. This provides basic obscurity but not true security. </p>
-<p>For stronger protection, we integrate <strong>Auth0 authentication</strong> into the static site. At build time, we decide which pages require login. For example, we might add a metadata flag <code>Visibility: friends</code> or <code>auth_required: true</code> for pages that should only be seen by certain users. The build process can then inject an Auth0 login gate into those pages. Concretely, we can create a Jinja template snippet that includes the Auth0 JavaScript SDK and a script to enforce login. Each protected page, when rendered, would contain something like: </p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;protected-content&quot;</span><span class="p">&gt;</span> ... full content ... <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.auth0.com/js/auth0-spa-js/1.XX/auth0-spa.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="w">  </span><span class="c1">// Initialize Auth0 client</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">auth0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">createAuth0Client</span><span class="p">({</span><span class="w"> </span><span class="nx">domain</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;YOUR_DOMAIN&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">client_id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;YOUR_CLIENTID&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">cacheLocation</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;localstorage&#39;</span><span class="w"> </span><span class="p">});</span>
-<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">isAuthenticated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">auth0</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">();</span>
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">isAuthenticated</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;protected-content&#39;</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="p">;</span>
-<span class="w">    </span><span class="c1">// Show a login button or auto-login:</span>
-<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">auth0</span><span class="p">.</span><span class="nx">loginWithRedirect</span><span class="p">();</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;protected-content&#39;</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;block&#39;</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</code></pre></div>
+  <a class="sidebar-nav-item" href="https://getpelican.com/">Pelican</a>
+  <a class="sidebar-nav-item" href="https://www.python.org/">Python.org</a>
+  <a class="sidebar-nav-item" href="https://palletsprojects.com/p/jinja/">Jinja2</a>
+  <a class="sidebar-nav-item" href="#">You can modify those links in your config file</a>
+  </nav>
 
-<p>This is a sketch, but the idea is the page will require an Auth0 login before showing content. Auth0 will handle the login redirect and token management (the Auth0 SPA SDK is used as shown in Auth0’s Gatsby exampl (<a href="https://auth0.com/blog/securing-gatsby-with-auth0/#:~:text=How%20to%20Secure%20GatsbyJS%20Sites,management%20on%20a%20GatsbyJS">How to Secure GatsbyJS Sites with Auth0 for Authentication</a>) (<a href="https://auth0.com/blog/securing-gatsby-with-auth0/#:~:text=How%20to%20Secure%20GatsbyJS%20Sites,management%20on%20a%20GatsbyJS">How to Secure GatsbyJS Sites with Auth0 for Authentication</a>)】). At build-time we embed the Auth0 credentials (domain, client ID) which are not sensitive. We do <strong>not</strong> include any secret keys in the static code. After login, the content div becomes visible. </p>
-<p><strong>Role-Based Access:</strong> Auth0 supports role claims in token (<a href="https://auth0.com/docs/manage-users/access-control/configure-core-rbac/roles#:~:text=We%20provide%20various%20functions%20to,or%20the%20Auth0%20Management%20API">Manage Role-Based Access Control Roles - Auth0</a>)】. If we want to distinguish “friends and family” vs “editors”, we can assign roles in Auth0 (e.g., a user role “family” or an allowed email list). The front-end script can then query the user’s profile/claims after login and decide whether to show the page. For example, a page for “family” could check <code>if(user.roles.includes('family')) { show content } else { hide and show "Access Denied" }</code>. This check is done client-side with the data from Auth0. While not foolproof (since the HTML is technically delivered), we could also choose not to even deploy certain files publicly. Another approach is to generate two versions of the site: one public (excluding private pages entirely) and one for authenticated use. However, since the requirement is static hosting on GitHub Pages (which doesn’t support server-side auth), using Auth0’s client-side gating is a practical solutio (<a href="https://community.auth0.com/t/protecting-static-website-using-auth0-but-using-existing-users/76359#:~:text=Hello,Auth0%20JavaScript%20SDK%20Quickstarts%3A%20Login">Protecting Static Website using Auth0 but using existing users - Auth0 Community</a>)】. </p>
-<p>In summary, public content will be generated normally and listed on the site. Private content will either be hidden from listings or not present at all in the public build. If hidden but present, they will have Auth0 code embedded to ensure only authorized users can easily view them. This setup turns the static site into a pseudo-protected site. It’s important to note that truly secure content shouldn’t be published to public servers at all – for highly sensitive info, one might maintain it in a private repo or use a hosting service with access control. But for “friends/family” level privacy, this approach (unlisted pages + Auth0 login on the front-end) is sufficient and commonly used. Auth0’s documentation and quickstarts will guide the integration of their SPA SDK into our static pages, making the process straightforward. </p>
-<h2>Tags, Indexes, and Navigation Pages</h2>
-<p>We will support <strong>multiple index pages</strong> to help discover content: by tag, by category, by popularity, etc. Pelican automatically creates index pages for <strong>tags and categories</strong>. Each tag will get a page listing all articles with that tag (Pelican’s templates and generators handle this if enabled). Same for categories (and with our nested scheme, categories like “data_science” under “tech/dev” will show all related posts). We’ll ensure the theme includes pages for tags/categories in the navigation or as part of a sitemap. </p>
-<p>For a <strong>“Most Read”</strong> page, since the site is static, we need to gather view statistics from an external source. One option is to use an analytics service (like Google Analytics or Plausible) on the site, then periodically retrieve pageview counts. We can incorporate a JSON of page view stats (keyed by URL or slug) and have a build step to sort articles by views and generate a page of “Top 10 most read articles.” This would be a custom script that runs before site generation to update a data file (or we use Pelican’s [<code>READERS</code> or data files plugin] to ingest a CSV/JSON). Alternatively, if we don’t have analytics integration, we might define "most read" manually or by other metrics (like an editorial choice or proxy like time since posted). But assuming we have GA, we could use Google Analytics Reporting API via Python to get the most viewed URLs and then produce a static page listing those (with links and maybe view counts). </p>
-<p>We also plan a <strong>handcrafted home page</strong> as mentioned earlier. This will likely be a static page (written in Markdown for convenience) that is set as the landing page. We can curate content here – e.g., a welcome message, featured posts in different categories, etc. Because Pelican allows creating arbitrary pages (any file under <code>content/pages/</code> by default) and does not force the blog index to be the root, we can completely customize the homepage. For example, the homepage could even be written as a Jinja template itself if we want dynamic content (Pelican allows creating templates for pages). But simpler, we can hardcode or use shortcodes for pulling in snippets (Pelican plugins exist for including content or defining shortcodes). </p>
-<p><strong>Navigation:</strong> The site will have a menu (likely in the header) linking to key index pages: e.g. <em>Blog</em>, <em>Categories</em>, <em>Tags</em>, <em>About</em>, <em>Languages</em>. We will enable Pelican’s <code>DISPLAY_PAGES_ON_MENU</code> and <code>DISPLAY_CATEGORIES_ON_MENU</code> settings as needed, or manually define a menu in config for finer control. The Ghost-based theme we use might already support a configurable menu. We’ll include a link to the “All Tags” page and maybe a link to “All Posts” archive. If the site becomes large, we could add a search functionality; Pelican has a plugin for search that works by building a JSON index used by a JS script (for example, <strong>Tipue Search</strong> plugin or <code>pelican-search</code> which provides Lunr.js searc (<a href="https://blog.stanleysolutionsnw.com/adding-search-to-my-pelican-blog-site.html#:~:text=Adding%20Search%20to%20my%20Pelican,based%20system">Adding Search to my Pelican Blog Site | Stanley Solutions Blog</a>)】). That would add a small JS (still lightweight) to enable full-text search on the client side, which is a nice enhancement for a digital garden. (This is optional but worth noting since gardens benefit from search.) </p>
-<h2>Build Pipeline &amp; Link Validation</h2>
-<p>To tie everything together, we’ll set up a robust <strong>build pipeline</strong> (e.g., using GitHub Actions or similar CI) to automate site generation, validation, and deployment to GitHub Pages. The stages would include: </p>
-<ol>
-<li>
-<p><strong>Generate Site:</strong> Use Pelican to build the site. This involves installing the Python dependencies (Pelican and required plugins like <code>pelican-i18n_subsites</code>, <code>pelican-wikilinks</code>, etc., all available via pip), then running <code>pelican content -o output -s pelicanconf.py</code> (and possibly once per language if using i18n plugin in a certain way). The Pelican config will include all our settings (paths, plugins, theme, etc.). </p>
-</li>
-<li>
-<p><strong>Validate Internal Links:</strong> After generation, we perform a link check focusing on internal links. We want to catch any broken references (especially from the wiki links or manual links). We can use an automated link checker – for example, a tool like <strong>LinkChecker</strong> (Python) or <code>html-proofer</code>. A Python approach could be writing a small script that parses all output HTML files and verifies that every <code>&lt;a href&gt;</code> pointing to the same domain has a corresponding file. Since we have the list of output files, we can map URLs to files easily. Another approach is to use Pelican’s own link mapping: the Wikilinks plugin might warn if a target is missing. If not, our custom backlink plugin could also log missing targets. In any case, the CI can run a script to ensure no 404s for internal hyperlinks. If a broken link is found, the build should fail, alerting us to fix the reference or add the missing page. This step addresses the requirement of a <strong>build stage validating internal links</strong> – essential in a wiki-like garden where content moves and many cross-links exist. </p>
-</li>
-<li>
-<p><strong>Deploy to GitHub Pages:</strong> Once the site passes checks, the pipeline can deploy it. For GitHub Pages, that typically means pushing the <code>output/</code> (static files) to the <code>gh-pages</code> branch or the <code>docs/</code> folder of the repository. We can use a GH Action for this, or even GitHub Pages’ native static publishing if we keep the output in <code>docs/</code>. The deployment must include all language versions (possibly in subfolders like <code>en/</code> and <code>es/</code> if configured) and all static assets. Since everything is static, deployment is as simple as uploading the files – no server-side logic needed. </p>
-</li>
-<li>
-<p><strong>(Optional) Post-deploy Tasks:</strong> If using analytics for “most read” or if we want to purge a CDN cache, etc., those could be additional steps. But not strictly necessary for core functionality. </p>
-</li>
-</ol>
-<p><strong>Actively Maintained Tools:</strong> All components in this stack are widely used and maintained. Pelican is a mature project (10k+ stars on GitHub, active as of 2025 (<a href="https://www.reddit.com/r/django/comments/oxuxg1/pelican_for_professional_website/#:~:text=pelican%20for%20professional%20website%20%3A,is%2C%20what%20is%20your">pelican for professional website : r/django - Reddit</a>)】, and its plugins (like Wikilinks and i18n) are actively kept up-to-date with Pelican release (<a href="https://github.com/MinchinWeb/minchin.pelican.plugins.wikilinks/#:~:text=Further%20configuration%20will%20depend%20on,file">GitHub - minchinweb/minchin.pelican.plugins.wikilinks: Support Wikilinks when generating Pelican sites</a>)】. Auth0 is a reliable commercial platform with extensive documentation and support for SPA integration. Any AI translation step can utilize stable APIs (Google Translate, DeepL) or libraries. By using established tools, we ensure longevity and community support. </p>
-<h2>Summary of the Recommended Stack</h2>
-<ul>
-<li><strong>Pelican (Python Static Site Generator)</strong> – Core engine for markdown-to-HTML, multi-language output, theming, and plugin (<a href="https://github.com/getpelican/pelican#:~:text=,rich%20plugin%20ecosystem%3A%20Pelican%20Plugins">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>)】.  </li>
-<li><strong>Content Structure:</strong> Markdown files in a nested directory hierarchy, one article per folder with associated images/docs, using Pelican’s attach mechanism for bundling asset (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=Starting%20with%20Pelican%203,sibling%20of%20the%20linking%20document">Writing content - PELICAN 4.11.0</a>) (<a href="https://docs.getpelican.com/en/latest/content.html#:~:text=%21%5BIcon%5D%28">Writing content - PELICAN 4.11.0</a>)】.  </li>
-<li><strong>Pelican Plugins:</strong> </li>
-<li><em>Wikilinks</em> for <code>[[wiki-style]]</code> link syntax between page (<a href="https://github.com/MinchinWeb/minchin.pelican.plugins.wikilinks/#:~:text=Usage%20Notes">GitHub - minchinweb/minchin.pelican.plugins.wikilinks: Support Wikilinks when generating Pelican sites</a>)】. </li>
-<li><em>i18n_subsites</em> for multi-language site generation (creating language-specific versions of the site (<a href="https://siongui.github.io/2017/01/07/pelican-translate-string-according-to-default-language-in-theme/#:~:text=Pelican%20static%20site%20generator%20and,macro%20to%20achieve%20this%20goal">[Pelican] Translate String According to Default Language in Theme</a>)】. </li>
-<li><em>Neighbors</em> (if using a theme that requires it) to get next/previous article links easil (<a href="https://github.com/abr4xas/Casper2Pelican#:~:text=Abr4xas%2C%20amendments%20by%20Colin%20Wren">GitHub - abr4xas/Casper2Pelican: The default personal blogging theme for pelican</a>)】. </li>
-<li><em>Tipue Search or similar</em> (optional) for client-side search functionalit (<a href="https://blog.stanleysolutionsnw.com/adding-search-to-my-pelican-blog-site.html#:~:text=Adding%20Search%20to%20my%20Pelican,based%20system">Adding Search to my Pelican Blog Site | Stanley Solutions Blog</a>)】. </li>
-<li>Custom plugins for backlink aggregation and any additional validation or content processing (AI translation insertion could also be done here or in CI). </li>
-<li><strong>Templates/Theming:</strong> A responsive theme inspired by Ghost’s <strong>Casper</strong> (e.g. Casper2Pelica (<a href="https://github.com/abr4xas/Casper2Pelican#:~:text=Casper2Pelican">GitHub - abr4xas/Casper2Pelican: The default personal blogging theme for pelican</a>)】 or another port) to provide a clean, modern UI. We will customize templates for special content types (recipes, trips) using Pelican’s template override featur (<a href="https://docs.getpelican.com/en/4.7.2/content.html#file-metadata#:~:text=match%20at%20L131%20,to%20use%20for%20this%20article%2Fpage">Writing content — Pelican 4.7.2 documentation</a>)】 and front-matter metadata, and include visual enhancements (cover images, syntax highlighting for code, etc.). The design will emphasize readability and aesthetics, avoiding a technical look. </li>
-<li><strong>Authentication:</strong> Auth0 SPA integration for protected sections. We do this by embedding Auth0’s JS and gating logic in pages marked as non-public. Auth0 manages the user accounts and login dialogs (e.g., via Google OAuth or email/password as configured), and the static site just includes the necessary scripts. This adds a slight JS dependency on those pages, but only for the sake of auth – the overall site remains static and content-focused. </li>
-<li><strong>Build/Deployment Pipeline:</strong> Use GitHub Actions (or similar CI) to run the build. The pipeline will run Pelican, run a <strong>link checker</strong> to validate all internal references (preventing broken links in the graph), and then deploy to GitHub Pages. Content translations via AI can be automated in this pipeline as well, ensuring the latest content is available in all languages. </li>
-</ul>
-<p>By combining these technologies, we get a <strong>robust, customizable, and beautiful digital garden system</strong> that meets all the listed requirements. All major components are Python-based (Pelican, plugins, build scripts), aligning with the preference for Python tooling. The architecture leverages static site best practices (pre-render everything for speed and simplicit (<a href="https://github.com/getpelican/pelican#:~:text=With%20Pelican%2C%20you%20can%20create,web%20server%20or%20hosting%20service">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>) (<a href="https://github.com/getpelican/pelican#:~:text=,is%20simple%20to%20host%20anywhere">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>)】) while layering on advanced features like backlinks, full-text search, and role-based access that are often missing from simpler static blogs. The result is a personal knowledge garden that is easy to write in (just Markdown in VSCode), easy to maintain (thanks to automation and plugin support), and delightful for readers in terms of appearance and navigation. </p>
-<p><strong>References:</strong> The selection of Pelican is supported by its official docs and community plugins, which confirm it can handle multi-language content, Markdown, and is extensibl (<a href="https://github.com/getpelican/pelican#:~:text=,rich%20plugin%20ecosystem%3A%20Pelican%20Plugins">GitHub - getpelican/pelican: Static site generator that supports Markdown and reST syntax. Powered by Python.</a>) (<a href="https://github.com/MinchinWeb/minchin.pelican.plugins.wikilinks/#:~:text=Usage%20Notes">GitHub - minchinweb/minchin.pelican.plugins.wikilinks: Support Wikilinks when generating Pelican sites</a>)】. The Ghost-inspired design is facilitated by existing Pelican themes (e.g., Casper2Pelican) which explicitly aims to bring Ghost’s default look to Pelica (<a href="https://github.com/abr4xas/Casper2Pelican#:~:text=Casper2Pelican">GitHub - abr4xas/Casper2Pelican: The default personal blogging theme for pelican</a>)】. Auth0 integration for static sites is a known approach (Auth0 provides SPA SDKs and guides for static site authentication flow (<a href="https://community.auth0.com/t/protecting-static-website-using-auth0-but-using-existing-users/76359#:~:text=Hello,Auth0%20JavaScript%20SDK%20Quickstarts%3A%20Login">Protecting Static Website using Auth0 but using existing users - Auth0 Community</a>)】). All these pieces together form a cohesive stack to realize the envisioned digital garden.</p>
-<h1>Follow up questions</h1>
-<p>While ponderimg (and soon testing) the suggested solution, some more questions came up to me.</p>
-<h2>Changing the structure</h2>
-<ul>
-<li>How does the system behave when I move an article feom one location of the tree to another?</li>
-<li>How does the system behave when I rename an article?</li>
-<li>How does the system behave when I delete an article?</li>
-<li>How does the system behave when I rename a folder?</li>
-<li>How does the system behave when I delete a folder?</li>
-</ul>
-<h2>Articles or Pages?</h2>
-<p>From the <a href="https://docs.getpelican.com/en/latest/content.html">Pelican documentation</a>:</p>
-<blockquote>
-<p>Pelican considers “articles” to be chronological content, such as posts on a blog, and thus associated with a date.
-The idea behind “pages” is that they are usually not temporal in nature and are used for content that does not change very often (e.g., “About” or “Contact” pages).</p>
-</blockquote>
-<p>So what should <strong>my</strong> articles be? In my article concept the date is not too important. But maybe the workflow to edit Pelican articles is easier than the one to edit pages?</p>
-<h1>Playing around</h1>
-<p>So I create a <a href="https://github.com/tillg/playground_pelican">github repo</a> and start playimng around.</p>                    </article>
-                </aside><!-- /#featured -->
-                <section id="extras" class="body">
-                                <div class="blogroll">
-                                        <h2>links</h2>
-                                        <ul>
-                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
-                                                        <li><a href="https://www.python.org/">Python.org</a></li>
-                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
-                                                        <li><a href="#">You can modify those links in your config file</a></li>
-                                        </ul>
-                                </div><!-- /.blogroll -->
-                                <div class="social">
-                                        <h2>social</h2>
-                                        <ul>
+  <div class="sidebar-item">
+    <p>
+    <a href="https://twitter.com/tillg">&copy; @tillg</a> 2017
+    </p>
+    <p class="tiny-note">
+      <a class="muted" href="https://github.com/thomaswilley/pelicanyan">pelicanyan v0.1</a>
+    </p>
+  </div>
+</div>    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="../" title="Home">grtnr.com</a>
+          </h3>
+        </div>
+      </div>
 
-                                                        <li><a href="#">You can add links in your config file</a></li>
-                                                        <li><a href="#">Another social link</a></li>
-                                        </ul>
-                                </div><!-- /.social -->
-                </section><!-- /#extras -->
+      <div class="container content">
+<div class="content-title">
+<h2>Articles by Till Gartner</h2>
+</div>
+<div class="posts">
+<div class="post">
+    <a href="../digital-garden/" rel="bookmark" title="Permalink to Digital Garden" style="color: black !important; display: block; text-decoration-color: black !important;">
+        <h1 class="post-title" style="color: black !important;">Digital&nbsp;Garden</h1>
+        <span class="post-date">April 18, 2025</span>
+        <img src="../digital-garden//digital-garden.jpg" style="height: 100px; float: left; margin-right: 10px; margin-top: 0px;">
+        <div style="overflow: hidden; margin-top: 5px;">
+            <span style="color: black !important;"><p>I read about digital gardens and liked the idea. So I started thinking on how I would setup such a garden - and of course used <span class="caps">AI</span>&nbsp;help&#8230;</p></span>
+        </div>
+        <div style="clear: both;"></div>
+    </a>
+</div></div>
+<!--// updated -->
+<div class="pagination">
+        <span class="pagination-item newer">newer</span>
+        <span class="pagination-item older">older</span>
+</div>
+      </div>
 
-                <footer id="contentinfo" class="body">
-                        <address id="about" class="vcard body">
-                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
-                        </address><!-- /#about -->
+      <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
-                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-                </footer><!-- /#contentinfo -->
+      <script>
+        (function(document) {
+          var i = 0;
+          // snip empty header rows since markdown can't
+          var rows = document.querySelectorAll('tr');
+          for(i=0; i<rows.length; i++) {
+            var ths = rows[i].querySelectorAll('th');
+            var rowlen = rows[i].children.length;
+            if (ths.length > 0 && ths.length === rowlen) {
+              rows[i].remove();
+            }
+          }
+        })(document);
+      </script>
 
-        </body>
+      <script>
+        /* Lanyon & Poole are Copyright (c) 2014 Mark Otto. Adapted to Pelican 20141223 and extended a bit by @thomaswilley */
+        (function(document) {
+          var toggle = document.querySelector('.sidebar-toggle');
+          var sidebar = document.querySelector('#sidebar');
+          var checkbox = document.querySelector('#sidebar-checkbox');
+          document.addEventListener('click', function(e) {
+            var target = e.target;
+            if(!checkbox.checked ||
+            sidebar.contains(target) ||
+            (target === checkbox || target === toggle)) return;
+            checkbox.checked = false;
+            }, false);
+            })(document);
+      </script>
+     </div>
+  </body>
 </html>

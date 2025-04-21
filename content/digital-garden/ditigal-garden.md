@@ -1,7 +1,7 @@
 ---
 date: 2025-04-18
 image: digital-garden.jpg
-summary: "I read a bout digital gardens and liked the idea. So I started thinking on how I would setup such a garden - and of course used AI help..."
+summary: I read about digital gardens and liked the idea. So I started thinking on how I would setup such a garden - and of course used AI help...
 ---
 
 ![Digital garden](digital-garden.jpg)
@@ -9,20 +9,21 @@ summary: "I read a bout digital gardens and liked the idea. So I started thinkin
 - [Requirements](#requirements)
 - [Technology and Architecture](#technology-and-architecture)
 - [ChatGPT: Building a Python-Powered Digital Garden: Stack \& Architecture](#chatgpt-building-a-python-powered-digital-garden-stack--architecture)
-  - [Static Site Generator \& Content Organization](#static-site-generator--content-organization)
-  - [Markdown Editing \& Local Preview](#markdown-editing--local-preview)
-  - [Wiki-Style Internal Linking \& Backlinks](#wiki-style-internal-linking--backlinks)
-  - [Custom Content Types \& Templates](#custom-content-types--templates)
-  - [Beautiful Theming (Ghost-Inspired Design)](#beautiful-theming-ghost-inspired-design)
-  - [Multi-Language Support \& AI Translations](#multi-language-support--ai-translations)
-  - [Content Access Control (Roles \& Authentication)](#content-access-control-roles--authentication)
-  - [Tags, Indexes, and Navigation Pages](#tags-indexes-and-navigation-pages)
-  - [Build Pipeline \& Link Validation](#build-pipeline--link-validation)
-  - [Summary of the Recommended Stack](#summary-of-the-recommended-stack)
+	- [Static Site Generator \& Content Organization](#static-site-generator--content-organization)
+	- [Markdown Editing \& Local Preview](#markdown-editing--local-preview)
+	- [Wiki-Style Internal Linking \& Backlinks](#wiki-style-internal-linking--backlinks)
+	- [Custom Content Types \& Templates](#custom-content-types--templates)
+	- [Beautiful Theming (Ghost-Inspired Design)](#beautiful-theming-ghost-inspired-design)
+	- [Multi-Language Support \& AI Translations](#multi-language-support--ai-translations)
+	- [Content Access Control (Roles \& Authentication)](#content-access-control-roles--authentication)
+	- [Tags, Indexes, and Navigation Pages](#tags-indexes-and-navigation-pages)
+	- [Build Pipeline \& Link Validation](#build-pipeline--link-validation)
+	- [Summary of the Recommended Stack](#summary-of-the-recommended-stack)
 - [Follow up questions](#follow-up-questions)
-  - [Changing the structure](#changing-the-structure)
-  - [Articles or Pages?](#articles-or-pages)
+	- [Changing the structure](#changing-the-structure)
+	- [Articles or Pages?](#articles-or-pages)
 - [Playing around](#playing-around)
+
 
 I read about Digital Gardens on [heise (in German)](https://www.heise.de/hintergrund/Nerd-Trend-Digitaler-Garten-Die-eigene-Website-als-persoenliches-Wissensarchiv-10344169.html) and really liked the idea. The key differences to my current blog that I thought of are
 

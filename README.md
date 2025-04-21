@@ -11,3 +11,13 @@ Playing around with [Pelican](https://blog.getpelican.com/) static site generato
 - Played around with settings in order to have the article markdown file next to the images. In order to get this I need to
   - Change the directory names of the articles to not have the date in it.
 - I also added a plugin that generates the title based on the filename: `auto_title.py`.
+
+## 2025-04-21: get the theme
+
+- Starting to install the theme [Pelicanyan](https://github.com/thomaswilley/pelicanyan?tab=readme-ov-file#pelicanyan)
+
+# TODO
+
+- Giscus comments
+- Google tracking
+- Multilingual
