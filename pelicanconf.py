@@ -7,6 +7,15 @@ ARTICLE_PATHS = ['.']
 STATIC_PATHS = ['static'] 
 ARTICLE_EXCLUDES = []
 
+# Add static files mapping
+EXTRA_PATH_METADATA = {
+    'static/favicon.ico': {'path': 'favicon.ico'},
+    'static/apple-touch-icon.png': {'path': 'apple-touch-icon.png'},
+    'static/apple-touch-icon-precomposed.png': {'path': 'apple-touch-icon-precomposed.png'},
+    'static/robots.txt': {'path': 'robots.txt'},
+    'static/humans.txt': {'path': 'humans.txt'}
+}
+
 ARTICLE_SAVE_AS = '{slug}/index.html'
 ARTICLE_URL = '{slug}/'
 

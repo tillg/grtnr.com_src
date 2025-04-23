@@ -23,4 +23,4 @@ So this would be the plan:
 * Build a UI that asks when u could go, and that gives u advice when u should go 
 * Extra features: take into account week-ends and public holidays, pool-features (i.e. I prefer swimming in a 50m pool)
 
-Anyone up for building such a tool? Send me an email if u want to hack 😉 
+Anyone up for building such a tool? Send me an email if u want to hack 😉

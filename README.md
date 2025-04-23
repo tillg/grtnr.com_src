@@ -21,4 +21,15 @@ Playing around with [Pelican](https://blog.getpelican.com/) static site generato
 
 - Giscus comments
 - Google tracking
+- Tags
+- Tage pages
+- Design home page
 - Multilingual
+- Linting
+- Smart resizing of images
+- Going live to test.grtnr.com
+- Add a sitemap
+- Check links in build pipeline
+- Add a search
+- Page cloud
+- Tag cloud
