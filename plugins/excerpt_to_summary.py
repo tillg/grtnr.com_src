@@ -1,7 +1,7 @@
 from pelican import signals
 
 def convert_excerpt_to_summary(generator):
-    print("Plugin excerpt_to_summary loaded!")  # Debug print
+    print("convert_excerpt_to_summary: Plugin excerpt_to_summary loaded!")  
     for article in generator.articles:
         if hasattr(article, 'excerpt'): 
             # Remove quotes if present
@@ -9,7 +9,7 @@ def convert_excerpt_to_summary(generator):
             if excerpt.startswith('"') and excerpt.endswith('"'):
                 excerpt = excerpt[1:-1]
             
-            print(f"Converting excerpt to summary for article: {article.title}")
+            #print(f"convert_excerpt_to_summary: Converting excerpt to summary for article: {article.title}")
             article.metadata['summary'] = excerpt
             article.summary = excerpt
 

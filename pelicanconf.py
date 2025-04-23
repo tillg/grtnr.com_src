@@ -9,11 +9,11 @@ ARTICLE_EXCLUDES = []
 
 # Add static files mapping
 EXTRA_PATH_METADATA = {
-    'static/favicon.ico': {'path': 'favicon.ico'},
-    'static/apple-touch-icon.png': {'path': 'apple-touch-icon.png'},
-    'static/apple-touch-icon-precomposed.png': {'path': 'apple-touch-icon-precomposed.png'},
-    'static/robots.txt': {'path': 'robots.txt'},
-    'static/humans.txt': {'path': 'humans.txt'}
+    'static/favicon.ico': {'save_as': 'favicon.ico'},
+    'static/apple-touch-icon.png': {'save_as': 'apple-touch-icon.png'},
+    'static/apple-touch-icon-precomposed.png': {'save_as': 'apple-touch-icon-precomposed.png'},
+    'static/robots.txt': {'save_as': 'robots.txt'},
+    'static/humans.txt': {'save_as': 'humans.txt'}
 }
 
 ARTICLE_SAVE_AS = '{slug}/index.html'
@@ -24,7 +24,6 @@ SLUGIFY_SOURCE = 'title'
 
 # Ensure static files are copied to article directories
 STATIC_CREATE_LINKS = True
-EXTRA_PATH_METADATA = {}
 
 TIMEZONE = 'Europe/Rome'
 

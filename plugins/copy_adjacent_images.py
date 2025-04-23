@@ -6,7 +6,7 @@ def copy_adjacent_images(generator):
     for article in generator.articles:
         source_path = article.source_path
         slug = article.slug
-        print(f"Copying images of article: {slug}")
+        #print(f"copy_adjacent_images: Copying images of article: {slug}")
         output_path = os.path.join(generator.output_path, slug)
 
         # Ensure the target output directory exists

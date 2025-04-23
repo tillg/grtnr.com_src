@@ -12,7 +12,7 @@ image: MacSoundFlower.png
 
 Here is what I wanted to achieve: Make a (video) recording of what is happening on the screen of my Mac **including the sound**. All this, while still hearing what is happening at the same time. In my case I wanted to record a Zoom-Class, but I guess this is a setup that might be useful in many situations.
 
-macOS comes with a great built-in screen recording tool:[ QuickTime Player](https://support.apple.com/en-us/HT208721) (yes, it records, even though the name says *player* 😀). 
+macOS comes with a great built-in screen recording tool:[QuickTime Player](https://support.apple.com/en-us/HT208721) (yes, it records, even though the name says *player* 😀). 
 
 When using QuickTime Player the only problem is the sound: The choices you have are *Internal Microphone* or *None*. That fits well if you want to record a tutorial where the sound is what you explain through the microphone, but it doesn't fit my situation.
 

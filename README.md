@@ -17,9 +17,16 @@ Playing around with [Pelican](https://blog.getpelican.com/) static site generato
 - Starting to install the theme [Pelicanyan](https://github.com/thomaswilley/pelicanyan?tab=readme-ov-file#pelicanyan)
 - Imported the content from the old grtnr.com blog and fixed the little problems.
 
+### 2025-04-23: Adapt details
+
+Details like
+
+- Added giscus
+- clean titles
+- Copy favicon and other static images to output/
+
 ## TODO
 
-- Giscus comments
 - Google tracking
 - Tags
 - Tage pages

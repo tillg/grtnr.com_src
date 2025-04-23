@@ -16,17 +16,21 @@ class AutoTitleReader(MarkdownReader):
             # Try to remove a date prefix if it exists (e.g., 2025-04-18-digital-garden)
             parts = dir_name.split('-')
             if len(parts) >= 4 and all(p.isdigit() for p in parts[:3]):
-                print(f"Detected date prefix in {dir_name}, removing it.")
+                #print(f"AutoTitleReader: Detected date prefix in {dir_name}, removing it.")
                 title_parts = parts[3:]
             else:
                 title_parts = parts
             
             # Convert to title case
             title = ' '.join(title_parts).replace('_', ' ').title()
-            #print(f"Setting title to: {title}")
             metadata['title'] = title
-            #print(f"Metadata after setting title:\n{json.dumps(metadata, indent=2, default=str)}")
 
+        # Remove surrounding quotes
+        title = metadata['title']
+        if title.startswith('"') and title.endswith('"'):
+                title = title[1:-1]
+                metadata['title'] = title
+                     
         return content, metadata
 
 def add_reader(readers):
