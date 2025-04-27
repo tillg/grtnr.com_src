@@ -1,12 +1,30 @@
 {
   "name": "Pelican Development Environment",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12", // Use Python 3.12
-  "postCreateCommand": "pip install -r requirements.txt",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "username": "vscode"
+    }
+  },
+  "postCreateCommand": "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\" \"\" --unattended && pip install -r requirements.txt",
   "customizations": {
     "vscode": {
+      "settings": {
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/*.pyc": true
+        }
+      },
       "extensions": [
         "ms-python.python",
-        "ms-python.vscode-pylance"
+        "ms-python.vscode-pylance",
+        "esbenp.prettier-vscode",
+        "github.copilot",
+        "dbaeumer.vscode-eslint"
       ]
     }
   }
