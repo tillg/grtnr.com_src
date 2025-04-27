@@ -2,6 +2,16 @@
 
 Playing around with [Pelican](https://blog.getpelican.com/) static site generator, as announced in my [article](https://grtnr.com/2025-04-18-digital-garden.html).
 
+## Get things up & running
+
+In order to get things running 
+
+* Make sure you have Python installed. I work with Python 3.12
+* Install the requireed packages: `pip install -r requirements.txt`
+* Build it: `pelican` 
+
+To work in a Github Codespace, start a Codespace and build it with `pelican`.
+
 ## Log
 
 ### 2025-05-19: First steps
