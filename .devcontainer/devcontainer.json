@@ -28,6 +28,7 @@
         "dbaeumer.vscode-eslint",
         "ms-azuretools.vscode-docker",
         "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
         "ms-vscode-remote.remote-containers",
         "github.codespaces"
       ]
