@@ -1,6 +1,15 @@
 {
   "name": "Pelican Development Environment",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "build": {
+    // relative to this JSON
+    "dockerfile": "Dockerfile",
+    "context": ".",
+    // build-time args∏
+    "args": {
+      "USERNAME": "vscode",
+      "USER_UID": "1000"
+    }
+  },
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
       "installZsh": true,
@@ -24,7 +33,8 @@
         "ms-python.vscode-pylance",
         "esbenp.prettier-vscode",
         "github.copilot",
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker"
       ]
     }
   }
