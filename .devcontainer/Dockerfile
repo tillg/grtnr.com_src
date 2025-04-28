@@ -1,19 +1,30 @@
 # Example .devcontainer/Dockerfile
-#FROM mcr.microsoft.com/devcontainers/base:ubuntu
+# Use the Python dev container base image
 FROM mcr.microsoft.com/devcontainers/python:3.12
 
-# install extra packages
+# Install extra packages
 RUN apt-get update \
-    && apt-get install -y \
-      curl \
-      git \
-    && rm -rf /var/lib/apt/lists/*
+  && apt-get install -y \
+  curl \
+  git \
+  && rm -rf /var/lib/apt/lists/*
 
-# set up non-root user (if you had that in devcontainer.json)
+# Set up non-root user
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+RUN groupadd --gid $USER_GID $USERNAME || true \
+  && id -u $USERNAME || useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
 
-# …and so on with any ENV, COPY, or other RUN steps you had inline.
+# Install zsh and set it as the default shell
+RUN apt-get update && apt-get install -y zsh && \
+  chsh -s $(which zsh) $USERNAME
+
+# Install Python dependencies
+COPY ./requirements.txt /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt && rm /tmp/requirements.txt
+
+# Set permissions for the non-root user
+USER $USERNAME
+WORKDIR /home/$USERNAME
+

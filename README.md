@@ -4,11 +4,12 @@ Playing around with [Pelican](https://blog.getpelican.com/) static site generato
 
 ## Get things up & running
 
-In order to get things running 
+In order to get things running
 
-* Make sure you have Python installed. I work with Python 3.12
-* Install the requireed packages: `pip install -r requirements.txt`
-* Build it: `pelican` 
+- Make sure you have Python installed. I work with Python 3.12
+- Install the requireed packages: `pip install -r requirements.txt`
+- Build it: `pelican`
+- In the dev process, you probably want to run it, keep it watching file changes and serve the website: `pelican -r -l`
 
 To work in a Github Codespace, start a Codespace and build it with `pelican`.
 
