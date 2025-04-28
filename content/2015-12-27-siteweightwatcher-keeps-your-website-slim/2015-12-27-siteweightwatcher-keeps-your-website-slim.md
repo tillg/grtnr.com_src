@@ -9,7 +9,7 @@ image: kickz_dashboard.png
 ---
 
 Good software developers test their stuff. And the [TDD (Test Driven Development)](https://www.wikiwand.com/en/Test-driven_development) addicts are maniacs when it comes to testing. Those guys usually think in code, be it Java, Python, nodeJS, you name it. TDD means you write tests first, then you code just as much as it takes to let the tests become green. Then you rework your code and only then you start writing tests for new requirements. 
-![](tdd.png)
+![TDD Process](tdd.png)
 
 This is **very** testy. My opinion is that if you do it the way it's written and described in the books you become awfully slow and it turns into nonsense. But that's another discussion, and not one I want to sort out here...
 
@@ -34,7 +34,7 @@ So here is what my SiteWeightWatcher should do:
 - How well connected is the site for users in Germany, UK, US or Asia? Over time, because those things change without us having done anything.
 
 I could imagine a dashboard for an online shop like [KICKZ.com](https://www.kickz.com/de) to look may this way:
-![](kickz_dashboard.png)A Dashboard that shows how page sizes evolve
+![Deshboard scribble](kickz_dashboard.png)A Dashboard that shows how page sizes evolve
 
 And just as the normal test teams do, these tests should also evolve and become more and more adapted to the site, it's functionality and its users. Whenever we have a real problem or bug out there, we have to make sure that our WeightWatcher will find it in case it should appear or happen again. 
 

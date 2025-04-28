@@ -16,7 +16,7 @@ As we eat lots of them, I decided to run a test: I ordered 6 different types of 
 
 So here is the result in a nutshell: 
 
-![](MangoChallenge.png)
+![Mango challenge result table](MangoChallenge.png)
 
 Our test results
 

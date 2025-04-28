@@ -20,7 +20,7 @@ This is where [SoundFlower](https://github.com/mattingalls/Soundflower) comes in
 
 What it does in our case: It creates a new, virtual sound channel that splits the sound stream into 2 other streams. In my case it means that in my Zoom session I select a virtual output instead of the speaker of my Mac. I called this output *MacSpkr_SndFlwr*. And this virtual stream splits the output to the Speaker of the Mac and the (logical) SoundFlower channel. Then I select the SoundFlower channel as input to my QuickTime Player Recording and that's it.
 
-![](MacSoundFlower.svg)The Sound Streams
+![Flow](MacSoundFlower.svg)The Sound Streams
 
 ## Setting it all up 
 
@@ -30,19 +30,19 @@ Also note that you need to reboot your Mac after installing Soundflower.
 
 Once you have Soundflower installed you can create a logical Audio Device that will be slipping the sound stream. To do so, open* Audio MIDI Setup*. It is a macOS utility program located in /Applications/Utilities. You can also start it via Spotlight (hit Cmd + Space) and enter "*Audio Midi"*
 
-![](Screenshot-2020-06-11-at-11.47.25.png)
+![Midi app launch](Screenshot-2020-06-11-at-11.47.25.png)
 
 *Starting the Audio MIDI Setup via Spotlight*
 
 Once you are in the Audio MIDI Setup program, create a new (logical) Audio Device: hit the "**+**" button in the bottom left corner and select "*Create Multi Output Device*". In the the panel that appears on the right, select "*MacBook Speaker*" AND "*Soundflower (2ch)*".
 
-![](Screenshot-2020-06-11-at-11.14.46.png)
+![Settings](Screenshot-2020-06-11-at-11.14.46.png)
 
 *The newly created Multi Output Device*
 
 Then launch your QuickTime Player (this one comes pre-installed on your Mac) and create a new Screen Recording: Menu *File ➡ New Screen Recording*. In the lower part of the screen a floating menu appears:
 
-![](macos-catalina-screenshot-menu-record.jpg)
+![Entire screen](macos-catalina-screenshot-menu-record.jpg)
 
 *The floating menu when recording with QuickTime Player*
 
