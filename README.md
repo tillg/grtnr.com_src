@@ -36,6 +36,11 @@ Details like
 - clean titles
 - Copy favicon and other static images to output/
 
+### 2025-04-27 & 28: Move to remote Codespace
+
+- Setup Codespace with devcontainer
+- Use Dockerfile
+
 ## TODO
 
 - Google tracking
