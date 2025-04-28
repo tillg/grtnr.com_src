@@ -20,9 +20,15 @@ RUN groupadd --gid $USER_GID $USERNAME || true \
 RUN apt-get update && apt-get install -y zsh && \
   chsh -s $(which zsh) $USERNAME
 
+# Install Node.js and npm
+RUN apt-get update && apt-get install -y nodejs npm
+
 # Install Python dependencies
 COPY ./requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt && rm /tmp/requirements.txt
+
+# Install the Dev Containers CLI
+RUN npm install -g @devcontainers/cli
 
 # Set permissions for the non-root user
 USER $USERNAME

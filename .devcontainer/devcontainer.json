@@ -27,7 +27,9 @@
         "github.copilot",
         "dbaeumer.vscode-eslint",
         "ms-azuretools.vscode-docker",
-        "yzhang.markdown-all-in-one"
+        "yzhang.markdown-all-in-one",
+        "ms-vscode-remote.remote-containers",
+        "github.codespaces"
       ]
     }
   }

@@ -39,6 +39,7 @@ Details like
 ## TODO
 
 - Google tracking
+- Search capability
 - Tags
 - Tage pages
 - Design home page
