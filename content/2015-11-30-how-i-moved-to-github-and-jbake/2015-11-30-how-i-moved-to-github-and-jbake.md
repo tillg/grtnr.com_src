@@ -1,6 +1,6 @@
 ---
 title: How I moved to GitHub & JBake
-tags: [tech, webSite]
+tags: tech, webSite
 image: github.png
 date: 2015-11-30
 ---

@@ -5,7 +5,7 @@ date_published: 2016-02-13T00:00:00.000Z
 date_updated: 2016-02-13T00:00:00.000Z
 image: d3.png
 excerpt: A very small D3 experiment.
-tags: [tech, javaScript]
+tags: tech, javaScript
 ---
 
 During my holiday week I played around with [D3 js](https://d3js.org/). I was fascinated by D3 since the first time I saw it, but I never had time to really play with it. Now I did - a little bit...

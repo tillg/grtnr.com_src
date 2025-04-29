@@ -1,6 +1,6 @@
 ---
 title: Crowdsourcing! Zahle 100,- € für Wappen
-tags: [tech]
+tags: tech
 image: gartner_wappen.jpg
 ---
 

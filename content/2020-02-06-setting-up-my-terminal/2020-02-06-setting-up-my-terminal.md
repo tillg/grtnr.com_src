@@ -1,6 +1,6 @@
 ---
 title: Setting up my terminal
-tags: [tech]
+tags: tech
 image: terminal.png
 ---
 

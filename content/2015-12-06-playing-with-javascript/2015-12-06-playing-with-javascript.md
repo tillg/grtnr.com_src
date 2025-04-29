@@ -1,6 +1,6 @@
 ---
 title: Playing with JavaScript
-tags: [tech]
+tags: tech
 date: 2015-12-06
 ---
 

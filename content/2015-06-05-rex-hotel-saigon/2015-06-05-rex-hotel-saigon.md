@@ -1,6 +1,6 @@
 ---
 title: Rex Hotel in Saigon
-tags: [trip, Vietnam]
+tags: trip, Vietnam
 image: img_1681.jpg
 ---
 

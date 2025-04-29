@@ -1,6 +1,6 @@
 ---
 title: Ping Visualization and Analysis
-tags: [tech]
+tags: tech
 image: ping.png
 ---
 

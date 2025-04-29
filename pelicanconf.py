@@ -4,7 +4,7 @@ SITEURL = ""
 
 PATH = "content"
 ARTICLE_PATHS = ['.']
-STATIC_PATHS = ['static'] 
+STATIC_PATHS = ['static']
 ARTICLE_EXCLUDES = []
 
 # Add static files mapping
@@ -35,14 +35,10 @@ DATE_FORMATS = {
 
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['auto_title', 'copy_adjacent_images', 'excerpt_to_summary', 'external_links']
+PLUGINS = ['auto_title', 'copy_adjacent_images',
+           'excerpt_to_summary', 'external_links']
 
 USE_FOLDER_AS_CATEGORY = False  # Don't categorize by folder name
-
-#Set the default metadata to help guide article output
-# DEFAULT_METADATA = {
-#     'slug': '',  # Use the slug in the article file itself
-# }
 
 DEBUG = True
 DELETE_OUTPUT_DIRECTORY = True
@@ -70,14 +66,33 @@ SOCIAL = (
 
 DEFAULT_PAGINATION = 10
 
+# Tag cloud settings
+TAG_CLOUD_STEPS = 4  # Count of different font sizes in the tag cloud
+TAG_CLOUD_MAX_ITEMS = 100  # Maximum number of tags in the cloud
+TAG_CLOUD_SORTING = 'size'  # 'size' (default) or 'alphabetically'
+
+# URL settings for tags
+TAG_URL = 'tag/{slug}/'
+TAG_SAVE_AS = 'tag/{slug}/index.html'
+TAGS_URL = 'tags/'
+TAGS_SAVE_AS = 'tags/index.html'
+
+# Generate tag pages
+GENERATE_TAGS = True
+
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
 THEME = 'pelicanyan'
-#GA_ACCOUNT = 'UA-12344321-1'
+# GA_ACCOUNT = 'UA-12344321-1'
 TWITTER_ACCOUNT = 'tillg'
-DIRECT_TEMPLATES = ('index', 'categories', 'authors', 'archives', 'sitemap', 'robots', 'humans')
+DIRECT_TEMPLATES = ('index', 'categories', 'authors',
+                    'archives', 'sitemap', 'robots', 'humans', 'tags')
 ROBOTS_SAVE_AS = 'robots.txt'
 HUMANS_SAVE_AS = 'humans.txt'
 SITEMAP_SAVE_AS = 'sitemap.xml'
-TYPOGRIFY=True
+TYPOGRIFY = True
+
+MENUITEMS = [
+    ('Tags', '/tags/'),
+]

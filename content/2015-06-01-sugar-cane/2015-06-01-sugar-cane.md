@@ -1,6 +1,6 @@
 ---
 title: Sugar cane drink
-tags: [trip, Vietnam]
+tags: , Vietnam]
 ---
 
 Just because it’s my last food shop in Da Nang (for this time), and because I never mentioned it. 

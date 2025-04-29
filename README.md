@@ -51,7 +51,6 @@ Details like
 - Multilingual
 - Linting
 - Smart resizing of images
-- Going live to test.grtnr.com
 - Add a sitemap
 - Check links in build pipeline
 - Add a search

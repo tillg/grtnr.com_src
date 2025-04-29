@@ -1,6 +1,6 @@
 ---
 title: Playing with Highcharts
-tags: [tech]
+tags: tech
 date: 2015-12-16
 ---
 
