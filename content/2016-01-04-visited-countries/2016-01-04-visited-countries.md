@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Visited countries
-tag: [tech]
+tags: tech
 ---
 A nice tool to play around - because it's nice to see where you've been and because it's a nice piece of JS:
 

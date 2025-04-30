@@ -1,6 +1,6 @@
 ---
 title: Beautiful websites
-category: [tech]
+tag: tech
 image: html.jpg
 excerpt: A list of sites I like - might be outdated...  😉
 ---

@@ -1,6 +1,7 @@
 AUTHOR = 'Till Gartner'
 SITENAME = 'grtnr.com'
 SITEURL = ""
+DESCRIPTION = 'Stuff that keeps me busy, like family, coding, math, mountains and more.'
 
 PATH = "content"
 ARTICLE_PATHS = ['.']
@@ -52,10 +53,9 @@ AUTHOR_FEED_RSS = None
 
 # Blogroll
 LINKS = (
-    ("Pelican", "https://getpelican.com/"),
-    ("Python.org", "https://www.python.org/"),
-    ("Jinja2", "https://palletsprojects.com/p/jinja/"),
-    ("You can modify those links in your config file", "#"),
+    ("Topics", "/tags"),
+    ("About", "/about"),
+    ("Impressum", "/impressum"),
 )
 
 # Social widget
@@ -93,6 +93,6 @@ HUMANS_SAVE_AS = 'humans.txt'
 SITEMAP_SAVE_AS = 'sitemap.xml'
 TYPOGRIFY = True
 
-MENUITEMS = [
-    ('Tags', '/tags/'),
-]
+# MENUITEMS = [
+#     ('Tags', '/tags/'),
+# ]

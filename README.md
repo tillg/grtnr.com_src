@@ -44,12 +44,12 @@ Details like
 ## TODO
 
 - Google tracking
+- Recipes
 - Search capability
-- Tags
-- Tage pages
 - Design home page
 - Multilingual
 - Linting
+- About page
 - Smart resizing of images
 - Add a sitemap
 - Check links in build pipeline
