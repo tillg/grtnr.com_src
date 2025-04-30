@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+<article class="recipe">
+  <header>
+    <h1>{{ recipe.title }}</h1>
+    {% if recipe.image %}
+    <img src="{{ SITEURL }}/{{ recipe.url }}{{ recipe.image }}" alt="{{ recipe.title }}" class="recipe-hero">
+    {% endif %}
+    
+    {% if recipe.description %}
+    <p class="recipe-description">{{ recipe.description }}</p>
+    {% endif %}
+    
+    <div class="recipe-meta">
+      {% if recipe.prep_time %}
+      <span class="prep-time">Prep: {{ recipe.prep_time }}</span>
+      {% endif %}
+      
+      {% if recipe.cook_time %}
+      <span class="cook-time">Cook: {{ recipe.cook_time }}</span>
+      {% endif %}
+      
+      {% if recipe.servings %}
+      <span class="servings">Serves: {{ recipe.servings }}</span>
+      {% endif %}
+    </div>
+  </header>
+  
+  {% if recipe.ingredients %}
+  <section class="ingredients">
+    <h2>Ingredients</h2>
+    <ul>
+      {% for ingredient in recipe.ingredients %}
+      <li>{{ ingredient }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+  
+  <section class="instructions">
+    <h2>Instructions</h2>
+    {{ recipe.content }}
+  </section>
+  
+  {% if recipe.notes %}
+  <section class="notes">
+    <h2>Notes</h2>
+    <p>{{ recipe.notes }}</p>
+  </section>
+  {% endif %}
+  
+  {% if recipe.tags %}
+  <footer class="tags">
+    <h3>Tags:</h3>
+    <ul>
+      {% for tag in recipe.tags %}
+      <li><a href="{{ SITEURL }}/tag/{{ tag.slug }}/">{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+  </footer>
+  {% endif %}
+</article>
+{% endblock %}

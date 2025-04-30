@@ -2,6 +2,7 @@ AUTHOR = 'Till Gartner'
 SITENAME = 'grtnr.com'
 SITEURL = ""
 DESCRIPTION = 'Stuff that keeps me busy, like family, coding, math, mountains and more.'
+THEME = 'pelicanyan'
 
 PATH = "content"
 ARTICLE_PATHS = ['.']
@@ -28,7 +29,10 @@ STATIC_CREATE_LINKS = True
 
 TIMEZONE = 'Europe/Rome'
 
+# Set defaults
 DEFAULT_LANG = 'en'
+DEFAULT_DATE = 'fs'  # Use file system's modification date
+
 DATE_FORMATS = {
     'en': '%B %-d, %Y',
     'de': '%-d %b %Y',
@@ -37,9 +41,13 @@ DATE_FORMATS = {
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
 PLUGINS = ['auto_title', 'copy_adjacent_images',
-           'excerpt_to_summary', 'external_links']
+           'excerpt_to_summary', 'external_links', 'recipes', 'set_proper_category', 'filter_articles_for_index']
 
+# Categories
 USE_FOLDER_AS_CATEGORY = False  # Don't categorize by folder name
+CATEGORY_URL = 'category/{slug}/'
+CATEGORY_SAVE_AS = 'category/{slug}/index.html'
+CATEGORIES_IN_INDEX = ['articles']
 
 DEBUG = True
 DELETE_OUTPUT_DIRECTORY = True
@@ -54,6 +62,7 @@ AUTHOR_FEED_RSS = None
 # Blogroll
 LINKS = (
     ("Topics", "/tags"),
+    ("Recipes", "/recipes"),
     ("About", "/about"),
     ("Impressum", "/impressum"),
 )
@@ -83,7 +92,6 @@ GENERATE_TAGS = True
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-THEME = 'pelicanyan'
 # GA_ACCOUNT = 'UA-12344321-1'
 TWITTER_ACCOUNT = 'tillg'
 DIRECT_TEMPLATES = ('index', 'categories', 'authors',
@@ -93,6 +101,16 @@ HUMANS_SAVE_AS = 'humans.txt'
 SITEMAP_SAVE_AS = 'sitemap.xml'
 TYPOGRIFY = True
 
-# MENUITEMS = [
-#     ('Tags', '/tags/'),
-# ]
+
+# Add recipes as a content type
+RECIPE_DIR = 'recipes'
+RECIPE_URL = 'recipes/{slug}/'
+RECIPE_SAVE_AS = 'recipes/{slug}/index.html'
+
+RECIPE_PATHS = ['recipes']  # New setting for recipes
+
+# Register the recipes path
+DIRECT_TEMPLATES += ('recipes_index',)  # Add recipes index to direct templates
+
+# Make sure recipes directory is included in content generation
+STATIC_PATHS += ['recipes']

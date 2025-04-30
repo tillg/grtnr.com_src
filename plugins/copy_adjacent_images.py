@@ -8,9 +8,13 @@ def copy_adjacent_images(generator):
     # Process regular articles
     process_articles(generator, generator.articles)
 
-    # Also process hidden articles
+    # Process hidden articles
     if hasattr(generator, 'hidden_articles'):
         process_articles(generator, generator.hidden_articles)
+
+    # Process recipes if available
+    if hasattr(generator, 'recipes'):
+        process_articles(generator, generator.recipes)
 
 
 def process_articles(generator, article_list):
