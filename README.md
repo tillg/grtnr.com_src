@@ -43,9 +43,7 @@ Details like
 
 ## TODO
 
-- Google tracking
 - Fix the article "2016-02-13 Playing around with D3.js"
-- On sidebar add the last creation / build date.
 - Search capability
 - Show google tracking data to the visitors
 - Show git history to the visitors on the site

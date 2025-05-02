@@ -1,3 +1,6 @@
+import datetime
+
+
 AUTHOR = 'Till Gartner'
 SITENAME = 'grtnr.com'
 SITEURL = ""
@@ -116,3 +119,6 @@ DIRECT_TEMPLATES += ('recipes_index',)  # Add recipes index to direct templates
 STATIC_PATHS += ['recipes']
 
 GOOGLE_ANALYTICS = "G-H8M7YDCSD4"
+
+# Add built time
+BUILD_TIME = datetime.datetime.utcnow().strftime("%d.%m.%Y %H:%M:%S")
