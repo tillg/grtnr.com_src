@@ -114,3 +114,5 @@ DIRECT_TEMPLATES += ('recipes_index',)  # Add recipes index to direct templates
 
 # Make sure recipes directory is included in content generation
 STATIC_PATHS += ['recipes']
+
+GOOGLE_ANALYTICS = "G-H8M7YDCSD4"
