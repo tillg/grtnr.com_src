@@ -1,0 +1,41 @@
+meta {
+  name: Count Repos
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://api.github.com/graphql
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: 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
+}
+
+body:json {
+  {"query": {
+      organization(login: "ORGANIZATION"){
+        projectV2(number: NUMBER) {
+          id
+        }
+      }
+    }}
+}
+
+body:text {
+  query {
+              repository(owner: "tillg", name: "grtnr.com_2024") {
+                  discussions(first: 100, categoryId: "Q&A") {  
+                      nodes {
+                          title
+                          url
+                          comments {
+                              totalCount
+                          }
+                      }
+                  }
+              }
+          }
+}

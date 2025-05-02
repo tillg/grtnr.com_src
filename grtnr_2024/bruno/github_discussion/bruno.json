@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "github_discussion",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
