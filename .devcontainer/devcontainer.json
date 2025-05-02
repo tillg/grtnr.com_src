@@ -1,0 +1,37 @@
+{
+  "name": "Pelican Development Environment",
+  "build": {
+    // relative to this JSON
+    "dockerfile": "Dockerfile",
+    "context": ".",
+    // build-time args∏
+    "args": {
+      "USERNAME": "vscode",
+      "USER_UID": "1000"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/*.pyc": true
+        }
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "esbenp.prettier-vscode",
+        "github.copilot",
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "ms-vscode-remote.remote-containers",
+        "github.codespaces"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<div class="post">
+    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}" style="color: black !important; display: block; text-decoration-color: black !important;">
+        <h1 class="post-title" style="color: black !important;">{{ article.title }}</h1>
+        <span class="post-date">{{ article.locale_date }}</span>
+        {% if article.image %}
+            <img src="{% if article.image is string and article.image.startswith('http') %}{{ article.image }}{% else %}{{ SITEURL }}/{{ article.url }}/{{ article.image }}{% endif %}" style="height: 100px; float: left; margin-right: 10px; margin-top: 0px;">
+        {% endif %}        
+        {% if article.summary %}
+        <div style="overflow: hidden; margin-top: 5px;">
+            <span style="color: black !important;">{{ article.summary }}</span>
+        </div>
+        {% endif %}
+         <span class="comment-count" data-giscus-comments="{{ article.url }}">
+            <span class="comment-num">Counting comments...</span>
+        </span>
+        <div style="clear: both;"></div>
+    </a>
+</div>
