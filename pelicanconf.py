@@ -122,3 +122,18 @@ GOOGLE_ANALYTICS = "G-H8M7YDCSD4"
 
 # Add built time
 BUILD_TIME = datetime.datetime.utcnow().strftime("%d.%m.%Y %H:%M:%S")
+
+# Markdown config so TOC works
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.toc': {
+            'permalink': False,
+            'anchorlink': False,
+            'toc_depth': 3,
+        },
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}

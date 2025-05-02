@@ -53,6 +53,5 @@ Details like
 - Smart resizing of images
 - Add a sitemap
 - Check links in build pipeline
-- Add a search
 - Page cloud
 - Tag cloud
