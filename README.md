@@ -1,6 +1,8 @@
-# playground_pelican
+# grtnr.com_src
 
-Playing around with [Pelican](https://blog.getpelican.com/) static site generator, as announced in my [article](https://grtnr.com/2025-04-18-digital-garden.html).
+This is the source of the Website [grtnr.com](https://grtnr.com) and it's test site [test.grtnr.com](https://test.grtnr.com).
+
+[TOC]
 
 ## Get things up & running
 
@@ -13,36 +15,9 @@ In order to get things running
 
 To work in a Github Codespace, start a Codespace and build it with `pelican`.
 
-## Log
-
-### 2025-05-19: First steps
-
-- Installed Pelican using `pip install pelican`.
-- Created a new Pelican project using `pelican-quickstart`.
-- Played around with settings in order to have the article markdown file next to the images. In order to get this I need to
-  - Change the directory names of the articles to not have the date in it.
-- I also added a plugin that generates the title based on the filename: `auto_title.py`.
-
-### 2025-04-21: get the theme
-
-- Starting to install the theme [Pelicanyan](https://github.com/thomaswilley/pelicanyan?tab=readme-ov-file#pelicanyan)
-- Imported the content from the old grtnr.com blog and fixed the little problems.
-
-### 2025-04-23: Adapt details
-
-Details like
-
-- Added giscus
-- clean titles
-- Copy favicon and other static images to output/
-
-### 2025-04-27 & 28: Move to remote Codespace
-
-- Setup Codespace with devcontainer
-- Use Dockerfile
-
 ## TODO
 
+- Fix deployment: Deploy to grtnr.com when committing to main, deploy to test.grtnr.com when committing to another branch.
 - Fix the article "2016-02-13 Playing around with D3.js"
 - Search capability
 - Show google tracking data to the visitors
@@ -55,3 +30,11 @@ Details like
 - Check links in build pipeline
 - Page cloud
 - Tag cloud
+
+## Archive
+
+For historical reasons I kept old versions of my site in this repo:
+
+- [grtnr_2022](grtnr_2022) contains the Jekyll based version of 2022
+- [grtnr_2024](grtnr_2024) contains the Jekyll based version of 2024
+- [Migration to Pelican](MIGRATION_TO_PELICAN.md) explains my path of migrating from the 2024-Version on Jekyll to Pelican.
