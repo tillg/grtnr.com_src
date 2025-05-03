@@ -1,9 +1,14 @@
 import datetime
 import pytz
+import os
 
+## Our sitename might vary depending on the environment
+SITENAME = 'grtnr.comi'
+# Override SITENAME from environment variable if available
+if 'PELICAN_SITENAME' in os.environ:
+    SITENAME = os.environ['PELICAN_SITENAME']
 
 AUTHOR = 'Till Gartner'
-SITENAME = 'grtnr.com'
 SITEURL = ""
 DESCRIPTION = 'Stuff that keeps me busy, like family, coding, math, mountains and more.'
 THEME = 'pelicanyan'

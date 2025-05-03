@@ -23,6 +23,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r .devcontainer/requirements.txt
 
+      - name: Set site name based on branch
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "PELICAN_SITENAME=grtnr.com" >> $GITHUB_ENV
+          else
+            echo "PELICAN_SITENAME=test.grtnr.com" >> $GITHUB_ENV
+          fi
+
       - name: Build site
         run: pelican content -o output -s pelicanconf.py
         
