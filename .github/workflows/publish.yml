@@ -27,7 +27,7 @@ jobs:
         run: pelican content -o output -s pelicanconf.py
         
       - name: Upload site as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: site-output
           path: ./output
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download site artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: site-output
           path: ./output
