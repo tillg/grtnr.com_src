@@ -54,6 +54,20 @@ Once you checked everything on `test.grtnr.com` this is how you deploy to `grtnr
 - Click "Create pull request" again
 - On the PR page, once you're ready to merge, click "Merge pull request" and then "Confirm merge"
 
+Once this is done u need to update your loacl environment:
+
+```bash
+# Switch back to the main branch
+git checkout main
+
+# Pull the latest changes from the remote main branch
+git pull origin main
+# This will bring in the changes you merged via PR
+
+# Clean up by deleting your local copy of the now-deleted remote branch
+git branch -d my-new-feature
+```
+
 ## TODO
 
 My planned features & changes, in no special order:
