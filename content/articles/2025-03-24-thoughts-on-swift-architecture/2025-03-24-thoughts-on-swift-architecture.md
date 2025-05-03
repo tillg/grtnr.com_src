@@ -1,6 +1,6 @@
 ---
 date: 2025-03-24
-image: https://img.transistor.fm/8oNIHMVZfJuWvHxD2UmRV8s-zz2ZDfXC-Sud2dJRo24/rs:fill:400:400:1/q:60/aHR0cHM6Ly9pbWct/dXBsb2FkLXByb2R1/Y3Rpb24udHJhbnNp/c3Rvci5mbS9lMjg4/Y2UwYzYzMjlmN2My/Y2U4MWE3ZmYwNDJk/YTZhZC5wbmc.webp
+image: developer_podcast.jpg
 excerpt: "I heard an interesting podcast on how to structure different model types in Swift: Domain models that are my internal representation, Data Models (or DTOs) that are the external representation, and View Models that are the representation for the UI. But many aspects are still unclear to me."
 ---
 
@@ -11,7 +11,7 @@ excerpt: "I heard an interesting podcast on how to structure different model typ
 
 I heard this really nice podcast yesterday on how to structure different model types in Swift: Domain models that are my internal representation, Data Models (or DTOs) that are the external representation, and View Models that are the representation for my UI:
 
-[![Developer Podcast](https://img.transistor.fm/8oNIHMVZfJuWvHxD2UmRV8s-zz2ZDfXC-Sud2dJRo24/rs:fill:400:400:1/q:60/aHR0cHM6Ly9pbWct/dXBsb2FkLXByb2R1/Y3Rpb24udHJhbnNp/c3Rvci5mbS9lMjg4/Y2UwYzYzMjlmN2My/Y2U4MWE3ZmYwNDJk/YTZhZC5wbmc.webp)](https://podcasts.apple.com/de/podcast/developer-podcast/id1467065787?i=1000698509743)
+[![Developer Podcast](developer_podcast.jpg)](https://podcasts.apple.com/de/podcast/developer-podcast/id1467065787?i=1000698509743)
 
 This post basically is a question that I added to the [Discord that goes with the Podcast](https://discord.com/invite/j57uchzUa9).
 

@@ -2,6 +2,7 @@
 date: 2025-01-15
 excerpt: I use different dev tools (Java, Python, Docker...) but I use some of them only rarely. So I forget how I installed them, what version manager I used etc. So this is the note to future me to look it up.
 image: dev_tools.png
+tags: Mac
 ---
 
 ![Funny pic from AI](dev_tools.png)
@@ -87,4 +88,4 @@ pyenv global <version> -- select globally for your user account
 
 ## Ruby
 
-TBD
+Not thought yet. Avoid Ruby in general... 😉

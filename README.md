@@ -15,7 +15,7 @@ This is the source of the Website [grtnr.com](https://grtnr.com) and it's test s
 In order to get things running
 
 - Make sure you have Python installed. I work with Python 3.12
-- Install the requireed packages: `pip install -r requirements.txt`
+- Install the required packages: `pip install -r .devcontainer/requirements.txt`
 - Build it: `pelican`
 - In the dev process, you probably want to run it, keep it watching file changes and serve the website: `pelican -r -l`
 
@@ -79,6 +79,7 @@ My planned features & changes, in no special order:
 - Show git history to the visitors on the site
 - Design home page
 - Multilingual
+- Add Chamge history per article, with date & comments
 - Linting
 - Smart resizing of images
 - Add a sitemap

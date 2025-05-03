@@ -1,4 +1,5 @@
 import datetime
+import pytz
 
 
 AUTHOR = 'Till Gartner'
@@ -121,7 +122,14 @@ STATIC_PATHS += ['recipes']
 GOOGLE_ANALYTICS = "G-H8M7YDCSD4"
 
 # Add built time
-BUILD_TIME = datetime.datetime.utcnow().strftime("%d.%m.%Y %H:%M:%S")
+# Get current time in UTC
+utc_now = datetime.datetime.now(pytz.UTC)
+
+# Convert to your local timezone
+local_now = utc_now.astimezone(pytz.timezone(TIMEZONE))
+
+# Format the time
+BUILD_TIME = local_now.strftime("%d.%m.%Y %H:%M:%S")
 
 # Markdown config so TOC works
 MARKDOWN = {

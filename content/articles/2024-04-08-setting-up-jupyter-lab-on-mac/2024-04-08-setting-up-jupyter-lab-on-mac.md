@@ -3,12 +3,14 @@ layout: post
 date: 2024-04-08
 excerpt: Setting up Python on a Mac can by tricky. The number of options is big, and they might interact strangely. Also you have to remember which installation method you used once you want to change version or upgrade. This post should remind me how I did it 😉
 image: python_on_mac.png
+tags: tech. Mac
 ---
 Setting up Python on a Mac can by tricky. The number of options is big, and they might interact strangely. Also you have to remember which installation method you used once you want to change version or upgrade. This post should remind me how I did it 😉
 
 ## Installing Python
 
 There are many ways to install Python on Mac and to manage it's versions:
+
 * The Python installed on MacOS
 * `brew`
 * Anaconda
