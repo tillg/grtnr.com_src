@@ -3,10 +3,11 @@ name: Build and Deploy Pelican Site
 on:
   push:
     branches:
-      - main # or whatever your default branch is
+      - main
+      - '*'
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source
@@ -24,11 +25,38 @@ jobs:
 
       - name: Build site
         run: pelican content -o output -s pelicanconf.py
+        
+      - name: Upload site as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: site-output
+          path: ./output
 
-      - name: Deploy to GitHub Pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download site artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: site-output
+          path: ./output
+          
+      - name: Deploy to grtnr.com
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          personal_token: ${{ secrets.DEPLOYMENT_TOKEN }}
+          publish_dir: ./output
+          publish_branch: main
+          external_repository: tillg/grtnr.com
+          cname: grtnr.com
+      
+      - name: Deploy to test.grtnr.com
+        if: github.ref != 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.DEPLOYMENT_TOKEN }}
           publish_dir: ./output
           publish_branch: main
           external_repository: tillg/test.grtnr.com
