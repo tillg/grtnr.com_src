@@ -8,7 +8,6 @@ This is the source of the Website [grtnr.com](https://grtnr.com) and it's test s
   - [TODO](#todo)
   - [Problems / Solutions](#problems--solutions)
     - [Git topics](#git-topics)
-  - [Archive](#archive)
 
 ## Get things up & running
 
@@ -112,10 +111,3 @@ git commit -m "Your descriptive commit message"
 git push origin your-new-branch-name
 ```
 
-## Archive
-
-For historical reasons I kept old versions of my site in this repo:
-
-- [grtnr_2022](grtnr_2022) contains the Jekyll based version of 2022
-- [grtnr_2024](grtnr_2024) contains the Jekyll based version of 2024
-- [Migration to Pelican](MIGRATION_TO_PELICAN.md) explains my path of migrating from the 2024-Version on Jekyll to Pelican.
