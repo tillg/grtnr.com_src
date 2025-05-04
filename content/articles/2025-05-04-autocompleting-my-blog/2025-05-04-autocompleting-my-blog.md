@@ -1,5 +1,5 @@
 ---
-title: Autocompleteing my Blog
+title: Autocompleting my Blog
 tags: blog, tech, softwareweneed
 summary: I now have a Pelican based blog and want to automagically add or fix content: Picture tags, article summaries, translations... Finally a wa to use AI 🤖
 ---
