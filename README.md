@@ -72,7 +72,7 @@ git branch -d my-new-feature
 
 My planned features & changes, in no special order:
 
-- Fix deployment: Deploy to grtnr.com when committing to main, deploy to test.grtnr.com when committing to another branch.
+- Fix the TOCs: They are just flat, no identation, in the generated HTMl
 - Fix the article "2016-02-13 Playing around with D3.js"
 - Search capability
 - Show google tracking data to the visitors
