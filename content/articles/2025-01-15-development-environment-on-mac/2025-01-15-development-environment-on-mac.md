@@ -16,7 +16,9 @@ As the way how certain packages are installed might change over time, I will add
 
 ## Xcode
 
-Xcode is the baic dev tooling on Mac. It contains git and other basic tools and compilers.
+Xcode is the basic dev tooling on Mac. It contains git and other basic tools and compilers.
+
+I install it from the Apple App Store.
 
 ## Terminal
 
