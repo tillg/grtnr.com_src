@@ -12,10 +12,15 @@ Every couple of years you get the opportunity to setup a new Mac. It's typically
 
 **Note:** The dev stuff is not listed here as there is an own [article about installing the Dev environment](development-environment-on-mac).
 
+- Mail first, as it takes loooong to download all the emails
+  - Work email
+  - Private Email
+
 ## Basic 
 
 - 1Password
 - DropBox
+- brew
 
 ## For work
 

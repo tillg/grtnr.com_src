@@ -12,16 +12,7 @@ I am not a professional developer, I do it for fun. And I like to play around, d
 
 As the way how certain packages are installed might change over time, I will add dates to my installation choices.
 
-- [Xcode](#xcode)
-- [Terminal](#terminal)
-- [zsh shell](#zsh-shell)
-- [Docker](#docker)
-- [Java](#java)
-- [Maven](#maven)
-- [Gradle](#gradle)
-- [Node and npm](#node-and-npm)
-- [Python](#python)
-- [Ruby](#ruby)
+[TOC]
 
 ## Xcode
 
@@ -32,6 +23,10 @@ Xcode is the baic dev tooling on Mac. It contains git and other basic tools and 
 My Terminal of choice is [iTerm2](https://iterm2.com), and I simply install it from it's website.
 
 ## zsh shell
+
+## VSCode 
+
+... or VSCode-insiders
 
 ## Docker
 **January 2025:** I switched away from [Docker Desktop](https://www.docker.com/products/docker-desktop/) to [Rancher Desktop](https://rancherdesktop.io).

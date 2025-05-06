@@ -1,0 +1,41 @@
+/* Tag Pills Styling */
+.tag-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.tag-pill {
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: #505050;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+  background-color: #e0e0e0;
+  color: #303030;
+  text-decoration: none;
+}
+
+/* Size variations */
+.tag-pill-small {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+.tag-pill-large {
+  font-size: 16px;
+  padding: 6px 16px;
+}
+
+/* Optional: Add a subtle shadow on hover for more interactive feel */
+.tag-pill:hover {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}

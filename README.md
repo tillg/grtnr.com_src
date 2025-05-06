@@ -71,7 +71,6 @@ git branch -d my-new-feature
 
 My planned features & changes, in no special order:
 
-- BUG: Fix the TOCs: They are just flat, no identation, in the generated HTMl
 - BUG: Fix the article "2016-02-13 Playing around with D3.js"
 - Make topic / tag _pills_ and link them to the topic pages.
 - Search capability

@@ -1,0 +1,7 @@
+{% macro render_tag_pills(tags, size="normal") %}
+<div class="tag-pills">
+  {% for tag in tags %}
+    <a href="{{ SITEURL }}/tag/{{ tag.slug }}/" class="tag-pill {% if size == 'small' %}tag-pill-small{% elif size == 'large' %}tag-pill-large{% endif %}">{{ tag }}</a>
+  {% endfor %}
+</div>
+{% endmacro %}
