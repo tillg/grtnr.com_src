@@ -1,6 +1,6 @@
 ---
 title: Setting up my terminal
-tags: tech
+tags: tech, Mac
 image: terminal.png
 ---
 

@@ -6,24 +6,7 @@ excerpt: "I read a bout digital gardens and liked the idea. So I started thinkin
 
 ![Digital garden](digital-garden.jpg)
 
-- [Requirements](#requirements)
-- [Technology and Architecture](#technology-and-architecture)
-- [ChatGPT: Building a Python-Powered Digital Garden: Stack \& Architecture](#chatgpt-building-a-python-powered-digital-garden-stack--architecture)
-  - [Static Site Generator \& Content Organization](#static-site-generator--content-organization)
-  - [Markdown Editing \& Local Preview](#markdown-editing--local-preview)
-  - [Wiki-Style Internal Linking \& Backlinks](#wiki-style-internal-linking--backlinks)
-  - [Custom Content Types \& Templates](#custom-content-types--templates)
-  - [Beautiful Theming (Ghost-Inspired Design)](#beautiful-theming-ghost-inspired-design)
-  - [Multi-Language Support \& AI Translations](#multi-language-support--ai-translations)
-  - [Content Access Control (Roles \& Authentication)](#content-access-control-roles--authentication)
-  - [Tags, Indexes, and Navigation Pages](#tags-indexes-and-navigation-pages)
-  - [Build Pipeline \& Link Validation](#build-pipeline--link-validation)
-  - [Summary of the Recommended Stack](#summary-of-the-recommended-stack)
-- [Follow up questions](#follow-up-questions)
-  - [Changing the structure](#changing-the-structure)
-  - [Articles or Pages?](#articles-or-pages)
-- [Playing around](#playing-around)
-
+[TOC]
 
 I read about Digital Gardens on [heise (in German)](https://www.heise.de/hintergrund/Nerd-Trend-Digitaler-Garten-Die-eigene-Website-als-persoenliches-Wissensarchiv-10344169.html) and really liked the idea. The key differences to my current blog that I thought of are
 
@@ -53,7 +36,7 @@ My requirements for a digital garden system:
 
 # Technology and Architecture
 
-[This is what ChatGPT produced](https://chatgpt.com/share/68026bb5-d040-8009-9f79-ec0fd35880f4) (I thionk it's really good, so I paste it all here):
+[This is what ChatGPT produced](https://chatgpt.com/share/68026bb5-d040-8009-9f79-ec0fd35880f4) (I think it's really good, so I paste it all here):
 
 Great. I’ll explore the best Python-based static site generators and architecture for building a beautifully styled, markdown-driven digital garden with support for access control, internal link checking, multilingual support, and article-type customization. I’ll also ensure the system supports your preferred local editing flow, generates plain HTML, and works well with GitHub Pages.
 

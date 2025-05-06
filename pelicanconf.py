@@ -3,7 +3,7 @@ import pytz
 import os
 
 ## Our sitename might vary depending on the environment
-SITENAME = 'grtnr.comi'
+SITENAME = 'grtnr.com'
 # Override SITENAME from environment variable if available
 if 'PELICAN_SITENAME' in os.environ:
     SITENAME = os.environ['PELICAN_SITENAME']
@@ -50,7 +50,8 @@ DATE_FORMATS = {
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
 PLUGINS = ['auto_title', 'copy_adjacent_images',
-           'excerpt_to_summary', 'external_links', 'recipes', 'set_proper_category', 'filter_articles_for_index']
+           'excerpt_to_summary', 'external_links', 'recipes', 'set_proper_category', 'filter_articles_for_index',
+           ]
 
 # Categories
 USE_FOLDER_AS_CATEGORY = False  # Don't categorize by folder name
@@ -143,6 +144,8 @@ MARKDOWN = {
             'permalink': False,
             'anchorlink': False,
             'toc_depth': 3,
+            'marker': '[TOC]',
+
         },
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
         'markdown.extensions.extra': {},

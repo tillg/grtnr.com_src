@@ -4,10 +4,7 @@ image: developer_podcast.jpg
 excerpt: "I heard an interesting podcast on how to structure different model types in Swift: Domain models that are my internal representation, Data Models (or DTOs) that are the external representation, and View Models that are the representation for the UI. But many aspects are still unclear to me."
 ---
 
-- [Question](#question)
-  - [Domain Models, Data Models, and Mappers](#domain-models-data-models-and-mappers)
-  - [Repository](#repository)
-- [Answer](#answer)
+[TOC]
 
 I heard this really nice podcast yesterday on how to structure different model types in Swift: Domain models that are my internal representation, Data Models (or DTOs) that are the external representation, and View Models that are the representation for my UI:
 

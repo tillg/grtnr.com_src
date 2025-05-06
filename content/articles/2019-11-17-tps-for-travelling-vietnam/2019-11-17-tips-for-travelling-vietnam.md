@@ -4,7 +4,6 @@ title: Tips for travelling Vietnam
 slug: tips-for-travelling-vietnam
 date_published: 2019-11-17T00:00:00.000Z
 date_updated: 2021-12-06T09:33:36.000Z
-tags: 
 image: lili-vietnam.JPG
 ---
 

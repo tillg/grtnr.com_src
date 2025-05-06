@@ -3,6 +3,7 @@ date: 2025-01-15
 excerpt: I use different dev tools (Java, Python, Docker...) but I use some of them only rarely. So I forget how I installed them, what version manager I used etc. So this is the note to future me to look it up.
 image: dev_tools.png
 tags: Mac
+updates: 2025-05-05
 ---
 
 ![Funny pic from AI](dev_tools.png)
@@ -11,6 +12,9 @@ I am not a professional developer, I do it for fun. And I like to play around, d
 
 As the way how certain packages are installed might change over time, I will add dates to my installation choices.
 
+- [Xcode](#xcode)
+- [Terminal](#terminal)
+- [zsh shell](#zsh-shell)
 - [Docker](#docker)
 - [Java](#java)
 - [Maven](#maven)
@@ -18,6 +22,16 @@ As the way how certain packages are installed might change over time, I will add
 - [Node and npm](#node-and-npm)
 - [Python](#python)
 - [Ruby](#ruby)
+
+## Xcode
+
+Xcode is the baic dev tooling on Mac. It contains git and other basic tools and compilers.
+
+## Terminal
+
+My Terminal of choice is [iTerm2](https://iterm2.com), and I simply install it from it's website.
+
+## zsh shell
 
 ## Docker
 **January 2025:** I switched away from [Docker Desktop](https://www.docker.com/products/docker-desktop/) to [Rancher Desktop](https://rancherdesktop.io).

@@ -4,16 +4,7 @@ image: david_cursor_magic.png
 excerpt: I found this video of a dev with LOTS of helpful tips on how to use Cursor - here are my take aways.
 ---
 
-- [Prompt Structure](#prompt-structure)
-- [Cursorrules](#cursorrules)
-- [AI Rules in Cursor Settings](#ai-rules-in-cursor-settings)
-- [Helpful small prompts](#helpful-small-prompts)
-- [Larger prompts](#larger-prompts)
-  - [Summary of current state](#summary-of-current-state)
-  - [Unbiased 50/50](#unbiased-5050)
-  - [one-paragraph search query](#one-paragraph-search-query)
-- [Instructions](#instructions)
-- [Other tools](#other-tools)
+[TOC]
 
 Last week end I discovered this video from David Ondrej: [I spent 400+ hours in Cursor, here’s what I learned](https://youtu.be/gYLNxUxVomY?si=1Q2x2UWgqy1RHvLt). The title is not super attractive, but the content was very helpful for me. So here are my notes so I can use all his tips and have the different prompts and snippets at hand to use them when coding.
 

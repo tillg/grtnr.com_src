@@ -8,7 +8,7 @@ tags:
 image: MacSoundFlower.png
 ---
 
-**TL;DR In order to record the screen of your Mac together with the sound (i.e. a Zoom session) you can use Soundflower.**
+**TL;DR** In order to record the screen of your Mac together with the sound (i.e. a Zoom session) you can use Soundflower.
 
 Here is what I wanted to achieve: Make a (video) recording of what is happening on the screen of my Mac **including the sound**. All this, while still hearing what is happening at the same time. In my case I wanted to record a Zoom-Class, but I guess this is a setup that might be useful in many situations.
 

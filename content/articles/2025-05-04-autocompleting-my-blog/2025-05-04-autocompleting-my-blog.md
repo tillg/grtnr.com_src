@@ -3,18 +3,7 @@ title: Autocompleting my Blog
 tags: blog, tech, softwareweneed
 summary: I now have a Pelican based blog and want to automagically add or fix content: Picture tags, article summaries, translations... Finally a wa to use AI 🤖
 ---
-
-- [Tools I would like to have](#tools-i-would-like-to-have)
-  - [Picture tag completion (AI)](#picture-tag-completion-ai)
-  - [Link checker](#link-checker)
-  - [Extract Generator (AI)](#extract-generator-ai)
-  - [Translator (AI'ish)](#translator-aiish)
-  - [Article illustration (AI)](#article-illustration-ai)
-- [We need a build pipeline](#we-need-a-build-pipeline)
-  - [Interims data](#interims-data)
-  - [Integrity of authored content](#integrity-of-authored-content)
-  - [Where to keep data](#where-to-keep-data)
-  - [Processing order](#processing-order)
+[TOC]
 
 Since last week my blog is based on [Pelican](https://getpelican.com), the Python based static blog generator. Now that the blog is built in a language that I master more or less, I can think of improving the process of writing and building things myself. And of course there are lots of tools that I can think of in order to make my life as well as the life of my readers easier. So here are some examples of these helpers.
 

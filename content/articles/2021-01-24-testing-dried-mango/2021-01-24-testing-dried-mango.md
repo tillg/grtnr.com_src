@@ -5,7 +5,6 @@ title: Testing dried Mango
 slug: testing-dried-mango
 date_published: 2021-01-24T13:04:58.000Z
 date_updated: 2021-01-24T13:04:58.000Z
-tags: Life
 excerpt: Since our 4 years in Vietnam we love Mango! And here in Germany we mostly turned to dried Mango. So it felt appropriate to have a proper test... 
 image: mangos.jpeg
 ---
