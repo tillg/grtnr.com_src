@@ -22,7 +22,7 @@ I install it from the Apple App Store.
 
 ## Terminal
 
-My Terminal of choice is [iTerm2](https://iterm2.com), and I simply install it from it's website.
+My Terminal of choice is [iTerm2](https://iterm2.com), and I simply install it from it's website. See [here](setting-up-my-terminal) for how I configure it.
 
 ## zsh shell
 
@@ -31,6 +31,7 @@ My Terminal of choice is [iTerm2](https://iterm2.com), and I simply install it f
 ... or VSCode-insiders
 
 ## Docker
+
 **January 2025:** I switched away from [Docker Desktop](https://www.docker.com/products/docker-desktop/) to [Rancher Desktop](https://rancherdesktop.io).
 
 Installation note: Downloaded the Apple Silicon version, opened the DMG and copied it into my Applications directory. The only detail I needed to do, is tick the "Administrative Access" checkbox in the setting.
@@ -92,6 +93,7 @@ Reason: `brew install gradle` installed Gradle Version 8.12.1, but for the curre
 Select a Pyenv-installed Python as the version to use, run one of the following commands:
 
 ```shell
+pyenv install 3.12
 pyenv shell <version> -- select just for current shell session
 pyenv local <version> -- automatically select whenever you are in the current directory (or its subdirectories)
 pyenv global <version> -- select globally for your user account

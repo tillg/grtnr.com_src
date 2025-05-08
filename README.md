@@ -73,6 +73,7 @@ My planned features & changes, in no special order:
 
 - BUG: Fix the article "2016-02-13 Playing around with D3.js"
 - Make topic / tag _pills_ and link them to the topic pages.
+- TODO Page
 - Search capability
 - Show google tracking data to the visitors
 - Show git history to the visitors on the site

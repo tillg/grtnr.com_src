@@ -1,24 +1,37 @@
 {% import 'tag_pills.html' as tag_pills %}
 
 <div class="post">
-    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}" style="color: black !important; display: block; text-decoration-color: black !important;">
+    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"
+        style="color: black !important; display: block; text-decoration-color: black !important;">
         <h1 class="post-title" style="color: black !important;">{{ article.title }}</h1>
+    </a>
+    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"
+        style="color: black !important; display: block; text-decoration-color: black !important;">
         <span class="post-date">{{ article.locale_date }}</span>
-        <!-- Render tags as pills if the article has tags -->
-        {% if article.tags %}
-            {{ tag_pills.render_tag_pills(article.tags) }}
-        {% endif %}
-        {% if article.image %}
-            <img src="{% if article.image is string and article.image.startswith('http') %}{{ article.image }}{% else %}{{ SITEURL }}/{{ article.url }}/{{ article.image }}{% endif %}" style="height: 100px; float: left; margin-right: 15px; margin-bottom: 10px;">
-        {% endif %}        
-        {% if article.summary %}
+    </a>
+
+    <!-- Render tags as pills if the article has tags -->
+    {% if article.tags %}
+    {{ tag_pills.render_tag_pills(article.tags) }}
+    {% endif %}
+    {% if article.image %}
+    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"
+        style="color: black !important; display: block; text-decoration-color: black !important;">
+        <img src="{% if article.image is string and article.image.startswith('http') %}{{ article.image }}{% else %}{{ SITEURL }}/{{ article.url }}/{{ article.image }}{% endif %}"
+            style="height: 100px; float: left; margin-right: 15px; margin-bottom: 10px;">
+    </a>
+    {% endif %}
+    {% if article.summary %}
+    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"
+        style="color: black !important; display: block; text-decoration-color: black !important;">
+
         <div style="color: black !important; margin-top: 5px;">
             {{ article.summary }}
         </div>
-        {% endif %}
-         <span class="comment-count" data-giscus-comments="{{ article.url }}">
-            <span class="comment-num">Counting comments...</span>
-        </span>
-        <div style="clear: both;"></div>
     </a>
+    {% endif %}
+    <span class="comment-count" data-giscus-comments="{{ article.url }}">
+        <span class="comment-num">Counting comments...</span>
+    </span>
+    <div style="clear: both;"></div>
 </div>

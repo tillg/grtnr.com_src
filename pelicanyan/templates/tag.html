@@ -4,8 +4,8 @@
 {% block title %}{{ SITENAME }} - {{ tag }}{% endblock %}
 
 {% block content %}
-<h1>
-    Articles about {{ tag_pills.render_tag_pills([tag], size='large') }}
+<h1 class="tag-heading">
+    Articles about <span class="tag-inline">{{ tag_pills.render_tag_pills([tag], size='large') }}</span>
 </h1>
 <ul>
     {% for article in articles %}

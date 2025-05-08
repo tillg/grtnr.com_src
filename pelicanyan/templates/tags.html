@@ -1,11 +1,21 @@
 {% extends "base.html" %}
+{% import 'tag_pills.html' as tag_pills %}
+
 {% block content %}
 
 <h1>Topics</h1>
 <div class="posts">
-    <ul>
-        {%- for tag, articles in tags|sort %}
-        <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles|count }})</li>
+    <ul style="list-style-type: none; padding-left: 0;">
+        {% set tag_list = [] %}
+        {% for tag, articles in tags %}
+        {% set _ = tag_list.append((tag, articles|length)) %}
+        {% endfor %}
+
+        {% for tag_item in tag_list|sort(attribute=1, reverse=True) %}
+        <li style="margin-bottom: 15px;">
+            {{ tag_pills.render_tag_pill(tag_item[0], size='large') }}
+            <span style="color: #9a9a9a; margin-left: 8px;">({{ tag_item[1] }})</span>
+        </li>
         {% endfor %}
     </ul>
 </div>
