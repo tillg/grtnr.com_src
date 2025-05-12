@@ -26,6 +26,17 @@ My Terminal of choice is [iTerm2](https://iterm2.com), and I simply install it f
 
 ## zsh shell
 
+On a new Mac, here is what I do:
+
+```shell
+# Check what Shell I have
+echo "$SHELL"
+
+# In case it's not zsh, set it as default
+chsh -s "$(which zsh)"
+
+```
+
 ## VSCode 
 
 ... or VSCode-insiders

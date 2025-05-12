@@ -22,6 +22,8 @@ Every couple of years you get the opportunity to setup a new Mac. It's typically
 - 1Password, 1st because everything needs passwords...
 - DropBox, early to give it time to sync.
 - AlDente for Battery management from [their Website](https://apphousekitchen.com/aldente-overview/pricing/)
+- iTerm - because we need it for the next steps. And make sure that `zsh` is the shell used.
+- ssh keys from 1Password
 - brew 
 - AnythingLLM
 - ChatGPT from the [OPenAI Website](https://openai.com/chatgpt/download/)
@@ -35,15 +37,17 @@ Every couple of years you get the opportunity to setup a new Mac. It's typically
 - Webex
 - VPN _Cisco AnyConnect_
 - MS Office 365, from AppStore, then login
-
+- MS Teams (that's not part of Office 365) from the [Microsoft Teams Website](https://www.microsoft.com/en-us/microsoft-teams/download-app)
 - Setup printers
 
 ## Settings to adjust
 
-- Trackpad
-- Touch ID
-- Screen Saver
-- Lock Screen
+- In _System Settings_
+  - Trackpad
+  - Touch ID
+  - Screen Saver
+  - Lock Screen
+  - Keyboard > Keyborad Shortcuts. 
 - Desktop & Dock in _System Settings_, _Hot Corners_ remove all Icons from Dock
 - Finder _Settings_ and _View Options_
 
