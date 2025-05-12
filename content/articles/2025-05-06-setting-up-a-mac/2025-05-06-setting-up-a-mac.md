@@ -19,8 +19,9 @@ Every couple of years you get the opportunity to setup a new Mac. It's typically
 
 ## Basic
 
-- 1Password, 1st because everything needs passwords...
+- 1Password, 1st because everything needs passwords. Installed from AppStore.
 - DropBox, early to give it time to sync.
+- Swish, the window manager I am used to. Installed from [their website](https://highlyopinionated.co/swish/).
 - AlDente for Battery management from [their Website](https://apphousekitchen.com/aldente-overview/pricing/)
 - iTerm - because we need it for the next steps. And make sure that `zsh` is the shell used.
 - ssh keys from 1Password

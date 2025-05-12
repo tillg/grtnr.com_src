@@ -3,7 +3,6 @@ layout: page
 title: Impressum
 slug: impressum
 date: 2025-04-29
-status: hidden
 ---
 
 Angaben gemäß § 5 TMG

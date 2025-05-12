@@ -5,7 +5,6 @@ This is the source of the Website [grtnr.com](https://grtnr.com) and it's test s
 - [grtnr.com\_src](#grtnrcom_src)
   - [Get things up \& running](#get-things-up--running)
   - [Creating \& publishing content](#creating--publishing-content)
-  - [TODO](#todo)
   - [Problems / Solutions](#problems--solutions)
     - [Git topics](#git-topics)
 
@@ -14,6 +13,8 @@ This is the source of the Website [grtnr.com](https://grtnr.com) and it's test s
 In order to get things running
 
 - Make sure you have Python installed. I work with Python 3.12
+- Create a local python environment: `python -m venv .venv` anc activate it: `source .venv/bin/activate`
+- Upgrade your pip: `pip install --upgrade pip`
 - Install the required packages: `pip install -r .devcontainer/requirements.txt`
 - Build it: `pelican`
 - In the dev process, you probably want to run it, keep it watching file changes and serve the website: `pelican -r -l`
@@ -66,26 +67,6 @@ git pull origin main
 # Clean up by deleting your local copy of the now-deleted remote branch
 git branch -d my-new-feature
 ```
-
-## TODO
-
-My planned features & changes, in no special order:
-
-- BUG: Fix the article "2016-02-13 Playing around with D3.js"
-- Make topic / tag _pills_ and link them to the topic pages.
-- TODO Page
-- Search capability
-- Show google tracking data to the visitors
-- Show git history to the visitors on the site
-- Design home page
-- Multilingual
-- Add Chamge history per article, with date & comments
-- Linting
-- Smart resizing of images
-- Add a sitemap
-- Check links in build pipeline
-- Page cloud
-- Tag cloud
 
 ## Problems / Solutions
 
