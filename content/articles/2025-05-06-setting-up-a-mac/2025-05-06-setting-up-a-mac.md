@@ -9,7 +9,7 @@ Every couple of years you get the opportunity to setup a new Mac. It's typically
 
 [TOC]
 
-**Note:** The dev stuff is not listed here as there is an own [article about installing the Dev environment](development-environment-on-mac).
+**Note:** The dev stuff is not listed here as there is an own [article about installing the Dev environment](/development-environment-on-mac/).
 
 ## First things first...
 

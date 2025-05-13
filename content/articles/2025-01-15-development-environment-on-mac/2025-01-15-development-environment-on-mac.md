@@ -22,7 +22,7 @@ I install it from the Apple App Store.
 
 ## Terminal
 
-My Terminal of choice is [iTerm2](https://iterm2.com), and I simply install it from it's website. See [here](setting-up-my-terminal) for how I configure it.
+My Terminal of choice is [iTerm2](https://iterm2.com), and I simply install it from it's website. See [here](/setting-up-my-terminal/) for how I configure it.
 
 ## zsh shell
 

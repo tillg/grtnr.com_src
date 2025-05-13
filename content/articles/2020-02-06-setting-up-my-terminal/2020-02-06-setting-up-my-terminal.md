@@ -46,7 +46,7 @@ Before going thru the different components one by one, this is the directory str
 
 ## zsh
 
-I used bash in the past and I was happy with it. I simply started my Mac Terminal, and there it was. And later I used iTerm2, and it alkso fired up with bash. So why move over to zsh?
+I used bash in the past and I was happy with it. I simply started my Mac Terminal, and there it was. And later I used iTerm2, and it also fired up with bash. So why move over to zsh?
 
 This article explains it nicely and extensively. In short:
 
@@ -91,7 +91,7 @@ I currently use the git plugin, which offers shortcuts for often used git comman
 
 ### Configuring Oh My Zsh
 
-As mentioned, I have all the configurations integrated in my `$HOME/.zshrc` file. The relecvant snippets from my `.zshrc`file:
+As mentioned, I have all the configurations integrated in my `$HOME/.zshrc` file. The relevant snippets from my `.zshrc`file:
 
 ```shell
 # Path to your oh-my-zsh installation.
@@ -111,17 +111,8 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 plugins=(git python)
 ```
 
-## powerlevel9k
+## powerlevel10k 
 
-> Powerlevel9k is a theme for ZSH which uses Powerline Fonts. It can be used with vanilla ZSH or ZSH frameworks such as Oh-My-Zsh, Prezto, Antigen, and many others.
-> -- <cite>[powerlevel9k website](https://github.com/Powerlevel9k/powerlevel9k)</cite>
+Note: I used to use [powerlevel9k](https://github.com/Powerlevel9k/powerlevel9k), but when installing my Mac in May 2025, 9k was outdated and pointed to [powerlevel10k](https://github.com/romkatv/powerlevel10k).
 
-[Installing powerlevel9k](https://github.com/Powerlevel9k/powerlevel9k/wiki/Install-Instructions#macos-with-homebrew) is straightforward on a Mac with git:
-
-```shell
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-```
-
-This clones the entire powerlevel9k repo into the right subdirectory under `.oh-my-zsh`.
-
-**Note** You can also install powerlevel9k with homebrew, but I don't know where it ends up. To be investigated... 😀
+Install powerlevel10k following their [installation guide for zsh](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#oh-my-zsh).
