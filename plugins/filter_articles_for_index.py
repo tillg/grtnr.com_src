@@ -9,6 +9,7 @@ def filter_articles_for_index(generator):
     # print(
     #     f"filter_articles_for_index: Categories in index: {categories_in_index}")
 
+    # If no categories specified, keep all articles (don't filter)
     if not categories_in_index:
         return
 

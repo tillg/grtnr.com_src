@@ -14,7 +14,8 @@ DESCRIPTION = 'Stuff that keeps me busy, like family, coding, math, mountains an
 THEME = 'pelicanyan'
 
 PATH = "content"
-ARTICLE_PATHS = ['.']
+ARTICLE_PATHS = ['articles']
+PAGE_PATHS = ['pages']
 STATIC_PATHS = ['static']
 ARTICLE_EXCLUDES = []
 
@@ -29,6 +30,9 @@ EXTRA_PATH_METADATA = {
 
 ARTICLE_SAVE_AS = '{slug}/index.html'
 ARTICLE_URL = '{slug}/'
+
+PAGE_SAVE_AS = '{slug}/index.html'
+PAGE_URL = '{slug}/'
 
 # Create the slug based on the title if not given in the article.
 SLUGIFY_SOURCE = 'title'
@@ -57,7 +61,7 @@ PLUGINS = ['auto_title', 'copy_adjacent_images',
 USE_FOLDER_AS_CATEGORY = False  # Don't categorize by folder name
 CATEGORY_URL = 'category/{slug}/'
 CATEGORY_SAVE_AS = 'category/{slug}/index.html'
-CATEGORIES_IN_INDEX = ['articles']
+CATEGORIES_IN_INDEX = []
 
 DEBUG = True
 DELETE_OUTPUT_DIRECTORY = True

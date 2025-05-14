@@ -4,30 +4,41 @@ import re
 from pelican import signals
 
 
-def copy_adjacent_images(generator):
+def copy_images_for_articles(generator):
+    """Handle only articles in this handler"""
     # Process regular articles
-    process_articles(generator, generator.articles)
+    process_content_items(generator, generator.articles)
 
     # Process hidden articles
     if hasattr(generator, 'hidden_articles'):
-        process_articles(generator, generator.hidden_articles)
-
+        process_content_items(generator, generator.hidden_articles)
+        
     # Process recipes if available
     if hasattr(generator, 'recipes'):
-        process_articles(generator, generator.recipes)
+        process_content_items(generator, generator.recipes)
 
 
-def process_articles(generator, article_list):
-    for article in article_list:
-        source_path = article.source_path
-        slug = article.slug
-        # print(f"copy_adjacent_images: Copying images of article: {slug}")
+def copy_images_for_pages(generator):
+    """Handle only pages in this handler"""
+    # Process pages
+    if hasattr(generator, 'pages'):
+        process_content_items(generator, generator.pages)
+
+    # Process hidden pages
+    if hasattr(generator, 'hidden_pages'):
+        process_content_items(generator, generator.hidden_pages)
+
+
+def process_content_items(generator, item_list):
+    for item in item_list:
+        source_path = item.source_path
+        slug = item.slug
         output_path = os.path.join(generator.output_path, slug)
 
         # Ensure the target output directory exists
         os.makedirs(output_path, exist_ok=True)
 
-        # Copy all image files from the article's source directory to the output directory
+        # Copy all image files from the source directory to the output directory
         source_dir = os.path.dirname(source_path)
         copied_images = []
         for fname in os.listdir(source_dir):
@@ -37,30 +48,31 @@ def process_articles(generator, article_list):
                 shutil.copy2(src, dst)
                 copied_images.append(fname)
 
-        # Fix image URLs in the content if the article is hidden
-        if hasattr(generator, 'hidden_articles') and article in generator.hidden_articles:
-            fix_image_urls(article, slug, copied_images)
+        # Fix image URLs for all content items (not just hidden ones)
+        fix_image_urls(item, slug, copied_images)
 
 
-def fix_image_urls(article, slug, image_names):
+def fix_image_urls(item, slug, image_names):
     # Find image references and fix them
     for img_name in image_names:
         # Look for HTML img tags with relative paths
-        article._content = re.sub(
+        item._content = re.sub(
             r'<img([^>]*) src=["\'](?!https?://|/)([^"\']*' +
             re.escape(img_name) + ')["\']',
             r'<img\1 src="/' + slug + r'/\2"',
-            article._content
+            item._content
         )
 
         # Look for Markdown image syntax
-        article._content = re.sub(
+        item._content = re.sub(
             r'!\[(.*?)\]\((?!https?://|/)([^)]*' +
             re.escape(img_name) + r')\)',
             r'![\1](/' + slug + r'/\2)',
-            article._content
+            item._content
         )
 
 
 def register():
-    signals.article_generator_finalized.connect(copy_adjacent_images)
+    # Connect different handlers for articles and pages
+    signals.article_generator_finalized.connect(copy_images_for_articles)
+    signals.page_generator_finalized.connect(copy_images_for_pages)
