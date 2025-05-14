@@ -21,17 +21,23 @@
     <h1 class="post-title">
       {{ article.title }}
     </h1>
-    <span class="post-date">{{ article.locale_date }}</span>
+    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 1rem;">
+      <span class="post-date" style="margin-bottom: 0; margin-top: 0;">{{ article.locale_date }}</span>
+      
+      {% if article.tags %}
+      {% import 'tag_pills.html' as tag_pills %}
+      {{ tag_pills.render_tag_pills(article.tags) }}
+      {% endif %}
+    </div>
 
     {{ article.content }}
-      <div id="giscus">
-        <script src="https://giscus.app/client.js" data-repo="tillg/grtnr.com_2024" data-repo-id="R_kgDONYRp_Q"
-          data-category="Q&A" data-category-id="DIC_kwDONYRp_c4Cm0cH" data-mapping="pathname" data-strict="0"
-          data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme"
-          data-lang="en" crossorigin="anonymous" async>
+    <div id="giscus">
+      <script src="https://giscus.app/client.js" data-repo="tillg/grtnr.com_2024" data-repo-id="R_kgDONYRp_Q"
+        data-category="Q&A" data-category-id="DIC_kwDONYRp_c4Cm0cH" data-mapping="pathname" data-strict="0"
+        data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme"
+        data-lang="en" crossorigin="anonymous" async>
       </script>
-  </div>
-
-  </div>
+    </div>
+</div>
 </div>
 {% endblock %}

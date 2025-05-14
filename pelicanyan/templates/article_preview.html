@@ -5,15 +5,17 @@
         style="color: black !important; display: block; text-decoration-color: black !important;">
         <h1 class="post-title" style="color: black !important;">{{ article.title }}</h1>
     </a>
-    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"
-        style="color: black !important; display: block; text-decoration-color: black !important;">
-        <span class="post-date">{{ article.locale_date }}</span>
-    </a>
+        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+            <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"
+                style="color: black !important; text-decoration-color: black !important; margin-right: 5px;">
+                <span class="post-date" style="margin-bottom: 0; margin-top: 0;">{{ article.locale_date }}</span>
+            </a>
 
-    <!-- Render tags as pills if the article has tags -->
-    {% if article.tags %}
-    {{ tag_pills.render_tag_pills(article.tags) }}
-    {% endif %}
+            <!-- Render tags as pills if the article has tags -->
+            {% if article.tags %}
+            {{ tag_pills.render_tag_pills(article.tags) }}
+            {% endif %}
+        </div>    
     {% if article.image %}
     <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}"
         style="color: black !important; display: block; text-decoration-color: black !important;">

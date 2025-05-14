@@ -1,9 +1,11 @@
 /* Tag Pills Styling */
+/* Tag Pills Styling */
 .tag-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 10px 0;
+  margin: 0;
+  align-items: center; /* Center vertically */
 }
 
 .tag-pill {
@@ -20,6 +22,7 @@
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
   font-weight: 400;
   letter-spacing: -.025rem;
+  margin-bottom: 0; /* Remove bottom margin to align with date */
 }
 
 .tag-pill:hover {
