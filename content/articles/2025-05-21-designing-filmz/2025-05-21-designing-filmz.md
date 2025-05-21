@@ -1,8 +1,8 @@
-—-
+——-
 Tags: tech
 Title: Designing Filmz 
 Date: 2025-05-21
-——
+——-
 
 Some time ago I built a little iOS App called Filmz: keep track of films and shows you want to see or you have seen. Keep personal additional information like “how did I like it?” (I.e. my personal rating), “For what audience would I recommend it?” (Adults, kids, family) “When and where did I see it” etc. And then comes sharing: passing on film recommendations to friends, either one film at a time or lists. 
 
