@@ -18,7 +18,7 @@ PATH = "content"
 ARTICLE_PATHS = ['articles']
 PAGE_PATHS = ['pages']
 STATIC_PATHS = ['static']
-ARTICLE_EXCLUDES = []
+ARTICLE_EXCLUDES = ['recipes']
 
 # Add static files mapping
 EXTRA_PATH_METADATA = {
@@ -57,7 +57,7 @@ DATE_FORMATS = {
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
-    'auto_title', 'normalize_slugs', 'recipes', 'set_proper_category', 
+    'auto_title', 'recipes', 'set_proper_category', 
     'filter_articles_for_index', 'copy_adjacent_images', 'excerpt_to_summary', 
     'external_links'
 ]

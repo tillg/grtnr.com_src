@@ -124,6 +124,12 @@ def livereload(c):
         static_file_glob = f"{theme_path}/static/**/*{extension}"
         watched_globs.append(static_file_glob)
 
+    # Watch plugin files for changes
+    plugin_file_extensions = [".py"]
+    for extension in plugin_file_extensions:
+        plugin_glob = f"plugins/**/*{extension}"
+        watched_globs.append(plugin_glob)
+
     for glob in watched_globs:
         server.watch(glob, cached_build)
 

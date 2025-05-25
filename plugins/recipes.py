@@ -28,10 +28,15 @@ def normalize_slug(text):
     text = unicodedata.normalize('NFKD', text)
     text = text.encode('ascii', 'ignore').decode('ascii')
     
-    # Convert to lowercase and replace spaces/special chars with hyphens
-    text = re.sub(r'[^a-zA-Z0-9\-_]', '-', text.lower())
-    text = re.sub(r'-+', '-', text)  # Remove multiple consecutive hyphens
-    text = text.strip('-')  # Remove leading/trailing hyphens
+    # Convert to lowercase and remove spaces/special chars (no hyphens for simple cases)
+    text = text.lower()
+    # Remove spaces entirely for compound words (linzer torte → linzertorte)
+    text = text.replace(' ', '')
+    # Remove other special characters except existing hyphens and underscores
+    text = re.sub(r'[^a-zA-Z0-9\-_]', '', text)
+    # Clean up multiple consecutive hyphens and leading/trailing hyphens
+    text = re.sub(r'-+', '-', text)
+    text = text.strip('-')
     
     return text
 
@@ -112,6 +117,9 @@ def add_recipes_to_context(generator):
                 # Get slug from metadata or derive from filename, then normalize
                 raw_slug = metadata.get('slug', os.path.splitext(filename)[0])
                 slug = normalize_slug(raw_slug)
+                
+                # Update metadata with normalized slug so all URL generation is consistent
+                metadata['slug'] = slug
 
                 # Format URL and save_as
                 url = recipe_url_pattern.format(slug=slug)
