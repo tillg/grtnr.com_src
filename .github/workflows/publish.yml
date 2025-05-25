@@ -32,7 +32,7 @@ jobs:
           fi
 
       - name: Build site
-        run: pelican content -o output -s pelicanconf.py
+        run: inv preview
         
       - name: Upload site as artifact
         uses: actions/upload-artifact@v4

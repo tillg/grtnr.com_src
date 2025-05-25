@@ -2,12 +2,7 @@
 
 This is the source of the Website [grtnr.com](https://grtnr.com) and it's test site [test.grtnr.com](https://test.grtnr.com).
 
-- [grtnr.com\_src](#grtnrcom_src)
-  - [Get things up \& running](#get-things-up--running)
-  - [Creating \& publishing content](#creating--publishing-content)
-  - [Code Quality](#code-quality)
-  - [Problems / Solutions](#problems--solutions)
-    - [Git topics](#git-topics)
+[TOC]
 
 ## Get things up & running
 
@@ -34,7 +29,6 @@ This project uses invoke for task automation. Here are the available commands:
 - `inv regenerate` - Automatically regenerate site upon file modification
 - `inv livereload` - Build with live reloading (recommended for development)
 - `inv preview` - Build production version of site
-- `inv publish` - Publish to production via rsync
 
 ## Code Quality
 
