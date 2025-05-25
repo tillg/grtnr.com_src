@@ -1,14 +1,13 @@
 # plugins/recipes/__init__.py
 from pelican import signals
-import os
 import datetime
-from pelican.utils import slugify
 
 
 class RecipeAdapter:
     """Adapter class for recipes to store in the context."""
 
-    def __init__(self, title, content, metadata, slug, url, save_as, source_path):
+    def __init__(self, title, content, metadata, slug, url, save_as,
+                 source_path):
         self.title = title
         self.content = content
         self._metadata = metadata
@@ -31,8 +30,8 @@ class RecipeAdapter:
 
 
 def add_recipes_to_context(generator):
-    from pelican.readers import MarkdownReader
     import os
+    from pelican.readers import MarkdownReader
 
     recipe_dir = generator.settings.get('RECIPE_DIR', 'recipes')
     recipe_url_pattern = generator.settings.get(

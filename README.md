@@ -5,6 +5,7 @@ This is the source of the Website [grtnr.com](https://grtnr.com) and it's test s
 - [grtnr.com\_src](#grtnrcom_src)
   - [Get things up \& running](#get-things-up--running)
   - [Creating \& publishing content](#creating--publishing-content)
+  - [Code Quality](#code-quality)
   - [Problems / Solutions](#problems--solutions)
     - [Git topics](#git-topics)
 
@@ -16,10 +17,52 @@ In order to get things running
 - Create a local python environment: `python -m venv .venv` anc activate it: `source .venv/bin/activate`
 - Upgrade your pip: `pip install --upgrade pip`
 - Install the required packages: `pip install -r .devcontainer/requirements.txt`
-- Build it: `pelican`
-- In the dev process, you probably want to run it, keep it watching file changes and serve the website: `pelican -r -l`
+- Build it: `inv build`
+- In the dev process, you probably want to run it with live reloading: `inv livereload`
 
-To work in a Github Codespace, start a Codespace and build it with `pelican`.
+To work in a Github Codespace, start a Codespace and build it with `inv build`.
+
+### Available invoke tasks
+
+This project uses invoke for task automation. Here are the available commands:
+
+- `inv build` - Build local version of site
+- `inv rebuild` - Build with the delete switch (clean rebuild)
+- `inv clean` - Remove generated files
+- `inv serve` - Serve site at http://localhost:8000/
+- `inv reserve` - Build then serve the site
+- `inv regenerate` - Automatically regenerate site upon file modification
+- `inv livereload` - Build with live reloading (recommended for development)
+- `inv preview` - Build production version of site
+- `inv publish` - Publish to production via rsync
+
+## Code Quality
+
+This project uses flake8 for Python code linting to ensure code quality and consistency.
+
+### Running the linter
+
+To check your code for style issues:
+
+```bash
+# Install flake8 (if not already installed via requirements.txt)
+pip install flake8
+
+# Run linting on all Python files
+flake8 tasks.py pelicanconf.py plugins/ --max-line-length=88 --ignore=W504
+
+# Run linting on specific files
+flake8 path/to/your/file.py
+```
+
+### Linting configuration
+
+The project uses these linting settings:
+- Maximum line length: 88 characters
+- Ignored warnings: W504 (line break after binary operator)
+- Star imports are allowed in configuration files like `publishconf.py`
+
+Make sure to run the linter and fix any issues before committing your changes.
 
 ## Creating & publishing content
 
@@ -92,4 +135,3 @@ git commit -m "Your descriptive commit message"
 # Push the new branch to GitHub to trigger deployment to test.grtnr.com
 git push origin your-new-branch-name
 ```
-

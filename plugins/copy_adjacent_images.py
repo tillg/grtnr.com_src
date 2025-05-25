@@ -12,7 +12,7 @@ def copy_images_for_articles(generator):
     # Process hidden articles
     if hasattr(generator, 'hidden_articles'):
         process_content_items(generator, generator.hidden_articles)
-        
+
     # Process recipes if available
     if hasattr(generator, 'recipes'):
         process_content_items(generator, generator.recipes)
@@ -38,11 +38,14 @@ def process_content_items(generator, item_list):
         # Ensure the target output directory exists
         os.makedirs(output_path, exist_ok=True)
 
-        # Copy all image files from the source directory to the output directory
+        # Copy all image files from the source directory to the
+        # output directory
         source_dir = os.path.dirname(source_path)
         copied_images = []
         for fname in os.listdir(source_dir):
-            if fname.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.svg')):
+            if fname.lower().endswith(
+                    ('.jpg', '.jpeg', '.png', '.gif', '.svg')
+            ):
                 src = os.path.join(source_dir, fname)
                 dst = os.path.join(output_path, fname)
                 shutil.copy2(src, dst)

@@ -4,9 +4,10 @@ import os
 
 
 def set_proper_category(generator):
-    """ Set the category of articles based on their directory structure.
-        We can't use the Pelican standard way switched on by USE_FOLDER_AS_CATEGORY
-        because of our nested directory structure.
+    """Set the category of articles based on their directory structure.
+
+    We can't use the Pelican standard way switched on by
+    USE_FOLDER_AS_CATEGORY because of our nested directory structure.
     """
 
     for article in generator.articles:

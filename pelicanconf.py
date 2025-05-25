@@ -2,7 +2,7 @@ import datetime
 import pytz
 import os
 
-## Our sitename might vary depending on the environment
+# Our sitename might vary depending on the environment
 SITENAME = 'grtnr.com'
 # Override SITENAME from environment variable if available
 if 'PELICAN_SITENAME' in os.environ:
@@ -10,7 +10,8 @@ if 'PELICAN_SITENAME' in os.environ:
 
 AUTHOR = 'Till Gartner'
 SITEURL = ""
-DESCRIPTION = 'Stuff that keeps me busy, like family, coding, math, mountains and more.'
+DESCRIPTION = ('Stuff that keeps me busy, like family, coding, math, '
+               'mountains and more.')
 THEME = 'pelicanyan'
 
 PATH = "content"
@@ -23,7 +24,9 @@ ARTICLE_EXCLUDES = []
 EXTRA_PATH_METADATA = {
     'static/favicon.ico': {'save_as': 'favicon.ico'},
     'static/apple-touch-icon.png': {'save_as': 'apple-touch-icon.png'},
-    'static/apple-touch-icon-precomposed.png': {'save_as': 'apple-touch-icon-precomposed.png'},
+    'static/apple-touch-icon-precomposed.png': {
+        'save_as': 'apple-touch-icon-precomposed.png'
+    },
     'static/robots.txt': {'save_as': 'robots.txt'},
     'static/humans.txt': {'save_as': 'humans.txt'}
 }
@@ -53,9 +56,11 @@ DATE_FORMATS = {
 
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
-PLUGINS = ['auto_title', 'copy_adjacent_images',
-           'excerpt_to_summary', 'external_links', 'recipes', 'set_proper_category', 'filter_articles_for_index',
-           ]
+PLUGINS = [
+    'auto_title', 'copy_adjacent_images', 'excerpt_to_summary',
+    'external_links', 'recipes', 'set_proper_category',
+    'filter_articles_for_index'
+]
 
 # Categories
 USE_FOLDER_AS_CATEGORY = False  # Don't categorize by folder name

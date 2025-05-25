@@ -6,6 +6,8 @@ excerpt: I added comments to my static website. Here's how I did it.
 
 **TL;DR:** I added comments to my static website. Here's how I did it - including some technical details. I researched amongst different possible solutions for the most solid one, integrated it for all posts and added a counter of the number of comments in the post overview page.
 
+**2025-05-23 Update** Since I moved from Jekyll to [Pelican](https://getpelican.com), I updated some details.
+
 ## Selecting a solution
 
 As i planned to play around with the new [Deep Research Model from OpenAI](https://openai.com/index/introducing-deep-research/) I gave it a spin with this topic: [feel free to read here](https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776). Overall the research was helpful and I ended up using [Giscus](https://giscus.app/) for the comments. Partly because it felt the most robust and reliable, partly because I had really bad expoerience with disqus some years ago.
@@ -34,12 +36,24 @@ In the follow up to it's research I asked the model to give me a step by step gu
 
 Here is the executive summary (the details are in the [chat I had with the AI](https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776)):
 
-- Step 1: Enable GitHub Discussions for Your Repository. 
+- Step 1: Enable GitHub Discussions for Your Repository. That means the repo into which the static site is generated (which sometimes is not the same as the source).
+  - Go to your GitHub repository
+  - Navigate to Settings > General.
+  - Scroll down to the Discussions section and enable it.
 - Step in between, that the AI missed to mention: Install giscus for all or some of your repos. [Here](https://github.com/apps/giscus/installations/select_target)
+![alt text](image.png)
 - Step 2: Install Giscus and Configure It
-- Step 3: Add Giscus to Your Jekyll Post Template. Worked like a charme, even though you will have to replace my Repo name and ID with your's...
-- Step 4: Style Giscus to Match Lanyon Theme. I skipped this one, as the styling looked pretty good _naked_ to me.
-- Step 5: Display Comment Count in Post Summaries
+  - Visit the Giscus setup page: https://giscus.app/.
+  - Under "Repository", enter your repo name. You now should see the green check mark that your repo meets all the criteria for using giscus.
+  - The “Page discussion mapping” option dictates a relationship between your pages, e.g an article, and a GitHub discussion. I selected, the pathname
+  - For the discussions category I selected “general”.
+  Set the Theme to "Match OS" or manually define light and dark mode.
+  Click "Copy Code" once you’ve generated the <script> tag.
+
+![Giscus Features](giscus-features.png)
+
+- Step 3: Add Giscus to Your Jekyll Post Template (or Pelican 😀). - - Step 4: Style Giscus to Match Lanyon Theme. I skipped this one, as the styling looked pretty good _naked_ to me.
+- Step 5: Display Comment Count in Post Summaries (see below)
 - Step 6: Commit and Push Changes - Duh...
 - Step 7: Test Your Setup
 
