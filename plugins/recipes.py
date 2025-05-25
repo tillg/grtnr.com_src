@@ -1,6 +1,39 @@
 # plugins/recipes/__init__.py
 from pelican import signals
 import datetime
+import unicodedata
+import re
+
+
+def normalize_slug(text):
+    """
+    Normalize text for use in URLs and file paths.
+    This function provides centralized character transliteration 
+    for consistent URL/path generation across the entire site.
+    """
+    if not text:
+        return text
+    
+    # Common German character mappings
+    char_map = {
+        'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'ß': 'ss',
+        'Ä': 'Ae', 'Ö': 'Oe', 'Ü': 'Ue'
+    }
+    
+    # Apply character mappings
+    for char, replacement in char_map.items():
+        text = text.replace(char, replacement)
+    
+    # Remove or replace other non-ASCII characters
+    text = unicodedata.normalize('NFKD', text)
+    text = text.encode('ascii', 'ignore').decode('ascii')
+    
+    # Convert to lowercase and replace spaces/special chars with hyphens
+    text = re.sub(r'[^a-zA-Z0-9\-_]', '-', text.lower())
+    text = re.sub(r'-+', '-', text)  # Remove multiple consecutive hyphens
+    text = text.strip('-')  # Remove leading/trailing hyphens
+    
+    return text
 
 
 class RecipeAdapter:
@@ -76,7 +109,9 @@ def add_recipes_to_context(generator):
                     metadata['date'] = datetime.datetime.fromtimestamp(
                         file_stat.st_mtime)
 
-                slug = metadata.get('slug', os.path.splitext(filename)[0])
+                # Get slug from metadata or derive from filename, then normalize
+                raw_slug = metadata.get('slug', os.path.splitext(filename)[0])
+                slug = normalize_slug(raw_slug)
 
                 # Format URL and save_as
                 url = recipe_url_pattern.format(slug=slug)

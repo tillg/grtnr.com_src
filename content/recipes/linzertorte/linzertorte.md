@@ -9,6 +9,8 @@ image: linzertorte.jpg
 excerpt: Tills Lieblingstorte 😉
 ---
 
+![](./linzertorte.jpg)
+
 ## Zutaten
 
 - 250g Butter

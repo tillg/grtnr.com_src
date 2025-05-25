@@ -26,3 +26,4 @@ watchfiles==1.0.5
 flake8==7.2.0
 python-dotenv==1.1.0
 invoke==2.2.0
+livereload==2.7.0

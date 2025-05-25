@@ -57,8 +57,9 @@ DATE_FORMATS = {
 # Add the plugins directory to the path
 PLUGIN_PATHS = ['plugins']
 PLUGINS = [
-    'auto_title', 'recipes', 'set_proper_category', 'filter_articles_for_index',
-    'copy_adjacent_images', 'excerpt_to_summary', 'external_links'
+    'auto_title', 'normalize_slugs', 'recipes', 'set_proper_category', 
+    'filter_articles_for_index', 'copy_adjacent_images', 'excerpt_to_summary', 
+    'external_links'
 ]
 
 # Categories

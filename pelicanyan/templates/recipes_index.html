@@ -3,30 +3,13 @@
 {% block title %}Recipes{% endblock %}
 
 {% block content %}
-<section class="recipes-list">
+<div class="content-title">
   <h1>Recipes</h1>
-  
+</div>
+
+<div class="posts">
   {% for recipe in recipes %}
-  <article class="recipe-card">
-    <a href="{{ SITEURL }}/{{ recipe.url }}">
-      {% if recipe.image %}
-      <img src="{{ SITEURL }}/{{ recipe.url }}{{ recipe.image }}" alt="{{ recipe.title }}">
-      {% endif %}
-      <h2>{{ recipe.title }}</h2>
-    </a>
-    
-    {% if recipe.description %}
-    <p>{{ recipe.description|truncate(100) }}</p>
-    {% endif %}
-    
-    {% if recipe.tags %}
-    <div class="tags">
-      {% for tag in recipe.tags %}
-      <span class="tag"><a href="{{ SITEURL }}/tag/{{ tag.slug }}/">{{ tag }}</a></span>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </article>
+    {% include 'recipe_preview.html' %}
   {% endfor %}
-</section>
+</div>
 {% endblock %}
