@@ -30,6 +30,14 @@ class RecipeAdapter:
 
 
 def add_recipes_to_context(generator):
+    # Only process recipes for ArticleGenerator to avoid duplicate processing
+    if not hasattr(generator, 'articles'):
+        return
+        
+    # Skip if recipes already added to avoid duplicates
+    if 'recipes' in generator.context:
+        return
+        
     import os
     from pelican.readers import MarkdownReader
 
