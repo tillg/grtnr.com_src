@@ -90,7 +90,8 @@ def reserve(c):
 @task
 def preview(c):
     """Build production version of site"""
-    pelican_run("-s {settings_publish}".format(**CONFIG))
+    # Use pelicanconf.py directly instead of publishconf.py to avoid import issues
+    pelican_run("-s " + CONFIG["settings_base"])
 
 
 @task
@@ -141,5 +142,7 @@ def livereload(c):
 
 def pelican_run(cmd):
     # allows to pass-through args to pelican
-    cmd += " " + program.core.remainder
+    remainder = getattr(program.core, 'remainder', None) or ''
+    if remainder:
+        cmd += " " + remainder
     pelican_main(shlex.split(cmd))
