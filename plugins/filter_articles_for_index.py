@@ -5,9 +5,7 @@ from pelican import signals
 def filter_articles_for_index(generator):
     """Filter articles for the index page before pagination."""
     # Get the categories to include from settings
-    categories_in_index = generator.settings.get(
-        'CATEGORIES_IN_INDEX', []
-    )
+    categories_in_index = generator.settings.get("CATEGORIES_IN_INDEX", [])
     # print(
     #     f"filter_articles_for_index: Categories in index:
     #     {categories_in_index}")
@@ -18,7 +16,8 @@ def filter_articles_for_index(generator):
 
     # Filter the articles
     filtered_articles = [
-        article for article in generator.articles
+        article
+        for article in generator.articles
         if article.category and article.category.name in categories_in_index
     ]
 

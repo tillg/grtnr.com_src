@@ -95,15 +95,36 @@ def preview(c):
 
 
 @task
+def format_py(c):
+    """Format Python code with Black and organize imports with isort"""
+    print("Running Black formatter...")
+    c.run(".venv/bin/black .")
+    print("Running isort to organize imports...")
+    c.run(".venv/bin/isort .")
+    print("Python formatting complete!")
+
+
+@task
+def lint_py(c):
+    """Run flake8 linting on Python files"""
+    print("Running flake8 linter...")
+    c.run(".venv/bin/flake8")
+
+
+@task
+def check_py(c):
+    """Format and lint Python files"""
+    format_py(c)
+    lint_py(c)
+
+
+@task
 def livereload(c):
     """Automatically reload browser tab upon file modification."""
     from livereload import Server
 
     def cached_build():
-        cmd = (
-            "-s {settings_base} -e CACHE_CONTENT=true "
-            "LOAD_CONTENT_CACHE=true"
-        )
+        cmd = "-s {settings_base} -e CACHE_CONTENT=true " "LOAD_CONTENT_CACHE=true"
         pelican_run(cmd.format(**CONFIG))
 
     cached_build()
@@ -139,16 +160,12 @@ def livereload(c):
 
         webbrowser.open("http://{host}:{port}".format(**CONFIG))
 
-    server.serve(
-        host=CONFIG["host"],
-        port=CONFIG["port"],
-        root=CONFIG["deploy_path"]
-    )
+    server.serve(host=CONFIG["host"], port=CONFIG["port"], root=CONFIG["deploy_path"])
 
 
 def pelican_run(cmd):
     # allows to pass-through args to pelican
-    remainder = getattr(program.core, 'remainder', None) or ''
+    remainder = getattr(program.core, "remainder", None) or ""
     if remainder:
         cmd += " " + remainder
     pelican_main(shlex.split(cmd))

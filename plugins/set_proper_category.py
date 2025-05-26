@@ -1,6 +1,7 @@
 # plugins/fix_categories.py
-from pelican import signals
 import os
+
+from pelican import signals
 
 
 def set_proper_category(generator):

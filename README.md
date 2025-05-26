@@ -32,31 +32,12 @@ This project uses invoke for task automation. Here are the available commands:
 
 ## Code Quality
 
-This project uses flake8 for Python code linting to ensure code quality and consistency.
+This project uses automated Python code formatting and linting. For detailed guidelines, tool configurations, and development workflows, see [CODE_GUIDELINES.md](CODE_GUIDELINES.md).
 
-### Running the linter
-
-To check your code for style issues:
-
-```bash
-# Install flake8 (if not already installed via requirements.txt)
-pip install flake8
-
-# Run linting on all Python files
-flake8 tasks.py pelicanconf.py plugins/ --max-line-length=88 --ignore=W504
-
-# Run linting on specific files
-flake8 path/to/your/file.py
-```
-
-### Linting configuration
-
-The project uses these linting settings:
-- Maximum line length: 88 characters
-- Ignored warnings: W504 (line break after binary operator)
-- Star imports are allowed in configuration files like `publishconf.py`
-
-Make sure to run the linter and fix any issues before committing your changes.
+**Quick commands:**
+- `inv format-py` - Format Python code
+- `inv lint-py` - Run linting
+- `inv check-py` - Format and lint (recommended before commits)
 
 ## Creating & publishing content
 

@@ -1,6 +1,7 @@
 import os
-import shutil
 import re
+import shutil
+
 from pelican import signals
 
 
@@ -10,22 +11,22 @@ def copy_images_for_articles(generator):
     process_content_items(generator, generator.articles)
 
     # Process hidden articles
-    if hasattr(generator, 'hidden_articles'):
+    if hasattr(generator, "hidden_articles"):
         process_content_items(generator, generator.hidden_articles)
 
     # Process recipes if available
-    if hasattr(generator, 'recipes'):
+    if hasattr(generator, "recipes"):
         process_content_items(generator, generator.recipes)
 
 
 def copy_images_for_pages(generator):
     """Handle only pages in this handler"""
     # Process pages
-    if hasattr(generator, 'pages'):
+    if hasattr(generator, "pages"):
         process_content_items(generator, generator.pages)
 
     # Process hidden pages
-    if hasattr(generator, 'hidden_pages'):
+    if hasattr(generator, "hidden_pages"):
         process_content_items(generator, generator.hidden_pages)
 
 
@@ -43,9 +44,7 @@ def process_content_items(generator, item_list):
         source_dir = os.path.dirname(source_path)
         copied_images = []
         for fname in os.listdir(source_dir):
-            if fname.lower().endswith(
-                    ('.jpg', '.jpeg', '.png', '.gif', '.svg')
-            ):
+            if fname.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".svg")):
                 src = os.path.join(source_dir, fname)
                 dst = os.path.join(output_path, fname)
                 shutil.copy2(src, dst)
@@ -60,18 +59,18 @@ def fix_image_urls(item, slug, image_names):
     for img_name in image_names:
         # Look for HTML img tags with relative paths
         item._content = re.sub(
-            r'<img([^>]*) src=["\'](?!https?://|/)([^"\']*' +
-            re.escape(img_name) + ')["\']',
+            r'<img([^>]*) src=["\'](?!https?://|/)([^"\']*'
+            + re.escape(img_name)
+            + ")[\"']",
             r'<img\1 src="/' + slug + r'/\2"',
-            item._content
+            item._content,
         )
 
         # Look for Markdown image syntax
         item._content = re.sub(
-            r'!\[(.*?)\]\((?!https?://|/)([^)]*' +
-            re.escape(img_name) + r')\)',
-            r'![\1](/' + slug + r'/\2)',
-            item._content
+            r"!\[(.*?)\]\((?!https?://|/)([^)]*" + re.escape(img_name) + r")\)",
+            r"![\1](/" + slug + r"/\2)",
+            item._content,
         )
 
 
