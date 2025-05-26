@@ -70,6 +70,7 @@ CATEGORIES_IN_INDEX = []
 
 DEBUG = True
 DELETE_OUTPUT_DIRECTORY = True
+CACHE_CONTENT = False
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -148,6 +149,13 @@ BUILD_TIME = local_now.strftime("%d.%m.%Y %H:%M:%S")
 
 # Markdown config so TOC works
 MARKDOWN = {
+    'extensions': [
+        'markdown.extensions.toc',
+        'markdown.extensions.codehilite', 
+        'markdown.extensions.extra',
+        'markdown.extensions.meta',
+        'plugins.markdown_wikilinks'
+    ],
     'extension_configs': {
         'markdown.extensions.toc': {
             'permalink': False,
@@ -159,6 +167,7 @@ MARKDOWN = {
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
         'markdown.extensions.extra': {},
         'markdown.extensions.meta': {},
+        'plugins.markdown_wikilinks': {},
     },
     'output_format': 'html5',
 }
