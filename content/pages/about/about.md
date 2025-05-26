@@ -6,7 +6,7 @@ status: published
 ---
 
 
-This is the website of Till Gartner. I'm a simple guy with simple hobbies, like
+This is the [[digital garden]] of Till Gartner. I'm a simple guy with simple hobbies, like
 
 - My **family** and **kids**
 - My business (I'm a manager in a really cool software company called [**mgm technology partners**](https://mgm-tp.com))
