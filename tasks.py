@@ -149,6 +149,34 @@ def check_md(c, file=None):
 
 
 @task
+def format_json(c, file=None):
+    """Format JSON files with Prettier"""
+    if file:
+        print(f"Running Prettier formatter on {file}...")
+        c.run(f"npx prettier --write --log-level warn '{file}'")
+    else:
+        print("Running Prettier formatter on all JSON files...")
+        c.run("npx prettier --write --log-level warn '**/*.json'")
+    print("JSON formatting complete!")
+
+
+@task
+def lint_json(c, file=None):
+    """Run jsonlint on JSON files"""
+    if file:
+        c.run(f"npx jsonlint '{file}' -q")
+    else:
+        c.run("find . -name '*.json' -not -path './node_modules/*' -not -path './output/*' -not -path './.venv/*' -not -path './venv/*' -not -path './.devcontainer/*' -exec npx jsonlint {} -q \\;")
+
+
+@task
+def check_json(c, file=None):
+    """Format and lint JSON files"""
+    format_json(c, file=file)
+    lint_json(c, file=file)
+
+
+@task
 def livereload(c):
     """Automatically reload browser tab upon file modification."""
     from livereload import Server

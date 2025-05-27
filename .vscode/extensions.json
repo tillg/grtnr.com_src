@@ -1,10 +1,10 @@
 {
-    "recommendations": [
-        "ms-python.python",
-        "ms-python.black-formatter", 
-        "ms-python.isort",
-        "ms-python.flake8",
-        "esbenp.prettier-vscode",
-        "DavidAnson.vscode-markdownlint"
-    ]
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.black-formatter",
+    "ms-python.isort",
+    "ms-python.flake8",
+    "esbenp.prettier-vscode",
+    "DavidAnson.vscode-markdownlint"
+  ]
 }

@@ -6,7 +6,7 @@ This document outlines the code quality standards, tools, and workflows for the 
 
 ## Overview
 
-This project uses automated formatting and linting to ensure consistent code quality across Python and Markdown files. The approach prioritizes automation over manual fixes, with most issues being auto-corrected by formatting tools.
+This project uses automated formatting and linting to ensure consistent code quality across Python, Markdown, and JSON files. The approach prioritizes automation over manual fixes, with most issues being auto-corrected by formatting tools.
 
 ## Quick Start Commands
 
@@ -39,6 +39,24 @@ inv lint-md
 inv format-md --file="path/to/file.md"
 inv lint-md --file="path/to/file.md"
 inv check-md --file="path/to/file.md"
+```
+
+### JSON
+
+```bash
+# Format and lint JSON files
+inv check-json
+
+# Format only
+inv format-json
+
+# Lint only
+inv lint-json
+
+# Work with single files
+inv format-json --file="path/to/file.json"
+inv lint-json --file="path/to/file.json"
+inv check-json --file="path/to/file.json"
 ```
 
 ### Installation
@@ -223,11 +241,69 @@ npx markdownlint '**/*.md'
 }
 ```
 
+## JSON Code Quality
+
+### Tools Used
+
+- **Prettier**: JSON formatter with 2-space indentation
+- **jsonlint**: JSON syntax validation and linting tool
+
+### Configuration
+
+**Prettier Configuration** (in `.prettierrc.json`):
+
+JSON files use the same Prettier configuration as other files, with specific settings:
+
+```json
+{
+  "printWidth": 88,
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "none",
+  "bracketSpacing": true
+}
+```
+
+**File Exclusions** (in `.prettierignore`):
+
+```text
+node_modules/
+output/
+.venv/
+venv/
+__pycache__/
+*.egg-info/
+```
+
+### Manual Commands
+
+```bash
+# Format with Prettier
+npx prettier --write --log-level warn '**/*.json'
+
+# Lint with jsonlint (quiet mode)
+npx jsonlint filename.json -q
+
+# Bulk lint all JSON files (quiet mode)
+find . -name '*.json' -not -path './node_modules/*' -not -path './output/*' -not -path './.venv/*' -not -path './venv/*' -exec npx jsonlint {} -q \;
+```
+
+### Required Node.js Packages
+
+```json
+{
+  "devDependencies": {
+    "jsonlint": "^1.6.3",
+    "prettier": "^3.5.3"
+  }
+}
+```
+
 ## VS Code Integration
 
 ### Settings Configuration
 
-The workspace includes automatic formatting and linting for both Python and Markdown:
+The workspace includes automatic formatting and linting for Python, Markdown, and JSON files:
 
 **VS Code Settings** (in `.vscode/settings.json`):
 
@@ -256,6 +332,20 @@ The workspace includes automatic formatting and linting for both Python and Mark
   },
   "markdownlint.config": {
     "extends": ".markdownlint.json"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
   }
 }
 ```
@@ -279,10 +369,11 @@ The workspace includes automatic formatting and linting for both Python and Mark
 
 ### Features
 
-- **Auto-format on save**: Enabled for both Python and Markdown files
+- **Auto-format on save**: Enabled for Python, Markdown, and JSON files
 - **Import organization**: Automatic import sorting on save for Python
-- **Linting integration**: Real-time error display for both languages
-- **Word wrap**: Set to 88 characters for consistency
+- **Linting integration**: Real-time error display for all languages
+- **Word wrap**: Set to 88 characters for consistency (Markdown only)
+- **JSON formatting**: 2-space indentation with consistent formatting
 - **Extension recommendations**: Automatically suggests required extensions
 
 ## Installation Guide
@@ -304,7 +395,7 @@ pip install black==24.10.0 isort==5.13.2 flake8==7.2.0
 npm install
 
 # Or install individually
-npm install --save-dev markdownlint-cli prettier
+npm install --save-dev markdownlint-cli prettier jsonlint
 ```
 
 ## Troubleshooting
@@ -351,15 +442,39 @@ markdownlint is configured to allow long lines in code blocks, tables, and headi
 2. Long URLs and code blocks are exempt from line length rules
 3. Consider using reference-style links for long URLs
 
+### JSON Issues
+
+**"Prettier not formatting JSON files"**
+
+1. Ensure the Prettier VS Code extension is installed
+2. Check that Prettier is set as the default formatter for JSON files
+3. Verify `.prettierrc.json` configuration exists
+4. Try running `npx prettier --write filename.json` manually
+
+**"jsonlint not catching errors"**
+
+1. Check that jsonlint is installed: `npm list jsonlint`
+2. Try running `npx jsonlint filename.json` manually
+3. Ensure the JSON file doesn't have comments (use JSONC for commented JSON)
+4. Check file path excludes in the find command
+
+**"JSON formatting inconsistent"**
+
+1. Ensure all JSON files use 2-space indentation
+2. Check that VS Code is using Prettier as the default formatter
+3. Verify no conflicting JSON formatters are installed
+4. Run `inv format-json` to standardize all files
+
 ### Configuration Conflicts
 
 If you encounter issues with configuration:
 
 1. **Check pyproject.toml** - Primary configuration file for Black and isort
 2. **Check .flake8** - Configuration file for flake8
-3. **Check .prettierrc.json** - Configuration file for Prettier
+3. **Check .prettierrc.json** - Configuration file for Prettier and JSON formatting
 4. **Check .markdownlint.json** - Configuration file for markdownlint
 5. **Check .vscode/settings.json** - VS Code workspace settings
+6. **Check .prettierignore** - File exclusions for Prettier
 
 ### Common Fixes
 

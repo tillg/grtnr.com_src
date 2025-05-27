@@ -1,29 +1,40 @@
 {
-    "files.associations": {
-        "*.html": "jinja-html"
-    },
+  "files.associations": {
+    "*.html": "jinja-html"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "[python]": {
     "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit"
-    },
-    "[python]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "ms-python.black-formatter"
-    },
-    "python.defaultInterpreterPath": "./.venv/bin/python",
-    "flake8.args": [
-        "--max-line-length=88",
-        "--extend-ignore=E203,W503"
-    ],
-    "flake8.interpreter": ["./.venv/bin/python"],
-    "python.analysis.typeCheckingMode": "basic",
-    "[markdown]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.wordWrap": "wordWrapColumn",
-        "editor.wordWrapColumn": 88
-    },
-    "markdownlint.config": {
-        "extends": ".markdownlint.json"
-    }
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.defaultInterpreterPath": "./.venv/bin/python",
+  "flake8.args": ["--max-line-length=88", "--extend-ignore=E203,W503"],
+  "flake8.interpreter": ["./.venv/bin/python"],
+  "python.analysis.typeCheckingMode": "basic",
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 88
+  },
+  "markdownlint.config": {
+    "extends": ".markdownlint.json"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  }
 }
