@@ -146,8 +146,7 @@ RECIPE_PATHS = ["recipes"]  # New setting for recipes
 # Register the recipes path
 DIRECT_TEMPLATES += ("recipes_index",)  # Add recipes index to direct templates
 
-# Make sure recipes directory is included in content generation
-STATIC_PATHS += ["recipes"]
+# Recipes are processed by the recipes plugin, not as static content
 
 GOOGLE_ANALYTICS = "G-H8M7YDCSD4"
 

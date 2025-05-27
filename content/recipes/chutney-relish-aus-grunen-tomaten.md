@@ -8,6 +8,7 @@ tags:
 ---
 
 **Zutaten für 4 Portionen**
+
 - 500 g Tomate(n), grüne, zerkleinert
 - 1 Paprikaschote(n), grüne, zerkleinert
 - 5 kleine Chilischote(n), ganze(!)

@@ -5,7 +5,7 @@ slug: hummus-from-mr-jim
 date_published: 2017-09-06T00:00:00.000Z
 date_updated: 2021-12-06T11:00:28.000Z
 date: 2017-09-06
-tags: 
+tags:
 image: hummus.jpg
 ---
 
@@ -21,9 +21,7 @@ It's rather simple:
 - 1/8 tea spoon of cayenne pepper
 - Water as needed
 
-*BLEND*! And yes, you can eat it right away, no need to wait...
+_BLEND_! And yes, you can eat it right away, no need to wait...
 
 The original writing from the chef:
 ![Hummus recipy](hummus-recipe.png)
-
-

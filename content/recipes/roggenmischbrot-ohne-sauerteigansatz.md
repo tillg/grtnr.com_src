@@ -4,14 +4,14 @@ title: Roggenmischbrot – Ohne Sauerteigansatz
 slug: roggenmischbrot-ohne-sauerteigansatz
 date_published: 2006-02-13T00:00:00.000Z
 date_updated: 2021-12-13T11:23:01.000Z
-tags: 
+tags:
 ---
 
 **Zutaten** für ein rundes Brot
 500g Roggenmehl (Typ 815) žitná mouka
 400g Weizenmehl (Typ 812) pšeničná mouka
-15g	Trockensauerteig Kvas suchý
-1 Beutel Trockenhefe	Kvasnice suchý
+15g Trockensauerteig Kvas suchý
+1 Beutel Trockenhefe Kvasnice suchý
 2 TL Salz sůl
 1 TL Zucker cukr
 Mehl zum Bearbeiten mouka

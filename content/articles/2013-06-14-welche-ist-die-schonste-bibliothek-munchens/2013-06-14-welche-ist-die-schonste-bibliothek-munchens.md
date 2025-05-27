@@ -16,11 +16,12 @@ Da kommen die Bibliotheken ins Spiel. Zunächst einmal sind Bibliotheken schön 
 Hier nehme ich mal die Bibliotheken auf, die ich schon besucht habe. Und wenn Ihr mir schönen Bibs vorstellt, freue ich mich, sie zu erkunden.
 
 - **[Deutsches Museum](https://www.deutsches-museum.de/bibliothek/)**: Mein aktueller Favorit: Große Tische zum Arbeiten, schöne Räumlichkeiten, meistens gut Platz.Juristische Bib, LMU: Da scheint es wohl mehrere zu geben. Die eine, in der ich war, war alles andere als schön. Da hatte ich mehr erwartet von den Juristen…
-- **[Juristische Bib im Rathaus, Stadtbibliothek](https://www.muenchen.de/rathaus/Stadtinfos/Rundgang-durch-das-Neue-Rathaus/Juristische-Bibliothek.html)**: OK, die Juristen können doch Bibliothek! Diese Bib ist eine Schmuckstück! Die Lage ist zentral, die Atmosphäre arbeitsam. Der Zugang ist OKish (Schließfächer vor der Bib, Notebook darf rein, Notebook-Tasche nicht). nett: Es gibt hier ein WLAN-Zugang! 
+- **[Juristische Bib im Rathaus, Stadtbibliothek](https://www.muenchen.de/rathaus/Stadtinfos/Rundgang-durch-das-Neue-Rathaus/Juristische-Bibliothek.html)**: OK, die Juristen können doch Bibliothek! Diese Bib ist eine Schmuckstück! Die Lage ist zentral, die Atmosphäre arbeitsam. Der Zugang ist OKish (Schließfächer vor der Bib, Notebook darf rein, Notebook-Tasche nicht). nett: Es gibt hier ein WLAN-Zugang!
 
 ![Juristischr Bib](jur_bib.jpg)
 
 Juristische Bib im Rathaus
+
 - **Mathematisches Institut der LMU**: Die Bücher dort sind schön (Mathe-Bücher halt…). Die Bib war schon abgegrabbelt als ich noch studiert habe, und seitdem haben sie nichts renoviert oder repariert glaube ich.
 - **StaBi, Staatsbibliothek**: Groß, ganz nett, schöne Tische, schöner Raum. Etwas anonym.
 

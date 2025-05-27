@@ -22,6 +22,3 @@ My planned features & changes, in no special order:
 - Page cloud
 - Tag cloud
 
-## Done
-
-- 2025-05-13 Reworked the pages & articles generation so the Todo page shows... 😉

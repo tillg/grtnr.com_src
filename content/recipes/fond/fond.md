@@ -4,7 +4,7 @@ title: Fond
 slug: fond
 date_published: 2015-12-06T00:00:00.000Z
 date_updated: 2021-12-06T11:11:10.000Z
-tags: 
+tags:
 image: fond.jpg
 ---
 
@@ -12,7 +12,7 @@ Und noch ein Juju-Rezept, diesma zu Fonds.
 
 ### Fisch-Fond
 
-**Wichtig**: Kiemen und Augen rausnehmen. Ca. 1 Kilo Fischgräten grob hacken. 2 Zwiebeln. 1 Stange Lauch. Schale einer Zitrone, auch ganze Zitrone möglich - Vorsicht das weiße wird bitter. 5cl Olivenöl. Wasser. Gut ist auch zusätzlich 1 Lorbeerblatt. Dies gibt aber intensiven Geschmack und kann später bei Bedarf hinzugefügt werden. 
+**Wichtig**: Kiemen und Augen rausnehmen. Ca. 1 Kilo Fischgräten grob hacken. 2 Zwiebeln. 1 Stange Lauch. Schale einer Zitrone, auch ganze Zitrone möglich - Vorsicht das weiße wird bitter. 5cl Olivenöl. Wasser. Gut ist auch zusätzlich 1 Lorbeerblatt. Dies gibt aber intensiven Geschmack und kann später bei Bedarf hinzugefügt werden.
 
 ### Hühner-Fond
 

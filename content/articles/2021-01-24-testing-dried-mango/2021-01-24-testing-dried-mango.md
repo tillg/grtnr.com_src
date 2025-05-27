@@ -11,9 +11,9 @@ image: mangos.jpeg
 
 Since our 4 years in Vietnam we love Mango! And here in Germany we mostly turned to dried Mango - and have fresh mango on exceptional occasions...
 
-As we eat lots of them, I decided to run a test: I ordered 6 different types of dried Mango and we had them tested and ranked by all family members and by friends too. 
+As we eat lots of them, I decided to run a test: I ordered 6 different types of dried Mango and we had them tested and ranked by all family members and by friends too.
 
-So here is the result in a nutshell: 
+So here is the result in a nutshell:
 
 ![Mango challenge result table](MangoChallenge.png)
 
@@ -21,7 +21,7 @@ Our test results
 
 The winner was: [Kamelur 1kg BIO Mango getrocknet, ungeschwefelt und ungezuckert - getrocknete Mango (dried mango) ohne Zucker-Zusatz](https://www.amazon.de/gp/product/B01DOIWQJC)
 
-Note that in further tests not everybody liked the *Kamelur* Mangostreifen as much as we did: They are a bit sour and so another cluster of mango lovers concentrated on the *howa* Mangos:
+Note that in further tests not everybody liked the _Kamelur_ Mangostreifen as much as we did: They are a bit sour and so another cluster of mango lovers concentrated on the _howa_ Mangos:
 
 Note: All Mango candidates were ordered at amazon, so this is also our source of prices.
 

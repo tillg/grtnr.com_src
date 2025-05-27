@@ -3,6 +3,7 @@ title: Autocompleting my Blog
 tags: blog, tech, softwareweneed
 summary: I now have a Pelican based blog and want to automagically add or fix content: Picture tags, article summaries, translations... Finally a wa to use AI 🤖
 ---
+
 [TOC]
 
 Since last week my blog is based on [Pelican](https://getpelican.com), the Python based static blog generator. Now that the blog is built in a language that I master more or less, I can think of improving the process of writing and building things myself. And of course there are lots of tools that I can think of in order to make my life as well as the life of my readers easier. So here are some examples of these helpers.
@@ -17,19 +18,19 @@ Whenever I add a picture without an alt text, it's bad for blind people. But I a
 
 I have many links pointing to external locations. And sometimes webpages disappear, so my links might point into Nirwana. It would be nice if
 
-- my user wouldn't have to click on broken links 
+- my user wouldn't have to click on broken links
 - I would get a tip that I need to fix one or the other link
 - I could maybe prevent the situation by keeping a copy of the page I link to in my own blog. Or is that evil scraping and content stealing?
 
 ### Extract Generator (AI)
 
-I often write articles without specifying the summary / excerpt that is shown in the article list. By default Pelican (and other static generators) take the first paragraph or the first 30 words and use it as excerpt. 
+I often write articles without specifying the summary / excerpt that is shown in the article list. By default Pelican (and other static generators) take the first paragraph or the first 30 words and use it as excerpt.
 
 Wouldn't it be much nicer to ask an LLM to generate a reasonable 3 lines summary?
 
 ### Translator (AI'ish)
 
-In my blog I sometimes write English, sometimes German articles. Maybe there is even a French article here and there. Wouldn't it be nice to have every article in every language? It feels as if nowadays that should be a standard, given the good quality of today's translation tools. 
+In my blog I sometimes write English, sometimes German articles. Maybe there is even a French article here and there. Wouldn't it be nice to have every article in every language? It feels as if nowadays that should be a standard, given the good quality of today's translation tools.
 
 So I write my articles in whatever language just comes out of my little brain, and the system should generate the missing languages.
 
@@ -54,7 +55,7 @@ Many of the tools I envisage create additional data, and often times the creatio
 
 ### Integrity of authored content
 
-One way we could think of solving this, is to simply add the AI generated excerpt to the original markdown (in this case it would go in the front matter as `summary` field). 
+One way we could think of solving this, is to simply add the AI generated excerpt to the original markdown (in this case it would go in the front matter as `summary` field).
 
 But I don't like this at all: I don't want the AI to mess around in the text and content I have been crafting personally. Therefore I want to define the following rule for my system:
 

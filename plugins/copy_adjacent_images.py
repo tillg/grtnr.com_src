@@ -14,10 +14,6 @@ def copy_images_for_articles(generator):
     if hasattr(generator, "hidden_articles"):
         process_content_items(generator, generator.hidden_articles)
 
-    # Process recipes if available
-    if hasattr(generator, "recipes"):
-        process_content_items(generator, generator.recipes)
-
 
 def copy_images_for_pages(generator):
     """Handle only pages in this handler"""
@@ -30,11 +26,23 @@ def copy_images_for_pages(generator):
         process_content_items(generator, generator.hidden_pages)
 
 
+def copy_images_for_recipes(generator, writer):
+    """Handle recipes after they are processed"""
+    # Process recipes if available
+    if hasattr(generator, "context") and "recipes" in generator.context:
+        process_content_items(generator, generator.context["recipes"])
+
+
 def process_content_items(generator, item_list):
     for item in item_list:
         source_path = item.source_path
         slug = item.slug
-        output_path = os.path.join(generator.output_path, slug)
+        # For recipes, use the save_as path if available, otherwise use slug
+        if hasattr(item, 'save_as'):
+            # Extract directory from save_as (e.g., "recipes/hummus-from-mr-jim/index.html" -> "recipes/hummus-from-mr-jim")
+            output_path = os.path.join(generator.output_path, os.path.dirname(item.save_as))
+        else:
+            output_path = os.path.join(generator.output_path, slug)
 
         # Ensure the target output directory exists
         os.makedirs(output_path, exist_ok=True)
@@ -51,7 +59,9 @@ def process_content_items(generator, item_list):
                 copied_images.append(fname)
 
         # Fix image URLs for all content items (not just hidden ones)
-        fix_image_urls(item, slug, copied_images)
+        # Only fix URLs for items that have _content attribute (articles/pages)
+        if hasattr(item, '_content'):
+            fix_image_urls(item, slug, copied_images)
 
 
 def fix_image_urls(item, slug, image_names):
@@ -78,3 +88,5 @@ def register():
     # Connect different handlers for articles and pages
     signals.article_generator_finalized.connect(copy_images_for_articles)
     signals.page_generator_finalized.connect(copy_images_for_pages)
+    # Connect to article writer finalized to handle recipes after they're processed
+    signals.article_writer_finalized.connect(copy_images_for_recipes)

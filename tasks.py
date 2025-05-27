@@ -119,6 +119,36 @@ def check_py(c):
 
 
 @task
+def format_md(c, file=None):
+    """Format Markdown files with Prettier"""
+    if file:
+        print(f"Running Prettier formatter on {file}...")
+        c.run(f"npx prettier --write --log-level warn '{file}'")
+    else:
+        print("Running Prettier formatter on all Markdown files...")
+        c.run("npx prettier --write --log-level warn '**/*.md'")
+    print("Markdown formatting complete!")
+
+
+@task
+def lint_md(c, file=None):
+    """Run markdownlint on Markdown files"""
+    if file:
+        print(f"Running markdownlint on {file}...")
+        c.run(f"npx markdownlint '{file}'")
+    else:
+        print("Running markdownlint on all files...")
+        c.run("npx markdownlint '**/*.md'")
+
+
+@task
+def check_md(c, file=None):
+    """Format and lint Markdown files"""
+    format_md(c, file=file)
+    lint_md(c, file=file)
+
+
+@task
 def livereload(c):
     """Automatically reload browser tab upon file modification."""
     from livereload import Server

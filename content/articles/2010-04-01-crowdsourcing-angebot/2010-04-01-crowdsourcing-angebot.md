@@ -41,11 +41,11 @@ Und hier noch ein paar Stichpunkte mit Hinweisen was mir gefällt (oder nicht):
 - Es darf flippig sein, aber nicht zerzaust.
 - Man muss nicht modelltreu bleiben, weglassen ist erlaubt. Es sollte sich aber schon an dem Gartner-Wappen anlehnen.
 - Beispieleinsätze für das Wappen wären
-	- Auf der Fahne unseres Fahrradanhängers (Größe ca. DIN A4)
-	- Auf T-Shirts oder Polos, groß auf dem Rücken ofer klein auf dem Ärmel.
-	- Auf dieser Webseite.
-	- Auf Golfbällen oder Skiern.
-	- Da fällt mir dann sicher noch mehr ein…
+  - Auf der Fahne unseres Fahrradanhängers (Größe ca. DIN A4)
+  - Auf T-Shirts oder Polos, groß auf dem Rücken ofer klein auf dem Ärmel.
+  - Auf dieser Webseite.
+  - Auf Golfbällen oder Skiern.
+  - Da fällt mir dann sicher noch mehr ein…
 
 So jetzt seid Ihr dran. ich bin schon gespannt, was da kommt – und ob überhaupt etwas kommt…
 

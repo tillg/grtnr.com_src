@@ -20,19 +20,19 @@ The choice was based on the set of criteria I gave to the model. Here are the mo
 - Markdown support – allow rich formatting (code blocks, etc.) suited for technical discussions.
 - Spam protection – has measures to reduce spam, especially if allowing anonymous or unauthenticated comments.
 
-The tools that Deep Research _analyzed_ were 
+The tools that Deep Research _analyzed_ were
 
-* Giscus
-* Utterances
-* Staticman
-* Commento
-* Hyvor Talk
-* Disqus
-* Some _self made_ solutions
+- Giscus
+- Utterances
+- Staticman
+- Commento
+- Hyvor Talk
+- Disqus
+- Some _self made_ solutions
 
 ## Integrating Giscus
 
-In the follow up to it's research I asked the model to give me a step by step guide on how to integrate the solution. This was far less reliable than the first research, but still helpful. 
+In the follow up to it's research I asked the model to give me a step by step guide on how to integrate the solution. This was far less reliable than the first research, but still helpful.
 
 Here is the executive summary (the details are in the [chat I had with the AI](https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776)):
 
@@ -41,14 +41,14 @@ Here is the executive summary (the details are in the [chat I had with the AI](h
   - Navigate to Settings > General.
   - Scroll down to the Discussions section and enable it.
 - Step in between, that the AI missed to mention: Install giscus for all or some of your repos. [Here](https://github.com/apps/giscus/installations/select_target)
-![alt text](image.png)
+  ![alt text](image.png)
 - Step 2: Install Giscus and Configure It
   - Visit the Giscus setup page: https://giscus.app/.
   - Under "Repository", enter your repo name. You now should see the green check mark that your repo meets all the criteria for using giscus.
   - The “Page discussion mapping” option dictates a relationship between your pages, e.g an article, and a GitHub discussion. I selected, the pathname
   - For the discussions category I selected “general”.
-  Set the Theme to "Match OS" or manually define light and dark mode.
-  Click "Copy Code" once you’ve generated the <script> tag.
+    Set the Theme to "Match OS" or manually define light and dark mode.
+    Click "Copy Code" once you’ve generated the <script> tag.
 
 ![Giscus Features](giscus-features.png)
 
@@ -65,26 +65,22 @@ After fiddling around a bit and smoothing the edges everything worked fine. But 
 
 So I spun up ChatGPT again and got another [research result](https://chatgpt.com/share/67ab5f69-4ddc-8009-8471-a35e00cb6a43). The rough steps are:
 
-* Step 1: Add a Placeholder for Comment Count. In my [`post_preview.html`](https://github.com/tillg/grtnr.com_2024/blob/main/_includes/post_preview.html) I added a `<span>` that actually needed to be a bit different from what the AI suggested:
+- Step 1: Add a Placeholder for Comment Count. In my [`post_preview.html`](https://github.com/tillg/grtnr.com_2024/blob/main/_includes/post_preview.html) I added a `<span>` that actually needed to be a bit different from what the AI suggested:
 
-    ```html
-    <span class="comment-count" data-giscus-comments="{{ post.url }}">
-        <span class="comment-num">Counting comments...</span>
-    </span>
-    ```
+  ```html
+  <span class="comment-count" data-giscus-comments="{{ post.url }}">
+    <span class="comment-num">Counting comments...</span>
+  </span>
+  ```
 
-* Step 2: Add JavaScript to Fetch the Comment Count. I added a script that fetches the comment count from the GitHub Discussions API and updates the comment count. The script suggested needed some fixes and ended up in this [Event Listener](https://github.com/tillg/grtnr.com_2024/blob/main/assets/js/giscus-comments.js). Don't be surprised by the two lines with dashes (---) at the top, I'll explain them below... Noteworthy here are
-  * Dealing with the `accessToken` (explained below)
-  * This argument of the grahQL query: `categoryId: "DIC_kwDONYRp_c4Cm0cH"`. This is the ID of the category that contains the discussions of the repository. 
-  * Note: What helped me for debugging & fixing this function is the [Github GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer).
-* Step 3: Include the JavaScript in Your Jekyll Site. In my case I added this script reference at the bottom of the [`default.html` layout file](https://github.com/tillg/grtnr.com_2024/blob/main/_layouts/default.html).
-* Step 4: Test the Comment Count. After some testing and fixing, it worked eventually locally.
+- Step 2: Add JavaScript to Fetch the Comment Count. I added a script that fetches the comment count from the GitHub Discussions API and updates the comment count. The script suggested needed some fixes and ended up in this [Event Listener](https://github.com/tillg/grtnr.com_2024/blob/main/assets/js/giscus-comments.js). Don't be surprised by the two lines with dashes (---) at the top, I'll explain them below... Noteworthy here are
+  - Dealing with the `accessToken` (explained below)
+  - This argument of the grahQL query: `categoryId: "DIC_kwDONYRp_c4Cm0cH"`. This is the ID of the category that contains the discussions of the repository.
+  - Note: What helped me for debugging & fixing this function is the [Github GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer).
+- Step 3: Include the JavaScript in Your Jekyll Site. In my case I added this script reference at the bottom of the [`default.html` layout file](https://github.com/tillg/grtnr.com_2024/blob/main/_layouts/default.html).
+- Step 4: Test the Comment Count. After some testing and fixing, it worked eventually locally.
 
 The following aspects kept me busy an hour or two:
 
-* The `accessToken`, where and how to get it
-* How to get the access token published to Github w/o the token-scanner and protector kicking in
-
-
-
-
+- The `accessToken`, where and how to get it
+- How to get the access token published to Github w/o the token-scanner and protector kicking in

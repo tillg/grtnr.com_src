@@ -8,7 +8,7 @@ I do Sivananda Yoga since over 30 years in [Munich](https://muenchen.sivananda.y
 
 ## The Om Tryambakam
 
-Our classical song at the end of a class 
+Our classical song at the end of a class
 
 ```
 Om Tryambakam Yajāmahe
@@ -37,7 +37,7 @@ Pūrnasya Pūrnam Ādāya
 Pūrnamevāvaśisyate
 ```
 
-[Get it as PDF](/public/om_tryambakam.pdf){:target="_blank"}
+[Get it as PDF](/public/om_tryambakam.pdf){:target="\_blank"}
 
 Copied from [here](https://bodymindlight.com/opening-and-closing-prayers-in-sivananda-yoga)
 

@@ -25,7 +25,7 @@ Every couple of years you get the opportunity to setup a new Mac. It's typically
 - AlDente for Battery management from [their Website](https://apphousekitchen.com/aldente-overview/pricing/)
 - iTerm - because we need it for the next steps. And make sure that `zsh` is the shell used.
 - ssh keys from 1Password
-- brew 
+- brew
 - AnythingLLM
 - ChatGPT from the [OPenAI Website](https://openai.com/chatgpt/download/)
 - Claude from the [Anthropic website](https://claude.ai/download)
@@ -48,10 +48,9 @@ Every couple of years you get the opportunity to setup a new Mac. It's typically
   - Touch ID
   - Screen Saver
   - Lock Screen
-  - Keyboard > Keyborad Shortcuts. 
+  - Keyboard > Keyborad Shortcuts.
 - Desktop & Dock in _System Settings_, _Hot Corners_ remove all Icons from Dock
 - Finder _Settings_ and _View Options_
 
-- Widgets on Desktop 
+- Widgets on Desktop
 - Wallet & Apple Pay
-

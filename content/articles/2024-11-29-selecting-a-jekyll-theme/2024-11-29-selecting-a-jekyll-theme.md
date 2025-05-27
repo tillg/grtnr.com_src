@@ -1,6 +1,6 @@
 ---
 date: 2024-11-29
-excerpt: It's been a while that I haven't worked on my site. Now I upgraded to the up-to-date technical tools - and as usual the theme is being reworked again... 
+excerpt: It's been a while that I haven't worked on my site. Now I upgraded to the up-to-date technical tools - and as usual the theme is being reworked again...
 image: hydejack.jpg
 ---
 
@@ -13,12 +13,13 @@ Themes that I looked at with my working notes.
 ![hydejack](hydejack.jpg)
 [Hydejack](https://hydejack.com) is my current theme (as of Nov 2024). It looks nice, but
 
-* It has too many bells & whistles - yes, taste changes over time
-* I got fed up with the entry page that I have to slide left
+- It has too many bells & whistles - yes, taste changes over time
+- I got fed up with the entry page that I have to slide left
 
 ---
 
 ## Hyde
+
 **Being stdied - Hottest candidate**
 
 ![Hyde](hyde.png)
@@ -27,6 +28,7 @@ Themes that I looked at with my working notes.
 ---
 
 ## Lanyon
+
 **Being studied - Hot candidate**
 
 ![Lanyon](lanyon0.png)
@@ -36,8 +38,8 @@ Themes that I looked at with my working notes.
 
 ---
 
-
 ## Minimal Theme
+
 **Being studied**
 
 ![Minimal](minimal.png)
@@ -46,6 +48,7 @@ Themes that I looked at with my working notes.
 ---
 
 ## Cayman
+
 **Being studied**
 
 ![Cayman](cayman.png)
@@ -54,6 +57,7 @@ Themes that I looked at with my working notes.
 ---
 
 ## Poole
+
 **Rejected** because I understodd that it's just a base theme. Hyde and Lanyon are based on it.
 
 ![Poole](poole.png)
@@ -61,9 +65,8 @@ Themes that I looked at with my working notes.
 
 ---
 
-
-
 ## Celeste
+
 **Being studied**
 
 ![Celeste](celeste.png)
@@ -72,6 +75,7 @@ Themes that I looked at with my working notes.
 ---
 
 ## Minimal Mistakes
+
 **Being studied**
 
 ![Minimal Mistakes](minimal_mistakes0.png)
@@ -81,7 +85,9 @@ Themes that I looked at with my working notes.
 [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes)
 
 ---
+
 ## Mediumish
+
 **Being studied - probably too fancy**
 
 ![mediumish](mediumish.png)
@@ -91,6 +97,7 @@ Themes that I looked at with my working notes.
 ---
 
 ## al-folio
+
 **Rejected** b/o too complex.
 
 ![al-folio](al-folio-preview.png)

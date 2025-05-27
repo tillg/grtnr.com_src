@@ -4,7 +4,7 @@ title: Moelleux au chocolat
 slug: moelleux-au-chocolat
 date_published: 2006-03-01T00:00:00.000Z
 date_updated: 2021-12-06T11:24:18.000Z
-tags: 
+tags:
 image: moelleux.jpg
 excerpt: La fameuse recette du Moelleux de Juju.
 ---

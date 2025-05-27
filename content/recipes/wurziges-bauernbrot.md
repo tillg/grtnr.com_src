@@ -4,7 +4,7 @@ title: Würziges Bauernbrot
 slug: wurziges-bauernbrot
 date_published: 2005-12-13T00:00:00.000Z
 date_updated: 2021-12-13T11:26:45.000Z
-tags: 
+tags:
 ---
 
 **Zutaten Vorteig**
@@ -31,6 +31,6 @@ Die Zutaten für den Vorteig in einer Schüssel oder einem Einmachglas mit Decke
 Salz im 45 Grad warmem Wasser auflösen. Roggen-, Weizenmehl, Brotgewürz und das Salzwasser mit dem ausgereiften Teigansatz vermischen, gut durchkneten, die Oberfläche glatt streichen. Mit Tuch und Folie abdecken und 40 bis 45 Minuten in den warmen Vorgärofen stellen. Dann den gelockerten Teig nochmals kurz durcharbeiten, in zwei gefettete Kastenformen füllen, glatt streichen, mit Brotgewürz oder Sesam bestreuen und die Körner mit einer Teigkarte festdrücken. Die Formen wieder abdecken und den Teig weitere 30 bis 40 Minuten im Vorgärofen gehen lassen. Die Gärzeit ist beendet, wenn sich die Teigoberfläche wollig anfühlt und feine, kleine Risse entstehen.
 
 **Backen**
-Die Brotformen mit Alufolie abdecken (Folie darf nicht am Teig aufliegen!) und auf der untersten Einschubleiste in den vorgeheizten Backofen (230 Grad) stellen. 	Backzeit: 20 bis 30 Minuten bei 230 Grad, 50 bis 60 Minuten bei 180 Grad backen und 15 Minuten im ausgeschalteten Ofen nachbacken lassen. Nach einer Stunde Backzeit Folie entfernen. Brote nach ein bis zwei Tagen anschneiden!
+Die Brotformen mit Alufolie abdecken (Folie darf nicht am Teig aufliegen!) und auf der untersten Einschubleiste in den vorgeheizten Backofen (230 Grad) stellen. Backzeit: 20 bis 30 Minuten bei 230 Grad, 50 bis 60 Minuten bei 180 Grad backen und 15 Minuten im ausgeschalteten Ofen nachbacken lassen. Nach einer Stunde Backzeit Folie entfernen. Brote nach ein bis zwei Tagen anschneiden!
 
 **Hinweis**: Brotbackformen nur zu zwei Drittel füllen, damit der Teig genügend Platz zum "Gehen" hat.

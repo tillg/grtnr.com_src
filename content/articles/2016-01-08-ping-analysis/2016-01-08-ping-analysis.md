@@ -10,8 +10,8 @@ So want I have been looking for is a reliable, long-term measurement of internet
 
 Then found something that is in the essence exactly what I have been looking for. Re-phrtase: If I would have started putting something together myself, this is what I would have built: It's called [Ping Visualization and Analysis](http://www.medienvilla.com/entwicklung.html#pinganalyse) and it is based on 2 components;
 
-* One simple script that logs ping times (and by simple I mean _realy simple!_)
-* One HTML page with some JavaScript that visualizes the ping times over time.
+- One simple script that logs ping times (and by simple I mean _realy simple!_)
+- One HTML page with some JavaScript that visualizes the ping times over time.
 
 You can let the ping-logger run on stupid simple hardware. It can run day & night, gathering data. The format is _plain_. A sample:
 
@@ -33,23 +33,18 @@ Pretty simple, uh?! A simple `ping` with a timestamp in front. And the JS stuff 
 
 ![graph](ping.png)
 
-I just had to fix some small things to make it run on my Mac (the `ping` syntax was from another Unix slang). 
+I just had to fix some small things to make it run on my Mac (the `ping` syntax was from another Unix slang).
 
 ##What next?
 So here is what I plan to improve (let's see wether this really happens):
 
-* Have the Sources GITted
-* Improve the graph:
-    * The colors are a bit strange to me...
-    * It feels upside down
-    * Have labels on the y axis
-    * May be have them more [like so](http://pinglogger.co.uk/index.php/screenshots/)
-* May be look into [log stash](https://www.elastic.co/products/logstash) as visualization...
+- Have the Sources GITted
+- Improve the graph:
+  - The colors are a bit strange to me...
+  - It feels upside down
+  - Have labels on the y axis
+  - May be have them more [like so](http://pinglogger.co.uk/index.php/screenshots/)
+- May be look into [log stash](https://www.elastic.co/products/logstash) as visualization...
 
 ##Addendum
 Also within the context, and because [Java is the development language of the year 2015](http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html): [A java program to track the ping times to multiple end points](http://pastebin.com/1qnCXDw7)
-
-
-
-
-

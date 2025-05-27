@@ -29,7 +29,7 @@ Make a long story short, here is how it works smoothly:
           - '81:80'
         volumes:
           - content:/usr/share/nginx/html
-    
+
       service2:
         image: nginx
         container_name: service2
@@ -37,19 +37,19 @@ Make a long story short, here is how it works smoothly:
           - '82:80'
         volumes:
           - content:/usr/share/nginx/html
-    
+
     volumes:
       content:
          driver_opts:
                type: none
-               device: ./data/content 
+               device: ./data/content
                o: bind
 
 That's what's going on:
 
 - We have 2 services of the same type: plain nginx containers for demo purposes.
 - They both expose their (internal) port 80 to port 81 resp. 82 to the outside world.
-- They both use a volume called **content** that is defined in the volumes section. 
+- They both use a volume called **content** that is defined in the volumes section.
 
 The detail that I missed for so long was the **volumes** section with the **driver_opts**. And while I ran a couple of tests and everything behaved exactly the way I hoped, I couldn't find any proper documentation. Here's what the [docker documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#driver_opts) says about **driver_opts**:
 
@@ -69,7 +69,6 @@ When investigating how things are working, docker's inspect tools give some insi
                     "Propagation": ""
                 }
             ]
-     
 
 At first I was sceptic because of this line:
 

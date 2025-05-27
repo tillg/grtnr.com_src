@@ -4,7 +4,7 @@ title: Von Crêpes bis Pancake
 slug: von-crepes-bis-pancake
 date_published: 2019-04-18T00:00:00.000Z
 date_updated: 2021-12-06T10:46:17.000Z
-tags: 
+tags:
 ---
 
 Nachdem uns unsere großen Kinder heute früh zum Frühstück mit Crêpes überrascht haben, hier das Rezept, was sie sich selber im Internet rausgesucht hatten.
@@ -13,9 +13,9 @@ Nachdem uns unsere großen Kinder heute früh zum Frühstück mit Crêpes überr
 
 ## Für den Teig: (Pfannkuchen)
 
-- 4 	Ei(er)
-- 2 EL	Zucker
-- 400 ml	Milch
+- 4 Ei(er)
+- 2 EL Zucker
+- 400 ml Milch
 - 1 Prise Salz
 - 200 g Mehl
 - 1 Messerspitze Backpulver
@@ -24,9 +24,10 @@ Nachdem uns unsere großen Kinder heute früh zum Frühstück mit Crêpes überr
 ## Für den Teig: (Crêpe)
 
 - 1 Ei(er)
-- 100 g	Mehl
+- 100 g Mehl
 
-1 EL	Zucker
+1 EL Zucker
+
 - 1 Prise Salz
 - 200 ml Milch
 - Öl, zum Braten

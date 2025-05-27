@@ -7,8 +7,6 @@ image: fumagalli.jpeg
 
 Was macht ein Clown im Büro?
 
+_Faxen_ ;)
 
-_Faxen_  ;)
-
-
-Ps: Und wer weiß wer dieser Clown ist? 
+Ps: Und wer weiß wer dieser Clown ist?

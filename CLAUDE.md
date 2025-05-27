@@ -24,7 +24,7 @@ This is a personal website/blog built with **Pelican** (Python static site gener
 **Python Code Quality:**
 
 - `inv format-py` - Format with Black + organize imports with isort (88 char line length)
-- `inv lint-py` - Run flake8 linting 
+- `inv lint-py` - Run flake8 linting
 - `inv check-py` - Format then lint (complete workflow)
 
 For detailed code quality standards and tool configurations, see [CODE_GUIDELINES.md](CODE_GUIDELINES.md).
@@ -32,14 +32,16 @@ For detailed code quality standards and tool configurations, see [CODE_GUIDELINE
 ## Architecture
 
 **Content Structure:**
+
 - `content/articles/YYYY-MM-DD-slug/` - Blog posts with date-based URLs
-- `content/pages/slug/` - Static pages 
+- `content/pages/slug/` - Static pages
 - `content/recipes/slug/` - Recipe content with special templates
 - Images are placed adjacent to content files and automatically copied
 
 **Plugin System (executes in order):**
+
 1. `auto_title` - Generates titles from directory names, removes date prefixes
-2. `recipes` - Creates recipe content type with custom URL structure  
+2. `recipes` - Creates recipe content type with custom URL structure
 3. `set_proper_category` - Manages content categorization
 4. `filter_articles_for_index` - Controls content visibility
 5. `copy_adjacent_images` - Auto-copies images, fixes relative URLs
@@ -47,6 +49,7 @@ For detailed code quality standards and tool configurations, see [CODE_GUIDELINE
 7. `external_links` - Processes external link handling
 
 **Markdown Extensions:**
+
 - TOC support with `[TOC]` marker
 - WikiLinks with `[[Page Name]]` syntax via `plugins.markdown_wikilinks`
 - Meta, extra, codehilite extensions enabled

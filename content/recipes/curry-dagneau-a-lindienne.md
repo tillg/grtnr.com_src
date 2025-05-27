@@ -35,6 +35,7 @@ Faites bouillir de l’eau salée ds une casserole. Lavez le riz et versez-le ds
 Versez le riz ds un grand plat creux, disposez la viande et la sauce dessus. Servez avec les 3 tomates crues restantes, préalablement détaillées en quartiers.
 
 **Weinempfehlung**
+
 - Rot: Côtes du Rhône (par exemple Vacqueras ou Chateneuf) ou Languedoc
 - Blanc: Gewürztramimer sec. Grand Chardonnay (Mersault, Monrachet). Pas de Bordeaux.
 

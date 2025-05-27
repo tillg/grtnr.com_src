@@ -4,7 +4,7 @@ title: Banh Xeo
 slug: banh-xeo
 date_published: 2020-05-01T15:33:40.000Z
 date_updated: 2020-05-06T12:55:33.000Z
-tags: 
+tags:
 image: banh-xeo2.jpeg
 excerpt: One of our favourite dishes in Vietnam
 ---

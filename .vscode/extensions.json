@@ -3,6 +3,8 @@
         "ms-python.python",
         "ms-python.black-formatter", 
         "ms-python.isort",
-        "ms-python.flake8"
+        "ms-python.flake8",
+        "esbenp.prettier-vscode",
+        "DavidAnson.vscode-markdownlint"
     ]
 }

@@ -14,16 +14,16 @@ I write or blog in different media:
 - A private blog with restricted access (because it contains family pictures)
 - This [blog](http://tillgartner.com)
 
-From time to time I find it nice to scroll through my past. I do this most often on our family blog, because it contains the most interesting content and because it is easy to scroll through. I would like to be able to scroll through all my past across all media. 
+From time to time I find it nice to scroll through my past. I do this most often on our family blog, because it contains the most interesting content and because it is easy to scroll through. I would like to be able to scroll through all my past across all media.
 
 So this is what my software should do:
 
 - Collect all entries I wrote in the social media:
-	- Twitter
-	- Facebook
-	- Wordpress
+  - Twitter
+  - Facebook
+  - Wordpress
 - Create one document per entry in a Github Repo
-- Handle properly duplicate content: Since some years my Twitter account is _linked_ to my Facebook account in that Twitter entries are replicated to Facebook. That's because I have people that I consider _audience_ in both media. 
+- Handle properly duplicate content: Since some years my Twitter account is _linked_ to my Facebook account in that Twitter entries are replicated to Facebook. That's because I have people that I consider _audience_ in both media.
 - Collect also the feedback to my posts
 - Nicely display them in a static way, including overview pages
 
@@ -42,4 +42,3 @@ Some technical thoughts:
 - The generated `index.html` would load the data via JS/AJAX requests and continue loading while the user scrolls down
 
 If anyone is interested, or has comment, please get in touch at till`dot`gartner`at`gmail`dot`com.
-

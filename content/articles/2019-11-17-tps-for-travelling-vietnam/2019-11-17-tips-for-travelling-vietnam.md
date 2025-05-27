@@ -9,10 +9,10 @@ image: lili-vietnam.JPG
 
 Neulich fragte mich ein Freund nach Tips für's Reisen in Vietnam: Ein Freund von ihm wollte für 10 Tage (!!) nach Vietnam reisen. Die Tips, die ich bei dieser Gelegenheit zusamengetragen habe, habe ich seitdem noch mindestens 5x weitergegeben. Deswegen schreibe ich sie jetzt hier auf. Und deshalb in der Dialog-Form...
 
-*Servus Till - ein junger Kollege von mir fährt Mitte/Ende November mit einem Kumpel für 10 Tage nach Vietnam.*
-*Bis dato haben sie noch keine konkreten Pläne. Hast Du ein paar Tipps was Mannas Tourist in Vietnam unbedingt gesehen haben sollte?*
-*Herzlichen Dank schon mal.*
-*LG*
+_Servus Till - ein junger Kollege von mir fährt Mitte/Ende November mit einem Kumpel für 10 Tage nach Vietnam._
+_Bis dato haben sie noch keine konkreten Pläne. Hast Du ein paar Tipps was Mannas Tourist in Vietnam unbedingt gesehen haben sollte?_
+_Herzlichen Dank schon mal._
+_LG_
 
 Umpf, das ist nicht ganz einfach. Hängt ab davon, was er so mag: eher Stadt, Natur, Party, Museen...
 

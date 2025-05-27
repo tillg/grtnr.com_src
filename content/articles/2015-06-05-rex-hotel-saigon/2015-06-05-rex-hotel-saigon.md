@@ -11,7 +11,6 @@ So what’s special about Rex Hotel? Certainly it’s history. And the style is 
 
 It’s very well located, right in the center of Saigon
 
-
 ![Rex](img_1681.jpg)
 
 This is the square right in front of Rex Hotel:
@@ -21,7 +20,6 @@ This is the square right in front of Rex Hotel:
 It has a nice entrance area that fits the Asian need to show off
 
 ![Rex](img_1673.jpg)
-
 
 The rooms are nice, spacious and clean. And best: No carpet!
 
@@ -39,7 +37,6 @@ They have multiple pools. That’s the central and biggest one:
 
 ![Rex](img_1664.jpg)
 
-
 And they have a tennis court. Yes, in the middle of super-busy-Saigon they have a tennis court on top of all:
 
 ![Rex](img_1656.jpg)
@@ -48,8 +45,6 @@ Since in Saigon running is no fun in the streets (I miss the beaches of Da Nang!
 
 ![Rex](img_1690.jpg)
 
-
 Besides the fact that beaches are just 100x nicer, the music in the fitness studio really kills you!
 
 Anyways, it was nice to stay here.
-

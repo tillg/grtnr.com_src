@@ -59,8 +59,8 @@ func mapCKRecordToTask(record: CKRecord) -> Task {
 
 Questions:
 
-* **Where** do I put the mapping functions? Are they part on the Domain Model or the Data Model? I guess they rather belong to the the Data Model.
-* **Errors**: How to deal with errors? For example, if the `CKRecord` does not contain a value for `id`, I would get a crash. Should I use optionals or throw an error?
+- **Where** do I put the mapping functions? Are they part on the Domain Model or the Data Model? I guess they rather belong to the the Data Model.
+- **Errors**: How to deal with errors? For example, if the `CKRecord` does not contain a value for `id`, I would get a crash. Should I use optionals or throw an error?
 
 ## Repository
 
@@ -81,8 +81,8 @@ And based on this protocol I could implement a `TaskRepositoryCloudKit` that use
 
 Next question:
 
-* **Repository functions**: Typically I would build functions from a repository that are beyond CRUD. For example a `getTasksDateRange` that returns the oldest and most recent due date. Where would I build this? I don't want to put it in `TaskRepositoryCloudKit` as it would be the same logic when using a different storage (i.e. load all the tasks in memory, sort them, and return the first and last). As I can't have functions in a protocol, wher do I put it?
-* **Naming**: Is the naming I suggested reasonable? Is it how you would do it in Swift? I chose `TaskRepositoryCloudKit` so it is listed next to the `TaskRepository` in the Xcode file browser. If I would need other Data Models to interface a system Xyz I would call them `TaskRawXyz` - is that reasonable?
+- **Repository functions**: Typically I would build functions from a repository that are beyond CRUD. For example a `getTasksDateRange` that returns the oldest and most recent due date. Where would I build this? I don't want to put it in `TaskRepositoryCloudKit` as it would be the same logic when using a different storage (i.e. load all the tasks in memory, sort them, and return the first and last). As I can't have functions in a protocol, wher do I put it?
+- **Naming**: Is the naming I suggested reasonable? Is it how you would do it in Swift? I chose `TaskRepositoryCloudKit` so it is listed next to the `TaskRepository` in the Xcode file browser. If I would need other Data Models to interface a system Xyz I would call them `TaskRawXyz` - is that reasonable?
 
 # Answer
 
@@ -91,7 +91,7 @@ I got a great [answer](https://discord.com/channels/1028834407374655518/10288469
 Here is Cocoatype's answer for reference:
 
 > **Where** do I put the mapping functions? Are they part on the Domain Model or the Data Model? I guess they rather belong to the the Data Model.
-I would put these in the repository or in a helper type for the repository. For instance, in my app Barc, I have a `BarcodeRepository` protocol, and a `FileBarcodeRepository` that uses SwiftData. Here's a small overview of what that looks like:
+> I would put these in the repository or in a helper type for the repository. For instance, in my app Barc, I have a `BarcodeRepository` protocol, and a `FileBarcodeRepository` that uses SwiftData. Here's a small overview of what that looks like:
 
 ```swift
 public protocol BarcodeRepository {
@@ -157,7 +157,7 @@ extension TaskRepository {
         }
     }
 }
-````
+```
 
 Because you know all TaskRepository implementations have a `getAllTasks()`, you can use it in the extension like that.
 

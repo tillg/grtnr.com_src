@@ -4,7 +4,7 @@ title: Kaiserschmarrn
 slug: kaiserschmarrn
 date_published: 2015-12-06T00:00:00.000Z
 date_updated: 2021-12-06T10:50:45.000Z
-tags: 
+tags:
 image: kaiserschmarrn.jpg
 ---
 

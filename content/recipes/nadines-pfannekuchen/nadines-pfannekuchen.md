@@ -4,7 +4,7 @@ title: Nadines Pfannekuchen
 slug: nadines-pfannekuchen
 date_published: 2016-10-06T00:00:00.000Z
 date_updated: 2021-12-06T11:26:26.000Z
-tags: 
+tags:
 date: 2016-10-06
 image: pfannkuchen.jpg
 excerpt: The best Pfannkuchen!!

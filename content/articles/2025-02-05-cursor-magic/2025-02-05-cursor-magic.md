@@ -14,38 +14,52 @@ Last week end I discovered this video from David Ondrej: [I spent 400+ hours in 
 
 The overall prompt structure that Deavid suggests:
 
-1.    what we are doing
-2.    tag relevant files
-3.    how to execute // what not to do
-4.    context dump
-5.    repeat core instruction
-6.    output format
-   
+1.  what we are doing
+2.  tag relevant files
+3.  how to execute // what not to do
+4.  context dump
+5.  repeat core instruction
+6.  output format
+
 ## Cursorrules
 
 `.cursorrules.md` is a file you put in your project top level directory that gives the AI more context about your project. Here is the structure of the file that David suggests:
+
 ```markdown
 # PROJECT OVERVIEW
+
 # PERSONALITY
+
 # TECH STACK
+
 - choose a tech stack with super popular languages
+
 # ERROR FIXING PROCESS
+
 step 1: explain the error in simple terms
-step 2: explain the solution in simple terms 
+step 2: explain the solution in simple terms
 step 3: show how to fix the error
+
 # BUILDING PROCESS
+
 # Our - env variables
-backend/.env 
+
+backend/.env
 frontend/. env
+
 # CURRENT FILE STRUCTURE
+
 Here you past the content of this command, so that Cursor knows about your project structure:
-tree -L 4 -a -I 'node_modules | -git|_pycache_|.DS_$
+tree -L 4 -a -I 'node*modules | -git|\_pycache*|.DS\_$
+
 # GITHUB PUSH PROCESS
+
 # IMPORTANT
+
 - Repeat the most important instructions.
 ```
 
-He also strongly suggests to have a `.cursorignore` in which you list your `.env` files. This hinders chat and Composer to write in those files accidentally. 
+He also strongly suggests to have a `.cursorignore` in which you list your `.env` files. This hinders chat and Composer to write in those files accidentally.
 
 ## AI Rules in Cursor Settings
 
@@ -55,6 +69,7 @@ An example:
 
 ```markdown
 # Fundamental Principles
+
 - Write clean, simple, readable code
 - Implement features in the simplest possible way
 - Keep files small and focused (<200 lines)
@@ -66,19 +81,22 @@ An example:
 - use clear and easy-to-understand language. write in short sentences.
 
 # Error Fixing
+
 - DO NOT JUMP TO CONCLUSIONS! Consider multiple possible causes before deciding.
 - Explain the problem in plain English
 - Make minimal necessary changes, changing as few lines of code as possible
 - in case of strange errors, ask the user to perform a Perplexity web search in order to get the latest up-to-date information
 
 # Building Process
+
 - ﻿﻿Verify each new feature works by telling the user how to test it
 - ﻿﻿DO NOT write complicated and confusing code. Opt for the simple & modular approach.
 - ﻿﻿when not sure what to do, tell the user to perform a web search
 
 # Comments
+
 - ALWAYS try to add more helpful and explanatory comments into our code.
-- NEVER delete old comments - unless they are obviously wrong / obsolete. 
+- NEVER delete old comments - unless they are obviously wrong / obsolete.
 - Include LOTS of explanatory comments in your code. ALWAYS write well documented code.
 - Document all changes and their reasoning IN THE COMMENTS YOU WRITE
 - when writing comments, use clear and easy-to-understand language. write short sentences.
@@ -93,7 +111,7 @@ Proceed like a Senior Developer with a focus on clear architecture.
 
 The fewer lines of code the better.
 
-Start by writing 3 reasoning paragraphs analyzing what the error might be. DO NOT JUMP TO CONCLUSIONS. 
+Start by writing 3 reasoning paragraphs analyzing what the error might be. DO NOT JUMP TO CONCLUSIONS.
 
 DO NOT STOP WORKING until…
 
@@ -121,6 +139,7 @@ I expect to see three concise paragraphs, written as if you were giving instruct
 ```
 
 ### Unbiased 50/50
+
 ```
 BEFORE YOU ANSWER, i want you to write two detailed paragraphs, one arguing for each of these solutions - do not jump to conclusions, seriously consider both approaches
 
@@ -128,8 +147,9 @@ then, after you finish, tell me whether one of these solutions is obviously bett
 ```
 
 ### one-paragraph search query
+
 ```
-let's perform a web search. your task is to write a one-paragraph search query, as if you were telling a human researcher that to find, including all the relevant context. format the paragraph as clear instructions, commanding a researcher to find what we're looking for. ask for code snippets or technical details when relevant 
+let's perform a web search. your task is to write a one-paragraph search query, as if you were telling a human researcher that to find, including all the relevant context. format the paragraph as clear instructions, commanding a researcher to find what we're looking for. ask for code snippets or technical details when relevant
 ```
 
 ## Instructions
@@ -138,17 +158,17 @@ David suggests to have a directory `instructions` that contains md files with ti
 
 Instruction files that he mentioned:
 
-* `supabase.md`: A file that describes the structure of his database, so cursor knows about tables, fields, mandatoryness etc.
-* `roadmap.md`: An explanation of the roadmap of your project.
+- `supabase.md`: A file that describes the structure of his database, so cursor knows about tables, fields, mandatoryness etc.
+- `roadmap.md`: An explanation of the roadmap of your project.
 
 ## Other tools
 
 Besides Cursor David uses many other tools. Some of what he mentioned:
 
-* [ChatGPT](https://chatgpt.com) 
-* [Claude](https://claude.ai) for side discussions with an advanced AI.
-* [Perplexity](https://www.perplexity.ai) for smart web searches.
-* [WisprFlow](https://wisprflow.ai) to speak rather than typing
-* [v0](https://v0.dev) a tool to create Web Apps in the browser by chatting withj an AI.
-* [Lovable](https://lovable.dev) for building backends, especially with [Supabase](https://supabase.com)
-* [Bolt](https://bolt.new) to build web sites.
+- [ChatGPT](https://chatgpt.com)
+- [Claude](https://claude.ai) for side discussions with an advanced AI.
+- [Perplexity](https://www.perplexity.ai) for smart web searches.
+- [WisprFlow](https://wisprflow.ai) to speak rather than typing
+- [v0](https://v0.dev) a tool to create Web Apps in the browser by chatting withj an AI.
+- [Lovable](https://lovable.dev) for building backends, especially with [Supabase](https://supabase.com)
+- [Bolt](https://bolt.new) to build web sites.

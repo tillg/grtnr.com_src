@@ -1,16 +1,15 @@
 ---
 layout: recipe
-title: Till Plätzchen & Haselnussbusserl 
+title: Till Plätzchen & Haselnussbusserl
 slug: till-platzchen
 date_published: 2021-12-05T12:31:19.000Z
 date_updated: 2021-12-13T10:47:01.000Z
-tags: 
+tags:
 image: plaetzchen.jpeg
 excerpt: Von Tills Oma Muini
 ---
 
-
-**** For our international friends, find the English recipe below. ****
+\***\* For our international friends, find the English recipe below. \*\***
 
 Die heiligen Plätzchen-Rezepte meiner Großmutter Muini. Die PLätzchen, die sie immer für mich gebacken hatte, und die im engeren Familienkreis sogar nach mir benannt wurden 😍
 
@@ -34,7 +33,7 @@ Neben der Tatsache, dass sie wahnsinnig gut schmecken und mir Muini in Erinnerun
 - 250 gr gemahlene Mandeln (oder Nüsse)
 - Für den Guss: 100 gr Puderzucker und 1 Essl. Zitrone
 
-**Machen:** Eigelb, Zucker und Vanillin Zucker schaumig schlagen, dann Backpulver und Mandeln so viel, dass der Teig nicht mehr klebt. 
+**Machen:** Eigelb, Zucker und Vanillin Zucker schaumig schlagen, dann Backpulver und Mandeln so viel, dass der Teig nicht mehr klebt.
 
 Auf mit Puderzucker bestreuter Platte ausrollen und ausstechen. Auf Pergament 10-15 Minuten backen auf 175 Grad.
 

@@ -111,7 +111,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 plugins=(git python)
 ```
 
-## powerlevel10k 
+## powerlevel10k
 
 Note: I used to use [powerlevel9k](https://github.com/Powerlevel9k/powerlevel9k), but when installing my Mac in May 2025, 9k was outdated and pointed to [powerlevel10k](https://github.com/romkatv/powerlevel10k).
 

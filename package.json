@@ -1,0 +1,16 @@
+{
+  "name": "grtnr.com_src",
+  "version": "1.0.0",
+  "description": "This is the source of the Website [grtnr.com](https://grtnr.com) and it's test site [test.grtnr.com](https://test.grtnr.com).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "markdownlint-cli": "^0.44.0",
+    "prettier": "^3.5.3"
+  }
+}

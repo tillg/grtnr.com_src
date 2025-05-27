@@ -8,6 +8,7 @@ tags:
 ---
 
 **Zutaten** für 5 Portionen
+
 - 1 kg Gulasch vom Rind
 - 500 g Zwiebel(n)
 - 2 EL Paprikapulver, scharf

@@ -11,36 +11,38 @@ OK, everytbody does it, even I do it: Static websites. It's fast, it's safe, it 
 
 Therefore I need anotrher setup. I plan to have a look at some different static web site systems, and set up a list of criteria against which I plan to test the different generators...
 
-
 ## Criteria
 
-* Themes
-    * Many
-    * Beautiful 
-    * Responsive 
-- Easy to write
-    - Editor with preview
-    - Easy handling and referencing of pics
-    - Pictures in preview
-    - Videos
-    - Tables
-    - Code with syntax highlighting
-	- Automated checking of consistency, i.e. the generated website is correct, complete, the pointers don't point to Nirwana...
-* Being able to create an [Accelerated Mobile Page](https://www.ampproject.org/) 
-* Functional features & pages
-    * Tags, tag pages, tag cloud (could also be an extension)
-    * Publishable on Github (it's very fast, free and reliable)
-    * Make website private. i.e. accessible only for registered members
-    * Publish by email
-    * Comment by email
-    * Push news to registered users by email
-    - Resize pics for fast delivery
-    - Easy to create new themes, Themes should be just CSS
-    - Based on other HTML, i.e. Bootstrap themes
-- Extensible architecture 
-    - Can add stuff, i.e. Picture resizing process
-    - At least a programming language I know a bit - or that I am curious to learn (that basically boils it down to Java and JavaScript)
-    - The generated HTML should be as simple as possible. All formatting sits in the CSS
+- Themes
+  - Many
+  - Beautiful
+  - Responsive
+
+* Easy to write
+  - Editor with preview
+  - Easy handling and referencing of pics
+  - Pictures in preview
+  - Videos
+  - Tables
+  - Code with syntax highlighting
+  - Automated checking of consistency, i.e. the generated website is correct, complete, the pointers don't point to Nirwana...
+
+- Being able to create an [Accelerated Mobile Page](https://www.ampproject.org/)
+- Functional features & pages
+  - Tags, tag pages, tag cloud (could also be an extension)
+  - Publishable on Github (it's very fast, free and reliable)
+  - Make website private. i.e. accessible only for registered members
+  - Publish by email
+  - Comment by email
+  - Push news to registered users by email
+  * Resize pics for fast delivery
+  * Easy to create new themes, Themes should be just CSS
+  * Based on other HTML, i.e. Bootstrap themes
+
+* Extensible architecture
+  - Can add stuff, i.e. Picture resizing process
+  - At least a programming language I know a bit - or that I am curious to learn (that basically boils it down to Java and JavaScript)
+  - The generated HTML should be as simple as possible. All formatting sits in the CSS
 
 ## Generators
 
@@ -69,12 +71,12 @@ When scanning the literature (and Github). this is the list of generators rthat 
 | Generator                                    | Programming language     | Themes    | Formats                                        | Comment                                                                                                               |
 | :------------------------------------------- | :----------------------- | :-------- | :--------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
 | [Jekyll](https://jekyllrb.com/)              | Ruby --                  | Lots ++   | Markdown, Textile, Liquid ++                   |                                                                                                                       |
-| *[Harp JS](https://harpjs.com/)*             | NodeJS  ++               | Some 00   | Markdown, EJS, Jade, LESS, Stylus... ++        |                                                                                                                       |
+| _[Harp JS](https://harpjs.com/)_             | NodeJS ++                | Some 00   | Markdown, EJS, Jade, LESS, Stylus... ++        |                                                                                                                       |
 | [Hugo](https://gohugo.io/)                   | GO --                    | Some 00   | Markdown, asciidoc, reStructure ++             |                                                                                                                       |
-| *[Metalsmith](http://www.metalsmith.io/)*    | Node JS --               |           |                                                | Looks very flexible. Also see http://dbushell.com/2015/05/11/wordpress-to-metalsmith/                                 |
+| _[Metalsmith](http://www.metalsmith.io/)_    | Node JS --               |           |                                                | Looks very flexible. Also see http://dbushell.com/2015/05/11/wordpress-to-metalsmith/                                 |
 | [Nikola](https://getnikola.com/)             | Python --                | Few --    | reStructuredText, Markdown,                    | Looks just so so...                                                                                                   |
 | [Octopress](http://octopress.org/)           | Python --                | Some 00   |                                                | Is just a package around Jekyll.                                                                                      |
-| *[Hexo](https://hexo.io/)*                   | Node JS ++               | Some 00   | Markdown, different flavors, Jekyll Plugins ++ | Looks very flexible, uses standard template engines (EJS, Jade, Swig...), allows to integrate scripts and plugins. ++ |
+| _[Hexo](https://hexo.io/)_                   | Node JS ++               | Some 00   | Markdown, different flavors, Jekyll Plugins ++ | Looks very flexible, uses standard template engines (EJS, Jade, Swig...), allows to integrate scripts and plugins. ++ |
 | [Hyde](http://hyde.github.io/)               | Python --                | Little -- |                                                |                                                                                                                       |
 | [Pelican](http://blog.getpelican.com/)       | Python --                |           |                                                |                                                                                                                       |
 | [Nanoc](http://nanoc.ws/)                    | Ruby --                  |           |                                                |                                                                                                                       |
@@ -82,22 +84,22 @@ When scanning the literature (and Github). this is the list of generators rthat 
 | [Lektor](https://www.getlektor.com/)         | Python --                |           |                                                |                                                                                                                       |
 | [Gatsby](https://github.com/gatsbyjs/gatsby) | Node JS, React           | No --     | Markdown 00                                    | Looks very flexible, but pretty complex...                                                                            |
 | [Expose](https://github.com/Jack000/Expose)  | Shell scripts --         |           | Markdown and picture folders                   | Specifically for picture sites.                                                                                       |
-| *[Wintersmith](http://wintersmith.io/)*      | Node JS, CoffeeScript ++ | Little -- | Markdown, Jade, ...                            | Looks very flexible, LESS, Sass, Stylus. Might be a bit complex...                                                    |
+| _[Wintersmith](http://wintersmith.io/)_      | Node JS, CoffeeScript ++ | Little -- | Markdown, Jade, ...                            | Looks very flexible, LESS, Sass, Stylus. Might be a bit complex...                                                    |
 | [DocPad](http://docpad.org/)                 | Node JS ++               | No --     | Markdown and others ++                         | Looks flexible but complex                                                                                            |
 | [kirby](https://getkirby.com/)               | PHP --                   |           | Markdown                                       |                                                                                                                       |
 
-As a result I should have a closer look at *[Harp JS](https://harpjs.com/)*, *[Metalsmith](http://www.metalsmith.io/)*, *[Hexo](https://hexo.io/)* and *[Wintersmith](http://wintersmith.io/)*.
+As a result I should have a closer look at _[Harp JS](https://harpjs.com/)_, _[Metalsmith](http://www.metalsmith.io/)_, _[Hexo](https://hexo.io/)_ and _[Wintersmith](http://wintersmith.io/)_.
 
-After quickly reading thru the websites of the above tools I decided to give it a try with *[Metalsmith](http://www.metalsmith.io/)*.
+After quickly reading thru the websites of the above tools I decided to give it a try with _[Metalsmith](http://www.metalsmith.io/)_.
 
 ## Editors
 
 When you think of a static site generation from a base of Markdown files, it quickly becomes natural to look for a good editor. What we want from our editor:
 
-* Preview Markdown
-* Preview including the CSS and other transformations that our site generator uses - to make sure we see the same result as it will be displayed in production
-* Preview including images. This might be non trivial since the images might be located on a different path in DEV as in PROD...
- Overa ll this means the editor must launch a compilation / composition process that produces the web view every time the Markdown source has been modified.
+- Preview Markdown
+- Preview including the CSS and other transformations that our site generator uses - to make sure we see the same result as it will be displayed in production
+- Preview including images. This might be non trivial since the images might be located on a different path in DEV as in PROD...
+  Overa ll this means the editor must launch a compilation / composition process that produces the web view every time the Markdown source has been modified.
 
 Editor we look at
 
@@ -112,5 +114,6 @@ Editor we look at
 ... probably some more...
 
 # History
-* August 2016: Started this page
-* Jan 2017: Continued while being in Thailand with the family, Tomi & Beate
+
+- August 2016: Started this page
+- Jan 2017: Continued while being in Thailand with the family, Tomi & Beate

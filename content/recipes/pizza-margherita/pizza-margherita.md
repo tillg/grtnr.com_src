@@ -4,7 +4,7 @@ title: Pizza Margherita
 slug: pizza-margherita
 date_published: 2006-03-13T00:00:00.000Z
 date_updated: 2021-12-13T11:16:16.000Z
-tags: 
+tags:
 image: pizza-magherita.jpg
 ---
 

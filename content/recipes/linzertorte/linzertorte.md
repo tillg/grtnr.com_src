@@ -3,7 +3,7 @@ layout: recipe
 title: Linzer Torte
 date_published: 2020-01-31T00:00:00.000Z
 date_updated: 2021-12-06T10:54:33.000Z
-tags: 
+tags:
 image: linzertorte.jpg
 excerpt: Tills Lieblingstorte 😉
 ---

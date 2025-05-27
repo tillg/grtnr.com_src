@@ -24,7 +24,7 @@ This project uses invoke for task automation. Here are the available commands:
 - `inv build` - Build local version of site
 - `inv rebuild` - Build with the delete switch (clean rebuild)
 - `inv clean` - Remove generated files
-- `inv serve` - Serve site at http://localhost:8000/
+- `inv serve` - Serve site at <http://localhost:8000/>
 - `inv reserve` - Build then serve the site
 - `inv regenerate` - Automatically regenerate site upon file modification
 - `inv livereload` - Build with live reloading (recommended for development)
@@ -35,6 +35,7 @@ This project uses invoke for task automation. Here are the available commands:
 This project uses automated Python code formatting and linting. For detailed guidelines, tool configurations, and development workflows, see [CODE_GUIDELINES.md](CODE_GUIDELINES.md).
 
 **Quick commands:**
+
 - `inv format-py` - Format Python code
 - `inv lint-py` - Run linting
 - `inv check-py` - Format and lint (recommended before commits)

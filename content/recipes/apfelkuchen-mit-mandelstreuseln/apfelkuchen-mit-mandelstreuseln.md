@@ -4,7 +4,7 @@ title: Apfelkuchen mit Mandelstreuseln
 slug: apfelkuchen-mit-mandelstreuseln
 date_published: 2017-08-13T00:00:00.000Z
 date_updated: 2021-12-06T11:20:09.000Z
-tags: 
+tags:
 image: apfelkuchen.jpg
 excerpt: Beates Mandelkuchen
 ---

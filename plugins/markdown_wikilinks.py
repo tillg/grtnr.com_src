@@ -38,6 +38,7 @@ class CustomWikiLinksPreprocessor(Preprocessor):
             # Import normalize_slug locally to avoid E402
             sys.path.insert(0, os.path.dirname(__file__))
             from normalize_slugs import normalize_slug
+
             slug = normalize_slug(slug)
 
             # Return markdown link format

@@ -16,5 +16,14 @@
         "--extend-ignore=E203,W503"
     ],
     "flake8.interpreter": ["./.venv/bin/python"],
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 88
+    },
+    "markdownlint.config": {
+        "extends": ".markdownlint.json"
+    }
 }
