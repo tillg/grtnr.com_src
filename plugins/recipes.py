@@ -1,50 +1,13 @@
 # plugins/recipes/__init__.py
 import datetime
-import re
-import unicodedata
 
 from pelican import signals
 
-
-def normalize_slug(text):
-    """
-    Normalize text for use in URLs and file paths.
-    This function provides centralized character transliteration
-    for consistent URL/path generation across the entire site.
-    """
-    if not text:
-        return text
-
-    # Common German character mappings
-    char_map = {
-        "ä": "ae",
-        "ö": "oe",
-        "ü": "ue",
-        "ß": "ss",
-        "Ä": "Ae",
-        "Ö": "Oe",
-        "Ü": "Ue",
-    }
-
-    # Apply character mappings
-    for char, replacement in char_map.items():
-        text = text.replace(char, replacement)
-
-    # Remove or replace other non-ASCII characters
-    text = unicodedata.normalize("NFKD", text)
-    text = text.encode("ascii", "ignore").decode("ascii")
-
-    # Convert to lowercase and remove spaces/special chars (no hyphens for simple cases)
-    text = text.lower()
-    # Remove spaces entirely for compound words (linzer torte → linzertorte)
-    text = text.replace(" ", "")
-    # Remove other special characters except existing hyphens and underscores
-    text = re.sub(r"[^a-zA-Z0-9\-_]", "", text)
-    # Clean up multiple consecutive hyphens and leading/trailing hyphens
-    text = re.sub(r"-+", "-", text)
-    text = text.strip("-")
-
-    return text
+# Import the central normalize_slug function
+import sys
+import os
+sys.path.insert(0, os.path.dirname(__file__))
+from normalize_slugs import normalize_slug
 
 
 class RecipeAdapter:

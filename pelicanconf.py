@@ -60,6 +60,7 @@ DATE_FORMATS = {
 PLUGIN_PATHS = ["plugins"]
 PLUGINS = [
     "auto_title",
+    "normalize_slugs",
     "recipes",
     "set_proper_category",
     "filter_articles_for_index",

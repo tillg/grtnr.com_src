@@ -9,6 +9,12 @@ import sys
 from markdown import Extension
 from markdown.preprocessors import Preprocessor
 
+# Import the central normalize_slug function
+import sys
+import os
+sys.path.insert(0, os.path.dirname(__file__))
+from normalize_slugs import normalize_slug
+
 
 class CustomWikiLinksPreprocessor(Preprocessor):
     """Preprocessor to handle [[WikiLinks]] with custom slug normalization."""
@@ -33,12 +39,8 @@ class CustomWikiLinksPreprocessor(Preprocessor):
             if not page_name.strip():
                 return match.group(0)
 
-            # Convert to slug with hyphens
+            # Convert to slug with hyphens, then normalize using central function
             slug = page_name.lower().replace(" ", "-")
-            # Import normalize_slug locally to avoid E402
-            sys.path.insert(0, os.path.dirname(__file__))
-            from normalize_slugs import normalize_slug
-
             slug = normalize_slug(slug)
 
             # Return markdown link format
