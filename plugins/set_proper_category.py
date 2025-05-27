@@ -1,7 +1,15 @@
 # plugins/fix_categories.py
 import os
+import sys
 
 from pelican import signals
+
+# Import centralized logging
+sys.path.insert(0, os.path.dirname(__file__))
+from logger_config import get_logger
+
+# Setup logger for this plugin
+logger = get_logger('set_proper_category')
 
 
 def set_proper_category(generator):
@@ -23,7 +31,7 @@ def set_proper_category(generator):
             # Set the category
             article.category.name = main_category
 
-    print(f"Fixed categories for {len(generator.articles)} articles")
+    logger.info(f"Fixed categories for {len(generator.articles)} articles")
 
 
 def register():

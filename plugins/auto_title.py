@@ -1,7 +1,15 @@
 import os
+import sys
 
 from pelican import signals
 from pelican.readers import MarkdownReader
+
+# Import centralized logging
+sys.path.insert(0, os.path.dirname(__file__))
+from logger_config import get_logger
+
+# Setup logger for this plugin
+logger = get_logger('auto_title')
 
 
 class AutoTitleReader(MarkdownReader):
@@ -18,8 +26,7 @@ class AutoTitleReader(MarkdownReader):
             # (e.g., 2025-04-18-digital-garden)
             parts = dir_name.split("-")
             if len(parts) >= 4 and all(p.isdigit() for p in parts[:3]):
-                # print(f"AutoTitleReader: Detected date prefix in
-                # {dir_name}, removing it.")
+                logger.debug(f"Detected date prefix in {dir_name}, removing it.")
                 title_parts = parts[3:]
             else:
                 title_parts = parts
@@ -27,6 +34,7 @@ class AutoTitleReader(MarkdownReader):
             # Convert to title case
             title = " ".join(title_parts).replace("_", " ").title()
             metadata["title"] = title
+            logger.debug(f"Generated title '{title}' from directory '{dir_name}'")
 
         # Remove surrounding quotes
         title = metadata["title"]

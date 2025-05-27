@@ -1,7 +1,15 @@
 import datetime
 import os
+import sys
 
 import pytz
+
+# Setup centralized logging
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'plugins'))
+from logger_config import setup_pelican_logging
+
+# Initialize logging with INFO level (can be changed to DEBUG for more verbose output)
+setup_pelican_logging('INFO')
 
 # Our sitename might vary depending on the environment
 SITENAME = "grtnr.com"

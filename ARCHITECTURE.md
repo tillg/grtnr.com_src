@@ -155,6 +155,56 @@ PLUGINS = [
 - Consistent interface with articles/pages
 - Template integration through adapter pattern
 
+## Logging System
+
+### Centralized Logging Configuration
+
+The project uses a centralized logging system with colored output and standardized formatting:
+
+**Key Features:**
+
+- **Colored Output**: Different colors for each log level (INFO=green, WARNING=yellow, ERROR=red, etc.)
+- **Standardized Format**: `YYYY-MM-DD HH:MM LEVEL    Message`
+- **Exception Handling**: Automatic stack trace logging with `exc_info=True`
+- **Multiple Loggers**: Plugin-specific loggers for better organization
+
+### Usage in Plugins
+
+```python
+import os
+import sys
+
+# Import centralized logging
+sys.path.insert(0, os.path.dirname(__file__))
+from logger_config import get_logger
+
+# Setup logger for plugin
+logger = get_logger('plugin_name')
+
+# Use logging throughout plugin
+logger.info("Plugin initialized")
+logger.debug("Processing content")
+logger.warning("Configuration issue detected")
+logger.error("Failed to process file", exc_info=True)
+```
+
+### Log Levels
+
+- **DEBUG**: Detailed diagnostic information (hidden by default)
+- **INFO**: General operational messages (green)
+- **WARNING**: Warning messages for potential issues (yellow)
+- **ERROR**: Error messages for failures (red)
+- **CRITICAL**: Critical failures that may stop execution (magenta)
+
+### Configuration
+
+Logging is initialized in `pelicanconf.py` with INFO level by default:
+
+```python
+from logger_config import setup_pelican_logging
+setup_pelican_logging('INFO')  # Change to 'DEBUG' for verbose output
+```
+
 ## Theme Architecture (pelicanyan)
 
 ### Template Hierarchy
@@ -392,8 +442,9 @@ inv livereload
 
 1. Follow signal-based architecture
 2. Use centralized `normalize_slug()` function
-3. Consider execution order dependencies
-4. Add to `PLUGINS` list in proper sequence
+3. Use centralized logging system (`from logger_config import get_logger`)
+4. Consider execution order dependencies
+5. Add to `PLUGINS` list in proper sequence
 
 ### Theme Customization
 

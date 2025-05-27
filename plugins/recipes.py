@@ -1,13 +1,19 @@
 # plugins/recipes/__init__.py
 import datetime
+import os
+import sys
 
 from pelican import signals
 
 # Import the central normalize_slug function
-import sys
-import os
 sys.path.insert(0, os.path.dirname(__file__))
 from normalize_slugs import normalize_slug
+
+# Import centralized logging
+from logger_config import get_logger
+
+# Setup logger for this plugin
+logger = get_logger('recipes')
 
 
 class RecipeAdapter:
@@ -56,7 +62,7 @@ def add_recipes_to_context(generator):
     recipe_path = os.path.join(generator.path, recipe_dir)
 
     if not os.path.exists(recipe_path):
-        print(f"Recipe folder {recipe_path} does not exist.")
+        logger.warning(f"Recipe folder {recipe_path} does not exist.")
         return
 
     md_reader = MarkdownReader(generator.settings)
@@ -109,17 +115,14 @@ def add_recipes_to_context(generator):
                 )
 
                 recipes.append(recipe)
-                # print(f"Processed recipe: {recipe.title}")
+                logger.debug(f"Processed recipe: {recipe.title}")
 
             except Exception as e:
-                print(f"Error processing {filepath}: {e}")
-                import traceback
-
-                traceback.print_exc()
+                logger.error(f"Error processing {filepath}: {e}", exc_info=True)
 
     # Add recipes to context
     generator.context["recipes"] = recipes
-    print(f"Added {len(recipes)} recipes to context")
+    logger.info(f"Added {len(recipes)} recipes to context")
 
 
 def generate_recipes(generator, writer):
@@ -128,7 +131,7 @@ def generate_recipes(generator, writer):
         return
 
     recipes = generator.context["recipes"]
-    print(f"Generating {len(recipes)} recipe pages")
+    logger.info(f"Generating {len(recipes)} recipe pages")
 
     for recipe in recipes:
         try:
@@ -139,12 +142,9 @@ def generate_recipes(generator, writer):
                 recipe=recipe,
                 relative_urls=generator.settings.get("RELATIVE_URLS", False),
             )
-            # print(f"Generated recipe page: {recipe.title}")
+            logger.debug(f"Generated recipe page: {recipe.title}")
         except Exception as e:
-            print(f"Error writing recipe {recipe.title}: {e}")
-            import traceback
-
-            traceback.print_exc()
+            logger.error(f"Error writing recipe {recipe.title}: {e}", exc_info=True)
 
     # Generate recipe index
     try:
@@ -155,16 +155,13 @@ def generate_recipes(generator, writer):
             recipes=recipes,
             relative_urls=generator.settings.get("RELATIVE_URLS", False),
         )
-        print("Generated recipe index")
+        logger.info("Generated recipe index")
     except Exception as e:
-        print(f"Error writing recipe index: {e}")
-        import traceback
-
-        traceback.print_exc()
+        logger.error(f"Error writing recipe index: {e}", exc_info=True)
 
 
 def register():
     """Register the plugin."""
-    print("Registering recipes plugin with signals")
+    logger.info("Registering recipes plugin with signals")
     signals.generator_init.connect(add_recipes_to_context)
     signals.article_writer_finalized.connect(generate_recipes)

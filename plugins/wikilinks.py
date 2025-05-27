@@ -15,6 +15,12 @@ import os
 sys.path.insert(0, os.path.dirname(__file__))
 from normalize_slugs import normalize_slug
 
+# Import centralized logging
+from logger_config import get_logger
+
+# Setup logger for this plugin
+logger = get_logger('wikilinks')
+
 
 class WikiLinksPreprocessor(Preprocessor):
     """Markdown preprocessor to handle [[WikiLinks]] before markdown processing."""
@@ -75,24 +81,22 @@ def process_wikilinks(content):
     """
     Process [[WikiLink]] syntax and convert to proper URLs using normalize_slug.
     """
-    print(f"DEBUG: Processing content object: {type(content)}")
-    print(f"DEBUG: Has source: {hasattr(content, 'source')}")
-    print(f"DEBUG: Has _content: {hasattr(content, '_content')}")
+    logger.debug(f"Processing content object: {type(content)}")
 
     # Check both _content and source attributes
     source_content = None
     if hasattr(content, "source") and content.source:
         source_content = content.source
-        print(f"DEBUG: Using source content, has [[: {'[[' in source_content}")
+        logger.debug(f"Using source content, has WikiLinks: {'[[' in source_content}")
     elif hasattr(content, "_content") and content._content:
         source_content = content._content
-        print(f"DEBUG: Using _content, has [[: {'[[' in source_content}")
+        logger.debug(f"Using _content, has WikiLinks: {'[[' in source_content}")
     else:
-        print("DEBUG: No content found")
+        logger.debug("No content found")
         return
 
     if not source_content:
-        print("DEBUG: Source content is empty")
+        logger.debug("Source content is empty")
         return
 
     def replace_wikilink(match):
