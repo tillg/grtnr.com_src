@@ -3,23 +3,23 @@ Custom WikiLinks plugin for Pelican that uses the normalize_slug function
 to ensure consistent URL generation for [[page]] links.
 """
 
+import os
 import re
+
+# Import the central normalize_slug function
+import sys
 
 import markdown
 from markdown.preprocessors import Preprocessor
 from pelican import signals
 
-# Import the central normalize_slug function
-import sys
-import os
 sys.path.insert(0, os.path.dirname(__file__))
-from normalize_slugs import normalize_slug
-
 # Import centralized logging
 from logger_config import get_logger
+from normalize_slugs import normalize_slug
 
 # Setup logger for this plugin
-logger = get_logger('wikilinks')
+logger = get_logger("wikilinks")
 
 
 class WikiLinksPreprocessor(Preprocessor):

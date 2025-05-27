@@ -10,6 +10,13 @@ from pelican import main as pelican_main
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
 from pelican.settings import DEFAULT_CONFIG, get_settings_from_file
 
+# Import centralized logging
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "plugins"))
+from logger_config import get_logger
+
+# Setup logger for tasks
+logger = get_logger("tasks")
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -97,17 +104,17 @@ def preview(c):
 @task
 def format_py(c):
     """Format Python code with Black and organize imports with isort"""
-    print("Running Black formatter...")
+    logger.info("Running Black formatter...")
     c.run(".venv/bin/black .")
-    print("Running isort to organize imports...")
+    logger.info("Running isort to organize imports...")
     c.run(".venv/bin/isort .")
-    print("Python formatting complete!")
+    logger.info("Python formatting complete!")
 
 
 @task
 def lint_py(c):
     """Run flake8 linting on Python files"""
-    print("Running flake8 linter...")
+    logger.info("Running flake8 linter...")
     c.run(".venv/bin/flake8")
 
 
@@ -122,22 +129,22 @@ def check_py(c):
 def format_md(c, file=None):
     """Format Markdown files with Prettier"""
     if file:
-        print(f"Running Prettier formatter on {file}...")
+        logger.info(f"Running Prettier formatter on {file}...")
         c.run(f"npx prettier --write --log-level warn '{file}'")
     else:
-        print("Running Prettier formatter on all Markdown files...")
+        logger.info("Running Prettier formatter on all Markdown files...")
         c.run("npx prettier --write --log-level warn '**/*.md'")
-    print("Markdown formatting complete!")
+    logger.info("Markdown formatting complete!")
 
 
 @task
 def lint_md(c, file=None):
     """Run markdownlint on Markdown files"""
     if file:
-        print(f"Running markdownlint on {file}...")
+        logger.info(f"Running markdownlint on {file}...")
         c.run(f"npx markdownlint '{file}'")
     else:
-        print("Running markdownlint on all files...")
+        logger.info("Running markdownlint on all files...")
         c.run("npx markdownlint '**/*.md'")
 
 
@@ -152,12 +159,12 @@ def check_md(c, file=None):
 def format_json(c, file=None):
     """Format JSON files with Prettier"""
     if file:
-        print(f"Running Prettier formatter on {file}...")
+        logger.info(f"Running Prettier formatter on {file}...")
         c.run(f"npx prettier --write --log-level warn '{file}'")
     else:
-        print("Running Prettier formatter on all JSON files...")
+        logger.info("Running Prettier formatter on all JSON files...")
         c.run("npx prettier --write --log-level warn '**/*.json'")
-    print("JSON formatting complete!")
+    logger.info("JSON formatting complete!")
 
 
 @task
@@ -166,7 +173,9 @@ def lint_json(c, file=None):
     if file:
         c.run(f"npx jsonlint '{file}' -q")
     else:
-        c.run("find . -name '*.json' -not -path './node_modules/*' -not -path './output/*' -not -path './.venv/*' -not -path './venv/*' -not -path './.devcontainer/*' -exec npx jsonlint {} -q \\;")
+        c.run(
+            "find . -name '*.json' -not -path './node_modules/*' -not -path './output/*' -not -path './.venv/*' -not -path './venv/*' -not -path './.devcontainer/*' -exec npx jsonlint {} -q \\;"
+        )
 
 
 @task

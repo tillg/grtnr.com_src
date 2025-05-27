@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from logger_config import get_logger
 
 # Setup logger for this plugin
-logger = get_logger('excerpt_to_summary')
+logger = get_logger("excerpt_to_summary")
 
 
 def convert_excerpt_to_summary(generator):

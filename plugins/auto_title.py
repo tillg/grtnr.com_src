@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from logger_config import get_logger
 
 # Setup logger for this plugin
-logger = get_logger('auto_title')
+logger = get_logger("auto_title")
 
 
 class AutoTitleReader(MarkdownReader):

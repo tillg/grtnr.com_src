@@ -38,9 +38,11 @@ def process_content_items(generator, item_list):
         source_path = item.source_path
         slug = item.slug
         # For recipes, use the save_as path if available, otherwise use slug
-        if hasattr(item, 'save_as'):
+        if hasattr(item, "save_as"):
             # Extract directory from save_as (e.g., "recipes/hummus-from-mr-jim/index.html" -> "recipes/hummus-from-mr-jim")
-            output_path = os.path.join(generator.output_path, os.path.dirname(item.save_as))
+            output_path = os.path.join(
+                generator.output_path, os.path.dirname(item.save_as)
+            )
         else:
             output_path = os.path.join(generator.output_path, slug)
 
@@ -60,7 +62,7 @@ def process_content_items(generator, item_list):
 
         # Fix image URLs for all content items (not just hidden ones)
         # Only fix URLs for items that have _content attribute (articles/pages)
-        if hasattr(item, '_content'):
+        if hasattr(item, "_content"):
             fix_image_urls(item, slug, copied_images)
 
 

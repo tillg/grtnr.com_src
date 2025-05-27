@@ -4,14 +4,13 @@ Custom markdown extension for WikiLinks that uses proper slug normalization.
 
 import os
 import re
+
+# Import the central normalize_slug function
 import sys
 
 from markdown import Extension
 from markdown.preprocessors import Preprocessor
 
-# Import the central normalize_slug function
-import sys
-import os
 sys.path.insert(0, os.path.dirname(__file__))
 from normalize_slugs import normalize_slug
 

@@ -7,13 +7,12 @@ from pelican import signals
 
 # Import the central normalize_slug function
 sys.path.insert(0, os.path.dirname(__file__))
-from normalize_slugs import normalize_slug
-
 # Import centralized logging
 from logger_config import get_logger
+from normalize_slugs import normalize_slug
 
 # Setup logger for this plugin
-logger = get_logger('recipes')
+logger = get_logger("recipes")
 
 
 class RecipeAdapter:
