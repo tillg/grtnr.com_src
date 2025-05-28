@@ -14,12 +14,12 @@ Last week end I discovered this video from David Ondrej: [I spent 400+ hours in 
 
 The overall prompt structure that Deavid suggests:
 
-1.  what we are doing
-2.  tag relevant files
-3.  how to execute // what not to do
-4.  context dump
-5.  repeat core instruction
-6.  output format
+1. what we are doing
+2. tag relevant files
+3. how to execute // what not to do
+4. context dump
+5. repeat core instruction
+6. output format
 
 ## Cursorrules
 
