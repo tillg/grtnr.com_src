@@ -10,7 +10,7 @@ I do Sivananda Yoga since over 30 years in [Munich](https://muenchen.sivananda.y
 
 Our classical song at the end of a class
 
-```
+```text
 Om Tryambakam Yajāmahe
 Sugandhim Pusti Vardhanam
 Urvā Rukam Iva Bhandhanān

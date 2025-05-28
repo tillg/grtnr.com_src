@@ -27,7 +27,7 @@ The principle way that JBake operates is similar to the famous [Jekyll](https://
 
 My directory structure looks like this:
 
-```
+```text
 .
 |-- assets
 |   |-- favicon.gif

@@ -33,7 +33,7 @@ The dependencies in this list are from top to bottom, i.e. the fonts are require
 
 Before going thru the different components one by one, this is the directory structure we will have after installing all the bits & pices:
 
-```
+```text
 ├── $HOME
 │   └── .oh-my-zsh/
 │   │   └── custom/
@@ -75,7 +75,7 @@ Configuring the zsh shell is done via entries in `.zshrc`, which is located in y
 
 Bascically Oh My Zsh makes your terminal look very nice (via [themes](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)) and offers lots of helpful plugins. An example list from their [github page](https://github.com/ohmyzsh/ohmyzsh):
 
-```
+```bash
 plugins=(
   git
   bundler

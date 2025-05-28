@@ -1,6 +1,6 @@
 ---
-Tags: tech
-Title: Designing Filmz
+Tags: tech, AI
+Title: An alternative AI peer programming approach - Redesigning Filmz
 Date: 2025-05-21
 image: filmz.png
 summary: Some time ago I built a little iOS App called Filmz with _vibe_coding_. Turns out that's nice until you end up _vibe debugging_. So now I take a new attempt, starting in a more structured way.
@@ -12,91 +12,33 @@ Some time ago I built a little iOS App called Filmz: keep track of films and sho
 
 As I didn’t know any Swift back then, I built it in a _vibe coding_ style, fully supported by AI (back then mainly Cursor.ai). This gave me a fast start, but I was lost once I wanted to add more complex features that required a well structured code base. And since I didn’t know much about Swift, I couldn’t do it either. Vibe debugging doesn’t work - yet…
 
-So here I start again, and with a different approach: I first want to sketch the structure I would like to have, lay out my design principles, the SDKs I want to use (or the ones I don’t want to use) and then start coding. I also plan to use AI support (my Swift know how is still mediocre), but I hope that this way I can create a code base that is more structured, and that will be able to evolve while staying structured.
+So here I start again, and with a different approach: I will try to work in a similar way as I would with a smart but junior peer developer. The focus will be on a stepwise approach, followed along with a proper documentation: Descriptions of the task at hand, description of the architecture changes, of the options that were inspected / though of and what was chosen why...
 
-## Main entities
+[I worked with my AI friend ChatGPT](https://chatgpt.com/share/68371708-8a44-8009-b424-059b920feec9), and plan to start with a structure as described below.
 
-These are the main entities I’m dealing with.
-
-### ImdbFilm
-
-A film from [IMDB](https://www.imdb.com) - even though I don’t use the real IMDB (API usage is really expensive) but [OMDB, the Open Movie DataBase](https://www.omdbapi.com) that can be queried via a much cheaper API. I use ImdbFilm objects and references throughout my code base to reference a "Film".
-
-ImdbFilms are also what I get back from my search (as JSON). And example:
-
-```json
-{
-  "Title": "Harry Potter and the Sorcerer’s Stone",
-  "Year": "2001",
-  "Rated": "PG",
-  "Released": "16 Nov 2001",
-  "Runtime": "152 min",
-  "Genre": "Adventure, Family, Fantasy",
-  "Director": "Chris Columbus",
-  "Writer": "J.K. Rowling, Steve Kloves",
-  "Actors": "Daniel Radcliffe, Rupert Grint, Emma Watson",
-  "Plot": "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
-  "Language": "English, Latin",
-  "Country": "United Kingdom, United States",
-  "Awards": "Nominated for 3 Oscars. 20 wins & 74 nominations total",
-  "Poster": "https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_SX300.jpg",
-  "Ratings": [
-    { "Source": "Internet Movie Database", "Value": "7.7/10" },
-    { "Source": "Rotten Tomatoes", "Value": "80%" },
-    { "Source": "Metacritic", "Value": "65/100" }
-  ],
-  "Metascore": "65",
-  "imdbRating": "7.7",
-  "imdbVotes": "904,094",
-  "imdbID": "tt0241527",
-  "Type": "movie",
-  "DVD": "N/A",
-  "BoxOffice": "$318,886,962",
-  "Production": "N/A",
-  "Website": "N/A",
-  "Response": "True"
-}
+```text
+README.md                        # Project overview and setup instructions
+docs/                     # Everything that is *not* source code lives here
+├── index.md              # High-level functional overview (user-centric)
+├── architecture.md       # High-level tech
+├── glossary.md           # Domain vocabulary
+├── features/             # One sub-dir *per* feature ⬇
+│   ├── dark-mode/
+│   │   ├── 01-intent.md          # “User story” or problem statement
+│   │   ├── 02-ui-flow.md         # Wire-flow, screenshots, diagrams → keep PNG/Drawio *in same folder*
+│   │   ├── 03-design.md          # Tech design & pseudo-code
+│   │   ├── 04-test-plan.md       # Acceptance & edge-case list
+│   │   └── dark-mode.drawio.png  # Diagram sits next to the text that references it
+│   ├── profile-refactor/
+│   │   └── …
+│   └── _TEMPLATE/               # Empty skeleton you copy when adding a feature
+├── data-structure/            # Cross-feature, Entity structures or ERDs, migration notes
+│   ├── schema-overview.mmd
+│   └── schema.md
+├── adr/                  # Architecture Decision Records
+│   ├── ADR-001-use-themex.md
+│   └── ADR-002-db-index.md
+└── changelog.md          # “Keep a Changelog” style history
 ```
 
-Fields of ImdbFilm:
-
-- ID - my internal ID
-- Title
-- year
-- genre - an array of strings
-- plot
-- Actors - an array of strings
-- poster - the url of a poster image
-- imdbRating
-- rottenTomatoeRating
-
-Some of the fields are optional, ID and Title are mandatory. At later stages we could think of keeping track of real actor objects and more, but for a start we are good.
-
-### MyFilm
-
-A film that is on my list. Either one I have seen, or one I plan to see.
-
-Fields of MyFilm:
-
-- ID
-- ImdbId - the film that we talk about
-- seen - Boolean
-- seenDate
-- myRating
-- myComments
-- recommendedAudience - kids, adults, family, bodyCountSavvy
-
-## Services
-
-## UI Objects
-
-## Principles
-
-### System boundaries
-
-### Use structs
-
-### Pass on IDs and services
-
-- Passing on IDs and services in my app. Every logic or UI component that needs the entire object gets it from the service
-- Take care of caching later
+2025-05-28: I take this as a starting point, work, and see what's missing. And add the missing bits on the way.

@@ -52,7 +52,7 @@ For a **Python-based static site generator**, **Pelican** is an excellent choice
 
 **Content Structure:** Organize the digital garden’s content in a logical directory hierarchy under Pelican’s `content/` folder. Each article lives in its own subdirectory alongside its assets. For example:
 
-```
+```text
 content/
 ├── tech/
 │   └── dev/

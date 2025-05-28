@@ -106,7 +106,7 @@ An example:
 
 David provides a list of helpful small prompts or prompt snippets. I copied some of them here for copy&paste usage:
 
-```
+```text
 Proceed like a Senior Developer with a focus on clear architecture.
 
 The fewer lines of code the better.
@@ -128,7 +128,7 @@ You should start the reasoning paragraph with lots of uncertainty, and slowly ga
 
 Used to summarize a compose flow and move over to a fresh compose dialoge.
 
-```
+```text
 Before we proceed, I need you to give me a summary of the current state of the project.
 
 Format this as 3 concise paragraphs, where you describe what we just did, what did not work, which files were updated/created, what mistakes to avoid, any key insights/lessons we’ve learned, what problems/errors we are facing,… and anything else a programmer might need to work productively on this project.
@@ -140,7 +140,7 @@ I expect to see three concise paragraphs, written as if you were giving instruct
 
 ### Unbiased 50/50
 
-```
+```text
 BEFORE YOU ANSWER, i want you to write two detailed paragraphs, one arguing for each of these solutions - do not jump to conclusions, seriously consider both approaches
 
 then, after you finish, tell me whether one of these solutions is obviously better than the other, and why.
@@ -148,7 +148,7 @@ then, after you finish, tell me whether one of these solutions is obviously bett
 
 ### one-paragraph search query
 
-```
+```text
 let's perform a web search. your task is to write a one-paragraph search query, as if you were telling a human researcher that to find, including all the relevant context. format the paragraph as clear instructions, commanding a researcher to find what we're looking for. ask for code snippets or technical details when relevant
 ```
 

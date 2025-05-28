@@ -73,7 +73,7 @@ The result is a neat little serach box on the top right corner:
 
 Last but not least we need the search result page. This page will be called (i.e. linked to) from the search form we just made. It's URL will be something like
 
-```
+```url
 http://tillgartner.com/search.html?q=huhu
 ```
 
