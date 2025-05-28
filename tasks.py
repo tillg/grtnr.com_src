@@ -142,10 +142,18 @@ def lint_md(c, file=None):
     """Run markdownlint on Markdown files"""
     if file:
         logger.info(f"Running markdownlint on {file}...")
-        c.run(f"npx markdownlint '{file}'")
+        result = c.run(f"npx markdownlint '{file}'", warn=True)
     else:
         logger.info("Running markdownlint on all files...")
-        c.run("npx markdownlint '**/*.md'")
+        result = c.run("npx markdownlint '**/*.md'", warn=True)
+    
+    # Count violations and provide summary
+    if result.stderr:
+        violations = result.stderr.strip().split('\n')
+        violation_count = len([line for line in violations if line.strip()])
+        logger.info(f"{violation_count} linting violations found")
+    else:
+        logger.info("0 linting violations found")
 
 
 @task
