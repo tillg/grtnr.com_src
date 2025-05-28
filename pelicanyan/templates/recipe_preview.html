@@ -6,19 +6,6 @@
         <h1 class="post-title" style="color: black !important;">{{ recipe.title }}</h1>
     </a>
         <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
-            <a href="{{ SITEURL }}/{{ recipe.url }}" rel="bookmark" title="Permalink to {{ recipe.title|striptags }}"
-                style="color: black !important; text-decoration-color: black !important; margin-right: 5px;">
-                <span class="post-date" style="margin-bottom: 0; margin-top: 0;">
-                    {% if recipe.metadata.date %}
-                        {% if recipe.metadata.date is string %}
-                            {{ recipe.metadata.date }}
-                        {% else %}
-                            {{ recipe.metadata.date.strftime('%B %-d, %Y') }}
-                        {% endif %}
-                    {% endif %}
-                </span>
-            </a>
-
             <!-- Recipe meta information -->
             {% if recipe.metadata.prep_time or recipe.metadata.cook_time or recipe.metadata.servings %}
             <div style="display: flex; gap: 10px; color: #666; font-size: 0.9em;">
