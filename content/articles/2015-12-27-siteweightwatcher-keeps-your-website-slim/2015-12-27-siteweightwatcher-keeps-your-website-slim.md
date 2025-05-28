@@ -30,7 +30,7 @@ So here is what my SiteWeightWatcher should do:
 - Track key figures and how they evolve over time:
 - How much data is transferred for each page?
 - How many requests are going back & forth?
-- How much time does it take searching for products? Over time...  
+- How much time does it take searching for products? Over time...
 - How well connected is the site for users in Germany, UK, US or Asia? Over time, because those things change without us having done anything.
 
 I could imagine a dashboard for an online shop like [KICKZ.com](https://www.kickz.com/de) to look may this way:
@@ -41,16 +41,16 @@ And just as the normal test teams do, these tests should also evolve and become 
 How could we start to build such a tool? Some thoughts:
 
 - We have agents and a central server. The agents are located all around the globe or in different networks (think of little Docker images that run on different clouds). They report all their captured data to the central server. This is where the reports are generated and where interactive explication of the data is provided.
-- The agents start collecting simple metrics:    
-- No of HTTP requests per page    
-- Data transferred per page    
-- No of lines of JavaScript per page    
-- Time to load the data    
+- The agents start collecting simple metrics:
+- No of HTTP requests per page
+- Data transferred per page
+- No of lines of JavaScript per page
+- Time to load the data
 - Time to execute JavaScript
-- Based on this we start with simple reports:    
-- What's the average page size?    
-- What's the average no of requests per page?    
-- What are my _heaviest_ pages?    
+- Based on this we start with simple reports:
+- What's the average page size?
+- What's the average no of requests per page?
+- What are my _heaviest_ pages?
 - A graph that shows availability of my site as well as load time over a 24h scale, a week scale, a month. May be my users only experience slow loading in the evenings.
 
 From there we we extend the data we collect as well as the reports.

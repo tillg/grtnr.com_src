@@ -74,7 +74,7 @@ At first I was sceptic because of this line:
 
     "Source": "/var/lib/docker/volumes/docker-playground_content/_data"
 
-But it turns out my data is **not** in this docker-managed directory, but where I wanted it. In my case that's in** ./data/content**. Also the relative path works fine.
+But it turns out my data is **not** in this docker-managed directory, but where I wanted it. In my case that's in **./data/content**. Also the relative path works fine.
 
 ### Sources
 

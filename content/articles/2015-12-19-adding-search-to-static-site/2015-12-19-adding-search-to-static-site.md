@@ -24,7 +24,7 @@ Next we need a search box on our pages. I want a search box on the top right of 
 In my case the `menu.ftl` looks something like this:
 
 ```javascript
-	<!-- Fixed navbar -->
+    <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -38,21 +38,21 @@ In my case the `menu.ftl` looks something like this:
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-			<li><a href="/recipe/recipe.html">Recipes</a></li>
+            <li><a href="/recipe/recipe.html">Recipes</a></li>
             <li><a href="/about.html">About</a></li>
           </ul>
-		  <div class="col-sm-3 col-md-3 pull-right">
-		  	<form class="navbar-form" role="search" action="/search.html">
-		    <div class="input-group">
-		    	<input type="text" class="form-control" placeholder="Search" name="q">
-		        <div class="input-group-btn">
-		        	<button class="btn btn-default" type="submit">
-                    	<i class="glyphicon glyphicon-search"></i>
-					</button>
-		        </div>
-		    </div>
-		 </form>
-		 </div>
+          <div class="col-sm-3 col-md-3 pull-right">
+              <form class="navbar-form" role="search" action="/search.html">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="q">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+         </form>
+         </div>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

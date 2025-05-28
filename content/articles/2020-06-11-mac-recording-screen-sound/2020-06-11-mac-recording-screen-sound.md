@@ -24,11 +24,11 @@ What it does in our case: It creates a new, virtual sound channel that splits th
 
 ## Setting it all up
 
-**Installing Soundflower **is well described on it's [download page on Github](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2). The process might seem a bit clumsy but works well if you follow it step by step. Note that it took me a while to figure out what they meant by "_Once there, there should be an "Allow" button (\*\*) that you will need to click on to give permission to use Soundflower (developer: MATT INGALLS)._" I was expecting a popup dialog with the Allow-button, but it's simply a button within the window.
+**Installing Soundflower** is well described on it's [download page on Github](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2). The process might seem a bit clumsy but works well if you follow it step by step. Note that it took me a while to figure out what they meant by "_Once there, there should be an "Allow" button (\*\*) that you will need to click on to give permission to use Soundflower (developer: MATT INGALLS)._" I was expecting a popup dialog with the Allow-button, but it's simply a button within the window.
 
 Also note that you need to reboot your Mac after installing Soundflower.
 
-Once you have Soundflower installed you can create a logical Audio Device that will be slipping the sound stream. To do so, open* Audio MIDI Setup*. It is a macOS utility program located in /Applications/Utilities. You can also start it via Spotlight (hit Cmd + Space) and enter "_Audio Midi"_
+Once you have Soundflower installed you can create a logical Audio Device that will be slipping the sound stream. To do so, open *Audio MIDI Setup*. It is a macOS utility program located in /Applications/Utilities. You can also start it via Spotlight (hit Cmd + Space) and enter "_Audio Midi"_
 
 ![Midi app launch](Screenshot-2020-06-11-at-11.47.25.png)
 

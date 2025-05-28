@@ -18,7 +18,7 @@ Therefore I need anotrher setup. I plan to have a look at some different static 
   - Beautiful
   - Responsive
 
-* Easy to write
+- Easy to write
   - Editor with preview
   - Easy handling and referencing of pics
   - Pictures in preview
@@ -35,11 +35,11 @@ Therefore I need anotrher setup. I plan to have a look at some different static 
   - Publish by email
   - Comment by email
   - Push news to registered users by email
-  * Resize pics for fast delivery
-  * Easy to create new themes, Themes should be just CSS
-  * Based on other HTML, i.e. Bootstrap themes
+  - Resize pics for fast delivery
+  - Easy to create new themes, Themes should be just CSS
+  - Based on other HTML, i.e. Bootstrap themes
 
-* Extensible architecture
+- Extensible architecture
   - Can add stuff, i.e. Picture resizing process
   - At least a programming language I know a bit - or that I am curious to learn (that basically boils it down to Java and JavaScript)
   - The generated HTML should be as simple as possible. All formatting sits in the CSS
