@@ -1,6 +1,6 @@
 ---
 Tags: tech, AI
-Title: An alternative AI peer programming approach - Redesigning Filmz
+Title: Beyond Vibe coding - Redesigning Filmz
 Date: 2025-05-21
 image: filmz.png
 summary: Some time ago I built a little iOS App called Filmz with _vibe_coding_. Turns out that's nice until you end up _vibe debugging_. So now I take a new attempt, starting in a more structured way.
