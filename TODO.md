@@ -16,7 +16,7 @@ We will build a service `translate` that gets a markdown text, a `original-langu
 
 We will keep translations once created and only re-translate (or translate for the first time), if the original markdown has been modified. To this end we keep track of the hash of the to-be-translated markdown file.
 
-The translation service is completely encapsulated. It can be tested on it's own, we camn have different implementations that use different backend services.
+The translation service is completely encapsulated. It can be tested on it's own, we can have different implementations that use different backend services.
 
 ### File organization
 
