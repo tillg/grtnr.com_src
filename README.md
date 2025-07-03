@@ -29,6 +29,8 @@ This project uses invoke for task automation. Here are the available commands:
 - `inv regenerate` - Automatically regenerate site upon file modification
 - `inv livereload` - Build with live reloading (recommended for development)
 - `inv preview` - Build production version of site
+- `inv clean-translations` - Remove all translation files and cache
+- `inv clean-translations-cache` - Remove only the translation cache file
 
 ## Code Quality
 
@@ -39,6 +41,119 @@ This project uses automated Python code formatting and linting. For detailed gui
 - `inv format-py` - Format Python code
 - `inv lint-py` - Run linting
 - `inv check-py` - Format and lint (recommended before commits)
+
+## Running Tests
+
+The project includes comprehensive tests for the translation service functionality.
+
+**Run all tests:**
+```bash
+python tests/test_translation_service.py
+```
+
+**Run tests with verbose output:**
+```bash
+python tests/test_translation_service.py -v
+```
+
+**Run using unittest module:**
+```bash
+python -m unittest tests.test_translation_service -v
+```
+
+**Test Coverage:** 22 tests covering language detection, translation services, file organization, caching, and error handling.
+
+## Translation Configuration
+
+This project includes an automatic translation system that can create multilingual versions of your articles and pages.
+
+### Enabling Translation
+
+Edit `pelicanconf.py` to configure the translation system:
+
+```python
+# Translation settings
+TRANSLATION_ENABLED = True  # Set to True to enable automatic translation
+TRANSLATION_TARGET_LANGUAGES = ["de", "fr", "es"]  # Languages to translate to
+TRANSLATION_EXCLUDE_CATEGORIES = ["recipes"]  # Categories to skip translation
+TRANSLATION_EXCLUDE_PATHS = ["/pages/impressum/"]  # Specific paths to skip
+```
+
+### Configuration Options
+
+- **`TRANSLATION_ENABLED`**: Boolean to enable/disable the translation feature
+- **`TRANSLATION_TARGET_LANGUAGES`**: List of target language codes (e.g., "de" for German, "fr" for French)
+- **`TRANSLATION_EXCLUDE_CATEGORIES`**: List of content categories to skip translation
+- **`TRANSLATION_EXCLUDE_PATHS`**: List of specific file paths to exclude from translation
+
+### Supported Languages
+
+This system uses **ISO 639-1 two-letter language codes**. Here are common examples:
+
+**European Languages:**
+- `en` - English
+- `de` - German (Deutsch)  
+- `fr` - French (Français)
+- `es` - Spanish (Español)
+- `it` - Italian (Italiano)
+- `pt` - Portuguese (Português)
+- `ru` - Russian (Русский)
+- `nl` - Dutch (Nederlands)
+- `sv` - Swedish (Svenska)
+- `da` - Danish (Dansk)
+- `no` - Norwegian (Norsk)
+- `fi` - Finnish (Suomi)
+- `pl` - Polish (Polski)
+
+**Asian Languages:**
+- `zh` - Chinese (中文)
+- `ja` - Japanese (日本語)
+- `ko` - Korean (한국어)
+- `hi` - Hindi (हिन्दी)
+- `ar` - Arabic (العربية)
+- `th` - Thai (ไทย)
+- `vi` - Vietnamese (Tiếng Việt)
+
+**Other Languages:**
+- `tr` - Turkish (Türkçe)
+- `he` - Hebrew (עברית)
+- `fa` - Persian (فارسی)
+
+For a complete list, see the [ISO 639-1 standard](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
+
+### How It Works
+
+1. **Language Detection**: Automatically detects the source language of each article
+2. **Smart Caching**: Only re-translates when source content changes (uses file hashing)
+3. **File Organization**: Stores translations in `extensions/` directories within each article folder
+4. **Metadata Tracking**: Each translation includes source language, target language, creation time, and source file hash
+
+### File Structure
+
+When enabled, translations are stored alongside your content:
+
+```
+content/articles/2025-01-01-example/
+├── 2025-01-01-example.md          # Original content
+└── extensions/
+    ├── 2025-01-01-example-DE.md   # German translation
+    ├── 2025-01-01-example-FR.md   # French translation
+    └── 2025-01-01-example-ES.md   # Spanish translation
+```
+
+**Note**: Translation files in `extensions/` directories are automatically excluded from Pelican processing to avoid conflicts.
+
+### Managing Translations
+
+**Clean up all translations** (useful when switching translation services):
+```bash
+inv clean-translations
+```
+
+**Clear only the translation cache** (forces re-translation without removing files):
+```bash
+inv clean-translations-cache
+```
 
 ## Creating & publishing content
 

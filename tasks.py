@@ -238,6 +238,54 @@ def livereload(c):
     server.serve(host=CONFIG["host"], port=CONFIG["port"], root=CONFIG["deploy_path"])
 
 
+@task
+def clean_translations(c):
+    """Remove all translation files from extensions directories"""
+    # Import file manager
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "plugins"))
+    from file_organization import ExtensionFileManager
+    
+    # Initialize file manager
+    content_path = SETTINGS.get("PATH", "content")
+    file_manager = ExtensionFileManager(content_root=content_path)
+    
+    print("🗑️  Cleaning up all translation files...")
+    
+    try:
+        removed_files, removed_dirs = file_manager.remove_all_translations_global()
+        
+        if removed_files > 0:
+            print(f"✅ Successfully removed:")
+            print(f"   📄 {removed_files} translation files")
+            print(f"   📁 {removed_dirs} empty extension directories")
+        else:
+            print("ℹ️  No translation files found to remove")
+            
+        # Also clear translation cache
+        cache_dir = SETTINGS.get("CACHE_PATH", "cache")
+        cache_file = os.path.join(cache_dir, "translation_cache.json")
+        if os.path.exists(cache_file):
+            os.remove(cache_file)
+            print("🗑️  Cleared translation cache")
+            
+    except Exception as e:
+        print(f"❌ Error during cleanup: {e}")
+        sys.exit(1)
+
+
+@task
+def clean_translations_cache(c):
+    """Remove only the translation cache file"""
+    cache_dir = SETTINGS.get("CACHE_PATH", "cache")
+    cache_file = os.path.join(cache_dir, "translation_cache.json")
+    
+    if os.path.exists(cache_file):
+        os.remove(cache_file)
+        print("✅ Translation cache cleared")
+    else:
+        print("ℹ️  No translation cache found")
+
+
 def pelican_run(cmd):
     # allows to pass-through args to pelican
     remainder = getattr(program.core, "remainder", None) or ""

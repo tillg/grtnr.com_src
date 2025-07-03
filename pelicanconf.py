@@ -27,8 +27,9 @@ THEME = "pelicanyan"
 PATH = "content"
 ARTICLE_PATHS = ["articles"]
 PAGE_PATHS = ["pages"]
+PAGE_EXCLUDES = ["extensions", "**/extensions", "**/extensions/**"]
 STATIC_PATHS = ["static"]
-ARTICLE_EXCLUDES = ["recipes"]
+ARTICLE_EXCLUDES = ["recipes", "extensions", "**/extensions", "**/extensions/**"]
 
 # Add static files mapping
 EXTRA_PATH_METADATA = {
@@ -75,6 +76,7 @@ PLUGINS = [
     "copy_adjacent_images",
     "excerpt_to_summary",
     "external_links",
+    "automatic_translation",
 ]
 
 # Categories
@@ -192,3 +194,9 @@ MARKDOWN = {
     },
     "output_format": "html5",
 }
+
+# Translation settings
+TRANSLATION_ENABLED = True  # Set to True to enable automatic translation
+TRANSLATION_TARGET_LANGUAGES = ["de", "fr"]  # Languages to translate to
+TRANSLATION_EXCLUDE_CATEGORIES = ["recipes"]  # Categories to skip translation
+TRANSLATION_EXCLUDE_PATHS = ["/pages/impressum/"]  # Paths to skip translation

@@ -37,7 +37,7 @@ For detailed system architecture documentation, see [ARCHITECTURE.md](ARCHITECTU
 
 ## Plugin System Architecture
 
-The system's power comes from **8 coordinated custom plugins** that execute in specific order:
+The system's power comes from **9 coordinated custom plugins** that execute in specific order:
 
 1. **auto_title** - Generates titles from directory names (removes date prefixes)
 2. **normalize_slugs** - German character normalization (ä→ae, ß→ss) used across all plugins
@@ -47,6 +47,7 @@ The system's power comes from **8 coordinated custom plugins** that execute in s
 6. **copy_adjacent_images** - Auto-copy images and fix relative URLs
 7. **excerpt_to_summary** - Summary generation for articles
 8. **external_links** - Add target="_blank" to external links
+9. **automatic_translation** - AI-powered automatic translation with caching
 
 **Key architectural patterns:**
 - **Signal-based coordination** - Uses Pelican's signal system for plugin communication
@@ -100,6 +101,37 @@ GitHub Actions automated pipeline:
 - **Recipes**: Use recipe content type for cooking content with dedicated templates
 - **Caching**: Development builds use caching for faster regeneration
 - **Linting**: Flake8 with 88 character line length, W504 ignored
+
+## Automatic Translation System
+
+The site includes an AI-powered automatic translation system that creates translations of articles and pages in multiple languages.
+
+**Features:**
+- **Language Detection** - Automatically detects the source language of content
+- **Hash-based Caching** - Only re-translates when source content changes
+- **File Organization** - Stores translations in `extensions/` directories
+- **Configuration** - Fully configurable target languages and exclusions
+
+**File Structure:**
+```text
+content/articles/2025-01-01-example/
+├── 2025-01-01-example.md          # Original content
+└── extensions/
+    ├── 2025-01-01-example-DE.md   # German translation
+    ├── 2025-01-01-example-FR.md   # French translation
+    └── 2025-01-01-example-ES.md   # Spanish translation
+```
+
+**Configuration (pelicanconf.py):**
+- `TRANSLATION_ENABLED = True` - Enable automatic translation
+- `TRANSLATION_TARGET_LANGUAGES = ["de", "fr", "es"]` - Target languages (ISO 639-1 codes)
+- `TRANSLATION_EXCLUDE_CATEGORIES = ["recipes"]` - Skip categories
+- `TRANSLATION_EXCLUDE_PATHS = ["/pages/impressum/"]` - Skip paths
+
+**Translation Files Include:**
+- Source and target language metadata
+- Creation timestamp and source file hash
+- Full translated content with preserved formatting
 
 ## Content Guidelines
 
