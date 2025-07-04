@@ -1,12 +1,26 @@
 ---
-source-language: en
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: bd90e984eb98a8d1a685356e1317909d5d84a4e0710dbcd8251ae8e2f9ef11dc
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:05.118138
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2021-12-03-life-is-good-cycling-to-work/2021-12-03-life-is-good-cycling-to-work.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→fr] <p>Another reason why life is good: I can cycle to work (almost) every day. It’s up to me wether I do it or not. Wether I think the weather is too bad, to cold, to wet - or wether I just put on my rain gear and do it anyways.</p>
-<p>And the best way to find out if something is worth doing it, is by checking how it feels not to do it. So I did: I didn’t cycle to work for almost a week. And it felt crap. The first day after the non-cycling week that I picked up my bike again felt great! Fresh air, moving and getting oxygen throughout the entire body, having cold fingers and a hot body…</p>
-<p>Bottom line: It might feel difficult at days, but it’s worth it: <span class="caps">EVERY</span> <span class="caps">TIME</span> I move I feel better than if I don’t. What an easy take-away 😜
-Those guys push the boundaries even further: Surfing at -2 degrees Celsius</p>
+```markdown
+---
+layout: post
+title: "La vie est belle : Aller au travail à vélo"
+slug: life-is-good-cycling-to-work
+date_published: 2021-12-03T09:52:15.000Z
+date_updated: 2021-12-06T15:54:36.000Z
+excerpt: La vie est belle parce que je peux aller au travail à vélo 😜
+---
+
+Une autre raison pour laquelle la vie est belle : je peux aller au travail à vélo (presque) tous les jours. C'est à moi de décider si je le fais ou non. Que je pense que le temps est trop mauvais, trop froid, trop humide - ou que je mette simplement mon équipement de pluie et que je le fasse quand même.
+
+Et la meilleure façon de savoir si quelque chose vaut la peine d'être fait, c'est de vérifier ce que l'on ressent en ne le faisant pas. Alors, j'ai essayé : je n'ai pas pris mon vélo pour aller au travail pendant presque une semaine. Et c'était nul. Le premier jour après cette semaine sans vélo où j'ai repris mon vélo, c'était génial ! L'air frais, bouger et oxygéner tout le corps, avoir les doigts froids et le corps chaud...
+
+En résumé : cela peut sembler difficile certains jours, mais ça en vaut la peine : CHAQUE FOIS que je bouge, je me sens mieux que si je ne le fais pas. Quelle conclusion facile à tirer 😜
+Ces gars-là repoussent les limites encore plus loin : Surfer à -2 degrés Celsius
+```

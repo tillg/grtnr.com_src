@@ -1,12 +1,26 @@
 ---
-source-language: en
-target-language: de
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: bd90e984eb98a8d1a685356e1317909d5d84a4e0710dbcd8251ae8e2f9ef11dc
-translation-type: automatic
+Translation: de
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:05.118255
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2021-12-03-life-is-good-cycling-to-work/2021-12-03-life-is-good-cycling-to-work.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→de] <p>Another reason why life is good: I can cycle to work (almost) every day. It’s up to me wether I do it or not. Wether I think the weather is too bad, to cold, to wet - or wether I just put on my rain gear and do it anyways.</p>
-<p>And the best way to find out if something is worth doing it, is by checking how it feels not to do it. So I did: I didn’t cycle to work for almost a week. And it felt crap. The first day after the non-cycling week that I picked up my bike again felt great! Fresh air, moving and getting oxygen throughout the entire body, having cold fingers and a hot body…</p>
-<p>Bottom line: It might feel difficult at days, but it’s worth it: <span class="caps">EVERY</span> <span class="caps">TIME</span> I move I feel better than if I don’t. What an easy take-away 😜
-Those guys push the boundaries even further: Surfing at -2 degrees Celsius</p>
+```markdown
+---
+layout: post
+title: "Das Leben ist schön: Mit dem Fahrrad zur Arbeit"
+slug: life-is-good-cycling-to-work
+date_published: 2021-12-03T09:52:15.000Z
+date_updated: 2021-12-06T15:54:36.000Z
+excerpt: Das Leben ist schön, weil ich mit dem Fahrrad zur Arbeit fahren kann 😜
+---
+
+Ein weiterer Grund, warum das Leben schön ist: Ich kann (fast) jeden Tag mit dem Fahrrad zur Arbeit fahren. Es liegt an mir, ob ich es mache oder nicht. Ob ich denke, dass das Wetter zu schlecht, zu kalt, zu nass ist - oder ob ich einfach meine Regenkleidung anziehe und es trotzdem mache.
+
+Und der beste Weg, um herauszufinden, ob sich etwas lohnt, ist zu prüfen, wie es sich anfühlt, es nicht zu tun. Also habe ich es ausprobiert: Ich bin fast eine Woche lang nicht mit dem Fahrrad zur Arbeit gefahren. Und es fühlte sich mies an. Der erste Tag nach der Nicht-Fahrrad-Woche, an dem ich wieder mein Fahrrad genommen habe, fühlte sich großartig an! Frische Luft, Bewegung und Sauerstoff im ganzen Körper, kalte Finger und ein heißer Körper...
+
+Fazit: Es mag an manchen Tagen schwierig erscheinen, aber es lohnt sich: JEDES MAL, wenn ich mich bewege, fühle ich mich besser als wenn ich es nicht tue. Was für eine einfache Erkenntnis 😜
+Diese Leute gehen noch weiter: Surfen bei -2 Grad Celsius
+```

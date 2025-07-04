@@ -1,17 +1,39 @@
 ---
-source-language: en
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: a98c2022d9b52110ea636bf25cc0d1855c4a102398a2872f32dc738cc41f96f2
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:05.529055
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2021-01-24-testing-dried-mango/2021-01-24-testing-dried-mango.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→fr] <p>Since our 4 years in Vietnam we love Mango! And here in Germany we mostly turned to dried Mango - and have fresh mango on exceptional occasions…</p>
-<p>As we eat lots of them, I decided to run a test: I ordered 6 different types of dried Mango and we had them tested and ranked by all family members and by friends too.</p>
-<p>So here is the result in a nutshell:</p>
-<p><img alt="Mango challenge result table" src="/testing-dried-mango/MangoChallenge.png"/></p>
-<p>Our test results</p>
-<p>The winner was: <a href="https://www.amazon.de/gp/product/B01DOIWQJC" rel="noopener noreferrer" target="_blank">Kamelur 1kg <span class="caps">BIO</span> Mango getrocknet, ungeschwefelt und ungezuckert - getrocknete Mango (dried mango) ohne Zucker-Zusatz</a></p>
-<p>Note that in further tests not everybody liked the <em>Kamelur</em> Mangostreifen as much as we did: They are a bit sour and so another cluster of mango lovers concentrated on the <em>howa</em> Mangos:</p>
-<p>Note: All Mango candidates were ordered at amazon, so this is also our source of prices.</p>
-<p>Have fun with Mangos, Till.</p>
+```markdown
+---
+layout: post
+title: Test de la mangue séchée
+slug: testing-dried-mango
+date_published: 2021-01-24T13:04:58.000Z
+date_updated: 2021-01-24T13:04:58.000Z
+excerpt: Depuis nos 4 ans au Vietnam, nous aimons la mangue ! Et ici en Allemagne, nous nous sommes principalement tournés vers la mangue séchée. Il semblait donc approprié de faire un test en bonne et due forme...
+image: mangos.jpeg
+---
+
+Depuis nos 4 ans au Vietnam, nous aimons la mangue ! Et ici en Allemagne, nous nous sommes principalement tournés vers la mangue séchée - et nous consommons de la mangue fraîche lors d'occasions exceptionnelles...
+
+Comme nous en mangeons beaucoup, j'ai décidé de faire un test : j'ai commandé 6 types différents de mangue séchée et nous les avons testés et classés avec tous les membres de la famille ainsi que des amis.
+
+Voici donc le résultat en bref :
+
+![Tableau des résultats du défi mangue](MangoChallenge.png)
+
+Nos résultats de test
+
+Le gagnant était : [Kamelur 1kg BIO Mangue séchée, non sulfurée et non sucrée - mangue séchée sans ajout de sucre](https://www.amazon.de/gp/product/B01DOIWQJC)
+
+Notez que lors de tests ultérieurs, tout le monde n'a pas autant apprécié les _Kamelur_ Mangostreifen que nous : elles sont un peu acides et donc un autre groupe d'amateurs de mangue s'est concentré sur les mangues _howa_ :
+
+Remarque : Tous les candidats mangue ont été commandés sur amazon, c'est donc également notre source de prix.
+
+Amusez-vous avec les mangues,
+Till.
+```

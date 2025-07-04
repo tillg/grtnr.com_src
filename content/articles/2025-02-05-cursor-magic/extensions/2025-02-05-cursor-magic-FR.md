@@ -1,160 +1,185 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 6f5f3859413aa8ee235065659ab80dc33db60f32d1c181831639b1989c52de3e
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:03.482094
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-05-cursor-magic/2025-02-05-cursor-magic.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <div class="toc">
-<ul>
-<li><a href="#prompt-structure">Prompt Structure</a></li>
-<li><a href="#cursorrules">Cursorrules</a></li>
-<li><a href="#ai-rules-in-cursor-settings"><span class="caps">AI</span> Rules in Cursor Settings</a></li>
-<li><a href="#helpful-small-prompts">Helpful small prompts</a></li>
-<li><a href="#larger-prompts">Larger prompts</a><ul>
-<li><a href="#summary-of-current-state">Summary of current state</a></li>
-<li><a href="#unbiased-5050">Unbiased 50/50</a></li>
-<li><a href="#one-paragraph-search-query">one-paragraph search query</a></li>
-</ul>
-</li>
-<li><a href="#instructions">Instructions</a></li>
-<li><a href="#other-tools">Other tools</a></li>
-</ul>
-</div>
-<p>Last week end I discovered this video from David Ondrej: <a href="https://youtu.be/gYLNxUxVomY?si=1Q2x2UWgqy1RHvLt" rel="noopener noreferrer" target="_blank">I spent 400+ hours in Cursor, here’s what I learned</a>. The title is not super attractive, but the content was very helpful for me. So here are my notes so I can use all his tips and have the different prompts and snippets at hand to use them when coding.</p>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/gYLNxUxVomY?si=xQAMyMvQCsSwWztk" title="YouTube video player" width="560"></iframe>
-<h2 id="prompt-structure">Prompt Structure</h2>
-<p>The overall prompt structure that Deavid suggests:</p>
-<ol>
-<li>what we are doing</li>
-<li>tag relevant files</li>
-<li>how to execute // what not to do</li>
-<li>context dump</li>
-<li>repeat core instruction</li>
-<li>output format</li>
-</ol>
-<h2 id="cursorrules">Cursorrules</h2>
-<p><code>.cursorrules.md</code> is a file you put in your project top level directory that gives the <span class="caps">AI</span> more context about your project. Here is the structure of the file that David suggests:</p>
-<div class="highlight"><pre><span></span><code><span class="gh"># PROJECT OVERVIEW</span>
+```markdown
+---
+date: 2025-02-05
+image: david_cursor_magic.png
+excerpt: J'ai trouvé cette vidéo d'un développeur avec BEAUCOUP de conseils utiles sur l'utilisation de Cursor - voici mes conclusions.
+---
 
-<span class="gh"># PERSONALITY</span>
+[TOC]
 
-<span class="gh"># TECH STACK</span>
+Le week-end dernier, j'ai découvert cette vidéo de David Ondrej : [J'ai passé plus de 400 heures dans Cursor, voici ce que j'ai appris](https://youtu.be/gYLNxUxVomY?si=1Q2x2UWgqy1RHvLt). Le titre n'est pas très accrocheur, mais le contenu m'a été très utile. Voici donc mes notes pour pouvoir utiliser tous ses conseils et avoir les différents prompts et extraits à portée de main lors du codage.
 
-<span class="k">-</span><span class="w"> </span>choose a tech stack with super popular languages
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gYLNxUxVomY?si=xQAMyMvQCsSwWztk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<span class="gh"># ERROR FIXING PROCESS</span>
+## Structure du Prompt
 
-step 1: explain the error in simple terms
-step 2: explain the solution in simple terms
-step 3: show how to fix the error
+La structure générale du prompt que David suggère :
 
-<span class="gh"># BUILDING PROCESS</span>
+1. ce que nous faisons
+2. taguer les fichiers pertinents
+3. comment exécuter // ce qu'il ne faut pas faire
+4. vidage de contexte
+5. répéter l'instruction principale
+6. format de sortie
 
-<span class="gh"># Our - env variables</span>
+## Cursorrules
+
+`.cursorrules.md` est un fichier que vous placez dans le répertoire racine de votre projet pour donner à l'IA plus de contexte sur votre projet. Voici la structure du fichier que David suggère :
+
+```markdown
+# APERÇU DU PROJET
+
+# PERSONNALITÉ
+
+# STACK TECHNIQUE
+
+- choisir un stack technique avec des langages très populaires
+
+# PROCESSUS DE CORRECTION DES ERREURS
+
+étape 1 : expliquer l'erreur en termes simples
+étape 2 : expliquer la solution en termes simples
+étape 3 : montrer comment corriger l'erreur
+
+# PROCESSUS DE CONSTRUCTION
+
+# Nos - variables d'environnement
 
 backend/.env
 frontend/. env
 
-<span class="gh"># CURRENT FILE STRUCTURE</span>
+# STRUCTURE ACTUELLE DES FICHIERS
 
-Here you past the content of this command, so that Cursor knows about your project structure:
+Ici, vous collez le contenu de cette commande, afin que Cursor connaisse la structure de votre projet :
 tree -L 4 -a -I 'node*modules | -git|\_pycache*|.DS\_$
 
-<span class="gh"># GITHUB PUSH PROCESS</span>
+# PROCESSUS DE PUSH GITHUB
 
-<span class="gh"># IMPORTANT</span>
+# IMPORTANT
 
-<span class="k">-</span><span class="w"> </span>Repeat the most important instructions.
-</code></pre></div>
-<p>He also strongly suggests to have a <code>.cursorignore</code> in which you list your <code>.env</code> files. This hinders chat and Composer to write in those files accidentally.</p>
-<h2 id="ai-rules-in-cursor-settings"><span class="caps">AI</span> Rules in Cursor Settings</h2>
-<p><span class="caps">AI</span> Rules are to be set in the cursor settings. They should not contain anything project specific, just coding principles that you would always want to apply. That’s the difference to the <code>.cursorrules</code> that also contain project specific details.</p>
-<p>An example:</p>
-<div class="highlight"><pre><span></span><code><span class="gh"># Fundamental Principles</span>
+- Répétez les instructions les plus importantes.
+```
 
-<span class="k">-</span><span class="w"> </span>Write clean, simple, readable code
-<span class="k">-</span><span class="w"> </span>Implement features in the simplest possible way
-<span class="k">-</span><span class="w"> </span>Keep files small and focused (&lt;200 lines)
-<span class="k">-</span><span class="w"> </span>Test after every meaningful change
-<span class="k">-</span><span class="w"> </span>Focus on core functionality before optimization
-<span class="k">-</span><span class="w"> </span>Use clear, consistent naming
-<span class="k">-</span><span class="w"> </span>Think thoroughly before coding. Write 2-3 reasoning paragraphs.
-<span class="k">-</span><span class="w"> </span>ALWAYS write simple, clean and modular code.
-<span class="k">-</span><span class="w"> </span>use clear and easy-to-understand language. write in short sentences.
+Il suggère également fortement d'avoir un `.cursorignore` dans lequel vous listez vos fichiers `.env`. Cela empêche le chat et le Composer d'écrire accidentellement dans ces fichiers.
 
-<span class="gh"># Error Fixing</span>
+## Règles de l'IA dans les Paramètres de Cursor
 
-<span class="k">-</span><span class="w"> </span>DO NOT JUMP TO CONCLUSIONS! Consider multiple possible causes before deciding.
-<span class="k">-</span><span class="w"> </span>Explain the problem in plain English
-<span class="k">-</span><span class="w"> </span>Make minimal necessary changes, changing as few lines of code as possible
-<span class="k">-</span><span class="w"> </span>in case of strange errors, ask the user to perform a Perplexity web search in order to get the latest up-to-date information
+Les règles de l'IA doivent être définies dans les paramètres de Cursor. Elles ne doivent contenir rien de spécifique au projet, juste des principes de codage que vous voudriez toujours appliquer. C'est la différence avec les `.cursorrules` qui contiennent également des détails spécifiques au projet.
 
-<span class="gh"># Building Process</span>
+Un exemple :
 
-<span class="k">-</span><span class="w"> </span>﻿﻿Verify each new feature works by telling the user how to test it
-<span class="k">-</span><span class="w"> </span>﻿﻿DO NOT write complicated and confusing code. Opt for the simple &amp; modular approach.
-<span class="k">-</span><span class="w"> </span>﻿﻿when not sure what to do, tell the user to perform a web search
+```markdown
+# Principes Fondamentaux
 
-<span class="gh"># Comments</span>
+- Écrire un code propre, simple et lisible
+- Implémenter les fonctionnalités de la manière la plus simple possible
+- Garder les fichiers petits et ciblés (<200 lignes)
+- Tester après chaque changement significatif
+- Se concentrer sur la fonctionnalité principale avant l'optimisation
+- Utiliser une nomenclature claire et cohérente
+- Réfléchir soigneusement avant de coder. Écrire 2-3 paragraphes de raisonnement.
+- TOUJOURS écrire un code simple, propre et modulaire.
+- utiliser un langage clair et facile à comprendre. écrire des phrases courtes.
 
-<span class="k">-</span><span class="w"> </span>ALWAYS try to add more helpful and explanatory comments into our code.
-<span class="k">-</span><span class="w"> </span>NEVER delete old comments - unless they are obviously wrong / obsolete.
-<span class="k">-</span><span class="w"> </span>Include LOTS of explanatory comments in your code. ALWAYS write well documented code.
-<span class="k">-</span><span class="w"> </span>Document all changes and their reasoning IN THE COMMENTS YOU WRITE
-<span class="k">-</span><span class="w"> </span>when writing comments, use clear and easy-to-understand language. write short sentences.
-</code></pre></div>
-<h2 id="helpful-small-prompts">Helpful small prompts</h2>
-<p>David provides a list of helpful small prompts or prompt snippets. I copied some of them here for copy&amp;paste usage:</p>
-<div class="highlight"><pre><span></span><code>Proceed like a Senior Developer with a focus on clear architecture.
+# Correction des Erreurs
 
-The fewer lines of code the better.
+- NE PAS TIRER DE CONCLUSIONS HÂTIVES ! Considérer plusieurs causes possibles avant de décider.
+- Expliquer le problème en anglais simple
+- Apporter les modifications minimales nécessaires, en changeant le moins de lignes de code possible
+- en cas d'erreurs étranges, demander à l'utilisateur d'effectuer une recherche web Perplexity pour obtenir les dernières informations à jour
 
-Start by writing 3 reasoning paragraphs analyzing what the error might be. DO NOT JUMP TO CONCLUSIONS.
+# Processus de Construction
 
-DO NOT STOP WORKING until…
+- ﻿﻿Vérifier que chaque nouvelle fonctionnalité fonctionne en indiquant à l'utilisateur comment la tester
+- ﻿﻿NE PAS écrire de code compliqué et déroutant. Opter pour une approche simple et modulaire.
+- ﻿﻿en cas de doute sur ce qu'il faut faire, dire à l'utilisateur d'effectuer une recherche sur le web
 
-Answer in short
+# Commentaires
 
-DO NET DELETE COMMENTS
+- TOUJOURS essayer d'ajouter des commentaires plus utiles et explicatifs dans notre code.
+- NE JAMAIS supprimer les anciens commentaires - sauf s'ils sont manifestement erronés / obsolètes.
+- Inclure BEAUCOUP de commentaires explicatifs dans votre code. TOUJOURS écrire un code bien documenté.
+- Documenter tous les changements et leur raisonnement DANS LES COMMENTAIRES QUE VOUS ÉCRIVEZ
+- lors de l'écriture de commentaires, utiliser un langage clair et facile à comprendre. écrire des phrases courtes.
+```
 
-You should start the reasoning paragraph with lots of uncertainty, and slowly gain confidence as you think about the item more.
-</code></pre></div>
-<h2 id="larger-prompts">Larger prompts</h2>
-<h3 id="summary-of-current-state">Summary of current state</h3>
-<p>Used to summarize a compose flow and move over to a fresh compose dialoge.</p>
-<div class="highlight"><pre><span></span><code>Before we proceed, I need you to give me a summary of the current state of the project.
+## Petits prompts utiles
 
-Format this as 3 concise paragraphs, where you describe what we just did, what did not work, which files were updated/created, what mistakes to avoid, any key insights/lessons we’ve learned, what problems/errors we are facing,… and anything else a programmer might need to work productively on this project.
+David fournit une liste de petits prompts utiles ou d'extraits de prompts. J'en ai copié certains ici pour une utilisation par copier-coller :
 
-Write in a conversational yet informative tone, something like README file on GitHub that is super information dense and without any fluff or noise. DO NOT include any assumptions or theories, just the facts.
+```text
+Agissez comme un développeur senior avec un accent sur une architecture claire.
 
-I expect to see three concise paragraphs, written as if you were giving instructions to another programmer and this was ALL you could tell him.
-</code></pre></div>
-<h3 id="unbiased-5050">Unbiased 50/50</h3>
-<div class="highlight"><pre><span></span><code>BEFORE YOU ANSWER, i want you to write two detailed paragraphs, one arguing for each of these solutions - do not jump to conclusions, seriously consider both approaches
+Moins il y a de lignes de code, mieux c'est.
 
-then, after you finish, tell me whether one of these solutions is obviously better than the other, and why.
-</code></pre></div>
-<h3 id="one-paragraph-search-query">one-paragraph search query</h3>
-<div class="highlight"><pre><span></span><code>let's perform a web search. your task is to write a one-paragraph search query, as if you were telling a human researcher that to find, including all the relevant context. format the paragraph as clear instructions, commanding a researcher to find what we're looking for. ask for code snippets or technical details when relevant
-</code></pre></div>
-<h2 id="instructions">Instructions</h2>
-<p>David suggests to have a directory <code>instructions</code> that contains md files with tips for the <span class="caps">AI</span>. This way you can reference these files from the Composer prompt. He also preferers this kind of instrauction files over refreencing @Docs in cursor, which seems not to work too good yet.</p>
-<p>Instruction files that he mentioned:</p>
-<ul>
-<li><code>supabase.md</code>: A file that describes the structure of his database, so cursor knows about tables, fields, mandatoryness etc.</li>
-<li><code>roadmap.md</code>: An explanation of the roadmap of your project.</li>
-</ul>
-<h2 id="other-tools">Other tools</h2>
-<p>Besides Cursor David uses many other tools. Some of what he mentioned:</p>
-<ul>
-<li><a href="https://chatgpt.com" rel="noopener noreferrer" target="_blank">ChatGPT</a></li>
-<li><a href="https://claude.ai" rel="noopener noreferrer" target="_blank">Claude</a> for side discussions with an advanced <span class="caps">AI</span>.</li>
-<li><a href="https://www.perplexity.ai" rel="noopener noreferrer" target="_blank">Perplexity</a> for smart web searches.</li>
-<li><a href="https://wisprflow.ai" rel="noopener noreferrer" target="_blank">WisprFlow</a> to speak rather than typing</li>
-<li><a href="https://v0.dev" rel="noopener noreferrer" target="_blank">v0</a> a tool to create Web Apps in the browser by chatting withj an <span class="caps">AI</span>.</li>
-<li><a href="https://lovable.dev" rel="noopener noreferrer" target="_blank">Lovable</a> for building backends, especially with <a href="https://supabase.com" rel="noopener noreferrer" target="_blank">Supabase</a></li>
-<li><a href="https://bolt.new" rel="noopener noreferrer" target="_blank">Bolt</a> to build web sites.</li>
-</ul>
+Commencez par écrire 3 paragraphes de raisonnement analysant ce que l'erreur pourrait être. NE PAS TIRER DE CONCLUSIONS HÂTIVES.
+
+NE PAS ARRÊTER DE TRAVAILLER jusqu'à ce que…
+
+Répondez brièvement
+
+NE PAS SUPPRIMER LES COMMENTAIRES
+
+Vous devriez commencer le paragraphe de raisonnement avec beaucoup d'incertitude, et gagner lentement en confiance à mesure que vous réfléchissez davantage à l'élément.
+```
+
+## Prompts plus larges
+
+### Résumé de l'état actuel
+
+Utilisé pour résumer un flux de composition et passer à un nouveau dialogue de composition.
+
+```text
+Avant de continuer, j'ai besoin que vous me donniez un résumé de l'état actuel du projet.
+
+Formatez cela en 3 paragraphes concis, où vous décrivez ce que nous venons de faire, ce qui n'a pas fonctionné, quels fichiers ont été mis à jour/créés, quelles erreurs éviter, les idées clés/leçons que nous avons apprises, les problèmes/erreurs auxquels nous faisons face,… et tout autre élément dont un programmeur pourrait avoir besoin pour travailler efficacement sur ce projet.
+
+Écrivez dans un ton conversationnel mais informatif, comme un fichier README sur GitHub qui est très dense en informations et sans fioritures ni bruit. NE PAS inclure d'hypothèses ou de théories, juste les faits.
+
+Je m'attends à voir trois paragraphes concis, écrits comme si vous donniez des instructions à un autre programmeur et que c'était TOUT ce que vous pouviez lui dire.
+```
+
+### Impartial 50/50
+
+```text
+AVANT DE RÉPONDRE, je veux que vous écriviez deux paragraphes détaillés, l'un argumentant pour chacune de ces solutions - ne tirez pas de conclusions hâtives, considérez sérieusement les deux approches
+
+puis, après avoir terminé, dites-moi si l'une de ces solutions est évidemment meilleure que l'autre, et pourquoi.
+```
+
+### requête de recherche en un paragraphe
+
+```text
+effectuons une recherche sur le web. votre tâche est d'écrire une requête de recherche en un paragraphe, comme si vous disiez à un chercheur humain ce qu'il faut trouver, en incluant tout le contexte pertinent. formatez le paragraphe comme des instructions claires, commandant à un chercheur de trouver ce que nous recherchons. demandez des extraits de code ou des détails techniques lorsque c'est pertinent
+```
+
+## Instructions
+
+David suggère d'avoir un répertoire `instructions` qui contient des fichiers md avec des conseils pour l'IA. De cette façon, vous pouvez référencer ces fichiers depuis le prompt du Composer. Il préfère ce type de fichiers d'instructions à la référence @Docs dans Cursor, qui semble ne pas encore très bien fonctionner.
+
+Fichiers d'instructions qu'il a mentionnés :
+
+- `supabase.md` : Un fichier qui décrit la structure de sa base de données, afin que Cursor connaisse les tables, champs, obligations, etc.
+- `roadmap.md` : Une explication de la feuille de route de votre projet.
+
+## Autres outils
+
+En plus de Cursor, David utilise de nombreux autres outils. Certains de ceux qu'il a mentionnés :
+
+- [ChatGPT](https://chatgpt.com)
+- [Claude](https://claude.ai) pour des discussions parallèles avec une IA avancée.
+- [Perplexity](https://www.perplexity.ai) pour des recherches web intelligentes.
+- [WisprFlow](https://wisprflow.ai) pour parler plutôt que taper
+- [v0](https://v0.dev) un outil pour créer des applications Web dans le navigateur en discutant avec une IA.
+- [Lovable](https://lovable.dev) pour construire des backends, surtout avec [Supabase](https://supabase.com)
+- [Bolt](https://bolt.new) pour construire des sites web.
+```

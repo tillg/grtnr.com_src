@@ -4,8 +4,8 @@ tags: blog, tech, softwareweneed
 summary: Ich habe jetzt einen auf Pelican basierten Blog und möchte automatisch Inhalte hinzufügen oder korrigieren: Bildtags, Artikelzusammenfassungen, Übersetzungen... Endlich eine Möglichkeit, KI 🤖 zu nutzen
 Translation: de
 Source-Language: en
-Translator: gpt-4
-Translate-Date: 2025-07-04T16:34:29.083252
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:01.956446
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-04-autocompleting-my-blog/2025-05-04-autocompleting-my-blog.md
 Generated-By: automatic-translation-plugin
 ---

@@ -7,7 +7,7 @@ summary: Hace algún tiempo construí una pequeña aplicación iOS llamada Filmz
 Translation: es
 Source-Language: en
 Translator: gpt-4
-Translate-Date: 2025-07-04T16:31:21.882008
+Translate-Date: 2025-07-04T16:39:27.383122
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
 Generated-By: automatic-translation-plugin
 ---

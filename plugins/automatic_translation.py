@@ -8,6 +8,7 @@ import os
 import sys
 from pathlib import Path
 from typing import List, Dict, Any
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Add the extensions directory to the path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'extensions'))
@@ -77,15 +78,36 @@ class TranslationGenerator(Generator):
         articles = self.context.get('articles', [])
         pages = self.context.get('pages', [])
         
-        # Process articles
+        # Collect all content that needs translation
+        all_content = []
         for article in articles:
             if self._should_translate_content(article):
-                self._translate_content(article)
+                all_content.append(article)
         
-        # Process pages
         for page in pages:
             if self._should_translate_content(page):
-                self._translate_content(page)
+                all_content.append(page)
+        
+        if not all_content:
+            logger.info("No content needs translation")
+            return
+        
+        logger.info(f"Processing {len(all_content)} content items for translation")
+        
+        # Process content in parallel (limit to avoid overwhelming the API)
+        max_content_workers = min(len(all_content), self.config.max_concurrent_content)
+        logger.info(f"Using {max_content_workers} parallel workers for content processing")
+        
+        with ThreadPoolExecutor(max_workers=max_content_workers) as executor:
+            # Submit all content translation tasks
+            futures = [executor.submit(self._translate_content, content) for content in all_content]
+            
+            # Wait for all to complete
+            for future in as_completed(futures):
+                try:
+                    future.result()
+                except Exception as e:
+                    logger.error(f"Failed to process content: {e}")
         
         logger.info("Automatic translation generation completed")
     
@@ -125,16 +147,32 @@ class TranslationGenerator(Generator):
         source_lang = self.translation_service.detect_language(source_content)
         logger.debug(f"Detected source language: {source_lang}")
         
-        # Translate to each target language
-        for target_lang in self.config.target_languages:
-            if target_lang == source_lang:
-                logger.debug(f"Skipping translation to same language: {target_lang}")
-                continue
+        # Translate to each target language in parallel
+        target_languages = [lang for lang in self.config.target_languages if lang != source_lang]
+        
+        if not target_languages:
+            logger.debug("No target languages to translate to")
+            return
+        
+        # Use parallel processing for multiple languages
+        max_workers = min(len(target_languages), self.config.max_concurrent_translations)
+        logger.info(f"Translating '{content.title}' to {len(target_languages)} languages using {max_workers} parallel workers")
+        
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all translation tasks
+            future_to_lang = {
+                executor.submit(self._create_translation, content, source_content, source_lang, target_lang): target_lang
+                for target_lang in target_languages
+            }
             
-            try:
-                self._create_translation(content, source_content, source_lang, target_lang)
-            except Exception as e:
-                logger.error(f"Failed to translate {content.title} to {target_lang}: {e}")
+            # Process completed translations
+            for future in as_completed(future_to_lang):
+                target_lang = future_to_lang[future]
+                try:
+                    future.result()  # This will raise any exception that occurred
+                    logger.debug(f"Completed translation to {target_lang}")
+                except Exception as e:
+                    logger.error(f"Failed to translate {content.title} to {target_lang}: {e}")
     
     def _get_source_content(self, content) -> str:
         """Read source content from file"""

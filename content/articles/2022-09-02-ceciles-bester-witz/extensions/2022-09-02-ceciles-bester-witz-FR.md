@@ -1,10 +1,21 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 92d6e93574c8ccaa468023ff5856ee2225e3fc47c2e482b88199c7daaf796153
-translation-type: automatic
+Translation: fr
+Source-Language: de
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:04.946557
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2022-09-02-ceciles-bester-witz/2022-09-02-ceciles-bester-witz.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <p>Sagt der große Stift zum kleinen Stift: Wachs-mal-Stift!</p>
-<p>I keep you posted about future highlights…</p>
+```markdown
+---
+layout: post
+date: 2022-09-03
+image: cecile.jpg
+excerpt: Qu'est-ce que j'ai ri...
+---
+
+Dit le grand crayon au petit crayon : Crayon de cire !
+
+Je vous tiendrai informé des prochains moments forts...
+```

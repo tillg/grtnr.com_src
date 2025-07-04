@@ -1,17 +1,28 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 5814d7550731f02195445b278d9581f350c0ed526470e564ec8e2a71b64d0384
-translation-type: automatic
+Translation: fr
+Source-Language: de
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:04.567305
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2023-05-07-double-ai-chat/2023-05-07-double-ai-chat.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <p>Ich habe mir ein multi-Ai-Chat-<span class="caps">UI</span> gebastelt und es funktioniert!! 😀 <a href="/ai-chat" target="_blank">Guckst Du hier</a></p>
-<h2 id="meine-to-do-liste">Meine To-Do-Liste:</h2>
-<ul>
-<li>See the result as it comes in from the <span class="caps">AI</span>.</li>
-<li>Use A12 Widgets</li>
-<li>Ability to enter specific configurations (i.e. being able to compare <span class="caps">GPT</span>-4 with temperature 0 vs temperature 1)</li>
-<li>Check tokens vs rate limits so messages don’t get too long</li>
-</ul>
-<p>Wenn Du Ideen / Anregungen hast, dann schreib mir gerne eine Mail.</p>
+```markdown
+---
+layout: post
+date: 2023-05-07
+excerpt: Double AI Chat
+image: robots.png
+---
+
+Je me suis créé une interface de chat multi-AI et ça fonctionne !! 😀 [Regardez ici](/ai-chat){:target="\_blank"}
+
+## Ma liste de tâches :
+
+- Voir le résultat au fur et à mesure qu'il arrive de l'IA.
+- Utiliser les Widgets A12
+- Possibilité d'entrer des configurations spécifiques (c'est-à-dire pouvoir comparer GPT-4 avec température 0 contre température 1)
+- Vérifier les jetons par rapport aux limites de taux pour que les messages ne deviennent pas trop longs
+
+Si vous avez des idées ou des suggestions, n'hésitez pas à m'envoyer un email.
+```

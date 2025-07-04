@@ -1,19 +1,31 @@
 ---
-source-language: en
-target-language: de
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 273e172dc9409dc9d675522c56d947a6beae04b93c51cbec87dbc777f418886d
-translation-type: automatic
+Translation: de
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:03.864824
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2024-12-02-sivananda-prayers/2024-12-02-sivananda-prayers.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→de] <p>I do Sivananda Yoga since over 30 years in <a href="https://muenchen.sivananda.yoga" rel="noopener noreferrer" target="_blank">Munich</a>, yet still can’t remember the songs at the end of the yoga classes. So I collected them in order to have them in a printable manner.</p>
-<h2 id="the-om-tryambakam">The Om Tryambakam</h2>
-<p>Our classical song at the end of a class</p>
-<div class="highlight"><pre><span></span><code>Om Tryambakam Yajāmahe
+```markdown
+---
+date: 2024-12-02
+excerpt: Ich praktiziere seit über 30 Jahren Sivananda Yoga, kann mich aber immer noch nicht an die Lieder am Ende der Yogastunden erinnern. Daher habe ich sie gesammelt...
+image: yogi-lotus.jpg
+---
+
+Ich praktiziere seit über 30 Jahren Sivananda Yoga in [München](https://muenchen.sivananda.yoga), kann mich aber immer noch nicht an die Lieder am Ende der Yogastunden erinnern. Daher habe ich sie gesammelt, um sie in druckbarer Form zur Verfügung zu haben.
+
+## Das Om Tryambakam
+
+Unser klassisches Lied am Ende einer Stunde
+
+```text
+Om Tryambakam Yajāmahe
 Sugandhim Pusti Vardhanam
 Urvā Rukam Iva Bhandhanān
 Mrityor Muksīya Mā’mrtāt
-(Repeat x3)
+(Wiederholen x3)
 
 Om Sarvesām Svastir Bhavatu
 Sarvesām Śāntir Bhavatu
@@ -33,7 +45,11 @@ Om Pūrnamada Pūrnamidam
 Pūrnāt Pūrnam Udachyate
 Pūrnasya Pūrnam Ādāya
 Pūrnamevāvaśisyate
-</code></pre></div>
-<p><a href="/public/om_tryambakam.pdf" target="_blank">Get it as <span class="caps">PDF</span></a></p>
-<p>Copied from <a href="https://bodymindlight.com/opening-and-closing-prayers-in-sivananda-yoga" rel="noopener noreferrer" target="_blank">here</a></p>
-<p><img alt="Yogi doing the lotus" src="/sivananda-prayers/yogi-lotus.jpg"/></p>
+```
+
+[Als PDF herunterladen](/public/om_tryambakam.pdf){:target="\_blank"}
+
+Kopiert von [hier](https://bodymindlight.com/opening-and-closing-prayers-in-sivananda-yoga)
+
+![Yogi im Lotussitz](yogi-lotus.jpg)
+```

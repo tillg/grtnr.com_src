@@ -1,63 +1,95 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: e9efb8cbbfdf8c25b6429ef6055502c4d9c9ccffd0deece3f26bf5328cdb8392
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:04.248880
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2024-04-08-setting-up-jupyter-lab-on-mac/2024-04-08-setting-up-jupyter-lab-on-mac.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <p>Setting up Python on a Mac can by tricky. The number of options is big, and they might interact strangely. Also you have to remember which installation method you used once you want to change version or upgrade. This post should remind me how I did it 😉</p>
-<h2 id="installing-python">Installing Python</h2>
-<p>There are many ways to install Python on Mac and to manage it’s versions:</p>
-<ul>
-<li>The Python installed on MacOS</li>
-<li><code>brew</code></li>
-<li>Anaconda</li>
-<li><code>pyenv</code></li>
-<li>…</li>
-</ul>
-<p>What worked best for me is <strong>pyenv</strong>:</p>
-<ul>
-<li>Install it: <code>brew install pyenv</code>. I assume you have <a href="https://brew.sh" rel="noopener noreferrer" target="_blank">Homebrew</a> installed…</li>
-<li>See the options and commands offered: <code>pyenv</code></li>
-<li>List all Python versions available to pyenv: <code>pyenv versions</code></li>
-<li>Install a version: <code>pyenv install 3.12</code> (That’s the Python version I currently use)</li>
-<li>Set the version that is globally used: <code>pyenv global 3.12</code></li>
-<li>Check what version is globally set: <code>pyenv global</code> or <code>python --version</code></li>
-</ul>
-<h2 id="create-working-directory">Create working directory</h2>
-<p>Create the directory in which you want to work in the context of your project. I keep all my coding projects under <code>~/git</code>. This way I know that all the projects under <code>~/git</code> don’t need to be backed up as they are in a git repo.</p>
-<p>Example:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/git
-mkdir<span class="w"> </span>my_python_project
-<span class="nb">cd</span><span class="w"> </span>my_python_project
-</code></pre></div>
-<h2 id="create-a-local-env">Create a local env</h2>
-<p>In order to provide my project it’s own python environment I use <a href="https://docs.python.org/3/library/venv.html" rel="noopener noreferrer" target="_blank">Python’s Virtual Environments</a>:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/git/my_python_project
-python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
-</code></pre></div>
-<p>This way I have created an environement inside the <code>.env</code> sub-dir. To activate it use <code>source .venv/bin/activate</code>.</p>
-<p><strong>Note</strong>: As my <code>.env</code> sub-directory should not be in the git repo, it needs to be listed in the <code>.gitignore</code> file.</p>
-<h2 id="install-jupyter-lab">Install Jupyter Lab</h2>
-<p>Now that I have the Python environment I can install Jupyter. Make sure I am in the right directory and the Python environment is activated:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Go in my project dir and activate it's Python environment</span>
-<span class="nb">cd</span><span class="w"> </span>~/git/my_python_project
-<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+```markdown
+---
+layout: post
+date: 2024-04-08
+excerpt: Configurer Python sur un Mac peut être délicat. Le nombre d'options est important, et elles peuvent interagir de manière étrange. De plus, vous devez vous souvenir de la méthode d'installation que vous avez utilisée lorsque vous souhaitez changer de version ou mettre à jour. Ce post devrait me rappeler comment je l'ai fait 😉
+image: python_on_mac.png
+tags: tech, Mac
+---
 
-<span class="c1"># Install Jupyter Lab in this environment</span>
-pip<span class="w"> </span>install<span class="w"> </span>jupyterlab
+Configurer Python sur un Mac peut être délicat. Le nombre d'options est important, et elles peuvent interagir de manière étrange. De plus, vous devez vous souvenir de la méthode d'installation que vous avez utilisée lorsque vous souhaitez changer de version ou mettre à jour. Ce post devrait me rappeler comment je l'ai fait 😉
 
-<span class="c1"># Very often it asks me to upgrade pip itself</span>
-pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+## Installer Python
 
-<span class="c1"># Start Jupyter Lab</span>
-jupyter<span class="w"> </span>lab
-<span class="c1"># Now wait a bit and your browser should open on http://localhost:8888/lab</span>
-</code></pre></div>
-<h2 id="create-a-new-notebook">Create a new notebook</h2>
-<p>Your browser should be open in a fresh Jupyter Lab environment:
-<img alt="An empty Lab environment" src="/setting-up-jupyter-lab-on-mac/jupyter_overview.png"/></p>
-<p>Click on <em>Notebook &gt; Python 3</em> and your first Notebook should be up <span class="amp">&amp;</span> running:</p>
-<p><img alt="A fresh nbotebook" src="/setting-up-jupyter-lab-on-mac/jupyter_detail.png"/></p>
-<p>To get going within Jupyter Lab, follow their <a href="https://jupyterlab.readthedocs.io/en/latest/user/interface.html" rel="noopener noreferrer" target="_blank">User Guide</a>.</p>
+Il existe de nombreuses façons d'installer Python sur Mac et de gérer ses versions :
+
+- Le Python installé sur MacOS
+- `brew`
+- Anaconda
+- `pyenv`
+- ...
+
+Ce qui a le mieux fonctionné pour moi est **pyenv** :
+
+- Installez-le : `brew install pyenv`. Je suppose que vous avez [Homebrew](https://brew.sh) installé...
+- Consultez les options et commandes proposées : `pyenv`
+- Listez toutes les versions de Python disponibles pour pyenv : `pyenv versions`
+- Installez une version : `pyenv install 3.12` (C'est la version de Python que j'utilise actuellement)
+- Définissez la version utilisée globalement : `pyenv global 3.12`
+- Vérifiez quelle version est définie globalement : `pyenv global` ou `python --version`
+
+## Créer un répertoire de travail
+
+Créez le répertoire dans lequel vous souhaitez travailler dans le cadre de votre projet. Je garde tous mes projets de codage sous `~/git`. De cette façon, je sais que tous les projets sous `~/git` n'ont pas besoin d'être sauvegardés car ils sont dans un dépôt git.
+
+Exemple :
+
+```bash
+cd ~/git
+mkdir my_python_project
+cd my_python_project
+```
+
+## Créer un environnement local
+
+Afin de fournir à mon projet son propre environnement Python, j'utilise [les environnements virtuels de Python](https://docs.python.org/3/library/venv.html) :
+
+```bash
+cd ~/git/my_python_project
+python3.12 -m venv .venv
+```
+
+De cette façon, j'ai créé un environnement à l'intérieur du sous-répertoire `.env`. Pour l'activer, utilisez `source .venv/bin/activate`.
+
+**Remarque** : Comme mon sous-répertoire `.env` ne doit pas être dans le dépôt git, il doit être listé dans le fichier `.gitignore`.
+
+## Installer Jupyter Lab
+
+Maintenant que j'ai l'environnement Python, je peux installer Jupyter. Assurez-vous que je suis dans le bon répertoire et que l'environnement Python est activé :
+
+```bash
+# Allez dans mon répertoire de projet et activez son environnement Python
+cd ~/git/my_python_project
+source .venv/bin/activate
+
+# Installez Jupyter Lab dans cet environnement
+pip install jupyterlab
+
+# Très souvent, il me demande de mettre à jour pip lui-même
+pip install --upgrade pip
+
+# Démarrez Jupyter Lab
+jupyter lab
+# Attendez un peu et votre navigateur devrait s'ouvrir sur http://localhost:8888/lab
+```
+
+## Créer un nouveau notebook
+
+Votre navigateur devrait être ouvert dans un nouvel environnement Jupyter Lab :
+![Un environnement Lab vide](jupyter_overview.png)
+
+Cliquez sur _Notebook > Python 3_ et votre premier Notebook devrait être prêt à fonctionner :
+
+![Un notebook vierge](jupyter_detail.png)
+
+Pour commencer avec Jupyter Lab, suivez leur [Guide de l'utilisateur](https://jupyterlab.readthedocs.io/en/latest/user/interface.html).
+```

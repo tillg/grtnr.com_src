@@ -1,47 +1,97 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 2874836d1997d93f99163c8d5920e3aa86f8eb8e596cd57752d40a8b3f87c875
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:03.239575
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-11-solid-comments-in-static-website/2025-02-11-solid-comments-in-static-website.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <p><strong><span class="caps">TL</span>;<span class="caps">DR</span>:</strong> I added comments to my static website. Here’s how I did it - including some technical details. I researched amongst different possible solutions for the most solid one, integrated it for all posts and added a counter of the number of comments in the post overview page.</p>
-<p><strong>2025-05-23 Update</strong> Since I moved from Jekyll to <a href="https://getpelican.com" rel="noopener noreferrer" target="_blank">Pelican</a>, I updated some details.</p>
-<h2 id="selecting-a-solution">Selecting a solution</h2>
-<p>As i planned to play around with the new <a href="https://openai.com/index/introducing-deep-research/" rel="noopener noreferrer" target="_blank">Deep Research Model from OpenAI</a> I gave it a spin with this topic: <a href="https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776" rel="noopener noreferrer" target="_blank">feel free to read here</a>. Overall the research was helpful and I ended up using <a href="https://giscus.app/" rel="noopener noreferrer" target="_blank">Giscus</a> for the comments. Partly because it felt the most robust and reliable, partly because I had really bad expoerience with disqus some years ago.</p>
-<p>The choice was based on the set of criteria I gave to the model. Here are the most important ones:</p>
-<ul>
-<li>No self-hosted server – I don’t want to manage (and pay 😉) a server.</li>
-<li>Data portability – the comments can exported.</li>
-<li>Privacy-friendly – no extra trackers or ads beyond what I already use (e.g. Google Analytics).</li>
-<li>Markdown support – allow rich formatting (code blocks, etc.) suited for technical discussions.</li>
-<li>Spam protection – has measures to reduce spam, especially if allowing anonymous or unauthenticated comments.</li>
-</ul>
-<p>The tools that Deep Research <em>analyzed</em> were</p>
-<ul>
-<li>Giscus</li>
-<li>Utterances</li>
-<li>Staticman</li>
-<li>Commento</li>
-<li>Hyvor Talk</li>
-<li>Disqus</li>
-<li>Some <em>self made</em> solutions</li>
-</ul>
-<h2 id="integrating-giscus">Integrating Giscus</h2>
-<p>In the follow up to it’s research I asked the model to give me a step by step guide on how to integrate the solution. This was far less reliable than the first research, but still helpful.</p>
-<p>Here is the executive summary (the details are in the <a href="https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776" rel="noopener noreferrer" target="_blank">chat I had with the <span class="caps">AI</span></a>):</p>
-<ul>
-<li>Step 1: Enable GitHub Discussions for Your Repository. That means the repo into which the static site is generated (which sometimes is not the same as the source).</li>
-<li>Go to your GitHub repository</li>
-<li>Navigate to Settings &gt; General.</li>
-<li>Scroll down to the Discussions section and enable it.</li>
-<li>Step in between, that the <span class="caps">AI</span> missed to mention: Install giscus for all or some of your repos. <a href="https://github.com/apps/giscus/installations/select_target" rel="noopener noreferrer" target="_blank">Here</a>
-<img alt="alt text" src="/solid-comments-in-static-website/image.png"/></li>
-<li>Step 2: Install Giscus and Configure It</li>
-<li>Visit the Giscus setup page: https://giscus.app/.</li>
-<li>Under “Repository”, enter your repo name. You now should see the green check mark that your repo meets all the criteria for using giscus.</li>
-<li>The “Page discussion mapping” option dictates a relationship between your pages, e.g an article, and a GitHub discussion. I selected, the pathname</li>
-<li>For the discussions category I selected “general”.
-    Set the Theme to “Match <span class="caps">OS</span>” or manually define light and dark mode.
-    Click “Copy Code” once you’ve generated the <script></script></li></ul>
+```markdown
+---
+date: 2025-02-11
+image: screenshot_comment.jpg
+excerpt: J'ai ajouté des commentaires à mon site web statique. Voici comment j'ai procédé.
+---
+
+**TL;DR :** J'ai ajouté des commentaires à mon site web statique. Voici comment j'ai procédé, y compris quelques détails techniques. J'ai recherché parmi différentes solutions possibles pour trouver la plus solide, je l'ai intégrée à tous les articles et j'ai ajouté un compteur du nombre de commentaires sur la page d'aperçu des articles.
+
+**Mise à jour du 2025-05-23** Depuis que je suis passé de Jekyll à [Pelican](https://getpelican.com), j'ai mis à jour certains détails.
+
+## Sélection d'une solution
+
+Comme je prévoyais d'expérimenter avec le nouveau [Deep Research Model d'OpenAI](https://openai.com/index/introducing-deep-research/), je l'ai testé sur ce sujet : [n'hésitez pas à lire ici](https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776). Dans l'ensemble, la recherche a été utile et j'ai fini par utiliser [Giscus](https://giscus.app/) pour les commentaires. En partie parce que cela semblait le plus robuste et fiable, en partie parce que j'avais eu une très mauvaise expérience avec Disqus il y a quelques années.
+
+Le choix était basé sur l'ensemble de critères que j'avais donné au modèle. Voici les plus importants :
+
+- Pas de serveur auto-hébergé – Je ne veux pas gérer (et payer 😉) un serveur.
+- Portabilité des données – les commentaires peuvent être exportés.
+- Respect de la vie privée – pas de traqueurs ou de publicités supplémentaires au-delà de ce que j'utilise déjà (par exemple Google Analytics).
+- Support Markdown – permet un formatage riche (blocs de code, etc.) adapté aux discussions techniques.
+- Protection contre le spam – dispose de mesures pour réduire le spam, surtout si l'on autorise les commentaires anonymes ou non authentifiés.
+
+Les outils que Deep Research a _analysés_ étaient
+
+- Giscus
+- Utterances
+- Staticman
+- Commento
+- Hyvor Talk
+- Disqus
+- Certaines solutions _faites maison_
+
+## Intégration de Giscus
+
+Suite à sa recherche, j'ai demandé au modèle de me fournir un guide étape par étape sur la façon d'intégrer la solution. Cela s'est avéré moins fiable que la première recherche, mais tout de même utile.
+
+Voici le résumé exécutif (les détails sont dans le [chat que j'ai eu avec l'IA](https://chatgpt.com/share/67a8aea4-9bc8-8009-917b-8855ebdd4776)) :
+
+- Étape 1 : Activer GitHub Discussions pour votre dépôt. Cela signifie le dépôt dans lequel le site statique est généré (qui parfois n'est pas le même que la source).
+  - Allez sur votre dépôt GitHub
+  - Naviguez vers Paramètres > Général.
+  - Faites défiler jusqu'à la section Discussions et activez-la.
+- Étape intermédiaire, que l'IA a omis de mentionner : Installer Giscus pour tous ou certains de vos dépôts. [Ici](https://github.com/apps/giscus/installations/select_target)
+  ![texte alternatif](image.png)
+- Étape 2 : Installer Giscus et le configurer
+  - Visitez la page de configuration de Giscus : https://giscus.app/.
+  - Sous "Repository", entrez le nom de votre dépôt. Vous devriez maintenant voir la coche verte indiquant que votre dépôt répond à tous les critères pour utiliser Giscus.
+  - L'option “Page discussion mapping” dicte une relation entre vos pages, par exemple un article, et une discussion GitHub. J'ai sélectionné, le chemin d'accès
+  - Pour la catégorie des discussions, j'ai sélectionné “général”.
+    Réglez le Thème sur "Match OS" ou définissez manuellement le mode clair et sombre.
+    Cliquez sur "Copy Code" une fois que vous avez généré la balise <script>.
+
+![Fonctionnalités de Giscus](giscus-features.png)
+
+- Étape 3 : Ajouter Giscus à votre modèle de publication Jekyll (ou Pelican 😀). - - Étape 4 : Styliser Giscus pour correspondre au thème Lanyon. J'ai sauté cette étape, car le style me semblait déjà assez bon _nu_.
+- Étape 5 : Afficher le nombre de commentaires dans les résumés des articles (voir ci-dessous)
+- Étape 6 : Valider et pousser les modifications - Évidemment...
+- Étape 7 : Tester votre configuration
+
+## Ajout du compteur de commentaires
+
+Après avoir un peu bricolé et lissé les bords, tout fonctionnait bien. Mais il y avait une fonctionnalité qui me manquait : je voulais voir le nombre de commentaires qu'un article de blog avait sur la page d'aperçu des articles.
+
+![Compteur de commentaires](screenshot_comment_counter.jpg){: style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"}
+
+J'ai donc relancé ChatGPT et obtenu un autre [résultat de recherche](https://chatgpt.com/share/67ab5f69-4ddc-8009-8471-a35e00cb6a43). Les étapes approximatives sont :
+
+- Étape 1 : Ajouter un espace réservé pour le compteur de commentaires. Dans mon [`post_preview.html`](https://github.com/tillg/grtnr.com_2024/blob/main/_includes/post_preview.html), j'ai ajouté un `<span>` qui devait en fait être un peu différent de ce que l'IA avait suggéré :
+
+  ```html
+  <span class="comment-count" data-giscus-comments="{{ post.url }}">
+    <span class="comment-num">Comptage des commentaires...</span>
+  </span>
+  ```
+
+- Étape 2 : Ajouter du JavaScript pour récupérer le compteur de commentaires. J'ai ajouté un script qui récupère le compteur de commentaires depuis l'API GitHub Discussions et met à jour le compteur de commentaires. Le script suggéré nécessitait quelques corrections et a fini par se retrouver dans cet [Event Listener](https://github.com/tillg/grtnr.com_2024/blob/main/assets/js/giscus-comments.js). Ne soyez pas surpris par les deux lignes avec des tirets (---) en haut, je les expliquerai ci-dessous... Ce qui est remarquable ici est
+  - La gestion du `accessToken` (expliquée ci-dessous)
+  - Cet argument de la requête grahQL : `categoryId: "DIC_kwDONYRp_c4Cm0cH"`. C'est l'ID de la catégorie qui contient les discussions du dépôt.
+  - Note : Ce qui m'a aidé pour déboguer et corriger cette fonction est le [Github GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer).
+- Étape 3 : Inclure le JavaScript dans votre site Jekyll. Dans mon cas, j'ai ajouté cette référence de script en bas du fichier de mise en page [`default.html`](https://github.com/tillg/grtnr.com_2024/blob/main/_layouts/default.html).
+- Étape 4 : Tester le compteur de commentaires. Après quelques tests et corrections, cela a finalement fonctionné localement.
+
+Les aspects suivants m'ont occupé pendant une heure ou deux :
+
+- Le `accessToken`, où et comment l'obtenir
+- Comment publier le jeton d'accès sur Github sans que le scanner et le protecteur de jetons ne s'activent
+```

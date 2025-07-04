@@ -1,87 +1,123 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 3f331ccbf78ad8a586c4e3cc6edadcaff49a25311e10dd4b5185c9fa796bd357
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:05.797340
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2020-12-28-my-notes-from-rc3-2020/2020-12-28-my-notes-from-rc3-2020.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <p>This year (Dec 2020) I had a ticket for the <span class="caps">RC3</span>. They were freely distributed, but ran out quickly. So I felt proud, and spent quite some time wtaching the <span class="caps">CCC</span> sessions.</p>
-<p>All the talks are available <a href="https://media.ccc.de/c/rc3" rel="noopener noreferrer" target="_blank">here</a>. I watched (partly or entirely) some of them.</p>
-<p>Besides the talks there was a <em>2D World</em> - that never worked for me 😢 (and my network link was rather good!):
-<img alt="Connection Lost" src="/my-notes-from-rc3-2020/image-8.png"/></p>
-<h3 id="an-introduction-to-tox">An Introduction to Tox</h3>
-<p>A new Messaging service. Better than email, Matrix and all the other messenger platforms. Advantages:</p>
-<ul>
-<li>No central servers, no way to disable any of the encryption features.</li>
-<li>Features of tox: Instant messaging, Voice calls, Video calls, Screen sharing, File sharing, Groups.</li>
-</ul>
-<p>It was interesting to learn, that there are <span class="caps">MANY</span> chat protocols out there. And many of them have similar goals: Keeping the data secure, and sometimes even the metadata. It seems to be a decision one has to make wether your protocol really hides the metadata (usually this is done by using Tor underneauth) or to provide low latency in order to also allow voice and video.</p>
-<p>Questions that come to my mind:</p>
-<ul>
-<li>Does is really provide video calls, or does it simply launch other video calls (i.e. Jitsi) - just as matrix does?</li>
-<li>Are the voice and video calls also really encrypted? Because Cisco Webex does not encrypt it’s video calls (only chats)</li>
-</ul>
-<p><img alt="Key features" src="/my-notes-from-rc3-2020/image-rc3.png"/></p>
-<p>About the guy:</p>
-<p><img alt="About" src="/my-notes-from-rc3-2020/image-10.png"/></p>
-<p><img alt="Getting in touch" src="/my-notes-from-rc3-2020/image-11.png"/></p>
-<h3 id="der-netzpolitische-wetterbericht">Der netzpolitische Wetterbericht</h3>
-<p>Live angehört, von Markus Beckedahl (von <a href="https://netzpolitik.org" rel="noopener noreferrer" target="_blank">netzpolitik.org</a>)</p>
-<p>Was ist letztes Jahr so passiert, welche Themen sind heiß?</p>
-<ul>
-<li>Regierungen wollen Schlüssel um verschlüsselte Kommunikation abzuhören.</li>
-<li>Staatstrojaner nutzen Sicherheitslücken - anstatt dass man diese schnell stopfen würde.</li>
-<li>SmartHome-Geräte wurden als Zeugen vor Gericht vorgeladen: Alexa hat erzählt, was ihr aufgetragen wurde</li>
-<li>Das <span class="caps">BND</span>-Gesetz wurde als verfassungswidrig klassifiziert - schönes Erlebnis 😀. Aber ein neues <span class="caps">BND</span>-Gesetz wurde flott durchgepeitscht…</li>
-<li>Der <a href="https://podcasts.apple.com/lu/podcast/npp-211-zu-fünft-mit-i-dil-baydar/id1281525246?i=1000492613815" rel="noopener noreferrer" target="_blank">Podcast mit Idil Baydar</a> - etwas derb aber recht interessant, in Summe empfehlenswert.</li>
-</ul>
-<p>Habe dann abgebrochen, war recht dröge…</p>
-<p><img alt="Zu fünft..." src="/my-notes-from-rc3-2020/image-2.png"/></p>
-<h3 id="digital-integrity-of-the-human-person-a-new-fundamental-right-2020-update">Digital integrity of the human person, a new fundamental right 2020 update</h3>
-<p>The guy (Alexis Roussel, Swiss) explains how the Human Rights should / could be extended to the digital space.</p>
-<p>Some interesting points he made:</p>
-<ul>
-<li>There is a bug in the <span class="caps">GDPR</span> (Article 2): The government can access all data in case of danger. Too vague as a description and breaks the basic idea of the <span class="caps">GDPR</span>.</li>
-<li>In Switzerland some cantons are updating their Constitution to extend it to the digital space.</li>
-</ul>
-<p>Only dropped in for 15 minutes, didn’t listen to the end…</p>
-<p><img alt="Wikipedia" src="/my-notes-from-rc3-2020/image-3.png"/></p>
-<h3 id="building-blocks-of-decentralization">Building Blocks of Decentralization</h3>
-<p>The guy talking is <a href="https://www.linkedin.com/in/willrscott/" rel="noopener noreferrer" target="_blank">Will Scott</a>. He seems to be a <span class="caps">IPFS</span> guy.</p>
-<ul>
-<li>Currently the largest decentralized system is BitTorrent</li>
-</ul>
-<p><img alt="BitTorrent numbers" src="/my-notes-from-rc3-2020/image-4.png"/></p>
-<ul>
-<li>Another huge distributed system is <a href="https://github.com/tootsuite/mastodon" rel="noopener noreferrer" target="_blank">Mastodon</a> “The Fediverse”. <em>What the hack is this?</em></li>
-</ul>
-<p><img alt="Mastodon" src="/my-notes-from-rc3-2020/image-5.png"/></p>
-<p><img alt="Mastodon numbers" src="/my-notes-from-rc3-2020/image-6.png"/></p>
-<ul>
-<li><span class="caps">IPFS</span> passed 2M users</li>
-<li><span class="caps">SSB</span> (Secure Scuttlebutt) 100K users</li>
-<li>Bitcoin: 1M active accounts</li>
-</ul>
-<p><img alt="Models of decentralization" src="/my-notes-from-rc3-2020/Screenshot-2020-12-28-at-19.37.34.png"/></p>
-<ul>
-<li>Centralized: Facebook. Federated: matrix. Decentralized mesh?</li>
-</ul>
-<p>The actual building blocks of decentralization:</p>
-<ul>
-<li><span class="caps">DHT</span>: Distributed Hash Tables</li>
-<li><span class="caps">BFT</span> (Byzantine Fault Tolerance) Consensus. There seems to be an explanation <a href="https://academy.binance.com/en/articles/byzantine-fault-tolerance-explained" rel="noopener noreferrer" target="_blank">here</a>.</li>
-<li>Consensus can be achieved by <em>Proof of Work</em> or by <em>Proof of Stake</em>.</li>
-</ul>
-<p>He then discussed limitations of those Building Blocks: Volume, number of entities, how many hops —&gt; latency, bandwidth (esp. upload compared to download),</p>
-<p><img alt="Metadata exposure" src="/my-notes-from-rc3-2020/image-7.png"/></p>
-<h3 id="weitere-talks">Weitere Talks…</h3>
-<p>…die ich gerne anhören würde:</p>
-<ul>
-<li><a href="https://media.ccc.de/v/rc3-channels-2020-70-verwaltung-von-projekten-mit-gitea" rel="noopener noreferrer" target="_blank">Verwaltung von Projekten mit Gitea</a>: Nach dem Verkauf von Github an Microsoft werden sich viele die Frage gestellt haben, ob es nicht Alternativen gibt, über die man selbst die volle Kontrolle hat. Ich verwende seit zwei Jahren Go Anwendung Gitea sowohl für berufliche Projekte und Open Source. Gitea hat den Vorteil dass die Hürden für Installation, Wartung und Bedienung übersichtlich und schnell zu meistern sind.
-  Bemerkung: ich habe den Link am 28.12.20 probiert, da schien er falsch zu seine, es wurde über ganz andere Themen gesprochen (auch nteressant: Internationaly Netzpolitik)</li>
-<li><a href="https://media.ccc.de/v/rc3-11591-digitales_klassenzimmer" rel="noopener noreferrer" target="_blank">Digitales Klassenzimmer</a>: In diesem Workshop können Lehrerinnen und Lehrer, Schüler.innen und andere Interessierte in Freie Schulsoftware reinschnuppern. BigBlueButton? Moodle? Nextcloud? Das sind die digitalen Klassenzimmer der Zukunft.</li>
-<li><a href="https://media.ccc.de/v/rc3-11583-rc3_eroffnung" rel="noopener noreferrer" target="_blank">rC3 Eröffnung</a></li>
-</ul>
-<p>Und das war mein Fahrplan für Day 3 (Di, 29. Dez):</p>
-<p><img alt="Fahrplan Day 3" src="/my-notes-from-rc3-2020/image-9.png"/></p>
+```markdown
+---
+layout: post
+title: Mes notes du RC3 2020
+slug: mes-notes-du-rc3-2020
+date_published: 2020-12-28T21:52:54.000Z
+date_updated: 2021-12-06T11:52:04.000Z
+tags:
+image: image-1-rc3.png
+---
+
+Cette année (décembre 2020), j'avais un billet pour le RC3. Ils ont été distribués gratuitement, mais se sont épuisés rapidement. J'étais donc fier et j'ai passé pas mal de temps à regarder les sessions du CCC.
+
+Toutes les conférences sont disponibles [ici](https://media.ccc.de/c/rc3). J'en ai regardé certaines (en partie ou en entier).
+
+En plus des conférences, il y avait un _Monde 2D_ - qui n'a jamais fonctionné pour moi 😢 (et pourtant ma connexion réseau était plutôt bonne !) :
+![Connexion perdue](image-8.png)
+
+### Une introduction à Tox
+
+Un nouveau service de messagerie. Meilleur que l'email, Matrix et toutes les autres plateformes de messagerie. Avantages :
+
+- Pas de serveurs centraux, aucune possibilité de désactiver les fonctionnalités de chiffrement.
+- Fonctionnalités de Tox : Messagerie instantanée, Appels vocaux, Appels vidéo, Partage d'écran, Partage de fichiers, Groupes.
+
+Il était intéressant d'apprendre qu'il existe de NOMBREUX protocoles de chat. Et beaucoup d'entre eux ont des objectifs similaires : Garder les données sécurisées, et parfois même les métadonnées. Il semble qu'il faille décider si votre protocole cache vraiment les métadonnées (généralement cela se fait en utilisant Tor en dessous) ou s'il permet une faible latence pour autoriser également la voix et la vidéo.
+
+Questions qui me viennent à l'esprit :
+
+- Fournit-il vraiment des appels vidéo, ou lance-t-il simplement d'autres appels vidéo (par exemple Jitsi) - tout comme le fait Matrix ?
+- Les appels vocaux et vidéo sont-ils vraiment chiffrés ? Car Cisco Webex ne chiffre pas ses appels vidéo (seulement les chats).
+
+![Caractéristiques clés](image-rc3.png)
+
+À propos du gars :
+
+![À propos](image-10.png)
+
+![Entrer en contact](image-11.png)
+
+### Der netzpolitische Wetterbericht
+
+Écouté en direct, par Markus Beckedahl (de [netzpolitik.org](https://netzpolitik.org))
+
+Qu'est-ce qui s'est passé l'année dernière, quels sujets sont brûlants ?
+
+- Les gouvernements veulent des clés pour écouter les communications chiffrées.
+- Les chevaux de Troie étatiques exploitent les failles de sécurité - au lieu de les corriger rapidement.
+- Les appareils SmartHome ont été convoqués comme témoins devant le tribunal : Alexa a raconté ce qu'on lui avait demandé.
+- La loi BND a été classée comme inconstitutionnelle - une belle expérience 😀. Mais une nouvelle loi BND a été rapidement adoptée...
+- Le [podcast avec Idil Baydar](https://podcasts.apple.com/lu/podcast/npp-211-zu-fünft-mit-i-dil-baydar/id1281525246?i=1000492613815) - un peu cru mais assez intéressant, globalement recommandable.
+
+J'ai ensuite arrêté, c'était assez ennuyeux...
+
+![Zu fünft...](image-2.png)
+
+### Intégrité numérique de la personne humaine, un nouveau droit fondamental mise à jour 2020
+
+Le gars (Alexis Roussel, Suisse) explique comment les Droits de l'Homme devraient / pourraient être étendus à l'espace numérique.
+
+Quelques points intéressants qu'il a soulevés :
+
+- Il y a un bug dans le RGPD (Article 2) : Le gouvernement peut accéder à toutes les données en cas de danger. Description trop vague et qui brise l'idée de base du RGPD.
+- En Suisse, certains cantons mettent à jour leur Constitution pour l'étendre à l'espace numérique.
+
+Je suis passé rapidement pendant 15 minutes, je n'ai pas écouté jusqu'à la fin...
+
+![Wikipédia](image-3.png)
+
+### Les blocs de construction de la décentralisation
+
+Le gars qui parle est [Will Scott](https://www.linkedin.com/in/willrscott/). Il semble être un gars d'IPFS.
+
+- Actuellement, le plus grand système décentralisé est BitTorrent
+
+![Chiffres de BitTorrent](image-4.png)
+
+- Un autre grand système distribué est [Mastodon](https://github.com/tootsuite/mastodon) "Le Fediverse". _Qu'est-ce que c'est que ça ?_
+
+![Mastodon](image-5.png)
+
+![Chiffres de Mastodon](image-6.png)
+
+- IPFS a dépassé les 2 millions d'utilisateurs
+- SSB (Secure Scuttlebutt) 100 000 utilisateurs
+- Bitcoin : 1 million de comptes actifs
+
+![Modèles de décentralisation](Screenshot-2020-12-28-at-19.37.34.png)
+
+- Centralisé : Facebook. Fédéré : matrix. Décentralisé en maillage ?
+
+Les véritables blocs de construction de la décentralisation :
+
+- DHT : Tables de hachage distribuées
+- BFT (Tolérance aux pannes byzantines) Consensus. Il semble y avoir une explication [ici](https://academy.binance.com/en/articles/byzantine-fault-tolerance-explained).
+- Le consensus peut être atteint par _Proof of Work_ ou par _Proof of Stake_.
+
+Il a ensuite discuté des limitations de ces blocs de construction : Volume, nombre d'entités, combien de sauts --> latence, bande passante (surtout en upload par rapport au download),
+
+![Exposition des métadonnées](image-7.png)
+
+### Autres conférences...
+
+...que j'aimerais écouter :
+
+- [Gestion de projets avec Gitea](https://media.ccc.de/v/rc3-channels-2020-70-verwaltung-von-projekten-mit-gitea) : Après la vente de Github à Microsoft, beaucoup se sont demandé s'il n'existait pas d'alternatives sur lesquelles on aurait un contrôle total. J'utilise depuis deux ans l'application Go Gitea pour des projets professionnels et Open Source. Gitea a l'avantage que les obstacles pour l'installation, la maintenance et l'utilisation sont clairs et rapidement surmontés.
+  Remarque : j'ai essayé le lien le 28.12.20, il semblait incorrect, il était question de tout autres sujets (aussi intéressant : Internationaly Netzpolitik)
+- [Salle de classe numérique](https://media.ccc.de/v/rc3-11591-digitales_klassenzimmer) : Dans cet atelier, les enseignants, les élèves et d'autres personnes intéressées peuvent découvrir les logiciels scolaires libres. BigBlueButton ? Moodle ? Nextcloud ? Ce sont les salles de classe numériques de l'avenir.
+- [Ouverture du rC3](https://media.ccc.de/v/rc3-11583-rc3_eroffnung)
+
+Et c'était mon programme pour le jour 3 (mardi 29 décembre) :
+
+![Programme Jour 3](image-9.png)
+```

@@ -1,11 +1,23 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 2d2f47b623675c57e432850811a0cf5a74921cbde6ced335a1eeff7cf6fdaf3a
-translation-type: automatic
+Translation: fr
+Source-Language: de
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:04.739799
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2022-09-12-noch-ein-guter-von-cecile/2022-09-12-noch-ein-guter-von-cecile.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <p>Was macht ein Clown im Büro?</p>
-<p><em>Faxen</em> ;)</p>
-<p>Ps: Und wer weiß wer dieser Clown ist?</p>
+```markdown
+---
+layout: post
+date: 2022-09-12
+excerpt: Et celui-là, Cécile l'a inventé elle-même !
+image: fumagalli.jpeg
+---
+
+Que fait un clown au bureau ?
+
+_Faxer_ ;)
+
+P.S. : Et qui sait qui est ce clown ?
+```

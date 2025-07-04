@@ -1,0 +1,11 @@
+{
+  "content_hash": "92d6e93574c8ccaa468023ff5856ee2225e3fc47c2e482b88199c7daaf796153",
+  "source_lang": "de",
+  "target_lang": "fr",
+  "translation": "```markdown\n---\nlayout: post\ndate: 2022-09-03\nimage: cecile.jpg\nexcerpt: Qu'est-ce que j'ai ri...\n---\n\nDit le grand crayon au petit crayon : Crayon de cire !\n\nJe vous tiendrai informé des prochains moments forts...\n```",
+  "timestamp": "2025-07-04T16:40:34.889610",
+  "metadata": {
+    "model": "gpt-4o",
+    "service_version": "1.0.0"
+  }
+}

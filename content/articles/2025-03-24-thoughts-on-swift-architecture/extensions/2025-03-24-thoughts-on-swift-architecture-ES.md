@@ -5,7 +5,7 @@ excerpt: "Escuché un podcast interesante sobre cómo estructurar diferentes tip
 Translation: es
 Source-Language: en
 Translator: gpt-4
-Translate-Date: 2025-07-04T16:07:19.071641
+Translate-Date: 2025-07-04T16:39:31.699374
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-24-thoughts-on-swift-architecture/2025-03-24-thoughts-on-swift-architecture.md
 Generated-By: automatic-translation-plugin
 ---

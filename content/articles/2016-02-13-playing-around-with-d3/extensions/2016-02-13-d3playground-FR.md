@@ -1,11 +1,26 @@
 ---
-source-language: en
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: df85f2b16031ddd3e29de0e9065e145ab3c4f3afe7bb59a4c77d972c222a5ee8
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:50.269462
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2016-02-13-playing-around-with-d3/2016-02-13-d3playground.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→fr] <p>During my holiday week I played around with <a href="https://d3js.org/" rel="noopener noreferrer" target="_blank">D3 js</a>. I was fascinated by D3 since the first time I saw it, but I never had time to really play with it. Now I did - a little bit…</p>
-<p>My sample data was the number of kilometers I drove with my Vespa in Đà Nẵng over time. I tracked this data by making a <em>screen shot</em> of my km counter from time to time. So I just flipped thru my photo gallery and looked for pictures of my tachometer. I entered the data in a <a href="/assets/playgroundd3/vespa.tsv">plain text file</a>. The I followed some tutorials and tinkered around until I got a curve the way I wanted it.</p>
-<p>See my final page <a href="/assets/playgroundd3/sample2.html">here</a> and the way on how I got there <a href="/assets/playgroundd3/index.html">here</a>.</p>
+```markdown
+---
+layout: post
+title: Expérimenter avec D3
+date_published: 2016-02-13T00:00:00.000Z
+date_updated: 2016-02-13T00:00:00.000Z
+image: d3.png
+excerpt: Une très petite expérience avec D3.
+tags: tech, javaScript
+---
+
+Pendant ma semaine de vacances, j'ai expérimenté avec [D3 js](https://d3js.org/). J'ai été fasciné par D3 depuis la première fois que je l'ai vu, mais je n'avais jamais eu le temps de vraiment m'y consacrer. Maintenant, je l'ai fait - un petit peu...
+
+Mes données d'exemple étaient le nombre de kilomètres que j'ai parcourus avec ma Vespa à Đà Nẵng au fil du temps. J'ai suivi ces données en prenant une _capture d'écran_ de mon compteur kilométrique de temps en temps. J'ai donc simplement parcouru ma galerie de photos et cherché des images de mon tachymètre. J'ai saisi les données dans un [fichier texte brut](/assets/playgroundd3/vespa.tsv). Ensuite, j'ai suivi quelques tutoriels et bricolé jusqu'à obtenir une courbe comme je le souhaitais.
+
+Voyez ma page finale [ici](/assets/playgroundd3/sample2.html) et la manière dont j'y suis arrivé [ici](/assets/playgroundd3/index.html).
+```

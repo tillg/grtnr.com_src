@@ -1,17 +1,39 @@
 ---
-source-language: en
-target-language: de
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: a98c2022d9b52110ea636bf25cc0d1855c4a102398a2872f32dc738cc41f96f2
-translation-type: automatic
+Translation: de
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:42:05.528822
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2021-01-24-testing-dried-mango/2021-01-24-testing-dried-mango.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→de] <p>Since our 4 years in Vietnam we love Mango! And here in Germany we mostly turned to dried Mango - and have fresh mango on exceptional occasions…</p>
-<p>As we eat lots of them, I decided to run a test: I ordered 6 different types of dried Mango and we had them tested and ranked by all family members and by friends too.</p>
-<p>So here is the result in a nutshell:</p>
-<p><img alt="Mango challenge result table" src="/testing-dried-mango/MangoChallenge.png"/></p>
-<p>Our test results</p>
-<p>The winner was: <a href="https://www.amazon.de/gp/product/B01DOIWQJC" rel="noopener noreferrer" target="_blank">Kamelur 1kg <span class="caps">BIO</span> Mango getrocknet, ungeschwefelt und ungezuckert - getrocknete Mango (dried mango) ohne Zucker-Zusatz</a></p>
-<p>Note that in further tests not everybody liked the <em>Kamelur</em> Mangostreifen as much as we did: They are a bit sour and so another cluster of mango lovers concentrated on the <em>howa</em> Mangos:</p>
-<p>Note: All Mango candidates were ordered at amazon, so this is also our source of prices.</p>
-<p>Have fun with Mangos, Till.</p>
+```markdown
+---
+layout: post
+title: Test von getrockneten Mangos
+slug: testing-dried-mango
+date_published: 2021-01-24T13:04:58.000Z
+date_updated: 2021-01-24T13:04:58.000Z
+excerpt: Seit unseren 4 Jahren in Vietnam lieben wir Mangos! Und hier in Deutschland greifen wir meistens zu getrockneten Mangos. Daher schien es angebracht, einen ordentlichen Test durchzuführen...
+image: mangos.jpeg
+---
+
+Seit unseren 4 Jahren in Vietnam lieben wir Mangos! Und hier in Deutschland greifen wir meistens zu getrockneten Mangos - und haben frische Mangos zu besonderen Anlässen...
+
+Da wir viele davon essen, habe ich beschlossen, einen Test durchzuführen: Ich habe 6 verschiedene Sorten getrockneter Mangos bestellt und sie von allen Familienmitgliedern und auch von Freunden testen und bewerten lassen.
+
+Hier ist das Ergebnis in Kürze:
+
+![Ergebnistabelle der Mango-Herausforderung](MangoChallenge.png)
+
+Unsere Testergebnisse
+
+Der Gewinner war: [Kamelur 1kg BIO Mango getrocknet, ungeschwefelt und ungezuckert - getrocknete Mango (dried mango) ohne Zucker-Zusatz](https://www.amazon.de/gp/product/B01DOIWQJC)
+
+Beachten Sie, dass bei weiteren Tests nicht jeder die _Kamelur_ Mangostreifen so sehr mochte wie wir: Sie sind etwas sauer, und so konzentrierte sich eine andere Gruppe von Mango-Liebhabern auf die _howa_ Mangos:
+
+Hinweis: Alle Mango-Kandidaten wurden bei Amazon bestellt, daher ist dies auch unsere Quelle für die Preise.
+
+Viel Spaß mit Mangos,
+Till.
+```
