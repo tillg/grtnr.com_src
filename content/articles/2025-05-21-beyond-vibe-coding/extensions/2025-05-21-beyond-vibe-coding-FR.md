@@ -7,7 +7,7 @@ summary: Il y a quelque temps, j'ai créé une petite application iOS appelée F
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:01.495625
+Translate-Date: 2025-07-04T16:43:14.925612
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
 Generated-By: automatic-translation-plugin
 ---

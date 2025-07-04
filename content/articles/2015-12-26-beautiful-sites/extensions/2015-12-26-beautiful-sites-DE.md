@@ -1,18 +1,27 @@
 ---
-source-language: en
-target-language: de
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: ad86d9de376bc0c9ecf8f634020fe64c1d3240dbccc9352f09293851842492c6
-translation-type: automatic
+Translation: de
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:43:12.428265
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2015-12-26-beautiful-sites/2015-12-26-beautiful-sites.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→de] <p>Since I always Have in mind that my site needs a proper design, I need a place to keep track of beautiful sites or at least sites where I like the design. So this is the home of those URLs</p>
-<ul>
-<li><a href="http://jason.pureconcepts.net/" rel="noopener noreferrer" target="_blank">Jason McCreary’s blog</a></li>
-<li>Large fonts</li>
-<li>Good for text based entries as well as pictures</li>
-<li>Simple navigation</li>
-<li><a href="http://alexcican.com/" rel="noopener noreferrer" target="_blank">Alex Cinan</a></li>
-<li>Large fonts</li>
-<li><span class="caps">BIG</span> pictures with the cool paralax effect</li>
-</ul>
+```markdown
+---
+title: Schöne Webseiten
+tag: tech
+image: html.jpg
+excerpt: Eine Liste von Seiten, die ich mag - könnte veraltet sein... 😉
+---
+
+Da ich immer im Hinterkopf habe, dass meine Seite ein ordentliches Design benötigt, brauche ich einen Ort, um schöne Seiten oder zumindest Seiten, deren Design mir gefällt, im Auge zu behalten. Dies ist also die Heimat dieser URLs.
+
+- [Jason McCrearys Blog](http://jason.pureconcepts.net/)
+  - Große Schriftarten
+  - Gut für textbasierte Einträge sowie Bilder
+  - Einfache Navigation
+- [Alex Cinan](http://alexcican.com/)
+  - Große Schriftarten
+  - GROßE Bilder mit dem coolen Parallax-Effekt
+```

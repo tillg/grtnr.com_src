@@ -5,7 +5,7 @@ summary: Ich habe jetzt einen auf Pelican basierten Blog und möchte automatisch
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:01.956446
+Translate-Date: 2025-07-04T16:43:15.699117
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-04-autocompleting-my-blog/2025-05-04-autocompleting-my-blog.md
 Generated-By: automatic-translation-plugin
 ---

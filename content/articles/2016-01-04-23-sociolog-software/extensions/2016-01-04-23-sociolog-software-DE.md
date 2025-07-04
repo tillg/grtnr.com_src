@@ -1,42 +1,55 @@
 ---
-source-language: en
-target-language: de
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: f74871d79814bc59a5b1c7171885bb67981c6fe570d92726c6e2abfd92f059f1
-translation-type: automatic
+Translation: de
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:43:09.363698
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2016-01-04-23-sociolog-software/2016-01-04-23-sociolog-software.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→de] <p>I write or blog in different media:</p>
-<ul>
-<li>Twitter</li>
-<li>Facebook</li>
-<li>A private blog with restricted access (because it contains family pictures)</li>
-<li>This <a href="http://tillgartner.com" rel="noopener noreferrer" target="_blank">blog</a></li>
-</ul>
-<p>From time to time I find it nice to scroll through my past. I do this most often on our family blog, because it contains the most interesting content and because it is easy to scroll through. I would like to be able to scroll through all my past across all media.</p>
-<p>So this is what my software should do:</p>
-<ul>
-<li>Collect all entries I wrote in the social media:</li>
-<li>Twitter</li>
-<li>Facebook</li>
-<li>Wordpress</li>
-<li>Create one document per entry in a Github Repo</li>
-<li>Handle properly duplicate content: Since some years my Twitter account is <em>linked</em> to my Facebook account in that Twitter entries are replicated to Facebook. That’s because I have people that I consider <em>audience</em> in both media.</li>
-<li>Collect also the feedback to my posts</li>
-<li>Nicely display them in a static way, including overview pages</li>
-</ul>
-<p>Some technical thoughts:</p>
-<ul>
-<li>I would write it in java because that’s what I know best</li>
-<li>Would be a headless program i.e. no <span class="caps">UI</span></li>
-<li>Input should be the date of the last recorded social media entry</li>
-<li>It collects all the entries (including the comments to it) on the different social media channels since that date</li>
-<li>It dedupes them (i.e. merges the ones that are the same or replicates of one another on different channels)</li>
-<li>It creates one document / file per social media entry and writes them in an output directory</li>
-<li>This directory is then replicated / added to a github account</li>
-<li>Social media entry documents would be named like <code>2015-12-03-The_title_of_what_ I_wrote-TWITTER.json</code></li>
-<li>There would be a <em>header file</em> with a fixed name, i.e. <code>sociologs.json</code>. This file would hold the first 20 logs and point to a file with the next logs.</li>
-<li>The domain <code>sociolog.io</code> would be <a href="https://www.godaddy.com/domains/searchresults.aspx?&amp;checkAvail=1&amp;domainToCheck=sociolog.io" rel="noopener noreferrer" target="_blank">available</a> - as of today, Jan 4 2016.</li>
-<li>The generated <code>index.html</code> would load the data via <span class="caps">JS</span>/<span class="caps">AJAX</span> requests and continue loading while the user scrolls down</li>
-</ul>
-<p>If anyone is interested, or has comment, please get in touch at till<code>dot</code>gartner<code>at</code>gmail<code>dot</code>com.</p>
+```markdown
+---
+title: sociolog - Ihr Pfad durch soziale Medien
+tags: softwareWeNeed
+layout: post
+date: 2016-01-04
+image: sociolog.png
+excerpt: Ein Tool, das meine Aktivitäten auf allen sozialen Medienplattformen verfolgt.
+---
+
+Ich schreibe oder blogge in verschiedenen Medien:
+
+- Twitter
+- Facebook
+- Ein privater Blog mit eingeschränktem Zugang (weil er Familienfotos enthält)
+- Dieser [Blog](http://tillgartner.com)
+
+Von Zeit zu Zeit finde ich es schön, durch meine Vergangenheit zu scrollen. Am häufigsten mache ich das in unserem Familienblog, weil er die interessantesten Inhalte enthält und weil es einfach ist, durchzuscrollen. Ich möchte in der Lage sein, durch meine gesamte Vergangenheit in allen Medien zu scrollen.
+
+Das sollte meine Software also tun:
+
+- Alle Einträge sammeln, die ich in den sozialen Medien geschrieben habe:
+  - Twitter
+  - Facebook
+  - Wordpress
+- Ein Dokument pro Eintrag in einem Github-Repo erstellen
+- Doppelte Inhalte ordnungsgemäß behandeln: Seit einigen Jahren ist mein Twitter-Konto mit meinem Facebook-Konto _verbunden_, sodass Twitter-Einträge auf Facebook repliziert werden. Das liegt daran, dass ich Menschen habe, die ich in beiden Medien als _Publikum_ betrachte.
+- Auch das Feedback zu meinen Beiträgen sammeln
+- Diese auf ansprechende Weise statisch darstellen, einschließlich Übersichtsseiten
+
+Einige technische Überlegungen:
+
+- Ich würde es in Java schreiben, da ich das am besten kenne
+- Wäre ein Headless-Programm, d.h. keine Benutzeroberfläche
+- Der Input sollte das Datum des letzten aufgezeichneten Social-Media-Eintrags sein
+- Es sammelt alle Einträge (einschließlich der Kommentare dazu) auf den verschiedenen Social-Media-Kanälen seit diesem Datum
+- Es entfernt Duplikate (d.h. es werden die gleichen oder replizierten Einträge auf verschiedenen Kanälen zusammengeführt)
+- Es erstellt ein Dokument / eine Datei pro Social-Media-Eintrag und schreibt sie in ein Ausgabeverzeichnis
+- Dieses Verzeichnis wird dann in ein Github-Konto repliziert / hinzugefügt
+- Social-Media-Eintragsdokumente würden wie `2015-12-03-Der_Titel_von_was_ich_geschrieben_habe-TWITTER.json` benannt
+- Es gäbe eine _Header-Datei_ mit einem festen Namen, z.B. `sociologs.json`. Diese Datei würde die ersten 20 Logs enthalten und auf eine Datei mit den nächsten Logs verweisen.
+- Die Domain `sociolog.io` wäre [verfügbar](https://www.godaddy.com/domains/searchresults.aspx?&checkAvail=1&domainToCheck=sociolog.io) - Stand heute, 4. Januar 2016.
+- Das generierte `index.html` würde die Daten über JS/AJAX-Anfragen laden und beim Herunterscrollen des Benutzers weiterladen
+
+Wenn jemand interessiert ist oder Anmerkungen hat, bitte kontaktieren Sie mich unter till`dot`gartner`at`gmail`dot`com.
+```

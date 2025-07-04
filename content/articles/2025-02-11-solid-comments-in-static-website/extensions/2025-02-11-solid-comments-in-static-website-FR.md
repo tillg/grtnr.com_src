@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:03.239575
+Translate-Date: 2025-07-04T16:43:13.122336
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-11-solid-comments-in-static-website/2025-02-11-solid-comments-in-static-website.md
 Generated-By: automatic-translation-plugin
 ---

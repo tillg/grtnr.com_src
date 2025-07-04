@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: de
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:04.946557
+Translate-Date: 2025-07-04T16:43:14.990337
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2022-09-02-ceciles-bester-witz/2022-09-02-ceciles-bester-witz.md
 Generated-By: automatic-translation-plugin
 ---

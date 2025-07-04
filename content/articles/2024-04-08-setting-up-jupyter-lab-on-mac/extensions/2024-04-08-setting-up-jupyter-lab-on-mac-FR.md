@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:04.248880
+Translate-Date: 2025-07-04T16:43:14.603608
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2024-04-08-setting-up-jupyter-lab-on-mac/2024-04-08-setting-up-jupyter-lab-on-mac.md
 Generated-By: automatic-translation-plugin
 ---

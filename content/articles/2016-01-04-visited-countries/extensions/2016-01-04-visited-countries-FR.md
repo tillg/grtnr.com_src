@@ -1,11 +1,22 @@
 ---
-source-language: en
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: e0209b5f8caf7c70008e2b7c12143d8c5724e5796c0c19848124a3ba472bb557
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T16:43:09.164676
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2016-01-04-visited-countries/2016-01-04-visited-countries.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→fr] <p>A nice tool to play around - because it’s nice to see where you’ve been and because it’s a nice piece of <span class="caps">JS</span>:</p>
-<p><a href="http://map1.maploco.com/visited-countries/mine.php?c1=mtlev1d7dk-b5fytqed5e-b3op0x9h4w-jefemlierk-2scxhcxdvo" rel="noopener noreferrer" target="_blank"><img alt="visited countries" src="http://map1.maploco.com/visited-countries/ml/mtlev1d7dk-b5fytqed5e-b3op0x9h4w-jefemlierk-2scxhcxdvo.gif"/></a></p>
-<p><a href="http://map1.maploco.com/visited-countries/mine.php?c1=mtlev1d7dk-b5fytqed5e-b3op0x9h4w-jefemlierk-2scxhcxdvo" rel="noopener noreferrer" target="_blank"><img alt="visited countries" border="0" src="http://map1.maploco.com/visited-countries/ml/mtlev1d7dk-b5fytqed5e-b3op0x9h4w-jefemlierk-2scxhcxdvo.gif"/></a></p>
+```markdown
+---
+layout: post
+title: Pays visités
+tags: tech
+---
+
+Un outil sympathique pour s'amuser - car c'est agréable de voir où vous êtes allé et parce que c'est un joli morceau de JS :
+
+[![pays visités](http://map1.maploco.com/visited-countries/ml/mtlev1d7dk-b5fytqed5e-b3op0x9h4w-jefemlierk-2scxhcxdvo.gif)](http://map1.maploco.com/visited-countries/mine.php?c1=mtlev1d7dk-b5fytqed5e-b3op0x9h4w-jefemlierk-2scxhcxdvo)
+
+<a href="http://map1.maploco.com/visited-countries/mine.php?c1=mtlev1d7dk-b5fytqed5e-b3op0x9h4w-jefemlierk-2scxhcxdvo"><img src="http://map1.maploco.com/visited-countries/ml/mtlev1d7dk-b5fytqed5e-b3op0x9h4w-jefemlierk-2scxhcxdvo.gif" border=0 alt="pays visités"></a>
+```

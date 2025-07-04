@@ -1,0 +1,11 @@
+{
+  "content_hash": "ad86d9de376bc0c9ecf8f634020fe64c1d3240dbccc9352f09293851842492c6",
+  "source_lang": "en",
+  "target_lang": "fr",
+  "translation": "```markdown\n---\ntitle: Beaux sites web\ntag: tech\nimage: html.jpg\nexcerpt: Une liste de sites que j'aime - pourrait être dépassée... 😉\n---\n\nComme j'ai toujours en tête que mon site a besoin d'un design approprié, j'ai besoin d'un endroit pour garder une trace des beaux sites ou du moins des sites dont j'aime le design. Voici donc le foyer de ces URL.\n\n- [Blog de Jason McCreary](http://jason.pureconcepts.net/)\n  - Grandes polices\n  - Bon pour les entrées basées sur du texte ainsi que pour les images\n  - Navigation simple\n- [Alex Cinan](http://alexcican.com/)\n  - Grandes polices\n  - GRANDES images avec le superbe effet parallaxe\n```",
+  "timestamp": "2025-07-04T16:43:12.447821",
+  "metadata": {
+    "model": "gpt-4o",
+    "service_version": "1.0.0"
+  }
+}

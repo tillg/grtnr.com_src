@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: de
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:04.567305
+Translate-Date: 2025-07-04T16:43:14.552791
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2023-05-07-double-ai-chat/2023-05-07-double-ai-chat.md
 Generated-By: automatic-translation-plugin
 ---
