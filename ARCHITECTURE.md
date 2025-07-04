@@ -482,4 +482,366 @@ inv livereload
 - WikiLinks provide easy cross-referencing
 - Tag system enables content organization
 
+## Translation Service Architecture
+
+### Overview
+
+The translation service provides AI-powered automatic translation of content into multiple languages using OpenAI's GPT API. It's designed as a standalone, independently testable service that integrates with the Pelican plugin system.
+
+### Architecture Principles
+
+- **Service Independence**: Complete decoupling from Pelican internals
+- **API-First Design**: Clear interface contract for translation operations
+- **Test-Driven Development**: Comprehensive testing with sample content
+- **Secure Key Management**: Environment-based API key handling
+- **Caching Strategy**: Hash-based caching to avoid redundant translations
+
+### Core Components
+
+#### TranslationService Class
+
+```python
+class TranslationService:
+    """Main translation service interface"""
+    
+    def __init__(self, api_key: str, model: str = "gpt-4"):
+        """Initialize with OpenAI API configuration"""
+        
+    def translate_content(self, content: str, source_lang: str, target_lang: str) -> str:
+        """Translate markdown content while preserving structure"""
+        
+    def detect_language(self, content: str) -> str:
+        """Detect source language of content"""
+        
+    def get_supported_languages(self) -> List[str]:
+        """Return list of supported language codes"""
+```
+
+#### Translation Cache
+
+```python
+class TranslationCache:
+    """Content hash-based caching system"""
+    
+    def __init__(self, cache_dir: str):
+        """Initialize cache directory"""
+        
+    def get_cached_translation(self, content_hash: str, target_lang: str) -> Optional[str]:
+        """Retrieve cached translation if available"""
+        
+    def cache_translation(self, content_hash: str, target_lang: str, translation: str):
+        """Store translation in cache"""
+        
+    def invalidate_cache(self, content_hash: str):
+        """Remove cached translations for specific content"""
+```
+
+#### Configuration Management
+
+```python
+class TranslationConfig:
+    """Configuration management for translation service"""
+    
+    api_key: str                    # OpenAI API key from environment
+    model: str                      # GPT model (default: gpt-4)
+    target_languages: List[str]     # Target language codes
+    exclude_categories: List[str]   # Categories to skip
+    exclude_paths: List[str]        # Paths to skip
+    cache_enabled: bool             # Enable caching (default: True)
+    max_retries: int               # API retry attempts (default: 3)
+    timeout: int                   # Request timeout in seconds (default: 30)
+```
+
+### Integration Architecture
+
+#### Plugin Integration
+
+The translation service integrates with Pelican through the `automatic_translation` plugin:
+
+```python
+# plugins/automatic_translation.py
+from translation_service import TranslationService, TranslationConfig
+
+def translate_content(generators):
+    """Pelican plugin entry point"""
+    config = TranslationConfig.from_pelican_settings(generators[0].settings)
+    service = TranslationService(config)
+    
+    for generator in generators:
+        for article in generator.articles:
+            service.process_article(article)
+```
+
+#### File Organization
+
+```text
+extensions/
+├── translation_service/
+│   ├── __init__.py
+│   ├── service.py              # Core TranslationService
+│   ├── cache.py                # TranslationCache implementation
+│   ├── config.py               # Configuration management
+│   ├── prompts.py              # Translation prompts
+│   └── exceptions.py           # Custom exceptions
+├── tests/
+│   ├── test_translation_service.py
+│   ├── test_cache.py
+│   ├── test_config.py
+│   └── fixtures/
+│       ├── sample_article.md
+│       ├── sample_recipe.md
+│       └── expected_translations/
+└── plugins/
+    └── automatic_translation.py   # Pelican plugin
+```
+
+### Translation Process Flow
+
+#### 1. Content Discovery
+
+1. Plugin scans all articles/pages during generation
+2. Filters content based on configuration (excluded categories/paths)
+3. Detects source language of each piece of content
+4. Determines target languages for translation
+
+#### 2. Cache Check
+
+1. Generates content hash (SHA-256 of markdown content)
+2. Checks cache for existing translations
+3. Skips translation if cached version exists and is current
+4. Proceeds to translation if cache miss or content changed
+
+#### 3. Translation Execution
+
+1. Constructs translation prompt with context
+2. Sends request to OpenAI API with retry logic
+3. Validates response structure and content
+4. Caches successful translation with metadata
+
+#### 4. File Management
+
+1. Creates `extensions/` directory structure
+2. Writes translated content with proper metadata
+3. Maintains original file structure and naming
+4. Updates cache with new translation hash
+
+### Translation Prompt Engineering
+
+#### Core Prompt Structure
+
+```text
+You are a professional translator specializing in technical content and markdown documents.
+
+TASK: Translate the following markdown content from {source_lang} to {target_lang}.
+
+REQUIREMENTS:
+1. Preserve ALL markdown formatting (headers, links, code blocks, lists, etc.)
+2. Maintain WikiLinks syntax: [[Page Name]] -> [[Translated Page Name]]
+3. Keep code blocks and technical terms untranslated unless they are comments
+4. Translate alt text in images: ![description](image.jpg) -> ![translated description](image.jpg)
+5. Preserve metadata sections (front matter) untranslated
+6. Maintain the tone and style appropriate for technical/blog content
+7. Use native language conventions for the target language
+
+CONTENT:
+{content}
+
+TRANSLATION:
+```
+
+#### Language-Specific Adaptations
+
+- **German**: Formal vs. informal tone detection
+- **French**: Proper accent handling and Canadian vs. European variations
+- **Spanish**: Regional variations and technical term handling
+- **Italian**: Formal register for technical content
+
+### API Key Management
+
+#### Environment Variables
+
+Configuration can be provided via environment variables or `.env` files:
+
+```bash
+# .env file (recommended for development)
+OPENAI_API_KEY=sk-...
+
+# Optional configuration
+TRANSLATION_MODEL=gpt-4           # Default model
+TRANSLATION_CACHE_DIR=./cache     # Cache directory
+TRANSLATION_MAX_RETRIES=3         # API retry attempts
+TRANSLATION_TIMEOUT=30            # Request timeout
+TRANSLATION_TARGET_LANGUAGES=de,fr,es  # Comma-separated language codes
+TRANSLATION_EXCLUDE_CATEGORIES=recipes,drafts  # Categories to skip
+TRANSLATION_EXCLUDE_PATHS=/pages/impressum/,/admin/  # Paths to skip
+TRANSLATION_CACHE_ENABLED=true    # Enable caching
+TRANSLATION_AUTO_DETECT=true      # Auto-detect source language
+```
+
+#### .env File Support
+
+The translation service uses `python-dotenv` to automatically load configuration from `.env` files:
+
+```python
+# Automatic .env loading
+from dotenv import load_dotenv
+load_dotenv()  # Loads .env from current directory or parent directories
+
+# Configuration priority (highest to lowest):
+# 1. Environment variables
+# 2. .env file in current directory
+# 3. .env file in parent directories
+# 4. Default values
+```
+
+#### Security Considerations
+
+- API keys stored in environment variables or `.env` files only
+- `.env` files should be added to `.gitignore`
+- No hardcoded secrets in source code
+- Cache files contain no sensitive information
+- Secure handling of API responses
+- Support for multiple `.env` files (development, staging, production)
+
+### Testing Strategy
+
+#### Unit Tests
+
+```python
+class TestTranslationService:
+    def test_translate_simple_content(self):
+        """Test basic translation functionality"""
+        
+    def test_preserve_markdown_structure(self):
+        """Test that markdown formatting is preserved"""
+        
+    def test_handle_wikilinks(self):
+        """Test WikiLinks translation"""
+        
+    def test_cache_functionality(self):
+        """Test caching behavior"""
+        
+    def test_error_handling(self):
+        """Test API error scenarios"""
+```
+
+#### Integration Tests
+
+```python
+class TestTranslationIntegration:
+    def test_full_article_translation(self):
+        """Test complete article translation workflow"""
+        
+    def test_pelican_plugin_integration(self):
+        """Test plugin integration with Pelican"""
+        
+    def test_file_output_structure(self):
+        """Test correct file generation"""
+```
+
+#### Manual Testing Framework
+
+```python
+class TranslationTestRunner:
+    """Manual testing framework for translation quality"""
+    
+    def run_sample_translations(self):
+        """Translate sample content for human review"""
+        
+    def generate_comparison_report(self):
+        """Generate side-by-side comparison for review"""
+        
+    def validate_translation_quality(self):
+        """Run automated quality checks"""
+```
+
+### Performance Considerations
+
+#### API Rate Limiting
+
+- Implement exponential backoff for retries
+- Batch requests when possible
+- Monitor API usage quotas
+- Graceful degradation on rate limits
+
+#### Caching Strategy
+
+- Content-based hashing for cache keys
+- Separate cache per target language
+- Cache invalidation on content changes
+- Configurable cache TTL
+
+#### Memory Management
+
+- Stream processing for large content
+- Lazy loading of translations
+- Cleanup of temporary files
+- Memory-efficient caching
+
+### Error Handling
+
+#### API Errors
+
+```python
+class TranslationError(Exception):
+    """Base exception for translation errors"""
+
+class APIError(TranslationError):
+    """OpenAI API communication errors"""
+
+class RateLimitError(TranslationError):
+    """API rate limiting errors"""
+
+class InvalidResponseError(TranslationError):
+    """Invalid API response format"""
+
+class LanguageNotSupportedError(TranslationError):
+    """Unsupported language codes"""
+```
+
+#### Graceful Degradation
+
+- Continue site generation if translation fails
+- Log errors without stopping build process
+- Provide fallback behavior for missing translations
+- Clear error messages for debugging
+
+### Monitoring and Logging
+
+#### Metrics Collection
+
+- Translation request counts
+- API response times
+- Cache hit/miss ratios
+- Error rates by type
+- Language pair success rates
+
+#### Logging Strategy
+
+```python
+logger = get_logger('translation_service')
+
+logger.info(f"Translating {len(articles)} articles to {target_lang}")
+logger.debug(f"Cache hit for {content_hash}")
+logger.warning(f"API rate limit reached, retrying in {delay}s")
+logger.error(f"Translation failed: {error}", exc_info=True)
+```
+
+### Future Enhancements
+
+#### Advanced Features
+
+- Batch translation for improved efficiency
+- Translation quality scoring
+- Custom terminology dictionaries
+- Multi-model fallback strategy
+- Real-time translation updates
+
+#### Integration Improvements
+
+- CLI commands for translation management
+- Web interface for translation review
+- Integration with translation management systems
+- Automated quality assessment
+
 This architecture supports a modern digital garden workflow with strong content organization, automated processing, and dual-environment deployment while maintaining the flexibility and performance of a static site generator.

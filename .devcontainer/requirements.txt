@@ -29,3 +29,5 @@ invoke==2.2.0
 livereload==2.7.0
 black==24.10.0
 isort==5.13.2
+openai==1.93.0
+httpx==0.28.1
