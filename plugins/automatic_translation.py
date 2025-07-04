@@ -215,13 +215,17 @@ class TranslationGenerator(Generator):
         lines = translation.split('\n')
         has_frontmatter = lines and lines[0].strip() == '---'
         
+        # Get model name from translation service config
+        model_name = self.config.model if self.config else 'unknown'
+        
         # Create translation metadata
         translation_meta = [
             f"Translation: {target_lang}",
             f"Source-Language: {source_lang}",
+            f"Translator: {model_name}",
+            f"Translate-Date: {self._get_current_timestamp()}",
             f"Source-File: {getattr(original_content, 'source_path', '')}",
-            f"Generated-By: automatic-translation-plugin",
-            f"Generated-Date: {self._get_current_timestamp()}"
+            f"Generated-By: automatic-translation-plugin"
         ]
         
         if has_frontmatter:
