@@ -5,8 +5,8 @@ summary: Notes sur les découvertes et les _compréhensions_ autour du [Protocol
 tags: Tech, IA
 Translation: fr
 Source-Language: en
-Translator: gpt-4
-Translate-Date: 2025-07-04T17:03:59.768686
+Translator: gpt-4o
+Translate-Date: 2025-07-04T22:06:50.096535
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-18-mcp-playground/2025-05-18-mcp-playground.md
 Generated-By: automatic-translation-plugin
 ---
@@ -24,7 +24,7 @@ Questions ouvertes que j'ai.
 
 ## Accéder à un serveur MCP
 
-Lors de la recherche et finalement de la découverte d'un serveur MCP pour mon cas d'utilisation, je trouve utile de jouer avec eux, afin de _comprendre_ quels outils le LLM obtient. La façon la plus simple de le faire est avec l'[Inspecteur MCP](https://github.com/modelcontextprotocol/inspector).
+Lors de la recherche et finalement de la découverte d'un serveur MCP pour mon cas d'utilisation, je trouve utile de jouer avec eux, afin de _comprendre_ quels outils le LLM obtient. La façon la plus simple de faire cela est avec l'[Inspecteur MCP](https://github.com/modelcontextprotocol/inspector).
 
 Pour commencer :
 
@@ -38,7 +38,7 @@ npx @modelcontextprotocol/inspector node build/index.js
 
 **Configuration**
 
-L'Inspecteur conserve ce que vous tapez dans la barre latérale dans le localStorage, mais pour des configurations répétables, vous pouvez sauvegarder un petit fichier JSON et pointer le CLI vers celui-ci :
+L'Inspecteur conserve tout ce que vous tapez dans la barre latérale dans le localStorage, mais pour des configurations répétables, vous pouvez sauvegarder un petit fichier JSON et pointer le CLI vers celui-ci :
 
 ```json
 // mcp.json
@@ -79,7 +79,7 @@ Configuration principale :
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/Users/nom_utilisateur/Desktop",
+        "/Users/nom_utilisateur/Bureau",
         "/chemin/vers/autre/répertoire/autorisé"
       ]
     }

@@ -2,8 +2,8 @@
   "content_hash": "7b207422c535554b09a2069a58b99a7d3f8bc65156a3dcfec71dfd6cb97df75f",
   "source_lang": "en",
   "target_lang": "de",
-  "translation": "```markdown\n---\ntitle: Mit Highcharts spielen\ntags: tech\ndate: 2015-12-16\n---\n\nHeute habe ich Highcharts entdeckt: Ein Tool, um ganz einfach Diagramme online zu erstellen. Es ermöglicht Ihnen tatsächlich, das Diagramm auf ihrer Website zu erstellen (Sie benötigen buchstäblich weniger als 5 Minuten!) und es von dort aus zu veröffentlichen.\n\nDies ist der Kilometerstand (oder sollte man _Kilometerleistung_ sagen?) meiner Vespa, seit ich sie gekauft habe:\n\n[![Highcharts](highcharts_chart.png)](https://app.everviz.com/show/opequb?redirected-from-hs)\n\nDer einzige Nachteil scheint zu sein, dass der Dienst Geld kostet, wenn Sie ihn in einem professionellen Kontext nutzen möchten. Sie sind auf [github](https://github.com/highcharts/highcharts) zu finden, aber die Beschreibung der Lizenz verweist Sie tatsächlich auf ihren [Online-Shop](http://shop.highsoft.com/).\n```",
-  "timestamp": "2025-07-04T17:02:42.715236",
+  "translation": "```markdown\n---\ntitle: Spielen mit Highcharts\ntags: tech\ndate: 2015-12-16\n---\n\nHeute habe ich Highcharts entdeckt: Ein Tool, um ganz einfach online Diagramme zu erstellen. Es ermöglicht Ihnen tatsächlich, das Diagramm auf ihrer Website zu erstellen (Sie benötigen buchstäblich weniger als 5 Minuten!) und es von dort aus zu veröffentlichen.\n\nDies ist der Kilometerstand (oder würden Sie _Kilometerzahl_ sagen?) meiner Vespa, seit ich sie gekauft habe:\n\n[![Highcharts](highcharts_chart.png)](https://app.everviz.com/show/opequb?redirected-from-hs)\n\nDer einzige Nachteil scheint zu sein, dass der Dienst Geld kostet, wenn Sie ihn in einem professionellen Kontext nutzen möchten. Sie sind auf [github](https://github.com/highcharts/highcharts), aber die Beschreibung der Lizenz verweist Sie tatsächlich auf ihren [Online-Shop](http://shop.highsoft.com/).\n```",
+  "timestamp": "2025-07-04T20:41:31.209902",
   "metadata": {
     "model": "gpt-4o",
     "service_version": "1.0.0"

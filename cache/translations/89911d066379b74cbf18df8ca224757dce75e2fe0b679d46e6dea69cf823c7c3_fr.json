@@ -1,0 +1,11 @@
+{
+  "content_hash": "89911d066379b74cbf18df8ca224757dce75e2fe0b679d46e6dea69cf823c7c3",
+  "source_lang": "en",
+  "target_lang": "fr",
+  "translation": "```markdown\n---\ntitle: Un Proxy pour naviguer hors ligne\ntags: softwareweneed\n---\n\nVoici un logiciel que j'aimerais avoir : un proxy qui fonctionne sur mon ordinateur portable et qui met en cache intelligemment certains sites web afin que je puisse les consulter lorsque je suis hors ligne.\n\nPlus précisément :\n\n- Un proxy qui fonctionne sur mon ordinateur portable\n- Le proxy sait quelles pages/sites je souhaite avoir disponibles lorsque je suis hors ligne\n- Lorsque le navigateur demande l'une de ces pages, le proxy vérifie si le site web est accessible. Si c'est le cas, il télécharge la page et l'envoie au navigateur. Si le proxy ne peut pas atteindre le site web, il essaie de servir la page depuis son cache local.\n\nDe cette manière, je pourrais naviguer normalement lorsque je suis en ligne. Lorsque je suis hors ligne, je pourrais accéder à une petite partie d'internet – mais je pourrais quand même lire certaines pages.\n\nUne fois cela réalisé, le proxy pourrait être amélioré :\n\n- Lorsqu'il est inactif et dispose d'une connexion internet, il pourrait rafraîchir les pages dans son cache\n- En comptant les pages que j'accède souvent, il pourrait décider quelles pages il est judicieux de mettre en cache\n- Il pourrait apprendre à quelle fréquence les pages changent et adapter les intervalles de rafraîchissement en conséquence\n- …\n\nEt voici les questions que je me pose :\n\n- Quelqu'un connaît-il un outil qui offre cette fonctionnalité ?\n- Quelqu'un verrait-il un problème majeur que j'aurais manqué ?\n- Des idées intéressantes sur la façon dont cela pourrait être construit ?\n\nPour compléter l'information : j'utilise un MacBook, OS X 10.6. Les commentaires sont les bienvenus...\n\nPassez une bonne soirée,\n\n– Till.\n```",
+  "timestamp": "2025-07-04T20:46:59.625862",
+  "metadata": {
+    "model": "gpt-4o",
+    "service_version": "1.0.0"
+  }
+}

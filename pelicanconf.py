@@ -8,8 +8,8 @@ import pytz
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "plugins"))
 from logger_config import setup_pelican_logging
 
-# Initialize logging with INFO level (can be changed to DEBUG for more verbose output)
-setup_pelican_logging("INFO")
+# Initialize logging with DEBUG level for multilingual debugging
+setup_pelican_logging("DEBUG")
 
 # Our sitename might vary depending on the environment
 SITENAME = "grtnr.com"
@@ -79,7 +79,7 @@ PLUGINS = [
     "copy_adjacent_images",
     "excerpt_to_summary",
     "external_links",
-    # "automatic_translation",  # Temporarily disabled to focus on multilingual structure
+    "automatic_translation",
     "multilingual_site",
 ]
 

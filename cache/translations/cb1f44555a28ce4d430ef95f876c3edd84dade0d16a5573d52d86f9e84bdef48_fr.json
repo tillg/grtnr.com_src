@@ -1,0 +1,11 @@
+{
+  "content_hash": "cb1f44555a28ce4d430ef95f876c3edd84dade0d16a5573d52d86f9e84bdef48",
+  "source_lang": "en",
+  "target_lang": "fr",
+  "translation": "```markdown\n---\ntitle: Restauration Rapide Vietnamienne\ntags: voyage, Vietnam\n---\n\nCe soir, j'ai appris quelque chose de nouveau : les Vietnamiens ont aussi de la restauration rapide. Comme McDonaldViet. Mon ami m'a montré un tel endroit ce soir. Ça s'appelle Star Beef. Croyez-le ou non, nous avons eu quelque chose comme un menu \"Pierre Chaude\". Sauf que la pierre était en métal.\n\nLa dame qui servait le bœuf le découpait en petits morceaux devant nous, avec des ciseaux.\n\n![restauration_rapide](fast_food1.jpg)\n\n![restauration_rapide](fast_food2.jpg)\n\n![restauration_rapide](fast_food3.jpg)\n```",
+  "timestamp": "2025-07-04T20:46:32.039441",
+  "metadata": {
+    "model": "gpt-4o",
+    "service_version": "1.0.0"
+  }
+}

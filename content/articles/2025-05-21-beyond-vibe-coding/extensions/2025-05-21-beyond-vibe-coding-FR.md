@@ -1,50 +1,50 @@
 ---
-Tags: tech, IA
-Title: Au-delà du codage Vibe - Refonte de Filmz
+Tags: tech, AI
+Title: Au-delà du _vibe coding_ - Repenser Filmz
 Date: 2025-05-21
 image: filmz.png
-summary: Il y a quelque temps, j'ai créé une petite application iOS appelée Filmz avec le _codage_vibe_. C'est bien jusqu'à ce que vous finissiez par faire du _débogage vibe_. Alors maintenant, je fais une nouvelle tentative, en commençant de manière plus structurée.
+summary: Il y a quelque temps, j'ai construit une petite application iOS appelée Filmz avec le _vibe coding_. Il s'avère que c'est agréable jusqu'à ce que vous finissiez par faire du _vibe debugging_. Je prends donc une nouvelle tentative, en commençant de manière plus structurée.
 Translation: fr
 Source-Language: en
-Translator: gpt-4
-Translate-Date: 2025-07-04T17:03:58.868178
+Translator: gpt-4o
+Translate-Date: 2025-07-04T22:06:50.096436
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
 Generated-By: automatic-translation-plugin
 ---
 
 <img src="filmz.png" alt="Filmz" width="300">
 
-Il y a quelque temps, j'ai créé une petite application iOS appelée Filmz : gardez une trace des films et des émissions que vous voulez voir ou que vous avez vus. Conservez des informations supplémentaires personnelles comme "qu'est-ce que j'en ai pensé ?" (c'est-à-dire ma note personnelle), "À quel public le recommanderais-je ?" (Adultes, enfants, famille) "Quand et où l'ai-je vu" etc. Et puis vient le partage : transmettre des recommandations de films à des amis, soit un film à la fois, soit des listes.
+Il y a quelque temps, j'ai construit une petite application iOS appelée Filmz : suivre les films et les séries que vous souhaitez voir ou que vous avez vus. Conservez des informations personnelles supplémentaires comme « comment l'ai-je aimé ? » (c'est-à-dire ma note personnelle), « À quel public le recommanderais-je ? » (adultes, enfants, famille) « Quand et où l'ai-je vu » etc. Et ensuite vient le partage : transmettre des recommandations de films à des amis, soit un film à la fois, soit des listes.
 
-Comme je ne connaissais pas Swift à l'époque, je l'ai construit dans un style de _codage vibe_, entièrement soutenu par l'IA (à l'époque principalement Cursor.ai). Cela m'a permis de démarrer rapidement, mais j'étais perdu une fois que je voulais ajouter des fonctionnalités plus complexes qui nécessitaient une base de code bien structurée. Et comme je ne connaissais pas grand-chose à Swift, je ne pouvais pas le faire non plus. Le débogage vibe ne fonctionne pas - pas encore...
+Comme je ne connaissais pas Swift à l'époque, je l'ai construite dans un style de _vibe coding_, entièrement soutenu par l'IA (à l'époque principalement Cursor.ai). Cela m'a permis de démarrer rapidement, mais j'étais perdu une fois que je voulais ajouter des fonctionnalités plus complexes nécessitant une base de code bien structurée. Et comme je ne connaissais pas bien Swift, je ne pouvais pas le faire non plus. Le _vibe debugging_ ne fonctionne pas - pas encore...
 
-Alors voici que je recommence, et avec une approche différente : j'essaierai de travailler de la même manière que je le ferais avec un développeur junior mais intelligent. L'accent sera mis sur une approche par étapes, accompagnée d'une documentation appropriée : Descriptions de la tâche en cours, description des changements d'architecture, des options qui ont été inspectées / envisagées et ce qui a été choisi pourquoi...
+Je recommence donc ici, avec une approche différente : je vais essayer de travailler de manière similaire à celle que j'adopterais avec un développeur junior intelligent mais inexpérimenté. L'accent sera mis sur une approche progressive, accompagnée d'une documentation appropriée : descriptions de la tâche à accomplir, description des changements d'architecture, des options qui ont été examinées / envisagées et ce qui a été choisi et pourquoi...
 
-[J'ai travaillé avec mon ami IA ChatGPT](https://chatgpt.com/share/68371708-8a44-8009-b424-059b920feec9), et je prévois de commencer avec une structure comme décrite ci-dessous.
+[J'ai travaillé avec mon ami IA ChatGPT](https://chatgpt.com/share/68371708-8a44-8009-b424-059b920feec9), et je prévois de commencer avec une structure décrite ci-dessous.
 
 ```text
-README.md                        # Vue d'ensemble du projet et instructions d'installation
+README.md                        # Vue d'ensemble du projet et instructions de configuration
 docs/                     # Tout ce qui n'est *pas* du code source se trouve ici
 ├── index.md              # Vue d'ensemble fonctionnelle de haut niveau (centrée sur l'utilisateur)
-├── architecture.md       # Tech de haut niveau
+├── architecture.md       # Technologie de haut niveau
 ├── glossary.md           # Vocabulaire du domaine
 ├── features/             # Un sous-répertoire *par* fonctionnalité ⬇
 │   ├── dark-mode/
-│   │   ├── 01-intent.md          # "User story" ou énoncé du problème
-│   │   ├── 02-ui-flow.md         # Wire-flow, captures d'écran, diagrammes → garder les PNG/Drawio *dans le même dossier*
+│   │   ├── 01-intent.md          # « User story » ou énoncé du problème
+│   │   ├── 02-ui-flow.md         # Wire-flow, captures d'écran, diagrammes → garder PNG/Drawio *dans le même dossier*
 │   │   ├── 03-design.md          # Conception technique & pseudo-code
-│   │   ├── 04-test-plan.md       # Liste des cas d'acceptation & des cas limites
+│   │   ├── 04-test-plan.md       # Liste d'acceptation & de cas limites
 │   │   └── dark-mode.drawio.png  # Le diagramme se trouve à côté du texte qui le référence
 │   ├── profile-refactor/
 │   │   └── …
-│   └── _TEMPLATE/               # Squelette vide que vous copiez lors de l'ajout d'une fonctionnalité
-├── data-structure/            # Cross-feature, structures d'entité ou ERDs, notes de migration
+│   └── _TEMPLATE/               # Modèle vide à copier lors de l'ajout d'une fonctionnalité
+├── data-structure/            # Trans-fonctionnalité, structures d'entités ou ERD, notes de migration
 │   ├── schema-overview.mmd
 │   └── schema.md
-├── adr/                  # Records de décisions d'architecture
+├── adr/                  # Architecture Decision Records
 │   ├── ADR-001-use-themex.md
 │   └── ADR-002-db-index.md
-└── changelog.md          # Historique de style "Keep a Changelog"
+└── changelog.md          # Historique au style « Keep a Changelog »
 ```
 
-2025-05-28: Je prends cela comme point de départ, je travaille, et je vois ce qui manque. Et j'ajoute les morceaux manquants en cours de route.
+2025-05-28 : Je prends ceci comme point de départ, travaille, et vois ce qui manque. Et j'ajoute les éléments manquants en cours de route.

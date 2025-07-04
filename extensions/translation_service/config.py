@@ -30,7 +30,7 @@ class TranslationConfig:
     model: str = "gpt-4o"
 
     # Language Configuration
-    target_languages: List[str] = field(default_factory=lambda: ["de", "fr", "es"])
+    target_languages: List[str] = field(default_factory=lambda: ["de", "fr"])
     exclude_categories: List[str] = field(default_factory=lambda: ["recipes"])
     exclude_paths: List[str] = field(default_factory=lambda: ["/pages/impressum/"])
 

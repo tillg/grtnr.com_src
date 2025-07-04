@@ -1,0 +1,11 @@
+{
+  "content_hash": "b4089af9f33dd4aa5ddf20b2be03094ff9b87c75798c551d1b07c817127a13fb",
+  "source_lang": "en",
+  "target_lang": "fr",
+  "translation": "```markdown\n---\nlayout: page\ntitle: À propos\ndate: 2025-04-29\nstatus: published\n---\n\nCeci est le [[jardin numérique]] de Till Gartner. Je suis un homme simple avec des passe-temps simples, comme\n\n- Ma **famille** et mes **enfants**\n- Mon entreprise (je suis manager dans une entreprise de logiciels vraiment cool appelée [**mgm technology partners**](https://mgm-tp.com))\n- Quelques **sports** : Ski, course à pied, natation, escalade.\n- Un peu de **programmation** (même si maintenant je gère plutôt l'informatique que je ne code) : Jouer avec des choses qui sont nouvelles pour moi.\n- Même si je ne cuisine pas vraiment (il n'y a aucun intérêt à essayer de rivaliser avec ma femme ! 🥰), je collectionne quelques [recettes](/recipes).\n\nRetrouvez-moi sur <a href=\"https://x.com/tillg\" target=\"blank\" style=\"display: inline-block; vertical-align: middle;\"><img src=\"x.svg\" alt=\"X\" width=\"20\" style=\"display: inline; margin: 0 3px; vertical-align: middle;\"/></a> ou <a href=\"https://www.instagram.com/tillg/\" target=\"blank\" style=\"display: inline-block; vertical-align: middle;\"><img src=\"instagram_icon.png\" alt=\"Instagram\" width=\"20\" style=\"display: inline; margin: 0 3px; vertical-align: middle;\"/></a>.\n\n![Till](till-comic.png)\n\n[Voici](/todo/) les choses que je prévois de faire dans mon Jardin Numérique.\n```",
+  "timestamp": "2025-07-04T20:47:06.968040",
+  "metadata": {
+    "model": "gpt-4o",
+    "service_version": "1.0.0"
+  }
+}

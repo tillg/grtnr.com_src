@@ -73,6 +73,11 @@ class TranslationService:
         
         # Setup logging
         self.logger = logging.getLogger(__name__)
+        
+        # Suppress verbose HTTP logging from external libraries
+        logging.getLogger("httpx").setLevel(logging.WARNING)
+        logging.getLogger("httpcore").setLevel(logging.WARNING)
+        logging.getLogger("openai").setLevel(logging.WARNING)
     
     def translate_content(self, content: str, source_lang: str, target_lang: str) -> TranslationResult:
         """Translate content from source language to target language"""
@@ -87,7 +92,7 @@ class TranslationService:
         if self.cache:
             cached_translation = self.cache.get_cached_translation(content, target_lang)
             if cached_translation:
-                self.logger.info(f"Cache hit for {target_lang} translation")
+                self.logger.debug(f"Cache hit for {target_lang} translation")
                 return TranslationResult(
                     translation=cached_translation,
                     source_lang=source_lang,
@@ -96,7 +101,7 @@ class TranslationService:
                 )
         
         # Perform translation
-        self.logger.info(f"Translating content from {source_lang} to {target_lang}")
+        self.logger.debug(f"Translating content from {source_lang} to {target_lang}")
         
         try:
             translation = self._call_openai_api(content, source_lang, target_lang)
@@ -176,7 +181,7 @@ class TranslationService:
         results = []
         
         for i, content in enumerate(contents):
-            self.logger.info(f"Processing batch item {i+1}/{len(contents)}")
+            self.logger.debug(f"Processing batch item {i+1}/{len(contents)}")
             
             try:
                 result = self.translate_content(content, source_lang, target_lang)
@@ -222,6 +227,9 @@ class TranslationService:
                 
                 if not translation:
                     raise InvalidResponseError("Empty translation received")
+                
+                # Clean up any markdown wrapper that might have been added
+                translation = self._clean_markdown_wrapper(translation)
                 
                 # Validate translation
                 validation_results = self.prompts.validate_translation_response(translation, content)
@@ -270,11 +278,51 @@ class TranslationService:
             self.cache.clear_cache()
             self.logger.info("Translation cache cleared")
     
+    def _clean_markdown_wrapper(self, content: str) -> str:
+        """Remove markdown code block wrapper if present"""
+        original_content = content
+        content = content.strip()
+        
+        # Pattern: ```markdown followed by content followed by ```
+        if content.startswith('```markdown'):
+            # Find the closing ```
+            lines = content.split('\n')
+            if len(lines) > 2:
+                # Look for the first closing ``` after the opening
+                for i in range(len(lines) - 1, 0, -1):  # Search backwards
+                    if lines[i].strip() == '```':
+                        # Extract content between the markers
+                        inner_content = '\n'.join(lines[1:i])
+                        content = inner_content
+                        self.logger.debug("Removed ```markdown wrapper from translation")
+                        break
+        
+        # Pattern: ``` followed by content followed by ```
+        elif content.startswith('```') and not content.startswith('```markdown'):
+            lines = content.split('\n')
+            if len(lines) > 2:
+                # Look for the first closing ``` after the opening
+                for i in range(len(lines) - 1, 0, -1):  # Search backwards
+                    if lines[i].strip() == '```':
+                        # Extract content between the markers
+                        inner_content = '\n'.join(lines[1:i])
+                        content = inner_content
+                        self.logger.debug("Removed ``` wrapper from translation")
+                        break
+        
+        content = content.strip()
+        
+        # Log if we cleaned something
+        if content != original_content.strip():
+            self.logger.info(f"Cleaned markdown wrapper from translation (original: {len(original_content)} chars, cleaned: {len(content)} chars)")
+        
+        return content
+    
     def cleanup_expired_cache(self) -> int:
         """Clean up expired cache entries"""
         if self.cache:
             removed_count = self.cache.cleanup_expired_cache()
-            self.logger.info(f"Removed {removed_count} expired cache entries")
+            self.logger.debug(f"Removed {removed_count} expired cache entries")
             return removed_count
         return 0
     

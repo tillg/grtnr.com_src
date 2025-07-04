@@ -56,6 +56,12 @@ class TranslationGenerator(Generator):
             return
         
         try:
+            # Suppress verbose HTTP logging from external libraries
+            import logging
+            logging.getLogger("httpx").setLevel(logging.WARNING)
+            logging.getLogger("httpcore").setLevel(logging.WARNING)
+            logging.getLogger("openai").setLevel(logging.WARNING)
+            
             self.config = TranslationConfig.from_pelican_settings(settings)
             self.translation_service = TranslationService(self.config)
             logger.info(f"Translation service initialized for languages: {self.config.target_languages}")
@@ -92,11 +98,27 @@ class TranslationGenerator(Generator):
             logger.info("No content needs translation")
             return
         
+        # Apply test limit if configured
+        test_limit = os.environ.get('TRANSLATION_TEST_LIMIT')
+        if test_limit and test_limit.isdigit():
+            test_limit = int(test_limit)
+            if len(all_content) > test_limit:
+                all_content = all_content[:test_limit]
+                logger.info(f"Applied test limit: processing only {test_limit} content items out of {len(articles) + len(pages)} total")
+        
         logger.info(f"Processing {len(all_content)} content items for translation")
         
         # Process content in parallel (limit to avoid overwhelming the API)
         max_content_workers = min(len(all_content), self.config.max_concurrent_content)
-        logger.info(f"Using {max_content_workers} parallel workers for content processing")
+        logger.debug(f"Using {max_content_workers} parallel workers for content processing")
+        
+        # Track translation statistics
+        translation_stats = {
+            'total_files_created': 0,
+            'cache_hits': 0,
+            'new_translations': 0,
+            'errors': 0
+        }
         
         with ThreadPoolExecutor(max_workers=max_content_workers) as executor:
             # Submit all content translation tasks
@@ -105,11 +127,19 @@ class TranslationGenerator(Generator):
             # Wait for all to complete
             for future in as_completed(futures):
                 try:
-                    future.result()
+                    stats = future.result()
+                    if stats:
+                        translation_stats['total_files_created'] += stats.get('files_created', 0)
+                        translation_stats['cache_hits'] += stats.get('cache_hits', 0)
+                        translation_stats['new_translations'] += stats.get('new_translations', 0)
                 except Exception as e:
                     logger.error(f"Failed to process content: {e}")
+                    translation_stats['errors'] += 1
         
-        logger.info("Automatic translation generation completed")
+        # Summary message
+        logger.info(f"Translation completed: {translation_stats['total_files_created']} files created, "
+                   f"{translation_stats['cache_hits']} cached, {translation_stats['new_translations']} new translations, "
+                   f"{translation_stats['errors']} errors")
     
     def _should_translate_content(self, content) -> bool:
         """Check if content should be translated"""
@@ -135,13 +165,20 @@ class TranslationGenerator(Generator):
     def _translate_content(self, content):
         """Translate content to all target languages"""
         
-        logger.info(f"Translating content: {content.title}")
+        logger.debug(f"Translating content: {content.title}")
+        
+        # Initialize statistics
+        stats = {
+            'files_created': 0,
+            'cache_hits': 0,
+            'new_translations': 0
+        }
         
         # Get source content
         source_content = self._get_source_content(content)
         if not source_content:
             logger.warning(f"Could not read source content for: {content.title}")
-            return
+            return stats
         
         # Detect source language
         source_lang = self.translation_service.detect_language(source_content)
@@ -152,11 +189,11 @@ class TranslationGenerator(Generator):
         
         if not target_languages:
             logger.debug("No target languages to translate to")
-            return
+            return stats
         
         # Use parallel processing for multiple languages
         max_workers = min(len(target_languages), self.config.max_concurrent_translations)
-        logger.info(f"Translating '{content.title}' to {len(target_languages)} languages using {max_workers} parallel workers")
+        logger.debug(f"Translating '{content.title}' to {len(target_languages)} languages using {max_workers} parallel workers")
         
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             # Submit all translation tasks
@@ -169,10 +206,16 @@ class TranslationGenerator(Generator):
             for future in as_completed(future_to_lang):
                 target_lang = future_to_lang[future]
                 try:
-                    future.result()  # This will raise any exception that occurred
+                    translation_stats = future.result()  # This will raise any exception that occurred
+                    if translation_stats:
+                        stats['files_created'] += translation_stats.get('files_created', 0)
+                        stats['cache_hits'] += translation_stats.get('cache_hits', 0)
+                        stats['new_translations'] += translation_stats.get('new_translations', 0)
                     logger.debug(f"Completed translation to {target_lang}")
                 except Exception as e:
                     logger.error(f"Failed to translate {content.title} to {target_lang}: {e}")
+        
+        return stats
     
     def _get_source_content(self, content) -> str:
         """Read source content from file"""
@@ -191,6 +234,13 @@ class TranslationGenerator(Generator):
     def _create_translation(self, content, source_content: str, source_lang: str, target_lang: str):
         """Create a translation file"""
         
+        # Initialize statistics
+        stats = {
+            'files_created': 0,
+            'cache_hits': 0,
+            'new_translations': 0
+        }
+        
         # Get translation
         result = self.translation_service.translate_content(
             source_content, source_lang, target_lang
@@ -198,8 +248,10 @@ class TranslationGenerator(Generator):
         
         if result.cached:
             logger.debug(f"Used cached translation for {target_lang}")
+            stats['cache_hits'] += 1
         else:
-            logger.info(f"Generated new translation for {target_lang}")
+            logger.debug(f"Generated new translation for {target_lang}")
+            stats['new_translations'] += 1
         
         # Create output directory structure
         output_dir = self._get_translation_output_dir(content)
@@ -209,9 +261,12 @@ class TranslationGenerator(Generator):
         translation_filename = self._get_translation_filename(content, target_lang)
         output_path = output_dir / translation_filename
         
+        # Clean markdown wrapper from translation before adding metadata
+        cleaned_translation = self._clean_markdown_wrapper(result.translation)
+        
         # Add translation metadata
         translation_content = self._add_translation_metadata(
-            result.translation, 
+            cleaned_translation, 
             source_lang, 
             target_lang, 
             content
@@ -222,10 +277,13 @@ class TranslationGenerator(Generator):
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write(translation_content)
             
-            logger.info(f"Created translation: {output_path}")
+            logger.debug(f"Created translation: {output_path}")
+            stats['files_created'] += 1
             
         except Exception as e:
             logger.error(f"Failed to write translation file {output_path}: {e}")
+        
+        return stats
     
     def _get_translation_output_dir(self, content) -> Path:
         """Get output directory for translations"""
@@ -290,6 +348,46 @@ class TranslationGenerator(Generator):
         """Get current timestamp for metadata"""
         from datetime import datetime
         return datetime.now().isoformat()
+    
+    def _clean_markdown_wrapper(self, content: str) -> str:
+        """Remove markdown code block wrapper if present"""
+        original_content = content
+        content = content.strip()
+        
+        # Pattern: ```markdown followed by content followed by ```
+        if content.startswith('```markdown'):
+            # Find the closing ```
+            lines = content.split('\n')
+            if len(lines) > 2:
+                # Look for the first closing ``` after the opening
+                for i in range(len(lines) - 1, 0, -1):  # Search backwards
+                    if lines[i].strip() == '```':
+                        # Extract content between the markers
+                        inner_content = '\n'.join(lines[1:i])
+                        content = inner_content
+                        logger.debug("Removed ```markdown wrapper from translation")
+                        break
+        
+        # Pattern: ``` followed by content followed by ```
+        elif content.startswith('```') and not content.startswith('```markdown'):
+            lines = content.split('\n')
+            if len(lines) > 2:
+                # Look for the first closing ``` after the opening
+                for i in range(len(lines) - 1, 0, -1):  # Search backwards
+                    if lines[i].strip() == '```':
+                        # Extract content between the markers
+                        inner_content = '\n'.join(lines[1:i])
+                        content = inner_content
+                        logger.debug("Removed ``` wrapper from translation")
+                        break
+        
+        content = content.strip()
+        
+        # Log if we cleaned something
+        if content != original_content.strip():
+            logger.info(f"Cleaned markdown wrapper from translation (original: {len(original_content)} chars, cleaned: {len(content)} chars)")
+        
+        return content
 
 
 def get_generators(pelican_object):

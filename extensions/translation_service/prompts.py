@@ -51,6 +51,12 @@ CRITICAL REQUIREMENTS:
 9. Keep URLs and file paths unchanged
 10. Preserve HTML tags and attributes
 
+OUTPUT FORMAT REQUIREMENTS:
+- Return ONLY the translated markdown content
+- Do NOT wrap the output in markdown code blocks (```markdown)
+- Do NOT add any explanations or prefixes
+- The response should be the raw translated markdown that can be directly written to a file
+
 CONTENT TO TRANSLATE:
 {content}
 

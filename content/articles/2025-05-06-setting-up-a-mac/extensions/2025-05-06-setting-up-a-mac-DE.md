@@ -1,62 +1,62 @@
 ---
 tags: Mac
 date: 2025-05-06
-title: Einrichten eines Mac
+title: Einen Mac einrichten
 image: mac.jpg
 Translation: de
 Source-Language: en
-Translator: gpt-4
-Translate-Date: 2025-07-04T17:03:59.732893
+Translator: gpt-4o
+Translate-Date: 2025-07-04T22:06:50.658575
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-06-setting-up-a-mac/2025-05-06-setting-up-a-mac.md
 Generated-By: automatic-translation-plugin
 ---
 
-Alle paar Jahre haben Sie die Möglichkeit, einen neuen Mac einzurichten. Es ist normalerweise ein angenehmer Prozess, doch er nimmt einige Zeit in Anspruch. Um diesen zu einem _strukturierten_ angenehmen Prozess zu machen, ist hier meine Notiz an mein zukünftiges Ich, was ich installieren muss und in welcher Reihenfolge.
+Alle paar Jahre haben Sie die Gelegenheit, einen neuen Mac einzurichten. Es ist normalerweise ein angenehmer Prozess, der jedoch etwas Zeit in Anspruch nimmt. Um diesen Prozess _strukturiert_ und angenehm zu gestalten, ist hier meine Notiz an mein zukünftiges Ich, was ich installieren muss und in welcher Reihenfolge.
 
 [TOC]
 
-**Hinweis:** Die Entwicklerwerkzeuge sind hier nicht aufgeführt, da es einen eigenen [Artikel über die Installation der Entwicklerumgebung](/development-environment-on-mac/) gibt.
+**Hinweis:** Die Entwickler-Tools sind hier nicht aufgeführt, da es einen eigenen [Artikel über die Installation der Entwicklungsumgebung](/development-environment-on-mac/) gibt.
 
-## Zuerst die ersten Dinge...
+## Zuerst die wichtigsten Dinge...
 
-- Zuerst Mail, da es sehr lange dauert, alle E-Mails herunterzuladen
-  - Geschäftliche E-Mail
+- Zuerst Mail, da es lange dauert, alle E-Mails herunterzuladen
+  - Arbeits-E-Mail
   - Private E-Mail
 
-## Grundlagen
+## Grundlegendes
 
-- 1Password, zuerst, weil alles Passwörter benötigt. Installiert aus dem AppStore.
-- DropBox, früh installieren, um Zeit zum Synchronisieren zu geben.
-- Swish, der Fenstermanager, an den ich gewöhnt bin. Installiert von [ihrer Website](https://highlyopinionated.co/swish/).
-- AlDente für die Batterieverwaltung von [ihrer Website](https://apphousekitchen.com/aldente-overview/pricing/)
-- iTerm - weil wir es für die nächsten Schritte brauchen. Und stellen Sie sicher, dass `zsh` die verwendete Shell ist.
-- ssh Schlüssel von 1Password
+- 1Password, zuerst, weil alles Passwörter benötigt. Aus dem AppStore installiert.
+- DropBox, frühzeitig, um ihm Zeit zum Synchronisieren zu geben.
+- Swish, der Fenster-Manager, den ich gewohnt bin. Von [deren Website](https://highlyopinionated.co/swish/) installiert.
+- AlDente für das Batteriemanagement von [deren Website](https://apphousekitchen.com/aldente-overview/pricing/)
+- iTerm - weil wir es für die nächsten Schritte benötigen. Und sicherstellen, dass `zsh` die verwendete Shell ist.
+- ssh-Schlüssel aus 1Password
 - brew
 - AnythingLLM
 - ChatGPT von der [OpenAI Website](https://openai.com/chatgpt/download/)
 - Claude von der [Anthropic Website](https://claude.ai/download)
 
-- Zeit-Dingens - erinnere mich nicht an den Namen...
+- Zeit-Dings - ich erinnere mich nicht an den Namen...
 
 ## Für die Arbeit
 
-- Zuerst OwnCloud, damit es Zeit zum Synchronisieren hat. Von der [OwnCloud Website](https://owncloud.com/desktop-app/).
+- Zuerst OwnCloud, damit es Zeit hat zu synchronisieren. Von der [OwnCloud Website](https://owncloud.com/desktop-app/).
 - Webex
 - VPN _Cisco AnyConnect_
-- MS Office 365, aus dem AppStore, dann anmelden
-- MS Teams (das ist kein Teil von Office 365) von der [Microsoft Teams Website](https://www.microsoft.com/en-us/microsoft-teams/download-app)
+- MS Office 365, aus dem AppStore, dann einloggen
+- MS Teams (das ist nicht Teil von Office 365) von der [Microsoft Teams Website](https://www.microsoft.com/en-us/microsoft-teams/download-app)
 - Drucker einrichten
 
-## Einstellungen zum Anpassen
+## Einstellungen anpassen
 
 - In _Systemeinstellungen_
   - Trackpad
   - Touch ID
   - Bildschirmschoner
   - Sperrbildschirm
-  - Tastatur > Tastaturkürzel.
-- Desktop & Dock in _Systemeinstellungen_, _Aktive Bildschirmecken_ alle Symbole vom Dock entfernen
-- Finder _Einstellungen_ und _Ansichtsoptionen_
+  - Tastatur > Tastenkombinationen.
+- Schreibtisch & Dock in _Systemeinstellungen_, _Aktive Ecken_, alle Symbole aus dem Dock entfernen
+- Finder _Einstellungen_ und _Darstellungsoptionen_
 
-- Widgets auf dem Desktop
+- Widgets auf dem Schreibtisch
 - Wallet & Apple Pay

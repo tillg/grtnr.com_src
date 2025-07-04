@@ -3,7 +3,7 @@
   "source_lang": "en",
   "target_lang": "fr",
   "translation": "```markdown\n---\ntitle: Le Mystère de Zipf\ntags: tech\narticle_header:\n  type: cover\n  image:\n    src: zipf.jpg\n---\n\nPas de contenu réel de ma part, mais un mème que j'ai découvert et que je ressens le besoin de me rappeler :\n\n<iframe width=\"853\" height=\"480\" src=\"https://www.youtube.com/embed/fCn8zs912OE?rel=0\" frameborder=\"0\" allowfullscreen></iframe>\n\nEt ce gars est maintenant définitivement sur ma liste de surveillance ;)\n```",
-  "timestamp": "2025-07-04T17:02:40.786295",
+  "timestamp": "2025-07-04T20:41:33.409137",
   "metadata": {
     "model": "gpt-4o",
     "service_version": "1.0.0"
