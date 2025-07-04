@@ -23,6 +23,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r .devcontainer/requirements.txt
 
+      - name: Cache translations
+        uses: actions/cache@v3
+        with:
+          path: cache/translations
+          key: translations-${{ hashFiles('content/**/*.md') }}-${{ github.ref }}
+          restore-keys: |
+            translations-${{ hashFiles('content/**/*.md') }}-
+            translations-
+
       - name: Set site name based on branch
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
@@ -31,8 +40,37 @@ jobs:
             echo "PELICAN_SITENAME=test.grtnr.com" >> $GITHUB_ENV
           fi
 
+      - name: Configure translation service
+        run: |
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
+          echo "TRANSLATION_CACHE_ENABLED=true" >> $GITHUB_ENV
+          echo "TRANSLATION_MAX_RETRIES=3" >> $GITHUB_ENV
+          echo "TRANSLATION_TIMEOUT=30" >> $GITHUB_ENV
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            # Production: Full translation
+            echo "TRANSLATION_ENABLED=true" >> $GITHUB_ENV
+            echo "TRANSLATION_TARGET_LANGUAGES=de,fr,es" >> $GITHUB_ENV
+            echo "TRANSLATION_MODEL=gpt-4" >> $GITHUB_ENV
+            echo "TRANSLATION_EXCLUDE_CATEGORIES=recipes" >> $GITHUB_ENV
+          else
+            # Test/staging: Limited translation to save costs
+            echo "TRANSLATION_ENABLED=true" >> $GITHUB_ENV
+            echo "TRANSLATION_TARGET_LANGUAGES=de" >> $GITHUB_ENV
+            echo "TRANSLATION_MODEL=gpt-4" >> $GITHUB_ENV
+            echo "TRANSLATION_EXCLUDE_CATEGORIES=recipes,drafts" >> $GITHUB_ENV
+          fi
+
       - name: Build site
         run: inv preview
+
+      - name: Show translation statistics
+        if: env.TRANSLATION_ENABLED == 'true'
+        run: |
+          echo "📊 Translation Statistics:"
+          echo "Cache directory contents:"
+          ls -la cache/translations/ 2>/dev/null || echo "No cache directory found"
+          echo "Generated translations:"
+          find output -name "*-[A-Z][A-Z].html" -o -name "*extensions*" 2>/dev/null | head -10 || echo "No translation files found"
         
       - name: Upload site as artifact
         uses: actions/upload-artifact@v4

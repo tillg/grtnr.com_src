@@ -67,8 +67,13 @@ class TranslationTestRunner:
         os.makedirs(self.output_dir, exist_ok=True)
         
         # Test configuration
-        self.config = TranslationConfig()
-        self.service = TranslationService(self.config)
+        try:
+            self.config = TranslationConfig.from_environment()
+            self.service = TranslationService(self.config)
+        except Exception as e:
+            print(f"⚠️  Using mock service due to: {e}")
+            self.config = TranslationConfig()
+            self.service = TranslationService(self.config)
         
     def run_sample_translations(self) -> Dict[str, Dict[str, str]]:
         """Translate sample content for human review"""
