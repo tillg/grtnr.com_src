@@ -31,6 +31,9 @@ PAGE_EXCLUDES = ["extensions", "**/extensions", "**/extensions/**"]
 STATIC_PATHS = ["static"]
 ARTICLE_EXCLUDES = ["recipes", "extensions", "**/extensions", "**/extensions/**"]
 
+# Additional ignore patterns to prevent extensions directories from being processed
+IGNORE_FILES = [".#*", "extensions/*", "**/extensions/**", "**extensions**"]
+
 # Add static files mapping
 EXTRA_PATH_METADATA = {
     "static/favicon.ico": {"save_as": "favicon.ico"},
