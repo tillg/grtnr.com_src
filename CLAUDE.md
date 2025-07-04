@@ -47,7 +47,7 @@ The system's power comes from **9 coordinated custom plugins** that execute in s
 6. **copy_adjacent_images** - Auto-copy images and fix relative URLs
 7. **excerpt_to_summary** - Summary generation for articles
 8. **external_links** - Add target="_blank" to external links
-9. **automatic_translation** - AI-powered automatic translation with caching
+9. **automatic_translation** - AI-powered automatic translation with hash-based caching
 
 **Key architectural patterns:**
 - **Signal-based coordination** - Uses Pelican's signal system for plugin communication
@@ -132,6 +132,17 @@ content/articles/2025-01-01-example/
 - Source and target language metadata
 - Creation timestamp and source file hash
 - Full translated content with preserved formatting
+
+**Management Commands:**
+
+- `inv clean-translations` - Remove all translation files and cache
+- `inv clean-translations-cache` - Clear cache only (forces re-translation)
+
+**Testing:**
+
+- Run tests: `python tests/test_translation_service.py -v`
+- 22 comprehensive tests covering all functionality
+- Mock implementations included for development/testing
 
 ## Content Guidelines
 
