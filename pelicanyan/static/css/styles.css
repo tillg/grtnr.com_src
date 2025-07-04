@@ -51,3 +51,43 @@ td img {
   margin-top: 0.5rem;
   display: block;
 }
+
+/* Language Switcher Styles */
+.language-switcher {
+  margin-top: 0.5rem;
+}
+
+.language-link {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  margin: 0.2rem;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.language-link:hover {
+  background-color: #268bd2;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar .language-switcher .language-link {
+  display: block;
+  margin: 0.2rem 0;
+  text-align: center;
+}
+
+/* Language selection page specific styles */
+.language-selection-page h1 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.language-selection-page p {
+  color: #666;
+  margin-bottom: 0.5rem;
+}

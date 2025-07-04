@@ -38,7 +38,7 @@ class TranslationConfig:
     
     # API Behavior
     max_retries: int = 3
-    timeout: int = 30
+    timeout: int = 120
     rate_limit_delay: int = 1  # seconds between requests
     
     # Language Detection

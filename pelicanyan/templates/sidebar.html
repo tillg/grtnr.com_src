@@ -18,6 +18,24 @@ styles, `#sidebar-checkbox` for behavior. -->
 
   </nav>
 
+  <!-- Language Switcher -->
+  {% if MULTILINGUAL_ENABLED and ((article is defined and article.language_links) or (page is defined and page.language_links)) %}
+  <div class="sidebar-item">
+    <h4>Language / Sprache / Langue</h4>
+    <div class="language-switcher">
+      {% if article is defined and article.language_links %}
+        {% for link in article.language_links %}
+        <a href="{{ link.url }}" class="language-link" hreflang="{{ link.code }}">{{ link.name }}</a>
+        {% endfor %}
+      {% elif page is defined and page.language_links %}
+        {% for link in page.language_links %}
+        <a href="{{ link.url }}" class="language-link" hreflang="{{ link.code }}">{{ link.name }}</a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
   <div class="sidebar-item">
       Last built {{ BUILD_TIME }}.
   </div>
