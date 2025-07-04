@@ -1,0 +1,11 @@
+{
+  "content_hash": "ade40a31a62a1c51a554857dff70cbfd772d548606aad435a16b455b73ffc4ab",
+  "source_lang": "en",
+  "target_lang": "de",
+  "translation": "# Testartikel\n\nDies ist ein einfacher Testartikel, um zu überprüfen, ob die Spracherkennung korrekt funktioniert.\n\n## Funktionen\n\n- Saubere Spracherkennung\n- Keine Warnmeldungen\n- Korrektes Parsen\n\nDas System sollte dies ohne Probleme als Englisch erkennen.\n\nÜBERSETZUNG:",
+  "timestamp": "2025-07-04T11:58:05.049673",
+  "metadata": {
+    "model": "gpt-4",
+    "service_version": "1.0.0"
+  }
+}

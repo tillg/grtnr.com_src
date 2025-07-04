@@ -1,0 +1,11 @@
+{
+  "content_hash": "5207c9a9bbcb02afcf482e6d68609e5f6b83490e6eb18d03c27d767bee749d95",
+  "source_lang": "en",
+  "target_lang": "de",
+  "translation": "Hallo, Welt! Dies ist ein Test.",
+  "timestamp": "2025-07-04T11:33:49.852815",
+  "metadata": {
+    "model": "gpt-4",
+    "service_version": "1.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "content_hash": "185f8db32271fe25f561a6fc938b2e264306ec304eda518007d1764826381969",
+  "source_lang": "en",
+  "target_lang": "es",
+  "translation": "Hola",
+  "timestamp": "2025-07-04T11:49:52.457123",
+  "metadata": {
+    "model": "gpt-4",
+    "service_version": "1.0.0"
+  }
+}

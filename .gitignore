@@ -8,7 +8,11 @@ ehthumbs.db
 Thumbs.db
 
 output
-cache
+
+# Cache files (keep translation cache, ignore others)
+cache/*
+!cache/translations/
+cache/translations/.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
