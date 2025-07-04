@@ -79,7 +79,7 @@ PLUGINS = [
     "copy_adjacent_images",
     "excerpt_to_summary",
     "external_links",
-    "automatic_translation",
+    # "automatic_translation",  # Temporarily disabled to focus on multilingual structure
     "multilingual_site",
 ]
 
@@ -212,6 +212,6 @@ TRANSLATION_MAX_RETRIES = int(os.environ.get("TRANSLATION_MAX_RETRIES", "3"))
 TRANSLATION_TIMEOUT = int(os.environ.get("TRANSLATION_TIMEOUT", "30"))
 
 # Multilingual site settings
-MULTILINGUAL_ENABLED = os.environ.get("MULTILINGUAL_ENABLED", "false").lower() == "true"
+MULTILINGUAL_ENABLED = os.environ.get("MULTILINGUAL_ENABLED", "true").lower() == "true"
 MULTILINGUAL_LANGUAGES = os.environ.get("MULTILINGUAL_LANGUAGES", "en,de,fr").split(",")
 MULTILINGUAL_DEFAULT_LANG = os.environ.get("MULTILINGUAL_DEFAULT_LANG", "en")

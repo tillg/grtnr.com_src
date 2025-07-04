@@ -6,8 +6,8 @@ image: filmz.png
 summary: Il y a quelque temps, j'ai créé une petite application iOS appelée Filmz avec le _codage_vibe_. C'est bien jusqu'à ce que vous finissiez par faire du _débogage vibe_. Alors maintenant, je fais une nouvelle tentative, en commençant de manière plus structurée.
 Translation: fr
 Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:14.925612
+Translator: gpt-4
+Translate-Date: 2025-07-04T16:49:57.606934
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
 Generated-By: automatic-translation-plugin
 ---
