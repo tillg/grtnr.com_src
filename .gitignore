@@ -8,6 +8,7 @@ ehthumbs.db
 Thumbs.db
 
 output
+test_output
 
 # Cache files (keep translation cache, ignore others)
 cache/*

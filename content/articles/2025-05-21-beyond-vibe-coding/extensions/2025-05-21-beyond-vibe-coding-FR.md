@@ -1,37 +1,50 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 6afa6c8efca11981762e933a16b098724592997958fb00720f7d8a71e54bd797
-translation-type: automatic
+Tags: tech, IA
+Title: Au-delà du codage Vibe - Refonte de Filmz
+Date: 2025-05-21
+image: filmz.png
+summary: Il y a quelque temps, j'ai créé une petite application iOS appelée Filmz avec le _codage_vibe_. C'est bien jusqu'à ce que vous finissiez par faire du _débogage vibe_. Alors maintenant, je fais une nouvelle tentative, en commençant de manière plus structurée.
+Translation: fr
+Source-Language: en
+Translator: gpt-4
+Translate-Date: 2025-07-04T16:31:17.557998
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <p><img alt="Filmz" src="/beyond-vibe-coding-redesigning-filmz/filmz.png" width="300"/></p>
-<p>Some time ago I built a little iOS App called Filmz: keep track of films and shows you want to see or you have seen. Keep personal additional information like “how did I like it?” (I.e. my personal rating), “For what audience would I recommend it?” (Adults, kids, family) “When and where did I see it” etc. And then comes sharing: passing on film recommendations to friends, either one film at a time or lists.</p>
-<p>As I didn’t know any Swift back then, I built it in a <em>vibe coding</em> style, fully supported by <span class="caps">AI</span> (back then mainly Cursor.ai). This gave me a fast start, but I was lost once I wanted to add more complex features that required a well structured code base. And since I didn’t know much about Swift, I couldn’t do it either. Vibe debugging doesn’t work - yet…</p>
-<p>So here I start again, and with a different approach: I will try to work in a similar way as I would with a smart but junior peer developer. The focus will be on a stepwise approach, followed along with a proper documentation: Descriptions of the task at hand, description of the architecture changes, of the options that were inspected / thought of and what was chosen why…</p>
-<p><a href="https://chatgpt.com/share/68371708-8a44-8009-b424-059b920feec9" rel="noopener noreferrer" target="_blank">I worked with my <span class="caps">AI</span> friend ChatGPT</a>, and plan to start with a structure as described below.</p>
-<div class="highlight"><pre><span></span><code>README.md                        # Project overview and setup instructions
-docs/                     # Everything that is *not* source code lives here
-├── index.md              # High-level functional overview (user-centric)
-├── architecture.md       # High-level tech
-├── glossary.md           # Domain vocabulary
-├── features/             # One sub-dir *per* feature ⬇
+<img src="filmz.png" alt="Filmz" width="300">
+
+Il y a quelque temps, j'ai créé une petite application iOS appelée Filmz : gardez une trace des films et des émissions que vous voulez voir ou que vous avez vus. Conservez des informations supplémentaires personnelles comme "qu'est-ce que j'en ai pensé ?" (c'est-à-dire ma note personnelle), "À quel public le recommanderais-je ?" (Adultes, enfants, famille) "Quand et où l'ai-je vu" etc. Et puis vient le partage : transmettre des recommandations de films à des amis, soit un film à la fois, soit des listes.
+
+Comme je ne connaissais pas Swift à l'époque, je l'ai construit dans un style de _codage vibe_, entièrement soutenu par l'IA (à l'époque principalement Cursor.ai). Cela m'a permis de démarrer rapidement, mais j'étais perdu une fois que je voulais ajouter des fonctionnalités plus complexes qui nécessitaient une base de code bien structurée. Et comme je ne connaissais pas grand-chose à Swift, je ne pouvais pas le faire non plus. Le débogage vibe ne fonctionne pas - pas encore...
+
+Alors voici que je recommence, et avec une approche différente : j'essaierai de travailler de la même manière que je le ferais avec un développeur junior mais intelligent. L'accent sera mis sur une approche par étapes, accompagnée d'une documentation appropriée : Descriptions de la tâche en cours, description des changements d'architecture, des options qui ont été inspectées / envisagées et ce qui a été choisi pourquoi...
+
+[J'ai travaillé avec mon ami IA ChatGPT](https://chatgpt.com/share/68371708-8a44-8009-b424-059b920feec9), et je prévois de commencer avec une structure comme décrite ci-dessous.
+
+```text
+README.md                        # Vue d'ensemble du projet et instructions d'installation
+docs/                     # Tout ce qui n'est *pas* du code source se trouve ici
+├── index.md              # Vue d'ensemble fonctionnelle de haut niveau (centrée sur l'utilisateur)
+├── architecture.md       # Tech de haut niveau
+├── glossary.md           # Vocabulaire du domaine
+├── features/             # Un sous-répertoire *par* fonctionnalité ⬇
 │   ├── dark-mode/
-│   │   ├── 01-intent.md          # “User story” or problem statement
-│   │   ├── 02-ui-flow.md         # Wire-flow, screenshots, diagrams → keep PNG/Drawio *in same folder*
-│   │   ├── 03-design.md          # Tech design &amp; pseudo-code
-│   │   ├── 04-test-plan.md       # Acceptance &amp; edge-case list
-│   │   └── dark-mode.drawio.png  # Diagram sits next to the text that references it
+│   │   ├── 01-intent.md          # "User story" ou énoncé du problème
+│   │   ├── 02-ui-flow.md         # Wire-flow, captures d'écran, diagrammes → garder les PNG/Drawio *dans le même dossier*
+│   │   ├── 03-design.md          # Conception technique & pseudo-code
+│   │   ├── 04-test-plan.md       # Liste des cas d'acceptation & des cas limites
+│   │   └── dark-mode.drawio.png  # Le diagramme se trouve à côté du texte qui le référence
 │   ├── profile-refactor/
 │   │   └── …
-│   └── _TEMPLATE/               # Empty skeleton you copy when adding a feature
-├── data-structure/            # Cross-feature, Entity structures or ERDs, migration notes
+│   └── _TEMPLATE/               # Squelette vide que vous copiez lors de l'ajout d'une fonctionnalité
+├── data-structure/            # Cross-feature, structures d'entité ou ERDs, notes de migration
 │   ├── schema-overview.mmd
 │   └── schema.md
-├── adr/                  # Architecture Decision Records
+├── adr/                  # Records de décisions d'architecture
 │   ├── ADR-001-use-themex.md
 │   └── ADR-002-db-index.md
-└── changelog.md          # “Keep a Changelog” style history
-</code></pre></div>
-<p>2025-05-28: I take this as a starting point, work, and see what’s missing. And add the missing bits on the way.</p>
+└── changelog.md          # Historique de style "Keep a Changelog"
+```
+
+2025-05-28: Je prends cela comme point de départ, je travaille, et je vois ce qui manque. Et j'ajoute les morceaux manquants en cours de route.

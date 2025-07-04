@@ -80,6 +80,7 @@ PLUGINS = [
     "excerpt_to_summary",
     "external_links",
     "automatic_translation",
+    "multilingual_site",
 ]
 
 # Categories
@@ -209,3 +210,8 @@ TRANSLATION_MODEL = os.environ.get("TRANSLATION_MODEL", "gpt-4")
 TRANSLATION_CACHE_ENABLED = os.environ.get("TRANSLATION_CACHE_ENABLED", "true").lower() == "true"
 TRANSLATION_MAX_RETRIES = int(os.environ.get("TRANSLATION_MAX_RETRIES", "3"))
 TRANSLATION_TIMEOUT = int(os.environ.get("TRANSLATION_TIMEOUT", "30"))
+
+# Multilingual site settings
+MULTILINGUAL_ENABLED = os.environ.get("MULTILINGUAL_ENABLED", "false").lower() == "true"
+MULTILINGUAL_LANGUAGES = os.environ.get("MULTILINGUAL_LANGUAGES", "en,de,fr").split(",")
+MULTILINGUAL_DEFAULT_LANG = os.environ.get("MULTILINGUAL_DEFAULT_LANG", "en")

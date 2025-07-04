@@ -6,7 +6,7 @@ tags: Tech, IA
 Translation: fr
 Source-Language: en
 Translator: gpt-4
-Translate-Date: 2025-07-04T15:28:28.575506
+Translate-Date: 2025-07-04T16:32:24.632609
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-18-mcp-playground/2025-05-18-mcp-playground.md
 Generated-By: automatic-translation-plugin
 ---
@@ -24,7 +24,7 @@ Questions ouvertes que j'ai.
 
 ## Accéder à un serveur MCP
 
-Lors de la recherche et finalement de la découverte d'un serveur MCP pour mon cas d'utilisation, je trouve utile de jouer avec eux, afin de _comprendre_ quels outils le LLM obtient. La façon la plus simple de faire cela est avec l'[Inspecteur MCP](https://github.com/modelcontextprotocol/inspector).
+Lors de la recherche et finalement de la découverte d'un serveur MCP pour mon cas d'utilisation, je trouve utile de jouer avec eux, afin de _comprendre_ quels outils le LLM obtient. La façon la plus simple de le faire est avec l'[Inspecteur MCP](https://github.com/modelcontextprotocol/inspector).
 
 Pour commencer :
 
@@ -80,7 +80,7 @@ Configuration principale :
         "-y",
         "@modelcontextprotocol/server-filesystem",
         "/Users/nom_utilisateur/Desktop",
-        "/chemin/vers/autre/repertoire/autorisé"
+        "/chemin/vers/autre/répertoire/autorisé"
       ]
     }
   }
