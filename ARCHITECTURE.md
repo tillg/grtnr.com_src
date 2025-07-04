@@ -826,3 +826,365 @@ logger.debug(f"Cache hit for {content_hash}")
 logger.warning(f"API rate limit reached, retrying in {delay}s")
 logger.error(f"Translation failed: {error}", exc_info=True)
 ```
+
+## Multilingual Site Architecture
+
+### Overview
+
+The multilingual site architecture transforms the existing single-language site into a multi-language platform with seamless language switching and proper URL structure. This builds upon the existing automatic translation system to provide a complete multilingual user experience.
+
+### URL Structure Design
+
+#### Recommended Output Structure
+
+```text
+output/
+├── en/                          # English (default/primary language)
+│   ├── index.html
+│   ├── something-interesting/   # Article URLs
+│   ├── about/                   # Page URLs
+│   └── recipes/                 # Recipe URLs
+├── de/                          # German
+│   ├── index.html
+│   ├── etwas-interessantes/     # Translated article URLs
+│   ├── ueber/                   # Translated page URLs
+│   └── rezepte/                 # Translated recipe URLs
+├── fr/                          # French
+│   ├── index.html
+│   ├── quelque-chose-interessant/
+│   ├── a-propos/
+│   └── recettes/
+└── index.html                   # Language selection landing page
+```
+
+#### URL Patterns
+
+- **Root**: `/` → Language selection page
+- **Language-specific**: `/{lang}/` → Language-specific homepage
+- **Content**: `/{lang}/{slug}/` → Language-specific content
+- **Cross-language**: Automatic redirects and canonical URLs
+
+### Static Site Generation Approach
+
+Since this is a static site generator, all multilingual functionality must be implemented at build time, not runtime. The architecture focuses on:
+
+1. **Build-Time Content Generation**: All language versions are generated during the Pelican build process
+2. **Static File Structure**: Each language gets its own directory structure in the output
+3. **Client-Side Language Detection**: JavaScript handles language detection and routing in the browser
+4. **Template-Based Navigation**: Language switching links are generated during build and embedded in templates
+
+### Architecture Components
+
+#### 1. Static URL Generation
+
+```python
+class StaticURLGenerator:
+    """Generates static URLs for all languages during build"""
+
+    def __init__(self, default_lang='en', supported_langs=['en', 'de', 'fr']):
+        self.default_lang = default_lang
+        self.supported_langs = supported_langs
+
+    def generate_language_urls(self, content_slug, translations):
+        """Generate URLs for all language versions of content"""
+        urls = {}
+        for lang in self.supported_langs:
+            if lang in translations:
+                translated_slug = self.translate_slug(content_slug, lang)
+                urls[lang] = f"/{lang}/{translated_slug}/"
+        return urls
+
+    def get_canonical_url(self, content_slug, lang):
+        """Get canonical URL for SEO purposes"""
+        return f"/{lang}/{content_slug}/"
+```
+
+#### 2. Content Transformation Pipeline
+
+```python
+class MultilingualContentProcessor:
+    """Transforms content for multilingual output"""
+
+    def process_articles(self, articles):
+        """Process articles for each language"""
+
+    def process_pages(self, pages):
+        """Process pages for each language"""
+
+    def process_recipes(self, recipes):
+        """Process recipes for each language"""
+
+    def generate_language_specific_content(self, content, lang):
+        """Generate content for specific language"""
+```
+
+#### 3. Navigation and UI Components
+
+```python
+class LanguageSwitcher:
+    """Language switching UI component"""
+
+    def generate_language_links(self, current_url, current_lang):
+        """Generate language switching links"""
+
+    def get_equivalent_url(self, url, target_lang):
+        """Find equivalent URL in target language"""
+```
+
+### Implementation Strategy
+
+#### Phase 1: URL Structure and Routing
+
+1. **Pelican Configuration Updates**
+
+   ```python
+   # pelicanconf.py
+   MULTILINGUAL_ENABLED = True
+   DEFAULT_LANG = 'en'
+   SUPPORTED_LANGUAGES = ['en', 'de', 'fr']
+   LANGUAGE_COOKIE_NAME = 'preferred_language'
+   ```
+
+2. **Plugin Development**
+
+   ```python
+   # plugins/multilingual_site.py
+   def generate_multilingual_content(generators):
+       """Generate content for each supported language during build"""
+
+   def create_language_specific_pages(content, translations):
+       """Create static pages for each language version"""
+
+   def generate_language_switcher_context(content, available_languages):
+       """Create template context for language switching"""
+
+   def generate_language_selection_page(supported_languages):
+       """Generate root language selection page"""
+   ```
+
+#### Phase 2: Content Integration
+
+1. **Translation Integration**
+
+   - Leverage existing translation files in `extensions/` directories
+   - Map original content to translated versions
+   - Handle missing translations gracefully
+
+2. **Slug Translation**
+   ```python
+   def translate_slug(original_slug, target_lang):
+       """Translate slugs for SEO-friendly URLs"""
+       # Examples:
+       # 'something-interesting' → 'etwas-interessantes' (DE)
+       # 'something-interesting' → 'quelque-chose-interessant' (FR)
+   ```
+
+#### Phase 3: Template Updates
+
+1. **Language-Aware Templates**
+
+   ```html
+   <!-- base.html -->
+   <html lang="{{ LANG }}">
+     <head>
+       <link rel="canonical" href="{{ CANONICAL_URL }}" />
+       <link rel="alternate" hreflang="en" href="{{ EN_URL }}" />
+       <link rel="alternate" hreflang="de" href="{{ DE_URL }}" />
+       <link rel="alternate" hreflang="fr" href="{{ FR_URL }}" />
+     </head>
+   </html>
+   ```
+
+2. **Language Switcher Component**
+   ```html
+   <!-- language_switcher.html -->
+   <div class="language-switcher">
+     <label>{{ _('Language') }}:</label>
+     <ul class="language-links">
+       {% for lang_code, lang_name, url in LANGUAGE_LINKS %}
+       <li class="{% if lang_code == CURRENT_LANG %}active{% endif %}">
+         <a href="{{ url }}" hreflang="{{ lang_code }}">{{ lang_name }}</a>
+       </li>
+       {% endfor %}
+     </ul>
+   </div>
+   ```
+
+#### Phase 4: Build Process Integration
+
+1. **Build Pipeline Updates**
+
+   ```python
+   def build_multilingual_site():
+       """Build process for multilingual site"""
+       # 1. Read original content and translations from extensions/
+       # 2. Generate static pages for each language in /{lang}/ directories
+       # 3. Create cross-language navigation links in templates
+       # 4. Generate root language selection page with client-side detection
+   ```
+
+2. **Asset Handling**
+   - Shared assets (CSS, JS, images) in common directory
+   - Language-specific assets when needed
+   - Proper cache busting for multilingual assets
+
+### File Organization Strategy
+
+#### Source Structure (Current)
+
+```text
+content/
+├── articles/
+│   └── 2025-07-03-something-interesting/
+│       ├── 2025-07-03-something-interesting.md      # Original (EN)
+│       └── extensions/
+│           ├── 2025-07-03-something-interesting-DE.md
+│           └── 2025-07-03-something-interesting-FR.md
+└── pages/
+    └── about/
+        ├── about.md                                  # Original (EN)
+        └── extensions/
+            ├── about-DE.md
+            └── about-FR.md
+```
+
+#### Output Structure (Proposed)
+
+```text
+output/
+├── index.html                   # Language selection page
+├── robots.txt                   # Updated for multilingual
+├── static/                      # Shared assets
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── en/                          # English content
+│   ├── index.html
+│   ├── something-interesting/
+│   │   └── index.html
+│   └── about/
+│       └── index.html
+├── de/                          # German content
+│   ├── index.html
+│   ├── etwas-interessantes/
+│   │   └── index.html
+│   └── ueber/
+│       └── index.html
+└── fr/                          # French content
+    ├── index.html
+    ├── quelque-chose-interessant/
+    │   └── index.html
+    └── a-propos/
+        └── index.html
+```
+
+### SEO and Technical Considerations
+
+#### 1. Search Engine Optimization
+
+```html
+<!-- Hreflang implementation -->
+<link rel="alternate" hreflang="en" href="https://grtnr.com/en/article-slug/" />
+<link rel="alternate" hreflang="de" href="https://grtnr.com/de/artikel-slug/" />
+<link rel="alternate" hreflang="fr" href="https://grtnr.com/fr/article-slug/" />
+<link rel="alternate" hreflang="x-default" href="https://grtnr.com/en/article-slug/" />
+```
+
+#### 3. Client-Side Language Detection
+
+```javascript
+// Client-side language detection for static sites
+function detectAndRedirectLanguage() {
+  const supportedLanguages = ["en", "de", "fr"]
+  const defaultLanguage = "en"
+
+  // Check for stored preference
+  const storedLang = localStorage.getItem("preferred_language")
+  if (storedLang && supportedLanguages.includes(storedLang)) {
+    window.location.href = `/${storedLang}/`
+    return
+  }
+
+  // Check browser language
+  const browserLang = navigator.language.split("-")[0]
+  if (supportedLanguages.includes(browserLang)) {
+    window.location.href = `/${browserLang}/`
+    return
+  }
+
+  // Default fallback
+  window.location.href = `/${defaultLanguage}/`
+}
+```
+
+### User Experience Design
+
+#### 1. Language Selection Page
+
+```html
+<!-- Landing page for language selection -->
+<div class="language-selection">
+  <h1>Welcome / Willkommen / Bienvenue</h1>
+  <div class="language-cards">
+    <a href="/en/" class="language-card">
+      <img src="/static/flags/en.svg" alt="English" />
+      <span>English</span>
+    </a>
+    <a href="/de/" class="language-card">
+      <img src="/static/flags/de.svg" alt="Deutsch" />
+      <span>Deutsch</span>
+    </a>
+    <a href="/fr/" class="language-card">
+      <img src="/static/flags/fr.svg" alt="Français" />
+      <span>Français</span>
+    </a>
+  </div>
+
+  <script>
+    // Auto-redirect based on browser language if no manual selection
+    setTimeout(() => {
+      detectAndRedirectLanguage()
+    }, 3000) // Give users 3 seconds to manually select
+  </script>
+</div>
+```
+
+#### 2. Language Persistence
+
+```javascript
+// Language preference persistence
+class LanguagePreference {
+  static get() {
+    return (
+      localStorage.getItem("preferred_language") || this.detectBrowserLanguage() || "en"
+    )
+  }
+
+  static set(lang) {
+    localStorage.setItem("preferred_language", lang)
+    document.cookie = `preferred_language=${lang}; path=/; max-age=31536000`
+  }
+
+  static detectBrowserLanguage() {
+    const lang = navigator.language || navigator.userLanguage
+    return lang.split("-")[0] // Extract language code
+  }
+}
+```
+
+#### 3. Missing Translation Handling
+
+```python
+def handle_missing_translation(content, target_lang, default_lang='en'):
+    """Handle cases where translation is not available"""
+    # Falls back to default language version
+```
+
+### Performance Considerations
+
+#### 1. Build Performance
+
+- **Incremental Building**: Only rebuild changed language versions
+- **Parallel Processing**: Generate multiple languages simultaneously
+- **Smart Caching**: Cache translations and generated content
+- **Asset Optimization**: Shared assets to reduce duplication

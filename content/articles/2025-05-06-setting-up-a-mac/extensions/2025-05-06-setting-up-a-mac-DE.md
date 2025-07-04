@@ -1,68 +1,62 @@
 ---
-source-language: en
-target-language: de
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 0848d251c7c42eb58ee2a75c33ada006af1dadb214ac5adadc5790d0f60c1499
-translation-type: automatic
+tags: Mac
+date: 2025-05-06
+title: Einrichten eines Mac
+image: mac.jpg
+Translation: de
+Source-Language: en
+Translator: gpt-4
+Translate-Date: 2025-07-04T15:29:22.234241
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-06-setting-up-a-mac/2025-05-06-setting-up-a-mac.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→de] <p>Every couple of years you get the opportunity to setup a new Mac. It’s typically a enjoyable process, yet it eats up some time. In order top make it a <em>structured</em> enjoyable process, here is my note to future-me of what I have to install, and in what order.</p>
-<div class="toc">
-<ul>
-<li><a href="#first-things-first">First things first…</a></li>
-<li><a href="#basic">Basic</a></li>
-<li><a href="#for-work">For work</a></li>
-<li><a href="#settings-to-adjust">Settings to adjust</a></li>
-</ul>
-</div>
-<p><strong>Note:</strong> The dev stuff is not listed here as there is an own <a href="/development-environment-on-mac/">article about installing the Dev environment</a>.</p>
-<h2 id="first-things-first">First things first…</h2>
-<ul>
-<li>Mail first, as it takes loooong to download all the emails</li>
-<li>Work email</li>
-<li>Private Email</li>
-</ul>
-<h2 id="basic">Basic</h2>
-<ul>
-<li>1Password, 1st because everything needs passwords. Installed from AppStore.</li>
-<li>DropBox, early to give it time to sync.</li>
-<li>Swish, the window manager I am used to. Installed from <a href="https://highlyopinionated.co/swish/" rel="noopener noreferrer" target="_blank">their website</a>.</li>
-<li>AlDente for Battery management from <a href="https://apphousekitchen.com/aldente-overview/pricing/" rel="noopener noreferrer" target="_blank">their Website</a></li>
-<li>iTerm - because we need it for the next steps. And make sure that <code>zsh</code> is the shell used.</li>
-<li>ssh keys from 1Password</li>
-<li>brew</li>
-<li>AnythingLLM</li>
-<li>ChatGPT from the <a href="https://openai.com/chatgpt/download/" rel="noopener noreferrer" target="_blank">OPenAI Website</a></li>
-<li>
-<p>Claude from the <a href="https://claude.ai/download" rel="noopener noreferrer" target="_blank">Anthropic website</a></p>
-</li>
-<li>
-<p>Time thingy - don’t remember the name…</p>
-</li>
-</ul>
-<h2 id="for-work">For work</h2>
-<ul>
-<li>OwnCloud first, so it has time to sync. From the <a href="https://owncloud.com/desktop-app/" rel="noopener noreferrer" target="_blank">OwnCloud Website</a>.</li>
-<li>Webex</li>
-<li><span class="caps">VPN</span> <em>Cisco AnyConnect</em></li>
-<li><span class="caps">MS</span> Office 365, from AppStore, then login</li>
-<li><span class="caps">MS</span> Teams (that’s not part of Office 365) from the <a href="https://www.microsoft.com/en-us/microsoft-teams/download-app" rel="noopener noreferrer" target="_blank">Microsoft Teams Website</a></li>
-<li>Setup printers</li>
-</ul>
-<h2 id="settings-to-adjust">Settings to adjust</h2>
-<ul>
-<li>In <em>System Settings</em></li>
-<li>Trackpad</li>
-<li>Touch <span class="caps">ID</span></li>
-<li>Screen Saver</li>
-<li>Lock Screen</li>
-<li>Keyboard &gt; Keyborad Shortcuts.</li>
-<li>Desktop <span class="amp">&amp;</span> Dock in <em>System Settings</em>, <em>Hot Corners</em> remove all Icons from Dock</li>
-<li>
-<p>Finder <em>Settings</em> and <em>View Options</em></p>
-</li>
-<li>
-<p>Widgets on Desktop</p>
-</li>
-<li>Wallet <span class="amp">&amp;</span> Apple Pay</li>
-</ul>
+Alle paar Jahre haben Sie die Möglichkeit, einen neuen Mac einzurichten. Es ist normalerweise ein angenehmer Prozess, der jedoch etwas Zeit in Anspruch nimmt. Um diesen Prozess _strukturiert_ und angenehm zu gestalten, ist hier meine Notiz an mein zukünftiges Ich, was ich installieren muss und in welcher Reihenfolge.
+
+[TOC]
+
+**Hinweis:** Die Entwicklerwerkzeuge sind hier nicht aufgeführt, da es einen eigenen [Artikel über die Installation der Entwicklerumgebung](/development-environment-on-mac/) gibt.
+
+## Zuerst die ersten Dinge...
+
+- Zuerst Mail, da es lange dauert, alle E-Mails herunterzuladen
+  - Arbeitsemail
+  - Private Email
+
+## Grundlegendes
+
+- 1Password, zuerst, weil alles Passwörter benötigt. Installiert aus dem AppStore.
+- DropBox, frühzeitig, um Zeit zum Synchronisieren zu haben.
+- Swish, der Fenstermanager, an den ich gewöhnt bin. Installiert von [ihrer Website](https://highlyopinionated.co/swish/).
+- AlDente für die Batterieverwaltung von [ihrer Website](https://apphousekitchen.com/aldente-overview/pricing/)
+- iTerm - weil wir es für die nächsten Schritte brauchen. Und stellen Sie sicher, dass `zsh` die verwendete Shell ist.
+- ssh-Schlüssel von 1Password
+- brew
+- AnythingLLM
+- ChatGPT von der [OpenAI-Website](https://openai.com/chatgpt/download/)
+- Claude von der [Anthropic-Website](https://claude.ai/download)
+
+- Zeit-Ding - erinnere mich nicht an den Namen...
+
+## Für die Arbeit
+
+- Zuerst OwnCloud, damit es Zeit zum Synchronisieren hat. Von der [OwnCloud-Website](https://owncloud.com/desktop-app/).
+- Webex
+- VPN _Cisco AnyConnect_
+- MS Office 365, aus dem AppStore, dann anmelden
+- MS Teams (das ist kein Teil von Office 365) von der [Microsoft Teams-Website](https://www.microsoft.com/en-us/microsoft-teams/download-app)
+- Drucker einrichten
+
+## Einstellungen zum Anpassen
+
+- In _Systemeinstellungen_
+  - Trackpad
+  - Touch ID
+  - Bildschirmschoner
+  - Sperrbildschirm
+  - Tastatur > Tastaturkürzel.
+- Desktop & Dock in _Systemeinstellungen_, _Aktive Bildschirmecken_ alle Symbole vom Dock entfernen
+- Finder _Einstellungen_ und _Anzeigeoptionen_
+
+- Widgets auf dem Desktop
+- Wallet & Apple Pay
