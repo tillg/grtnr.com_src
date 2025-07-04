@@ -1,0 +1,11 @@
+{
+  "content_hash": "c62377c897e3a08d0126ed93d217895ffd0bb8096ad05e9ed2e22b28bb5c6586",
+  "source_lang": "en",
+  "target_lang": "de",
+  "translation": "```markdown\n---\ntitle: Zipf-Mysterium\ntags: tech\narticle_header:\n  type: cover\n  image:\n    src: zipf.jpg\n---\n\nKein eigener Inhalt von mir, aber ein Meme, das ich entdeckt habe und das ich mir merken muss:\n\n<iframe width=\"853\" height=\"480\" src=\"https://www.youtube.com/embed/fCn8zs912OE?rel=0\" frameborder=\"0\" allowfullscreen></iframe>\n\nUnd der Typ steht jetzt definitiv auf meiner Beobachtungsliste ;)\n```",
+  "timestamp": "2025-07-04T17:02:41.089542",
+  "metadata": {
+    "model": "gpt-4o",
+    "service_version": "1.0.0"
+  }
+}
