@@ -50,7 +50,7 @@ jobs:
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             # Production: Full translation
             echo "TRANSLATION_ENABLED=true" >> $GITHUB_ENV
-            echo "TRANSLATION_TARGET_LANGUAGES=de,fr,es" >> $GITHUB_ENV
+            echo "TRANSLATION_TARGET_LANGUAGES=en,de,fr" >> $GITHUB_ENV
             echo "TRANSLATION_MODEL=gpt-4o" >> $GITHUB_ENV
             echo "TRANSLATION_EXCLUDE_CATEGORIES=recipes" >> $GITHUB_ENV
           else
