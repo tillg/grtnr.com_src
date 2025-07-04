@@ -146,6 +146,15 @@ class TranslationService:
             
             detected_lang = response.choices[0].message.content.strip().lower()
             
+            # Clean up the response - remove any quotes or extra characters
+            detected_lang = detected_lang.strip('\'"` ')
+            
+            # Extract just the language code if there's extra text
+            for supported_lang in self.prompts.get_supported_languages():
+                if supported_lang in detected_lang:
+                    detected_lang = supported_lang
+                    break
+            
             # Validate detected language
             if self.prompts.is_language_supported(detected_lang):
                 return detected_lang

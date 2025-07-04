@@ -1,291 +1,289 @@
 """
-Pelican plugin for automatic article translation.
-Integrates with the existing plugin system to provide translation capabilities.
+Automatic Translation Plugin for Pelican
+
+AI-powered automatic translation plugin that creates translations of articles and pages.
 """
 
 import os
 import sys
-from typing import List
+from pathlib import Path
+from typing import List, Dict, Any
+
+# Add the extensions directory to the path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'extensions'))
+
+try:
+    from translation_service import TranslationService, TranslationConfig
+    from translation_service.exceptions import TranslationError
+except ImportError as e:
+    # Graceful fallback if translation service is not available
+    print(f"Translation service not available: {e}")
+    TranslationService = None
+    TranslationConfig = None
+    TranslationError = Exception
 
 from pelican import signals
+from pelican.generators import Generator
+from pelican.contents import Article, Page
 
 # Import centralized logging
-sys.path.insert(0, os.path.dirname(__file__))
-from logger_config import get_logger
-from translation_service import TranslationService, TranslationError
-from file_organization import ExtensionFileManager
+try:
+    from logger_config import get_logger
+    logger = get_logger('automatic_translation')
+except ImportError:
+    import logging
+    logger = logging.getLogger('automatic_translation')
 
-logger = get_logger("automatic_translation")
 
-
-class AutomaticTranslationPlugin:
-    """Main plugin class for automatic translation functionality."""
-
-    def __init__(self):
+class TranslationGenerator(Generator):
+    """Generator for creating automatic translations"""
+    
+    def __init__(self, context, settings, path, theme, output_path):
+        super().__init__(context, settings, path, theme, output_path)
+        
+        # Initialize translation service
         self.translation_service = None
-        self.file_manager = None
-        self.target_languages = []
-        self.enabled = False
-        self.exclude_categories = []
-        self.exclude_paths = []
-
-    def initialize(self, pelican_instance):
-        """Initialize the plugin with Pelican settings."""
-        settings = pelican_instance.settings
-
+        self.config = None
+        
         # Check if translation is enabled
-        self.enabled = settings.get('TRANSLATION_ENABLED', False)
-        if not self.enabled:
+        if not settings.get('TRANSLATION_ENABLED', False):
             logger.info("Automatic translation is disabled")
             return
-
-        # Get target languages from settings
-        self.target_languages = settings.get('TRANSLATION_TARGET_LANGUAGES',
-                                             ['de', 'fr'])
-        if not self.target_languages:
-            logger.warning("No target languages specified, "
-                           "disabling translation")
-            self.enabled = False
+        
+        if TranslationService is None:
+            logger.error("Translation service is not available - check dependencies")
             return
-
-        # Get exclusion settings
-        self.exclude_categories = settings.get(
-            'TRANSLATION_EXCLUDE_CATEGORIES', [])
-        self.exclude_paths = settings.get('TRANSLATION_EXCLUDE_PATHS', [])
-
-        # Initialize services
-        cache_dir = settings.get('CACHE_PATH', 'cache')
-        self.translation_service = TranslationService(cache_dir=cache_dir)
-        self.file_manager = ExtensionFileManager(
-            content_root=settings.get('PATH', 'content'))
-
-        logger.info(f"Automatic translation initialized for languages: "
-                    f"{self.target_languages}")
-
-    def should_translate_content(self, content) -> bool:
-        """Check if content should be translated."""
-        if not self.enabled:
+        
+        try:
+            self.config = TranslationConfig.from_pelican_settings(settings)
+            self.translation_service = TranslationService(self.config)
+            logger.info(f"Translation service initialized for languages: {self.config.target_languages}")
+        except Exception as e:
+            logger.error(f"Failed to initialize translation service: {e}")
+    
+    def generate_context(self):
+        """Generate context for translations"""
+        pass
+    
+    def generate_output(self, writer):
+        """Generate translated content files"""
+        
+        if not self.translation_service:
+            return
+        
+        logger.info("Starting automatic translation generation")
+        
+        # Get all articles and pages
+        articles = self.context.get('articles', [])
+        pages = self.context.get('pages', [])
+        
+        # Process articles
+        for article in articles:
+            if self._should_translate_content(article):
+                self._translate_content(article)
+        
+        # Process pages
+        for page in pages:
+            if self._should_translate_content(page):
+                self._translate_content(page)
+        
+        logger.info("Automatic translation generation completed")
+    
+    def _should_translate_content(self, content) -> bool:
+        """Check if content should be translated"""
+        
+        # Check if content is already a translation
+        if hasattr(content, 'metadata') and content.metadata.get('translation_source'):
             return False
-
-        # Skip translation files themselves to avoid recursive translation
-        if hasattr(content, 'source_path'):
-            source_path = content.source_path
-            if '/extensions/' in source_path:
-                logger.debug(f"Skipping translation file: {source_path}")
-                return False
-
-        # Check category exclusions
+        
+        # Check excluded categories
         if hasattr(content, 'category') and content.category:
-            category_name = getattr(content.category, 'name', str(content.category))
-            if category_name in self.exclude_categories:
-                logger.debug(f"Skipping translation for excluded category: "
-                             f"{category_name}")
+            if self.config.should_exclude_category(content.category.name):
+                logger.debug(f"Skipping translation for excluded category: {content.category.name}")
                 return False
-
-        # Check path exclusions
-        if hasattr(content, 'source_path'):
-            source_path = content.source_path
-            for exclude_path in self.exclude_paths:
-                if exclude_path in source_path:
-                    logger.debug(f"Skipping translation for excluded path: "
-                                 f"{source_path}")
-                    return False
-
-        # Skip recipe files - they're handled separately if needed
-        if hasattr(content, 'source_path') and '/recipes/' in content.source_path:
-            logger.debug(f"Skipping recipe file: {content.source_path}")
+        
+        # Check excluded paths
+        content_path = getattr(content, 'source_path', '')
+        if self.config.should_exclude_path(content_path):
+            logger.debug(f"Skipping translation for excluded path: {content_path}")
             return False
-
+        
         return True
-
-    def translate_article(self, article):
-        """Translate an individual article."""
-        if not self.should_translate_content(article):
+    
+    def _translate_content(self, content):
+        """Translate content to all target languages"""
+        
+        logger.info(f"Translating content: {content.title}")
+        
+        # Get source content
+        source_content = self._get_source_content(content)
+        if not source_content:
+            logger.warning(f"Could not read source content for: {content.title}")
             return
-
-        source_path = article.source_path
-        logger.info(f"Processing article for translation: {source_path}")
-
-        # Get the original content
-        original_content = self._get_content_without_metadata(article)
-
-        # Calculate file hash for caching
-        file_hash = self.translation_service.cache.get_file_hash(source_path)
-
-        for target_lang in self.target_languages:
+        
+        # Detect source language
+        source_lang = self.translation_service.detect_language(source_content)
+        logger.debug(f"Detected source language: {source_lang}")
+        
+        # Translate to each target language
+        for target_lang in self.config.target_languages:
+            if target_lang == source_lang:
+                logger.debug(f"Skipping translation to same language: {target_lang}")
+                continue
+            
             try:
-                # Check if translation already exists and is current
-                if self.file_manager.is_translation_current(
-                        source_path, target_lang, file_hash):
-                    logger.debug(f"Translation {source_path} -> {target_lang} "
-                                 f"is current, skipping")
-                    continue
-
-                # Translate the content
-                translated_content, source_lang = (
-                    self.translation_service.translate_content(
-                        original_content, source_path, target_lang))
-
-                # Skip if source equals target language
-                if source_lang == target_lang:
-                    continue
-
-                # Write the translation file
-                self.file_manager.write_translation_file(
-                    source_path, target_lang, translated_content,
-                    source_lang, file_hash)
-
-                logger.info(f"Created translation: {source_path} "
-                            f"({source_lang} -> {target_lang})")
-
-            except TranslationError as e:
-                logger.error(f"Translation failed for {source_path} -> "
-                             f"{target_lang}: {e}")
+                self._create_translation(content, source_content, source_lang, target_lang)
             except Exception as e:
-                logger.error(f"Unexpected error translating {source_path}: {e}")
-
-        # Cleanup old translation files
-        self.file_manager.cleanup_old_translations(source_path,
-                                                   self.target_languages)
-
-    def translate_page(self, page):
-        """Translate an individual page."""
-        if not self.should_translate_content(page):
-            return
-
-        source_path = page.source_path
-        logger.info(f"Processing page for translation: {source_path}")
-
-        # Get the original content
-        original_content = self._get_content_without_metadata(page)
-
-        # Calculate file hash for caching
-        file_hash = self.translation_service.cache.get_file_hash(source_path)
-
-        for target_lang in self.target_languages:
-            try:
-                # Check if translation already exists and is current
-                if self.file_manager.is_translation_current(
-                        source_path, target_lang, file_hash):
-                    logger.debug(f"Translation {source_path} -> {target_lang} "
-                                 f"is current, skipping")
-                    continue
-
-                # Translate the content
-                translated_content, source_lang = (
-                    self.translation_service.translate_content(
-                        original_content, source_path, target_lang))
-
-                # Skip if source equals target language
-                if source_lang == target_lang:
-                    continue
-
-                # Write the translation file
-                self.file_manager.write_translation_file(
-                    source_path, target_lang, translated_content,
-                    source_lang, file_hash)
-
-                logger.info(f"Created translation: {source_path} "
-                            f"({source_lang} -> {target_lang})")
-
-            except TranslationError as e:
-                logger.error(f"Translation failed for {source_path} -> "
-                             f"{target_lang}: {e}")
-            except Exception as e:
-                logger.error(f"Unexpected error translating {source_path}: {e}")
-
-        # Cleanup old translation files
-        self.file_manager.cleanup_old_translations(source_path,
-                                                   self.target_languages)
-
-    def _get_content_without_metadata(self, content_obj) -> str:
-        """Extract content without frontmatter metadata."""
-        if hasattr(content_obj, '_content'):
-            # Use the processed content
-            return content_obj._content
-        elif hasattr(content_obj, 'source_path'):
-            # Read the file and extract content after metadata
-            try:
-                with open(content_obj.source_path, 'r', encoding='utf-8') as f:
-                    file_content = f.read()
-
-                # Skip frontmatter if present
-                if file_content.startswith('---'):
-                    lines = file_content.split('\n')
-                    frontmatter_end = -1
-                    for i, line in enumerate(lines[1:], 1):
-                        if line.strip() == '---':
-                            frontmatter_end = i
-                            break
-
-                    if frontmatter_end != -1:
-                        return '\n'.join(lines[frontmatter_end + 1:])
-
-                return file_content
-            except Exception as e:
-                logger.error(f"Failed to read content from "
-                             f"{content_obj.source_path}: {e}")
-                return ""
-        else:
-            logger.warning("Could not extract content from object")
+                logger.error(f"Failed to translate {content.title} to {target_lang}: {e}")
+    
+    def _get_source_content(self, content) -> str:
+        """Read source content from file"""
+        
+        source_path = getattr(content, 'source_path', None)
+        if not source_path:
             return ""
+        
+        try:
+            with open(source_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        except Exception as e:
+            logger.error(f"Failed to read source file {source_path}: {e}")
+            return ""
+    
+    def _create_translation(self, content, source_content: str, source_lang: str, target_lang: str):
+        """Create a translation file"""
+        
+        # Get translation
+        result = self.translation_service.translate_content(
+            source_content, source_lang, target_lang
+        )
+        
+        if result.cached:
+            logger.debug(f"Used cached translation for {target_lang}")
+        else:
+            logger.info(f"Generated new translation for {target_lang}")
+        
+        # Create output directory structure
+        output_dir = self._get_translation_output_dir(content)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create translation filename
+        translation_filename = self._get_translation_filename(content, target_lang)
+        output_path = output_dir / translation_filename
+        
+        # Add translation metadata
+        translation_content = self._add_translation_metadata(
+            result.translation, 
+            source_lang, 
+            target_lang, 
+            content
+        )
+        
+        # Write translation file
+        try:
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(translation_content)
+            
+            logger.info(f"Created translation: {output_path}")
+            
+        except Exception as e:
+            logger.error(f"Failed to write translation file {output_path}: {e}")
+    
+    def _get_translation_output_dir(self, content) -> Path:
+        """Get output directory for translations"""
+        
+        source_path = Path(getattr(content, 'source_path', ''))
+        source_dir = source_path.parent
+        
+        # Create extensions directory within the content directory
+        return source_dir / 'extensions'
+    
+    def _get_translation_filename(self, content, target_lang: str) -> str:
+        """Get filename for translation"""
+        
+        source_path = Path(getattr(content, 'source_path', ''))
+        base_name = source_path.stem
+        
+        # Add language suffix
+        return f"{base_name}-{target_lang.upper()}.md"
+    
+    def _add_translation_metadata(self, translation: str, source_lang: str, 
+                                 target_lang: str, original_content) -> str:
+        """Add metadata to translation"""
+        
+        # Extract existing metadata if present
+        lines = translation.split('\n')
+        has_frontmatter = lines and lines[0].strip() == '---'
+        
+        # Create translation metadata
+        translation_meta = [
+            f"Translation: {target_lang}",
+            f"Source-Language: {source_lang}",
+            f"Source-File: {getattr(original_content, 'source_path', '')}",
+            f"Generated-By: automatic-translation-plugin",
+            f"Generated-Date: {self._get_current_timestamp()}"
+        ]
+        
+        if has_frontmatter:
+            # Insert metadata into existing frontmatter
+            end_marker = None
+            for i, line in enumerate(lines[1:], 1):
+                if line.strip() == '---':
+                    end_marker = i
+                    break
+            
+            if end_marker:
+                # Insert translation metadata before the closing ---
+                lines[end_marker:end_marker] = translation_meta
+            else:
+                # Malformed frontmatter, add at the end
+                lines.extend(['---'] + translation_meta + ['---'])
+        else:
+            # Add frontmatter with translation metadata
+            lines = ['---'] + translation_meta + ['---', ''] + lines
+        
+        return '\n'.join(lines)
+    
+    def _get_current_timestamp(self) -> str:
+        """Get current timestamp for metadata"""
+        from datetime import datetime
+        return datetime.now().isoformat()
 
 
-# Global plugin instance
-plugin_instance = AutomaticTranslationPlugin()
+def get_generators(pelican_object):
+    """Register the translation generator"""
+    if pelican_object.settings.get('TRANSLATION_ENABLED', False):
+        return TranslationGenerator
+    return None
 
 
-def pelican_init(pelican_instance):
-    """Initialize the plugin when Pelican starts."""
-    plugin_instance.initialize(pelican_instance)
-
-
-def translate_articles(generator):
-    """Process articles for translation."""
-    if not plugin_instance.enabled:
+def initialize_translation_service(sender):
+    """Initialize translation service on Pelican startup"""
+    
+    settings = sender.settings
+    
+    if not settings.get('TRANSLATION_ENABLED', False):
         return
-
-    logger.info("Starting automatic translation of articles")
-
-    # Process regular articles
-    if hasattr(generator, 'articles'):
-        for article in generator.articles:
-            plugin_instance.translate_article(article)
-
-    # Process hidden articles
-    if hasattr(generator, 'hidden_articles'):
-        for article in generator.hidden_articles:
-            plugin_instance.translate_article(article)
-
-    logger.info("Finished automatic translation of articles")
-
-
-def translate_pages(generator):
-    """Process pages for translation."""
-    if not plugin_instance.enabled:
-        return
-
-    logger.info("Starting automatic translation of pages")
-
-    # Process regular pages
-    if hasattr(generator, 'pages'):
-        for page in generator.pages:
-            plugin_instance.translate_page(page)
-
-    # Process hidden pages
-    if hasattr(generator, 'hidden_pages'):
-        for page in generator.hidden_pages:
-            plugin_instance.translate_page(page)
-
-    logger.info("Finished automatic translation of pages")
+    
+    logger.info("Initializing automatic translation service")
+    
+    try:
+        # Test translation service setup
+        config = TranslationConfig.from_pelican_settings(settings)
+        service = TranslationService(config)
+        
+        # Run health check
+        health = service.health_check()
+        if health['status'] == 'healthy':
+            logger.info("Translation service health check passed")
+        else:
+            logger.warning(f"Translation service health check failed: {health}")
+            
+    except Exception as e:
+        logger.error(f"Failed to initialize translation service: {e}")
 
 
 def register():
-    """Register the plugin with Pelican."""
-    # Connect to initialization signal
-    signals.initialized.connect(pelican_init)
-
-    # Connect to content generation signals
-    # Run after content processing but before finalization
-    signals.article_generator_finalized.connect(translate_articles)
-    signals.page_generator_finalized.connect(translate_pages)
+    """Register plugin with Pelican"""
+    signals.initialized.connect(initialize_translation_service)
+    signals.get_generators.connect(get_generators)

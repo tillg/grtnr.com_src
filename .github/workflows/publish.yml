@@ -60,17 +60,49 @@ jobs:
             echo "TRANSLATION_EXCLUDE_CATEGORIES=recipes,drafts" >> $GITHUB_ENV
           fi
 
+      - name: Debug translation configuration
+        run: |
+          echo "🔍 Translation Debug Information:"
+          echo "TRANSLATION_ENABLED=$TRANSLATION_ENABLED"
+          echo "TRANSLATION_TARGET_LANGUAGES=$TRANSLATION_TARGET_LANGUAGES"
+          echo "OPENAI_API_KEY set: $(if [ -n "$OPENAI_API_KEY" ]; then echo 'Yes (***hidden***)'; else echo 'No'; fi)"
+          echo "Python path:"
+          python -c "import sys; print('\n'.join(sys.path))"
+          echo "Translation service test:"
+          python -c "
+          import sys, os
+          sys.path.insert(0, 'extensions')
+          try:
+              from translation_service import TranslationConfig
+              config = TranslationConfig.from_environment()
+              print(f'✅ Config loaded: {config}')
+          except Exception as e:
+              print(f'❌ Config failed: {e}')
+              import traceback
+              traceback.print_exc()
+          "
+
       - name: Build site
         run: inv preview
 
       - name: Show translation statistics
-        if: env.TRANSLATION_ENABLED == 'true'
         run: |
           echo "📊 Translation Statistics:"
           echo "Cache directory contents:"
-          ls -la cache/translations/ 2>/dev/null || echo "No cache directory found"
-          echo "Generated translations:"
-          find output -name "*-[A-Z][A-Z].html" -o -name "*extensions*" 2>/dev/null | head -10 || echo "No translation files found"
+          ls -la cache/ 2>/dev/null || echo "No cache directory found"
+          if [ -d "cache/translations" ]; then
+            ls -la cache/translations/
+          else
+            echo "No translations cache directory"
+          fi
+          echo "Content extensions directories:"
+          find content -name "extensions" -type d 2>/dev/null || echo "No extensions directories found"
+          echo "Generated translation files:"
+          find content -name "*-[A-Z][A-Z].md" 2>/dev/null | head -10 || echo "No translation files found in content"
+          echo "Build log for translation mentions:"
+          echo "Checking for translation activity in recent output..."
+          echo "Directory structure:"
+          ls -la
         
       - name: Upload site as artifact
         uses: actions/upload-artifact@v4

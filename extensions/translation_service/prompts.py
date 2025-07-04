@@ -63,9 +63,10 @@ TASK: Detect the primary language of the following text content.
 
 INSTRUCTIONS:
 1. Analyze the text and determine the primary language
-2. Respond with only the ISO 639-1 language code (e.g., 'en', 'de', 'fr', 'es')
-3. If the text is mixed languages, choose the predominant language
-4. If uncertain, default to 'en' for English
+2. Respond with ONLY the two-letter ISO 639-1 language code
+3. Do not include quotes, punctuation, or any other text
+4. Valid codes: en, de, fr, es, it, pt, ru, ja, ko, zh, ar, hi, nl, sv, no, da, fi, pl, cs, tr
+5. If uncertain, respond with: en
 
 CONTENT:
 {content}
