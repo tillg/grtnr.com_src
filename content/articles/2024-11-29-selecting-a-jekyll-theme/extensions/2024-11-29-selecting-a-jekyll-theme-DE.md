@@ -2,7 +2,7 @@
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:14.125076
+Translate-Date: 2025-07-04T17:02:45.345755
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2024-11-29-selecting-a-jekyll-theme/2024-11-29-selecting-a-jekyll-theme.md
 Generated-By: automatic-translation-plugin
 ---

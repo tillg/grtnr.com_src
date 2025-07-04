@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:30.955084
+Translate-Date: 2025-07-04T17:02:43.788576
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2019-11-08-markdown-editors/2019-11-08-markdown-editors.md
 Generated-By: automatic-translation-plugin
 ---

@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4
-Translate-Date: 2025-07-04T16:50:00.344448
+Translate-Date: 2025-07-04T17:04:03.801013
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-24-thoughts-on-swift-architecture/2025-03-24-thoughts-on-swift-architecture.md
 Generated-By: automatic-translation-plugin
 ---

@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:21.276896
+Translate-Date: 2025-07-04T17:02:43.394268
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2020-02-06-setting-up-my-terminal/2020-02-06-setting-up-my-terminal.md
 Generated-By: automatic-translation-plugin
 ---

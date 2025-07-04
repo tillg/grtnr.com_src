@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:15.374396
+Translate-Date: 2025-07-04T17:02:42.525335
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2021-09-04-named-volumes-with-docker-compose/2021-09-04-named-volumes-with-docker-compose.md
 Generated-By: automatic-translation-plugin
 ---

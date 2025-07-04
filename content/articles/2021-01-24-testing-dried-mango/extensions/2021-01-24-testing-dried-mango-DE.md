@@ -2,7 +2,7 @@
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:15.752367
+Translate-Date: 2025-07-04T17:02:42.918258
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2021-01-24-testing-dried-mango/2021-01-24-testing-dried-mango.md
 Generated-By: automatic-translation-plugin
 ---

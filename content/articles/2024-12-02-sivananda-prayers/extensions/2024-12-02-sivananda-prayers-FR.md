@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:13.865058
+Translate-Date: 2025-07-04T17:02:45.409736
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2024-12-02-sivananda-prayers/2024-12-02-sivananda-prayers.md
 Generated-By: automatic-translation-plugin
 ---

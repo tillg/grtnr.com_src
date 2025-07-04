@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4
-Translate-Date: 2025-07-04T16:49:59.108948
+Translate-Date: 2025-07-04T17:04:00.971968
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-04-18-digital-garden/2025-04-18-digital-garden.md
 Generated-By: automatic-translation-plugin
 ---

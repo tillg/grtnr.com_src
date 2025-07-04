@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:09.901790
+Translate-Date: 2025-07-04T17:02:45.345263
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2016-01-04-23-sociolog-software/2016-01-04-23-sociolog-software.md
 Generated-By: automatic-translation-plugin
 ---

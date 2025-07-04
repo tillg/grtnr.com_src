@@ -2,7 +2,7 @@
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:34.140755
+Translate-Date: 2025-07-04T17:02:44.422986
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2019-04-15-svg-programming/2019-04-15-svg-programming.md
 Generated-By: automatic-translation-plugin
 ---

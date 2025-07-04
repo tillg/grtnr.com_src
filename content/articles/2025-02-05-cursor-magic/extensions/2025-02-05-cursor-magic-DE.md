@@ -2,7 +2,7 @@
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:13.656405
+Translate-Date: 2025-07-04T17:02:44.848204
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-05-cursor-magic/2025-02-05-cursor-magic.md
 Generated-By: automatic-translation-plugin
 ---

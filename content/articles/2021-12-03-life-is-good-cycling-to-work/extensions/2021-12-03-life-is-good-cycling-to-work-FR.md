@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:15.491712
+Translate-Date: 2025-07-04T17:02:42.479323
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2021-12-03-life-is-good-cycling-to-work/2021-12-03-life-is-good-cycling-to-work.md
 Generated-By: automatic-translation-plugin
 ---

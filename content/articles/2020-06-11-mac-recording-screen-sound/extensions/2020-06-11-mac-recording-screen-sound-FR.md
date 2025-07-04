@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:16.036697
+Translate-Date: 2025-07-04T17:02:43.308363
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2020-06-11-mac-recording-screen-sound/2020-06-11-mac-recording-screen-sound.md
 Generated-By: automatic-translation-plugin
 ---

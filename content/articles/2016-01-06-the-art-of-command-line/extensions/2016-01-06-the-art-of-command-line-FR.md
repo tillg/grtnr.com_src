@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:01.827430
+Translate-Date: 2025-07-04T17:02:45.387621
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2016-01-06-the-art-of-command-line/2016-01-06-the-art-of-command-line.md
 Generated-By: automatic-translation-plugin
 ---

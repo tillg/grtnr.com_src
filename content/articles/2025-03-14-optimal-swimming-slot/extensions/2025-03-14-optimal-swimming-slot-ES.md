@@ -5,7 +5,7 @@ excerpt: Me encantaría construir un pequeño sitio web que optimice mis horario
 Translation: es
 Source-Language: en
 Translator: gpt-4
-Translate-Date: 2025-07-04T16:50:01.015519
+Translate-Date: 2025-07-04T17:04:04.535105
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-14-optimal-swimming-slot/2025-03-14-optimal-swimming-slot.md
 Generated-By: automatic-translation-plugin
 ---

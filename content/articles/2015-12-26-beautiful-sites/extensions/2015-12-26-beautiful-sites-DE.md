@@ -2,7 +2,7 @@
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:12.428265
+Translate-Date: 2025-07-04T17:02:21.315119
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2015-12-26-beautiful-sites/2015-12-26-beautiful-sites.md
 Generated-By: automatic-translation-plugin
 ---

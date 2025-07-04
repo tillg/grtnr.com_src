@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: de
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:47.058085
+Translate-Date: 2025-07-04T17:02:43.773129
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2019-11-17-tps-for-travelling-vietnam/2019-11-17-tips-for-travelling-vietnam.md
 Generated-By: automatic-translation-plugin
 ---

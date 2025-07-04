@@ -5,7 +5,7 @@ excerpt: Ich würde gerne eine kleine Webseite erstellen, die meine Schwimmzeite
 Translation: de
 Source-Language: en
 Translator: gpt-4
-Translate-Date: 2025-07-04T16:50:01.014698
+Translate-Date: 2025-07-04T17:04:04.535665
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-14-optimal-swimming-slot/2025-03-14-optimal-swimming-slot.md
 Generated-By: automatic-translation-plugin
 ---

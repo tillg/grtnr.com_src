@@ -1,12 +1,24 @@
 ---
-source-language: en
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 7b207422c535554b09a2069a58b99a7d3f8bc65156a3dcfec71dfd6cb97df75f
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T17:02:41.381942
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2015-12-16-playing-with-highcharts/2015-12-16-playing-with-highcharts.md
+Generated-By: automatic-translation-plugin
 ---
 
-[en→fr] <p>Today I discovered Highcharts: A tool to easily create charts online. It actually lets you create the chart on their website (you litteraly need less than 5 minutes!) and publish it from there.</p>
-<p>This is the mileage (or would you say <em>kilometreage</em>?) of my Vespa since I bought it:</p>
-<p><a href="https://app.everviz.com/show/opequb?redirected-from-hs" rel="noopener noreferrer" target="_blank"><img alt="Highcharts" src="/playing-with-highcharts/highcharts_chart.png"/></a></p>
-<p>The only downside seems to be the fact that the service costs money if you want to use it in a professional context. They are on <a href="https://github.com/highcharts/highcharts" rel="noopener noreferrer" target="_blank">github</a> but the description of the licence actually points you to their <a href="http://shop.highsoft.com/" rel="noopener noreferrer" target="_blank">online shop</a>.</p>
+```markdown
+---
+title: Jouer avec Highcharts
+tags: tech
+date: 2015-12-16
+---
+
+Aujourd'hui, j'ai découvert Highcharts : un outil pour créer facilement des graphiques en ligne. Il permet en fait de créer le graphique directement sur leur site web (il vous faut littéralement moins de 5 minutes !) et de le publier à partir de là.
+
+Voici le kilométrage (ou devrais-je dire _kilométrage_ ?) de ma Vespa depuis que je l'ai achetée :
+
+[![Highcharts](highcharts_chart.png)](https://app.everviz.com/show/opequb?redirected-from-hs)
+
+Le seul inconvénient semble être le fait que le service est payant si vous souhaitez l'utiliser dans un contexte professionnel. Ils sont sur [github](https://github.com/highcharts/highcharts) mais la description de la licence vous renvoie en fait à leur [boutique en ligne](http://shop.highsoft.com/).
+```

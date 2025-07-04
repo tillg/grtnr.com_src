@@ -2,7 +2,7 @@
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:43:06.159534
+Translate-Date: 2025-07-04T17:02:44.871685
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2016-01-08-ping-analysis/2016-01-08-ping-analysis.md
 Generated-By: automatic-translation-plugin
 ---

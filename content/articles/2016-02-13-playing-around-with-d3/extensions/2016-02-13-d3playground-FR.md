@@ -2,7 +2,7 @@
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-04T16:42:50.269462
+Translate-Date: 2025-07-04T17:02:44.888747
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2016-02-13-playing-around-with-d3/2016-02-13-d3playground.md
 Generated-By: automatic-translation-plugin
 ---

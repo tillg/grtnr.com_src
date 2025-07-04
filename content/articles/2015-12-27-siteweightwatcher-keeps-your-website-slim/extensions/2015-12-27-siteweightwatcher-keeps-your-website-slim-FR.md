@@ -1,50 +1,71 @@
 ---
-source-language: de
-target-language: fr
-last-created: 2025-07-03 17:23:23
-hash-on-last-created: 59c33f06f55529f65a31b1127693101d592cf4babd8941f34b4abcc2856fcfc1
-translation-type: automatic
+Translation: fr
+Source-Language: en
+Translator: gpt-4o
+Translate-Date: 2025-07-04T17:02:45.924974
+Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2015-12-27-siteweightwatcher-keeps-your-website-slim/2015-12-27-siteweightwatcher-keeps-your-website-slim.md
+Generated-By: automatic-translation-plugin
 ---
 
-[de→fr] <p>Good software developers test their stuff. And the <a href="https://www.wikiwand.com/en/Test-driven_development" rel="noopener noreferrer" target="_blank"><span class="caps">TDD</span> (Test Driven Development)</a> addicts are maniacs when it comes to testing. Those guys usually think in code, be it Java, Python, nodeJS, you name it. <span class="caps">TDD</span> means you write tests first, then you code just as much as it takes to let the tests become green. Then you rework your code and only then you start writing tests for new requirements.
-<img alt="TDD Process" src="/siteweightwatcher-keeps-your-website-slim/tdd.png"/></p>
-<p>This is <strong>very</strong> testy. My opinion is that if you do it the way it’s written and described in the books you become awfully slow and it turns into nonsense. But that’s another discussion, and not one I want to sort out here…</p>
-<p>What’s missing with most of the test approaches I have seen in the past are the following two things:</p>
-<ol>
-<li>The test guys and test tools stop monitoring the software or website once it went into production. Somehow they feel that their responsibility ends with the going live…</li>
-<li>They test the software. Not the rest, I.e. The design, the <span class="caps">HTML</span>, the <span class="caps">CSS</span> etc. And the user experience, the feeling wether what I see, touch, browse navigate is of good quality, is very much influenced by this packaging of the software logic.</li>
-</ol>
-<p>So I am looking for a tool to test (web based) software once it’s out in the wild and throughout the entire user experience. Imagine a website, a simple blog. It might be perfect when it got launched, but over time it just degrades: the designers have added so many bells and whistles, the volume of the content has grown, it was tweaked to be more useable on mobiles… And eventually the site is bloated, heavy and slow. Why do I have to wait for my users to tell me (that would be complaining)?</p>
-<p>At <a href="https://mgm-tp.com" rel="noopener noreferrer" target="_blank">mgm technology partners</a> we have automated test suites that run every night. So developers that built in code that slows down the software have a report that tells them every morning in their inbox.</p>
-<p>So here is what my SiteWeightWatcher should do:</p>
-<ul>
-<li>Run tests every 5-30 minutes against the production site</li>
-<li>Check all the pages, not just index.html</li>
-<li>Report immediately when pages become slow (that would be slower than they used to be)</li>
-<li>Track key figures and how they evolve over time:</li>
-<li>How much data is transferred for each page?</li>
-<li>How many requests are going back <span class="amp">&amp;</span> forth?</li>
-<li>How much time does it take searching for products? Over time…</li>
-<li>How well connected is the site for users in Germany, <span class="caps">UK</span>, <span class="caps">US</span> or Asia? Over time, because those things change without us having done anything.</li>
-</ul>
-<p>I could imagine a dashboard for an online shop like <a href="https://www.kickz.com/de" rel="noopener noreferrer" target="_blank"><span class="caps">KICKZ</span>.com</a> to look may this way:
-<img alt="Deshboard scribble" src="/siteweightwatcher-keeps-your-website-slim/kickz_dashboard.png"/>A Dashboard that shows how page sizes evolve</p>
-<p>And just as the normal test teams do, these tests should also evolve and become more and more adapted to the site, it’s functionality and its users. Whenever we have a real problem or bug out there, we have to make sure that our WeightWatcher will find it in case it should appear or happen again.</p>
-<p>How could we start to build such a tool? Some thoughts:</p>
-<ul>
-<li>We have agents and a central server. The agents are located all around the globe or in different networks (think of little Docker images that run on different clouds). They report all their captured data to the central server. This is where the reports are generated and where interactive explication of the data is provided.</li>
-<li>The agents start collecting simple metrics:</li>
-<li>No of <span class="caps">HTTP</span> requests per page</li>
-<li>Data transferred per page</li>
-<li>No of lines of JavaScript per page</li>
-<li>Time to load the data</li>
-<li>Time to execute JavaScript</li>
-<li>Based on this we start with simple reports:</li>
-<li>What’s the average page size?</li>
-<li>What’s the average no of requests per page?</li>
-<li>What are my <em>heaviest</em> pages?</li>
-<li>A graph that shows availability of my site as well as load time over a 24h scale, a week scale, a month. May be my users only experience slow loading in the evenings.</li>
-</ul>
-<p>From there we we extend the data we collect as well as the reports.</p>
-<p>Such a tool would be great to monitor sites that I am in charge of (I.e. websites that we have developed at mgm) but could also give valuable information about other market players. It could be used both by technical people as well as the marketing guys - since they also <em>sometimes</em> break performance. I would be curious to see this kind of stats for Zalando 😜</p>
-<p>Does anyone know about such a monitoring system? Please let me know.</p>
+```markdown
+---
+layout: post
+title: SiteWeightWatcher - garde votre site web léger
+slug: siteweightwatcher-garde-votre-site-web-léger
+date_published: 2015-12-27T00:00:00.000Z
+date_updated: 2021-12-06T14:38:49.000Z
+tags: Tech
+image: kickz_dashboard.png
+---
+
+Les bons développeurs de logiciels testent leurs créations. Et les accros du [TDD (Test Driven Development)](https://www.wikiwand.com/en/Test-driven_development) sont des maniaques en matière de tests. Ces personnes pensent généralement en code, que ce soit Java, Python, nodeJS, vous l'appelez. TDD signifie que vous écrivez d'abord les tests, puis vous codez juste ce qu'il faut pour que les tests deviennent verts. Ensuite, vous retravaillez votre code et ce n'est qu'alors que vous commencez à écrire des tests pour de nouvelles exigences.
+![Processus TDD](tdd.png)
+
+C'est **très** axé sur les tests. Mon opinion est que si vous le faites comme c'est écrit et décrit dans les livres, vous devenez terriblement lent et cela tourne au non-sens. Mais c'est une autre discussion, et ce n'est pas une que je veux régler ici...
+
+Ce qui manque dans la plupart des approches de test que j'ai vues dans le passé, ce sont les deux choses suivantes :
+
+1. Les testeurs et les outils de test cessent de surveiller le logiciel ou le site web une fois qu'il est en production. D'une manière ou d'une autre, ils estiment que leur responsabilité s'arrête avec la mise en ligne...
+2. Ils testent le logiciel. Pas le reste, c'est-à-dire le design, le HTML, le CSS, etc. Et l'expérience utilisateur, le sentiment de savoir si ce que je vois, touche, navigue est de bonne qualité, est très influencé par cet emballage de la logique logicielle.
+
+Je cherche donc un outil pour tester les logiciels (basés sur le web) une fois qu'ils sont dans la nature et tout au long de l'expérience utilisateur. Imaginez un site web, un simple blog. Il pourrait être parfait lors de son lancement, mais avec le temps, il se dégrade : les designers ont ajouté tant de fioritures, le volume du contenu a augmenté, il a été ajusté pour être plus utilisable sur les mobiles... Et finalement, le site est gonflé, lourd et lent. Pourquoi dois-je attendre que mes utilisateurs me le disent (ce qui serait se plaindre) ?
+
+Chez [mgm technology partners](https://mgm-tp.com), nous avons des suites de tests automatisés qui s'exécutent chaque nuit. Ainsi, les développeurs qui ont intégré du code ralentissant le logiciel reçoivent un rapport qui leur indique chaque matin dans leur boîte de réception.
+
+Voici donc ce que mon SiteWeightWatcher devrait faire :
+
+- Exécuter des tests toutes les 5 à 30 minutes sur le site de production
+- Vérifier toutes les pages, pas seulement index.html
+- Signaler immédiatement lorsque les pages deviennent lentes (c'est-à-dire plus lentes qu'elles ne l'étaient auparavant)
+- Suivre les indicateurs clés et leur évolution dans le temps :
+  - Quelle quantité de données est transférée pour chaque page ?
+  - Combien de requêtes sont échangées ?
+  - Combien de temps faut-il pour rechercher des produits ? Au fil du temps...
+  - Quelle est la connectivité du site pour les utilisateurs en Allemagne, au Royaume-Uni, aux États-Unis ou en Asie ? Au fil du temps, car ces choses changent sans que nous ayons fait quoi que ce soit.
+
+Je pourrais imaginer un tableau de bord pour une boutique en ligne comme [KICKZ.com](https://www.kickz.com/de) ressemblant à ceci :
+![Esquisse du tableau de bord](kickz_dashboard.png)Un tableau de bord qui montre comment les tailles de page évoluent
+
+Et tout comme les équipes de test normales le font, ces tests devraient également évoluer et s'adapter de plus en plus au site, à sa fonctionnalité et à ses utilisateurs. Chaque fois que nous avons un vrai problème ou un bug, nous devons nous assurer que notre WeightWatcher le détectera au cas où il apparaîtrait ou se reproduirait.
+
+Comment pourrions-nous commencer à construire un tel outil ? Quelques réflexions :
+
+- Nous avons des agents et un serveur central. Les agents sont situés partout dans le monde ou dans différents réseaux (pensez à de petites images Docker qui s'exécutent sur différents clouds). Ils rapportent toutes leurs données capturées au serveur central. C'est là que les rapports sont générés et où une explication interactive des données est fournie.
+- Les agents commencent à collecter des métriques simples :
+  - Nombre de requêtes HTTP par page
+  - Données transférées par page
+  - Nombre de lignes de JavaScript par page
+  - Temps de chargement des données
+  - Temps d'exécution du JavaScript
+- À partir de cela, nous commençons avec des rapports simples :
+  - Quelle est la taille moyenne des pages ?
+  - Quel est le nombre moyen de requêtes par page ?
+  - Quelles sont mes pages les _plus lourdes_ ?
+  - Un graphique qui montre la disponibilité de mon site ainsi que le temps de chargement sur une échelle de 24 heures, une semaine, un mois. Peut-être que mes utilisateurs ne rencontrent des temps de chargement lents que le soir.
+
+De là, nous étendons les données que nous collectons ainsi que les rapports.
+
+Un tel outil serait formidable pour surveiller les sites dont je suis responsable (c'est-à-dire les sites web que nous avons développés chez mgm) mais pourrait également fournir des informations précieuses sur d'autres acteurs du marché. Il pourrait être utilisé à la fois par des personnes techniques ainsi que par les équipes marketing - car elles aussi _parfois_ compromettent la performance. Je serais curieux de voir ce genre de statistiques pour Zalando 😜
+
+Quelqu'un connaît-il un tel système de surveillance ? Merci de me le faire savoir.
+```
