@@ -5,7 +5,7 @@ excerpt: J'ai ajouté des commentaires à mon site web statique. Voici comment j
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-08T07:49:16.801502
+Translate-Date: 2025-07-08T08:08:39.482330
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-11-solid-comments-in-static-website/2025-02-11-solid-comments-in-static-website.md
 Generated-By: automatic-translation-plugin
 ---

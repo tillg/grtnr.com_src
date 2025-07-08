@@ -4,8 +4,8 @@ tags: blog, tech, logicielsdontnousavonsbesoin
 summary: J'ai maintenant un blog basé sur Pelican et je veux ajouter ou corriger automatiquement du contenu : Balises d'image, résumés d'articles, traductions... Enfin un moyen d'utiliser l'IA 🤖
 Translation: fr
 Source-Language: en
-Translator: gpt-4
-Translate-Date: 2025-07-08T07:50:50.971869
+Translator: gpt-4o
+Translate-Date: 2025-07-08T08:08:37.651437
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-04-autocompleting-my-blog/2025-05-04-autocompleting-my-blog.md
 Generated-By: automatic-translation-plugin
 ---

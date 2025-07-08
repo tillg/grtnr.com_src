@@ -6,8 +6,8 @@ image: filmz.png
 summary: Vor einiger Zeit habe ich eine kleine iOS-App namens Filmz mit _vibe_coding_ entwickelt. Das ist schön, bis man beim _vibe debugging_ landet. Jetzt starte ich einen neuen Versuch, diesmal auf eine strukturiertere Weise.
 Translation: de
 Source-Language: en
-Translator: gpt-4
-Translate-Date: 2025-07-08T07:50:49.055778
+Translator: gpt-4o
+Translate-Date: 2025-07-08T08:08:36.941955
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
 Generated-By: automatic-translation-plugin
 ---

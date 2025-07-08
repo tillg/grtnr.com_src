@@ -5,7 +5,7 @@ excerpt: Ich habe dieses Video eines Entwicklers mit VIELEN hilfreichen Tipps zu
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-08T07:49:15.989367
+Translate-Date: 2025-07-08T08:08:39.905415
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-05-cursor-magic/2025-02-05-cursor-magic.md
 Generated-By: automatic-translation-plugin
 ---

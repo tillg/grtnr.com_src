@@ -328,6 +328,9 @@ class MultilingualContentProcessor:
         logger.debug(f"Parsed translation metadata: {metadata}")
         logger.debug(f"Translated content length: {len(content)} chars")
         
+        # Extract a clean summary from the markdown content before processing
+        clean_summary = self._extract_clean_summary(content)
+        
         # Process the markdown content to HTML using Pelican's markdown processor
         processed_content = self._process_markdown_content(content)
         logger.debug(f"Processed content length: {len(processed_content)} chars")
@@ -341,14 +344,27 @@ class MultilingualContentProcessor:
         
         # Override with translated metadata if available
         if 'excerpt' in metadata:
-            new_metadata['excerpt'] = metadata['excerpt']
-            new_metadata['summary'] = metadata['excerpt']  # Also set summary for template display
-            logger.debug(f"Set translated excerpt and summary for {lang}: {metadata['excerpt']}")
+            clean_excerpt = self._process_markdown_content(metadata['excerpt'])
+            # Remove wrapping <p> tags if it's a single paragraph for inline display
+            if clean_excerpt.startswith('<p>') and clean_excerpt.endswith('</p>') and clean_excerpt.count('<p>') == 1:
+                clean_excerpt = clean_excerpt[3:-4]
+            new_metadata['excerpt'] = clean_excerpt
+            new_metadata['summary'] = clean_excerpt  # Also set summary for template display
+            logger.debug(f"Set translated excerpt and summary for {lang}: {clean_excerpt}")
         
         # Handle summary field directly (some articles use summary instead of excerpt)
         if 'summary' in metadata:
-            new_metadata['summary'] = metadata['summary']
-            logger.debug(f"Set translated summary for {lang}: {metadata['summary']}")
+            clean_summary_from_meta = self._process_markdown_content(metadata['summary'])
+            # Remove wrapping <p> tags if it's a single paragraph for inline display
+            if clean_summary_from_meta.startswith('<p>') and clean_summary_from_meta.endswith('</p>') and clean_summary_from_meta.count('<p>') == 1:
+                clean_summary_from_meta = clean_summary_from_meta[3:-4]
+            new_metadata['summary'] = clean_summary_from_meta
+            logger.debug(f"Set translated summary for {lang}: {clean_summary_from_meta}")
+        
+        # If no explicit summary/excerpt in metadata, use the clean summary we extracted
+        if 'summary' not in new_metadata and 'excerpt' not in new_metadata and clean_summary:
+            new_metadata['summary'] = clean_summary
+            logger.debug(f"Set auto-generated clean summary for {lang}: {clean_summary[:100]}...")
         
         # Override title if provided in translated metadata
         if 'title' in metadata:
@@ -497,6 +513,72 @@ class MultilingualContentProcessor:
         
         body = '\n'.join(lines[body_start:])
         return metadata, body
+    
+    def _extract_clean_summary(self, content: str) -> str:
+        """Extract a clean text summary from markdown content, excluding TOC and other markup"""
+        import re
+        
+        # Remove TOC markers
+        content = re.sub(r'\[TOC\]', '', content)
+        
+        # Split into lines and process
+        lines = content.split('\n')
+        summary_lines = []
+        
+        for line in lines:
+            line = line.strip()
+            
+            # Skip empty lines
+            if not line:
+                continue
+                
+            # Skip headers
+            if line.startswith('#'):
+                continue
+                
+            # Skip image references
+            if line.startswith('<img') or line.startswith('!['):
+                continue
+                
+            # Skip code blocks
+            if line.startswith('```'):
+                continue
+                
+            # Skip lists (we want paragraph text for summary)
+            if line.startswith('- ') or line.startswith('* ') or re.match(r'^\d+\.', line):
+                continue
+                
+            # Skip links that are on their own line
+            if line.startswith('http') or line.startswith('[') and line.endswith(']'):
+                continue
+                
+            # Add the line if it looks like paragraph text
+            if len(line) > 20:  # Only include substantial text
+                summary_lines.append(line)
+                
+                # Stop after we have enough content for a summary
+                if len(' '.join(summary_lines)) > 150:
+                    break
+        
+        # Join the lines and clean up markdown formatting
+        summary = ' '.join(summary_lines)
+        
+        # Remove markdown formatting
+        summary = re.sub(r'\*\*(.+?)\*\*', r'\1', summary)  # Bold
+        summary = re.sub(r'_(.+?)_', r'\1', summary)  # Italic
+        summary = re.sub(r'\[(.+?)\]\(.+?\)', r'\1', summary)  # Links
+        summary = re.sub(r'`(.+?)`', r'\1', summary)  # Code
+        
+        # Clean up extra whitespace
+        summary = re.sub(r'\s+', ' ', summary).strip()
+        
+        # Truncate if too long
+        if len(summary) > 200:
+            summary = summary[:200].rsplit(' ', 1)[0] + '...'
+        
+        logger.debug(f"Extracted clean summary: {summary}")
+        return summary
+    
     
     def _process_markdown_content(self, content: str) -> str:
         """Process markdown content to HTML using Pelican's markdown processor"""
