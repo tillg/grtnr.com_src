@@ -5,8 +5,8 @@ summary: Notes sur les découvertes et les _compréhensions_ autour du [Protocol
 tags: Tech, IA
 Translation: fr
 Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-04T22:06:50.096535
+Translator: gpt-4
+Translate-Date: 2025-07-08T07:50:48.643485
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-18-mcp-playground/2025-05-18-mcp-playground.md
 Generated-By: automatic-translation-plugin
 ---
