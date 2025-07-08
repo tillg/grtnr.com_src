@@ -1,26 +1,11 @@
-## Multilingual site
+## Cleanup code
 
-- Articles are translated automatically already
-- Now a multilingual site structure should be created.
-- The user should be able on every page to switch between German, English and French
-- Once he selected a language, he should stay in this language when following links inside our website.
+Look thru the code base and try to identify legacy structures:
 
-### Architecture
+- Unused code. Make sure we only have functions and code that is really used
+- Wrong names: Look for functions that do something else than the name suggests. In this case explain me what the function does and come up with a suggestion for a name.
+- Duplicate functionality: Functionality that has been developed twice, or twiuse very similar. Explain me those functions or functional blocks.
 
-The translated articles, pages etc. should be transformed & copied into the target web structure during the build process.
+Are there other type of bad code smell that we should look for?
 
-### File organization
-
-We have following directory structure in our sources:
-
-```text
-content/
-    articles/
-        2025-07-03-something-interesting/
-            2025-07-03-something-interesting.md
-            extensions/
-                2025-07-03-something-interesting-DE.md
-                2025-07-03-something-interesting-FR.md
-```
-
-Architecture question: What is the ideal directory & file structure we want to have in our output?
+All the findings should be reported in THIS MD file, including suggestions on how to fix them.
