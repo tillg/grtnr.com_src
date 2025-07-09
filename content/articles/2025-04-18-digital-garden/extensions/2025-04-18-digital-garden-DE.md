@@ -5,7 +5,7 @@ excerpt: "Ich habe über digitale Gärten gelesen und mochte die Idee. Also bega
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T07:25:28.567427
+Translate-Date: 2025-07-09T07:28:02.299971
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-04-18-digital-garden/2025-04-18-digital-garden.md
 Generated-By: automatic-translation-plugin
 ---
