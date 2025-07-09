@@ -10,10 +10,10 @@ styles, `#sidebar-checkbox` for behavior. -->
 
   <nav class="sidebar-nav">
 
-  <a class="sidebar-nav-item" href="{{ SITEURL }}/">Home</a>
+  <a class="sidebar-nav-item" href="{{ SITEURL }}{% if current_language and current_language != 'en' %}/{{ current_language }}{% endif %}/">Home</a>
 
   {% for title, href in LINKS %}
-  <a class="sidebar-nav-item" href="{{ href }}">{{ title }}</a>
+  <a class="sidebar-nav-item" href="{% if current_language and current_language != 'en' %}/{{ current_language }}{% endif %}{{ href }}">{{ title }}</a>
   {% endfor %}
 
   </nav>

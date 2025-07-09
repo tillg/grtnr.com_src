@@ -746,16 +746,14 @@ class MultilingualOutputGenerator:
             override_output=self.output_path
         )
     
-    def generate_language_selection_page(self, writer, context: Dict, supported_langs: List[str], lang_names: Dict, template_getter):
-        """Generate root language selection page"""
-        selection_context = context.copy()
-        selection_context['supported_languages'] = supported_langs
-        selection_context['language_names'] = lang_names
+    def generate_root_page_with_default_language(self, writer, context: Dict, articles: List[Article], template_getter):
+        """Generate root index page with auto-redirect functionality"""
+        root_context = context.copy()
         
         writer.write_file(
             'index.html',
-            template_getter('language_selection'),
-            selection_context,
+            template_getter('auto_redirect'),
+            root_context,
             override_output=self.output_path
         )
     
@@ -875,10 +873,9 @@ class MultilingualSiteGenerator(Generator):
         for lang in self.content_processor.supported_langs:
             self._generate_language_version(writer, lang, processed_articles[lang], processed_pages[lang])
         
-        # Generate language selection page
-        self.output_generator.generate_language_selection_page(
-            writer, self.context, self.content_processor.supported_langs, 
-            self.language_switcher.lang_names, self.get_template
+        # Generate root page with English content (default language)
+        self.output_generator.generate_root_page_with_default_language(
+            writer, self.context, processed_articles['en'], self.get_template
         )
         
         logger.info("Multilingual site generation completed")

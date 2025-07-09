@@ -91,3 +91,90 @@ td img {
   color: #666;
   margin-bottom: 0.5rem;
 }
+
+/* Top-right language switcher styles */
+.language-switcher-top {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+
+.language-globe-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-globe-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.globe-icon {
+  fill: #333;
+  transition: fill 0.2s ease;
+}
+
+.language-globe-btn:hover .globe-icon {
+  fill: #268bd2;
+}
+
+.language-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 120px;
+  z-index: 1001;
+}
+
+.language-option {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.language-option:last-child {
+  border-bottom: none;
+}
+
+.language-option:hover {
+  background-color: #f5f5f5;
+  text-decoration: none;
+}
+
+.lang-code {
+  font-weight: bold;
+  color: #268bd2;
+  margin-right: 0.5rem;
+}
+
+.lang-name {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .language-switcher-top {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .language-menu {
+    min-width: 100px;
+  }
+}

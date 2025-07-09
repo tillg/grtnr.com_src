@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ SITENAME }}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .loading-container {
+            text-align: center;
+            color: #666;
+        }
+        
+        .globe-spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        .globe-spinner svg {
+            width: 100%;
+            height: 100%;
+            fill: #333;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 14px;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        /* Fade out animation */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container" id="loadingContainer">
+        <div class="globe-spinner">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+        </div>
+        <div class="loading-text">Redirecting...</div>
+    </div>
+
+    <script>
+        // Supported languages
+        const supportedLanguages = ['en', 'de', 'fr'];
+        const defaultLanguage = 'en';
+
+        function detectBrowserLanguage() {
+            // Check for stored language preference first
+            const storedLang = localStorage.getItem('selectedLanguage');
+            if (storedLang && supportedLanguages.includes(storedLang)) {
+                return storedLang;
+            }
+
+            // Get browser languages in order of preference
+            const browserLanguages = navigator.languages || [navigator.language || navigator.userLanguage];
+            
+            // Check each browser language preference
+            for (const lang of browserLanguages) {
+                // Extract language code (e.g., 'en-US' -> 'en')
+                const langCode = lang.split('-')[0].toLowerCase();
+                
+                // Check if we support this language
+                if (supportedLanguages.includes(langCode)) {
+                    return langCode;
+                }
+            }
+
+            // Fallback to default language
+            return defaultLanguage;
+        }
+
+        function redirectToLanguage(lang) {
+            // Store the detected/selected language
+            localStorage.setItem('selectedLanguage', lang);
+            
+            // Fade out effect
+            const container = document.getElementById('loadingContainer');
+            container.classList.add('fade-out');
+            
+            // Redirect after brief fade animation
+            setTimeout(() => {
+                if (lang === 'en') {
+                    window.location.href = '/en/';
+                } else {
+                    window.location.href = `/${lang}/`;
+                }
+            }, 300);
+        }
+
+        // Execute immediately when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add small delay to show the spinning globe briefly
+            setTimeout(() => {
+                const detectedLang = detectBrowserLanguage();
+                redirectToLanguage(detectedLang);
+            }, 500); // 500ms delay to show the globe
+        });
+
+        // Fallback: redirect after 2 seconds even if something goes wrong
+        setTimeout(() => {
+            const detectedLang = detectBrowserLanguage();
+            redirectToLanguage(detectedLang);
+        }, 2000);
+    </script>
+</body>
+</html>

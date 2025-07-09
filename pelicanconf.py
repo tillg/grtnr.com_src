@@ -215,3 +215,6 @@ TRANSLATION_TIMEOUT = int(os.environ.get("TRANSLATION_TIMEOUT", "30"))
 MULTILINGUAL_ENABLED = os.environ.get("MULTILINGUAL_ENABLED", "true").lower() == "true"
 MULTILINGUAL_LANGUAGES = os.environ.get("MULTILINGUAL_LANGUAGES", "en,de,fr").split(",")
 MULTILINGUAL_DEFAULT_LANG = os.environ.get("MULTILINGUAL_DEFAULT_LANG", "en")
+
+# Set default language to be passed to templates
+DEFAULT_LANG = "en"
