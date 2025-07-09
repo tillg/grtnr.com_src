@@ -5,7 +5,7 @@ excerpt: "J'ai écouté un podcast intéressant sur la structuration des différ
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T07:57:29.989146
+Translate-Date: 2025-07-09T08:08:28.776016
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-24-thoughts-on-swift-architecture/2025-03-24-thoughts-on-swift-architecture.md
 Generated-By: automatic-translation-plugin
 ---

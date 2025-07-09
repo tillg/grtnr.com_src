@@ -287,7 +287,7 @@ class TestExtensionFileManager(unittest.TestCase):
         self.manager.write_translation_file(
             self.test_file, "fr", "French", "en", "hash2")
         self.manager.write_translation_file(
-            self.test_file, "es", "Spanish", "en", "hash3")
+            self.test_file, "it", "Italian", "en", "hash3")
         
         # Cleanup, keeping only German and French
         self.manager.cleanup_old_translations(self.test_file, ["de", "fr"])
@@ -296,7 +296,7 @@ class TestExtensionFileManager(unittest.TestCase):
         translations = self.manager.get_existing_translations(self.test_file)
         self.assertIn("de", translations)
         self.assertIn("fr", translations)
-        self.assertNotIn("es", translations)
+        self.assertNotIn("it", translations)
 
 
 class TestTranslationServiceErrors(unittest.TestCase):

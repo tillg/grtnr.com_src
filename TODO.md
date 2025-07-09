@@ -1,11 +1,13 @@
-## Multi language navigation rework
+## Show translator in articles
 
-Currently the user is presented with the language choice when "entering" the website on the main page. Then he navigates always within one language, without the possibility to switch while being on one article.
+We want to rework the templates in order to show what has been translated automatically:
 
-Change the navigation so the user starts with a default language (i.e. english) and has the possibility to switch to another language while being on an article or recipe or page.
+## Document translation model
 
-- Have a small language switch in the top right corner of every page
-- When "closed" the language switcher should simply be a black & white globe
-- When flipping open, the other 2 possible languages are offered
-- When switching to another language, he remains in that language when following links.
-- Also going to the main/index page by clicking on the site name at the top should stay within the same language.
+- The automatic translation function should also return the LLM version from the ChatGPT call
+- The LLM model and version that was returned by the translation job should be added to the xyz-FR.md in the front matter as "Translator".
+
+## Show translator on site
+
+- Every article that has been translated automatically should show the model that was used to translate on the site as "Translated by".
+- Next to this information there should be a link to the "original version" of this document.

@@ -5,7 +5,7 @@ excerpt: J'ai trouvé cette vidéo d'un développeur avec BEAUCOUP de conseils u
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T07:57:31.107535
+Translate-Date: 2025-07-09T08:08:30.221561
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-05-cursor-magic/2025-02-05-cursor-magic.md
 Generated-By: automatic-translation-plugin
 ---
