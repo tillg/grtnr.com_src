@@ -289,7 +289,8 @@ class TranslationGenerator(Generator):
             cleaned_translation, 
             source_lang, 
             target_lang, 
-            content
+            content,
+            result.model
         )
         
         # Write translation file
@@ -324,15 +325,16 @@ class TranslationGenerator(Generator):
         return f"{base_name}-{target_lang.upper()}.md"
     
     def _add_translation_metadata(self, translation: str, source_lang: str, 
-                                 target_lang: str, original_content) -> str:
+                                 target_lang: str, original_content, model_name: str = None) -> str:
         """Add metadata to translation"""
         
         # Extract existing metadata if present
         lines = translation.split('\n')
         has_frontmatter = lines and lines[0].strip() == '---'
         
-        # Get model name from translation service config
-        model_name = self.config.model if self.config else 'unknown'
+        # Use provided model name or fall back to config
+        if not model_name:
+            model_name = self.config.model if self.config else 'unknown'
         
         # Create translation metadata
         translation_meta = [

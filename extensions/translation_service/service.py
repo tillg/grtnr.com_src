@@ -37,6 +37,7 @@ class TranslationResult:
     target_lang: str
     cached: bool = False
     metadata: Dict[str, Any] = None
+    model: str = None
     
     def __post_init__(self):
         if self.metadata is None:
@@ -63,7 +64,7 @@ class TranslationAPIClient:
         logging.getLogger("httpcore").setLevel(logging.WARNING)
         logging.getLogger("openai").setLevel(logging.WARNING)
     
-    def translate(self, content: str, source_lang: str, target_lang: str) -> str:
+    def translate(self, content: str, source_lang: str, target_lang: str) -> tuple[str, str]:
         """Make API call to OpenAI with retry logic"""
         
         prompt = self.prompts.build_translation_prompt(content, source_lang, target_lang)
@@ -96,7 +97,10 @@ class TranslationAPIClient:
                 if not validation_results.get('has_content', True):
                     raise InvalidResponseError("Translation validation failed: no content")
                 
-                return translation
+                # Extract model information from response
+                model_info = response.model if hasattr(response, 'model') else self.config.model
+                
+                return translation, model_info
                 
             except Exception as e:
                 last_exception = e
@@ -287,14 +291,15 @@ class TranslationService:
                     translation=cached_translation,
                     source_lang=source_lang,
                     target_lang=target_lang,
-                    cached=True
+                    cached=True,
+                    model=self.config.model  # Use configured model for cached results
                 )
         
         # Perform translation via API client
         self.logger.debug(f"Translating content from {source_lang} to {target_lang}")
         
         try:
-            translation = self.api_client.translate(content, source_lang, target_lang)
+            translation, model_info = self.api_client.translate(content, source_lang, target_lang)
             
             # Cache the translation
             if self.cache:
@@ -304,7 +309,7 @@ class TranslationService:
                     translation=translation,
                     source_lang=source_lang,
                     metadata={
-                        'model': self.config.model,
+                        'model': model_info,
                         'service_version': '1.0.0'
                     }
                 )
@@ -313,7 +318,8 @@ class TranslationService:
                 translation=translation,
                 source_lang=source_lang,
                 target_lang=target_lang,
-                cached=False
+                cached=False,
+                model=model_info
             )
             
         except Exception as e:

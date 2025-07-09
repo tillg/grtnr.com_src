@@ -91,8 +91,10 @@ class DateLocalizer:
                 # German format: "Mi 21. Mai 2025"
                 return f"{weekday_short} {date_obj.day}. {month_short} {date_obj.year}"
             elif target_lang == 'fr':
-                # French format: "mer 21 mai 2025"
-                return f"{weekday_short} {date_obj.day} {month_short} {date_obj.year}"
+                # French format: "Mercredi 21 mai 2025"
+                weekday_full = config['weekdays'][weekday_idx]
+                month_full = config['months'][month_idx]
+                return f"{weekday_full} {date_obj.day} {month_full} {date_obj.year}"
             else:
                 # English format: "Wed 21 May 2025"
                 return f"{weekday_short} {date_obj.day} {month_short} {date_obj.year}"
@@ -408,6 +410,23 @@ class MultilingualContentProcessor:
             # Force summary to be set from excerpt to override any original summary
             translated_article.summary = new_metadata['excerpt']
             logger.debug(f"Set summary from excerpt for {lang}: {new_metadata['excerpt']}")
+        
+        # Add original article URL for template display
+        translated_article.original_url = f"/{original_article.slug}/"
+        logger.debug(f"Set original article URL for {lang}: {translated_article.original_url}")
+        
+        # Add translation metadata fields as attributes for template display
+        if 'Translation' in metadata:
+            translated_article.Translation = metadata['Translation']
+            logger.debug(f"Set Translation attribute for {lang}: {metadata['Translation']}")
+        
+        if 'Translator' in metadata:
+            translated_article.Translator = metadata['Translator']
+            logger.debug(f"Set Translator attribute for {lang}: {metadata['Translator']}")
+        
+        if 'Source-File' in metadata:
+            translated_article.Source_File = metadata['Source-File']
+            logger.debug(f"Set Source-File attribute for {lang}: {metadata['Source-File']}")
         
         logger.debug(f"Created translated article '{translated_article.title}' for language '{lang}' with URL {translated_article.metadata['url']}")
         return translated_article

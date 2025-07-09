@@ -30,6 +30,15 @@
       {% endif %}
     </div>
 
+    {% if article.Translation %}
+    <div style="margin-bottom: 1rem; font-size: 0.9em; color: #666;">
+      Translated by: {{ article.Translator }}
+      {% if article.original_url %}
+      | <a href="{{ article.original_url }}" style="color: #0066cc;">Original version</a>
+      {% endif %}
+    </div>
+    {% endif %}
+
     {{ article.content }}
     <div id="giscus">
       <script src="https://giscus.app/client.js"
