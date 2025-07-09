@@ -11,7 +11,7 @@ from logger_config import get_logger
 logger = get_logger("excerpt_to_summary")
 
 
-def convert_excerpt_to_summary(generator):
+def copy_excerpt_to_summary(generator):
     logger.info("Plugin excerpt_to_summary loaded!")
     for article in generator.articles:
         if hasattr(article, "excerpt"):
@@ -26,7 +26,7 @@ def convert_excerpt_to_summary(generator):
 
 
 def register():
-    signals.article_generator_pretaxonomy.connect(convert_excerpt_to_summary)
+    signals.article_generator_pretaxonomy.connect(copy_excerpt_to_summary)
 
 
 # Register the plugin on import

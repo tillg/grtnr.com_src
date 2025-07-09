@@ -39,29 +39,36 @@ CONFIG = {
 
 
 @task
-def clean(c):
+def clean_output_directory(c):
     """Remove generated files"""
     if os.path.isdir(CONFIG["deploy_path"]):
         shutil.rmtree(CONFIG["deploy_path"])
         os.makedirs(CONFIG["deploy_path"])
 
 
+# Backward compatibility alias
+@task
+def clean(c):
+    """Remove generated files (alias for clean_output_directory)"""
+    clean_output_directory(c)
+
+
 @task
 def build(c):
     """Build local version of site"""
-    pelican_run("-s {settings_base}".format(**CONFIG))
+    prepare_and_run_pelican("-s {settings_base}".format(**CONFIG))
 
 
 @task
 def rebuild(c):
     """`build` with the delete switch"""
-    pelican_run("-d -s {settings_base}".format(**CONFIG))
+    prepare_and_run_pelican("-d -s {settings_base}".format(**CONFIG))
 
 
 @task
 def regenerate(c):
     """Automatically regenerate site upon file modification"""
-    pelican_run("-r -s {settings_base}".format(**CONFIG))
+    prepare_and_run_pelican("-r -s {settings_base}".format(**CONFIG))
 
 
 @task
@@ -88,17 +95,24 @@ def serve(c):
 
 
 @task
-def reserve(c):
+def build_and_serve(c):
     """`build`, then `serve`"""
     build(c)
     serve(c)
+
+
+# Backward compatibility alias
+@task
+def reserve(c):
+    """Build then serve (alias for build_and_serve)"""
+    build_and_serve(c)
 
 
 @task
 def preview(c):
     """Build production version of site"""
     # Use pelicanconf.py directly instead of publishconf.py to avoid import issues
-    pelican_run("-s " + CONFIG["settings_base"])
+    prepare_and_run_pelican("-s " + CONFIG["settings_base"])
 
 
 @task
@@ -200,7 +214,7 @@ def livereload(c):
 
     def cached_build():
         cmd = "-s {settings_base} -e CACHE_CONTENT=true " "LOAD_CONTENT_CACHE=true"
-        pelican_run(cmd.format(**CONFIG))
+        prepare_and_run_pelican(cmd.format(**CONFIG))
 
     cached_build()
     server = Server()
@@ -286,7 +300,7 @@ def clean_translations_cache(c):
         print("ℹ️  No translation cache found")
 
 
-def pelican_run(cmd):
+def prepare_and_run_pelican(cmd):
     # allows to pass-through args to pelican
     remainder = getattr(program.core, "remainder", None) or ""
     if remainder:

@@ -12,7 +12,7 @@ from logger_config import get_logger
 logger = get_logger("set_proper_category")
 
 
-def set_proper_category(generator):
+def assign_categories_from_directory(generator):
     """Set the category of articles based on their directory structure.
 
     We can't use the Pelican standard way switched on by
@@ -35,4 +35,4 @@ def set_proper_category(generator):
 
 
 def register():
-    signals.article_generator_finalized.connect(set_proper_category)
+    signals.article_generator_finalized.connect(assign_categories_from_directory)

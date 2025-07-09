@@ -77,7 +77,7 @@ def add_wikilinks_preprocessor(pelican):
         pelican.settings["MARKDOWN"]["preprocessors"] = [WikiLinksPreprocessor]
 
 
-def process_wikilinks(content):
+def convert_wikilinks_to_html(content):
     """
     Process [[WikiLink]] syntax and convert to proper URLs using normalize_slug.
     """
@@ -143,20 +143,20 @@ def process_content_wikilinks(content_generator):
     # Process articles
     if hasattr(content_generator, "articles"):
         for article in content_generator.articles:
-            process_wikilinks(article)
+            convert_wikilinks_to_html(article)
 
     if hasattr(content_generator, "hidden_articles"):
         for article in content_generator.hidden_articles:
-            process_wikilinks(article)
+            convert_wikilinks_to_html(article)
 
     # Process pages
     if hasattr(content_generator, "pages"):
         for page in content_generator.pages:
-            process_wikilinks(page)
+            convert_wikilinks_to_html(page)
 
     if hasattr(content_generator, "hidden_pages"):
         for page in content_generator.hidden_pages:
-            process_wikilinks(page)
+            convert_wikilinks_to_html(page)
 
 
 def register():

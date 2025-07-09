@@ -6,7 +6,7 @@ def is_external_link(href):
     return href and (href.startswith("http://") or href.startswith("https://"))
 
 
-def process_external_links(content):
+def add_external_link_attributes(content):
     if not content._content:
         return
 
@@ -20,4 +20,4 @@ def process_external_links(content):
 
 
 def register():
-    signals.content_object_init.connect(process_external_links)
+    signals.content_object_init.connect(add_external_link_attributes)

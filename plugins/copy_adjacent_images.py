@@ -63,10 +63,10 @@ def process_content_items(generator, item_list):
         # Fix image URLs for all content items (not just hidden ones)
         # Only fix URLs for items that have _content attribute (articles/pages)
         if hasattr(item, "_content"):
-            fix_image_urls(item, slug, copied_images)
+            convert_relative_image_paths(item, slug, copied_images)
 
 
-def fix_image_urls(item, slug, image_names):
+def convert_relative_image_paths(item, slug, image_names):
     # Find image references and fix them
     for img_name in image_names:
         # Look for HTML img tags with relative paths
