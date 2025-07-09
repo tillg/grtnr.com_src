@@ -5,7 +5,7 @@ excerpt: "J'ai lu à propos des jardins numériques et j'ai aimé l'idée. J'ai 
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T07:11:56.641361
+Translate-Date: 2025-07-09T07:25:28.567030
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-04-18-digital-garden/2025-04-18-digital-garden.md
 Generated-By: automatic-translation-plugin
 ---
