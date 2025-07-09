@@ -106,13 +106,10 @@
             {% for lang in ['en', 'de', 'fr'] %}
               {% if lang != current_lang %}
                 <a href="#" class="language-option" data-lang="{{ lang }}" onclick="switchLanguage('{{ lang }}')">
-                  <span class="lang-code">{{ lang.upper() }}</span>
-                  <span class="lang-name">
-                    {% if lang == 'en' %}English
-                    {% elif lang == 'de' %}Deutsch
-                    {% elif lang == 'fr' %}Français
-                    {% endif %}
-                  </span>
+                  {% if lang == 'en' %}English
+                  {% elif lang == 'de' %}Deutsch
+                  {% elif lang == 'fr' %}Français
+                  {% endif %}
                 </a>
               {% endif %}
             {% endfor %}

@@ -156,16 +156,6 @@ td img {
   text-decoration: none;
 }
 
-.lang-code {
-  font-weight: bold;
-  color: #268bd2;
-  margin-right: 0.5rem;
-}
-
-.lang-name {
-  color: #666;
-  font-size: 0.9rem;
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
