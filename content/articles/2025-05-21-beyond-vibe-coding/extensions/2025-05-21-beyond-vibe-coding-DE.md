@@ -7,7 +7,7 @@ summary: Vor einiger Zeit habe ich eine kleine iOS-App namens Filmz mit _vibe_co
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-08T08:08:36.941955
+Translate-Date: 2025-07-09T07:11:55.093652
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
 Generated-By: automatic-translation-plugin
 ---

@@ -5,7 +5,7 @@ excerpt: "Ich habe einen interessanten Podcast darüber gehört, wie man verschi
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-08T08:08:39.881144
+Translate-Date: 2025-07-09T07:11:57.256849
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-24-thoughts-on-swift-architecture/2025-03-24-thoughts-on-swift-architecture.md
 Generated-By: automatic-translation-plugin
 ---

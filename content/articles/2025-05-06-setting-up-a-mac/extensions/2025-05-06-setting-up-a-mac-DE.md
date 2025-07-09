@@ -6,7 +6,7 @@ image: mac.jpg
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-08T08:08:37.630617
+Translate-Date: 2025-07-09T07:11:56.060055
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-06-setting-up-a-mac/2025-05-06-setting-up-a-mac.md
 Generated-By: automatic-translation-plugin
 ---
