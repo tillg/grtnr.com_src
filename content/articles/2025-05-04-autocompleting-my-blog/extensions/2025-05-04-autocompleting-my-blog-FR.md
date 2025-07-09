@@ -5,7 +5,7 @@ summary: J'ai maintenant un blog basé sur Pelican et je veux ajouter ou corrige
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T07:44:44.197726
+Translate-Date: 2025-07-09T07:57:29.314571
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-04-autocompleting-my-blog/2025-05-04-autocompleting-my-blog.md
 Generated-By: automatic-translation-plugin
 ---

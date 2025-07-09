@@ -6,7 +6,7 @@ tags: Technik, KI
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T07:44:43.740413
+Translate-Date: 2025-07-09T07:57:28.836077
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-18-mcp-playground/2025-05-18-mcp-playground.md
 Generated-By: automatic-translation-plugin
 ---
