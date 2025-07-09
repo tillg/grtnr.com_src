@@ -667,88 +667,14 @@ class LanguageSwitcher:
         return '/' + '/'.join(parts) + '/'
 
 
-class MultilingualSiteGenerator(Generator):
-    """Generator for multilingual site functionality"""
+class MultilingualOutputGenerator:
+    """Handles generation of multilingual content files"""
     
-    def __init__(self, context, settings, path, theme, output_path):
-        super().__init__(context, settings, path, theme, output_path)
-        
-        # Check if multilingual is enabled
-        multilingual_enabled = settings.get('MULTILINGUAL_ENABLED', False)
-        logger.info(f"Multilingual initialization: MULTILINGUAL_ENABLED = {multilingual_enabled}")
-        if not multilingual_enabled:
-            logger.info("Multilingual site is disabled")
-            return
-        
-        self.content_processor = MultilingualContentProcessor(settings)
-        self.language_switcher = LanguageSwitcher(settings.get('MULTILINGUAL_LANGUAGES', ['en', 'de', 'fr']))
-        
-        logger.info(f"Multilingual site generator initialized for languages: {self.content_processor.supported_langs}")
+    def __init__(self, output_path, settings):
+        self.output_path = output_path
+        self.settings = settings
     
-    def generate_context(self):
-        """Generate context for multilingual site"""
-        if not self.settings.get('MULTILINGUAL_ENABLED', False):
-            return
-        
-        # Add language switcher to context
-        self.context['language_switcher'] = self.language_switcher
-        self.context['multilingual_languages'] = self.content_processor.supported_langs
-        self.context['default_language'] = self.content_processor.default_lang
-    
-    def generate_output(self, writer):
-        """Generate multilingual site output"""
-        if not self.settings.get('MULTILINGUAL_ENABLED', False):
-            return
-        
-        logger.info("Starting multilingual site generation")
-        
-        # Process articles
-        articles = self.context.get('articles', [])
-        logger.info(f"Starting to process {len(articles)} articles for multilingual generation")
-        processed_articles = self.content_processor.process_articles(articles)
-        
-        # Log results
-        for lang, lang_articles in processed_articles.items():
-            logger.info(f"Language '{lang}': {len(lang_articles)} articles")
-        
-        # Process pages
-        pages = self.context.get('pages', [])
-        processed_pages = self.content_processor.process_pages(pages)
-        
-        # Generate language-specific versions
-        for lang in self.content_processor.supported_langs:
-            self._generate_language_version(writer, lang, processed_articles[lang], processed_pages[lang])
-        
-        # Generate language selection page
-        self._generate_language_selection_page(writer)
-        
-        logger.info("Multilingual site generation completed")
-    
-    def _generate_language_version(self, writer, lang: str, articles: List[Article], pages: List[Page]):
-        """Generate content for a specific language"""
-        logger.info(f"Generating content for language: {lang}")
-        
-        # Update context for this language
-        lang_context = self.context.copy()
-        lang_context['articles'] = articles
-        lang_context['pages'] = pages
-        lang_context['LANG'] = lang
-        lang_context['current_language'] = lang
-        
-        # Generate individual articles for this language
-        logger.info(f"Generating {len(articles)} individual articles for language '{lang}'")
-        for article in articles:
-            self._generate_language_article(writer, article, lang_context)
-        
-        # Generate individual pages for this language
-        logger.info(f"Generating {len(pages)} individual pages for language '{lang}'")
-        for page in pages:
-            self._generate_language_page(writer, page, lang_context)
-        
-        # Generate language-specific index
-        self._generate_language_index(writer, lang, articles, lang_context)
-    
-    def _generate_language_article(self, writer, article: Article, context: Dict):
+    def generate_language_article(self, writer, article: Article, context: Dict, template_getter):
         """Generate individual article page for a specific language"""
         save_as = article.metadata.get('save_as')
         if not save_as:
@@ -764,7 +690,7 @@ class MultilingualSiteGenerator(Generator):
         try:
             writer.write_file(
                 save_as,
-                self.get_template('article'),
+                template_getter('article'),
                 article_context,
                 override_output=self.output_path
             )
@@ -772,7 +698,7 @@ class MultilingualSiteGenerator(Generator):
         except Exception as e:
             logger.error(f"Failed to generate article '{article.title}': {e}")
     
-    def _generate_language_page(self, writer, page: Page, context: Dict):
+    def generate_language_page(self, writer, page: Page, context: Dict, template_getter):
         """Generate individual page for a specific language"""
         save_as = page.metadata.get('save_as')
         if not save_as:
@@ -785,7 +711,7 @@ class MultilingualSiteGenerator(Generator):
         try:
             writer.write_file(
                 save_as,
-                self.get_template('page'),
+                template_getter('page'),
                 page_context,
                 override_output=self.output_path
             )
@@ -793,7 +719,7 @@ class MultilingualSiteGenerator(Generator):
         except Exception as e:
             logger.error(f"Failed to generate page '{page.title}': {e}")
     
-    def _generate_language_index(self, writer, lang: str, articles: List[Article], context: Dict):
+    def generate_language_index(self, writer, lang: str, articles: List[Article], context: Dict, template_getter):
         """Generate index page for a specific language"""
         index_save_as = f"{lang}/index.html"
         
@@ -815,21 +741,21 @@ class MultilingualSiteGenerator(Generator):
         
         writer.write_file(
             index_save_as,
-            self.get_template('index'),
+            template_getter('index'),
             index_context,
             override_output=self.output_path
         )
     
-    def _generate_language_selection_page(self, writer):
+    def generate_language_selection_page(self, writer, context: Dict, supported_langs: List[str], lang_names: Dict, template_getter):
         """Generate root language selection page"""
-        context = self.context.copy()
-        context['supported_languages'] = self.content_processor.supported_langs
-        context['language_names'] = self.language_switcher.lang_names
+        selection_context = context.copy()
+        selection_context['supported_languages'] = supported_langs
+        selection_context['language_names'] = lang_names
         
         writer.write_file(
             'index.html',
-            self.get_template('language_selection'),
-            context,
+            template_getter('language_selection'),
+            selection_context,
             override_output=self.output_path
         )
     
@@ -873,6 +799,109 @@ class MultilingualSiteGenerator(Generator):
                 
         except Exception as e:
             logger.warning(f"Failed to copy images for translated article {article.title}: {e}")
+
+
+class MultilingualContextManager:
+    """Manages multilingual context and language-specific data"""
+    
+    def __init__(self, content_processor, language_switcher):
+        self.content_processor = content_processor
+        self.language_switcher = language_switcher
+    
+    def generate_context(self, context: Dict):
+        """Generate context for multilingual site"""
+        # Add language switcher to context
+        context['language_switcher'] = self.language_switcher
+        context['multilingual_languages'] = self.content_processor.supported_langs
+        context['default_language'] = self.content_processor.default_lang
+    
+    def create_language_context(self, base_context: Dict, lang: str, articles: List[Article], pages: List[Page]) -> Dict:
+        """Create language-specific context"""
+        lang_context = base_context.copy()
+        lang_context['articles'] = articles
+        lang_context['pages'] = pages
+        lang_context['LANG'] = lang
+        lang_context['current_language'] = lang
+        return lang_context
+
+
+class MultilingualSiteGenerator(Generator):
+    """Generator for multilingual site functionality"""
+    
+    def __init__(self, context, settings, path, theme, output_path):
+        super().__init__(context, settings, path, theme, output_path)
+        
+        # Check if multilingual is enabled
+        multilingual_enabled = settings.get('MULTILINGUAL_ENABLED', False)
+        logger.info(f"Multilingual initialization: MULTILINGUAL_ENABLED = {multilingual_enabled}")
+        if not multilingual_enabled:
+            logger.info("Multilingual site is disabled")
+            return
+        
+        self.content_processor = MultilingualContentProcessor(settings)
+        self.language_switcher = LanguageSwitcher(settings.get('MULTILINGUAL_LANGUAGES', ['en', 'de', 'fr']))
+        self.output_generator = MultilingualOutputGenerator(output_path, settings)
+        self.context_manager = MultilingualContextManager(self.content_processor, self.language_switcher)
+        
+        logger.info(f"Multilingual site generator initialized for languages: {self.content_processor.supported_langs}")
+    
+    def generate_context(self):
+        """Generate context for multilingual site"""
+        if not self.settings.get('MULTILINGUAL_ENABLED', False):
+            return
+        
+        self.context_manager.generate_context(self.context)
+    
+    def generate_output(self, writer):
+        """Generate multilingual site output"""
+        if not self.settings.get('MULTILINGUAL_ENABLED', False):
+            return
+        
+        logger.info("Starting multilingual site generation")
+        
+        # Process articles and pages
+        articles = self.context.get('articles', [])
+        pages = self.context.get('pages', [])
+        
+        logger.info(f"Starting to process {len(articles)} articles for multilingual generation")
+        processed_articles = self.content_processor.process_articles(articles)
+        processed_pages = self.content_processor.process_pages(pages)
+        
+        # Log results
+        for lang, lang_articles in processed_articles.items():
+            logger.info(f"Language '{lang}': {len(lang_articles)} articles")
+        
+        # Generate language-specific versions
+        for lang in self.content_processor.supported_langs:
+            self._generate_language_version(writer, lang, processed_articles[lang], processed_pages[lang])
+        
+        # Generate language selection page
+        self.output_generator.generate_language_selection_page(
+            writer, self.context, self.content_processor.supported_langs, 
+            self.language_switcher.lang_names, self.get_template
+        )
+        
+        logger.info("Multilingual site generation completed")
+    
+    def _generate_language_version(self, writer, lang: str, articles: List[Article], pages: List[Page]):
+        """Generate content for a specific language"""
+        logger.info(f"Generating content for language: {lang}")
+        
+        # Create language-specific context
+        lang_context = self.context_manager.create_language_context(self.context, lang, articles, pages)
+        
+        # Generate individual articles for this language
+        logger.info(f"Generating {len(articles)} individual articles for language '{lang}'")
+        for article in articles:
+            self.output_generator.generate_language_article(writer, article, lang_context, self.get_template)
+        
+        # Generate individual pages for this language
+        logger.info(f"Generating {len(pages)} individual pages for language '{lang}'")
+        for page in pages:
+            self.output_generator.generate_language_page(writer, page, lang_context, self.get_template)
+        
+        # Generate language-specific index
+        self.output_generator.generate_language_index(writer, lang, articles, lang_context, self.get_template)
 
 
 def get_generators(pelican_object):

@@ -43,35 +43,19 @@ class TranslationResult:
             self.metadata = {}
 
 
-class TranslationService:
-    """AI-powered translation service using OpenAI's GPT API"""
+class TranslationAPIClient:
+    """Handles OpenAI API calls with retry logic"""
     
-    def __init__(self, config: TranslationConfig):
-        """Initialize translation service with configuration"""
-        
+    def __init__(self, config: TranslationConfig, prompts: TranslationPrompts):
         if OpenAI is None:
             raise ConfigurationError("OpenAI package is not installed. Run: pip install openai")
         
         self.config = config
-        self.config.validate()
-        
-        # Initialize OpenAI client
+        self.prompts = prompts
         self.client = OpenAI(
             api_key=self.config.api_key,
             timeout=self.config.timeout
         )
-        
-        # Initialize cache if enabled
-        self.cache = None
-        if self.config.cache_enabled:
-            self.cache = TranslationCache(
-                cache_dir=self.config.cache_dir
-            )
-        
-        # Initialize prompts
-        self.prompts = TranslationPrompts()
-        
-        # Setup logging
         self.logger = logging.getLogger(__name__)
         
         # Suppress verbose HTTP logging from external libraries
@@ -79,132 +63,7 @@ class TranslationService:
         logging.getLogger("httpcore").setLevel(logging.WARNING)
         logging.getLogger("openai").setLevel(logging.WARNING)
     
-    def translate_content(self, content: str, source_lang: str, target_lang: str) -> TranslationResult:
-        """Translate content from source language to target language"""
-        
-        # Validate languages
-        if not self.prompts.is_language_supported(source_lang):
-            raise LanguageNotSupportedError(source_lang)
-        if not self.prompts.is_language_supported(target_lang):
-            raise LanguageNotSupportedError(target_lang)
-        
-        # Check cache first
-        if self.cache:
-            cached_translation = self.cache.get_cached_translation(content, target_lang)
-            if cached_translation:
-                self.logger.debug(f"Cache hit for {target_lang} translation")
-                return TranslationResult(
-                    translation=cached_translation,
-                    source_lang=source_lang,
-                    target_lang=target_lang,
-                    cached=True
-                )
-        
-        # Perform translation
-        self.logger.debug(f"Translating content from {source_lang} to {target_lang}")
-        
-        try:
-            translation = self._call_openai_api(content, source_lang, target_lang)
-            
-            # Cache the translation
-            if self.cache:
-                self.cache.cache_translation(
-                    content=content,
-                    target_lang=target_lang,
-                    translation=translation,
-                    source_lang=source_lang,
-                    metadata={
-                        'model': self.config.model,
-                        'service_version': '1.0.0'
-                    }
-                )
-            
-            return TranslationResult(
-                translation=translation,
-                source_lang=source_lang,
-                target_lang=target_lang,
-                cached=False
-            )
-            
-        except Exception as e:
-            self.logger.error(f"Translation failed: {e}")
-            raise
-    
-    def detect_language(self, content: str) -> str:
-        """Detect the primary language of content"""
-        
-        if not self.config.auto_detect_language:
-            return self.config.default_source_language
-        
-        prompt = self.prompts.build_language_detection_prompt(content)
-        
-        try:
-            response = self.client.chat.completions.create(
-                model=self.config.model,
-                messages=[
-                    {"role": "system", "content": self.prompts.get_system_prompt()},
-                    {"role": "user", "content": prompt}
-                ],
-                max_tokens=10,
-                temperature=0.1
-            )
-            
-            detected_lang = response.choices[0].message.content.strip().lower()
-            
-            # Clean up the response - remove any quotes or extra characters
-            detected_lang = detected_lang.strip('\'"` ')
-            
-            # Extract just the language code if there's extra text
-            for supported_lang in self.prompts.get_supported_languages():
-                if supported_lang in detected_lang:
-                    detected_lang = supported_lang
-                    break
-            
-            # Validate detected language
-            if self.prompts.is_language_supported(detected_lang):
-                return detected_lang
-            else:
-                self.logger.warning(f"Detected unsupported language '{detected_lang}', using default")
-                return self.config.default_source_language
-                
-        except Exception as e:
-            self.logger.warning(f"Language detection failed: {e}, using default")
-            return self.config.default_source_language
-    
-    def get_supported_languages(self) -> List[str]:
-        """Get list of supported language codes"""
-        return self.prompts.get_supported_languages()
-    
-    def translate_batch(self, contents: List[str], source_lang: str, target_lang: str) -> List[TranslationResult]:
-        """Translate multiple contents in batch"""
-        
-        results = []
-        
-        for i, content in enumerate(contents):
-            self.logger.debug(f"Processing batch item {i+1}/{len(contents)}")
-            
-            try:
-                result = self.translate_content(content, source_lang, target_lang)
-                results.append(result)
-                
-                # Rate limiting
-                if i < len(contents) - 1:  # Don't wait after the last item
-                    time.sleep(self.config.rate_limit_delay)
-                    
-            except Exception as e:
-                self.logger.error(f"Batch item {i+1} failed: {e}")
-                # Create error result
-                results.append(TranslationResult(
-                    translation=f"ERROR: {str(e)}",
-                    source_lang=source_lang,
-                    target_lang=target_lang,
-                    cached=False,
-                    metadata={'error': str(e)}
-                ))
-        
-        return results
-    
-    def _call_openai_api(self, content: str, source_lang: str, target_lang: str) -> str:
+    def translate(self, content: str, source_lang: str, target_lang: str) -> str:
         """Make API call to OpenAI with retry logic"""
         
         prompt = self.prompts.build_translation_prompt(content, source_lang, target_lang)
@@ -266,17 +125,46 @@ class TranslationService:
         else:
             raise APIError(f"API call failed after {self.config.max_retries} retries: {last_exception}")
     
-    def get_cache_stats(self) -> Dict[str, Any]:
-        """Get cache statistics"""
-        if self.cache:
-            return self.cache.get_cache_stats()
-        return {'cache_enabled': False}
-    
-    def clear_cache(self) -> None:
-        """Clear translation cache"""
-        if self.cache:
-            self.cache.clear_cache()
-            self.logger.info("Translation cache cleared")
+    def detect_language(self, content: str) -> str:
+        """Detect the primary language of content"""
+        
+        if not self.config.auto_detect_language:
+            return self.config.default_source_language
+        
+        prompt = self.prompts.build_language_detection_prompt(content)
+        
+        try:
+            response = self.client.chat.completions.create(
+                model=self.config.model,
+                messages=[
+                    {"role": "system", "content": self.prompts.get_system_prompt()},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=10,
+                temperature=0.1
+            )
+            
+            detected_lang = response.choices[0].message.content.strip().lower()
+            
+            # Clean up the response - remove any quotes or extra characters
+            detected_lang = detected_lang.strip('\'"` ')
+            
+            # Extract just the language code if there's extra text
+            for supported_lang in self.prompts.get_supported_languages():
+                if supported_lang in detected_lang:
+                    detected_lang = supported_lang
+                    break
+            
+            # Validate detected language
+            if self.prompts.is_language_supported(detected_lang):
+                return detected_lang
+            else:
+                self.logger.warning(f"Detected unsupported language '{detected_lang}', using default")
+                return self.config.default_source_language
+                
+        except Exception as e:
+            self.logger.warning(f"Language detection failed: {e}, using default")
+            return self.config.default_source_language
     
     def _clean_markdown_wrapper(self, content: str) -> str:
         """Remove markdown code block wrapper if present"""
@@ -317,6 +205,144 @@ class TranslationService:
             self.logger.info(f"Cleaned markdown wrapper from translation (original: {len(original_content)} chars, cleaned: {len(content)} chars)")
         
         return content
+
+
+class BatchTranslationProcessor:
+    """Handles batch processing of multiple translations"""
+    
+    def __init__(self, config: TranslationConfig):
+        self.config = config
+        self.logger = logging.getLogger(__name__)
+    
+    def process_batch(self, contents: List[str], source_lang: str, target_lang: str, 
+                     translation_func) -> List[TranslationResult]:
+        """Process multiple translations in batch"""
+        
+        results = []
+        
+        for i, content in enumerate(contents):
+            self.logger.debug(f"Processing batch item {i+1}/{len(contents)}")
+            
+            try:
+                result = translation_func(content, source_lang, target_lang)
+                results.append(result)
+                
+                # Rate limiting
+                if i < len(contents) - 1:  # Don't wait after the last item
+                    time.sleep(self.config.rate_limit_delay)
+                    
+            except Exception as e:
+                self.logger.error(f"Batch item {i+1} failed: {e}")
+                # Create error result
+                results.append(TranslationResult(
+                    translation=f"ERROR: {str(e)}",
+                    source_lang=source_lang,
+                    target_lang=target_lang,
+                    cached=False,
+                    metadata={'error': str(e)}
+                ))
+        
+        return results
+
+
+class TranslationService:
+    """AI-powered translation service using OpenAI's GPT API"""
+    
+    def __init__(self, config: TranslationConfig):
+        """Initialize translation service with configuration"""
+        
+        self.config = config
+        self.config.validate()
+        
+        # Initialize components
+        self.prompts = TranslationPrompts()
+        self.api_client = TranslationAPIClient(config, self.prompts)
+        self.batch_processor = BatchTranslationProcessor(config)
+        
+        # Initialize cache if enabled
+        self.cache = None
+        if self.config.cache_enabled:
+            self.cache = TranslationCache(
+                cache_dir=self.config.cache_dir
+            )
+        
+        # Setup logging
+        self.logger = logging.getLogger(__name__)
+    
+    def translate_content(self, content: str, source_lang: str, target_lang: str) -> TranslationResult:
+        """Translate content from source language to target language"""
+        
+        # Validate languages
+        if not self.prompts.is_language_supported(source_lang):
+            raise LanguageNotSupportedError(source_lang)
+        if not self.prompts.is_language_supported(target_lang):
+            raise LanguageNotSupportedError(target_lang)
+        
+        # Check cache first
+        if self.cache:
+            cached_translation = self.cache.get_cached_translation(content, target_lang)
+            if cached_translation:
+                self.logger.debug(f"Cache hit for {target_lang} translation")
+                return TranslationResult(
+                    translation=cached_translation,
+                    source_lang=source_lang,
+                    target_lang=target_lang,
+                    cached=True
+                )
+        
+        # Perform translation via API client
+        self.logger.debug(f"Translating content from {source_lang} to {target_lang}")
+        
+        try:
+            translation = self.api_client.translate(content, source_lang, target_lang)
+            
+            # Cache the translation
+            if self.cache:
+                self.cache.cache_translation(
+                    content=content,
+                    target_lang=target_lang,
+                    translation=translation,
+                    source_lang=source_lang,
+                    metadata={
+                        'model': self.config.model,
+                        'service_version': '1.0.0'
+                    }
+                )
+            
+            return TranslationResult(
+                translation=translation,
+                source_lang=source_lang,
+                target_lang=target_lang,
+                cached=False
+            )
+            
+        except Exception as e:
+            self.logger.error(f"Translation failed: {e}")
+            raise
+    
+    def detect_language(self, content: str) -> str:
+        """Detect the primary language of content"""
+        return self.api_client.detect_language(content)
+    
+    def get_supported_languages(self) -> List[str]:
+        """Get list of supported language codes"""
+        return self.prompts.get_supported_languages()
+    
+    def translate_batch(self, contents: List[str], source_lang: str, target_lang: str) -> List[TranslationResult]:
+        """Translate multiple contents in batch"""
+        return self.batch_processor.process_batch(contents, source_lang, target_lang, self.translate_content)
+    
+    def get_cache_stats(self) -> Dict[str, Any]:
+        """Get cache statistics"""
+        if self.cache:
+            return self.cache.get_cache_stats()
+        return {'cache_enabled': False}
+    
+    def clear_cache(self) -> None:
+        """Clear translation cache"""
+        if self.cache:
+            self.cache.clear_cache()
+            self.logger.info("Translation cache cleared")
     
     def cleanup_expired_cache(self) -> int:
         """Clean up expired cache entries"""

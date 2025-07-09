@@ -80,6 +80,22 @@ class TranslationGenerator(Generator):
         
         logger.info("Starting automatic translation generation")
         
+        # Filter content that needs translation
+        translatable_content = self._filter_translatable_content()
+        
+        if not translatable_content:
+            logger.info("No content needs translation")
+            return
+        
+        # Process translations in parallel
+        translation_stats = self._process_translations_batch(translatable_content)
+        
+        # Log final statistics
+        self._log_translation_statistics(translation_stats)
+
+    def _filter_translatable_content(self) -> List[Any]:
+        """Filter content that needs translation and apply test limits."""
+        
         # Get all articles and pages
         articles = self.context.get('articles', [])
         pages = self.context.get('pages', [])
@@ -94,10 +110,6 @@ class TranslationGenerator(Generator):
             if self._should_translate_content(page):
                 all_content.append(page)
         
-        if not all_content:
-            logger.info("No content needs translation")
-            return
-        
         # Apply test limit if configured
         test_limit = os.environ.get('TRANSLATION_TEST_LIMIT')
         if test_limit and test_limit.isdigit():
@@ -107,9 +119,13 @@ class TranslationGenerator(Generator):
                 logger.info(f"Applied test limit: processing only {test_limit} content items out of {len(articles) + len(pages)} total")
         
         logger.info(f"Processing {len(all_content)} content items for translation")
+        return all_content
+
+    def _process_translations_batch(self, content_list: List[Any]) -> Dict[str, int]:
+        """Process content translations in parallel and return statistics."""
         
         # Process content in parallel (limit to avoid overwhelming the API)
-        max_content_workers = min(len(all_content), self.config.max_concurrent_content)
+        max_content_workers = min(len(content_list), self.config.max_concurrent_content)
         logger.debug(f"Using {max_content_workers} parallel workers for content processing")
         
         # Track translation statistics
@@ -122,7 +138,7 @@ class TranslationGenerator(Generator):
         
         with ThreadPoolExecutor(max_workers=max_content_workers) as executor:
             # Submit all content translation tasks
-            futures = [executor.submit(self._translate_content, content) for content in all_content]
+            futures = [executor.submit(self._translate_content, content) for content in content_list]
             
             # Wait for all to complete
             for future in as_completed(futures):
@@ -136,7 +152,11 @@ class TranslationGenerator(Generator):
                     logger.error(f"Failed to process content: {e}")
                     translation_stats['errors'] += 1
         
-        # Summary message
+        return translation_stats
+
+    def _log_translation_statistics(self, translation_stats: Dict[str, int]):
+        """Log final translation statistics."""
+        
         logger.info(f"Translation completed: {translation_stats['total_files_created']} files created, "
                    f"{translation_stats['cache_hits']} cached, {translation_stats['new_translations']} new translations, "
                    f"{translation_stats['errors']} errors")

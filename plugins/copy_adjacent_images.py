@@ -34,36 +34,47 @@ def copy_images_for_recipes(generator, writer):
 
 
 def process_content_items(generator, item_list):
+    """Orchestrates image copying and URL fixing for content items."""
     for item in item_list:
-        source_path = item.source_path
-        slug = item.slug
-        # For recipes, use the save_as path if available, otherwise use slug
-        if hasattr(item, "save_as"):
-            # Extract directory from save_as (e.g., "recipes/hummus-from-mr-jim/index.html" -> "recipes/hummus-from-mr-jim")
-            output_path = os.path.join(
-                generator.output_path, os.path.dirname(item.save_as)
-            )
-        else:
-            output_path = os.path.join(generator.output_path, slug)
+        copied_images = copy_adjacent_images(generator, item)
+        update_image_urls_in_content(item, copied_images)
 
-        # Ensure the target output directory exists
-        os.makedirs(output_path, exist_ok=True)
 
-        # Copy all image files from the source directory to the
-        # output directory
-        source_dir = os.path.dirname(source_path)
-        copied_images = []
-        for fname in os.listdir(source_dir):
-            if fname.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".svg")):
-                src = os.path.join(source_dir, fname)
-                dst = os.path.join(output_path, fname)
-                shutil.copy2(src, dst)
-                copied_images.append(fname)
+def copy_adjacent_images(generator, item):
+    """Copy adjacent image files from source to output directory."""
+    source_path = item.source_path
+    slug = item.slug
+    
+    # For recipes, use the save_as path if available, otherwise use slug
+    if hasattr(item, "save_as"):
+        # Extract directory from save_as (e.g., "recipes/hummus-from-mr-jim/index.html" -> "recipes/hummus-from-mr-jim")
+        output_path = os.path.join(
+            generator.output_path, os.path.dirname(item.save_as)
+        )
+    else:
+        output_path = os.path.join(generator.output_path, slug)
 
-        # Fix image URLs for all content items (not just hidden ones)
-        # Only fix URLs for items that have _content attribute (articles/pages)
-        if hasattr(item, "_content"):
-            convert_relative_image_paths(item, slug, copied_images)
+    # Ensure the target output directory exists
+    os.makedirs(output_path, exist_ok=True)
+
+    # Copy all image files from the source directory to the output directory
+    source_dir = os.path.dirname(source_path)
+    copied_images = []
+    for fname in os.listdir(source_dir):
+        if fname.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".svg")):
+            src = os.path.join(source_dir, fname)
+            dst = os.path.join(output_path, fname)
+            shutil.copy2(src, dst)
+            copied_images.append(fname)
+    
+    return copied_images
+
+
+def update_image_urls_in_content(item, copied_images):
+    """Update image URLs in content to use absolute paths."""
+    # Only fix URLs for items that have _content attribute (articles/pages)
+    if hasattr(item, "_content") and copied_images:
+        convert_relative_image_paths(item, item.slug, copied_images)
 
 
 def convert_relative_image_paths(item, slug, image_names):
