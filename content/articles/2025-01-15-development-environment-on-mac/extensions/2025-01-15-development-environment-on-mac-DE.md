@@ -4,12 +4,12 @@ excerpt: I use different dev tools (Java, Python, Docker...) but I use some of t
 image: dev_tools.png
 tags: Mac
 updates: 2025-05-05
-Translation: de
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:10.676278
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-01-15-development-environment-on-mac/2025-01-15-development-environment-on-mac.md
-Generated-By: automatic-translation-plugin
+translation: de
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:34.789588
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-01-15-development-environment-on-mac/2025-01-15-development-environment-on-mac.md
+generated_by: automatic-translation-plugin
 ---
 
 ![Lustiges Bild von KI](dev_tools.png)

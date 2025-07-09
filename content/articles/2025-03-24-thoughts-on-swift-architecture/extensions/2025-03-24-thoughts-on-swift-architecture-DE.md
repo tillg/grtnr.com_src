@@ -2,12 +2,12 @@
 date: 2025-03-24
 image: developer_podcast.jpg
 excerpt: "Ich habe einen interessanten Podcast darüber gehört, wie man verschiedene Modelltypen in Swift strukturiert: Domain-Modelle, die meine interne Repräsentation sind, Datenmodelle (oder DTOs), die die externe Repräsentation sind, und View-Modelle, die die Repräsentation für die Benutzeroberfläche sind. Aber viele Aspekte sind mir noch unklar."
-Translation: de
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:07.656084
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-24-thoughts-on-swift-architecture/2025-03-24-thoughts-on-swift-architecture.md
-Generated-By: automatic-translation-plugin
+translation: de
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:33.428588
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-24-thoughts-on-swift-architecture/2025-03-24-thoughts-on-swift-architecture.md
+generated_by: automatic-translation-plugin
 ---
 
 [TOC]

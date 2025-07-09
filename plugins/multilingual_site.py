@@ -416,17 +416,17 @@ class MultilingualContentProcessor:
         logger.debug(f"Set original article URL for {lang}: {translated_article.original_url}")
         
         # Add translation metadata fields as attributes for template display
-        if 'Translation' in metadata:
-            translated_article.Translation = metadata['Translation']
-            logger.debug(f"Set Translation attribute for {lang}: {metadata['Translation']}")
+        if 'translation' in metadata:
+            translated_article.translation = metadata['translation']
+            logger.debug(f"Set translation attribute for {lang}: {metadata['translation']}")
         
-        if 'Translator' in metadata:
-            translated_article.Translator = metadata['Translator']
-            logger.debug(f"Set Translator attribute for {lang}: {metadata['Translator']}")
+        if 'translator' in metadata:
+            translated_article.translator = metadata['translator']
+            logger.debug(f"Set translator attribute for {lang}: {metadata['translator']}")
         
-        if 'Source-File' in metadata:
-            translated_article.Source_File = metadata['Source-File']
-            logger.debug(f"Set Source-File attribute for {lang}: {metadata['Source-File']}")
+        if 'source_file' in metadata:
+            translated_article.source_file = metadata['source_file']
+            logger.debug(f"Set source_file attribute for {lang}: {metadata['source_file']}")
         
         logger.debug(f"Created translated article '{translated_article.title}' for language '{lang}' with URL {translated_article.metadata['url']}")
         return translated_article

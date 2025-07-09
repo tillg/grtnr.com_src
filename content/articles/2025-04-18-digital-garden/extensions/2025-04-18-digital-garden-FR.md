@@ -2,12 +2,12 @@
 date: 2025-04-18
 image: digital-garden.jpg
 excerpt: "J'ai lu à propos des jardins numériques et j'ai aimé l'idée. J'ai donc commencé à réfléchir à la manière dont je mettrais en place un tel jardin - et bien sûr, j'ai utilisé l'aide de l'IA..."
-Translation: fr
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:07.033104
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-04-18-digital-garden/2025-04-18-digital-garden.md
-Generated-By: automatic-translation-plugin
+translation: fr
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:32.711052
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-04-18-digital-garden/2025-04-18-digital-garden.md
+generated_by: automatic-translation-plugin
 ---
 
 ![Jardin numérique](digital-garden.jpg)

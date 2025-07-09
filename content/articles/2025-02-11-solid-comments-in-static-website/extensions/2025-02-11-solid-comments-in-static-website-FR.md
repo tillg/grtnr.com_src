@@ -2,12 +2,12 @@
 date: 2025-02-11
 image: screenshot_comment.jpg
 excerpt: J'ai ajouté des commentaires à mon site web statique. Voici comment j'ai procédé.
-Translation: fr
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:09.231834
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-11-solid-comments-in-static-website/2025-02-11-solid-comments-in-static-website.md
-Generated-By: automatic-translation-plugin
+translation: fr
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:34.028811
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-11-solid-comments-in-static-website/2025-02-11-solid-comments-in-static-website.md
+generated_by: automatic-translation-plugin
 ---
 
 **TL;DR :** J'ai ajouté des commentaires à mon site web statique. Voici comment j'ai procédé - y compris quelques détails techniques. J'ai recherché parmi différentes solutions possibles pour trouver la plus solide, je l'ai intégrée à tous les articles et j'ai ajouté un compteur du nombre de commentaires dans la page de vue d'ensemble des articles.

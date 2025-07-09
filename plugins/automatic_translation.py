@@ -338,12 +338,12 @@ class TranslationGenerator(Generator):
         
         # Create translation metadata
         translation_meta = [
-            f"Translation: {target_lang}",
-            f"Source-Language: {source_lang}",
-            f"Translator: {model_name}",
-            f"Translate-Date: {self._get_current_timestamp()}",
-            f"Source-File: {getattr(original_content, 'source_path', '')}",
-            f"Generated-By: automatic-translation-plugin"
+            f"translation: {target_lang}",
+            f"source_language: {source_lang}",
+            f"translator: {model_name}",
+            f"translate_date: {self._get_current_timestamp()}",
+            f"source_file: {getattr(original_content, 'source_path', '')}",
+            f"generated_by: automatic-translation-plugin"
         ]
         
         if has_frontmatter:

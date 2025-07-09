@@ -3,12 +3,12 @@ tags: Mac
 date: 2025-05-06
 title: Einen Mac einrichten
 image: mac.jpg
-Translation: de
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:06.090125
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-06-setting-up-a-mac/2025-05-06-setting-up-a-mac.md
-Generated-By: automatic-translation-plugin
+translation: de
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:31.823842
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-06-setting-up-a-mac/2025-05-06-setting-up-a-mac.md
+generated_by: automatic-translation-plugin
 ---
 
 Alle paar Jahre haben Sie die Gelegenheit, einen neuen Mac einzurichten. Es ist normalerweise ein angenehmer Prozess, der jedoch etwas Zeit in Anspruch nimmt. Um diesen Prozess _strukturiert_ und angenehm zu gestalten, ist hier meine Notiz an mein zukünftiges Ich, was ich installieren muss und in welcher Reihenfolge.

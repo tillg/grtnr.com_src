@@ -2,12 +2,12 @@
 date: 2025-02-05
 image: david_cursor_magic.png
 excerpt: Ich habe dieses Video eines Entwicklers mit VIELEN hilfreichen Tipps zur Nutzung von Cursor gefunden - hier sind meine Erkenntnisse.
-Translation: de
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:10.050670
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-05-cursor-magic/2025-02-05-cursor-magic.md
-Generated-By: automatic-translation-plugin
+translation: de
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:34.912774
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-05-cursor-magic/2025-02-05-cursor-magic.md
+generated_by: automatic-translation-plugin
 ---
 
 [TOC]

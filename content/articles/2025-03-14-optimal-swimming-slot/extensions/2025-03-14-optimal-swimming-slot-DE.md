@@ -2,12 +2,12 @@
 date: 2025-03-14
 image: pools.png
 excerpt: Ich würde gerne eine kleine Website erstellen, die meine Schwimmzeiten in den öffentlichen Schwimmbädern Münchens optimiert.
-Translation: de
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:08.581889
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-14-optimal-swimming-slot/2025-03-14-optimal-swimming-slot.md
-Generated-By: automatic-translation-plugin
+translation: de
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:33.867371
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-14-optimal-swimming-slot/2025-03-14-optimal-swimming-slot.md
+generated_by: automatic-translation-plugin
 ---
 
 ![Schwimmbäder](pools.png)

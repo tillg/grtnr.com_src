@@ -2,12 +2,12 @@
 date: 2025-03-14
 image: pools.png
 excerpt: J’aimerais créer un petit site web qui optimise mes créneaux de natation dans les piscines publiques de Munich.
-Translation: fr
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:08.581601
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-14-optimal-swimming-slot/2025-03-14-optimal-swimming-slot.md
-Generated-By: automatic-translation-plugin
+translation: fr
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:33.868342
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-14-optimal-swimming-slot/2025-03-14-optimal-swimming-slot.md
+generated_by: automatic-translation-plugin
 ---
 
 ![Piscines](pools.png)

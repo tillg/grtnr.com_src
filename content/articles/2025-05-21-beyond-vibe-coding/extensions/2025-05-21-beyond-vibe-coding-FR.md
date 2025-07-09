@@ -4,12 +4,12 @@ Title: Au-delà du _vibe coding_ - Repenser Filmz
 Date: 2025-05-21
 image: filmz.png
 summary: Il y a quelque temps, j'ai construit une petite application iOS appelée Filmz avec le _vibe coding_. Il s'avère que c'est agréable jusqu'à ce que vous finissiez par faire du _vibe debugging_. Je prends donc une nouvelle tentative, en commençant de manière plus structurée.
-Translation: fr
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:05.033981
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
-Generated-By: automatic-translation-plugin
+translation: fr
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:31.816663
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
+generated_by: automatic-translation-plugin
 ---
 
 <img src="filmz.png" alt="Filmz" width="300">

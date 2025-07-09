@@ -3,12 +3,12 @@ tags: Mac
 date: 2025-05-06
 title: Configuration d'un Mac
 image: mac.jpg
-Translation: fr
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:06.090305
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-06-setting-up-a-mac/2025-05-06-setting-up-a-mac.md
-Generated-By: automatic-translation-plugin
+translation: fr
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:31.824192
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-06-setting-up-a-mac/2025-05-06-setting-up-a-mac.md
+generated_by: automatic-translation-plugin
 ---
 
 Tous les deux ans, vous avez l'opportunité de configurer un nouveau Mac. C'est généralement un processus agréable, bien qu'il prenne un peu de temps. Afin d'en faire un processus agréable et _structuré_, voici ma note pour le moi du futur sur ce que je dois installer, et dans quel ordre.

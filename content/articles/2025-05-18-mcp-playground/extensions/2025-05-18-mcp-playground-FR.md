@@ -3,12 +3,12 @@ title: Terrain de jeu MCP
 image: mcp.png
 summary: Notes sur les découvertes et les _compréhensions_ autour du [Protocole de Contexte de Modèle alias _MCP](https://modelcontextprotocol.io/introduction).
 tags: Tech, IA
-Translation: fr
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:06.084580
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-18-mcp-playground/2025-05-18-mcp-playground.md
-Generated-By: automatic-translation-plugin
+translation: fr
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:31.108397
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-18-mcp-playground/2025-05-18-mcp-playground.md
+generated_by: automatic-translation-plugin
 ---
 
 Notes sur les découvertes et les _compréhensions_ autour du [Protocole de Contexte de Modèle alias _MCP](https://modelcontextprotocol.io/introduction).

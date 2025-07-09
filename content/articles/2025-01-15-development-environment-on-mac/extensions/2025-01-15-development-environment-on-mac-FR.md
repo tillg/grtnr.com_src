@@ -4,12 +4,12 @@ excerpt: J'utilise différents outils de développement (Java, Python, Docker...
 image: dev_tools.png
 tags: Mac
 updates: 2025-05-05
-Translation: fr
-Source-Language: en
-Translator: gpt-4o
-Translate-Date: 2025-07-09T10:19:10.676128
-Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-01-15-development-environment-on-mac/2025-01-15-development-environment-on-mac.md
-Generated-By: automatic-translation-plugin
+translation: fr
+source_language: en
+translator: gpt-4o
+translate_date: 2025-07-09T14:55:34.790071
+source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-01-15-development-environment-on-mac/2025-01-15-development-environment-on-mac.md
+generated_by: automatic-translation-plugin
 ---
 
 ![Image amusante de l'IA](dev_tools.png)
