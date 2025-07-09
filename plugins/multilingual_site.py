@@ -831,6 +831,7 @@ class MultilingualContextManager:
         context['language_switcher'] = self.language_switcher
         context['multilingual_languages'] = self.content_processor.supported_langs
         context['default_language'] = self.content_processor.default_lang
+        context['MULTILINGUAL_ENABLED'] = True
     
     def create_language_context(self, base_context: Dict, lang: str, articles: List[Article], pages: List[Page]) -> Dict:
         """Create language-specific context"""

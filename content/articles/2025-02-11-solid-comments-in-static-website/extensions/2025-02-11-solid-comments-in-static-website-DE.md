@@ -5,7 +5,7 @@ excerpt: Ich habe Kommentare zu meiner statischen Website hinzugefügt. So habe 
 Translation: de
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T08:28:52.900818
+Translate-Date: 2025-07-09T10:19:09.232469
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-11-solid-comments-in-static-website/2025-02-11-solid-comments-in-static-website.md
 Generated-By: automatic-translation-plugin
 ---
