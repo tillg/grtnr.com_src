@@ -7,7 +7,7 @@ updates: 2025-05-05
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T08:08:30.721672
+Translate-Date: 2025-07-09T08:28:53.670776
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-01-15-development-environment-on-mac/2025-01-15-development-environment-on-mac.md
 Generated-By: automatic-translation-plugin
 ---

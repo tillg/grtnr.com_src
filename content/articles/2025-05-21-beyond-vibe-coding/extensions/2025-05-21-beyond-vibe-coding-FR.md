@@ -7,7 +7,7 @@ summary: Il y a quelque temps, j'ai construit une petite application iOS appelé
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T08:08:26.980827
+Translate-Date: 2025-07-09T08:28:50.713825
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
 Generated-By: automatic-translation-plugin
 ---

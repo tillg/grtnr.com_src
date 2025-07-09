@@ -6,7 +6,7 @@ tags: Tech, IA
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T08:08:26.982879
+Translate-Date: 2025-07-09T08:28:50.452427
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-18-mcp-playground/2025-05-18-mcp-playground.md
 Generated-By: automatic-translation-plugin
 ---

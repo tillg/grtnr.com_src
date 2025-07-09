@@ -5,7 +5,7 @@ excerpt: J’aimerais créer un petit site web qui optimise mes créneaux de nat
 Translation: fr
 Source-Language: en
 Translator: gpt-4o
-Translate-Date: 2025-07-09T08:08:29.550424
+Translate-Date: 2025-07-09T08:28:52.901154
 Source-File: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-14-optimal-swimming-slot/2025-03-14-optimal-swimming-slot.md
 Generated-By: automatic-translation-plugin
 ---
