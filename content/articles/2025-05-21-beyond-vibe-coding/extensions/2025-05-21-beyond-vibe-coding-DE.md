@@ -1,24 +1,24 @@
 ---
 Tags: tech, AI
-Title: Jenseits des Vibe-Codings - Neugestaltung von Filmz
+Title: Jenseits von Vibe Coding - Neugestaltung von Filmz
 Date: 2025-05-21
 image: filmz.png
-summary: Vor einiger Zeit habe ich eine kleine iOS-App namens Filmz mit _vibe_coding_ entwickelt. Das ist schön, bis man beim _vibe debugging_ landet. Jetzt starte ich einen neuen Versuch, diesmal auf eine strukturiertere Weise.
+summary: Vor einiger Zeit habe ich eine kleine iOS-App namens Filmz mit _vibe_coding_ entwickelt. Das ist nett, bis man beim _vibe debugging_ landet. Jetzt starte ich einen neuen Versuch, diesmal auf eine strukturiertere Weise.
 translation: de
 source_language: en
-translator: gpt-4o
-translate_date: 2025-07-09T14:55:31.816081
-source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-21-beyond-vibe-coding/2025-05-21-beyond-vibe-coding.md
-generated_by: automatic-translation-plugin
+source_hash: 6afa6c8efca11981762e933a16b098724592997958fb00720f7d8a71e54bd797
+translator: gpt-4o-2024-08-06
+translate_date: 2025-07-18T21:52:32.348039
+generated_by: simplified-translation-system
 ---
 
 <img src="filmz.png" alt="Filmz" width="300">
 
-Vor einiger Zeit habe ich eine kleine iOS-App namens Filmz entwickelt: Behalten Sie den Überblick über Filme und Serien, die Sie sehen möchten oder bereits gesehen haben. Halten Sie persönliche Zusatzinformationen fest wie „Wie hat es mir gefallen?“ (d.h. meine persönliche Bewertung), „Für welches Publikum würde ich es empfehlen?“ (Erwachsene, Kinder, Familie) „Wann und wo habe ich es gesehen?“ usw. Und dann kommt das Teilen: Weitergabe von Filmempfehlungen an Freunde, entweder einen Film nach dem anderen oder in Listen.
+Vor einiger Zeit habe ich eine kleine iOS-App namens Filmz entwickelt: Behalten Sie den Überblick über Filme und Serien, die Sie sehen möchten oder gesehen haben. Speichern Sie persönliche Zusatzinformationen wie „Wie hat es mir gefallen?“ (d.h. meine persönliche Bewertung), „Für welches Publikum würde ich es empfehlen?“ (Erwachsene, Kinder, Familie) „Wann und wo habe ich es gesehen?“ usw. Und dann kommt das Teilen: Filmempfehlungen an Freunde weitergeben, entweder einen Film nach dem anderen oder als Listen.
 
-Da ich damals kein Swift konnte, habe ich es im _vibe coding_-Stil entwickelt, voll unterstützt von KI (damals hauptsächlich Cursor.ai). Das gab mir einen schnellen Start, aber ich war verloren, als ich komplexere Funktionen hinzufügen wollte, die eine gut strukturierte Codebasis erforderten. Und da ich nicht viel über Swift wusste, konnte ich es auch nicht umsetzen. Vibe-Debugging funktioniert noch nicht...
+Da ich damals kein Swift konnte, habe ich es im _vibe coding_-Stil entwickelt, vollständig unterstützt von KI (damals hauptsächlich Cursor.ai). Das gab mir einen schnellen Start, aber ich war verloren, sobald ich komplexere Funktionen hinzufügen wollte, die eine gut strukturierte Codebasis erforderten. Und da ich nicht viel über Swift wusste, konnte ich es auch nicht umsetzen. Vibe Debugging funktioniert noch nicht...
 
-Also starte ich hier erneut, und mit einem anderen Ansatz: Ich werde versuchen, ähnlich zu arbeiten, wie ich es mit einem klugen, aber noch unerfahrenen Entwicklerkollegen tun würde. Der Fokus wird auf einem schrittweisen Ansatz liegen, begleitet von einer ordentlichen Dokumentation: Beschreibungen der aktuellen Aufgabe, Beschreibung der Architekturänderungen, der Optionen, die geprüft/überlegt wurden und was warum gewählt wurde...
+Also starte ich hier erneut und mit einem anderen Ansatz: Ich werde versuchen, auf ähnliche Weise zu arbeiten, wie ich es mit einem klugen, aber unerfahrenen Junior-Entwickler tun würde. Der Fokus wird auf einem schrittweisen Ansatz liegen, begleitet von einer ordentlichen Dokumentation: Beschreibungen der aktuellen Aufgabe, Beschreibung der Architekturänderungen, der inspizierten / in Betracht gezogenen Optionen und was warum gewählt wurde...
 
 [Ich habe mit meinem KI-Freund ChatGPT gearbeitet](https://chatgpt.com/share/68371708-8a44-8009-b424-059b920feec9) und plane, mit einer Struktur zu beginnen, wie unten beschrieben.
 
@@ -34,7 +34,7 @@ docs/                     # Alles, was *nicht* Quellcode ist, lebt hier
 │   │   ├── 02-ui-flow.md         # Wireflow, Screenshots, Diagramme → PNG/Drawio *im selben Ordner* behalten
 │   │   ├── 03-design.md          # Technisches Design & Pseudocode
 │   │   ├── 04-test-plan.md       # Akzeptanz- & Randfallliste
-│   │   └── dark-mode.drawio.png  # Diagramm befindet sich neben dem Text, der darauf verweist
+│   │   └── dark-mode.drawio.png  # Diagramm sitzt neben dem Text, der darauf verweist
 │   ├── profile-refactor/
 │   │   └── …
 │   └── _TEMPLATE/               # Leeres Gerüst, das Sie beim Hinzufügen einer Funktion kopieren
@@ -44,7 +44,7 @@ docs/                     # Alles, was *nicht* Quellcode ist, lebt hier
 ├── adr/                  # Architektur-Entscheidungsprotokolle
 │   ├── ADR-001-use-themex.md
 │   └── ADR-002-db-index.md
-└── changelog.md          # „Keep a Changelog“-Stil Historie
+└── changelog.md          # „Keep a Changelog“-Stil Geschichte
 ```
 
 2025-05-28: Ich nehme dies als Ausgangspunkt, arbeite und sehe, was fehlt. Und füge die fehlenden Teile unterwegs hinzu.

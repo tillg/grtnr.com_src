@@ -4,10 +4,10 @@ image: david_cursor_magic.png
 excerpt: Ich habe dieses Video eines Entwicklers mit VIELEN hilfreichen Tipps zur Nutzung von Cursor gefunden - hier sind meine Erkenntnisse.
 translation: de
 source_language: en
-translator: gpt-4o
-translate_date: 2025-07-09T14:55:34.912774
-source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-02-05-cursor-magic/2025-02-05-cursor-magic.md
-generated_by: automatic-translation-plugin
+source_hash: 6f5f3859413aa8ee235065659ab80dc33db60f32d1c181831639b1989c52de3e
+translator: gpt-4o-2024-08-06
+translate_date: 2025-07-18T21:57:15.009446
+generated_by: simplified-translation-system
 ---
 
 [TOC]
@@ -29,7 +29,7 @@ Die allgemeine Prompt-Struktur, die David vorschlägt:
 
 ## Cursorrules
 
-`.cursorrules.md` ist eine Datei, die Sie im obersten Verzeichnis Ihres Projekts ablegen, um der KI mehr Kontext über Ihr Projekt zu geben. Hier ist die Struktur der Datei, die David vorschlägt:
+`.cursorrules.md` ist eine Datei, die Sie in Ihr Projektverzeichnis auf oberster Ebene legen, um der KI mehr Kontext über Ihr Projekt zu geben. Hier ist die Struktur der Datei, die David vorschlägt:
 
 ```markdown
 # PROJEKTÜBERSICHT
@@ -38,7 +38,7 @@ Die allgemeine Prompt-Struktur, die David vorschlägt:
 
 # TECH STACK
 
-- Wählen Sie einen Tech-Stack mit sehr populären Sprachen
+- wählen Sie einen Tech-Stack mit sehr populären Sprachen
 
 # FEHLERBEHEBUNGSPROZESS
 
@@ -51,11 +51,11 @@ Schritt 3: Zeigen Sie, wie der Fehler behoben wird
 # Unsere - Umgebungsvariablen
 
 backend/.env
-frontend/. env
+frontend/.env
 
 # AKTUELLE DATEISTRUKTUR
 
-Hier fügen Sie den Inhalt dieses Befehls ein, damit Cursor über Ihre Projektstruktur Bescheid weiß:
+Hier fügen Sie den Inhalt dieses Befehls ein, damit Cursor über Ihre Projektstruktur informiert ist:
 tree -L 4 -a -I 'node*modules | -git|\_pycache*|.DS\_$
 
 # GITHUB PUSH PROZESS
@@ -83,21 +83,21 @@ Ein Beispiel:
 - Konzentrieren Sie sich auf die Kernfunktionalität vor der Optimierung
 - Verwenden Sie klare, konsistente Benennungen
 - Denken Sie gründlich nach, bevor Sie programmieren. Schreiben Sie 2-3 Überlegungsabsätze.
-- Schreiben Sie IMMER einfachen, sauberen und modularen Code.
+- IMMER einfachen, sauberen und modularen Code schreiben.
 - Verwenden Sie klare und leicht verständliche Sprache. Schreiben Sie in kurzen Sätzen.
 
 # Fehlerbehebung
 
-- SCHLUSSFOLGERUNGEN NICHT VORWEGNEHMEN! Berücksichtigen Sie mehrere mögliche Ursachen, bevor Sie sich entscheiden.
+- NICHT VORSCHNELL SCHLUSSFOLGERN! Berücksichtigen Sie mehrere mögliche Ursachen, bevor Sie sich entscheiden.
 - Erklären Sie das Problem in einfachem Englisch
-- Machen Sie die minimal notwendigen Änderungen, ändern Sie so wenige Codezeilen wie möglich
+- Machen Sie nur die minimal notwendigen Änderungen, ändern Sie so wenige Codezeilen wie möglich
 - Bei seltsamen Fehlern bitten Sie den Benutzer, eine Perplexity-Websuche durchzuführen, um die neuesten Informationen zu erhalten
 
 # Bauprozess
 
-- ﻿﻿Überprüfen Sie jede neue Funktion, indem Sie dem Benutzer sagen, wie er sie testen soll
-- ﻿﻿Schreiben Sie KEINEN komplizierten und verwirrenden Code. Entscheiden Sie sich für den einfachen und modularen Ansatz.
-- ﻿﻿Wenn Sie nicht sicher sind, was zu tun ist, sagen Sie dem Benutzer, er solle eine Websuche durchführen
+- ﻿﻿Überprüfen Sie, ob jede neue Funktion funktioniert, indem Sie dem Benutzer sagen, wie er sie testen kann
+- ﻿﻿Schreiben Sie KEINEN komplizierten und verwirrenden Code. Wählen Sie den einfachen und modularen Ansatz.
+- ﻿﻿Wenn Sie nicht sicher sind, was zu tun ist, sagen Sie dem Benutzer, dass er eine Websuche durchführen soll
 
 # Kommentare
 
@@ -110,14 +110,14 @@ Ein Beispiel:
 
 ## Hilfreiche kleine Prompts
 
-David bietet eine Liste hilfreicher kleiner Prompts oder Prompt-Snippets. Ich habe einige von ihnen hier für die Copy&Paste-Nutzung kopiert:
+David bietet eine Liste hilfreicher kleiner Prompts oder Prompt-Snippets. Ich habe einige davon hier für die Copy&Paste-Nutzung kopiert:
 
 ```text
-Verfahren Sie wie ein Senior Developer mit Fokus auf klare Architektur.
+Vorgehen wie ein Senior Developer mit Fokus auf klare Architektur.
 
 Je weniger Codezeilen, desto besser.
 
-Beginnen Sie mit dem Schreiben von 3 Überlegungsabsätzen, in denen Sie analysieren, was der Fehler sein könnte. SCHLUSSFOLGERUNGEN NICHT VORWEGNEHMEN.
+Beginnen Sie mit dem Schreiben von 3 Überlegungsabsätzen, in denen Sie analysieren, was der Fehler sein könnte. NICHT VORSCHNELL SCHLUSSFOLGERN.
 
 NICHT AUFHÖREN ZU ARBEITEN, bis…
 
@@ -132,22 +132,22 @@ Sie sollten den Überlegungsabsatz mit viel Unsicherheit beginnen und langsam Ve
 
 ### Zusammenfassung des aktuellen Zustands
 
-Wird verwendet, um einen Compose-Flow zusammenzufassen und zu einem neuen Compose-Dialog zu wechseln.
+Wird verwendet, um einen Compose-Flow zusammenzufassen und zu einem neuen Compose-Dialog überzugehen.
 
 ```text
 Bevor wir fortfahren, benötige ich von Ihnen eine Zusammenfassung des aktuellen Projektzustands.
 
 Formatieren Sie dies als 3 prägnante Absätze, in denen Sie beschreiben, was wir gerade getan haben, was nicht funktioniert hat, welche Dateien aktualisiert/erstellt wurden, welche Fehler zu vermeiden sind, welche wichtigen Erkenntnisse/Lektionen wir gelernt haben, welche Probleme/Fehler wir haben,… und alles andere, was ein Programmierer benötigt, um produktiv an diesem Projekt zu arbeiten.
 
-Schreiben Sie in einem gesprächigen, aber informativen Ton, ähnlich wie eine README-Datei auf GitHub, die sehr informationsdicht ist und ohne jeglichen Fluff oder Lärm. KEINE Annahmen oder Theorien einbeziehen, nur die Fakten.
+Schreiben Sie in einem gesprächigen, aber informativen Ton, ähnlich einer README-Datei auf GitHub, die sehr informationsdicht ist und ohne unnötigen Ballast. Schließen Sie keine Annahmen oder Theorien ein, nur die Fakten.
 
-Ich erwarte, dass Sie drei prägnante Absätze schreiben, als ob Sie einem anderen Programmierer Anweisungen geben würden und dies ALLES wäre, was Sie ihm sagen könnten.
+Ich erwarte drei prägnante Absätze, geschrieben, als ob Sie einem anderen Programmierer Anweisungen geben würden und dies alles wäre, was Sie ihm sagen könnten.
 ```
 
 ### Unvoreingenommen 50/50
 
 ```text
-BEVOR SIE ANTWORTEN, möchte ich, dass Sie zwei detaillierte Absätze schreiben, die jeweils eine dieser Lösungen argumentieren - ziehen Sie keine voreiligen Schlüsse, sondern betrachten Sie ernsthaft beide Ansätze
+BEVOR SIE ANTWORTEN, möchte ich, dass Sie zwei detaillierte Absätze schreiben, die jeweils für eine dieser Lösungen argumentieren - ziehen Sie keine voreiligen Schlüsse, betrachten Sie ernsthaft beide Ansätze
 
 dann, nachdem Sie fertig sind, sagen Sie mir, ob eine dieser Lösungen offensichtlich besser ist als die andere und warum.
 ```
@@ -155,16 +155,16 @@ dann, nachdem Sie fertig sind, sagen Sie mir, ob eine dieser Lösungen offensich
 ### Ein-Absatz-Suchanfrage
 
 ```text
-Lassen Sie uns eine Websuche durchführen. Ihre Aufgabe ist es, eine Ein-Absatz-Suchanfrage zu schreiben, als ob Sie einem menschlichen Forscher sagen würden, was zu finden ist, einschließlich aller relevanten Kontexte. Formatieren Sie den Absatz als klare Anweisungen, die einen Forscher dazu auffordern, das zu finden, wonach wir suchen. Fordern Sie Code-Snippets oder technische Details an, wenn relevant.
+Lassen Sie uns eine Websuche durchführen. Ihre Aufgabe ist es, eine Ein-Absatz-Suchanfrage zu schreiben, als ob Sie einem menschlichen Forscher sagen würden, was zu finden ist, einschließlich aller relevanten Kontexte. Formatieren Sie den Absatz als klare Anweisungen, die einen Forscher dazu auffordern, zu finden, wonach wir suchen. Fragen Sie nach Code-Snippets oder technischen Details, wenn relevant.
 ```
 
 ## Anweisungen
 
-David schlägt vor, ein Verzeichnis `instructions` zu haben, das md-Dateien mit Tipps für die KI enthält. Auf diese Weise können Sie auf diese Dateien aus dem Composer-Prompt verweisen. Er bevorzugt diese Art von Anweisungsdateien gegenüber dem Verweisen auf @Docs in Cursor, was anscheinend noch nicht so gut funktioniert.
+David schlägt vor, ein Verzeichnis `instructions` zu haben, das md-Dateien mit Tipps für die KI enthält. Auf diese Weise können Sie von der Composer-Eingabeaufforderung auf diese Dateien verweisen. Er bevorzugt diese Art von Anweisungsdateien gegenüber dem Verweis auf @Docs in Cursor, was anscheinend noch nicht so gut funktioniert.
 
-Anweisungsdateien, die er erwähnt hat:
+Erwähnte Anweisungsdateien:
 
-- `supabase.md`: Eine Datei, die die Struktur seiner Datenbank beschreibt, damit Cursor über Tabellen, Felder, Pflichtfelder usw. Bescheid weiß.
+- `supabase.md`: Eine Datei, die die Struktur seiner Datenbank beschreibt, sodass Cursor über Tabellen, Felder, Pflichtfelder usw. informiert ist.
 - `roadmap.md`: Eine Erklärung der Roadmap Ihres Projekts.
 
 ## Andere Werkzeuge

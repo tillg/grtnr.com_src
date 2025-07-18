@@ -1,0 +1,669 @@
+2025-07-18 22:15:16,494 - translate_all_articles - INFO - Initialized SystematicTranslator
+2025-07-18 22:15:16,494 - translate_all_articles - INFO - Content directory: content
+2025-07-18 22:15:16,494 - translate_all_articles - INFO - Target languages: ['de', 'fr']
+2025-07-18 22:15:16,494 - translate_all_articles - INFO - Dry run: True
+2025-07-18 22:15:16,494 - translate_all_articles - INFO - Max workers: 1
+2025-07-18 22:15:16,494 - translate_all_articles - INFO - Starting systematic translation of all articles
+2025-07-18 22:15:16,499 - translate_all_articles - INFO - Found 50 articles to process
+2025-07-18 22:15:16,499 - translate_all_articles - INFO - Processing article: 2010-04-01-crowdsourcing-angebot.md
+2025-07-18 22:15:16,500 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,500 - translate_all_articles - INFO - DRY RUN: Would translate 2010-04-01-crowdsourcing-angebot.md to de
+2025-07-18 22:15:16,500 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,500 - translate_all_articles - INFO - DRY RUN: Would translate 2010-04-01-crowdsourcing-angebot.md to fr
+2025-07-18 22:15:16,500 - translate_all_articles - INFO - Progress: 1/50 (2.0%)
+2025-07-18 22:15:16,500 - translate_all_articles - INFO - Processing article: 2010-07-29-proxy-for-offline-surfing.md
+2025-07-18 22:15:16,501 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,501 - translate_all_articles - INFO - DRY RUN: Would translate 2010-07-29-proxy-for-offline-surfing.md to de
+2025-07-18 22:15:16,501 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,501 - translate_all_articles - INFO - DRY RUN: Would translate 2010-07-29-proxy-for-offline-surfing.md to fr
+2025-07-18 22:15:16,501 - translate_all_articles - INFO - Progress: 2/50 (4.0%)
+2025-07-18 22:15:16,501 - translate_all_articles - INFO - Processing article: 2011-03-31-ipad-hologram.md
+2025-07-18 22:15:16,501 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,501 - translate_all_articles - INFO - DRY RUN: Would translate 2011-03-31-ipad-hologram.md to de
+2025-07-18 22:15:16,502 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,502 - translate_all_articles - INFO - DRY RUN: Would translate 2011-03-31-ipad-hologram.md to fr
+2025-07-18 22:15:16,502 - translate_all_articles - INFO - Progress: 3/50 (6.0%)
+2025-07-18 22:15:16,502 - translate_all_articles - INFO - Processing article: 2012-04-10_indien_tag_1.md
+2025-07-18 22:15:16,502 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,502 - translate_all_articles - INFO - DRY RUN: Would translate 2012-04-10_indien_tag_1.md to de
+2025-07-18 22:15:16,502 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,502 - translate_all_articles - INFO - DRY RUN: Would translate 2012-04-10_indien_tag_1.md to fr
+2025-07-18 22:15:16,502 - translate_all_articles - INFO - Progress: 4/50 (8.0%)
+2025-07-18 22:15:16,502 - translate_all_articles - INFO - Processing article: 2012-04-11_indien_tag_2.md
+2025-07-18 22:15:16,503 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,503 - translate_all_articles - INFO - DRY RUN: Would translate 2012-04-11_indien_tag_2.md to de
+2025-07-18 22:15:16,503 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,503 - translate_all_articles - INFO - DRY RUN: Would translate 2012-04-11_indien_tag_2.md to fr
+2025-07-18 22:15:16,503 - translate_all_articles - INFO - Progress: 5/50 (10.0%)
+2025-07-18 22:15:16,503 - translate_all_articles - INFO - Processing article: 2013-06-14-welche-ist-die-schonste-bibliothek-munchens.md
+2025-07-18 22:15:16,505 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,505 - translate_all_articles - INFO - DRY RUN: Would translate 2013-06-14-welche-ist-die-schonste-bibliothek-munchens.md to de
+2025-07-18 22:15:16,505 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,505 - translate_all_articles - INFO - DRY RUN: Would translate 2013-06-14-welche-ist-die-schonste-bibliothek-munchens.md to fr
+2025-07-18 22:15:16,505 - translate_all_articles - INFO - Progress: 6/50 (12.0%)
+2025-07-18 22:15:16,505 - translate_all_articles - INFO - Processing article: 2015-05-29-friday-night.md
+2025-07-18 22:15:16,506 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,506 - translate_all_articles - INFO - DRY RUN: Would translate 2015-05-29-friday-night.md to de
+2025-07-18 22:15:16,506 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,506 - translate_all_articles - INFO - DRY RUN: Would translate 2015-05-29-friday-night.md to fr
+2025-07-18 22:15:16,506 - translate_all_articles - INFO - Progress: 7/50 (14.0%)
+2025-07-18 22:15:16,506 - translate_all_articles - INFO - Processing article: 2015-06-01-absacker.md
+2025-07-18 22:15:16,507 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,507 - translate_all_articles - INFO - DRY RUN: Would translate 2015-06-01-absacker.md to de
+2025-07-18 22:15:16,507 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,507 - translate_all_articles - INFO - DRY RUN: Would translate 2015-06-01-absacker.md to fr
+2025-07-18 22:15:16,507 - translate_all_articles - INFO - Progress: 8/50 (16.0%)
+2025-07-18 22:15:16,507 - translate_all_articles - INFO - Processing article: 2015-06-01-sugar-cane.md
+2025-07-18 22:15:16,507 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,507 - translate_all_articles - INFO - DRY RUN: Would translate 2015-06-01-sugar-cane.md to de
+2025-07-18 22:15:16,507 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,508 - translate_all_articles - INFO - DRY RUN: Would translate 2015-06-01-sugar-cane.md to fr
+2025-07-18 22:15:16,508 - translate_all_articles - INFO - Progress: 9/50 (18.0%)
+2025-07-18 22:15:16,508 - translate_all_articles - INFO - Processing article: 2015-06-01-vietnamese-fast-food.md
+2025-07-18 22:15:16,508 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,508 - translate_all_articles - INFO - DRY RUN: Would translate 2015-06-01-vietnamese-fast-food.md to de
+2025-07-18 22:15:16,508 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,508 - translate_all_articles - INFO - DRY RUN: Would translate 2015-06-01-vietnamese-fast-food.md to fr
+2025-07-18 22:15:16,508 - translate_all_articles - INFO - Progress: 10/50 (20.0%)
+2025-07-18 22:15:16,508 - translate_all_articles - INFO - Processing article: 2015-06-05-rex-hotel-saigon.md
+2025-07-18 22:15:16,509 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,509 - translate_all_articles - INFO - DRY RUN: Would translate 2015-06-05-rex-hotel-saigon.md to de
+2025-07-18 22:15:16,509 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,509 - translate_all_articles - INFO - DRY RUN: Would translate 2015-06-05-rex-hotel-saigon.md to fr
+2025-07-18 22:15:16,509 - translate_all_articles - INFO - Progress: 11/50 (22.0%)
+2025-07-18 22:15:16,509 - translate_all_articles - INFO - Processing article: 2015-11-30-how-i-moved-to-github-and-jbake.md
+2025-07-18 22:15:16,510 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,510 - translate_all_articles - INFO - DRY RUN: Would translate 2015-11-30-how-i-moved-to-github-and-jbake.md to de
+2025-07-18 22:15:16,510 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,510 - translate_all_articles - INFO - DRY RUN: Would translate 2015-11-30-how-i-moved-to-github-and-jbake.md to fr
+2025-07-18 22:15:16,510 - translate_all_articles - INFO - Progress: 12/50 (24.0%)
+2025-07-18 22:15:16,510 - translate_all_articles - INFO - Processing article: 2015-12-06-playing-with-javascript.md
+2025-07-18 22:15:16,511 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,511 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-06-playing-with-javascript.md to de
+2025-07-18 22:15:16,511 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,511 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-06-playing-with-javascript.md to fr
+2025-07-18 22:15:16,511 - translate_all_articles - INFO - Progress: 13/50 (26.0%)
+2025-07-18 22:15:16,511 - translate_all_articles - INFO - Processing article: 2015-12-09-zipf.md
+2025-07-18 22:15:16,512 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,512 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-09-zipf.md to de
+2025-07-18 22:15:16,512 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,512 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-09-zipf.md to fr
+2025-07-18 22:15:16,512 - translate_all_articles - INFO - Progress: 14/50 (28.0%)
+2025-07-18 22:15:16,512 - translate_all_articles - INFO - Processing article: 2015-12-16-playing-with-highcharts.md
+2025-07-18 22:15:16,513 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,513 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-16-playing-with-highcharts.md to de
+2025-07-18 22:15:16,513 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,513 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-16-playing-with-highcharts.md to fr
+2025-07-18 22:15:16,513 - translate_all_articles - INFO - Progress: 15/50 (30.0%)
+2025-07-18 22:15:16,513 - translate_all_articles - INFO - Processing article: 2015-12-19-adding-search-to-static-site.md
+2025-07-18 22:15:16,513 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,513 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-19-adding-search-to-static-site.md to de
+2025-07-18 22:15:16,513 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,513 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-19-adding-search-to-static-site.md to fr
+2025-07-18 22:15:16,514 - translate_all_articles - INFO - Progress: 16/50 (32.0%)
+2025-07-18 22:15:16,514 - translate_all_articles - INFO - Processing article: 2015-12-26-beautiful-sites.md
+2025-07-18 22:15:16,515 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,515 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-26-beautiful-sites.md to de
+2025-07-18 22:15:16,515 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,515 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-26-beautiful-sites.md to fr
+2025-07-18 22:15:16,515 - translate_all_articles - INFO - Progress: 17/50 (34.0%)
+2025-07-18 22:15:16,515 - translate_all_articles - INFO - Processing article: 2015-12-27-siteweightwatcher-keeps-your-website-slim.md
+2025-07-18 22:15:16,516 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,516 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-27-siteweightwatcher-keeps-your-website-slim.md to de
+2025-07-18 22:15:16,516 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,516 - translate_all_articles - INFO - DRY RUN: Would translate 2015-12-27-siteweightwatcher-keeps-your-website-slim.md to fr
+2025-07-18 22:15:16,516 - translate_all_articles - INFO - Progress: 18/50 (36.0%)
+2025-07-18 22:15:16,516 - translate_all_articles - INFO - Processing article: 2016-01-04-23-sociolog-software.md
+2025-07-18 22:15:16,516 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,516 - translate_all_articles - INFO - DRY RUN: Would translate 2016-01-04-23-sociolog-software.md to de
+2025-07-18 22:15:16,516 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,516 - translate_all_articles - INFO - DRY RUN: Would translate 2016-01-04-23-sociolog-software.md to fr
+2025-07-18 22:15:16,516 - translate_all_articles - INFO - Progress: 19/50 (38.0%)
+2025-07-18 22:15:16,516 - translate_all_articles - INFO - Processing article: 2016-01-04-visited-countries.md
+2025-07-18 22:15:16,517 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,517 - translate_all_articles - INFO - DRY RUN: Would translate 2016-01-04-visited-countries.md to de
+2025-07-18 22:15:16,517 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,517 - translate_all_articles - INFO - DRY RUN: Would translate 2016-01-04-visited-countries.md to fr
+2025-07-18 22:15:16,517 - translate_all_articles - INFO - Progress: 20/50 (40.0%)
+2025-07-18 22:15:16,517 - translate_all_articles - INFO - Processing article: 2016-01-06-the-art-of-command-line.md
+2025-07-18 22:15:16,518 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,518 - translate_all_articles - INFO - DRY RUN: Would translate 2016-01-06-the-art-of-command-line.md to de
+2025-07-18 22:15:16,518 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,518 - translate_all_articles - INFO - DRY RUN: Would translate 2016-01-06-the-art-of-command-line.md to fr
+2025-07-18 22:15:16,518 - translate_all_articles - INFO - Progress: 21/50 (42.0%)
+2025-07-18 22:15:16,518 - translate_all_articles - INFO - Processing article: 2016-01-08-ping-analysis.md
+2025-07-18 22:15:16,519 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,519 - translate_all_articles - INFO - DRY RUN: Would translate 2016-01-08-ping-analysis.md to de
+2025-07-18 22:15:16,519 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,519 - translate_all_articles - INFO - DRY RUN: Would translate 2016-01-08-ping-analysis.md to fr
+2025-07-18 22:15:16,519 - translate_all_articles - INFO - Progress: 22/50 (44.0%)
+2025-07-18 22:15:16,519 - translate_all_articles - INFO - Processing article: 2016-02-13-d3playground.md
+2025-07-18 22:15:16,520 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,520 - translate_all_articles - INFO - DRY RUN: Would translate 2016-02-13-d3playground.md to de
+2025-07-18 22:15:16,520 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,520 - translate_all_articles - INFO - DRY RUN: Would translate 2016-02-13-d3playground.md to fr
+2025-07-18 22:15:16,520 - translate_all_articles - INFO - Progress: 23/50 (46.0%)
+2025-07-18 22:15:16,520 - translate_all_articles - INFO - Processing article: 2016-08-08-my-static-website.md
+2025-07-18 22:15:16,521 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,521 - translate_all_articles - INFO - DRY RUN: Would translate 2016-08-08-my-static-website.md to de
+2025-07-18 22:15:16,521 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,521 - translate_all_articles - INFO - DRY RUN: Would translate 2016-08-08-my-static-website.md to fr
+2025-07-18 22:15:16,521 - translate_all_articles - INFO - Progress: 24/50 (48.0%)
+2025-07-18 22:15:16,521 - translate_all_articles - INFO - Processing article: 2019-04-11-image-encoding-in-node.md
+2025-07-18 22:15:16,522 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,522 - translate_all_articles - INFO - DRY RUN: Would translate 2019-04-11-image-encoding-in-node.md to de
+2025-07-18 22:15:16,522 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,522 - translate_all_articles - INFO - DRY RUN: Would translate 2019-04-11-image-encoding-in-node.md to fr
+2025-07-18 22:15:16,522 - translate_all_articles - INFO - Progress: 25/50 (50.0%)
+2025-07-18 22:15:16,522 - translate_all_articles - INFO - Processing article: 2019-04-15-svg-programming.md
+2025-07-18 22:15:16,523 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,523 - translate_all_articles - INFO - DRY RUN: Would translate 2019-04-15-svg-programming.md to de
+2025-07-18 22:15:16,523 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,523 - translate_all_articles - INFO - DRY RUN: Would translate 2019-04-15-svg-programming.md to fr
+2025-07-18 22:15:16,523 - translate_all_articles - INFO - Progress: 26/50 (52.0%)
+2025-07-18 22:15:16,523 - translate_all_articles - INFO - Processing article: 2019-11-08-markdown-editors.md
+2025-07-18 22:15:16,524 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,524 - translate_all_articles - INFO - DRY RUN: Would translate 2019-11-08-markdown-editors.md to de
+2025-07-18 22:15:16,524 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,524 - translate_all_articles - INFO - DRY RUN: Would translate 2019-11-08-markdown-editors.md to fr
+2025-07-18 22:15:16,524 - translate_all_articles - INFO - Progress: 27/50 (54.0%)
+2025-07-18 22:15:16,524 - translate_all_articles - INFO - Processing article: 2019-11-17-tips-for-travelling-vietnam.md
+2025-07-18 22:15:16,524 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,524 - translate_all_articles - INFO - DRY RUN: Would translate 2019-11-17-tips-for-travelling-vietnam.md to de
+2025-07-18 22:15:16,524 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,524 - translate_all_articles - INFO - DRY RUN: Would translate 2019-11-17-tips-for-travelling-vietnam.md to fr
+2025-07-18 22:15:16,524 - translate_all_articles - INFO - Progress: 28/50 (56.0%)
+2025-07-18 22:15:16,524 - translate_all_articles - INFO - Processing article: 2020-02-06-setting-up-my-terminal.md
+2025-07-18 22:15:16,525 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,525 - translate_all_articles - INFO - DRY RUN: Would translate 2020-02-06-setting-up-my-terminal.md to de
+2025-07-18 22:15:16,525 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,525 - translate_all_articles - INFO - DRY RUN: Would translate 2020-02-06-setting-up-my-terminal.md to fr
+2025-07-18 22:15:16,525 - translate_all_articles - INFO - Progress: 29/50 (58.0%)
+2025-07-18 22:15:16,525 - translate_all_articles - INFO - Processing article: 2020-06-11-mac-recording-screen-sound.md
+2025-07-18 22:15:16,526 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,526 - translate_all_articles - INFO - DRY RUN: Would translate 2020-06-11-mac-recording-screen-sound.md to de
+2025-07-18 22:15:16,526 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,526 - translate_all_articles - INFO - DRY RUN: Would translate 2020-06-11-mac-recording-screen-sound.md to fr
+2025-07-18 22:15:16,526 - translate_all_articles - INFO - Progress: 30/50 (60.0%)
+2025-07-18 22:15:16,526 - translate_all_articles - INFO - Processing article: 2020-12-28-my-notes-from-rc3-2020.md
+2025-07-18 22:15:16,526 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,526 - translate_all_articles - INFO - DRY RUN: Would translate 2020-12-28-my-notes-from-rc3-2020.md to de
+2025-07-18 22:15:16,526 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,526 - translate_all_articles - INFO - DRY RUN: Would translate 2020-12-28-my-notes-from-rc3-2020.md to fr
+2025-07-18 22:15:16,526 - translate_all_articles - INFO - Progress: 31/50 (62.0%)
+2025-07-18 22:15:16,526 - translate_all_articles - INFO - Processing article: 2021-01-24-testing-dried-mango.md
+2025-07-18 22:15:16,527 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,527 - translate_all_articles - INFO - DRY RUN: Would translate 2021-01-24-testing-dried-mango.md to de
+2025-07-18 22:15:16,527 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,527 - translate_all_articles - INFO - DRY RUN: Would translate 2021-01-24-testing-dried-mango.md to fr
+2025-07-18 22:15:16,527 - translate_all_articles - INFO - Progress: 32/50 (64.0%)
+2025-07-18 22:15:16,527 - translate_all_articles - INFO - Processing article: 2021-09-04-named-volumes-with-docker-compose.md
+2025-07-18 22:15:16,528 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,528 - translate_all_articles - INFO - DRY RUN: Would translate 2021-09-04-named-volumes-with-docker-compose.md to de
+2025-07-18 22:15:16,528 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,528 - translate_all_articles - INFO - DRY RUN: Would translate 2021-09-04-named-volumes-with-docker-compose.md to fr
+2025-07-18 22:15:16,528 - translate_all_articles - INFO - Progress: 33/50 (66.0%)
+2025-07-18 22:15:16,528 - translate_all_articles - INFO - Processing article: 2021-12-03-life-is-good-cycling-to-work.md
+2025-07-18 22:15:16,529 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,529 - translate_all_articles - INFO - DRY RUN: Would translate 2021-12-03-life-is-good-cycling-to-work.md to de
+2025-07-18 22:15:16,529 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,529 - translate_all_articles - INFO - DRY RUN: Would translate 2021-12-03-life-is-good-cycling-to-work.md to fr
+2025-07-18 22:15:16,529 - translate_all_articles - INFO - Progress: 34/50 (68.0%)
+2025-07-18 22:15:16,529 - translate_all_articles - INFO - Processing article: 2022-09-02-ceciles-bester-witz.md
+2025-07-18 22:15:16,529 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,529 - translate_all_articles - INFO - DRY RUN: Would translate 2022-09-02-ceciles-bester-witz.md to de
+2025-07-18 22:15:16,529 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,529 - translate_all_articles - INFO - DRY RUN: Would translate 2022-09-02-ceciles-bester-witz.md to fr
+2025-07-18 22:15:16,529 - translate_all_articles - INFO - Progress: 35/50 (70.0%)
+2025-07-18 22:15:16,529 - translate_all_articles - INFO - Processing article: 2022-09-12-noch-ein-guter-von-cecile.md
+2025-07-18 22:15:16,530 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,530 - translate_all_articles - INFO - DRY RUN: Would translate 2022-09-12-noch-ein-guter-von-cecile.md to de
+2025-07-18 22:15:16,530 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,530 - translate_all_articles - INFO - DRY RUN: Would translate 2022-09-12-noch-ein-guter-von-cecile.md to fr
+2025-07-18 22:15:16,530 - translate_all_articles - INFO - Progress: 36/50 (72.0%)
+2025-07-18 22:15:16,530 - translate_all_articles - INFO - Processing article: 2023-05-07-double-ai-chat.md
+2025-07-18 22:15:16,531 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:16,531 - translate_all_articles - INFO - DRY RUN: Would translate 2023-05-07-double-ai-chat.md to de
+2025-07-18 22:15:16,531 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:16,531 - translate_all_articles - INFO - DRY RUN: Would translate 2023-05-07-double-ai-chat.md to fr
+2025-07-18 22:15:16,531 - translate_all_articles - INFO - Progress: 37/50 (74.0%)
+2025-07-18 22:15:16,531 - translate_all_articles - INFO - Processing article: 2024-04-08-setting-up-jupyter-lab-on-mac.md
+2025-07-18 22:15:16,534 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,534 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,534 - translate_all_articles - INFO - Progress: 38/50 (76.0%)
+2025-07-18 22:15:16,534 - translate_all_articles - INFO - Processing article: 2024-11-29-selecting-a-jekyll-theme.md
+2025-07-18 22:15:16,535 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,535 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,535 - translate_all_articles - INFO - Progress: 39/50 (78.0%)
+2025-07-18 22:15:16,535 - translate_all_articles - INFO - Processing article: 2024-12-02-sivananda-prayers.md
+2025-07-18 22:15:16,537 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,537 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,537 - translate_all_articles - INFO - Progress: 40/50 (80.0%)
+2025-07-18 22:15:16,537 - translate_all_articles - INFO - Processing article: 2025-01-15-development-environment-on-mac.md
+2025-07-18 22:15:16,539 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,539 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,539 - translate_all_articles - INFO - Progress: 41/50 (82.0%)
+2025-07-18 22:15:16,539 - translate_all_articles - INFO - Processing article: 2025-02-05-cursor-magic.md
+2025-07-18 22:15:16,541 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,541 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,541 - translate_all_articles - INFO - Progress: 42/50 (84.0%)
+2025-07-18 22:15:16,541 - translate_all_articles - INFO - Processing article: 2025-02-11-solid-comments-in-static-website.md
+2025-07-18 22:15:16,543 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,543 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,543 - translate_all_articles - INFO - Progress: 43/50 (86.0%)
+2025-07-18 22:15:16,543 - translate_all_articles - INFO - Processing article: 2025-03-14-optimal-swimming-slot.md
+2025-07-18 22:15:16,544 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,544 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,544 - translate_all_articles - INFO - Progress: 44/50 (88.0%)
+2025-07-18 22:15:16,544 - translate_all_articles - INFO - Processing article: 2025-03-24-thoughts-on-swift-architecture.md
+2025-07-18 22:15:16,546 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,546 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,546 - translate_all_articles - INFO - Progress: 45/50 (90.0%)
+2025-07-18 22:15:16,546 - translate_all_articles - INFO - Processing article: 2025-04-18-digital-garden.md
+2025-07-18 22:15:16,549 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,550 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,550 - translate_all_articles - INFO - Progress: 46/50 (92.0%)
+2025-07-18 22:15:16,550 - translate_all_articles - INFO - Processing article: 2025-05-04-autocompleting-my-blog.md
+2025-07-18 22:15:16,554 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,554 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,554 - translate_all_articles - INFO - Progress: 47/50 (94.0%)
+2025-07-18 22:15:16,554 - translate_all_articles - INFO - Processing article: 2025-05-06-setting-up-a-mac.md
+2025-07-18 22:15:16,557 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,557 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,558 - translate_all_articles - INFO - Progress: 48/50 (96.0%)
+2025-07-18 22:15:16,558 - translate_all_articles - INFO - Processing article: 2025-05-18-mcp-playground.md
+2025-07-18 22:15:16,560 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,560 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,560 - translate_all_articles - INFO - Progress: 49/50 (98.0%)
+2025-07-18 22:15:16,560 - translate_all_articles - INFO - Processing article: 2025-05-21-beyond-vibe-coding.md
+2025-07-18 22:15:16,563 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:15:16,563 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:15:16,563 - translate_all_articles - INFO - Progress: 50/50 (100.0%)
+2025-07-18 22:15:16,564 - translate_all_articles - INFO - Translation process completed. Report saved to translation_report.txt
+2025-07-18 22:15:29,928 - translate_all_articles - INFO - Initialized SystematicTranslator
+2025-07-18 22:15:29,928 - translate_all_articles - INFO - Content directory: content
+2025-07-18 22:15:29,928 - translate_all_articles - INFO - Target languages: ['de', 'fr']
+2025-07-18 22:15:29,928 - translate_all_articles - INFO - Dry run: False
+2025-07-18 22:15:29,928 - translate_all_articles - INFO - Max workers: 1
+2025-07-18 22:15:29,928 - translate_all_articles - INFO - Starting systematic translation of all articles
+2025-07-18 22:15:29,933 - translate_all_articles - INFO - Found 50 articles to process
+2025-07-18 22:15:29,934 - translate_all_articles - INFO - Processing article: 2010-04-01-crowdsourcing-angebot.md
+2025-07-18 22:15:29,934 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:31,128 - translate_all_articles - DEBUG - • Translation already up to date: 2010-04-01-crowdsourcing-angebot-DE.md
+2025-07-18 22:15:31,129 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:15:31,912 - translation_service.service - DEBUG - Translating content from de to fr
+2025-07-18 22:15:53,091 - translate_all_articles - INFO - ✓ Created/updated translation: 2010-04-01-crowdsourcing-angebot-FR.md
+2025-07-18 22:15:54,096 - translate_all_articles - INFO - Progress: 1/50 (2.0%)
+2025-07-18 22:15:54,096 - translate_all_articles - INFO - Processing article: 2010-07-29-proxy-for-offline-surfing.md
+2025-07-18 22:15:54,098 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:15:54,926 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:16:01,107 - translate_all_articles - INFO - ✓ Created/updated translation: 2010-07-29-proxy-for-offline-surfing-DE.md
+2025-07-18 22:16:02,113 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:16:02,969 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:16:12,308 - translate_all_articles - INFO - ✓ Created/updated translation: 2010-07-29-proxy-for-offline-surfing-FR.md
+2025-07-18 22:16:13,309 - translate_all_articles - INFO - Progress: 2/50 (4.0%)
+2025-07-18 22:16:13,309 - translate_all_articles - INFO - Processing article: 2011-03-31-ipad-hologram.md
+2025-07-18 22:16:13,312 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:16:13,908 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:16:15,432 - translate_all_articles - INFO - ✓ Created/updated translation: 2011-03-31-ipad-hologram-DE.md
+2025-07-18 22:16:16,437 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:16:17,939 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:16:21,013 - translate_all_articles - INFO - ✓ Created/updated translation: 2011-03-31-ipad-hologram-FR.md
+2025-07-18 22:16:22,018 - translate_all_articles - INFO - Progress: 3/50 (6.0%)
+2025-07-18 22:16:22,019 - translate_all_articles - INFO - Processing article: 2012-04-10_indien_tag_1.md
+2025-07-18 22:16:22,021 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:16:23,049 - translate_all_articles - DEBUG - • Translation already up to date: 2012-04-10_indien_tag_1-DE.md
+2025-07-18 22:16:23,050 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:16:23,874 - translation_service.service - DEBUG - Translating content from de to fr
+2025-07-18 22:16:34,075 - translate_all_articles - INFO - ✓ Created/updated translation: 2012-04-10_indien_tag_1-FR.md
+2025-07-18 22:16:35,079 - translate_all_articles - INFO - Progress: 4/50 (8.0%)
+2025-07-18 22:16:35,079 - translate_all_articles - INFO - Processing article: 2012-04-11_indien_tag_2.md
+2025-07-18 22:16:35,082 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:16:35,723 - translate_all_articles - DEBUG - • Translation already up to date: 2012-04-11_indien_tag_2-DE.md
+2025-07-18 22:16:35,723 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:16:36,371 - translation_service.service - DEBUG - Translating content from de to fr
+2025-07-18 22:16:52,148 - translate_all_articles - INFO - ✓ Created/updated translation: 2012-04-11_indien_tag_2-FR.md
+2025-07-18 22:16:53,154 - translate_all_articles - INFO - Progress: 5/50 (10.0%)
+2025-07-18 22:16:53,154 - translate_all_articles - INFO - Processing article: 2013-06-14-welche-ist-die-schonste-bibliothek-munchens.md
+2025-07-18 22:16:53,156 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:16:53,734 - translate_all_articles - DEBUG - • Translation already up to date: 2013-06-14-welche-ist-die-schonste-bibliothek-munchens-DE.md
+2025-07-18 22:16:53,735 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:16:54,395 - translation_service.service - DEBUG - Translating content from de to fr
+2025-07-18 22:17:06,704 - translate_all_articles - INFO - ✓ Created/updated translation: 2013-06-14-welche-ist-die-schonste-bibliothek-munchens-FR.md
+2025-07-18 22:17:07,708 - translate_all_articles - INFO - Progress: 6/50 (12.0%)
+2025-07-18 22:17:07,708 - translate_all_articles - INFO - Processing article: 2015-05-29-friday-night.md
+2025-07-18 22:17:07,709 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:17:08,281 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:17:23,902 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-05-29-friday-night-DE.md
+2025-07-18 22:17:24,904 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:17:25,523 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:17:58,200 - translate_all_articles - INFO - Initialized SystematicTranslator
+2025-07-18 22:17:58,200 - translate_all_articles - INFO - Content directory: content
+2025-07-18 22:17:58,200 - translate_all_articles - INFO - Target languages: ['de', 'fr']
+2025-07-18 22:17:58,200 - translate_all_articles - INFO - Dry run: False
+2025-07-18 22:17:58,200 - translate_all_articles - INFO - Max workers: 1
+2025-07-18 22:17:58,200 - translate_all_articles - INFO - Starting systematic translation of all articles
+2025-07-18 22:17:58,205 - translate_all_articles - INFO - Found 50 articles to process
+2025-07-18 22:17:58,205 - translate_all_articles - INFO - Processing article: 2010-04-01-crowdsourcing-angebot.md
+2025-07-18 22:17:58,206 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:17:59,696 - translate_all_articles - DEBUG - • Translation already up to date: 2010-04-01-crowdsourcing-angebot-DE.md
+2025-07-18 22:17:59,696 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:17:59,696 - translate_all_articles - INFO - Progress: 1/50 (2.0%)
+2025-07-18 22:17:59,696 - translate_all_articles - INFO - Processing article: 2010-07-29-proxy-for-offline-surfing.md
+2025-07-18 22:17:59,701 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:17:59,701 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:17:59,701 - translate_all_articles - INFO - Progress: 2/50 (4.0%)
+2025-07-18 22:17:59,701 - translate_all_articles - INFO - Processing article: 2011-03-31-ipad-hologram.md
+2025-07-18 22:17:59,704 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:17:59,704 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:17:59,704 - translate_all_articles - INFO - Progress: 3/50 (6.0%)
+2025-07-18 22:17:59,704 - translate_all_articles - INFO - Processing article: 2012-04-10_indien_tag_1.md
+2025-07-18 22:17:59,707 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:18:00,413 - translate_all_articles - DEBUG - • Translation already up to date: 2012-04-10_indien_tag_1-DE.md
+2025-07-18 22:18:00,413 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:18:00,413 - translate_all_articles - INFO - Progress: 4/50 (8.0%)
+2025-07-18 22:18:00,413 - translate_all_articles - INFO - Processing article: 2012-04-11_indien_tag_2.md
+2025-07-18 22:18:00,416 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:18:01,164 - translate_all_articles - DEBUG - • Translation already up to date: 2012-04-11_indien_tag_2-DE.md
+2025-07-18 22:18:01,165 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:18:01,165 - translate_all_articles - INFO - Progress: 5/50 (10.0%)
+2025-07-18 22:18:01,165 - translate_all_articles - INFO - Processing article: 2013-06-14-welche-ist-die-schonste-bibliothek-munchens.md
+2025-07-18 22:18:01,169 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:18:01,781 - translate_all_articles - DEBUG - • Translation already up to date: 2013-06-14-welche-ist-die-schonste-bibliothek-munchens-DE.md
+2025-07-18 22:18:01,781 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:18:01,781 - translate_all_articles - INFO - Progress: 6/50 (12.0%)
+2025-07-18 22:18:01,782 - translate_all_articles - INFO - Processing article: 2015-05-29-friday-night.md
+2025-07-18 22:18:01,784 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:18:01,784 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:18:02,418 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:18:16,119 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-05-29-friday-night-FR.md
+2025-07-18 22:18:17,122 - translate_all_articles - INFO - Progress: 7/50 (14.0%)
+2025-07-18 22:18:17,122 - translate_all_articles - INFO - Processing article: 2015-06-01-absacker.md
+2025-07-18 22:18:17,124 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:18:17,658 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:18:24,135 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-06-01-absacker-DE.md
+2025-07-18 22:18:25,136 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:18:25,916 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:18:32,671 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-06-01-absacker-FR.md
+2025-07-18 22:18:33,676 - translate_all_articles - INFO - Progress: 8/50 (16.0%)
+2025-07-18 22:18:33,677 - translate_all_articles - INFO - Processing article: 2015-06-01-sugar-cane.md
+2025-07-18 22:18:33,679 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:18:34,443 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:18:37,759 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-06-01-sugar-cane-DE.md
+2025-07-18 22:18:38,761 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:18:39,707 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:18:44,311 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-06-01-sugar-cane-FR.md
+2025-07-18 22:18:45,315 - translate_all_articles - INFO - Progress: 9/50 (18.0%)
+2025-07-18 22:18:45,316 - translate_all_articles - INFO - Processing article: 2015-06-01-vietnamese-fast-food.md
+2025-07-18 22:18:45,319 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:18:45,919 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:18:48,804 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-06-01-vietnamese-fast-food-DE.md
+2025-07-18 22:18:49,810 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:18:50,342 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:18:52,967 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-06-01-vietnamese-fast-food-FR.md
+2025-07-18 22:18:53,971 - translate_all_articles - INFO - Progress: 10/50 (20.0%)
+2025-07-18 22:18:53,971 - translate_all_articles - INFO - Processing article: 2015-06-05-rex-hotel-saigon.md
+2025-07-18 22:18:53,974 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:18:54,795 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:19:04,351 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-06-05-rex-hotel-saigon-DE.md
+2025-07-18 22:19:05,353 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:19:05,869 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:19:14,781 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-06-05-rex-hotel-saigon-FR.md
+2025-07-18 22:19:15,787 - translate_all_articles - INFO - Progress: 11/50 (22.0%)
+2025-07-18 22:19:15,787 - translate_all_articles - INFO - Processing article: 2015-11-30-how-i-moved-to-github-and-jbake.md
+2025-07-18 22:19:15,790 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:19:16,392 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:19:24,617 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-11-30-how-i-moved-to-github-and-jbake-DE.md
+2025-07-18 22:19:25,618 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:19:26,288 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:19:36,541 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-11-30-how-i-moved-to-github-and-jbake-FR.md
+2025-07-18 22:19:37,545 - translate_all_articles - INFO - Progress: 12/50 (24.0%)
+2025-07-18 22:19:37,546 - translate_all_articles - INFO - Processing article: 2015-12-06-playing-with-javascript.md
+2025-07-18 22:19:37,548 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:19:39,207 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:19:46,492 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-06-playing-with-javascript-DE.md
+2025-07-18 22:19:47,495 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:19:48,443 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:20:02,281 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-06-playing-with-javascript-FR.md
+2025-07-18 22:20:03,287 - translate_all_articles - INFO - Progress: 13/50 (26.0%)
+2025-07-18 22:20:03,287 - translate_all_articles - INFO - Processing article: 2015-12-09-zipf.md
+2025-07-18 22:20:03,290 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:20:03,979 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:20:09,823 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-09-zipf-DE.md
+2025-07-18 22:20:10,823 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:20:11,445 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:20:13,964 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-09-zipf-FR.md
+2025-07-18 22:20:14,968 - translate_all_articles - INFO - Progress: 14/50 (28.0%)
+2025-07-18 22:20:14,969 - translate_all_articles - INFO - Processing article: 2015-12-16-playing-with-highcharts.md
+2025-07-18 22:20:14,970 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:20:16,087 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:20:19,389 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-16-playing-with-highcharts-DE.md
+2025-07-18 22:20:20,392 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:20:21,797 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:20:24,765 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-16-playing-with-highcharts-FR.md
+2025-07-18 22:20:25,765 - translate_all_articles - INFO - Progress: 15/50 (30.0%)
+2025-07-18 22:20:25,765 - translate_all_articles - INFO - Processing article: 2015-12-19-adding-search-to-static-site.md
+2025-07-18 22:20:25,767 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:20:26,502 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:20:42,850 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-19-adding-search-to-static-site-DE.md
+2025-07-18 22:20:43,856 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:20:44,692 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:21:07,301 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-19-adding-search-to-static-site-FR.md
+2025-07-18 22:21:08,301 - translate_all_articles - INFO - Progress: 16/50 (32.0%)
+2025-07-18 22:21:08,302 - translate_all_articles - INFO - Processing article: 2015-12-26-beautiful-sites.md
+2025-07-18 22:21:08,304 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:21:08,975 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:21:12,269 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-26-beautiful-sites-DE.md
+2025-07-18 22:21:13,273 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:21:14,283 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:21:17,777 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-26-beautiful-sites-FR.md
+2025-07-18 22:21:18,782 - translate_all_articles - INFO - Progress: 17/50 (34.0%)
+2025-07-18 22:21:18,782 - translate_all_articles - INFO - Processing article: 2015-12-27-siteweightwatcher-keeps-your-website-slim.md
+2025-07-18 22:21:18,785 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:21:19,517 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:21:41,782 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-27-siteweightwatcher-keeps-your-website-slim-DE.md
+2025-07-18 22:21:42,787 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:21:43,619 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:22:02,121 - translate_all_articles - INFO - ✓ Created/updated translation: 2015-12-27-siteweightwatcher-keeps-your-website-slim-FR.md
+2025-07-18 22:22:03,126 - translate_all_articles - INFO - Progress: 18/50 (36.0%)
+2025-07-18 22:22:03,126 - translate_all_articles - INFO - Processing article: 2016-01-04-23-sociolog-software.md
+2025-07-18 22:22:03,128 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:22:03,965 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:22:15,604 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-01-04-23-sociolog-software-DE.md
+2025-07-18 22:22:16,609 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:22:17,293 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:22:29,505 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-01-04-23-sociolog-software-FR.md
+2025-07-18 22:22:30,510 - translate_all_articles - INFO - Progress: 19/50 (38.0%)
+2025-07-18 22:22:30,511 - translate_all_articles - INFO - Processing article: 2016-01-04-visited-countries.md
+2025-07-18 22:22:30,512 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:22:31,599 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:22:35,350 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-01-04-visited-countries-DE.md
+2025-07-18 22:22:36,355 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:22:37,203 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:22:41,220 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-01-04-visited-countries-FR.md
+2025-07-18 22:22:42,225 - translate_all_articles - INFO - Progress: 20/50 (40.0%)
+2025-07-18 22:22:42,226 - translate_all_articles - INFO - Processing article: 2016-01-06-the-art-of-command-line.md
+2025-07-18 22:22:42,228 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:22:42,894 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:22:45,789 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-01-06-the-art-of-command-line-DE.md
+2025-07-18 22:22:46,793 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:22:47,404 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:22:51,199 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-01-06-the-art-of-command-line-FR.md
+2025-07-18 22:22:52,205 - translate_all_articles - INFO - Progress: 21/50 (42.0%)
+2025-07-18 22:22:52,205 - translate_all_articles - INFO - Processing article: 2016-01-08-ping-analysis.md
+2025-07-18 22:22:52,206 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:22:53,293 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:23:09,299 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-01-08-ping-analysis-DE.md
+2025-07-18 22:23:10,303 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:23:10,822 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:23:29,309 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-01-08-ping-analysis-FR.md
+2025-07-18 22:23:30,315 - translate_all_articles - INFO - Progress: 22/50 (44.0%)
+2025-07-18 22:23:30,315 - translate_all_articles - INFO - Processing article: 2016-02-13-d3playground.md
+2025-07-18 22:23:30,317 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:23:30,977 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:23:36,742 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-02-13-d3playground-DE.md
+2025-07-18 22:23:37,747 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:23:38,890 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:23:45,958 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-02-13-d3playground-FR.md
+2025-07-18 22:23:46,962 - translate_all_articles - INFO - Progress: 23/50 (46.0%)
+2025-07-18 22:23:46,962 - translate_all_articles - INFO - Processing article: 2016-08-08-my-static-website.md
+2025-07-18 22:23:46,964 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:23:47,608 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:24:17,153 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-08-08-my-static-website-DE.md
+2025-07-18 22:24:18,155 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:24:18,677 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:24:49,598 - translate_all_articles - INFO - ✓ Created/updated translation: 2016-08-08-my-static-website-FR.md
+2025-07-18 22:24:50,600 - translate_all_articles - INFO - Progress: 24/50 (48.0%)
+2025-07-18 22:24:50,601 - translate_all_articles - INFO - Processing article: 2019-04-11-image-encoding-in-node.md
+2025-07-18 22:24:50,602 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:24:51,277 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:25:01,556 - translate_all_articles - INFO - ✓ Created/updated translation: 2019-04-11-image-encoding-in-node-DE.md
+2025-07-18 22:25:02,558 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:25:03,248 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:25:11,926 - translate_all_articles - INFO - ✓ Created/updated translation: 2019-04-11-image-encoding-in-node-FR.md
+2025-07-18 22:25:12,928 - translate_all_articles - INFO - Progress: 25/50 (50.0%)
+2025-07-18 22:25:12,928 - translate_all_articles - INFO - Processing article: 2019-04-15-svg-programming.md
+2025-07-18 22:25:12,929 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:25:13,613 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:25:18,021 - translate_all_articles - INFO - ✓ Created/updated translation: 2019-04-15-svg-programming-DE.md
+2025-07-18 22:25:19,026 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:25:19,677 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:25:24,529 - translate_all_articles - INFO - ✓ Created/updated translation: 2019-04-15-svg-programming-FR.md
+2025-07-18 22:25:25,530 - translate_all_articles - INFO - Progress: 26/50 (52.0%)
+2025-07-18 22:25:25,531 - translate_all_articles - INFO - Processing article: 2019-11-08-markdown-editors.md
+2025-07-18 22:25:25,533 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:25:26,721 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:25:33,824 - translate_all_articles - INFO - ✓ Created/updated translation: 2019-11-08-markdown-editors-DE.md
+2025-07-18 22:25:34,828 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:25:35,316 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:25:43,298 - translate_all_articles - INFO - ✓ Created/updated translation: 2019-11-08-markdown-editors-FR.md
+2025-07-18 22:25:44,300 - translate_all_articles - INFO - Progress: 27/50 (54.0%)
+2025-07-18 22:25:44,300 - translate_all_articles - INFO - Processing article: 2019-11-17-tips-for-travelling-vietnam.md
+2025-07-18 22:25:44,301 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:25:45,158 - translate_all_articles - DEBUG - • Translation already up to date: 2019-11-17-tips-for-travelling-vietnam-DE.md
+2025-07-18 22:25:45,158 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:25:45,982 - translation_service.service - DEBUG - Translating content from de to fr
+2025-07-18 22:26:26,010 - translate_all_articles - INFO - ✓ Created/updated translation: 2019-11-17-tips-for-travelling-vietnam-FR.md
+2025-07-18 22:26:27,016 - translate_all_articles - INFO - Progress: 28/50 (56.0%)
+2025-07-18 22:26:27,016 - translate_all_articles - INFO - Processing article: 2020-02-06-setting-up-my-terminal.md
+2025-07-18 22:26:27,017 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:26:27,560 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:26:47,009 - translate_all_articles - INFO - ✓ Created/updated translation: 2020-02-06-setting-up-my-terminal-DE.md
+2025-07-18 22:26:48,013 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:26:48,943 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:27:13,635 - translate_all_articles - INFO - ✓ Created/updated translation: 2020-02-06-setting-up-my-terminal-FR.md
+2025-07-18 22:27:14,639 - translate_all_articles - INFO - Progress: 29/50 (58.0%)
+2025-07-18 22:27:14,639 - translate_all_articles - INFO - Processing article: 2020-06-11-mac-recording-screen-sound.md
+2025-07-18 22:27:14,642 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:27:15,231 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:27:35,293 - translate_all_articles - INFO - ✓ Created/updated translation: 2020-06-11-mac-recording-screen-sound-DE.md
+2025-07-18 22:27:36,298 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:27:37,053 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:27:54,792 - translate_all_articles - INFO - ✓ Created/updated translation: 2020-06-11-mac-recording-screen-sound-FR.md
+2025-07-18 22:27:55,797 - translate_all_articles - INFO - Progress: 30/50 (60.0%)
+2025-07-18 22:27:55,797 - translate_all_articles - INFO - Processing article: 2020-12-28-my-notes-from-rc3-2020.md
+2025-07-18 22:27:55,800 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:27:56,437 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:28:13,724 - translate_all_articles - INFO - ✓ Created/updated translation: 2020-12-28-my-notes-from-rc3-2020-DE.md
+2025-07-18 22:28:14,731 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:28:15,331 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:28:43,276 - translate_all_articles - INFO - ✓ Created/updated translation: 2020-12-28-my-notes-from-rc3-2020-FR.md
+2025-07-18 22:28:44,277 - translate_all_articles - INFO - Progress: 31/50 (62.0%)
+2025-07-18 22:28:44,277 - translate_all_articles - INFO - Processing article: 2021-01-24-testing-dried-mango.md
+2025-07-18 22:28:44,281 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:28:44,939 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:28:50,629 - translate_all_articles - INFO - ✓ Created/updated translation: 2021-01-24-testing-dried-mango-DE.md
+2025-07-18 22:28:51,638 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:28:52,286 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:28:59,211 - translate_all_articles - INFO - ✓ Created/updated translation: 2021-01-24-testing-dried-mango-FR.md
+2025-07-18 22:29:00,222 - translate_all_articles - INFO - Progress: 32/50 (64.0%)
+2025-07-18 22:29:00,222 - translate_all_articles - INFO - Processing article: 2021-09-04-named-volumes-with-docker-compose.md
+2025-07-18 22:29:00,225 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:29:00,737 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:29:13,722 - translate_all_articles - INFO - ✓ Created/updated translation: 2021-09-04-named-volumes-with-docker-compose-DE.md
+2025-07-18 22:29:14,729 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:29:15,390 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:29:30,275 - translate_all_articles - INFO - ✓ Created/updated translation: 2021-09-04-named-volumes-with-docker-compose-FR.md
+2025-07-18 22:29:31,281 - translate_all_articles - INFO - Progress: 33/50 (66.0%)
+2025-07-18 22:29:31,281 - translate_all_articles - INFO - Processing article: 2021-12-03-life-is-good-cycling-to-work.md
+2025-07-18 22:29:31,284 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:29:31,933 - translation_service.service - DEBUG - Translating content from en to de
+2025-07-18 22:29:36,690 - translate_all_articles - INFO - ✓ Created/updated translation: 2021-12-03-life-is-good-cycling-to-work-DE.md
+2025-07-18 22:29:37,700 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:29:38,738 - translation_service.service - DEBUG - Translating content from en to fr
+2025-07-18 22:29:44,247 - translate_all_articles - INFO - ✓ Created/updated translation: 2021-12-03-life-is-good-cycling-to-work-FR.md
+2025-07-18 22:29:45,253 - translate_all_articles - INFO - Progress: 34/50 (68.0%)
+2025-07-18 22:29:45,253 - translate_all_articles - INFO - Processing article: 2022-09-02-ceciles-bester-witz.md
+2025-07-18 22:29:45,256 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:29:45,801 - translate_all_articles - DEBUG - • Translation already up to date: 2022-09-02-ceciles-bester-witz-DE.md
+2025-07-18 22:29:45,801 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:29:46,313 - translation_service.service - DEBUG - Translating content from de to fr
+2025-07-18 22:29:47,856 - translate_all_articles - INFO - ✓ Created/updated translation: 2022-09-02-ceciles-bester-witz-FR.md
+2025-07-18 22:29:48,861 - translate_all_articles - INFO - Progress: 35/50 (70.0%)
+2025-07-18 22:29:48,861 - translate_all_articles - INFO - Processing article: 2022-09-12-noch-ein-guter-von-cecile.md
+2025-07-18 22:29:48,865 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:29:52,002 - translate_all_articles - DEBUG - • Translation already up to date: 2022-09-12-noch-ein-guter-von-cecile-DE.md
+2025-07-18 22:29:52,002 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:29:52,767 - translation_service.service - DEBUG - Translating content from de to fr
+2025-07-18 22:29:54,064 - translate_all_articles - INFO - ✓ Created/updated translation: 2022-09-12-noch-ein-guter-von-cecile-FR.md
+2025-07-18 22:29:55,073 - translate_all_articles - INFO - Progress: 36/50 (72.0%)
+2025-07-18 22:29:55,074 - translate_all_articles - INFO - Processing article: 2023-05-07-double-ai-chat.md
+2025-07-18 22:29:55,077 - translate_all_articles - INFO -   de: translating...
+2025-07-18 22:29:55,631 - translate_all_articles - DEBUG - • Translation already up to date: 2023-05-07-double-ai-chat-DE.md
+2025-07-18 22:29:55,631 - translate_all_articles - INFO -   fr: translating...
+2025-07-18 22:29:56,350 - translation_service.service - DEBUG - Translating content from de to fr
+2025-07-18 22:29:58,847 - translate_all_articles - INFO - ✓ Created/updated translation: 2023-05-07-double-ai-chat-FR.md
+2025-07-18 22:29:59,857 - translate_all_articles - INFO - Progress: 37/50 (74.0%)
+2025-07-18 22:29:59,857 - translate_all_articles - INFO - Processing article: 2024-04-08-setting-up-jupyter-lab-on-mac.md
+2025-07-18 22:29:59,861 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,861 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,861 - translate_all_articles - INFO - Progress: 38/50 (76.0%)
+2025-07-18 22:29:59,862 - translate_all_articles - INFO - Processing article: 2024-11-29-selecting-a-jekyll-theme.md
+2025-07-18 22:29:59,864 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,865 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,865 - translate_all_articles - INFO - Progress: 39/50 (78.0%)
+2025-07-18 22:29:59,865 - translate_all_articles - INFO - Processing article: 2024-12-02-sivananda-prayers.md
+2025-07-18 22:29:59,867 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,868 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,868 - translate_all_articles - INFO - Progress: 40/50 (80.0%)
+2025-07-18 22:29:59,868 - translate_all_articles - INFO - Processing article: 2025-01-15-development-environment-on-mac.md
+2025-07-18 22:29:59,872 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,873 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,873 - translate_all_articles - INFO - Progress: 41/50 (82.0%)
+2025-07-18 22:29:59,873 - translate_all_articles - INFO - Processing article: 2025-02-05-cursor-magic.md
+2025-07-18 22:29:59,877 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,877 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,877 - translate_all_articles - INFO - Progress: 42/50 (84.0%)
+2025-07-18 22:29:59,878 - translate_all_articles - INFO - Processing article: 2025-02-11-solid-comments-in-static-website.md
+2025-07-18 22:29:59,881 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,881 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,881 - translate_all_articles - INFO - Progress: 43/50 (86.0%)
+2025-07-18 22:29:59,881 - translate_all_articles - INFO - Processing article: 2025-03-14-optimal-swimming-slot.md
+2025-07-18 22:29:59,884 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,884 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,884 - translate_all_articles - INFO - Progress: 44/50 (88.0%)
+2025-07-18 22:29:59,884 - translate_all_articles - INFO - Processing article: 2025-03-24-thoughts-on-swift-architecture.md
+2025-07-18 22:29:59,887 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,887 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,887 - translate_all_articles - INFO - Progress: 45/50 (90.0%)
+2025-07-18 22:29:59,887 - translate_all_articles - INFO - Processing article: 2025-04-18-digital-garden.md
+2025-07-18 22:29:59,890 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,890 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,890 - translate_all_articles - INFO - Progress: 46/50 (92.0%)
+2025-07-18 22:29:59,891 - translate_all_articles - INFO - Processing article: 2025-05-04-autocompleting-my-blog.md
+2025-07-18 22:29:59,893 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,893 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,893 - translate_all_articles - INFO - Progress: 47/50 (94.0%)
+2025-07-18 22:29:59,893 - translate_all_articles - INFO - Processing article: 2025-05-06-setting-up-a-mac.md
+2025-07-18 22:29:59,895 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,896 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,896 - translate_all_articles - INFO - Progress: 48/50 (96.0%)
+2025-07-18 22:29:59,896 - translate_all_articles - INFO - Processing article: 2025-05-18-mcp-playground.md
+2025-07-18 22:29:59,898 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,898 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,898 - translate_all_articles - INFO - Progress: 49/50 (98.0%)
+2025-07-18 22:29:59,898 - translate_all_articles - INFO - Processing article: 2025-05-21-beyond-vibe-coding.md
+2025-07-18 22:29:59,900 - translate_all_articles - DEBUG -   de: up to date
+2025-07-18 22:29:59,900 - translate_all_articles - DEBUG -   fr: up to date
+2025-07-18 22:29:59,900 - translate_all_articles - INFO - Progress: 50/50 (100.0%)
+2025-07-18 22:29:59,901 - translate_all_articles - INFO - Translation process completed. Report saved to translation_report.txt

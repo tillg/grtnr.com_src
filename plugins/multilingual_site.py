@@ -170,17 +170,28 @@ class MultilingualContentProcessor:
             # Process translations and add translated articles
             translations = self._find_translations(article)
             logger.debug(f"Found {len(translations)} translations for article '{article.title}': {list(translations.keys())}")
-            for lang, translated_content in translations.items():
-                if lang in self.supported_langs and lang != original_lang:
+            
+            # For each supported language, add either the translation or the original as fallback
+            for lang in self.supported_langs:
+                if lang == original_lang:
+                    continue  # Already added above
+                    
+                if lang in translations:
+                    # Add translation if available
                     try:
-                        # Parse the translated content to get the actual article data
                         logger.debug(f"Processing translation for '{article.title}' in language '{lang}'")
-                        translated_article = self._create_translated_article_from_content(article, translated_content, lang)
+                        translated_article = self._create_translated_article_from_content(article, translations[lang], lang)
                         processed_articles[lang].append(translated_article)
                         logger.debug(f"Added translated article '{translated_article.title}' for language '{lang}'")
                     except Exception as e:
                         logger.warning(f"Failed to process translation for {article.title} in {lang}: {e}")
                         logger.exception("Full exception details:")
+                        # Fall back to original if translation fails
+                        processed_articles[lang].append(article)
+                else:
+                    # Add original article as fallback if no translation available
+                    logger.debug(f"No translation for '{article.title}' in '{lang}', using original")
+                    processed_articles[lang].append(article)
         
         return processed_articles
     
@@ -739,11 +750,72 @@ class MultilingualOutputGenerator:
             logger.error(f"Failed to generate page '{page.title}': {e}")
     
     def generate_language_index(self, writer, lang: str, articles: List[Article], context: Dict, template_getter):
-        """Generate index page for a specific language"""
-        index_save_as = f"{lang}/index.html"
-        
-        # Prepare context for index page with pagination-like structure
+        """Generate index page for a specific language with proper pagination"""
         from types import SimpleNamespace
+        
+        # Get pagination settings
+        pagination_size = self.settings.get('DEFAULT_PAGINATION', 10)
+        
+        if not pagination_size or len(articles) <= pagination_size:
+            # No pagination needed - generate single index page
+            self._generate_single_language_index(writer, lang, articles, context, template_getter)
+            return
+        
+        # Generate paginated index pages
+        total_pages = (len(articles) + pagination_size - 1) // pagination_size
+        
+        for page_num in range(1, total_pages + 1):
+            start_idx = (page_num - 1) * pagination_size
+            end_idx = start_idx + pagination_size
+            page_articles = articles[start_idx:end_idx]
+            
+            # Create pagination object
+            articles_page = SimpleNamespace()
+            articles_page.object_list = page_articles
+            articles_page.has_previous = lambda p=page_num: p > 1
+            articles_page.has_next = lambda p=page_num, t=total_pages: p < t
+            articles_page.previous_page_number = page_num - 1 if page_num > 1 else None
+            articles_page.next_page_number = page_num + 1 if page_num < total_pages else None
+            articles_page.number = page_num
+            
+            # Create previous/next page objects for template
+            if page_num > 1:
+                articles_previous_page = SimpleNamespace()
+                articles_previous_page.url = f"{lang}/index.html" if page_num == 2 else f"{lang}/index{page_num-1}.html"
+            else:
+                articles_previous_page = None
+                
+            if page_num < total_pages:
+                articles_next_page = SimpleNamespace()
+                articles_next_page.url = f"{lang}/index{page_num+1}.html"
+            else:
+                articles_next_page = None
+            
+            # Determine save path
+            if page_num == 1:
+                index_save_as = f"{lang}/index.html"
+            else:
+                index_save_as = f"{lang}/index{page_num}.html"
+            
+            # Prepare context
+            index_context = context.copy()
+            index_context['articles'] = page_articles
+            index_context['articles_page'] = articles_page
+            index_context['articles_previous_page'] = articles_previous_page
+            index_context['articles_next_page'] = articles_next_page
+            
+            writer.write_file(
+                index_save_as,
+                template_getter('index'),
+                index_context,
+                override_output=self.output_path
+            )
+    
+    def _generate_single_language_index(self, writer, lang: str, articles: List[Article], context: Dict, template_getter):
+        """Generate single index page without pagination"""
+        from types import SimpleNamespace
+        
+        index_save_as = f"{lang}/index.html"
         
         # Create a mock pagination object that the template expects
         articles_page = SimpleNamespace()
@@ -757,6 +829,8 @@ class MultilingualOutputGenerator:
         index_context = context.copy()
         index_context['articles'] = articles
         index_context['articles_page'] = articles_page
+        index_context['articles_previous_page'] = None
+        index_context['articles_next_page'] = None
         
         writer.write_file(
             index_save_as,

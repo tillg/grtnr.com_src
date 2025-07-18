@@ -34,9 +34,6 @@ class TranslationConfig:
     exclude_categories: List[str] = field(default_factory=lambda: ["recipes"])
     exclude_paths: List[str] = field(default_factory=lambda: ["/pages/impressum/"])
 
-    # Cache Configuration
-    cache_enabled: bool = True
-    cache_dir: str = "./cache/translations"
 
     # API Behavior
     max_retries: int = 3
@@ -84,7 +81,6 @@ class TranslationConfig:
 
         # Optional configuration
         config.model = os.getenv("TRANSLATION_MODEL", config.model)
-        config.cache_dir = os.getenv("TRANSLATION_CACHE_DIR", config.cache_dir)
         config.timeout = int(os.getenv("TRANSLATION_TIMEOUT", str(config.timeout)))
         config.max_retries = int(
             os.getenv("TRANSLATION_MAX_RETRIES", str(config.max_retries))
@@ -116,9 +112,6 @@ class TranslationConfig:
             config.exclude_paths = [path.strip() for path in exclude_paths.split(",")]
 
         # Boolean flags
-        config.cache_enabled = (
-            os.getenv("TRANSLATION_CACHE_ENABLED", "true").lower() == "true"
-        )
         config.auto_detect_language = (
             os.getenv("TRANSLATION_AUTO_DETECT", "true").lower() == "true"
         )
@@ -153,11 +146,6 @@ class TranslationConfig:
             "TRANSLATION_EXCLUDE_PATHS", config.exclude_paths
         )
 
-        # Cache Configuration
-        config.cache_enabled = settings.get(
-            "TRANSLATION_CACHE_ENABLED", config.cache_enabled
-        )
-        config.cache_dir = settings.get("TRANSLATION_CACHE_DIR", config.cache_dir)
 
         # API Behavior
         config.max_retries = settings.get("TRANSLATION_MAX_RETRIES", config.max_retries)
@@ -266,7 +254,6 @@ class TranslationConfig:
             f"TranslationConfig("
             f"model='{self.model}', "
             f"target_languages={self.target_languages}, "
-            f"cache_enabled={self.cache_enabled}, "
             f"max_retries={self.max_retries}"
             f")"
         )

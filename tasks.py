@@ -275,29 +275,12 @@ def clean_translations(c):
         else:
             print("ℹ️  No translation files found to remove")
             
-        # Also clear translation cache
-        cache_dir = SETTINGS.get("CACHE_PATH", "cache")
-        cache_file = os.path.join(cache_dir, "translation_cache.json")
-        if os.path.exists(cache_file):
-            os.remove(cache_file)
-            print("🗑️  Cleared translation cache")
             
     except Exception as e:
         print(f"❌ Error during cleanup: {e}")
         sys.exit(1)
 
 
-@task
-def clean_translations_cache(c):
-    """Remove only the translation cache file"""
-    cache_dir = SETTINGS.get("CACHE_PATH", "cache")
-    cache_file = os.path.join(cache_dir, "translation_cache.json")
-    
-    if os.path.exists(cache_file):
-        os.remove(cache_file)
-        print("✅ Translation cache cleared")
-    else:
-        print("ℹ️  No translation cache found")
 
 
 def prepare_and_run_pelican(cmd):

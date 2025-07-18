@@ -1,22 +1,22 @@
 ---
 date: 2025-03-24
 image: developer_podcast.jpg
-excerpt: "Ich habe einen interessanten Podcast darüber gehört, wie man verschiedene Modelltypen in Swift strukturiert: Domain-Modelle, die meine interne Repräsentation sind, Datenmodelle (oder DTOs), die die externe Repräsentation sind, und View-Modelle, die die Repräsentation für die Benutzeroberfläche sind. Aber viele Aspekte sind mir noch unklar."
+excerpt: "Ich habe einen interessanten Podcast darüber gehört, wie man verschiedene Modelltypen in Swift strukturiert: Domain-Modelle, die meine interne Darstellung sind, Datenmodelle (oder DTOs), die die externe Darstellung sind, und View-Modelle, die die Darstellung für die Benutzeroberfläche sind. Aber viele Aspekte sind mir noch unklar."
 translation: de
 source_language: en
-translator: gpt-4o
-translate_date: 2025-07-09T14:55:33.428588
-source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-03-24-thoughts-on-swift-architecture/2025-03-24-thoughts-on-swift-architecture.md
-generated_by: automatic-translation-plugin
+source_hash: e5f70dbd927f7137061d6c631f9bd7ef414c3992a3c494fd9f1f3ccce95df6a3
+translator: gpt-4o-2024-08-06
+translate_date: 2025-07-18T21:55:20.918187
+generated_by: simplified-translation-system
 ---
 
 [TOC]
 
-Ich habe gestern einen wirklich interessanten Podcast darüber gehört, wie man verschiedene Modelltypen in Swift strukturiert: Domain-Modelle, die meine interne Repräsentation sind, Datenmodelle (oder DTOs), die die externe Repräsentation sind, und View-Modelle, die die Repräsentation für meine Benutzeroberfläche sind:
+Ich habe gestern einen wirklich netten Podcast darüber gehört, wie man verschiedene Modelltypen in Swift strukturiert: Domain-Modelle, die meine interne Darstellung sind, Datenmodelle (oder DTOs), die die externe Darstellung sind, und View-Modelle, die die Darstellung für meine Benutzeroberfläche sind:
 
 [![Entwickler-Podcast](developer_podcast.jpg)](https://podcasts.apple.com/de/podcast/developer-podcast/id1467065787?i=1000698509743)
 
-Dieser Beitrag ist im Grunde eine Frage, die ich dem [Discord, der zum Podcast gehört](https://discord.com/invite/j57uchzUa9), hinzugefügt habe.
+Dieser Beitrag ist im Grunde eine Frage, die ich dem [Discord, das zum Podcast gehört](https://discord.com/invite/j57uchzUa9), hinzugefügt habe.
 
 # Frage
 
@@ -24,7 +24,7 @@ Ich bin ein Swift-Anfänger, und viele Aspekte sind mir noch unklar. Basierend a
 
 ## Domain-Modelle, Datenmodelle und Mapper
 
-Das Beispiel ist eine ToDo-App und die Haupteinheit ist die **Aufgabe**. Also hätte ich ein Domain-Modell `Task`, das so aussieht:
+Das Beispiel ist eine ToDo-App und somit ist die Haupteinheit die **Aufgabe**. Also hätte ich ein Domain-Modell `Task`, das so aussieht:
 
 ```swift
 struct Task {
@@ -36,7 +36,7 @@ struct Task {
 }
 ```
 
-Da ich meine Aufgaben in CloudKit speichern möchte, benötige ich ein Datenmodell, das mit CloudKit kompatibel ist. Also brauche ich `CKRecord`-Objekte, die Aufgaben darstellen. Meinem Verständnis nach werden sie so aufgebaut:
+Da ich meine Aufgaben in CloudKit speichern möchte, benötige ich ein Datenmodell, das mit CloudKit kompatibel ist. Daher benötige ich `CKRecord`-Objekte, die Aufgaben darstellen. Meinem Verständnis nach werden sie so aufgebaut:
 
 ```swift
 func mapTaskToCKRecord(task: Task) -> CKRecord {
@@ -50,7 +50,7 @@ func mapTaskToCKRecord(task: Task) -> CKRecord {
 }
 ```
 
-Und ich hätte die entsprechende Funktion, um einen `CKRecord` zurück in eine `Task` zu konvertieren:
+Und ich hätte die entsprechende Funktion, um ein `CKRecord` zurück zu einer `Task` zu konvertieren:
 
 ```swift
 func mapCKRecordToTask(record: CKRecord) -> Task {
@@ -65,8 +65,8 @@ func mapCKRecordToTask(record: CKRecord) -> Task {
 
 Fragen:
 
-- **Wo** platziere ich die Mapping-Funktionen? Sind sie Teil des Domain-Modells oder des Datenmodells? Ich vermute, sie gehören eher zum Datenmodell.
-- **Fehler**: Wie gehe ich mit Fehlern um? Zum Beispiel, wenn der `CKRecord` keinen Wert für `id` enthält, würde es zu einem Absturz kommen. Sollte ich Optionals verwenden oder einen Fehler werfen?
+- **Wo** platziere ich die Mapping-Funktionen? Gehören sie zum Domain-Modell oder zum Datenmodell? Ich vermute, sie gehören eher zum Datenmodell.
+- **Fehler**: Wie gehe ich mit Fehlern um? Zum Beispiel, wenn das `CKRecord` keinen Wert für `id` enthält, würde ich einen Absturz bekommen. Sollte ich Optionals verwenden oder einen Fehler werfen?
 
 ## Repository
 
@@ -83,12 +83,12 @@ protocol TaskRepository {
 }
 ```
 
-Und basierend auf diesem Protokoll könnte ich ein `TaskRepositoryCloudKit` implementieren, das die Mapping-Funktionen verwendet, um zwischen Domain- und Datenmodellen zu konvertieren und alle CRUD-Operationen, die im (Speicher-)TaskRepository durchgeführt werden, in der CloudKit-Datenbank widerspiegelt.
+Und basierend auf diesem Protokoll könnte ich ein `TaskRepositoryCloudKit` implementieren, das die Mapping-Funktionen nutzt, um zwischen Domain- und Datenmodellen zu konvertieren und alle CRUD-Operationen, die im (im Speicher) TaskRepository durchgeführt werden, in der CloudKit-Datenbank widerspiegelt.
 
 Nächste Frage:
 
-- **Repository-Funktionen**: Typischerweise würde ich Funktionen aus einem Repository erstellen, die über CRUD hinausgehen. Zum Beispiel ein `getTasksDateRange`, das das älteste und das neueste Fälligkeitsdatum zurückgibt. Wo würde ich das einbauen? Ich möchte es nicht in `TaskRepositoryCloudKit` einbauen, da es dieselbe Logik wäre, wenn ein anderer Speicher verwendet wird (d.h. alle Aufgaben in den Speicher laden, sortieren und die erste und letzte zurückgeben). Da ich keine Funktionen in einem Protokoll haben kann, wo platziere ich es?
-- **Benennung**: Ist die von mir vorgeschlagene Benennung sinnvoll? Ist es so, wie Sie es in Swift machen würden? Ich habe `TaskRepositoryCloudKit` gewählt, damit es im Xcode-Dateibrowser neben dem `TaskRepository` aufgelistet wird. Wenn ich andere Datenmodelle benötige, um ein System Xyz zu integrieren, würde ich sie `TaskRawXyz` nennen - ist das sinnvoll?
+- **Repository-Funktionen**: Typischerweise würde ich Funktionen aus einem Repository erstellen, die über CRUD hinausgehen. Zum Beispiel ein `getTasksDateRange`, das das älteste und das neueste Fälligkeitsdatum zurückgibt. Wo würde ich das erstellen? Ich möchte es nicht in `TaskRepositoryCloudKit` setzen, da es die gleiche Logik wäre, wenn ein anderer Speicher verwendet wird (d.h. alle Aufgaben in den Speicher laden, sie sortieren und die erste und letzte zurückgeben). Da ich keine Funktionen in einem Protokoll haben kann, wo platziere ich es?
+- **Benennung**: Ist die von mir vorgeschlagene Benennung sinnvoll? Ist es so, wie Sie es in Swift machen würden? Ich habe `TaskRepositoryCloudKit` gewählt, damit es neben dem `TaskRepository` im Xcode-Dateibrowser aufgelistet wird. Wenn ich andere Datenmodelle benötigen würde, um ein System Xyz zu integrieren, würde ich sie `TaskRawXyz` nennen - ist das sinnvoll?
 
 # Antwort
 
@@ -96,7 +96,7 @@ Ich habe eine großartige [Antwort](https://discord.com/channels/102883440737465
 
 Hier ist Cocoatypes Antwort zur Referenz:
 
-> **Wo** platziere ich die Mapping-Funktionen? Sind sie Teil des Domain-Modells oder des Datenmodells? Ich vermute, sie gehören eher zum Datenmodell.
+> **Wo** platziere ich die Mapping-Funktionen? Gehören sie zum Domain-Modell oder zum Datenmodell? Ich vermute, sie gehören eher zum Datenmodell.
 > Ich würde diese im Repository oder in einem Hilfstyp für das Repository platzieren. Zum Beispiel habe ich in meiner App Barc ein `BarcodeRepository`-Protokoll und ein `FileBarcodeRepository`, das SwiftData verwendet. Hier ist ein kleiner Überblick, wie das aussieht:
 
 ```swift
@@ -147,11 +147,11 @@ struct BarcodeModelMapper {
 }
 ```
 
-> **Fehler**: Wie gehe ich mit Fehlern um? Zum Beispiel, wenn der CKRecord keinen Wert für id enthält, würde es zu einem Absturz kommen. Sollte ich Optionals verwenden oder einen Fehler werfen?
+> **Fehler**: Wie gehe ich mit Fehlern um? Zum Beispiel, wenn das CKRecord keinen Wert für id enthält, würde ich einen Absturz bekommen. Sollte ich Optionals verwenden oder einen Fehler werfen?
 
-Ich persönlich werfe Fehler und gehe mit ihnen auf der Ebene um, auf der es sinnvoll ist, mit ihnen umzugehen. Optionals sind in Ordnung, wenn etwas tatsächlich optional ist, aber denken Sie daran, dass Sie hier versuchen, zu vermeiden, dass Sie mit API-Einschränkungen in Ihrem View-Code umgehen müssen. Ich würde also nichts optional machen, nur um Fehler zu vermeiden.
+Ich persönlich werfe Fehler und gehe auf der Ebene damit um, auf der es sinnvoll ist, damit umzugehen. Optionals sind in Ordnung, wenn etwas tatsächlich optional ist, aber denken Sie daran, dass Sie hier versuchen, zu vermeiden, dass Sie mit API-Einschränkungen in Ihrem View-Code umgehen müssen. Ich würde also nichts optional machen, nur um Fehler zu vermeiden.
 
-> **Repository-Funktionen**: Typischerweise würde ich Funktionen aus einem Repository erstellen, die über CRUD hinausgehen. Zum Beispiel ein getTasksDateRange, das das älteste und das neueste Fälligkeitsdatum zurückgibt. Wo würde ich das einbauen? Ich möchte es nicht in TaskRepositoryCloudKit einbauen, da es dieselbe Logik wäre, wenn ein anderer Speicher verwendet wird (d.h. alle Aufgaben in den Speicher laden, sortieren und die erste und letzte zurückgeben). Da ich keine Funktionen in einem Protokoll haben kann, wo platziere ich es?
+> **Repository-Funktionen**: Typischerweise würde ich Funktionen aus einem Repository erstellen, die über CRUD hinausgehen. Zum Beispiel ein getTasksDateRange, das das älteste und das neueste Fälligkeitsdatum zurückgibt. Wo würde ich das erstellen? Ich möchte es nicht in TaskRepositoryCloudKit setzen, da es die gleiche Logik wäre, wenn ein anderer Speicher verwendet wird (d.h. alle Aufgaben in den Speicher laden, sie sortieren und die erste und letzte zurückgeben). Da ich keine Funktionen in einem Protokoll haben kann, wo platziere ich es?
 
 Wenn Sie etwas über mehrere Implementierungen hinweg haben möchten, verwenden Sie eine Protokollerweiterung. Zum Beispiel:
 
@@ -167,6 +167,6 @@ extension TaskRepository {
 
 Da Sie wissen, dass alle TaskRepository-Implementierungen ein `getAllTasks()` haben, können Sie es in der Erweiterung so verwenden.
 
-> **Benennung**: Ist die von mir vorgeschlagene Benennung sinnvoll? Ist es so, wie Sie es in Swift machen würden? Ich habe TaskRepositoryCloudKit gewählt, damit es im Xcode-Dateibrowser neben dem TaskRepository aufgelistet wird. Wenn ich andere Datenmodelle benötige, um ein System Xyz zu integrieren, würde ich sie TaskRawXyz nennen - ist das sinnvoll
+> **Benennung**: Ist die von mir vorgeschlagene Benennung sinnvoll? Ist es so, wie Sie es in Swift machen würden? Ich habe TaskRepositoryCloudKit gewählt, damit es neben dem TaskRepository im Xcode-Dateibrowser aufgelistet wird. Wenn ich andere Datenmodelle benötigen würde, um ein System Xyz zu integrieren, würde ich sie TaskRawXyz nennen - ist das sinnvoll
 
 Ich persönlich setze den spezifischsten Teil zuerst (BarcodeRepository wird zu FileBarcodeRepository und PreviewBarcodeRepository und StubBarcodeRepository), aber am Ende ist auch in Ordnung. Daran ist nichts Ungewöhnliches.

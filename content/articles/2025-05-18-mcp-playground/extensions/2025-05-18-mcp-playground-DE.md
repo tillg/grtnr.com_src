@@ -1,17 +1,17 @@
 ---
-title: MCP Spielplatz
+title: MCP-Spielwiese
 image: mcp.png
-summary: Notizen über Erkenntnisse und _Verständnisse_ rund um [Model Context Protocol aka _MCP](https://modelcontextprotocol.io/introduction).
-tags: Technik, KI
+summary: Notizen zu Erkenntnissen und _Verständnissen_ rund um das [Model Context Protocol alias _MCP](https://modelcontextprotocol.io/introduction).
+tags: Tech, KI
 translation: de
 source_language: en
-translator: gpt-4o
-translate_date: 2025-07-09T14:55:31.108582
-source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-05-18-mcp-playground/2025-05-18-mcp-playground.md
-generated_by: automatic-translation-plugin
+source_hash: 1c3aa9204681ea87c2ca715d9af8e740b8cb8c72ceb2b9f76e05481d19cc10f3
+translator: gpt-4o-2024-08-06
+translate_date: 2025-07-18T21:51:17.467893
+generated_by: simplified-translation-system
 ---
 
-Notizen über Erkenntnisse und _Verständnisse_ rund um [Model Context Protocol aka _MCP](https://modelcontextprotocol.io/introduction).
+Notizen zu Erkenntnissen und _Verständnissen_ rund um das [Model Context Protocol alias \_MCP](https://modelcontextprotocol.io/introduction).
 
 [TOC]
 
@@ -19,26 +19,26 @@ Notizen über Erkenntnisse und _Verständnisse_ rund um [Model Context Protocol 
 
 Offene Fragen, die ich habe.
 
-- Kann ich Claude mit verschiedenen MCP Server Konfigurationen betreiben? D.h. ich habe eine Konfiguration pro Projekt, sagen wir eine für mein Python-Projekt (mit Zugriff nur auf mein Python-Projektverzeichnis), eine für mein Swift/Xcode-Projekt (mit einem anderen Verzeichnis und anderen Tools).
-- Test: Spielen Sie mit dem MCP Inspector und [Xcode Build MCP Server](https://github.com/cameroncooke/XcodeBuildMCP) herum.
+- Kann ich Claude mit verschiedenen MCP-Server-Konfigurationen ausführen? D.h. ich habe eine Konfiguration pro Projekt, zum Beispiel eine für mein Python-Projekt (einschließlich Zugriff nur auf mein Python-Projektverzeichnis), eine für mein Swift/Xcode-Projekt (mit einem anderen Verzeichnis und anderen Tools).
+- Test: Mit dem MCP Inspector und [Xcode Build MCP Server](https://github.com/cameroncooke/XcodeBuildMCP) experimentieren.
 
 ## Zugriff auf einen MCP-Server
 
-Bei der Suche und schließlich dem Finden eines MCP-Servers für meinen Anwendungsfall finde ich es hilfreich, mit ihnen herumzuspielen, um zu _verstehen_, welche Werkzeuge das LLM erhält. Der einfachste Weg, dies zu tun, ist mit dem [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
+Wenn ich nach einem MCP-Server für meinen Anwendungsfall suche und schließlich einen finde, finde ich es hilfreich, mit ihnen zu experimentieren, um zu _verstehen_, welche Werkzeuge das LLM erhält. Der einfachste Weg, dies zu tun, ist mit dem [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
 
-So geht's:
+Loslegen:
 
 ```bash
 # Stellen Sie sicher, dass Sie eine aktuelle Version von nodeJs installiert haben (in meinem Fall mit nvm)
 nvm use 24
 npx @modelcontextprotocol/inspector node build/index.js
 
-# Es lädt & startet den MCP UI Client und stellt ihn lokal zur Verfügung.
+# Es lädt & startet den MCP UI Client und stellt ihn lokal bereit.
 ```
 
 **Konfiguration**
 
-Der Inspector behält alles, was Sie in die Seitenleiste eingeben, im localStorage, aber für wiederholbare Setups können Sie eine winzige JSON-Datei speichern und die CLI darauf hinweisen:
+Der Inspector speichert alles, was Sie in der Seitenleiste eingeben, in localStorage, aber für wiederholbare Setups können Sie eine kleine JSON-Datei speichern und die CLI darauf verweisen:
 
 ```json
 // mcp.json
@@ -49,25 +49,25 @@ Der Inspector behält alles, was Sie in die Seitenleiste eingeben, im localStora
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/Users/IhrName/Projects", // lesen/schreiben
-        "/Users/IhrName/Notes", // lesen/schreiben
-        "/Users/IhrName/Code" // nur lesen? fügen Sie ',ro' hinzu, wenn Sie Docker verwenden
+        "/Users/yourname/Projects", // lesen/schreiben
+        "/Users/yourname/Notes", // lesen/schreiben
+        "/Users/yourname/Code" // nur lesen? fügen Sie ',ro' hinzu, wenn Sie Docker verwenden
       ]
     }
   }
 }
 ```
 
-Führen Sie dann `npx @modelcontextprotocol/inspector --config ./mcp.json --server filesystem` aus
+Dann führen Sie `npx @modelcontextprotocol/inspector --config ./mcp.json --server filesystem` aus.
 
 ## MCP-Server
 
-MCP-Server, die ich verwendet oder angesehen habe:
+MCP-Server, die ich verwendet oder betrachtet habe:
 
-### Dateisystem MCP Server
+### Filesystem MCP Server
 
-- [Dateisystem MCP Server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
-- Einer der [Referenz-Server](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#-reference-servers)
+- [Filesystem MCP Server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
+- Einer der [Referenzserver](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#-reference-servers)
 
 Hauptkonfiguration:
 
@@ -79,8 +79,8 @@ Hauptkonfiguration:
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/Users/Benutzername/Desktop",
-        "/pfad/zum/anderen/erlaubten/verzeichnis"
+        "/Users/username/Desktop",
+        "/path/to/other/allowed/dir"
       ]
     }
   }
@@ -89,7 +89,7 @@ Hauptkonfiguration:
 
 ## MCP-Server
 
-MCP-Server, die ich getestet habe oder plane zu testen.
+MCP-Server, die ich getestet habe oder testen möchte.
 
 ### Dateisystemzugriff
 
@@ -97,5 +97,5 @@ MCP-Server, die ich getestet habe oder plane zu testen.
 
 ![Xcode Build](xcode_build.png)
 
-- Ermöglicht Xcode Build-Aktionen.
+- Ermöglicht Xcode-Build-Aktionen.
 - https://github.com/cameroncooke/XcodeBuildMCP

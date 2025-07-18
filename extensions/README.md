@@ -34,7 +34,6 @@ extensions/
 ├── translation_service/        # Core translation service
 │   ├── __init__.py
 │   ├── service.py             # Main TranslationService class
-│   ├── cache.py               # Translation caching
 │   ├── config.py              # Configuration management
 │   ├── prompts.py             # Translation prompts
 │   └── exceptions.py          # Custom exceptions
@@ -61,8 +60,6 @@ TRANSLATION_MODEL=gpt-4
 TRANSLATION_TARGET_LANGUAGES=de,fr,es
 TRANSLATION_EXCLUDE_CATEGORIES=recipes,drafts
 TRANSLATION_EXCLUDE_PATHS=/pages/impressum/,/admin/
-TRANSLATION_CACHE_ENABLED=true
-TRANSLATION_CACHE_DIR=./cache/translations
 TRANSLATION_MAX_RETRIES=3
 TRANSLATION_TIMEOUT=30
 ```
@@ -87,9 +84,6 @@ TRANSLATION_MODEL = "gpt-4"
 TRANSLATION_MAX_RETRIES = 3
 TRANSLATION_TIMEOUT = 30
 
-# Cache configuration
-TRANSLATION_CACHE_ENABLED = True
-TRANSLATION_CACHE_DIR = "./cache/translations"
 ```
 
 ## Usage
@@ -225,7 +219,7 @@ The service supports these language codes:
 
 ## Performance Tips
 
-1. **Use Caching**: Keep `TRANSLATION_CACHE_ENABLED=true` for faster rebuilds
+1. **Monitor Performance**: Check translation logs for any API rate limiting issues
 2. **Rate Limiting**: Adjust `TRANSLATION_RATE_LIMIT_DELAY` if hitting API limits
 3. **Exclude Content**: Use exclude settings to skip unnecessary translations
 4. **Model Selection**: Use `gpt-4-turbo` for better performance vs. quality balance
@@ -248,10 +242,10 @@ The service supports these language codes:
    - Review the generated comparison report
    - Adjust prompts in `translation_service/prompts.py`
 
-4. **Cache Problems**
-   - Clear cache: `rm -rf cache/translations/*`
-   - Disable cache temporarily: `TRANSLATION_CACHE_ENABLED=false`
-   - Check cache directory permissions
+4. **Translation Issues**
+   - Check translation logs for API errors
+   - Verify OpenAI API key is valid
+   - Ensure target language is supported
 
 ### Health Check
 

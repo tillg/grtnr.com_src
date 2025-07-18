@@ -1,0 +1,74 @@
+
+========================================
+TRANSLATION COVERAGE REPORT
+========================================
+
+Total articles found: 50
+
+Coverage by Language:
+
+DE:
+  - Up to date: 42/50 (84.0%)
+  - Exists but outdated: 0
+  - Missing: 8
+
+FR:
+  - Up to date: 50/50 (100.0%)
+  - Exists but outdated: 0
+  - Missing: 0
+
+
+Articles needing translation:
+  - 2010-04-01-crowdsourcing-angebot: de:missing
+  - 2012-04-10-indien-tag1: de:missing
+  - 2012-04-11-indien-tag2: de:missing
+  - 2013-06-14-welche-ist-die-schonste-bibliothek-munchens: de:missing
+  - 2019-11-17-tps-for-travelling-vietnam: de:missing
+  - 2022-09-02-ceciles-bester-witz: de:missing
+  - 2022-09-12-noch-ein-guter-von-cecile: de:missing
+  - 2023-05-07-double-ai-chat: de:missing
+
+
+Articles with complete translations (42):
+  - 2010-07-29-proxy-for-offline-surfing
+  - 2011-03-31-ipad-hologram
+  - 2015-05-29-friday-night
+  - 2015-06-01-absacker
+  - 2015-06-01-sugar-cane
+  - 2015-06-01-vietnamese-fast-food
+  - 2015-06-05-rex-hotel-saigon
+  - 2015-11-30-how-i-moved-to-github-and-jbake
+  - 2015-12-06-playing-with-javascript
+  - 2015-12-09-zipf
+  - 2015-12-16-playing-with-highcharts
+  - 2015-12-19-adding-search-to-static-site
+  - 2015-12-26-beautiful-sites
+  - 2015-12-27-siteweightwatcher-keeps-your-website-slim
+  - 2016-01-04-23-sociolog-software
+  - 2016-01-04-visited-countries
+  - 2016-01-06-the-art-of-command-line
+  - 2016-01-08-ping-analysis
+  - 2016-02-13-playing-around-with-d3
+  - 2016-08-08-my-static-website
+  - 2019-04-11-image-ecoding-in-node
+  - 2019-04-15-svg-programming
+  - 2019-11-08-markdown-editors
+  - 2020-02-06-setting-up-my-terminal
+  - 2020-06-11-mac-recording-screen-sound
+  - 2020-12-28-my-notes-from-rc3-2020
+  - 2021-01-24-testing-dried-mango
+  - 2021-09-04-named-volumes-with-docker-compose
+  - 2021-12-03-life-is-good-cycling-to-work
+  - 2024-04-08-setting-up-jupyter-lab-on-mac
+  - 2024-11-29-selecting-a-jekyll-theme
+  - 2024-12-02-sivananda-prayers
+  - 2025-01-15-development-environment-on-mac
+  - 2025-02-05-cursor-magic
+  - 2025-02-11-solid-comments-in-static-website
+  - 2025-03-14-optimal-swimming-slot
+  - 2025-03-24-thoughts-on-swift-architecture
+  - 2025-04-18-digital-garden
+  - 2025-05-04-autocompleting-my-blog
+  - 2025-05-06-setting-up-a-mac
+  - 2025-05-18-mcp-playground
+  - 2025-05-21-beyond-vibe-coding

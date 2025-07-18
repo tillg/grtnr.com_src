@@ -1,20 +1,20 @@
 ---
 date: 2025-01-15
-excerpt: I use different dev tools (Java, Python, Docker...) but I use some of them only rarely. So I forget how I installed them, what version manager I used etc. So this is the note to future me to look it up.
+excerpt: Ich verwende verschiedene Entwicklerwerkzeuge (Java, Python, Docker...), aber einige davon benutze ich nur selten. Daher vergesse ich, wie ich sie installiert habe, welchen Versionsmanager ich verwendet habe usw. Dies ist also die Notiz an mein zukünftiges Ich, um es nachzuschlagen.
 image: dev_tools.png
 tags: Mac
 updates: 2025-05-05
 translation: de
 source_language: en
-translator: gpt-4o
-translate_date: 2025-07-09T14:55:34.789588
-source_file: /Users/tgartner/git/grtnr.com_src/content/articles/2025-01-15-development-environment-on-mac/2025-01-15-development-environment-on-mac.md
-generated_by: automatic-translation-plugin
+source_hash: 7033de83ddf5f709d1c0537cf7c17d163ddf109292658515b549fc5ba7986c8f
+translator: gpt-4o-2024-08-06
+translate_date: 2025-07-18T21:58:16.420848
+generated_by: simplified-translation-system
 ---
 
-![Lustiges Bild von KI](dev_tools.png)
+![Lustiges Bild von AI](dev_tools.png)
 
-Ich bin kein professioneller Entwickler, ich mache es zum Spaß. Und ich mag es, herumzuspielen, neue Technologien zu entdecken und alle möglichen kleinen Dinge zu entwickeln. Manchmal brauche ich Python, manchmal React/Typescript, Java und mehr. Für jedes Entwicklungstool oder jede Sprache gibt es mehrere Optionen, wie man sie installiert und ihre Versionen verwaltet. Da ich dazu neige, Dinge wie "Wie habe ich Python auf diesem Rechner installiert?" zu vergessen, ist dies eine Notiz an mein zukünftiges Ich, die mir sagt, wie ich jedes Entwicklungstool installiert habe.
+Ich bin kein professioneller Entwickler, ich mache es aus Spaß. Und ich mag es, herumzuspielen, neue Technologien zu entdecken und alle möglichen kleinen Dinge zu entwickeln. Manchmal brauche ich Python, manchmal React/Typescript, Java und mehr. Für jedes Entwicklungswerkzeug oder jede Sprache gibt es mehrere Möglichkeiten, wie man sie installieren und ihre Versionen verwalten kann. Da ich dazu neige, Dinge wie "Wie habe ich Python auf diesem Rechner installiert?" zu vergessen, ist dies eine Notiz an mein zukünftiges Ich, die mir sagt, wie ich jedes Entwicklungswerkzeug installiert habe.
 
 Da sich die Art und Weise, wie bestimmte Pakete installiert werden, im Laufe der Zeit ändern kann, werde ich meinen Installationsentscheidungen Daten hinzufügen.
 
@@ -22,15 +22,15 @@ Da sich die Art und Weise, wie bestimmte Pakete installiert werden, im Laufe der
 
 ## Xcode
 
-Xcode ist das grundlegende Entwicklungstool auf dem Mac. Es enthält git und andere grundlegende Werkzeuge und Compiler.
+Xcode ist das grundlegende Entwicklerwerkzeug auf dem Mac. Es enthält git und andere grundlegende Werkzeuge und Compiler.
 
 Ich installiere es aus dem Apple App Store.
 
 ## Terminal
 
-Mein bevorzugtes Terminal ist [iTerm2](https://iterm2.com), und ich installiere es einfach von der Website. Siehe [hier](/setting-up-my-terminal/) für die Konfiguration.
+Mein bevorzugtes Terminal ist [iTerm2](https://iterm2.com), und ich installiere es einfach von der Website. Siehe [hier](/setting-up-my-terminal/), wie ich es konfiguriere.
 
-## zsh Shell
+## zsh shell
 
 Auf einem neuen Mac mache ich Folgendes:
 
@@ -38,7 +38,7 @@ Auf einem neuen Mac mache ich Folgendes:
 # Überprüfen, welche Shell ich habe
 echo "$SHELL"
 
-# Falls es nicht zsh ist, als Standard setzen
+# Falls es nicht zsh ist, als Standard festlegen
 chsh -s "$(which zsh)"
 
 ```
@@ -51,12 +51,12 @@ chsh -s "$(which zsh)"
 
 **Januar 2025:** Ich bin von [Docker Desktop](https://www.docker.com/products/docker-desktop/) zu [Rancher Desktop](https://rancherdesktop.io) gewechselt.
 
-Installationshinweis: Ich habe die Apple Silicon-Version heruntergeladen, das DMG geöffnet und es in mein Anwendungsverzeichnis kopiert. Das einzige Detail, das ich tun musste, war, das Kontrollkästchen "Administrative Access" in den Einstellungen zu aktivieren.
-![alternativer Text](rancher_prefs.png)
+Installationshinweis: Die Apple Silicon-Version heruntergeladen, das DMG geöffnet und es in mein Anwendungsverzeichnis kopiert. Das einzige Detail, das ich tun musste, war das Ankreuzen des "Administrative Access"-Kästchens in den Einstellungen.
+![alt text](rancher_prefs.png)
 
 _Registry_: Ich verwende verschiedene Registries, wenn ich an verschiedenen Projekten arbeite.
 
-_Frage_: Wie konfiguriere ich Docker so, dass es Images aus einer bestimmten Registry zieht?
+_Frage_: Wie konfiguriere ich Docker so, dass es Images aus einem bestimmten Registry zieht?
 
 ## Java
 
@@ -70,13 +70,13 @@ Dies sind die Optionen, die ich gesehen habe:
 **Mini-Cheatsheet**
 
 - `sdk install java 17.0.12-jbr` installiert diese spezifische Java-Version
-- `sdk list java` zeigt alle verfügbaren Java-Versionen (zum Installieren) an
+- `sdk list java` zeigt alle verfügbaren Java-Versionen (zur Installation verfügbar)
 - Um die installierten Java-Versionen aufzulisten:
-  - `sdk offline enable`, so werden nur lokal installierte Versionen aufgelistet
+  - `sdk offline enable`, damit werden nur lokal installierte Versionen aufgelistet
   - `sdk list java`
   - `sdk offline disable`
 - `sdk default java 21.0.6-amzn` setzt diese Version als Standard
-  Um eine Java-Version als Standard in einem Verzeichnis festzulegen, siehe den [Env-Befehl](https://sdkman.io/usage/#env-command)
+  Um eine Java-Version als Standard innerhalb eines Verzeichnisses festzulegen, siehe den [Env-Befehl](https://sdkman.io/usage/#env-command)
 
 ## Maven
 
@@ -119,4 +119,4 @@ pyenv global <version> -- global für Ihr Benutzerkonto auswählen
 
 ## Ruby
 
-Noch nicht darüber nachgedacht. Vermeiden Sie Ruby im Allgemeinen... 😉
+Noch nicht durchdacht. Vermeiden Sie Ruby im Allgemeinen... 😉

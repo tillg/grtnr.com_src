@@ -17,7 +17,6 @@ except ImportError:
     OpenAI = None
 
 from .config import TranslationConfig
-from .cache import TranslationCache
 from .prompts import TranslationPrompts
 from .exceptions import (
     TranslationError,
@@ -263,12 +262,6 @@ class TranslationService:
         self.api_client = TranslationAPIClient(config, self.prompts)
         self.batch_processor = BatchTranslationProcessor(config)
         
-        # Initialize cache if enabled
-        self.cache = None
-        if self.config.cache_enabled:
-            self.cache = TranslationCache(
-                cache_dir=self.config.cache_dir
-            )
         
         # Setup logging
         self.logger = logging.getLogger(__name__)
@@ -282,18 +275,6 @@ class TranslationService:
         if not self.prompts.is_language_supported(target_lang):
             raise LanguageNotSupportedError(target_lang)
         
-        # Check cache first
-        if self.cache:
-            cached_translation = self.cache.get_cached_translation(content, target_lang)
-            if cached_translation:
-                self.logger.debug(f"Cache hit for {target_lang} translation")
-                return TranslationResult(
-                    translation=cached_translation,
-                    source_lang=source_lang,
-                    target_lang=target_lang,
-                    cached=True,
-                    model=self.config.model  # Use configured model for cached results
-                )
         
         # Perform translation via API client
         self.logger.debug(f"Translating content from {source_lang} to {target_lang}")
@@ -301,18 +282,6 @@ class TranslationService:
         try:
             translation, model_info = self.api_client.translate(content, source_lang, target_lang)
             
-            # Cache the translation
-            if self.cache:
-                self.cache.cache_translation(
-                    content=content,
-                    target_lang=target_lang,
-                    translation=translation,
-                    source_lang=source_lang,
-                    metadata={
-                        'model': model_info,
-                        'service_version': '1.0.0'
-                    }
-                )
             
             return TranslationResult(
                 translation=translation,
@@ -338,25 +307,6 @@ class TranslationService:
         """Translate multiple contents in batch"""
         return self.batch_processor.process_batch(contents, source_lang, target_lang, self.translate_content)
     
-    def get_cache_stats(self) -> Dict[str, Any]:
-        """Get cache statistics"""
-        if self.cache:
-            return self.cache.get_cache_stats()
-        return {'cache_enabled': False}
-    
-    def clear_cache(self) -> None:
-        """Clear translation cache"""
-        if self.cache:
-            self.cache.clear_cache()
-            self.logger.info("Translation cache cleared")
-    
-    def cleanup_expired_cache(self) -> int:
-        """Clean up expired cache entries"""
-        if self.cache:
-            removed_count = self.cache.cleanup_expired_cache()
-            self.logger.debug(f"Removed {removed_count} expired cache entries")
-            return removed_count
-        return 0
     
     def health_check(self) -> Dict[str, Any]:
         """Perform health check of the translation service"""
@@ -367,7 +317,6 @@ class TranslationService:
             'checks': {},
             'config': {
                 'model': self.config.model,
-                'cache_enabled': self.config.cache_enabled,
                 'target_languages': self.config.target_languages
             }
         }
@@ -381,15 +330,6 @@ class TranslationService:
             health_status['checks']['api_connectivity'] = f'fail: {e}'
             health_status['status'] = 'unhealthy'
         
-        # Check cache
-        if self.cache:
-            try:
-                cache_stats = self.cache.get_cache_stats()
-                health_status['checks']['cache'] = 'pass'
-                health_status['cache_stats'] = cache_stats
-            except Exception as e:
-                health_status['checks']['cache'] = f'fail: {e}'
-                health_status['status'] = 'unhealthy'
         
         return health_status
     
@@ -398,7 +338,6 @@ class TranslationService:
         return (
             f"TranslationService("
             f"model='{self.config.model}', "
-            f"cache_enabled={self.config.cache_enabled}, "
             f"target_languages={len(self.config.target_languages)}"
             f")"
         )

@@ -201,13 +201,18 @@ MARKDOWN = {
 
 # Translation settings
 TRANSLATION_ENABLED = os.environ.get("TRANSLATION_ENABLED", "false").lower() == "true"
-TRANSLATION_TARGET_LANGUAGES = os.environ.get("TRANSLATION_TARGET_LANGUAGES", "de,fr").split(",")
-TRANSLATION_EXCLUDE_CATEGORIES = os.environ.get("TRANSLATION_EXCLUDE_CATEGORIES", "recipes").split(",")
-TRANSLATION_EXCLUDE_PATHS = os.environ.get("TRANSLATION_EXCLUDE_PATHS", "/pages/impressum/").split(",")
+TRANSLATION_TARGET_LANGUAGES = os.environ.get(
+    "TRANSLATION_TARGET_LANGUAGES", "de,fr"
+).split(",")
+TRANSLATION_EXCLUDE_CATEGORIES = os.environ.get(
+    "TRANSLATION_EXCLUDE_CATEGORIES", "recipes"
+).split(",")
+TRANSLATION_EXCLUDE_PATHS = os.environ.get(
+    "TRANSLATION_EXCLUDE_PATHS", "/pages/impressum/"
+).split(",")
 
 # Additional translation configuration
 TRANSLATION_MODEL = os.environ.get("TRANSLATION_MODEL", "gpt-4")
-TRANSLATION_CACHE_ENABLED = os.environ.get("TRANSLATION_CACHE_ENABLED", "true").lower() == "true"
 TRANSLATION_MAX_RETRIES = int(os.environ.get("TRANSLATION_MAX_RETRIES", "3"))
 TRANSLATION_TIMEOUT = int(os.environ.get("TRANSLATION_TIMEOUT", "30"))
 

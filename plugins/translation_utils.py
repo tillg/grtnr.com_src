@@ -1,0 +1,305 @@
+"""
+Translation utilities for the simplified translation system.
+
+This module provides a simple translate_document function that handles
+translation with hash-based caching directly in the translation files.
+"""
+
+import os
+import sys
+import re
+import hashlib
+from pathlib import Path
+from typing import Optional, Dict, Any
+from datetime import datetime
+
+# Add the extensions directory to the path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'extensions'))
+
+try:
+    from translation_service import TranslationService, TranslationConfig
+    from translation_service.exceptions import TranslationError
+except ImportError as e:
+    TranslationService = None
+    TranslationConfig = None
+    TranslationError = Exception
+
+# Import centralized logging
+try:
+    from logger_config import get_logger
+    logger = get_logger('translation_utils')
+except ImportError:
+    import logging
+    logger = logging.getLogger('translation_utils')
+
+
+def generate_content_hash(content: str) -> str:
+    """Generate SHA-256 hash of content"""
+    return hashlib.sha256(content.encode('utf-8')).hexdigest()
+
+
+def extract_frontmatter_and_content(content: str) -> tuple[dict, str]:
+    """Extract frontmatter and content from markdown"""
+    frontmatter = {}
+    body = content
+    
+    lines = content.split('\n')
+    
+    if lines and lines[0].strip() == '---':
+        # Find end of frontmatter
+        end_marker = None
+        for i, line in enumerate(lines[1:], 1):
+            if line.strip() == '---':
+                end_marker = i
+                break
+        
+        if end_marker:
+            frontmatter_lines = lines[1:end_marker]
+            body = '\n'.join(lines[end_marker + 1:])
+            
+            # Parse frontmatter
+            for line in frontmatter_lines:
+                if ':' in line:
+                    key, value = line.split(':', 1)
+                    frontmatter[key.strip()] = value.strip()
+    
+    return frontmatter, body
+
+
+def create_translation_frontmatter(original_frontmatter: dict, source_lang: str, 
+                                  target_lang: str, source_hash: str, 
+                                  model_name: str = None) -> dict:
+    """Create frontmatter for translation with hash-based caching"""
+    
+    # Start with original frontmatter
+    translation_frontmatter = original_frontmatter.copy()
+    
+    # Add translation-specific metadata
+    translation_frontmatter.update({
+        'translation': target_lang,
+        'source_language': source_lang,
+        'source_hash': source_hash,
+        'translator': model_name or 'gpt-4o',
+        'translate_date': datetime.now().isoformat(),
+        'generated_by': 'simplified-translation-system'
+    })
+    
+    return translation_frontmatter
+
+
+def frontmatter_to_string(frontmatter: dict) -> str:
+    """Convert frontmatter dict to string format"""
+    if not frontmatter:
+        return ""
+    
+    lines = ['---']
+    for key, value in frontmatter.items():
+        lines.append(f"{key}: {value}")
+    lines.append('---')
+    lines.append('')
+    
+    return '\n'.join(lines)
+
+
+def is_translation_up_to_date(target_doc_path: Path, source_hash: str) -> bool:
+    """Check if translation is up to date by comparing source hash"""
+    
+    if not target_doc_path.exists():
+        return False
+    
+    try:
+        with open(target_doc_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        frontmatter, _ = extract_frontmatter_and_content(content)
+        stored_hash = frontmatter.get('source_hash', '')
+        
+        return stored_hash == source_hash
+        
+    except Exception as e:
+        logger.warning(f"Error checking translation freshness: {e}")
+        return False
+
+
+def translate_document(source_doc_path: Path, target_language: str, 
+                      target_doc_path: Path, settings: dict = None) -> bool:
+    """
+    Translate a document from source to target language with hash-based caching.
+    
+    Args:
+        source_doc_path: Path to the source document
+        target_language: Target language code (e.g., 'de', 'fr', 'es')
+        target_doc_path: Path where the translation should be saved
+        settings: Pelican settings dict (optional)
+    
+    Returns:
+        bool: True if translation was created/updated, False if already up to date
+    """
+    
+    # Check if translation is enabled
+    if settings and not settings.get('TRANSLATION_ENABLED', False):
+        logger.debug("Translation is disabled")
+        return False
+    
+    # Check if translation service is available
+    if TranslationService is None:
+        logger.error("Translation service is not available")
+        return False
+    
+    # Read source document
+    try:
+        with open(source_doc_path, 'r', encoding='utf-8') as f:
+            source_content = f.read()
+    except Exception as e:
+        logger.error(f"Failed to read source document {source_doc_path}: {e}")
+        return False
+    
+    # Generate hash of source content
+    source_hash = generate_content_hash(source_content)
+    
+    # Check if translation is up to date
+    if is_translation_up_to_date(target_doc_path, source_hash):
+        logger.debug(f"Translation {target_doc_path} is up to date")
+        return False
+    
+    # Extract frontmatter and content
+    frontmatter, body = extract_frontmatter_and_content(source_content)
+    
+    # Initialize translation service
+    try:
+        if settings:
+            config = TranslationConfig.from_pelican_settings(settings)
+        else:
+            # Use default config
+            config = TranslationConfig()
+        
+        
+        translation_service = TranslationService(config)
+        
+        # Detect source language
+        source_lang = translation_service.detect_language(source_content)
+        
+        # Skip if source and target languages are the same
+        if source_lang == target_language:
+            logger.debug(f"Source and target languages are the same ({source_lang})")
+            return False
+        
+        # Translate content
+        logger.info(f"Translating {source_doc_path} from {source_lang} to {target_language}")
+        
+        # Translate the full content (including frontmatter)
+        result = translation_service.translate_content(
+            source_content, source_lang, target_language
+        )
+        
+        # Clean up any markdown wrapper
+        cleaned_translation = _clean_markdown_wrapper(result.translation)
+        
+        # Extract translated frontmatter and content
+        translated_frontmatter, translated_body = extract_frontmatter_and_content(cleaned_translation)
+        
+        # Update frontmatter with translation metadata
+        final_frontmatter = create_translation_frontmatter(
+            translated_frontmatter, source_lang, target_language, 
+            source_hash, result.model
+        )
+        
+        # Combine frontmatter and content
+        final_content = frontmatter_to_string(final_frontmatter) + translated_body
+        
+        # Ensure target directory exists
+        target_doc_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Write translation
+        with open(target_doc_path, 'w', encoding='utf-8') as f:
+            f.write(final_content)
+        
+        logger.info(f"Created translation: {target_doc_path}")
+        return True
+        
+    except Exception as e:
+        logger.error(f"Translation failed: {e}")
+        return False
+
+
+def _clean_markdown_wrapper(content: str) -> str:
+    """Remove markdown code block wrapper if present"""
+    original_content = content
+    content = content.strip()
+    
+    # Pattern: ```markdown followed by content followed by ```
+    if content.startswith('```markdown'):
+        # Find the closing ```
+        lines = content.split('\n')
+        if len(lines) > 2:
+            # Look for the first closing ``` after the opening
+            for i in range(len(lines) - 1, 0, -1):  # Search backwards
+                if lines[i].strip() == '```':
+                    # Extract content between the markers
+                    inner_content = '\n'.join(lines[1:i])
+                    content = inner_content
+                    logger.debug("Removed ```markdown wrapper from translation")
+                    break
+    
+    # Pattern: ``` followed by content followed by ```
+    elif content.startswith('```') and not content.startswith('```markdown'):
+        lines = content.split('\n')
+        if len(lines) > 2:
+            # Look for the first closing ``` after the opening
+            for i in range(len(lines) - 1, 0, -1):  # Search backwards
+                if lines[i].strip() == '```':
+                    # Extract content between the markers
+                    inner_content = '\n'.join(lines[1:i])
+                    content = inner_content
+                    logger.debug("Removed ``` wrapper from translation")
+                    break
+    
+    content = content.strip()
+    
+    # Log if we cleaned something
+    if content != original_content.strip():
+        logger.debug(f"Cleaned markdown wrapper from translation (original: {len(original_content)} chars, cleaned: {len(content)} chars)")
+    
+    return content
+
+
+def get_translation_path(source_path: Path, target_language: str) -> Path:
+    """Get the path for a translation file"""
+    source_dir = source_path.parent
+    extensions_dir = source_dir / 'extensions'
+    
+    # Get base filename without extension
+    base_name = source_path.stem
+    
+    # Create translation filename
+    translation_filename = f"{base_name}-{target_language.upper()}.md"
+    
+    return extensions_dir / translation_filename
+
+
+def cleanup_old_translations(source_path: Path, target_languages: list) -> None:
+    """Remove translation files that are no longer needed"""
+    source_dir = source_path.parent
+    extensions_dir = source_dir / 'extensions'
+    
+    if not extensions_dir.exists():
+        return
+    
+    base_name = source_path.stem
+    
+    # Find all translation files for this source
+    pattern = f"{base_name}-*.md"
+    translation_files = list(extensions_dir.glob(pattern))
+    
+    # Remove files for languages not in target list
+    for trans_file in translation_files:
+        # Extract language from filename
+        lang_match = re.search(r'-([A-Z]{2})\.md$', trans_file.name)
+        if lang_match:
+            lang = lang_match.group(1).lower()
+            if lang not in target_languages:
+                try:
+                    trans_file.unlink()
+                    logger.info(f"Removed obsolete translation: {trans_file}")
+                except Exception as e:
+                    logger.warning(f"Failed to remove {trans_file}: {e}")

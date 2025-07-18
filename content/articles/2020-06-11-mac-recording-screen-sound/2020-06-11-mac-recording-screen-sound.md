@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Mac: Recording screen & sound"
+title: Mac: Recording screen & sound
 slug: mac-recording-screen-sound
 date_published: 2020-06-11T10:06:49.000Z
 date_updated: 2020-06-11T17:50:04.000Z
@@ -28,7 +28,7 @@ What it does in our case: It creates a new, virtual sound channel that splits th
 
 Also note that you need to reboot your Mac after installing Soundflower.
 
-Once you have Soundflower installed you can create a logical Audio Device that will be slipping the sound stream. To do so, open *Audio MIDI Setup*. It is a macOS utility program located in /Applications/Utilities. You can also start it via Spotlight (hit Cmd + Space) and enter "_Audio Midi"_
+Once you have Soundflower installed you can create a logical Audio Device that will be slipping the sound stream. To do so, open _Audio MIDI Setup_. It is a macOS utility program located in /Applications/Utilities. You can also start it via Spotlight (hit Cmd + Space) and enter "_Audio Midi"_
 
 ![Midi app launch](Screenshot-2020-06-11-at-11.47.25.png)
 
