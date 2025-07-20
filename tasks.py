@@ -116,6 +116,17 @@ def preview(c):
 
 
 @task
+def check_links(c):
+    """Check links in the generated site"""
+    logger.info("Running linkchecker on output directory...")
+    result = c.run("./check-links.sh", warn=True)
+    if result.return_code == 0:
+        logger.info("Link check completed successfully - no broken links found")
+    else:
+        logger.error("Link check failed - broken links found! See linkcheck-errors.txt for details")
+
+
+@task
 def format_py(c):
     """Format Python code with Black and organize imports with isort"""
     logger.info("Running Black formatter...")

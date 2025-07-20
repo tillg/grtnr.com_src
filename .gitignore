@@ -9,6 +9,7 @@ Thumbs.db
 
 output
 test_output
+linkcheck-errors.txt
 
 # Cache files (keep translation cache, ignore others)
 cache/*
