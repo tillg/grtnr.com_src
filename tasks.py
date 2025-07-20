@@ -57,6 +57,7 @@ def clean(c):
 def build(c):
     """Build local version of site"""
     prepare_and_run_pelican("-s {settings_base}".format(**CONFIG))
+    check_links(c)
 
 
 @task
@@ -113,6 +114,7 @@ def preview(c):
     """Build production version of site"""
     # Use pelicanconf.py directly instead of publishconf.py to avoid import issues
     prepare_and_run_pelican("-s " + CONFIG["settings_base"])
+    check_links(c)
 
 
 @task
@@ -124,6 +126,21 @@ def check_links(c):
         logger.info("Link check completed successfully - no broken links found")
     else:
         logger.error("Link check failed - broken links found! See linkcheck-errors.txt for details")
+        # Read and display first few errors for immediate visibility
+        try:
+            with open("linkcheck-errors.txt", "r") as f:
+                lines = f.readlines()
+                error_count = len([line for line in lines if line.startswith(("MISSING:", "ERROR:", "WARNING:"))])
+                logger.error(f"Found {error_count} link issues:")
+                for line in lines[:10]:  # Show first 10 lines
+                    if line.strip() and (line.startswith(("MISSING:", "ERROR:", "WARNING:")) or "That's it" in line):
+                        logger.error(f"  {line.strip()}")
+                if len(lines) > 10:
+                    logger.error(f"  ... and {len(lines) - 10} more issues (see linkcheck-errors.txt)")
+        except FileNotFoundError:
+            logger.error("linkcheck-errors.txt file not found")
+        # Exit with error to fail the build
+        sys.exit(1)
 
 
 @task

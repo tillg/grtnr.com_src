@@ -22,6 +22,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r .devcontainer/requirements.txt
+          # Install linkchecker for link validation
+          sudo apt-get update
+          sudo apt-get install -y linkchecker
 
       - name: Cache translations
         uses: actions/cache@v3
