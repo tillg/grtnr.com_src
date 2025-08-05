@@ -12,6 +12,16 @@ But it's a lot of content, so here are my notes - hopefully in a easy-to-navigat
 
 ## Swift
 
+### Strings
+
+- They are special, and there is a lot to know...
+- This doesn't work:
+
+```swift
+let name = "Paul"
+let firstLetter = name[0]
+```
+
 ### Optionals
 
 - Optionals let us represent the absence of data, which means we’re able to say “this integer has no value” – that’s different from a fixed number such as 0.
@@ -29,19 +39,85 @@ But it's a lot of content, so here are my notes - hopefully in a easy-to-navigat
 
 ## SwiftUI
 
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB)
+- [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
+
 ### Views
 
 - Everything is a view in SwiftUI 😜
 - Running code when a view is shown, using `onAppear()`.
 
+Even `ForEach` is a view, that's why we can write
+
+```swift
+ForEach(0..<5) {
+    Text("Row \($0)")
+}
+```
+
+Note: We can't write `ForEach(0..<5)`, because `ForEach`expects a `Range<Int>`, not a `ClosedRange<Int>`!
+
 ### Data Entry
 
-- `Stepper` for numbers
+#### `Stepper`
+
+![Stepper](stepper.png)
+A stepper is a two-segment control that people use to increase or decrease an incremental value.
+
+```swift
+@State private var count: Int = 0
+
+var body: some View {
+    Stepper("\(count)",
+        value: $count,
+        in: 0...100
+    )
+}
+```
+
 - `DatePicker` for Dates. Using the `displayedComponents` parameter to control dates or times.
+- `Form`
+- `Picker`
+- Navigation Bar
+-
 
 ### Lists
 
 Building scrolling tables of data using `List`, in particular how it can create rows directly from arrays of data.
+
+### Images
+
+```swift
+struct ContentView: View
+{
+var body: some View {
+Image (example)
+    .resizable ()
+    .scaledToFit ()
+    .frame(width: 300, height: 300)}
+}
+```
+
+![alt text](image.png)
+
+Replace `ScaledToFit` by `ScaledToFill` and get
+
+![alt text](image-1.png)
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        Image (•example)
+            .resizable ()
+            .scaledToFit()
+            .containerRelativeFrame(horizontal) { size, axis in
+            size * 0.8
+            ｝
+    }
+}
+```
+
+![alt text](image-2.png)
 
 ### Bundle
 
@@ -63,3 +139,8 @@ Covered in [Day 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO I 
 - Crashing your code with `fatalError()`, and why that might actually be a good thing.
 - How to check whether a string is spelled correctly, using `UITextChecker` (it's a messy beast).
 - Using `DragGesture()` to let the user move views around, then snapping them back to their original location.
+- Bundles: How to put a file `whatever.txt` in your bundle, how to access (i.e. read it). File names need to be unique throughout a bundle.
+
+## Questions
+
+- What are the differences between a `Form` and a `VStack` ?
