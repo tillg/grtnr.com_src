@@ -10,17 +10,9 @@ In June 2025 I started working thru [100 Days of SwiftUI](https://www.hackingwit
 
 But it's a lot of content, so here are my notes - hopefully in a easy-to-navigate cheatsheet format. I have a rough structure in mind, but I will only fill in the content when I need it. So don't expect a complete overview!
 
+[TOC]
+
 ## Swift
-
-### Strings
-
-- They are special, and there is a lot to know...
-- This doesn't work:
-
-```swift
-let name = "Paul"
-let firstLetter = name[0]
-```
 
 ### Optionals
 
@@ -32,6 +24,33 @@ let firstLetter = name[0]
 - The nil coalescing operator, ??, unwraps and returns an optional’s value, or uses a default value instead.
 - Optional chaining lets us read an optional inside another optional with a convenient syntax.
 - If a function might throw errors, you can convert it into an optional using try? – you’ll either get back the function’s return value, or nil if an error is thrown.
+
+### Protocols and Extensions
+
+```swift
+protocol Vehicle {
+    func estimateTime(for distance: Int) -> Int
+    func travel(distance: Int)
+}
+```
+
+```swift
+extension String {
+    func trimmed() -> String {
+        self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+```
+
+### Strings
+
+- They are special, and there is a lot to know...
+- This doesn't work:
+
+```swift
+let name = "Paul"
+let firstLetter = name[0]
+```
 
 ### Dates
 
@@ -56,6 +75,30 @@ ForEach(0..<5) {
 ```
 
 Note: We can't write `ForEach(0..<5)`, because `ForEach`expects a `Range<Int>`, not a `ClosedRange<Int>`!
+
+#### `ForEach` View
+
+`FotEach` is a view, that is made up the sub-views created in every loop instance.
+
+We typically use it to create sub-views based on a counter or an array.
+
+`ForEach` with an array:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+  let items = ["Apple", "Banana", "Cherry"]
+
+  var body: some View {
+    List {
+      ForEach(items, id: \.self) { item in
+        Text(item)
+      }
+    }
+  }
+}
+```
 
 ### Data Entry
 
@@ -118,6 +161,8 @@ struct ContentView: View {
 ```
 
 ![alt text](image-2.png)
+
+### Toolbar
 
 ### Bundle
 
