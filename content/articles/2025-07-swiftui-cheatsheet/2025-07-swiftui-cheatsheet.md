@@ -14,6 +14,10 @@ But it's a lot of content, so here are my notes - hopefully in a easy-to-navigat
 
 ## Swift
 
+For an all in overview, see [Learn essential Swift in one hour](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
+
+In the following chapter I have just added the parts I needed to check on at least once.
+
 ### Optionals
 
 - Optionals let us represent the absence of data, which means we’re able to say “this integer has no value” – that’s different from a fixed number such as 0.
@@ -42,6 +46,59 @@ extension String {
 }
 ```
 
+### Arrays & sorting
+
+All arrays have built-in `sort()` and `sorted()` methods that can be used to sort the array.
+
+- `sort()` sorts the array in-place
+- `sorted()` returns a new, sorted array.
+
+If the array is simple you can just call `sort()` directly, like this, to sort an array in place:
+
+```swift
+var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
+names.sort()
+```
+
+If you have more complex structs, you need to pass along the comparison:
+
+```swift
+struct User {
+    var firstName: String
+}
+
+var users = [
+    User(firstName: "Jemima"),
+    User(firstName: "Peter"),
+    User(firstName: "David"),
+    User(firstName: "Kelly"),
+    User(firstName: "Isabella")
+]
+
+users.sort {
+    $0.firstName < $1.firstName
+}
+```
+
+We can make our own types conform to `Comparable`, and when we do so we also get a `sorted()` method with no parameters. This takes two steps:
+
+1. Add the `Comparable` conformance to the definition of User.
+2. Add a method called `<` that takes two users and returns true if the first should be sorted before the second.
+
+Here’s how that looks in code:
+
+```swift
+struct User: Identifiable, Comparable {
+    let id = UUID()
+    var firstName: String
+    var lastName: String
+
+    static func <(lhs: User, rhs: User) -> Bool {
+        lhs.lastName < rhs.lastName
+    }
+}
+```
+
 ### Strings
 
 - They are special, and there is a lot to know...
@@ -58,7 +115,7 @@ let firstLetter = name[0]
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB)
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) is a nice tool to navigate and play around the different Views & components.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
 ### Views
