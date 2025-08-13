@@ -18,14 +18,45 @@ For an all in overview, see [Learn essential Swift in one hour](https://www.hack
 
 In the following chapter I have just added the parts I needed to check on at least once.
 
+### `struct` & computed properties
+
+```swift
+struct Employee {
+    let name: String
+    var vacationAllocated = 14
+    var vacationTaken = 0
+
+    var vacationRemaining: Int {
+        vacationAllocated - vacationTaken
+    }
+}
+```
+
 ### Optionals
 
 - Optionals let us represent the absence of data, which means we’re able to say “this integer has no value” – that’s different from a fixed number such as 0.
   - Example: `var str:String?` can hold a String or nil
 - As a result, everything that isn’t optional definitely has a value inside, even if that’s just an empty string.
 - Unwrapping an optional is the process of looking inside a box to see what it contains: if there’s a value inside it’s sent back for use, otherwise there will be nil inside.
-- We can use if let to run some code if the optional has a value, or guard let to run some code if the optional doesn’t have a value – but with guard we must always exit the function afterwards.
+- We can use `if let` to run some code if the optional has a value, or guard let to run some code if the optional doesn’t have a value – but with guard we must always exit the function afterwards.
+
+```swift
+func printSquare(of number: Int?) {
+    guard let number = number else {
+        print("Missing input")
+        return
+    }
+
+    print("\(number) x \(number) is \(number * number)")
+}
+```
+
 - The nil coalescing operator, ??, unwraps and returns an optional’s value, or uses a default value instead.
+
+```swift
+let new = captains["Serenity"] ?? "N/A"
+```
+
 - Optional chaining lets us read an optional inside another optional with a convenient syntax.
 - If a function might throw errors, you can convert it into an optional using try? – you’ll either get back the function’s return value, or nil if an error is thrown.
 

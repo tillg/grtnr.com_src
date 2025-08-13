@@ -6,9 +6,9 @@ image: swiftui.png
 summary: Mon aide-mémoire, créé en suivant [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: fr
 source_language: en
-source_hash: b2a2fd2590a98613ee14933ee2c3d3c6b963d3e1469976664a5cc7728fb11fb0
+source_hash: 6eef7758d78403186edcaf2dad6921fdb12a1642e62e25ca022e92067b2c8a39
 translator: gpt-4o-2024-08-06
-translate_date: 2025-08-11T11:33:21.527352
+translate_date: 2025-08-12T09:04:35.057796
 generated_by: simplified-translation-system
 ---
 
@@ -20,12 +20,16 @@ Mais c'est beaucoup de contenu, alors voici mes notes - j'espère dans un format
 
 ## Swift
 
+Pour un aperçu complet, voir [Apprenez l'essentiel de Swift en une heure](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
+
+Dans le chapitre suivant, j'ai juste ajouté les parties que j'avais besoin de vérifier au moins une fois.
+
 ### Optionnels
 
 - Les optionnels nous permettent de représenter l'absence de données, ce qui signifie que nous pouvons dire "cet entier n'a pas de valeur" – c'est différent d'un nombre fixe tel que 0.
   - Exemple : `var str:String?` peut contenir une chaîne ou nil
 - En conséquence, tout ce qui n'est pas optionnel a définitivement une valeur à l'intérieur, même si ce n'est qu'une chaîne vide.
-- Déballer un optionnel est le processus de regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
+- Déballer un optionnel est le processus consistant à regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
 - Nous pouvons utiliser if let pour exécuter du code si l'optionnel a une valeur, ou guard let pour exécuter du code si l'optionnel n'a pas de valeur – mais avec guard, nous devons toujours quitter la fonction ensuite.
 - L'opérateur de coalescence de nil, ??, déballe et renvoie la valeur d'un optionnel, ou utilise une valeur par défaut à la place.
 - Le chaînage optionnel nous permet de lire un optionnel à l'intérieur d'un autre optionnel avec une syntaxe pratique.
@@ -48,6 +52,59 @@ extension String {
 }
 ```
 
+### Tableaux et tri
+
+Tous les tableaux ont des méthodes intégrées `sort()` et `sorted()` qui peuvent être utilisées pour trier le tableau.
+
+- `sort()` trie le tableau sur place
+- `sorted()` renvoie un nouveau tableau trié.
+
+Si le tableau est simple, vous pouvez simplement appeler `sort()` directement, comme ceci, pour trier un tableau sur place :
+
+```swift
+var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
+names.sort()
+```
+
+Si vous avez des structures plus complexes, vous devez transmettre la comparaison :
+
+```swift
+struct User {
+    var firstName: String
+}
+
+var users = [
+    User(firstName: "Jemima"),
+    User(firstName: "Peter"),
+    User(firstName: "David"),
+    User(firstName: "Kelly"),
+    User(firstName: "Isabella")
+]
+
+users.sort {
+    $0.firstName < $1.firstName
+}
+```
+
+Nous pouvons faire en sorte que nos propres types soient conformes à `Comparable`, et lorsque nous le faisons, nous obtenons également une méthode `sorted()` sans paramètres. Cela prend deux étapes :
+
+1. Ajouter la conformité `Comparable` à la définition de User.
+2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et renvoie vrai si le premier doit être trié avant le second.
+
+Voici à quoi cela ressemble en code :
+
+```swift
+struct User: Identifiable, Comparable {
+    let id = UUID()
+    var firstName: String
+    var lastName: String
+
+    static func <(lhs: User, rhs: User) -> Bool {
+        lhs.lastName < rhs.lastName
+    }
+}
+```
+
 ### Chaînes
 
 - Elles sont spéciales, et il y a beaucoup à savoir...
@@ -64,7 +121,7 @@ let firstLetter = name[0]
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB)
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil sympa pour naviguer et jouer avec les différentes vues et composants.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
 ### Vues
@@ -76,7 +133,7 @@ Même `ForEach` est une vue, c'est pourquoi nous pouvons écrire
 
 ```swift
 ForEach(0..<5) {
-    Text("Ligne \($0)")
+    Text("Row \($0)")
 }
 ```
 
@@ -94,7 +151,7 @@ Nous l'utilisons généralement pour créer des sous-vues basées sur un compteu
 import SwiftUI
 
 struct ContentView: View {
-  let items = ["Pomme", "Banane", "Cerise"]
+  let items = ["Apple", "Banana", "Cherry"]
 
   var body: some View {
     List {
@@ -132,7 +189,7 @@ var body: some View {
 
 ### Listes
 
-Construire des tableaux de données défilants en utilisant `List`, en particulier comment il peut créer des lignes directement à partir de tableaux de données.
+Construction de tableaux de données défilants en utilisant `List`, en particulier comment elle peut créer des lignes directement à partir de tableaux de données.
 
 ### Images
 
@@ -172,25 +229,25 @@ struct ContentView: View {
 
 ### Bundle
 
-Lire des fichiers depuis notre bundle d'application en recherchant leur chemin en utilisant la classe `Bundle`, y compris le chargement de chaînes depuis celui-ci.
+Lecture de fichiers à partir de notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes à partir de là.
 
 ### Animations
 
 Couvert dans [Jour 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Je dois revoir les clips pour extraire mes notes/aide-mémoire.
 
-- Créer des animations implicitement en utilisant le modificateur `animation()`.
-- Personnaliser les animations avec des délais et des répétitions, et choisir entre des animations ease-in-ease-out et des animations à ressort.
-- Attacher le modificateur animation() à des liaisons, afin que nous puissions animer les changements directement depuis les contrôles de l'interface utilisateur.
-- Utiliser `withAnimation()` pour créer des animations explicites.
-- Attacher plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
+- Création d'animations implicitement en utilisant le modificateur `animation()`.
+- Personnalisation des animations avec des délais et des répétitions, et choix entre les animations ease-in-ease-out et spring.
+- Attachement du modificateur animation() aux liaisons, afin que nous puissions animer les changements directement à partir des contrôles de l'interface utilisateur.
+- Utilisation de `withAnimation()` pour créer des animations explicites.
+- Attachement de plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
 
 ### Autres sujets
 
 - Apprentissage automatique
 - Faire planter votre code avec `fatalError()`, et pourquoi cela pourrait en fait être une bonne chose.
 - Comment vérifier si une chaîne est orthographiée correctement, en utilisant `UITextChecker` (c'est une bête compliquée).
-- Utiliser `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les faire revenir à leur emplacement d'origine.
-- Bundles : Comment mettre un fichier `whatever.txt` dans votre bundle, comment y accéder (c'est-à-dire le lire). Les noms de fichiers doivent être uniques dans tout un bundle.
+- Utilisation de `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les faire revenir à leur position d'origine.
+- Bundles : Comment mettre un fichier `whatever.txt` dans votre bundle, comment y accéder (c'est-à-dire le lire). Les noms de fichiers doivent être uniques dans un bundle.
 
 ## Questions
 
