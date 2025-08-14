@@ -6,15 +6,15 @@ image: swiftui.png
 summary: Mon aide-mémoire, créé en suivant [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: fr
 source_language: en
-source_hash: 6eef7758d78403186edcaf2dad6921fdb12a1642e62e25ca022e92067b2c8a39
+source_hash: 231c8d427dc142a538e388e2ebf4089e371d3e6fc321e88925f5d3dbb8fbcba0
 translator: gpt-4o-2024-08-06
-translate_date: 2025-08-12T09:04:35.057796
+translate_date: 2025-08-13T09:03:01.412019
 generated_by: simplified-translation-system
 ---
 
-En juin 2025, j'ai commencé à suivre [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). C'est un excellent cours, et je suis vraiment impressionné par la quantité de contenu de qualité et de cours que Paul Hudson propose - et maintient !! Paul, merci beaucoup pour cela ! 🙏🏼
+En juin 2025, j'ai commencé à travailler sur [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). C'est un excellent cours, et je suis vraiment impressionné par la quantité de contenu de qualité et de cours que Paul Hudson propose - et maintient !! Paul, merci beaucoup pour cela ! 🙏🏼
 
-Mais c'est beaucoup de contenu, alors voici mes notes - j'espère dans un format d'aide-mémoire facile à naviguer. J'ai une structure approximative en tête, mais je ne remplirai le contenu que lorsque j'en aurai besoin. Ne vous attendez donc pas à un aperçu complet !
+Mais c'est beaucoup de contenu, alors voici mes notes - j'espère dans un format d'aide-mémoire facile à naviguer. J'ai une structure approximative en tête, mais je ne remplirai le contenu que lorsque j'en aurai besoin. Ne vous attendez donc pas à une vue d'ensemble complète !
 
 [TOC]
 
@@ -24,14 +24,45 @@ Pour un aperçu complet, voir [Apprenez l'essentiel de Swift en une heure](https
 
 Dans le chapitre suivant, j'ai juste ajouté les parties que j'avais besoin de vérifier au moins une fois.
 
+### `struct` & propriétés calculées
+
+```swift
+struct Employee {
+    let name: String
+    var vacationAllocated = 14
+    var vacationTaken = 0
+
+    var vacationRemaining: Int {
+        vacationAllocated - vacationTaken
+    }
+}
+```
+
 ### Optionnels
 
 - Les optionnels nous permettent de représenter l'absence de données, ce qui signifie que nous pouvons dire "cet entier n'a pas de valeur" – c'est différent d'un nombre fixe tel que 0.
   - Exemple : `var str:String?` peut contenir une chaîne ou nil
 - En conséquence, tout ce qui n'est pas optionnel a définitivement une valeur à l'intérieur, même si ce n'est qu'une chaîne vide.
-- Déballer un optionnel est le processus consistant à regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
-- Nous pouvons utiliser if let pour exécuter du code si l'optionnel a une valeur, ou guard let pour exécuter du code si l'optionnel n'a pas de valeur – mais avec guard, nous devons toujours quitter la fonction ensuite.
-- L'opérateur de coalescence de nil, ??, déballe et renvoie la valeur d'un optionnel, ou utilise une valeur par défaut à la place.
+- Déballer un optionnel est le processus de regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
+- Nous pouvons utiliser `if let` pour exécuter du code si l'optionnel a une valeur, ou guard let pour exécuter du code si l'optionnel n'a pas de valeur – mais avec guard, nous devons toujours quitter la fonction ensuite.
+
+```swift
+func printSquare(of number: Int?) {
+    guard let number = number else {
+        print("Entrée manquante")
+        return
+    }
+
+    print("\(number) x \(number) est \(number * number)")
+}
+```
+
+- L'opérateur de coalescence nil, ??, déballe et renvoie la valeur d'un optionnel, ou utilise une valeur par défaut à la place.
+
+```swift
+let new = captains["Serenity"] ?? "N/A"
+```
+
 - Le chaînage optionnel nous permet de lire un optionnel à l'intérieur d'un autre optionnel avec une syntaxe pratique.
 - Si une fonction peut générer des erreurs, vous pouvez la convertir en optionnel en utilisant try? – vous obtiendrez soit la valeur de retour de la fonction, soit nil si une erreur est générée.
 
@@ -52,7 +83,7 @@ extension String {
 }
 ```
 
-### Tableaux et tri
+### Tableaux & tri
 
 Tous les tableaux ont des méthodes intégrées `sort()` et `sorted()` qui peuvent être utilisées pour trier le tableau.
 
@@ -89,7 +120,7 @@ users.sort {
 Nous pouvons faire en sorte que nos propres types soient conformes à `Comparable`, et lorsque nous le faisons, nous obtenons également une méthode `sorted()` sans paramètres. Cela prend deux étapes :
 
 1. Ajouter la conformité `Comparable` à la définition de User.
-2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et renvoie vrai si le premier doit être trié avant le second.
+2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et renvoie true si le premier doit être trié avant le second.
 
 Voici à quoi cela ressemble en code :
 
@@ -121,7 +152,7 @@ let firstLetter = name[0]
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil sympa pour naviguer et jouer avec les différentes vues et composants.
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil sympa pour naviguer et jouer avec les différentes Vues et composants.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
 ### Vues
@@ -133,7 +164,7 @@ Même `ForEach` est une vue, c'est pourquoi nous pouvons écrire
 
 ```swift
 ForEach(0..<5) {
-    Text("Row \($0)")
+    Text("Ligne \($0)")
 }
 ```
 
@@ -168,7 +199,7 @@ struct ContentView: View {
 #### `Stepper`
 
 ![Stepper](stepper.png)
-Un stepper est un contrôle à deux segments que les gens utilisent pour augmenter ou diminuer une valeur incrémentale.
+Un stepper est un contrôle à deux segments que les gens utilisent pour augmenter ou diminuer une valeur incrémentielle.
 
 ```swift
 @State private var count: Int = 0
@@ -181,7 +212,7 @@ var body: some View {
 }
 ```
 
-- `DatePicker` pour les dates. Utilisation du paramètre `displayedComponents` pour contrôler les dates ou les heures.
+- `DatePicker` pour les Dates. Utilisation du paramètre `displayedComponents` pour contrôler les dates ou les heures.
 - `Form`
 - `Picker`
 - Barre de navigation
@@ -189,7 +220,7 @@ var body: some View {
 
 ### Listes
 
-Construction de tableaux de données défilants en utilisant `List`, en particulier comment elle peut créer des lignes directement à partir de tableaux de données.
+Construire des tableaux de données défilants en utilisant `List`, en particulier comment il peut créer des lignes directement à partir de tableaux de données.
 
 ### Images
 
@@ -229,24 +260,24 @@ struct ContentView: View {
 
 ### Bundle
 
-Lecture de fichiers à partir de notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes à partir de là.
+Lire des fichiers depuis notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes à partir de là.
 
 ### Animations
 
 Couvert dans [Jour 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Je dois revoir les clips pour extraire mes notes/aide-mémoire.
 
-- Création d'animations implicitement en utilisant le modificateur `animation()`.
-- Personnalisation des animations avec des délais et des répétitions, et choix entre les animations ease-in-ease-out et spring.
-- Attachement du modificateur animation() aux liaisons, afin que nous puissions animer les changements directement à partir des contrôles de l'interface utilisateur.
-- Utilisation de `withAnimation()` pour créer des animations explicites.
-- Attachement de plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
+- Créer des animations implicitement en utilisant le modificateur `animation()`.
+- Personnaliser les animations avec des délais et des répétitions, et choisir entre des animations ease-in-ease-out et des animations à ressort.
+- Attacher le modificateur animation() aux liaisons, afin que nous puissions animer les changements directement depuis les contrôles de l'interface utilisateur.
+- Utiliser `withAnimation()` pour créer des animations explicites.
+- Attacher plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
 
 ### Autres sujets
 
 - Apprentissage automatique
 - Faire planter votre code avec `fatalError()`, et pourquoi cela pourrait en fait être une bonne chose.
 - Comment vérifier si une chaîne est orthographiée correctement, en utilisant `UITextChecker` (c'est une bête compliquée).
-- Utilisation de `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les faire revenir à leur position d'origine.
+- Utiliser `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les ramener à leur position d'origine.
 - Bundles : Comment mettre un fichier `whatever.txt` dans votre bundle, comment y accéder (c'est-à-dire le lire). Les noms de fichiers doivent être uniques dans un bundle.
 
 ## Questions

@@ -216,6 +216,40 @@ var body: some View {
 
 Building scrolling tables of data using `List`, in particular how it can create rows directly from arrays of data.
 
+```swift
+List {
+    Section {
+        Label("Sun", systemImage: "sun.max")
+        Label("Cloud", systemImage: "cloud")
+        Label("Rain", systemImage: "cloud.rain")
+    }
+}
+```
+
+Buttons in Lists: When you place a button in a list, the ENTIRE list element become clickable! If there are more than one button in a list, wherever you click on the list element, it clicks ALL the buttons one after the other!
+
+To fix that and get the behaviour we want, use `.buttonStyle(.plain)`
+
+Same is true for HStack:
+
+```swift
+HStack {
+    if label.isEmpty == false {
+        Text(label)
+    }
+
+    ForEach(1..<maximumRating + 1, id: \.self) { number in
+        Button {
+            rating = number
+        } label: {
+            image(for: number)
+                .foregroundStyle(number > rating ? offColor : onColor)
+        }
+    }
+}
+.buttonStyle(.plain)
+```
+
 ### Images
 
 ```swift
