@@ -300,7 +300,153 @@ Covered in [Day 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO I 
 - Using `withAnimation()` to create explicit animations.
 - Attaching multiple `animation()` modifiers to a single view so that we can control the animation stack.
 
-### Other topics
+### Loading Data
+
+If it's synchronous:
+
+```swift
+View...
+    .onAppear(loadIt)
+```
+
+?? How is it done, when `loadIt` is async??
+
+## Networking
+
+This is how you send something to an HTTPS Endpoint:
+
+```swift
+ func placeOrder() async {
+        guard let encoded = try? JSONEncoder().encode(order) else {
+            print("Failed to encode order")
+            return
+        }
+
+        let url = URL(string: "https://reqres.in/api/cupcakes")!
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+
+        do {
+            let (data, other) = try await URLSession.shared.upload(for: request, from: encoded)
+
+            let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
+            confirmationMessage = "Your order for \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
+            showingConfirmation = true
+        } catch {
+            print("Check out failed: \(error.localizedDescription)")
+        }
+    }
+```
+
+## SwiftData
+
+?? What is the relationship betweeen Model, ModelContext and ModelContainer??
+
+Make a model first:
+
+```swift
+@Model
+class Book {  // Models HAVE TO BE Classes!
+    var title: String
+    var author: String
+    var genre: String
+    var review: String
+    var rating: Int
+}
+```
+
+Add the `modelContainer` at App level
+
+```swift
+
+import SwiftData
+import SwiftUI
+
+@main
+struct BookwormApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(for: Book.self)
+    }
+}
+```
+
+Use the data in your view:
+
+```swift
+struct ContentView: View {
+    @Environment(\.modelContext) var modelContext
+    @Query(sort: [
+        SortDescriptor(\Book.title),
+        SortDescriptor(\Book.author)
+    ]) var books: [Book]
+    ...
+```
+
+Pass a SwiftData object to a down stream View:
+
+```swift
+struct DetailView: View {
+    @Environment(\.modelContext) var modelContext
+
+    let book: Book
+    ...
+```
+
+Add a SwiftData object:
+
+```swift
+
+struct AddBookView: View {
+    @Environment(\.modelContext) var modelContext
+    var body: some View {
+        NavigationStack {
+            Form {
+                // Data entry here
+                Section {
+                    Button("Save") {
+                        let newBook = Book(title: title, author: author, genre: genre, review: review, rating: rating)
+                        modelContext.insert(newBook)
+                        dismiss()
+                    }
+                }
+            }
+            .navigationTitle("Add Book")
+        }
+    }
+}
+```
+
+Delete a SwiftData object:
+
+```swift
+    func deleteBook() {
+        modelContext.delete(book)
+        dismiss()
+    }
+```
+
+Adding a context and sample data for `#Preview:
+
+```swift
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Book.self, configurations: config)
+        let example = Book(title: "Test Book", author: "Test Author", genre: "Fantasy", review: "This was a great book; I really enjoyed it.", rating: 4)
+
+        return DetailView(book: example)
+            .modelContainer(container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
+}
+```
+
+## Other topics
 
 - Machine Learning
 - Crashing your code with `fatalError()`, and why that might actually be a good thing.
@@ -308,6 +454,10 @@ Covered in [Day 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO I 
 - Using `DragGesture()` to let the user move views around, then snapping them back to their original location.
 - Bundles: How to put a file `whatever.txt` in your bundle, how to access (i.e. read it). File names need to be unique throughout a bundle.
 
-## Questions
+## Questions & Todos
 
 - What are the differences between a `Form` and a `VStack` ?
+- Multi screen setups: `Sheet` and `NavigationStack`, and how to move around
+  - `NavigationStack(path)`
+- Binding: `@State`, `@Bindable`, `@Binding`
+- How to pass data around multi screen setups
