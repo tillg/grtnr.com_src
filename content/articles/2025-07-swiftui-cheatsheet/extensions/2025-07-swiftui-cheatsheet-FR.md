@@ -1,18 +1,18 @@
 ---
 Tags: tech
-Title: Aide-mémoire SwiftUI
+Title: SwiftUI Cheatsheet
 Date: 2025-08-03
 image: swiftui.png
 summary: Mon aide-mémoire, créé en suivant [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: fr
 source_language: en
-source_hash: be0412ee015ec415443ee3637866a75252354173dc7c0d0ac6fea67760b195ab
+source_hash: 06b297ad1e3c40d5dc0c07363f90bf4f7d37817e86210dac2a17df220350ad77
 translator: gpt-4o-2024-08-06
-translate_date: 2025-08-15T15:43:44.123254
+translate_date: 2025-08-17T10:27:03.141565
 generated_by: simplified-translation-system
 ---
 
-En juin 2025, j'ai commencé à suivre [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). C'est un excellent cours, et je suis vraiment impressionné par la quantité de contenu de qualité et de cours que Paul Hudson propose - et maintient !! Paul, merci beaucoup pour cela ! 🙏🏼
+En juin 2025, j'ai commencé à travailler sur [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). C'est un excellent cours, et je suis vraiment impressionné par la quantité de contenu de qualité et de cours que Paul Hudson propose - et maintient !! Paul, merci beaucoup pour cela ! 🙏🏼
 
 Mais c'est beaucoup de contenu, alors voici mes notes - j'espère dans un format d'aide-mémoire facile à naviguer. J'ai une structure générale en tête, mais je ne remplirai le contenu que lorsque j'en aurai besoin. Ne vous attendez donc pas à une vue d'ensemble complète !
 
@@ -20,11 +20,11 @@ Mais c'est beaucoup de contenu, alors voici mes notes - j'espère dans un format
 
 ## Swift
 
-Pour une vue d'ensemble complète, voir [Apprenez l'essentiel de Swift en une heure](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
+Pour une vue d'ensemble complète, voir [Learn essential Swift in one hour](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
 
 Dans le chapitre suivant, j'ai juste ajouté les parties que j'avais besoin de vérifier au moins une fois.
 
-### `struct` & propriétés calculées
+### `struct` et propriétés calculées
 
 ```swift
 struct Employee {
@@ -40,11 +40,11 @@ struct Employee {
 
 ### Optionnels
 
-- Les optionnels nous permettent de représenter l'absence de données, ce qui signifie que nous pouvons dire "cet entier n'a pas de valeur" – c'est différent d'un nombre fixe tel que 0.
-  - Exemple : `var str:String?` peut contenir une chaîne de caractères ou nil
+- Les optionnels nous permettent de représenter l'absence de données, ce qui signifie que nous pouvons dire "cet entier n'a pas de valeur" – c'est différent d'un nombre fixe comme 0.
+  - Exemple : `var str:String?` peut contenir une chaîne ou nil
 - En conséquence, tout ce qui n'est pas optionnel a définitivement une valeur à l'intérieur, même si ce n'est qu'une chaîne vide.
-- Déballer un optionnel est le processus de regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
-- Nous pouvons utiliser `if let` pour exécuter du code si l'optionnel a une valeur, ou guard let pour exécuter du code si l'optionnel n'a pas de valeur – mais avec guard, nous devons toujours quitter la fonction par la suite.
+- Déballer un optionnel est le processus consistant à regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
+- Nous pouvons utiliser `if let` pour exécuter du code si l'optionnel a une valeur, ou `guard let` pour exécuter du code si l'optionnel n'a pas de valeur – mais avec guard, nous devons toujours quitter la fonction par la suite.
 
 ```swift
 func printSquare(of number: Int?) {
@@ -83,7 +83,7 @@ extension String {
 }
 ```
 
-### Tableaux & tri
+### Tableaux et tri
 
 Tous les tableaux ont des méthodes intégrées `sort()` et `sorted()` qui peuvent être utilisées pour trier le tableau.
 
@@ -97,7 +97,7 @@ var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
 names.sort()
 ```
 
-Si vous avez des structures plus complexes, vous devez transmettre la comparaison :
+Si vous avez des structures plus complexes, vous devez passer la comparaison :
 
 ```swift
 struct User {
@@ -136,7 +136,7 @@ struct User: Identifiable, Comparable {
 }
 ```
 
-### Chaînes de caractères
+### Chaînes
 
 - Elles sont spéciales, et il y a beaucoup à savoir...
 - Cela ne fonctionne pas :
@@ -152,13 +152,13 @@ let firstLetter = name[0]
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil sympa pour naviguer et jouer avec les différentes Vues et composants.
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil pratique pour naviguer et explorer les différentes vues et composants.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
 ### Vues
 
 - Tout est une vue dans SwiftUI 😜
-- Exécution de code lorsqu'une vue est affichée, en utilisant `onAppear()`.
+- Exécuter du code lorsqu'une vue est affichée, en utilisant `onAppear()`.
 
 Même `ForEach` est une vue, c'est pourquoi nous pouvons écrire
 
@@ -172,7 +172,7 @@ Remarque : Nous ne pouvons pas écrire `ForEach(0..<5)`, car `ForEach` attend un
 
 #### Vue `ForEach`
 
-`ForEach` est une vue, qui est composée des sous-vues créées à chaque instance de boucle.
+`ForEach` est une vue, composée des sous-vues créées à chaque instance de boucle.
 
 Nous l'utilisons généralement pour créer des sous-vues basées sur un compteur ou un tableau.
 
@@ -182,7 +182,7 @@ Nous l'utilisons généralement pour créer des sous-vues basées sur un compteu
 import SwiftUI
 
 struct ContentView: View {
-  let items = ["Pomme", "Banane", "Cerise"]
+  let items = ["Apple", "Banana", "Cherry"]
 
   var body: some View {
     List {
@@ -232,7 +232,7 @@ List {
 }
 ```
 
-Boutons dans les listes : Lorsque vous placez un bouton dans une liste, l'ENTIÈRE élément de la liste devient cliquable ! S'il y a plus d'un bouton dans une liste, où que vous cliquiez sur l'élément de la liste, cela clique sur TOUS les boutons l'un après l'autre !
+Boutons dans les listes : Lorsque vous placez un bouton dans une liste, l'ENTIÈRE élément de liste devient cliquable ! S'il y a plus d'un bouton dans une liste, où que vous cliquiez sur l'élément de liste, cela clique sur TOUS les boutons l'un après l'autre !
 
 Pour corriger cela et obtenir le comportement souhaité, utilisez `.buttonStyle(.plain)`
 
@@ -294,23 +294,62 @@ struct ContentView: View {
 
 ### Bundle
 
-Lecture de fichiers depuis notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes de caractères depuis là.
+Lecture de fichiers à partir de notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes à partir de là.
 
 ### Animations
 
 Couvert dans [Jour 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Je dois revoir les clips pour extraire mes notes/aide-mémoire.
 
 - Création d'animations implicitement en utilisant le modificateur `animation()`.
-- Personnalisation des animations avec des délais et des répétitions, et choix entre animations ease-in-ease-out et animations à ressort.
-- Attachement du modificateur animation() aux liaisons, afin que nous puissions animer les changements directement depuis les contrôles UI.
+- Personnalisation des animations avec des délais et des répétitions, et choix entre les animations ease-in-ease-out et les animations à ressort.
+- Attachement du modificateur animation() aux liaisons, afin que nous puissions animer les changements directement à partir des contrôles de l'interface utilisateur.
 - Utilisation de `withAnimation()` pour créer des animations explicites.
 - Attachement de plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
+
+### Chargement de données
+
+Si c'est synchrone :
+
+```swift
+View...
+    .onAppear(loadIt)
+```
+
+?? Comment cela se fait-il lorsque `loadIt` est asynchrone ??
+
+## Réseautage
+
+Voici comment vous envoyez quelque chose à un point de terminaison HTTPS :
+
+```swift
+ func placeOrder() async {
+        guard let encoded = try? JSONEncoder().encode(order) else {
+            print("Échec de l'encodage de la commande")
+            return
+        }
+
+        let url = URL(string: "https://reqres.in/api/cupcakes")!
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+
+        do {
+            let (data, other) = try await URLSession.shared.upload(for: request, from: encoded)
+
+            let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
+            confirmationMessage = "Votre commande de \(decodedOrder.quantity)x cupcakes \(Order.types[decodedOrder.type].lowercased()) est en route !"
+            showingConfirmation = true
+        } catch {
+            print("Échec de la commande : \(error.localizedDescription)")
+        }
+    }
+```
 
 ## SwiftData
 
 ?? Quelle est la relation entre Model, ModelContext et ModelContainer ??
 
-Créer d'abord un modèle :
+Créez d'abord un modèle :
 
 ```swift
 @Model
@@ -323,7 +362,7 @@ class Book {  // Les modèles DOIVENT ÊTRE des classes !
 }
 ```
 
-Ajouter le `modelContainer` au niveau de l'application
+Ajoutez le `modelContainer` au niveau de l'application
 
 ```swift
 
@@ -353,7 +392,7 @@ struct ContentView: View {
     ...
 ```
 
-Passer un objet SwiftData à une vue en aval :
+Passez un objet SwiftData à une vue en aval :
 
 ```swift
 struct DetailView: View {
@@ -363,7 +402,7 @@ struct DetailView: View {
     ...
 ```
 
-Ajouter un objet SwiftData :
+Ajoutez un objet SwiftData :
 
 ```swift
 
@@ -387,7 +426,7 @@ struct AddBookView: View {
 }
 ```
 
-Supprimer un objet SwiftData :
+Supprimez un objet SwiftData :
 
 ```swift
     func deleteBook() {
@@ -417,14 +456,14 @@ Ajout d'un contexte et de données d'exemple pour `#Preview` :
 
 - Apprentissage automatique
 - Faire planter votre code avec `fatalError()`, et pourquoi cela pourrait en fait être une bonne chose.
-- Comment vérifier si une chaîne de caractères est correctement orthographiée, en utilisant `UITextChecker` (c'est une bête compliquée).
-- Utilisation de `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les faire revenir à leur emplacement d'origine.
-- Bundles : Comment mettre un fichier `whatever.txt` dans votre bundle, comment y accéder (c'est-à-dire le lire). Les noms de fichiers doivent être uniques dans un bundle.
+- Comment vérifier si une chaîne est correctement orthographiée, en utilisant `UITextChecker` (c'est une bête compliquée).
+- Utilisation de `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les ramener à leur position d'origine.
+- Bundles : Comment mettre un fichier `whatever.txt` dans votre bundle, comment y accéder (c'est-à-dire le lire). Les noms de fichiers doivent être uniques dans tout un bundle.
 
-## Questions & Tâches
+## Questions et tâches
 
 - Quelles sont les différences entre un `Form` et un `VStack` ?
 - Configurations multi-écrans : `Sheet` et `NavigationStack`, et comment se déplacer
   - `NavigationStack(path)`
 - Liaison : `@State`, `@Bindable`, `@Binding`
-- Comment faire circuler les données dans des configurations multi-écrans
+- Comment passer des données dans des configurations multi-écrans
