@@ -1,14 +1,14 @@
 ---
 Tags: tech
-Title: SwiftUI Cheatsheet
+Title: Aide-mémoire SwiftUI
 Date: 2025-08-03
 image: swiftui.png
 summary: Mon aide-mémoire, créé en suivant [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: fr
 source_language: en
-source_hash: 06b297ad1e3c40d5dc0c07363f90bf4f7d37817e86210dac2a17df220350ad77
+source_hash: 1ceced4ac231fe904e5e5f713184064cfe03b219f6d778efc979718f50a27d58
 translator: gpt-4o-2024-08-06
-translate_date: 2025-08-17T10:27:03.141565
+translate_date: 2025-08-25T08:28:23.312833
 generated_by: simplified-translation-system
 ---
 
@@ -20,11 +20,11 @@ Mais c'est beaucoup de contenu, alors voici mes notes - j'espère dans un format
 
 ## Swift
 
-Pour une vue d'ensemble complète, voir [Learn essential Swift in one hour](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
+Pour une vue d'ensemble complète, voir [Apprenez l'essentiel de Swift en une heure](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
 
-Dans le chapitre suivant, j'ai juste ajouté les parties que j'avais besoin de vérifier au moins une fois.
+Dans le chapitre suivant, j'ai seulement ajouté les parties que j'avais besoin de vérifier au moins une fois.
 
-### `struct` et propriétés calculées
+### `struct` & propriétés calculées
 
 ```swift
 struct Employee {
@@ -40,11 +40,11 @@ struct Employee {
 
 ### Optionnels
 
-- Les optionnels nous permettent de représenter l'absence de données, ce qui signifie que nous pouvons dire "cet entier n'a pas de valeur" – c'est différent d'un nombre fixe comme 0.
+- Les optionnels nous permettent de représenter l'absence de données, ce qui signifie que nous pouvons dire "cet entier n'a pas de valeur" - c'est différent d'un nombre fixe tel que 0.
   - Exemple : `var str:String?` peut contenir une chaîne ou nil
 - En conséquence, tout ce qui n'est pas optionnel a définitivement une valeur à l'intérieur, même si ce n'est qu'une chaîne vide.
-- Déballer un optionnel est le processus consistant à regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
-- Nous pouvons utiliser `if let` pour exécuter du code si l'optionnel a une valeur, ou `guard let` pour exécuter du code si l'optionnel n'a pas de valeur – mais avec guard, nous devons toujours quitter la fonction par la suite.
+- Déballer un optionnel est le processus de regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
+- Nous pouvons utiliser `if let` pour exécuter du code si l'optionnel a une valeur, ou `guard let` pour exécuter du code si l'optionnel n'a pas de valeur - mais avec guard, nous devons toujours quitter la fonction ensuite.
 
 ```swift
 func printSquare(of number: Int?) {
@@ -83,7 +83,7 @@ extension String {
 }
 ```
 
-### Tableaux et tri
+### Tableaux & tri
 
 Tous les tableaux ont des méthodes intégrées `sort()` et `sorted()` qui peuvent être utilisées pour trier le tableau.
 
@@ -120,7 +120,7 @@ users.sort {
 Nous pouvons faire en sorte que nos propres types soient conformes à `Comparable`, et lorsque nous le faisons, nous obtenons également une méthode `sorted()` sans paramètres. Cela prend deux étapes :
 
 1. Ajouter la conformité `Comparable` à la définition de User.
-2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et renvoie vrai si le premier doit être trié avant le second.
+2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et renvoie true si le premier doit être trié avant le second.
 
 Voici à quoi cela ressemble en code :
 
@@ -152,7 +152,7 @@ let firstLetter = name[0]
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil pratique pour naviguer et explorer les différentes vues et composants.
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil sympa pour naviguer et jouer avec les différentes vues et composants.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
 ### Vues
@@ -172,7 +172,7 @@ Remarque : Nous ne pouvons pas écrire `ForEach(0..<5)`, car `ForEach` attend un
 
 #### Vue `ForEach`
 
-`ForEach` est une vue, composée des sous-vues créées à chaque instance de boucle.
+`ForEach` est une vue, qui est composée des sous-vues créées à chaque instance de boucle.
 
 Nous l'utilisons généralement pour créer des sous-vues basées sur un compteur ou un tableau.
 
@@ -220,7 +220,7 @@ var body: some View {
 
 ### Listes
 
-Construction de tableaux de données défilants en utilisant `List`, en particulier comment il peut créer des lignes directement à partir de tableaux de données.
+Construire des tableaux de données défilants en utilisant `List`, en particulier comment il peut créer des lignes directement à partir de tableaux de données.
 
 ```swift
 List {
@@ -232,7 +232,7 @@ List {
 }
 ```
 
-Boutons dans les listes : Lorsque vous placez un bouton dans une liste, l'ENTIÈRE élément de liste devient cliquable ! S'il y a plus d'un bouton dans une liste, où que vous cliquiez sur l'élément de liste, cela clique sur TOUS les boutons l'un après l'autre !
+Boutons dans les listes : Lorsque vous placez un bouton dans une liste, l'ENTIÈRE élément de la liste devient cliquable ! S'il y a plus d'un bouton dans une liste, où que vous cliquiez sur l'élément de la liste, cela clique sur TOUS les boutons l'un après l'autre !
 
 Pour corriger cela et obtenir le comportement souhaité, utilisez `.buttonStyle(.plain)`
 
@@ -294,17 +294,17 @@ struct ContentView: View {
 
 ### Bundle
 
-Lecture de fichiers à partir de notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes à partir de là.
+Lire des fichiers à partir de notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes à partir de là.
 
 ### Animations
 
 Couvert dans [Jour 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Je dois revoir les clips pour extraire mes notes/aide-mémoire.
 
-- Création d'animations implicitement en utilisant le modificateur `animation()`.
-- Personnalisation des animations avec des délais et des répétitions, et choix entre les animations ease-in-ease-out et les animations à ressort.
-- Attachement du modificateur animation() aux liaisons, afin que nous puissions animer les changements directement à partir des contrôles de l'interface utilisateur.
-- Utilisation de `withAnimation()` pour créer des animations explicites.
-- Attachement de plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
+- Créer des animations implicitement en utilisant le modificateur `animation()`.
+- Personnaliser les animations avec des délais et des répétitions, et choisir entre des animations ease-in-ease-out et des animations à ressort.
+- Attacher le modificateur animation() aux liaisons, afin que nous puissions animer les changements directement à partir des contrôles de l'interface utilisateur.
+- Utiliser `withAnimation()` pour créer des animations explicites.
+- Attacher plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
 
 ### Chargement de données
 
@@ -315,7 +315,7 @@ View...
     .onAppear(loadIt)
 ```
 
-?? Comment cela se fait-il lorsque `loadIt` est asynchrone ??
+?? Comment est-ce fait, lorsque `loadIt` est asynchrone ??
 
 ## Réseautage
 
@@ -347,13 +347,20 @@ Voici comment vous envoyez quelque chose à un point de terminaison HTTPS :
 
 ## SwiftData
 
-?? Quelle est la relation entre Model, ModelContext et ModelContainer ??
+Les éléments en mouvement que nous avons sont
 
-Créez d'abord un modèle :
+- Le `Model`: C'est la structure de données. L'objet(s) et ses champs
+- Le `ModelContainer`: C'est le stockage persistant. Pensez-y comme le fichier dans lequel les données sont écrites sur le serveur.
+- Le `ModelContext`: C'est la version conservée en mémoire de vos données et où les modifications de données sont conservées avant d'être enregistrées dans le `ModelContainer`.
+
+Pour permettre à votre logiciel d'utiliser SwiftData, créez d'abord un modèle :
 
 ```swift
+import Foundation
+import SwiftData
+
 @Model
-class Book {  // Les modèles DOIVENT ÊTRE des classes !
+class Book {  // Les modèles DOIVENT être des classes !
     var title: String
     var author: String
     var genre: String
@@ -442,7 +449,7 @@ Ajout d'un contexte et de données d'exemple pour `#Preview` :
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Book.self, configurations: config)
-        let example = Book(title: "Test Book", author: "Test Author", genre: "Fantasy", review: "C'était un excellent livre ; je l'ai vraiment apprécié.", rating: 4)
+        let example = Book(title: "Livre de test", author: "Auteur de test", genre: "Fantaisie", review: "C'était un excellent livre ; je l'ai vraiment apprécié.", rating: 4)
 
         return DetailView(book: example)
             .modelContainer(container)
@@ -456,14 +463,14 @@ Ajout d'un contexte et de données d'exemple pour `#Preview` :
 
 - Apprentissage automatique
 - Faire planter votre code avec `fatalError()`, et pourquoi cela pourrait en fait être une bonne chose.
-- Comment vérifier si une chaîne est correctement orthographiée, en utilisant `UITextChecker` (c'est une bête compliquée).
-- Utilisation de `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les ramener à leur position d'origine.
+- Comment vérifier si une chaîne est orthographiée correctement, en utilisant `UITextChecker` (c'est une bête compliquée).
+- Utiliser `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les faire revenir à leur position d'origine.
 - Bundles : Comment mettre un fichier `whatever.txt` dans votre bundle, comment y accéder (c'est-à-dire le lire). Les noms de fichiers doivent être uniques dans tout un bundle.
 
-## Questions et tâches
+## Questions & Tâches
 
 - Quelles sont les différences entre un `Form` et un `VStack` ?
 - Configurations multi-écrans : `Sheet` et `NavigationStack`, et comment se déplacer
   - `NavigationStack(path)`
 - Liaison : `@State`, `@Bindable`, `@Binding`
-- Comment passer des données dans des configurations multi-écrans
+- Comment transmettre des données dans des configurations multi-écrans

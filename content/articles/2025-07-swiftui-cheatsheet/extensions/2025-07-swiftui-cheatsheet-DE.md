@@ -6,21 +6,21 @@ image: swiftui.png
 summary: Mein Spickzettel, erstellt während des Kurses [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: de
 source_language: en
-source_hash: 06b297ad1e3c40d5dc0c07363f90bf4f7d37817e86210dac2a17df220350ad77
+source_hash: 1ceced4ac231fe904e5e5f713184064cfe03b219f6d778efc979718f50a27d58
 translator: gpt-4o-2024-08-06
-translate_date: 2025-08-17T10:26:40.751603
+translate_date: 2025-08-25T08:27:56.611482
 generated_by: simplified-translation-system
 ---
 
 Im Juni 2025 begann ich mit dem Kurs [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). Es ist ein großartiger Kurs, und ich bin wirklich beeindruckt, wie viel qualitativ hochwertiger Inhalt und Kurse Paul Hudson bereitstellt und pflegt!! Paul, vielen Dank dafür! 🙏🏼
 
-Aber es ist eine Menge Inhalt, daher sind hier meine Notizen – hoffentlich in einem leicht navigierbaren Spickzettel-Format. Ich habe eine grobe Struktur im Kopf, aber ich werde den Inhalt nur dann ausfüllen, wenn ich ihn benötige. Erwarten Sie also keine vollständige Übersicht!
+Aber es ist eine Menge Inhalt, daher hier meine Notizen - hoffentlich in einem leicht navigierbaren Spickzettel-Format. Ich habe eine grobe Struktur im Kopf, werde den Inhalt jedoch nur dann ausfüllen, wenn ich ihn benötige. Erwarten Sie also keine vollständige Übersicht!
 
 [TOC]
 
 ## Swift
 
-Für einen umfassenden Überblick siehe [Learn essential Swift in one hour](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
+Für einen umfassenden Überblick siehe [Lernen Sie essentielles Swift in einer Stunde](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
 
 Im folgenden Kapitel habe ich nur die Teile hinzugefügt, die ich mindestens einmal überprüfen musste.
 
@@ -40,11 +40,11 @@ struct Employee {
 
 ### Optionals
 
-- Optionals ermöglichen es uns, das Fehlen von Daten darzustellen, was bedeutet, dass wir sagen können: „Dieser Integer hat keinen Wert“ – das unterscheidet sich von einer festen Zahl wie 0.
+- Optionals ermöglichen es uns, das Fehlen von Daten darzustellen, was bedeutet, dass wir sagen können „dieser Integer hat keinen Wert“ – das ist anders als eine feste Zahl wie 0.
   - Beispiel: `var str:String?` kann einen String oder nil enthalten
 - Folglich hat alles, was nicht optional ist, definitiv einen Wert, selbst wenn es nur ein leerer String ist.
-- Das Entpacken eines Optionals ist der Prozess, in eine Box zu schauen, um zu sehen, was sie enthält: Wenn ein Wert darin ist, wird er zur Verwendung zurückgegeben, andernfalls wird nil enthalten sein.
-- Wir können `if let` verwenden, um Code auszuführen, wenn das Optional einen Wert hat, oder `guard let`, um Code auszuführen, wenn das Optional keinen Wert hat – aber mit `guard` müssen wir danach immer die Funktion verlassen.
+- Das Auflösen eines Optionals ist der Prozess, in eine Box zu schauen, um zu sehen, was sie enthält: Wenn ein Wert darin ist, wird er zur Verwendung zurückgegeben, andernfalls wird nil enthalten sein.
+- Wir können `if let` verwenden, um Code auszuführen, wenn das Optional einen Wert hat, oder guard let, um Code auszuführen, wenn das Optional keinen Wert hat – aber mit guard müssen wir danach immer die Funktion verlassen.
 
 ```swift
 func printSquare(of number: Int?) {
@@ -57,14 +57,14 @@ func printSquare(of number: Int?) {
 }
 ```
 
-- Der nil-koaleszierende Operator, ??, entpackt und gibt den Wert eines Optionals zurück oder verwendet stattdessen einen Standardwert.
+- Der nil-Koaleszenz-Operator, ??, löst ein Optional auf und gibt dessen Wert zurück oder verwendet stattdessen einen Standardwert.
 
 ```swift
 let new = captains["Serenity"] ?? "N/A"
 ```
 
 - Optional Chaining ermöglicht es uns, ein Optional innerhalb eines anderen Optionals mit einer praktischen Syntax zu lesen.
-- Wenn eine Funktion Fehler werfen könnte, können Sie sie mit `try?` in ein Optional umwandeln – Sie erhalten entweder den Rückgabewert der Funktion oder nil, wenn ein Fehler auftritt.
+- Wenn eine Funktion möglicherweise Fehler wirft, können Sie sie mit try? in ein Optional umwandeln – Sie erhalten entweder den Rückgabewert der Funktion oder nil, wenn ein Fehler auftritt.
 
 ### Protokolle und Erweiterungen
 
@@ -90,7 +90,7 @@ Alle Arrays haben eingebaute `sort()` und `sorted()` Methoden, die verwendet wer
 - `sort()` sortiert das Array an Ort und Stelle
 - `sorted()` gibt ein neues, sortiertes Array zurück.
 
-Wenn das Array einfach ist, können Sie `sort()` direkt aufrufen, um ein Array an Ort und Stelle zu sortieren:
+Wenn das Array einfach ist, können Sie `sort()` direkt aufrufen, wie hier, um ein Array an Ort und Stelle zu sortieren:
 
 ```swift
 var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
@@ -152,15 +152,15 @@ let firstLetter = name[0]
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) ist ein nützliches Tool, um durch die verschiedenen Ansichten und Komponenten zu navigieren und damit zu spielen.
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) ist ein schönes Tool, um die verschiedenen Views & Komponenten zu navigieren und auszuprobieren.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
-### Ansichten
+### Views
 
-- Alles ist eine Ansicht in SwiftUI 😜
-- Code ausführen, wenn eine Ansicht angezeigt wird, mit `onAppear()`.
+- Alles ist eine View in SwiftUI 😜
+- Code ausführen, wenn eine View angezeigt wird, mit `onAppear()`.
 
-Sogar `ForEach` ist eine Ansicht, deshalb können wir schreiben
+Sogar `ForEach` ist eine View, deshalb können wir schreiben
 
 ```swift
 ForEach(0..<5) {
@@ -168,11 +168,11 @@ ForEach(0..<5) {
 }
 ```
 
-Hinweis: Wir können nicht `ForEach(0..<5)` schreiben, da `ForEach` einen `Range<Int>` erwartet, keinen `ClosedRange<Int>`!
+Hinweis: Wir können nicht `ForEach(0..<5)` schreiben, weil `ForEach` einen `Range<Int>` erwartet, nicht einen `ClosedRange<Int>`!
 
-#### `ForEach` Ansicht
+#### `ForEach` View
 
-`ForEach` ist eine Ansicht, die aus den Unteransichten besteht, die in jeder Schleifeninstanz erstellt werden.
+`ForEach` ist eine View, die aus den Unteransichten besteht, die in jeder Schleifeninstanz erstellt werden.
 
 Wir verwenden es typischerweise, um Unteransichten basierend auf einem Zähler oder einem Array zu erstellen.
 
@@ -199,7 +199,7 @@ struct ContentView: View {
 #### `Stepper`
 
 ![Stepper](stepper.png)
-Ein Stepper ist ein zweigeteiltes Steuerelement, das verwendet wird, um einen inkrementellen Wert zu erhöhen oder zu verringern.
+Ein Stepper ist ein zweigliedriges Steuerelement, das Menschen verwenden, um einen inkrementellen Wert zu erhöhen oder zu verringern.
 
 ```swift
 @State private var count: Int = 0
@@ -212,7 +212,7 @@ var body: some View {
 }
 ```
 
-- `DatePicker` für Daten. Verwenden des `displayedComponents` Parameters, um Daten oder Zeiten zu steuern.
+- `DatePicker` für Daten. Verwenden des Parameters `displayedComponents`, um Daten oder Zeiten zu steuern.
 - `Form`
 - `Picker`
 - Navigationsleiste
@@ -232,7 +232,7 @@ List {
 }
 ```
 
-Buttons in Listen: Wenn Sie einen Button in eine Liste setzen, wird das GESAMTE Listenelement klickbar! Wenn es mehr als einen Button in einer Liste gibt, wird, wo immer Sie auf das Listenelement klicken, ALLE Buttons nacheinander geklickt!
+Buttons in Listen: Wenn Sie einen Button in eine Liste setzen, wird das GESAMTE Listenelement anklickbar! Wenn es mehr als einen Button in einer Liste gibt, wird, wo immer Sie auf das Listenelement klicken, ALLE Buttons nacheinander geklickt!
 
 Um das zu beheben und das gewünschte Verhalten zu erhalten, verwenden Sie `.buttonStyle(.plain)`
 
@@ -269,11 +269,11 @@ Image (example)
 }
 ```
 
-![alternativer Text](image.png)
+![alt text](image.png)
 
 Ersetzen Sie `ScaledToFit` durch `ScaledToFill` und erhalten Sie
 
-![alternativer Text](image-1.png)
+![alt text](image-1.png)
 
 ```swift
 struct ContentView: View {
@@ -288,23 +288,23 @@ struct ContentView: View {
 }
 ```
 
-![alternativer Text](image-2.png)
+![alt text](image-2.png)
 
 ### Werkzeugleiste
 
 ### Bundle
 
-Dateien aus unserem App-Bundle lesen, indem wir ihren Pfad mit der `Bundle` Klasse nachschlagen, einschließlich dem Laden von Strings von dort.
+Dateien aus unserem App-Bundle lesen, indem wir ihren Pfad mit der `Bundle`-Klasse nachschlagen, einschließlich des Ladens von Strings von dort.
 
 ### Animationen
 
 Behandelt in [Tag 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Ich muss die Clips noch einmal ansehen, um meine Notizen/Spickzettel zu extrahieren.
 
-- Animationen implizit mit dem `animation()` Modifikator erstellen.
-- Animationen mit Verzögerungen und Wiederholungen anpassen und zwischen Ease-in-Ease-out und Spring-Animationen wählen.
-- Den `animation()` Modifikator an Bindungen anhängen, damit wir Änderungen direkt von UI-Steuerelementen aus animieren können.
+- Animationen implizit mit dem `animation()`-Modifikator erstellen.
+- Animationen mit Verzögerungen und Wiederholungen anpassen und zwischen Ease-in-Ease-out- und Federanimationen wählen.
+- Den `animation()`-Modifikator an Bindungen anhängen, um Änderungen direkt von UI-Steuerelementen zu animieren.
 - `withAnimation()` verwenden, um explizite Animationen zu erstellen.
-- Mehrere `animation()` Modifikatoren an eine einzelne Ansicht anhängen, damit wir den Animationsstapel steuern können.
+- Mehrere `animation()`-Modifikatoren an eine einzelne View anhängen, um den Animationsstapel zu steuern.
 
 ### Daten laden
 
@@ -317,7 +317,7 @@ View...
 
 ?? Wie wird es gemacht, wenn `loadIt` asynchron ist??
 
-## Netzwerke
+## Netzwerk
 
 So senden Sie etwas an einen HTTPS-Endpunkt:
 
@@ -337,7 +337,7 @@ So senden Sie etwas an einen HTTPS-Endpunkt:
             let (data, other) = try await URLSession.shared.upload(for: request, from: encoded)
 
             let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
-            confirmationMessage = "Ihre Bestellung über \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) Cupcakes ist unterwegs!"
+            confirmationMessage = "Ihre Bestellung über \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) Cupcakes ist auf dem Weg!"
             showingConfirmation = true
         } catch {
             print("Checkout fehlgeschlagen: \(error.localizedDescription)")
@@ -347,11 +347,18 @@ So senden Sie etwas an einen HTTPS-Endpunkt:
 
 ## SwiftData
 
-?? Was ist die Beziehung zwischen Model, ModelContext und ModelContainer??
+Die beweglichen Teile, die wir haben, sind
 
-Erstellen Sie zuerst ein Modell:
+- Das `Model`: Dies ist die Datenstruktur. Das Objekt(e) und seine Felder
+- Der `ModelContainer`: Dies ist der persistente Speicher. Denken Sie daran wie an die Datei, in die die Daten auf dem Server geschrieben werden.
+- Der `ModelContext`: Das ist die im Speicher gehaltene Version Ihrer Daten und wo die Datenänderungen gehalten werden, bevor sie im `ModelContainer` gespeichert werden.
+
+Um Ihre Software für die Verwendung von SwiftData zu aktivieren, erstellen Sie zuerst ein Modell:
 
 ```swift
+import Foundation
+import SwiftData
+
 @Model
 class Book {  // Modelle MÜSSEN Klassen sein!
     var title: String
@@ -435,7 +442,7 @@ Löschen Sie ein SwiftData-Objekt:
     }
 ```
 
-Hinzufügen eines Kontexts und von Beispieldaten für `#Preview:
+Einen Kontext und Beispieldaten für `#Preview` hinzufügen:
 
 ```swift
 #Preview {
@@ -452,12 +459,12 @@ Hinzufügen eines Kontexts und von Beispieldaten für `#Preview:
 }
 ```
 
-## Weitere Themen
+## Andere Themen
 
 - Maschinelles Lernen
 - Ihren Code mit `fatalError()` abstürzen lassen und warum das tatsächlich eine gute Sache sein könnte.
-- Wie man überprüft, ob ein String korrekt geschrieben ist, mit `UITextChecker` (es ist ein unordentliches Biest).
-- Verwenden von `DragGesture()`, um dem Benutzer zu ermöglichen, Ansichten zu verschieben, und sie dann wieder an ihren ursprünglichen Ort zu schnappen.
+- Wie man überprüft, ob ein String korrekt geschrieben ist, mit `UITextChecker` (es ist ein unübersichtliches Biest).
+- `DragGesture()` verwenden, um dem Benutzer zu ermöglichen, Ansichten zu verschieben, und sie dann an ihren ursprünglichen Ort zurückschnappen lassen.
 - Bundles: Wie man eine Datei `whatever.txt` in Ihr Bundle legt, wie man darauf zugreift (d.h. sie liest). Dateinamen müssen im gesamten Bundle eindeutig sein.
 
 ## Fragen & Todos

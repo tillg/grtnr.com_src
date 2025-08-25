@@ -341,11 +341,18 @@ This is how you send something to an HTTPS Endpoint:
 
 ## SwiftData
 
-?? What is the relationship betweeen Model, ModelContext and ModelContainer??
+The moving parts we have are
 
-Make a model first:
+- The `Model`: This is the data structure. The object(s) and it's fields
+- The `ModelContainer`: This is the persistent storage. Think of it like the file in which the data is written on the server.
+- The `ModelContext`: That's the in-memory kept version of your data and where the data modifications are held before being saved to the `ModelContainer`.
+
+To enable your software to use SwiftData, make a model first:
 
 ```swift
+import Foundation
+import SwiftData
+
 @Model
 class Book {  // Models HAVE TO BE Classes!
     var title: String
@@ -429,7 +436,7 @@ Delete a SwiftData object:
     }
 ```
 
-Adding a context and sample data for `#Preview:
+Adding a context and sample data for `#Preview`:
 
 ```swift
 #Preview {
