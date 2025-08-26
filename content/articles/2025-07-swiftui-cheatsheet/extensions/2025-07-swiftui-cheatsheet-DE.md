@@ -6,21 +6,21 @@ image: swiftui.png
 summary: Mein Spickzettel, erstellt während des Kurses [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: de
 source_language: en
-source_hash: 1ceced4ac231fe904e5e5f713184064cfe03b219f6d778efc979718f50a27d58
+source_hash: 4a6cf116522828b17669d7806d359f5c48ae77a906d84ef70b966048913b3390
 translator: gpt-4o-2024-08-06
-translate_date: 2025-08-25T08:27:56.611482
+translate_date: 2025-08-26T08:28:38.669965
 generated_by: simplified-translation-system
 ---
 
-Im Juni 2025 begann ich mit dem Kurs [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). Es ist ein großartiger Kurs, und ich bin wirklich beeindruckt, wie viel qualitativ hochwertiger Inhalt und Kurse Paul Hudson bereitstellt und pflegt!! Paul, vielen Dank dafür! 🙏🏼
+Im Juni 2025 begann ich mit dem Kurs [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). Es ist ein großartiger Kurs, und ich bin wirklich beeindruckt, wie viel qualitativ hochwertiger Inhalt und Kurse Paul Hudson bereitstellt – und pflegt!! Paul, vielen Dank dafür! 🙏🏼
 
-Aber es ist eine Menge Inhalt, daher hier meine Notizen - hoffentlich in einem leicht navigierbaren Spickzettel-Format. Ich habe eine grobe Struktur im Kopf, werde den Inhalt jedoch nur dann ausfüllen, wenn ich ihn benötige. Erwarten Sie also keine vollständige Übersicht!
+Aber es ist eine Menge Inhalt, daher hier meine Notizen – hoffentlich in einem leicht navigierbaren Spickzettelformat. Ich habe eine grobe Struktur im Kopf, aber ich werde den Inhalt nur dann ausfüllen, wenn ich ihn brauche. Erwarten Sie also keine vollständige Übersicht!
 
 [TOC]
 
 ## Swift
 
-Für einen umfassenden Überblick siehe [Lernen Sie essentielles Swift in einer Stunde](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
+Für einen umfassenden Überblick siehe [Lerne das Wesentliche von Swift in einer Stunde](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
 
 Im folgenden Kapitel habe ich nur die Teile hinzugefügt, die ich mindestens einmal überprüfen musste.
 
@@ -40,16 +40,16 @@ struct Employee {
 
 ### Optionals
 
-- Optionals ermöglichen es uns, das Fehlen von Daten darzustellen, was bedeutet, dass wir sagen können „dieser Integer hat keinen Wert“ – das ist anders als eine feste Zahl wie 0.
+- Optionals ermöglichen es uns, das Fehlen von Daten darzustellen, was bedeutet, dass wir sagen können „dieser Integer hat keinen Wert“ – das unterscheidet sich von einer festen Zahl wie 0.
   - Beispiel: `var str:String?` kann einen String oder nil enthalten
 - Folglich hat alles, was nicht optional ist, definitiv einen Wert, selbst wenn es nur ein leerer String ist.
-- Das Auflösen eines Optionals ist der Prozess, in eine Box zu schauen, um zu sehen, was sie enthält: Wenn ein Wert darin ist, wird er zur Verwendung zurückgegeben, andernfalls wird nil enthalten sein.
+- Das Entpacken eines Optionals ist der Prozess, in eine Box zu schauen, um zu sehen, was sie enthält: Wenn ein Wert darin ist, wird er zur Verwendung zurückgegeben, andernfalls wird nil darin sein.
 - Wir können `if let` verwenden, um Code auszuführen, wenn das Optional einen Wert hat, oder guard let, um Code auszuführen, wenn das Optional keinen Wert hat – aber mit guard müssen wir danach immer die Funktion verlassen.
 
 ```swift
 func printSquare(of number: Int?) {
     guard let number = number else {
-        print("Eingabe fehlt")
+        print("Fehlende Eingabe")
         return
     }
 
@@ -57,14 +57,14 @@ func printSquare(of number: Int?) {
 }
 ```
 
-- Der nil-Koaleszenz-Operator, ??, löst ein Optional auf und gibt dessen Wert zurück oder verwendet stattdessen einen Standardwert.
+- Der nil-Koaleszenz-Operator, ??, entpackt und gibt den Wert eines Optionals zurück oder verwendet stattdessen einen Standardwert.
 
 ```swift
 let new = captains["Serenity"] ?? "N/A"
 ```
 
 - Optional Chaining ermöglicht es uns, ein Optional innerhalb eines anderen Optionals mit einer praktischen Syntax zu lesen.
-- Wenn eine Funktion möglicherweise Fehler wirft, können Sie sie mit try? in ein Optional umwandeln – Sie erhalten entweder den Rückgabewert der Funktion oder nil, wenn ein Fehler auftritt.
+- Wenn eine Funktion Fehler werfen könnte, können Sie sie mit try? in ein Optional umwandeln – Sie erhalten entweder den Rückgabewert der Funktion oder nil, wenn ein Fehler auftritt.
 
 ### Protokolle und Erweiterungen
 
@@ -87,17 +87,17 @@ extension String {
 
 Alle Arrays haben eingebaute `sort()` und `sorted()` Methoden, die verwendet werden können, um das Array zu sortieren.
 
-- `sort()` sortiert das Array an Ort und Stelle
+- `sort()` sortiert das Array direkt
 - `sorted()` gibt ein neues, sortiertes Array zurück.
 
-Wenn das Array einfach ist, können Sie `sort()` direkt aufrufen, wie hier, um ein Array an Ort und Stelle zu sortieren:
+Wenn das Array einfach ist, können Sie einfach `sort()` direkt aufrufen, um ein Array an Ort und Stelle zu sortieren:
 
 ```swift
 var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
 names.sort()
 ```
 
-Wenn Sie komplexere Strukturen haben, müssen Sie den Vergleich mitgeben:
+Wenn Sie komplexere Strukturen haben, müssen Sie den Vergleich übergeben:
 
 ```swift
 struct User {
@@ -117,7 +117,7 @@ users.sort {
 }
 ```
 
-Wir können unsere eigenen Typen `Comparable` konform machen, und wenn wir das tun, erhalten wir auch eine `sorted()` Methode ohne Parameter. Dies erfordert zwei Schritte:
+Wir können unsere eigenen Typen `Comparable` konform machen, und wenn wir dies tun, erhalten wir auch eine `sorted()` Methode ohne Parameter. Dies erfordert zwei Schritte:
 
 1. Fügen Sie die `Comparable`-Konformität zur Definition von User hinzu.
 2. Fügen Sie eine Methode namens `<` hinzu, die zwei Benutzer nimmt und true zurückgibt, wenn der erste vor dem zweiten sortiert werden soll.
@@ -157,7 +157,7 @@ let firstLetter = name[0]
 
 ### Views
 
-- Alles ist eine View in SwiftUI 😜
+- In SwiftUI ist alles eine View 😜
 - Code ausführen, wenn eine View angezeigt wird, mit `onAppear()`.
 
 Sogar `ForEach` ist eine View, deshalb können wir schreiben
@@ -168,7 +168,7 @@ ForEach(0..<5) {
 }
 ```
 
-Hinweis: Wir können nicht `ForEach(0..<5)` schreiben, weil `ForEach` einen `Range<Int>` erwartet, nicht einen `ClosedRange<Int>`!
+Hinweis: Wir können nicht `ForEach(0..<5)` schreiben, da `ForEach` einen `Range<Int>` erwartet, nicht einen `ClosedRange<Int>`!
 
 #### `ForEach` View
 
@@ -199,7 +199,7 @@ struct ContentView: View {
 #### `Stepper`
 
 ![Stepper](stepper.png)
-Ein Stepper ist ein zweigliedriges Steuerelement, das Menschen verwenden, um einen inkrementellen Wert zu erhöhen oder zu verringern.
+Ein Stepper ist ein zweigeteiltes Steuerelement, das verwendet wird, um einen inkrementellen Wert zu erhöhen oder zu verringern.
 
 ```swift
 @State private var count: Int = 0
@@ -232,11 +232,11 @@ List {
 }
 ```
 
-Buttons in Listen: Wenn Sie einen Button in eine Liste setzen, wird das GESAMTE Listenelement anklickbar! Wenn es mehr als einen Button in einer Liste gibt, wird, wo immer Sie auf das Listenelement klicken, ALLE Buttons nacheinander geklickt!
+Buttons in Listen: Wenn Sie einen Button in einer Liste platzieren, wird das GESAMTE Listenelement anklickbar! Wenn es mehr als einen Button in einer Liste gibt, wird, wo auch immer Sie auf das Listenelement klicken, ALLE Buttons nacheinander angeklickt!
 
 Um das zu beheben und das gewünschte Verhalten zu erhalten, verwenden Sie `.buttonStyle(.plain)`
 
-Das Gleiche gilt für HStack:
+Gleiches gilt für HStack:
 
 ```swift
 HStack {
@@ -269,11 +269,11 @@ Image (example)
 }
 ```
 
-![alt text](image.png)
+![alternativer Text](image.png)
 
 Ersetzen Sie `ScaledToFit` durch `ScaledToFill` und erhalten Sie
 
-![alt text](image-1.png)
+![alternativer Text](image-1.png)
 
 ```swift
 struct ContentView: View {
@@ -288,23 +288,23 @@ struct ContentView: View {
 }
 ```
 
-![alt text](image-2.png)
+![alternativer Text](image-2.png)
 
 ### Werkzeugleiste
 
 ### Bundle
 
-Dateien aus unserem App-Bundle lesen, indem wir ihren Pfad mit der `Bundle`-Klasse nachschlagen, einschließlich des Ladens von Strings von dort.
+Dateien aus unserem App-Bundle lesen, indem wir ihren Pfad mit der `Bundle`-Klasse suchen, einschließlich des Ladens von Strings von dort.
 
 ### Animationen
 
 Behandelt in [Tag 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Ich muss die Clips noch einmal ansehen, um meine Notizen/Spickzettel zu extrahieren.
 
 - Animationen implizit mit dem `animation()`-Modifikator erstellen.
-- Animationen mit Verzögerungen und Wiederholungen anpassen und zwischen Ease-in-Ease-out- und Federanimationen wählen.
-- Den `animation()`-Modifikator an Bindungen anhängen, um Änderungen direkt von UI-Steuerelementen zu animieren.
+- Animationen mit Verzögerungen und Wiederholungen anpassen und zwischen Ease-in-Ease-out und Federanimationen wählen.
+- Den `animation()`-Modifikator an Bindungen anhängen, damit wir Änderungen direkt von UI-Steuerelementen aus animieren können.
 - `withAnimation()` verwenden, um explizite Animationen zu erstellen.
-- Mehrere `animation()`-Modifikatoren an eine einzelne View anhängen, um den Animationsstapel zu steuern.
+- Mehrere `animation()`-Modifikatoren an eine einzige View anhängen, damit wir den Animationsstapel steuern können.
 
 ### Daten laden
 
@@ -349,8 +349,8 @@ So senden Sie etwas an einen HTTPS-Endpunkt:
 
 Die beweglichen Teile, die wir haben, sind
 
-- Das `Model`: Dies ist die Datenstruktur. Das Objekt(e) und seine Felder
-- Der `ModelContainer`: Dies ist der persistente Speicher. Denken Sie daran wie an die Datei, in die die Daten auf dem Server geschrieben werden.
+- Das `Model`: Dies ist die Datenstruktur. Das/die Objekt(e) und seine Felder
+- Der `ModelContainer`: Dies ist der persistente Speicher. Denken Sie daran wie die Datei, in die die Daten auf dem Server geschrieben werden.
 - Der `ModelContext`: Das ist die im Speicher gehaltene Version Ihrer Daten und wo die Datenänderungen gehalten werden, bevor sie im `ModelContainer` gespeichert werden.
 
 Um Ihre Software für die Verwendung von SwiftData zu aktivieren, erstellen Sie zuerst ein Modell:
@@ -442,14 +442,14 @@ Löschen Sie ein SwiftData-Objekt:
     }
 ```
 
-Einen Kontext und Beispieldaten für `#Preview` hinzufügen:
+Hinzufügen eines Kontexts und Beispieldaten für `#Preview`:
 
 ```swift
 #Preview {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Book.self, configurations: config)
-        let example = Book(title: "Testbuch", author: "Testautor", genre: "Fantasy", review: "Dies war ein großartiges Buch; ich habe es wirklich genossen.", rating: 4)
+        let example = Book(title: "Testbuch", author: "Testautor", genre: "Fantasy", review: "Das war ein großartiges Buch; ich habe es wirklich genossen.", rating: 4)
 
         return DetailView(book: example)
             .modelContainer(container)
@@ -462,15 +462,16 @@ Einen Kontext und Beispieldaten für `#Preview` hinzufügen:
 ## Andere Themen
 
 - Maschinelles Lernen
-- Ihren Code mit `fatalError()` abstürzen lassen und warum das tatsächlich eine gute Sache sein könnte.
+- Ihren Code mit `fatalError()` zum Absturz bringen und warum das tatsächlich eine gute Sache sein könnte.
 - Wie man überprüft, ob ein String korrekt geschrieben ist, mit `UITextChecker` (es ist ein unübersichtliches Biest).
-- `DragGesture()` verwenden, um dem Benutzer zu ermöglichen, Ansichten zu verschieben, und sie dann an ihren ursprünglichen Ort zurückschnappen lassen.
-- Bundles: Wie man eine Datei `whatever.txt` in Ihr Bundle legt, wie man darauf zugreift (d.h. sie liest). Dateinamen müssen im gesamten Bundle eindeutig sein.
+- Verwenden von `DragGesture()`, um dem Benutzer zu ermöglichen, Ansichten zu verschieben, und sie dann an ihren ursprünglichen Ort zurückschnappen zu lassen.
+- Bundles: Wie man eine Datei `whatever.txt` in Ihr Bundle legt, wie man darauf zugreift (d. h. sie liest). Dateinamen müssen im gesamten Bundle eindeutig sein.
 
 ## Fragen & Todos
 
 - Was sind die Unterschiede zwischen einem `Form` und einem `VStack`?
-- Multi-Screen-Setups: `Sheet` und `NavigationStack`, und wie man sich bewegt
+- Multi-Screen-Setups: `Sheet` und `NavigationStack` und wie man sich bewegt
   - `NavigationStack(path)`
 - Binding: `@State`, `@Bindable`, `@Binding`
 - Wie man Daten in Multi-Screen-Setups weitergibt
+- TODO: Unterschied im Verhalten und Aussehen von Alert und Bestätigungsdialog verstehen.

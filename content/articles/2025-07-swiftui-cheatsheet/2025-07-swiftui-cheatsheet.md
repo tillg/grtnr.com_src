@@ -468,3 +468,4 @@ Adding a context and sample data for `#Preview`:
   - `NavigationStack(path)`
 - Binding: `@State`, `@Bindable`, `@Binding`
 - How to pass data around multi screen setups
+- TODO: Understand differnece in behaviour and look of Alert and Confirmation Dialogue.
