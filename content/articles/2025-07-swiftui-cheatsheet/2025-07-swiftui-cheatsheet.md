@@ -212,6 +212,24 @@ var body: some View {
 - Navigation Bar
 -
 
+### Text
+
+`Text` is a Text field that describes text.
+
+Note: Text fields with different styling can be _plused_ together to form one large text field with parts with different styling inside:
+
+```swift
+Text(page.title)
+    .font(.headline)
++ Text(": ") +
+Text("Page description here")
+    .italic()
+```
+
+And you get a text with different stylings combined:
+
+![alt text](image-4.png)
+
 ### Lists
 
 Building scrolling tables of data using `List`, in particular how it can create rows directly from arrays of data.
@@ -310,6 +328,70 @@ View...
 ```
 
 ?? How is it done, when `loadIt` is async??
+
+### Passing & returning values to/from views
+
+As seen in [Selecting and editing map annotations](https://www.hackingwithswift.com/books/ios-swiftui/selecting-and-editing-map-annotations)
+
+Imagine I have a View that is opened as Sheet and gets in a `Location` (being a self defined `struct`):
+
+```swift
+struct EditView: View {
+    @Environment(\.dismiss) var dismiss
+    var location: Location
+
+    @State private var name: String
+    @State private var description: String
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    TextField("Place name", text: $name)
+                    TextField("Description", text: $description)
+                }
+            }
+            .navigationTitle("Place details")
+            .toolbar {
+                Button("Save") {
+                    dismiss()
+                }
+            }
+        }
+    }
+}
+```
+
+To pass in the `Location` I make an extra initializer:
+
+```swift
+init(location: Location) {
+    self.location = location
+
+    _name = State(initialValue: location.name)
+    _description = State(initialValue: location.description)
+}
+```
+
+Tu _return_ data to the calling code, I pass in a method `onSave`. First create an additional var in my View struct:
+
+```swift
+var onSave: (Location) -> Void
+```
+
+and then extend the initializer like so:
+
+```swift
+init(location: Location, onSave: @escaping (Location) -> Void) {
+    self.location = location
+    self.onSave = onSave
+
+    _name = State(initialValue: location.name)
+    _description = State(initialValue: location.description)
+}
+```
+
+That `@escaping` part is important, and means the function is being stashed away for user later on, rather than being called immediately, and it’s needed here because the `onSave` function will get called only when the user presses Save.
 
 ## Networking
 
@@ -452,6 +534,48 @@ Adding a context and sample data for `#Preview`:
     }
 }
 ```
+
+## Core Image (Image Filters)
+
+It's tricky... Look at the class explaining it [here](https://www.hackingwithswift.com/books/ios-swiftui/basic-image-filtering-using-core-image)
+
+### TODO
+
+- Explain the different classes / objects there are, what functionality is provided by which one, and how to transistion from one to the other: SwiftUI.Image - CGImage - CIImage
+- Explain the context & filter concept.
+- Give example
+
+## MapKit
+
+- [Maps Video](https://www.hackingwithswift.com/books/ios-swiftui/integrating-mapkit-with-swiftui)
+- `import MapKit`
+- `Map()` shows a map ;)
+- `.mapStyle(.imagery)` or `.hybrid` or `.mapStyle(.hybrid(elevation: .realistic))`
+- _Entering_ locations as `MapCameraPosition`:
+
+```swift
+let startPosition = MapCameraPosition.region(
+    MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 56, longitude: -3),
+        span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
+    )
+)
+```
+
+- Getting Map taps as coordinates with `MapReader`, i.e. calculation from Screen Coordinates --> Long/Lat
+
+```swift
+MapReader { proxy in
+    Map(initialPosition: startPosition)
+        .onTapGesture { position in
+            if let coordinate = proxy.convert(position, from: .local) {
+                print("Tapped at \(coordinate)")
+            }
+        }
+}
+```
+
+- Have `Marker` on maps
 
 ## Other topics
 

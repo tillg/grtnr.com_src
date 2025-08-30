@@ -3,24 +3,24 @@ Tags: tech
 Title: SwiftUI Spickzettel
 Date: 2025-08-03
 image: swiftui.png
-summary: Mein Spickzettel, erstellt während des Kurses [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
+summary: Mein Spickzettel, erstellt während des [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: de
 source_language: en
-source_hash: 4a6cf116522828b17669d7806d359f5c48ae77a906d84ef70b966048913b3390
+source_hash: 12138c658800902c8d7e342da3655fe811145e94a94130c36bd16e530e93ccea
 translator: gpt-4o-2024-08-06
-translate_date: 2025-08-26T08:28:38.669965
+translate_date: 2025-08-30T15:19:16.194544
 generated_by: simplified-translation-system
 ---
 
-Im Juni 2025 begann ich mit dem Kurs [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). Es ist ein großartiger Kurs, und ich bin wirklich beeindruckt, wie viel qualitativ hochwertiger Inhalt und Kurse Paul Hudson bereitstellt – und pflegt!! Paul, vielen Dank dafür! 🙏🏼
+Im Juni 2025 begann ich mit dem Kurs [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). Es ist ein großartiger Kurs, und ich bin wirklich beeindruckt, wie viel qualitativ hochwertiger Inhalt und Kurse Paul Hudson bereitstellt und pflegt!! Paul, vielen Dank dafür! 🙏🏼
 
-Aber es ist eine Menge Inhalt, daher hier meine Notizen – hoffentlich in einem leicht navigierbaren Spickzettelformat. Ich habe eine grobe Struktur im Kopf, aber ich werde den Inhalt nur dann ausfüllen, wenn ich ihn brauche. Erwarten Sie also keine vollständige Übersicht!
+Aber es ist eine Menge Inhalt, daher sind hier meine Notizen – hoffentlich in einem leicht navigierbaren Spickzettel-Format. Ich habe eine grobe Struktur im Kopf, aber ich werde den Inhalt nur dann ausfüllen, wenn ich ihn benötige. Erwarten Sie also keine vollständige Übersicht!
 
 [TOC]
 
 ## Swift
 
-Für einen umfassenden Überblick siehe [Lerne das Wesentliche von Swift in einer Stunde](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
+Für einen umfassenden Überblick siehe [Lernen Sie essentielles Swift in einer Stunde](https://www.hackingwithswift.com/articles/242/learn-essential-swift-in-one-hour).
 
 Im folgenden Kapitel habe ich nur die Teile hinzugefügt, die ich mindestens einmal überprüfen musste.
 
@@ -42,7 +42,7 @@ struct Employee {
 
 - Optionals ermöglichen es uns, das Fehlen von Daten darzustellen, was bedeutet, dass wir sagen können „dieser Integer hat keinen Wert“ – das unterscheidet sich von einer festen Zahl wie 0.
   - Beispiel: `var str:String?` kann einen String oder nil enthalten
-- Folglich hat alles, was nicht optional ist, definitiv einen Wert, selbst wenn es nur ein leerer String ist.
+- Folglich hat alles, was nicht optional ist, definitiv einen Wert, selbst wenn es sich nur um einen leeren String handelt.
 - Das Entpacken eines Optionals ist der Prozess, in eine Box zu schauen, um zu sehen, was sie enthält: Wenn ein Wert darin ist, wird er zur Verwendung zurückgegeben, andernfalls wird nil darin sein.
 - Wir können `if let` verwenden, um Code auszuführen, wenn das Optional einen Wert hat, oder guard let, um Code auszuführen, wenn das Optional keinen Wert hat – aber mit guard müssen wir danach immer die Funktion verlassen.
 
@@ -57,7 +57,7 @@ func printSquare(of number: Int?) {
 }
 ```
 
-- Der nil-Koaleszenz-Operator, ??, entpackt und gibt den Wert eines Optionals zurück oder verwendet stattdessen einen Standardwert.
+- Der nil-Koaleszenzoperator, ??, entpackt und gibt den Wert eines Optionals zurück oder verwendet stattdessen einen Standardwert.
 
 ```swift
 let new = captains["Serenity"] ?? "N/A"
@@ -87,17 +87,17 @@ extension String {
 
 Alle Arrays haben eingebaute `sort()` und `sorted()` Methoden, die verwendet werden können, um das Array zu sortieren.
 
-- `sort()` sortiert das Array direkt
+- `sort()` sortiert das Array an Ort und Stelle
 - `sorted()` gibt ein neues, sortiertes Array zurück.
 
-Wenn das Array einfach ist, können Sie einfach `sort()` direkt aufrufen, um ein Array an Ort und Stelle zu sortieren:
+Wenn das Array einfach ist, können Sie `sort()` direkt aufrufen, um ein Array an Ort und Stelle zu sortieren:
 
 ```swift
 var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
 names.sort()
 ```
 
-Wenn Sie komplexere Strukturen haben, müssen Sie den Vergleich übergeben:
+Wenn Sie komplexere Strukturen haben, müssen Sie den Vergleich mitgeben:
 
 ```swift
 struct User {
@@ -117,7 +117,7 @@ users.sort {
 }
 ```
 
-Wir können unsere eigenen Typen `Comparable` konform machen, und wenn wir dies tun, erhalten wir auch eine `sorted()` Methode ohne Parameter. Dies erfordert zwei Schritte:
+Wir können unsere eigenen Typen `Comparable` konform machen, und wenn wir das tun, erhalten wir auch eine `sorted()` Methode ohne Parameter. Dies erfordert zwei Schritte:
 
 1. Fügen Sie die `Comparable`-Konformität zur Definition von User hinzu.
 2. Fügen Sie eine Methode namens `<` hinzu, die zwei Benutzer nimmt und true zurückgibt, wenn der erste vor dem zweiten sortiert werden soll.
@@ -148,16 +148,16 @@ let firstLetter = name[0]
 
 ### Daten
 
-`Date`, `DateComponents` und `DateFormatter`
+`Date`, `DateComponents`, und `DateFormatter`
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) ist ein schönes Tool, um die verschiedenen Views & Komponenten zu navigieren und auszuprobieren.
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) ist ein nettes Tool, um die verschiedenen Views & Komponenten zu navigieren und auszuprobieren.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
 ### Views
 
-- In SwiftUI ist alles eine View 😜
+- Alles ist eine View in SwiftUI 😜
 - Code ausführen, wenn eine View angezeigt wird, mit `onAppear()`.
 
 Sogar `ForEach` ist eine View, deshalb können wir schreiben
@@ -168,7 +168,7 @@ ForEach(0..<5) {
 }
 ```
 
-Hinweis: Wir können nicht `ForEach(0..<5)` schreiben, da `ForEach` einen `Range<Int>` erwartet, nicht einen `ClosedRange<Int>`!
+Hinweis: Wir können nicht `ForEach(0..<5)` schreiben, weil `ForEach` einen `Range<Int>` erwartet, nicht einen `ClosedRange<Int>`!
 
 #### `ForEach` View
 
@@ -199,7 +199,7 @@ struct ContentView: View {
 #### `Stepper`
 
 ![Stepper](stepper.png)
-Ein Stepper ist ein zweigeteiltes Steuerelement, das verwendet wird, um einen inkrementellen Wert zu erhöhen oder zu verringern.
+Ein Stepper ist eine zweigeteilte Steuerung, die Benutzer verwenden, um einen inkrementellen Wert zu erhöhen oder zu verringern.
 
 ```swift
 @State private var count: Int = 0
@@ -212,15 +212,33 @@ var body: some View {
 }
 ```
 
-- `DatePicker` für Daten. Verwenden des Parameters `displayedComponents`, um Daten oder Zeiten zu steuern.
+- `DatePicker` für Daten. Verwenden Sie den Parameter `displayedComponents`, um Daten oder Zeiten zu steuern.
 - `Form`
 - `Picker`
 - Navigationsleiste
 -
 
+### Text
+
+`Text` ist ein Textfeld, das Text beschreibt.
+
+Hinweis: Textfelder mit unterschiedlichem Styling können zusammengefügt werden, um ein großes Textfeld mit unterschiedlichen Stilelementen zu bilden:
+
+```swift
+Text(page.title)
+    .font(.headline)
++ Text(": ") +
+Text("Seitenbeschreibung hier")
+    .italic()
+```
+
+Und Sie erhalten einen Text mit unterschiedlichen kombinierten Stilelementen:
+
+![alt text](image-4.png)
+
 ### Listen
 
-Scrollende Datentabellen mit `List` erstellen, insbesondere wie sie Zeilen direkt aus Datenarrays erstellen kann.
+Erstellen von scrollbaren Datentabellen mit `List`, insbesondere wie es Zeilen direkt aus Datenarrays erstellen kann.
 
 ```swift
 List {
@@ -232,11 +250,11 @@ List {
 }
 ```
 
-Buttons in Listen: Wenn Sie einen Button in einer Liste platzieren, wird das GESAMTE Listenelement anklickbar! Wenn es mehr als einen Button in einer Liste gibt, wird, wo auch immer Sie auf das Listenelement klicken, ALLE Buttons nacheinander angeklickt!
+Buttons in Listen: Wenn Sie einen Button in eine Liste setzen, wird das GESAMTE Listenelement anklickbar! Wenn es mehr als einen Button in einer Liste gibt, wird, wo immer Sie auf das Listenelement klicken, ALLE Buttons nacheinander geklickt!
 
 Um das zu beheben und das gewünschte Verhalten zu erhalten, verwenden Sie `.buttonStyle(.plain)`
 
-Gleiches gilt für HStack:
+Dasselbe gilt für HStack:
 
 ```swift
 HStack {
@@ -269,11 +287,11 @@ Image (example)
 }
 ```
 
-![alternativer Text](image.png)
+![alt text](image.png)
 
 Ersetzen Sie `ScaledToFit` durch `ScaledToFill` und erhalten Sie
 
-![alternativer Text](image-1.png)
+![alt text](image-1.png)
 
 ```swift
 struct ContentView: View {
@@ -288,23 +306,23 @@ struct ContentView: View {
 }
 ```
 
-![alternativer Text](image-2.png)
+![alt text](image-2.png)
 
 ### Werkzeugleiste
 
 ### Bundle
 
-Dateien aus unserem App-Bundle lesen, indem wir ihren Pfad mit der `Bundle`-Klasse suchen, einschließlich des Ladens von Strings von dort.
+Lesen von Dateien aus unserem App-Bundle, indem wir ihren Pfad mit der `Bundle`-Klasse nachschlagen, einschließlich des Ladens von Strings von dort.
 
 ### Animationen
 
-Behandelt in [Tag 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Ich muss die Clips noch einmal ansehen, um meine Notizen/Spickzettel zu extrahieren.
+Behandelt in [Tag 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Ich muss mir die Clips noch einmal ansehen, um meine Notizen/Spickzettel zu extrahieren.
 
-- Animationen implizit mit dem `animation()`-Modifikator erstellen.
-- Animationen mit Verzögerungen und Wiederholungen anpassen und zwischen Ease-in-Ease-out und Federanimationen wählen.
-- Den `animation()`-Modifikator an Bindungen anhängen, damit wir Änderungen direkt von UI-Steuerelementen aus animieren können.
-- `withAnimation()` verwenden, um explizite Animationen zu erstellen.
-- Mehrere `animation()`-Modifikatoren an eine einzige View anhängen, damit wir den Animationsstapel steuern können.
+- Erstellen von Animationen implizit mit dem `animation()`-Modifier.
+- Anpassen von Animationen mit Verzögerungen und Wiederholungen sowie die Wahl zwischen Ease-in-Ease-out- und Federanimationen.
+- Anhängen des `animation()`-Modifiers an Bindungen, sodass wir Änderungen direkt von UI-Steuerelementen animieren können.
+- Verwenden von `withAnimation()`, um explizite Animationen zu erstellen.
+- Anhängen mehrerer `animation()`-Modifier an eine einzige View, sodass wir den Animationsstapel steuern können.
 
 ### Daten laden
 
@@ -317,14 +335,78 @@ View...
 
 ?? Wie wird es gemacht, wenn `loadIt` asynchron ist??
 
-## Netzwerk
+### Werte an Views übergeben und von Views zurückgeben
+
+Wie gesehen in [Auswählen und Bearbeiten von Kartenanmerkungen](https://www.hackingwithswift.com/books/ios-swiftui/selecting-and-editing-map-annotations)
+
+Stellen Sie sich vor, ich habe eine View, die als Sheet geöffnet wird und eine `Location` (eine selbst definierte `struct`) erhält:
+
+```swift
+struct EditView: View {
+    @Environment(\.dismiss) var dismiss
+    var location: Location
+
+    @State private var name: String
+    @State private var description: String
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    TextField("Ortsname", text: $name)
+                    TextField("Beschreibung", text: $description)
+                }
+            }
+            .navigationTitle("Ortsdetails")
+            .toolbar {
+                Button("Speichern") {
+                    dismiss()
+                }
+            }
+        }
+    }
+}
+```
+
+Um die `Location` zu übergeben, mache ich einen zusätzlichen Initialisierer:
+
+```swift
+init(location: Location) {
+    self.location = location
+
+    _name = State(initialValue: location.name)
+    _description = State(initialValue: location.description)
+}
+```
+
+Um Daten an den aufrufenden Code _zurückzugeben_, übergebe ich eine Methode `onSave`. Zuerst erstelle ich eine zusätzliche Variable in meiner View-Struktur:
+
+```swift
+var onSave: (Location) -> Void
+```
+
+und erweitere dann den Initialisierer wie folgt:
+
+```swift
+init(location: Location, onSave: @escaping (Location) -> Void) {
+    self.location = location
+    self.onSave = onSave
+
+    _name = State(initialValue: location.name)
+    _description = State(initialValue: location.description)
+}
+```
+
+Der Teil `@escaping` ist wichtig und bedeutet, dass die Funktion für die spätere Verwendung gespeichert wird, anstatt sofort aufgerufen zu werden, und es ist hier notwendig, weil die `onSave`-Funktion nur aufgerufen wird, wenn der Benutzer auf Speichern drückt.
+
+## Networking
 
 So senden Sie etwas an einen HTTPS-Endpunkt:
 
 ```swift
  func placeOrder() async {
         guard let encoded = try? JSONEncoder().encode(order) else {
-            print("Bestellung konnte nicht kodiert werden")
+            print("Bestellung konnte nicht codiert werden")
             return
         }
 
@@ -349,9 +431,9 @@ So senden Sie etwas an einen HTTPS-Endpunkt:
 
 Die beweglichen Teile, die wir haben, sind
 
-- Das `Model`: Dies ist die Datenstruktur. Das/die Objekt(e) und seine Felder
-- Der `ModelContainer`: Dies ist der persistente Speicher. Denken Sie daran wie die Datei, in die die Daten auf dem Server geschrieben werden.
-- Der `ModelContext`: Das ist die im Speicher gehaltene Version Ihrer Daten und wo die Datenänderungen gehalten werden, bevor sie im `ModelContainer` gespeichert werden.
+- Das `Model`: Dies ist die Datenstruktur. Das Objekt/die Objekte und seine/ihre Felder
+- Der `ModelContainer`: Dies ist der persistente Speicher. Denken Sie daran wie an die Datei, in die die Daten auf dem Server geschrieben werden.
+- Der `ModelContext`: Das ist die im Speicher gehaltene Version Ihrer Daten und wo die Datenänderungen gespeichert werden, bevor sie in den `ModelContainer` gespeichert werden.
 
 Um Ihre Software für die Verwendung von SwiftData zu aktivieren, erstellen Sie zuerst ein Modell:
 
@@ -387,7 +469,7 @@ struct BookwormApp: App {
 }
 ```
 
-Verwenden Sie die Daten in Ihrer Ansicht:
+Verwenden Sie die Daten in Ihrer View:
 
 ```swift
 struct ContentView: View {
@@ -399,7 +481,7 @@ struct ContentView: View {
     ...
 ```
 
-Geben Sie ein SwiftData-Objekt an eine nachgelagerte Ansicht weiter:
+Übergeben Sie ein SwiftData-Objekt an eine nachgelagerte View:
 
 ```swift
 struct DetailView: View {
@@ -433,7 +515,7 @@ struct AddBookView: View {
 }
 ```
 
-Löschen Sie ein SwiftData-Objekt:
+Löschen eines SwiftData-Objekts:
 
 ```swift
     func deleteBook() {
@@ -449,7 +531,7 @@ Hinzufügen eines Kontexts und Beispieldaten für `#Preview`:
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Book.self, configurations: config)
-        let example = Book(title: "Testbuch", author: "Testautor", genre: "Fantasy", review: "Das war ein großartiges Buch; ich habe es wirklich genossen.", rating: 4)
+        let example = Book(title: "Testbuch", author: "Testautor", genre: "Fantasy", review: "Dies war ein großartiges Buch; Ich habe es wirklich genossen.", rating: 4)
 
         return DetailView(book: example)
             .modelContainer(container)
@@ -459,19 +541,50 @@ Hinzufügen eines Kontexts und Beispieldaten für `#Preview`:
 }
 ```
 
-## Andere Themen
+## Core Image (Bildfilter)
+
+Es ist knifflig... Schauen Sie sich die Klasse an, die es [hier](https://www.hackingwithswift.com/books/ios-swiftui/basic-image-filtering-using-core-image) erklärt
+
+### TODO
+
+- Erklären Sie die verschiedenen Klassen/Objekte, die es gibt, welche Funktionalität von welchem bereitgestellt wird und wie man von einem zum anderen übergeht: SwiftUI.Image - CGImage - CIImage
+- Erklären Sie das Kontext- und Filterkonzept.
+- Geben Sie ein Beispiel
+
+## MapKit
+
+- [Maps Video](https://www.hackingwithswift.com/books/ios-swiftui/integrating-mapkit-with-swiftui)
+- `import MapKit`
+- `Map()` zeigt eine Karte ;)
+- `.mapStyle(.imagery)` oder `.hybrid` oder `.mapStyle(.hybrid(elevation: .realistic))`
+- _Eingeben_ von Standorten als `MapCameraPosition`:
+
+```swift
+let startPosition = MapCameraPosition.region(
+    MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 56, longitude: -3),
+        span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
+    )
+)
+```
+
+- Erhalten von Kartentipps als Koordinaten mit `MapReader`, d.h. Berechnung von Bildschirmkoordinaten --> Länge/Breite
+
+```swift
+MapReader { proxy in
+    Map(initialPosition: startPosition)
+        .onTapGesture { position in
+            if let coordinate = proxy.convert(position, from: .local) {
+                print("Angetippt bei \(coordinate)")
+            }
+        }
+}
+```
+
+- Haben von `Marker` auf Karten
+
+## Weitere Themen
 
 - Maschinelles Lernen
-- Ihren Code mit `fatalError()` zum Absturz bringen und warum das tatsächlich eine gute Sache sein könnte.
-- Wie man überprüft, ob ein String korrekt geschrieben ist, mit `UITextChecker` (es ist ein unübersichtliches Biest).
-- Verwenden von `DragGesture()`, um dem Benutzer zu ermöglichen, Ansichten zu verschieben, und sie dann an ihren ursprünglichen Ort zurückschnappen zu lassen.
-- Bundles: Wie man eine Datei `whatever.txt` in Ihr Bundle legt, wie man darauf zugreift (d. h. sie liest). Dateinamen müssen im gesamten Bundle eindeutig sein.
-
-## Fragen & Todos
-
-- Was sind die Unterschiede zwischen einem `Form` und einem `VStack`?
-- Multi-Screen-Setups: `Sheet` und `NavigationStack` und wie man sich bewegt
-  - `NavigationStack(path)`
-- Binding: `@State`, `@Bindable`, `@Binding`
-- Wie man Daten in Multi-Screen-Setups weitergibt
-- TODO: Unterschied im Verhalten und Aussehen von Alert und Bestätigungsdialog verstehen.
+- Absturz Ihres Codes mit `fatalError()`, und warum das tatsächlich eine gute Sache sein könnte.
+- Wie man überprüft, ob ein String korrekt geschrieben ist, mit `UITextChecker`

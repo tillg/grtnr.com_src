@@ -6,15 +6,15 @@ image: swiftui.png
 summary: Mon aide-mémoire, construit en suivant [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: fr
 source_language: en
-source_hash: 4a6cf116522828b17669d7806d359f5c48ae77a906d84ef70b966048913b3390
+source_hash: 12138c658800902c8d7e342da3655fe811145e94a94130c36bd16e530e93ccea
 translator: gpt-4o-2024-08-06
-translate_date: 2025-08-26T08:29:02.394099
+translate_date: 2025-08-30T15:20:05.517374
 generated_by: simplified-translation-system
 ---
 
-En juin 2025, j'ai commencé à travailler sur [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). C'est un excellent cours, et je suis vraiment impressionné par la quantité de contenu de qualité et de cours que Paul Hudson fournit - et maintient !! Paul, merci beaucoup pour cela ! 🙏🏼
+En juin 2025, j'ai commencé à travailler sur [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). C'est un excellent cours, et je suis vraiment impressionné par la quantité de contenu de qualité et de cours que Paul Hudson propose - et maintient !! Paul, merci beaucoup pour cela ! 🙏🏼
 
-Mais c'est beaucoup de contenu, donc voici mes notes - j'espère dans un format d'aide-mémoire facile à naviguer. J'ai une structure générale en tête, mais je ne remplirai le contenu que lorsque j'en aurai besoin. Ne vous attendez donc pas à une vue d'ensemble complète !
+Mais c'est beaucoup de contenu, alors voici mes notes - j'espère dans un format d'aide-mémoire facile à naviguer. J'ai une structure approximative en tête, mais je ne remplirai le contenu que lorsque j'en aurai besoin. Ne vous attendez donc pas à une vue d'ensemble complète !
 
 [TOC]
 
@@ -97,7 +97,7 @@ var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
 names.sort()
 ```
 
-Si vous avez des structures plus complexes, vous devez transmettre la comparaison :
+Si vous avez des structures plus complexes, vous devez passer la comparaison :
 
 ```swift
 struct User {
@@ -117,10 +117,10 @@ users.sort {
 }
 ```
 
-Nous pouvons faire en sorte que nos propres types soient conformes à `Comparable`, et lorsque nous le faisons, nous obtenons également une méthode `sorted()` sans paramètres. Cela nécessite deux étapes :
+Nous pouvons faire en sorte que nos propres types soient conformes à `Comparable`, et lorsque nous le faisons, nous obtenons également une méthode `sorted()` sans paramètres. Cela prend deux étapes :
 
 1. Ajouter la conformité `Comparable` à la définition de User.
-2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et renvoie vrai si le premier doit être trié avant le second.
+2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et renvoie true si le premier doit être trié avant le second.
 
 Voici à quoi cela ressemble en code :
 
@@ -152,8 +152,8 @@ let firstLetter = name[0]
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil sympa pour naviguer et jouer avec les différentes vues et composants.
-- [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un bel outil pour naviguer et jouer avec les différentes vues et composants.
+- [Guide des interfaces humaines](https://developer.apple.com/design/human-interface-guidelines/components)
 
 ### Vues
 
@@ -182,7 +182,7 @@ Nous l'utilisons généralement pour créer des sous-vues basées sur un compteu
 import SwiftUI
 
 struct ContentView: View {
-  let items = ["Apple", "Banana", "Cherry"]
+  let items = ["Pomme", "Banane", "Cerise"]
 
   var body: some View {
     List {
@@ -218,6 +218,24 @@ var body: some View {
 - Barre de navigation
 -
 
+### Texte
+
+`Text` est un champ de texte qui décrit du texte.
+
+Remarque : Les champs de texte avec un style différent peuvent être _additionnés_ pour former un grand champ de texte avec des parties de style différent à l'intérieur :
+
+```swift
+Text(page.title)
+    .font(.headline)
++ Text(": ") +
+Text("Description de la page ici")
+    .italic()
+```
+
+Et vous obtenez un texte avec différents styles combinés :
+
+![texte alternatif](image-4.png)
+
 ### Listes
 
 Construire des tableaux de données défilants en utilisant `List`, en particulier comment il peut créer des lignes directement à partir de tableaux de données.
@@ -232,7 +250,7 @@ List {
 }
 ```
 
-Boutons dans les listes : Lorsque vous placez un bouton dans une liste, l'ENTIER élément de la liste devient cliquable ! S'il y a plus d'un bouton dans une liste, où que vous cliquiez sur l'élément de la liste, cela clique sur TOUS les boutons les uns après les autres !
+Boutons dans les listes : Lorsque vous placez un bouton dans une liste, l'ENTIER élément de la liste devient cliquable ! S'il y a plus d'un bouton dans une liste, où que vous cliquiez sur l'élément de la liste, cela clique sur TOUS les boutons l'un après l'autre !
 
 Pour corriger cela et obtenir le comportement souhaité, utilisez `.buttonStyle(.plain)`
 
@@ -294,7 +312,7 @@ struct ContentView: View {
 
 ### Bundle
 
-Lire des fichiers depuis notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes depuis celui-ci.
+Lire des fichiers depuis notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes à partir de là.
 
 ### Animations
 
@@ -302,11 +320,11 @@ Couvert dans [Jour 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO
 
 - Créer des animations implicitement en utilisant le modificateur `animation()`.
 - Personnaliser les animations avec des délais et des répétitions, et choisir entre des animations ease-in-ease-out et des animations à ressort.
-- Attacher le modificateur `animation()` à des liaisons, afin que nous puissions animer les changements directement depuis les contrôles de l'interface utilisateur.
+- Attacher le modificateur animation() aux liaisons, afin que nous puissions animer les changements directement depuis les contrôles de l'interface utilisateur.
 - Utiliser `withAnimation()` pour créer des animations explicites.
 - Attacher plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
 
-### Chargement de données
+### Chargement des données
 
 Si c'est synchrone :
 
@@ -315,11 +333,75 @@ View...
     .onAppear(loadIt)
 ```
 
-?? Comment cela se fait-il, lorsque `loadIt` est asynchrone ??
+?? Comment cela se fait-il lorsque `loadIt` est asynchrone ??
+
+### Passer et retourner des valeurs vers/depuis des vues
+
+Comme vu dans [Sélection et édition d'annotations de carte](https://www.hackingwithswift.com/books/ios-swiftui/selecting-and-editing-map-annotations)
+
+Imaginez que j'ai une vue qui est ouverte comme une feuille et reçoit un `Location` (étant une `struct` définie par l'utilisateur) :
+
+```swift
+struct EditView: View {
+    @Environment(\.dismiss) var dismiss
+    var location: Location
+
+    @State private var name: String
+    @State private var description: String
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    TextField("Nom du lieu", text: $name)
+                    TextField("Description", text: $description)
+                }
+            }
+            .navigationTitle("Détails du lieu")
+            .toolbar {
+                Button("Enregistrer") {
+                    dismiss()
+                }
+            }
+        }
+    }
+}
+```
+
+Pour passer le `Location`, je fais un initialiseur supplémentaire :
+
+```swift
+init(location: Location) {
+    self.location = location
+
+    _name = State(initialValue: location.name)
+    _description = State(initialValue: location.description)
+}
+```
+
+Pour _retourner_ des données au code appelant, je passe une méthode `onSave`. Tout d'abord, créez une variable supplémentaire dans ma structure de vue :
+
+```swift
+var onSave: (Location) -> Void
+```
+
+et puis étendez l'initialiseur comme suit :
+
+```swift
+init(location: Location, onSave: @escaping (Location) -> Void) {
+    self.location = location
+    self.onSave = onSave
+
+    _name = State(initialValue: location.name)
+    _description = State(initialValue: location.description)
+}
+```
+
+La partie `@escaping` est importante, et signifie que la fonction est mise de côté pour une utilisation ultérieure, plutôt que d'être appelée immédiatement, et c'est nécessaire ici car la fonction `onSave` sera appelée uniquement lorsque l'utilisateur appuiera sur Enregistrer.
 
 ## Réseau
 
-Voici comment vous envoyez quelque chose à un point de terminaison HTTPS :
+Voici comment envoyer quelque chose à un point de terminaison HTTPS :
 
 ```swift
  func placeOrder() async {
@@ -360,7 +442,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Book {  // Les modèles DOIVENT être des classes !
+class Book {  // Les modèles DOIVENT ÊTRE des classes !
     var title: String
     var author: String
     var genre: String
@@ -459,19 +541,49 @@ Ajoutez un contexte et des données d'exemple pour `#Preview` :
 }
 ```
 
+## Core Image (Filtres d'image)
+
+C'est compliqué... Regardez la classe expliquant cela [ici](https://www.hackingwithswift.com/books/ios-swiftui/basic-image-filtering-using-core-image)
+
+### TODO
+
+- Expliquer les différentes classes / objets qui existent, quelle fonctionnalité est fournie par lequel, et comment passer de l'un à l'autre : SwiftUI.Image - CGImage - CIImage
+- Expliquer le concept de contexte et de filtre.
+- Donner un exemple
+
+## MapKit
+
+- [Vidéo sur les cartes](https://www.hackingwithswift.com/books/ios-swiftui/integrating-mapkit-with-swiftui)
+- `import MapKit`
+- `Map()` affiche une carte ;)
+- `.mapStyle(.imagery)` ou `.hybrid` ou `.mapStyle(.hybrid(elevation: .realistic))`
+- _Entrer_ des emplacements en tant que `MapCameraPosition` :
+
+```swift
+let startPosition = MapCameraPosition.region(
+    MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 56, longitude: -3),
+        span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
+    )
+)
+```
+
+- Obtenir des clics sur la carte en tant que coordonnées avec `MapReader`, c'est-à-dire le calcul des coordonnées de l'écran --> Long/Lat
+
+```swift
+MapReader { proxy in
+    Map(initialPosition: startPosition)
+        .onTapGesture { position in
+            if let coordinate = proxy.convert(position, from: .local) {
+                print("Clic à \(coordinate)")
+            }
+        }
+}
+```
+
+- Avoir des `Marker` sur les cartes
+
 ## Autres sujets
 
 - Apprentissage automatique
 - Faire planter votre code avec `fatalError()`, et pourquoi cela pourrait en fait être une bonne chose.
-- Comment vérifier si une chaîne est orthographiée correctement, en utilisant `UITextChecker` (c'est une bête compliquée).
-- Utiliser `DragGesture()` pour permettre à l'utilisateur de déplacer des vues, puis les faire revenir à leur emplacement d'origine.
-- Bundles : Comment mettre un fichier `whatever.txt` dans votre bundle, comment y accéder (c'est-à-dire le lire). Les noms de fichiers doivent être uniques dans un bundle.
-
-## Questions & Tâches
-
-- Quelles sont les différences entre un `Form` et un `VStack` ?
-- Configurations multi-écrans : `Sheet` et `NavigationStack`, et comment se déplacer
-  - `NavigationStack(path)`
-- Liaison : `@State`, `@Bindable`, `@Binding`
-- Comment faire passer des données dans des configurations multi-écrans
-- TODO : Comprendre la différence de comportement et d'apparence entre Alert et Confirmation Dialogue.
