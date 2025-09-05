@@ -144,6 +144,29 @@ let firstLetter = name[0]
 
 `Date`, `DateComponents`, and `DateFormatter`
 
+### `enum`
+
+`enum` are created like so:
+
+```swift
+enum Weekday {
+    case monday, tuesday, wednesday, thursday, friday
+}
+```
+
+A `switch` statement with `enum` looks like this:
+
+```swift
+switch loadingState {
+case .loading:
+    LoadingView()
+case .success:
+    SuccessView()
+case .failed:
+    FailedView()
+}
+```
+
 ## SwiftUI
 
 - [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) is a nice tool to navigate and play around the different Views & components.
@@ -166,7 +189,7 @@ Note: We can't write `ForEach(0..<5)`, because `ForEach`expects a `Range<Int>`, 
 
 #### `ForEach` View
 
-`FotEach` is a view, that is made up the sub-views created in every loop instance.
+`ForEach` is a view, that is made up the sub-views created in every loop instance.
 
 We typically use it to create sub-views based on a counter or an array.
 
@@ -190,6 +213,37 @@ struct ContentView: View {
 
 ### Data Entry
 
+#### `TextField`
+
+#### `Picker`
+
+`Picker` is used to pick one out of many possible selections.
+
+A regular picker looks like this:
+
+```swift
+Picker("Number of people", selection: $numberOfPeople) {
+    ForEach(2 ..< 100 , id: \.self) {
+        Text("\($0) people")
+    }
+}
+```
+
+![alt text](image-7.png)
+
+A `Picker` can be modified with the `PickerStyle` modifier:
+
+```swift
+Picker("Tip percentage", selection: $tipPercentage) {
+    ForEach(tipPercentages, id: \.self) {
+        Text($0, format: .percent)
+    }
+}
+.pickerStyle(.segmented)
+```
+
+![alt text](image-8.png)
+
 #### `Stepper`
 
 ![Stepper](stepper.png)
@@ -210,7 +264,39 @@ var body: some View {
 - `Form`
 - `Picker`
 - Navigation Bar
--
+
+### Alerts & Confirmation Dialogs
+
+#### Alerts
+
+Alerts are an extension to a View with a Bool variable that decides on wether they are shown or not.
+
+```swift
+struct ContentView: View {
+    @State private var showingAlert = false
+
+    var body: some View {
+        Button("Show Alert") {
+            showingAlert = true
+        }
+        .alert("Important message", isPresented: $showingAlert) {
+            Button("OK") { }
+        }
+    }
+}
+```
+
+#### Confirmation Dialogues
+
+Use them when many buttons / options are available. For example code check ou [this repo](https://github.com/tillg/100DaysOfSwiftUI/blob/main/16.5-AlertAndConfirmation/AlertAndConfirmation/AlertAndConfirmation/ContentView.swift).
+
+**Note**: Pre-iOS 26 they slid in from the bottom, in iOS 26 they show up inside the screen.
+
+Confirmation Dialog in iOS 18.5:
+![alt text](image-6.png)
+
+Confirmation Dialog in iOS 26:
+![alt text](image-5.png)
 
 ### Text
 
@@ -393,6 +479,34 @@ init(location: Location, onSave: @escaping (Location) -> Void) {
 
 That `@escaping` part is important, and means the function is being stashed away for user later on, rather than being called immediately, and it’s needed here because the `onSave` function will get called only when the user presses Save.
 
+### `Sheet`s & `NavigationStack`s
+
+To open a view as sheet:
+
+```swift
+struct ContentView: View {
+    @State private var showingAddExpense = false
+
+    var body: some View {
+        NavigationStack {
+            VStack {
+                // Some code here
+            }
+            .navigationTitle("iExpense")
+            .toolbar {
+                Button("Add Expense", systemImage: "plus") {
+                    showingAddExpense = true
+                }
+            }
+            .sheet(isPresented: $showingAddExpense) {
+                AddView(expenses: expenses)
+            }
+        }
+    }
+}
+
+```
+
 ## Networking
 
 This is how you send something to an HTTPS Endpoint:
@@ -421,7 +535,53 @@ This is how you send something to an HTTPS Endpoint:
     }
 ```
 
-## SwiftData
+## Saving Data
+
+I know 3 ways to save data in Swift/UI:
+
+- UserDefaults: Best used to save small data quantities. For example App Settings.
+- TODO Writing it to the documents directory
+- SwiftData
+
+### UserDefaults
+
+We need a couple of things:
+
+1. Our data has to be `Codable`, so that later we can create `JSONEncoder`
+2. UserDefaults to save and load our data
+3. A custom initializer for the data class, so it automatically loads
+4. A `didSet` to the data, so whenever data is added or changed it gets automagically saved.
+
+Making the data `Codable` most often is not too hard: As long as the components are `Codable`, the entire class is also.
+
+This is what saving the data in a `didSet` can look like:
+
+```swift
+var items = [ExpenseItem]() {
+    didSet {
+        if let encoded = try? JSONEncoder().encode(items) {
+            UserDefaults.standard.set(encoded, forKey: "Items")
+        }
+    }
+}
+```
+
+And this is how a initializer that loads the data could look like:
+
+```swift
+init() {
+    if let savedItems = UserDefaults.standard.data(forKey: "Items") {
+        if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
+            items = decodedItems
+            return
+        }
+    }
+
+    items = []
+}
+```
+
+### SwiftData
 
 The moving parts we have are
 
