@@ -540,10 +540,10 @@ This is how you send something to an HTTPS Endpoint:
 I know 3 ways to save data in Swift/UI:
 
 - UserDefaults: Best used to save small data quantities. For example App Settings.
-- TODO Writing it to the documents directory
+- Writing it to the documents directory
 - SwiftData
 
-### UserDefaults
+### Writing & reading to UserDefaults
 
 We need a couple of things:
 
@@ -578,6 +578,34 @@ init() {
     }
 
     items = []
+}
+```
+
+### Writing & reading to the documents directory
+
+This is how we write:
+
+```swift
+let data = Data("Test Message".utf8)
+let url = URL.documentsDirectory.appending(path: "message.txt")
+
+do {
+    try data.write(to: url, options: [.atomic, .completeFileProtection])
+} catch {
+    print(error.localizedDescription)
+}
+```
+
+..and this is how we read:
+
+```swift
+let url = URL.documentsDirectory.appending(path: "message.txt")
+
+do {
+    let input = try String(contentsOf: url)
+    print(input)
+} catch {
+    print(error.localizedDescription)
 }
 ```
 
