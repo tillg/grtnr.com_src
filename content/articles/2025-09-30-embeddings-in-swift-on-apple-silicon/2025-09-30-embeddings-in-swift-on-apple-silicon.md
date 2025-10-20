@@ -432,23 +432,28 @@ As we can't speed up the Embedding creation (if you have an idea, drop me an ema
 
 The part of the Accelerate Framework that we are going to use is [vDSP](https://developer.apple.com/documentation/accelerate/vdsp-library). It's subtitled _Perform basic arithmetic operations and common digital signal processing (DSP) routines on large vectors._, but it contains exactly what we need.
 
-The function we'll use is `multiply(addition:_:)`: _Returns the double-precision element-wise product of the sum of two vectors and a scalar value._ I found it a bit surprising, that Apple doesn't offer a function to just add 2 vectors, but only add **and** multiply by a scalar, but here we are, multiplying with 1.0 😜
+The function we'll use is [`vDSP.add(a, b)`](<https://developer.apple.com/documentation/accelerate/vdsp/add(_:_:)-2ftxc>): _Returns the double-precision element-wise sum of two vectors._
 
 Using this fast vector addition, this is our timing we get:
 
 ```bash
-⏱️ [Embedding] count=21730  total=157.469968s  avg=7.247ms
-⏱️ [MeanVector] count=21730  total=162.495383s  avg=7.478ms
+⏱️ [Embedding] count=21730  total=157.937617s  avg=7.268ms
+⏱️ [MeanVector] count=21730  total=159.350313s  avg=7.333ms
 ```
 
 In an overview:
 
-| Data set: 21'730 | Calc Embeddings | Calc Mean | Sorting | Total   |
-| ---------------- | --------------- | --------- | ------- | ------- |
-| Naive w/ caching | 158 sec         | 329 sec   | 49 ms   | 487 sec |
-| Using vDSP       | 157 sec         | 162 sec   | 49 ms   | 320 sec |
+| Data set: 21'730 | Calc Embed's | Calc Mean          | Sorting | Total             |
+| ---------------- | ------------ | ------------------ | ------- | ----------------- |
+| Naive w/ caching | 158 sec      | 329 sec ~ 5,48 min | 49 ms   | 487 sec ~ 8,1 min |
+| Using vDSP       | 157 sec      | 159 sec ~ 2,6 min  | 49 ms   | 316 sec ~ 5,2 min |
+
+So we brought it down by 3 minutes 😜
 
 ## Todo
 
+- Replace all the timing with new timing function
+- Create extra Github repo
 - Reference Code base by deep links into Github
 - Modify timing to run the experiments around 100x and calc average in order to get reliable data
+- Run experiments on physical devices.
