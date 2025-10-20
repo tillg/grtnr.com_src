@@ -421,12 +421,32 @@ Pay attention to the units when reading this table! 😜
 
 So if we look into the `NLContextualEmbedding.vectorNaive` function, we see the following time consumptions:
 
-```
+```bash
 ⏱️ [Embedding] count=21730  total=158.623341s  avg=7.300ms
 ⏱️ [MeanVector] count=21730  total=329.307913s  avg=15.155ms
 ```
 
 As we can't speed up the Embedding creation (if you have an idea, drop me an email!), let's look at the mean vector calculation: As we described earlier it basically sums up a list of vectors and then divides it by the no of vectors so it get's the average. Time to unpack the [Accelerate Framework](https://developer.apple.com/accelerate/)!
+
+## Using Accelerate Framework
+
+The part of the Accelerate Framework that we are going to use is [vDSP](https://developer.apple.com/documentation/accelerate/vdsp-library). It's subtitled _Perform basic arithmetic operations and common digital signal processing (DSP) routines on large vectors._, but it contains exactly what we need.
+
+The function we'll use is `multiply(addition:_:)`: _Returns the double-precision element-wise product of the sum of two vectors and a scalar value._ I found it a bit surprising, that Apple doesn't offer a function to just add 2 vectors, but only add **and** multiply by a scalar, but here we are, multiplying with 1.0 😜
+
+Using this fast vector addition, this is our timing we get:
+
+```bash
+⏱️ [Embedding] count=21730  total=157.469968s  avg=7.247ms
+⏱️ [MeanVector] count=21730  total=162.495383s  avg=7.478ms
+```
+
+In an overview:
+
+| Data set: 21'730 | Calc Embeddings | Calc Mean | Sorting | Total   |
+| ---------------- | --------------- | --------- | ------- | ------- |
+| Naive w/ caching | 158 sec         | 329 sec   | 49 ms   | 487 sec |
+| Using vDSP       | 157 sec         | 162 sec   | 49 ms   | 320 sec |
 
 ## Todo
 
