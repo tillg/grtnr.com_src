@@ -193,6 +193,8 @@ The fields of a model must have standard values so they can be saved in CloudKit
 
 ### Not signed in with AppleId
 
+If the device is not logged with an AppleId, it doesn't sync.
+
 ### Entitlements was modified during the build
 
 ```error
