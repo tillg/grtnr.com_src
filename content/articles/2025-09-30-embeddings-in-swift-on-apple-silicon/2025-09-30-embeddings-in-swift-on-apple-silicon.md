@@ -12,7 +12,9 @@ I am in process of learning the Swift programming language. I do so by following
 
 When trying to apply my learning to little projects I always have lots of questions coming up, and the most reliable source to look for answers is the course, i.e. it's pages. So I need to search in Paul Hudson's site, more specifically in the pages of his course.
 
-As I also play around with Machine Learning, I planned to build an App that I would call **AskPaul**: enter your question and get answers built by a (local!) RAG system: A system that contains all the pages of the course, in Markdown, chunked and index with it's embeddings. Then search for the relevant chunks for the question at hand and pass it to the LLM together with the question.
+As I also play around with Machine Learning, I planned to build an App that I would call **AskPaul**: enter your question and get answers built by a (local!) RAG system: A system that contains all the pages of the course, in Markdown, chunked and index with it's embeddings. Then search for the relevant chunks for the question at hand and pass it to the LLM together with the question. And when I say LLM, I mean the local LLM on your Apple device 😜
+
+In order to experiment with the Swift Embeddings I set up a repo [SwiftEmbeddings](https://github.com/tillg/SwiftEmbeddings). It contains my code & [Playgrounds](https://github.com/tillg/SwiftEmbeddings/tree/main/SwiftEmbeddings/SwiftEmbeddings/Playgrounds).
 
 ## What needs to be done
 
@@ -22,7 +24,7 @@ Given a set of web pages available as Markdown, chunk them into handy sized port
 
 Given a question (think of something like `In Swift, how can I extend a protocol?`) the system should find the chunks with relevant content by calculating the embedding vector of that question and then compare it to all the chunk's vectors to find the closest one. Those chunks are then passed to the LLM together with the question.
 
-In the _old_ Apple Embedding system that is located in the Natural Language package, the functions to achieve this are easily accessible and very nicely explained in the article [Finding similarities between pieces of text](https://developer.apple.com/documentation/naturallanguage/finding-similarities-between-pieces-of-text).
+In the _old_ Apple Embedding system that is located in the [Natural Language framework](https://developer.apple.com/documentation/NaturalLanguage), the functions to achieve this are easily accessible and very nicely explained in the article [Finding similarities between pieces of text](https://developer.apple.com/documentation/naturallanguage/finding-similarities-between-pieces-of-text).
 
 ## The problem
 
@@ -55,38 +57,47 @@ As I started with the idea of building an on-device RAG system for Paul Hudson's
 - Chunk them
 - Write them all in one JSON file that I can copy in my Swift project
 
-To get this done I plugged together some scripts in [site2chunks](https://github.com/tillg/site2chunks). An example JSON is in my AskPaul project: [merged_chunks](https://github.com/tillg/AskPaul/blob/main/AskPaul/AskPaul/merged_chunks.json)
+To get this done I plugged together some scripts in [site2chunks](https://github.com/tillg/site2chunks). An example JSON is in my AskPaul project: [merged_chunks](https://github.com/tillg/SwiftEmbeddings/blob/main/SwiftEmbeddings/SwiftEmbeddings/merged_chunks.json)
 
 Based on this I have in my Swift code
 
 - A `struct Chunk`. If you are curious, go see the [code](https://github.com/tillg/AskPaul/blob/main/AskPaul/AskPaul/Chunk.swift) that represents a chunk
 - A `Bundle Extension` that reads the chunks from the JSON file ([Code]()). Note: This is of course inspired from [Paul Hudson's course](https://www.hackingwithswift.com/example-code/system/how-to-decode-json-from-your-app-bundle-the-easy-way) 😜
 
-**Note**: I start with just the _main pages_: the entry page of each of the 100 lessons. I do this so the data set is easy to handle and my experiments are fast to run. Once I am done with the experiments I will increase the data set.
+**Note**: I start with just the _main pages_: the entry page of each of the 100 lessons. I do this so the data set is easy to handle and my experiments are fast to run. These 100 pages are chunked into 722 chunks. Once I am done with the experiments I will increase the data set to all the pages from hackingwithswift.com .
 
 ## The starting point: `NLEmbedding`
 
-With this test data in place, let's play around with the _old_ `NLEmbedding`.
+With this test data in place, let's play around with the _old_ `NLEmbedding`. You can look up the code in [Playgrounds/01-NLEmbedding.swift](https://github.com/tillg/SwiftEmbeddings/blob/main/SwiftEmbeddings/SwiftEmbeddings/Playgrounds/01-NLEmbedding.swift)
 
 The rough structure of the code looks like this:
 
 ```swift
-#Playground
+#Playground("Basic embedding & distance")
 {
-    let question = """
-        How can I extend a protocol?
+    let question = "What is a protocol?"
+    let potentialAnswer = """
+    A protocol defines a blueprint of methods, properties, ... blabla
     """
-    if let sentenceEmbedding = NLEmbedding.sentenceEmbedding(for: .english) {
-        if let vector = sentenceEmbedding.vector(for: question) {
-            print(vector)
-        }
-        let distance = sentenceEmbedding.distance(between: question, and: "That is a sentence.")
-        print(distance.description)
+    guard let sentenceEmbedding = NLEmbedding.sentenceEmbedding(for: .english) else {
+        fatalError("Cannot create Embedding")
     }
+    guard let vector = sentenceEmbedding.vector(for: question) else {
+        fatalError("Cannot create vector")
+    }
+    let distance = sentenceEmbedding.distance(between: question, and: potentialAnswer)
+    print("Distance: \(distance.description)")
 }
+
 ```
 
-Calculating the embedding vector for my 722 chunks on my MacBook Pro takes 35'966 ms ~ 35 seconds or ~ 49 ms / Vector.
+Here's what this code is about:
+
+- We initialize our variables `question` and `potentialAnswer`
+- We create our `NLEmbedding` object - which might (theoretically) fail. If it does, there's nothing we can do but fail it all.
+- Then we calculate the [distance](<https://developer.apple.com/documentation/naturallanguage/nlembedding/distance(between:and:distancetype:)>) between the question and print it.
+
+Next, let's see how long it takes to calculate the embedding vectors for all the 722 chunks from our test data. On my MacBook Pro it takes 35'966 ms ~ 35 seconds or ~ 49 ms / Vector.
 
 The other test is calculating distances between pairs of sentences:
 
@@ -94,7 +105,7 @@ The other test is calculating distances between pairs of sentences:
 let distance = sentenceEmbedding.distance(between: chunk1.content, and: chunk2.content)
 ```
 
-As expected this takes about twice as long, as for every distance calculation 2 embedding vectors have to be calculated: `Calculating 722 distances with NLEmbedding: 70334.78999137878 ms`
+As expected this takes about twice as long, as for every distance calculation 2 embedding vectors have to be calculated: `⏱️ [Calculating distances with NLEmbedding] count=1  total=72.558420s  avg=72.558420s`
 
 Note that if I run the loop calculating the distance always to the same text, it takes almost exactly the same time as just calculating one vector. In other words this loop:
 
@@ -114,14 +125,11 @@ func findClosest<T: Embeddable>(to question: String, in chunks: [T], k: Int = 3)
             // Fallback if embedding is unavailable
             return Array(chunks.prefix(k))
         }
-        var distanceCalculations = 0
         let sorted = chunks.sorted { lhs, rhs in
             let dl = sentenceEmbedding.distance(between: question, and: lhs.content)
             let dr = sentenceEmbedding.distance(between: question, and: rhs.content)
-            distanceCalculations += 2
             return dl < dr
         }
-        print("\(distanceCalculations) distance calculations done.")
         return Array(sorted.prefix(k))
     }
 ```
@@ -132,13 +140,13 @@ Note that we need 11'290 comparisons. As I assume that Apple caches the Vector o
 
 An attempt to put our results in an overview:
 
-| Data set: 722 chunks | Calculate 722 vectors | Calculate 722 distances | Sort array of 722 chunks | ms / Vector |
-| -------------------- | --------------------- | ----------------------- | ------------------------ | ----------- |
-| NLEmbedding          | 35 sec                | 70 sec                  | 1554 sec                 | 49 ms       |
+| Data set: 722 chunks | Calc vectors | Calc distances | Sort array | ms / Vector |
+| -------------------- | ------------ | -------------- | ---------- | ----------- |
+| NLEmbedding          | 35 sec       | 70 sec         | 1'554 sec  | 49 ms       |
 
 ## Measuring time
 
-As we will measure lots of time slots used by different calculations, I built a little time tracking system. The key thing to understand is how to call it:
+As we will measure lots of processing time consumed by our calculations, I built a little time tracking system. This is how to call it:
 
 ```swift
 timerTrack("Timer name") {
@@ -147,7 +155,7 @@ timerTrack("Timer name") {
 timerReport("Timer name") // Prints out my timer stats
 ```
 
-Over time my `timerTrack` got more elaborate so it returns the result of it's block, works also in async. So we can do things like this:
+My `timerTrack` also returns the result of it's block and works as async. So we can do things like this:
 
 ```swift
 let result = try timerTrack("Embedding") {
@@ -171,18 +179,18 @@ v3.y = (v1.y + v2.y) / 2;
 v3.z = (v1.z + v2.z) / 2;
 ```
 
-It would be an easy loop through the dimensions, and for every dimension calculate the average of all the components of the vectors. Now we face a little technicality, and that's how `NLContextualEmbedding` delivers us the vectors, wrapped in a `NLContextualEmbeddingResult`. If you look up the [docs](https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult) here is what they say:
+It would be an easy loop through the dimensions, and for every dimension calculate the average of all the components of the vectors. Now we face a little technicality: `NLContextualEmbedding` delivers us the vectors, wrapped in a `NLContextualEmbeddingResult`. If you look up the [docs](https://developer.apple.com/documentation/naturallanguage/nlcontextualembeddingresult) here is what they say:
 
 ```swift
 func enumerateTokenVectors(in: Range<String.Index>, using: ([Double], Range<String.Index>) -> Bool)
 # Iterates over the embedding vectors for the range you specify.
 ```
 
-For me this was tricky, but this is what (I think) it boils down to:
+It took me some time to digest this, but this is what it boils down to:
 
 You give it a `Range<String.Index>` to indicate from where to where you want the vectors listed. Why did they not simply use something like `0...10`? The secret is, that the `Range<String.Index>` is not going through the text like `T`, `h`, `ì`, `s`, `_`, `i`, `s`... but through the **tokens**.
 
-Let's inspect what the toekns actually look like:
+Let's inspect what the tokens actually look like:
 
 ```swift
 result.enumerateTokenVectors(in: result.string.startIndex..<result.string.endIndex) { vector, range in
@@ -205,14 +213,14 @@ Vector for token [e]
 Vector for token [.]
 ```
 
-Seeing this, it makes sense that the index is just counting from 1 to the `string.count`, but is a bit of a more complex beast.
+Seeing this, it makes sense that the index is not just counting from 1 to the `string.count`, but is a bit of a more complex beast.
 
 You already saw how to use the second argument of our `enumerateTokenVectors` function: The `using`-closure with a signature of `([Double], Range<String.Index>) -> Bool`. That basically means you give it an array of `Double` (yes, this is finally our vector 😜) and a String index and return a `Bool`: `true` if you want it to continue, `false` if you want it to stop.
 
-With this in mine, let's write a function that caclculates the average of our vectors that are inside a `NLContextualResult`:
+With this in mind, let's write a function that caclculates the average of our vectors that are inside a `NLContextualResult`:
 
 ```swift
-func getMeanVectorNaive(result: NLContextualEmbeddingResult) -> [Double]? {
+func meanVectorNaive(result: NLContextualEmbeddingResult) -> [Double]? {
     var sumVector: [Double]? = nil
     var count = 0
     result.enumerateTokenVectors(in: result.string.startIndex..<result.string.endIndex) { vector, _ in
@@ -230,7 +238,7 @@ func getMeanVectorNaive(result: NLContextualEmbeddingResult) -> [Double]? {
 
     // Check that we are not facing an empty arry of vectors - avoid div by 0
     guard var sumVector = sumVector, count > 0 else {
-        print("getMeanVectorNaive: No token vectors to average")
+        print("meanVectorNaive: No token vectors to average")
         return nil
     }
 
@@ -242,14 +250,14 @@ func getMeanVectorNaive(result: NLContextualEmbeddingResult) -> [Double]? {
 }
 ```
 
-I guess now this code is pretty straight forward:
+Here is what's happening in the code:
 
-- We set our `sumVector` and `count`
-- Then we call the `enumerateTokenVectors` with a closure that adds the value of each vector to the `sumVector` and increase the counter by +1 for every vector
-- Then we divide every component of the sumVector by the number of vectors we initially had,
+- We set our `sumVector` and `count` (this will be the number of vectors we added up).
+- Then we call the `enumerateTokenVectors` with a closure that adds the value of each vector to the `sumVector` and increase `count` by +1 for every vector. We start the loop with a `sumVector` being `nil` and setting it to the value of the first vector that comes in.
+- Then we divide every component of the `sumVector` by the number of vectors we initially had,
 - ...and we surround this by some guards for avoiding division by zero.
 
-Note that in my code base I wrapped this as extensions to `NLContextualEmbeddingResult`.
+Note that in my code base I wrapped this as [extensions to `NLContextualEmbeddingResult`](https://github.com/tillg/SwiftEmbeddings/blob/main/SwiftEmbeddings/SwiftEmbeddings/NLContextualEmbeddingExtension.swift).
 
 Before we measure the timing of our naive mean pooling, let's see how long it takes to just calculate the embedding vectors with `NLContextualEmbedding`:
 
@@ -257,20 +265,20 @@ Calculating 722 embeddings with `NLContextualEmbedding` (w/o compiling them to t
 
 To put it into relation, let's add this to our overview table:
 
-| Data set: 722 chunks                       | Calculate 722 vectors | Calculate 722 distances | Sort array of 722 chunks | ms / Vector |
-| ------------------------------------------ | --------------------- | ----------------------- | ------------------------ | ----------- |
-| NLEmbedding                                | 35 sec                | 70 sec                  | 1554 sec                 | 49 ms       |
-| NLContextualEmbedding (Just the embedding) | 5 sec                 |                         |                          | 7,26 ms     |
+| Data set: 722 chunks                       | Calc' vectors | Calc' distances | Sort array | ms / Vector |
+| ------------------------------------------ | ------------- | --------------- | ---------- | ----------- |
+| NLEmbedding                                | 35 sec        | 70 sec          | 1554 sec   | 49 ms       |
+| NLContextualEmbedding (Just the embedding) | 5 sec         |                 |            | 7,26 ms     |
 
 Wow! It takes 7x less time to calculate the embeddings with the more modern `NLContextualEmbedding`, even though this one produces not one but many vectors per chunk!
 
-Up net, let's calculate the compiles mean vector for all of our 722 chunks: 17118 ms ~ 17 seconds
+Up net, we calculate the mean vector for all of our 722 chunks: 17118 ms ~ 17 seconds
 
-| Data set: 722 chunks                          | Calculate 722 vectors | Calculate 722 distances | Sort array of 722 chunks | ms / Vector |
-| --------------------------------------------- | --------------------- | ----------------------- | ------------------------ | ----------- |
-| NLEmbedding                                   | 35 sec                | 70 sec                  | 1554 sec                 | 49 ms       |
-| NLContextualEmbedding (Just the embedding)    | 5 sec                 |                         |                          | 7,26 ms     |
-| 🔆 NLContextualEmbedding & mean pooling naive | 17 sec                |                         |                          | 23,71 ms    |
+| Data set: 722 chunks                       | Calc' vectors | Calc' distances | Sort array | ms / Vector |
+| ------------------------------------------ | ------------- | --------------- | ---------- | ----------- |
+| NLEmbedding                                | 35 sec        | 70 sec          | 1554 sec   | 49 ms       |
+| NLContextualEmbedding (Just the embedding) | 5 sec         |                 |            | 7,26 ms     |
+| NLContextualEmbedding & mean pooling naive | 17 sec        |                 |            | 23,71 ms    |
 
 ## Calculating Cosine similarity the naive way
 
@@ -289,9 +297,13 @@ Cosine similarity is a number that tells us how much two arrows point the same w
 - If they point at 90°, cosine similarity = 0 (not similar 😐)
 - If they point opposite ways, cosine similarity = -1 (totally different 😠)
 
+![alt text](cosine_sim.png)
+
 Now we rather want something that expresses a notion of distance. We call this **cosine distance**.
 
-`Cosine distance = 1 − cosine similarity`
+$$
+\text{Cosine distance} = 1 − \text{cosine similarity}
+$$
 
 That means:
 
@@ -342,13 +354,13 @@ func cosineSimilarityNaive(_ a: [Double], _ b: [Double]) -> Double? {
 
 Now with this in place we can calculate the 722 distance with our naive implementation: This takes us 34306 ms ~ 34 sec
 
-Now we sort our array by using this distance function: this takes us 717983 ms ~ 717 sec. Still twice as fast as the old `NLEmbedding` - and we haven't started tuning yet! 😜
+Now we sort our array by using this distance function: this takes us 717983 ms ~ 717 sec ~ 12 minutes. Still twice as fast as the old `NLEmbedding` - and we haven't started tuning yet! 😜
 
-| Data set: 722 chunks                          | Calculate 722 vectors | Calculate 722 distances | Sort array of 722 chunks | ms / Vector |
-| --------------------------------------------- | --------------------- | ----------------------- | ------------------------ | ----------- |
-| NLEmbedding                                   | 35 sec                | 70 sec                  | 1554 sec                 | 49 ms       |
-| NLContextualEmbedding (Just the embedding)    | 5 sec                 |                         |                          | 7,26 ms     |
-| 🔆 NLContextualEmbedding & mean pooling naive | 17 sec                | 34 sec                  | 717 sec                  | 23,71 ms    |
+| Data set: 722 chunks                       | Calc' vectors | Calc' distances | Sort array       | ms / Vector |
+| ------------------------------------------ | ------------- | --------------- | ---------------- | ----------- |
+| NLEmbedding                                | 35 sec        | 70 sec          | 1554 sec         | 49 ms       |
+| NLContextualEmbedding (Just the embedding) | 5 sec         |                 |                  | 7,26 ms     |
+| NLContextualEmbedding & mean pooling naive | 17 sec        | 34 sec          | 717 sec ~ 12 min | 23,71 ms    |
 
 Now let's look into some optimization...
 
@@ -375,12 +387,12 @@ actor EmbeddingStore {
 
 What it basically does is calculating the embedding vectors for chunks and then using them to get a distance and to sort them all. The only tricky part is the `async` side: using `NLContextualEmbedding` is async, so we do it all at the beginning and then use the pre-calculated vectors when sorting - w/o any `async` burden by that time. We also shift the work around actors a bit... The benefit is impressive:
 
-| Data set: 722 chunks                                              | Calculate 722 vectors | Calculate 722 distances | Sort array of 722 chunks | ms / Vector |
-| ----------------------------------------------------------------- | --------------------- | ----------------------- | ------------------------ | ----------- |
-| NLEmbedding                                                       | 35 sec                | 70 sec                  | 1554 sec                 | 49 ms       |
-| NLContextualEmbedding (Just the embedding)                        | 5 sec                 |                         |                          | 7,26 ms     |
-| NLContextualEmbedding & mean pooling naive                        | 17 sec                | 34 sec                  | 717 sec                  | 23,71 ms    |
-| 🔆 NLContextualEmbedding & mean pooling naive w/ cached distances | 17 sec                | 74 ms ~ 0,074 sec       | 1 ms                     | 23,71 ms    |
+| Data set: 722 chunks                                           | Calc' vectors | Calc' distances   | Sort array | ms / Vector |
+| -------------------------------------------------------------- | ------------- | ----------------- | ---------- | ----------- |
+| NLEmbedding                                                    | 35 sec        | 70 sec            | 1554 sec   | 49 ms       |
+| NLContextualEmbedding (Just the embedding)                     | 5 sec         |                   |            | 7,26 ms     |
+| NLContextualEmbedding & mean pooling naive                     | 17 sec        | 34 sec            | 717 sec    | 23,71 ms    |
+| NLContextualEmbedding & mean pooling naive w/ cached distances | 17 sec        | 74 ms ~ 0,074 sec | 1 ms       | 23,71 ms    |
 
 That basically means that calculating the cosine similarity by multiplying vectors is super cheap, even the naive way. And sorting them once the distances have been calculated is almost free 😜
 
@@ -434,14 +446,13 @@ The part of the Accelerate Framework that we are going to use is [vDSP](https://
 
 The function we'll use is [`vDSP.add(a, b)`](<https://developer.apple.com/documentation/accelerate/vdsp/add(_:_:)-2ftxc>): _Returns the double-precision element-wise sum of two vectors._
 
-Using this fast vector addition, this is our timing we get:
+So we clculte our mean vector by cycling thru the vectors of the EmbeddingResult and summing them up:
 
-```bash
-⏱️ [Embedding] count=21730  total=157.937617s  avg=7.268ms
-⏱️ [MeanVector] count=21730  total=159.350313s  avg=7.333ms
+```swift
+sumVector = vDSP.add(sumVector!, vector)
 ```
 
-In an overview:
+Using this fast vector addition, this is our timing we get:
 
 | Data set: 21'730 | Calc Embed's | Calc Mean          | Sorting | Total             |
 | ---------------- | ------------ | ------------------ | ------- | ----------------- |
@@ -450,10 +461,19 @@ In an overview:
 
 So we brought it down by 3 minutes 😜
 
+## Up next
+
+The next steps towards a functioning AskPaul application that I have in mind are
+
+- Think of how to evaluate the quality of the search, that will most certainly include
+  - Collecting questions and the relevant places in hackingwithswift that answer that question
+  - Automate asking the questions and evaluating the returned chunks
+  - Tune whatever it takes: How we chunk, how big the chunks are, how we search...
+- Wrap the vector calculation and search function in a library. Maybe even together with the testing & tuning part.
+- Integrate the chunking & searching into a RAG system
+- Build the application for Paul 😜
+
 ## Todo
 
-- Replace all the timing with new timing function
-- Create extra Github repo
-- Reference Code base by deep links into Github
 - Modify timing to run the experiments around 100x and calc average in order to get reliable data
 - Run experiments on physical devices.
