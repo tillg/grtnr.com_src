@@ -41,6 +41,27 @@ chsh -s "$(which zsh)"
 
 ... or VSCode-insiders
 
+**Extensions:**
+
+- **markdownlint** by David Anson (`davidanson.vscode-markdownlint`) - The de facto standard for markdown linting with 10M+ downloads. Underlines issues inline and can auto-fix on save.
+  `code --install-extension davidanson.vscode-markdownlint`
+  Configuration files are searched in order: `.markdownlint.jsonc`, `.markdownlint.json`, `.markdownlint.yaml`/`.yml`, or `.markdownlintrc`. (Added January 2026)
+
+- **Prettier** (`esbenp.prettier-vscode`) - Code formatter.
+  `code --install-extension esbenp.prettier-vscode`
+  Enable format on save in VS Code settings:
+
+  ```json
+  {
+    "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    }
+  }
+  ```
+
+  (Added January 2026)
+
 ## Docker
 
 **January 2025:** I switched away from [Docker Desktop](https://www.docker.com/products/docker-desktop/) to [Rancher Desktop](https://rancherdesktop.io).
@@ -110,6 +131,10 @@ pyenv shell <version> -- select just for current shell session
 pyenv local <version> -- automatically select whenever you are in the current directory (or its subdirectories)
 pyenv global <version> -- select globally for your user account
 ```
+
+## Markdown Linting
+
+`brew install markdownlint-cli2`
 
 ## Ruby
 
