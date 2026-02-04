@@ -67,7 +67,7 @@ def copy_images_for_localized_recipe(generator, recipe, language):
     # Copy all image files from source to localized output directory
     try:
         for fname in os.listdir(source_dir):
-            if fname.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".svg")):
+            if fname.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".svg", ".pdf")):
                 src = os.path.join(source_dir, fname)
                 dst = os.path.join(output_path, fname)
                 shutil.copy2(src, dst)
@@ -104,7 +104,7 @@ def copy_adjacent_images(generator, item):
     source_dir = os.path.dirname(source_path)
     copied_images = []
     for fname in os.listdir(source_dir):
-        if fname.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".svg")):
+        if fname.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".svg", ".pdf")):
             src = os.path.join(source_dir, fname)
             dst = os.path.join(output_path, fname)
             shutil.copy2(src, dst)
@@ -136,6 +136,15 @@ def convert_relative_image_paths(item, slug, image_names):
         item._content = re.sub(
             r"!\[(.*?)\]\((?!https?://|/)([^)]*" + re.escape(img_name) + r")\)",
             r"![\1](/" + slug + r"/\2)",
+            item._content,
+        )
+
+        # Look for HTML anchor tags with relative paths (for PDFs and other files)
+        item._content = re.sub(
+            r'<a([^>]*) href=["\'](?!https?://|/|#)([^"\']*'
+            + re.escape(img_name)
+            + ")[\"']",
+            r'<a\1 href="/' + slug + r'/\2"',
             item._content,
         )
 
