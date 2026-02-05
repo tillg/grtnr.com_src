@@ -6,15 +6,15 @@ image: swiftui.png
 summary: Mein Spickzettel, erstellt während des Kurses [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: de
 source_language: en
-source_hash: d83e77e2a43c8ae966d62e933c71450af1eec306c629add35308f902eba592bc
+source_hash: 5d00b2e23be29e0bb68e67f99dead0139dd92336d2c2cabddd8ae37dd5ed3a4a
 translator: gpt-4o-2024-08-06
-translate_date: 2025-09-05T09:13:18.333798
+translate_date: 2026-02-05T15:42:09.627069
 generated_by: simplified-translation-system
 ---
 
-Im Juni 2025 begann ich mit dem Kurs [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). Es ist ein großartiger Kurs, und ich bin wirklich beeindruckt, wie viel qualitativ hochwertiger Inhalt und Kurse Paul Hudson bereitstellt – und pflegt!! Paul, vielen Dank dafür! 🙏🏼
+Im Juni 2025 begann ich mit dem Kurs [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). Es ist ein großartiger Kurs, und ich bin wirklich beeindruckt, wie viel qualitativ hochwertiger Inhalt und Kurse Paul Hudson bereitstellt - und pflegt!! Paul, vielen Dank dafür! 🙏🏼
 
-Aber es ist eine Menge Inhalt, daher hier meine Notizen – hoffentlich in einem leicht navigierbaren Spickzettel-Format. Ich habe eine grobe Struktur im Kopf, werde den Inhalt jedoch nur dann ausfüllen, wenn ich ihn benötige. Erwarten Sie also keine vollständige Übersicht!
+Aber es ist eine Menge Inhalt, daher sind hier meine Notizen - hoffentlich in einem leicht navigierbaren Spickzettelformat. Ich habe eine grobe Struktur im Kopf, werde den Inhalt jedoch nur dann ausfüllen, wenn ich ihn benötige. Erwarten Sie also keine vollständige Übersicht!
 
 [TOC]
 
@@ -40,11 +40,11 @@ struct Employee {
 
 ### Optionals
 
-- Optionals ermöglichen es uns, das Fehlen von Daten darzustellen, was bedeutet, dass wir sagen können: „Dieser Integer hat keinen Wert“ – das ist anders als eine feste Zahl wie 0.
+- Optionals ermöglichen es uns, das Fehlen von Daten darzustellen, was bedeutet, dass wir sagen können: „Dieser Integer hat keinen Wert“ – das unterscheidet sich von einer festen Zahl wie 0.
   - Beispiel: `var str:String?` kann einen String oder nil enthalten
-- Folglich hat alles, was nicht optional ist, definitiv einen Wert, selbst wenn es nur ein leerer String ist.
-- Das Entpacken eines Optionals ist der Prozess, in eine Box zu schauen, um zu sehen, was sie enthält: Wenn ein Wert darin ist, wird er zur Verwendung zurückgegeben, andernfalls wird nil enthalten sein.
-- Wir können `if let` verwenden, um Code auszuführen, wenn das Optional einen Wert hat, oder guard let, um Code auszuführen, wenn das Optional keinen Wert hat – aber mit guard müssen wir danach immer die Funktion verlassen.
+- Folglich hat alles, was nicht optional ist, definitiv einen Wert, auch wenn es nur ein leerer String ist.
+- Das Entpacken eines Optionals ist der Prozess, in eine Box zu schauen, um zu sehen, was sie enthält: Wenn ein Wert darin ist, wird er zur Verwendung zurückgegeben, andernfalls wird nil darin sein.
+- Wir können `if let` verwenden, um Code auszuführen, wenn das Optional einen Wert hat, oder `guard let`, um Code auszuführen, wenn das Optional keinen Wert hat – aber bei `guard` müssen wir danach immer die Funktion verlassen.
 
 ```swift
 func printSquare(of number: Int?) {
@@ -64,7 +64,7 @@ let new = captains["Serenity"] ?? "N/A"
 ```
 
 - Optional Chaining ermöglicht es uns, ein Optional innerhalb eines anderen Optionals mit einer praktischen Syntax zu lesen.
-- Wenn eine Funktion Fehler werfen könnte, können Sie sie mit try? in ein Optional umwandeln – Sie erhalten entweder den Rückgabewert der Funktion oder nil, wenn ein Fehler auftritt.
+- Wenn eine Funktion Fehler werfen könnte, können Sie sie mit `try?` in ein Optional umwandeln – Sie erhalten entweder den Rückgabewert der Funktion oder nil, wenn ein Fehler auftritt.
 
 ### Protokolle und Erweiterungen
 
@@ -90,14 +90,14 @@ Alle Arrays haben eingebaute `sort()` und `sorted()` Methoden, die verwendet wer
 - `sort()` sortiert das Array direkt
 - `sorted()` gibt ein neues, sortiertes Array zurück.
 
-Wenn das Array einfach ist, können Sie einfach `sort()` direkt aufrufen, um ein Array vor Ort zu sortieren:
+Wenn das Array einfach ist, können Sie einfach `sort()` direkt aufrufen, um ein Array direkt zu sortieren:
 
 ```swift
 var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
 names.sort()
 ```
 
-Wenn Sie komplexere Strukturen haben, müssen Sie den Vergleich angeben:
+Wenn Sie komplexere Strukturen haben, müssen Sie den Vergleich übergeben:
 
 ```swift
 struct User {
@@ -175,15 +175,15 @@ case .failed:
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) ist ein schönes Tool, um die verschiedenen Ansichten und Komponenten zu navigieren und auszuprobieren.
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) ist ein nettes Tool, um die verschiedenen Views & Komponenten zu navigieren und auszuprobieren.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
-### Ansichten
+### Views
 
-- Alles ist eine Ansicht in SwiftUI 😜
-- Code ausführen, wenn eine Ansicht angezeigt wird, mit `onAppear()`.
+- Alles ist eine View in SwiftUI 😜
+- Code ausführen, wenn eine View angezeigt wird, mit `onAppear()`.
 
-Sogar `ForEach` ist eine Ansicht, deshalb können wir schreiben
+Sogar `ForEach` ist eine View, deshalb können wir schreiben
 
 ```swift
 ForEach(0..<5) {
@@ -193,9 +193,9 @@ ForEach(0..<5) {
 
 Hinweis: Wir können nicht `ForEach(0..<5)` schreiben, weil `ForEach` einen `Range<Int>` erwartet, nicht einen `ClosedRange<Int>`!
 
-#### `ForEach` Ansicht
+#### `ForEach` View
 
-`ForEach` ist eine Ansicht, die aus den Unteransichten besteht, die in jeder Schleifeninstanz erstellt werden.
+`ForEach` ist eine View, die aus den Unteransichten besteht, die in jeder Schleifeninstanz erstellt werden.
 
 Wir verwenden es typischerweise, um Unteransichten basierend auf einem Zähler oder einem Array zu erstellen.
 
@@ -205,7 +205,7 @@ Wir verwenden es typischerweise, um Unteransichten basierend auf einem Zähler o
 import SwiftUI
 
 struct ContentView: View {
-  let items = ["Apfel", "Banane", "Kirsche"]
+  let items = ["Apple", "Banana", "Cherry"]
 
   var body: some View {
     List {
@@ -223,9 +223,9 @@ struct ContentView: View {
 
 #### `Picker`
 
-`Picker` wird verwendet, um eine von vielen möglichen Auswahlen zu treffen.
+`Picker` wird verwendet, um eine von vielen möglichen Auswahlmöglichkeiten zu treffen.
 
-Ein regulärer Picker sieht so aus:
+Ein normaler Picker sieht so aus:
 
 ```swift
 Picker("Anzahl der Personen", selection: $numberOfPeople) {
@@ -253,7 +253,7 @@ Picker("Trinkgeldprozentsatz", selection: $tipPercentage) {
 #### `Stepper`
 
 ![Stepper](stepper.png)
-Ein Stepper ist ein zweigeteiltes Steuerelement, das Menschen verwenden, um einen inkrementellen Wert zu erhöhen oder zu verringern.
+Ein Stepper ist ein zweigeteiltes Steuerelement, das Benutzer verwenden, um einen inkrementellen Wert zu erhöhen oder zu verringern.
 
 ```swift
 @State private var count: Int = 0
@@ -275,7 +275,7 @@ var body: some View {
 
 #### Warnungen
 
-Warnungen sind eine Erweiterung einer Ansicht mit einer Booleschen Variablen, die entscheidet, ob sie angezeigt werden oder nicht.
+Warnungen sind eine Erweiterung einer View mit einer Bool-Variablen, die entscheidet, ob sie angezeigt werden oder nicht.
 
 ```swift
 struct ContentView: View {
@@ -294,9 +294,9 @@ struct ContentView: View {
 
 #### Bestätigungsdialoge
 
-Verwenden Sie sie, wenn viele Schaltflächen/Optionen verfügbar sind. Für Beispielcode siehe [dieses Repo](https://github.com/tillg/100DaysOfSwiftUI/blob/main/16.5-AlertAndConfirmation/AlertAndConfirmation/AlertAndConfirmation/ContentView.swift).
+Verwenden Sie sie, wenn viele Schaltflächen / Optionen verfügbar sind. Für Beispielcode schauen Sie sich [dieses Repo](https://github.com/tillg/100DaysOfSwiftUI/blob/main/16.5-AlertAndConfirmation/AlertAndConfirmation/AlertAndConfirmation/ContentView.swift) an.
 
-**Hinweis**: Vor iOS 26 schoben sie sich von unten ins Bild, in iOS 26 erscheinen sie innerhalb des Bildschirms.
+**Hinweis**: Vor iOS 26 schoben sie sich von unten herein, in iOS 26 erscheinen sie innerhalb des Bildschirms.
 
 Bestätigungsdialog in iOS 18.5:
 ![alt text](image-6.png)
@@ -318,13 +318,13 @@ Text("Seitenbeschreibung hier")
     .italic()
 ```
 
-Und Sie erhalten einen Text mit unterschiedlichen Stilen kombiniert:
+Und Sie erhalten einen Text mit verschiedenen kombinierten Stilen:
 
 ![alt text](image-4.png)
 
 ### Listen
 
-Scrollende Datenlisten mit `List` erstellen, insbesondere wie sie Zeilen direkt aus Datenarrays erstellen kann.
+Erstellen von scrollbaren Datentabellen mit `List`, insbesondere wie es Zeilen direkt aus Datenarrays erstellen kann.
 
 ```swift
 List {
@@ -336,11 +336,11 @@ List {
 }
 ```
 
-Schaltflächen in Listen: Wenn Sie eine Schaltfläche in eine Liste einfügen, wird das GESAMTE Listenelement anklickbar! Wenn es mehr als eine Schaltfläche in einer Liste gibt, klicken Sie, wo immer Sie auf das Listenelement klicken, ALLE Schaltflächen nacheinander!
+Schaltflächen in Listen: Wenn Sie eine Schaltfläche in eine Liste einfügen, wird das GESAMTE Listenelement klickbar! Wenn es mehr als eine Schaltfläche in einer Liste gibt, wo immer Sie auf das Listenelement klicken, werden ALLE Schaltflächen nacheinander geklickt!
 
 Um das zu beheben und das gewünschte Verhalten zu erhalten, verwenden Sie `.buttonStyle(.plain)`
 
-Dasselbe gilt für HStack:
+Das Gleiche gilt für HStack:
 
 ```swift
 HStack {
@@ -398,17 +398,17 @@ struct ContentView: View {
 
 ### Bundle
 
-Dateien aus unserem App-Bundle lesen, indem wir ihren Pfad mit der `Bundle`-Klasse nachschlagen, einschließlich des Ladens von Strings von dort.
+Lesen von Dateien aus unserem App-Bundle, indem wir ihren Pfad mit der `Bundle`-Klasse nachschlagen, einschließlich dem Laden von Strings von dort.
 
 ### Animationen
 
 Behandelt in [Tag 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Ich muss die Clips noch einmal ansehen, um meine Notizen/Spickzettel zu extrahieren.
 
-- Animationen implizit mit dem `animation()`-Modifier erstellen.
-- Animationen mit Verzögerungen und Wiederholungen anpassen und zwischen Ease-in-Ease-out- und Spring-Animationen wählen.
-- Den `animation()`-Modifier an Bindungen anhängen, damit wir Änderungen direkt von UI-Steuerelementen aus animieren können.
-- `withAnimation()` verwenden, um explizite Animationen zu erstellen.
-- Mehrere `animation()`-Modifier an eine einzelne Ansicht anhängen, damit wir den Animationsstapel steuern können.
+- Erstellen von Animationen implizit mit dem `animation()`-Modifier.
+- Anpassen von Animationen mit Verzögerungen und Wiederholungen und die Wahl zwischen Ease-in-Ease-out- und Federanimationen.
+- Anhängen des `animation()`-Modifiers an Bindungen, sodass wir Änderungen direkt von UI-Steuerelementen aus animieren können.
+- Verwenden von `withAnimation()`, um explizite Animationen zu erstellen.
+- Anhängen mehrerer `animation()`-Modifier an eine einzelne View, sodass wir den Animationsstapel steuern können.
 
 ### Daten laden
 
@@ -421,11 +421,11 @@ View...
 
 ?? Wie wird es gemacht, wenn `loadIt` asynchron ist??
 
-### Werte an Ansichten übergeben und zurückgeben
+### Werte an Views übergeben & zurückgeben
 
-Wie in [Auswählen und Bearbeiten von Kartenanmerkungen](https://www.hackingwithswift.com/books/ios-swiftui/selecting-and-editing-map-annotations) gesehen
+Wie gesehen in [Auswählen und Bearbeiten von Kartenanmerkungen](https://www.hackingwithswift.com/books/ios-swiftui/selecting-and-editing-map-annotations)
 
-Stellen Sie sich vor, ich habe eine Ansicht, die als Sheet geöffnet wird und ein `Location` (ein selbst definiertes `struct`) erhält:
+Stellen Sie sich vor, ich habe eine View, die als Sheet geöffnet wird und eine `Location` (eine selbst definierte `struct`) erhält:
 
 ```swift
 struct EditView: View {
@@ -483,11 +483,11 @@ init(location: Location, onSave: @escaping (Location) -> Void) {
 }
 ```
 
-Dieser `@escaping`-Teil ist wichtig und bedeutet, dass die Funktion für die spätere Verwendung aufbewahrt wird, anstatt sofort aufgerufen zu werden, und es ist hier notwendig, weil die `onSave`-Funktion nur aufgerufen wird, wenn der Benutzer auf Speichern drückt.
+Der Teil `@escaping` ist wichtig und bedeutet, dass die Funktion für die spätere Verwendung gespeichert wird, anstatt sofort aufgerufen zu werden, und er ist hier erforderlich, da die `onSave`-Funktion nur aufgerufen wird, wenn der Benutzer auf Speichern drückt.
 
 ### `Sheet`s & `NavigationStack`s
 
-Um eine Ansicht als Sheet zu öffnen:
+Um eine View als Sheet zu öffnen:
 
 ```swift
 struct ContentView: View {
@@ -513,14 +513,14 @@ struct ContentView: View {
 
 ```
 
-## Netzwerk
+## Netzwerken
 
 So senden Sie etwas an einen HTTPS-Endpunkt:
 
 ```swift
  func placeOrder() async {
         guard let encoded = try? JSONEncoder().encode(order) else {
-            print("Bestellung konnte nicht codiert werden")
+            print("Bestellung konnte nicht kodiert werden")
             return
         }
 
@@ -533,7 +533,7 @@ So senden Sie etwas an einen HTTPS-Endpunkt:
             let (data, other) = try await URLSession.shared.upload(for: request, from: encoded)
 
             let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
-            confirmationMessage = "Ihre Bestellung über \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) Cupcakes ist auf dem Weg!"
+            confirmationMessage = "Ihre Bestellung über \(decodedOrder.quantity)x \(Order.types[decodedOrder.type].lowercased()) Cupcakes ist unterwegs!"
             showingConfirmation = true
         } catch {
             print("Checkout fehlgeschlagen: \(error.localizedDescription)")
@@ -546,17 +546,17 @@ So senden Sie etwas an einen HTTPS-Endpunkt:
 Ich kenne 3 Möglichkeiten, Daten in Swift/UI zu speichern:
 
 - UserDefaults: Am besten geeignet, um kleine Datenmengen zu speichern. Zum Beispiel App-Einstellungen.
-- TODO Schreiben in das Dokumentenverzeichnis
+- Schreiben in das Dokumentenverzeichnis
 - SwiftData
 
-### UserDefaults
+### Schreiben & Lesen in UserDefaults
 
 Wir benötigen ein paar Dinge:
 
 1. Unsere Daten müssen `Codable` sein, damit wir später `JSONEncoder` erstellen können
-2. UserDefaults zum Speichern und Laden unserer Daten
+2. UserDefaults, um unsere Daten zu speichern und zu laden
 3. Ein benutzerdefinierter Initialisierer für die Datenklasse, damit sie automatisch geladen wird
-4. Ein `didSet` für die Daten, damit sie immer automatisch gespeichert werden, wenn Daten hinzugefügt oder geändert werden.
+4. Ein `didSet` für die Daten, sodass sie immer gespeichert werden, wenn Daten hinzugefügt oder geändert werden.
 
 Die Daten `Codable` zu machen, ist meistens nicht allzu schwer: Solange die Komponenten `Codable` sind, ist es auch die gesamte Klasse.
 
@@ -587,12 +587,25 @@ init() {
 }
 ```
 
-### SwiftData
+### Schreiben & Lesen in das Dokumentenverzeichnis
 
-Die beweglichen Teile, die wir haben, sind
+So schreiben wir:
 
-- Das `Model`: Dies ist die Datenstruktur. Das/die Objekt(e) und seine/ihre Felder
-- Der `ModelContainer`: Dies ist der persistente Speicher. Denken Sie daran wie die Datei, in die die Daten auf dem Server geschrieben werden.
-- Der `ModelContext`: Das ist die im Speicher gehaltene Version Ihrer Daten und wo die Datenänderungen gehalten werden, bevor sie im `ModelContainer` gespeichert werden.
+```swift
+let data = Data("Testnachricht".utf8)
+let url = URL.documentsDirectory.appending(path: "message.txt")
 
-Um Ihre Software für die Verwendung von SwiftData zu aktivieren, erstellen Sie
+do {
+    try data.write(to: url, options: [.atomic, .completeFileProtection])
+} catch {
+    print(error.localizedDescription)
+}
+```
+
+..und so lesen wir:
+
+```swift
+let url = URL.documentsDirectory.appending(path: "message.txt")
+
+do {
+    let input = try String(contentsOf

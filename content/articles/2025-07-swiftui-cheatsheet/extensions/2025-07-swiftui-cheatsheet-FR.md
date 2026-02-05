@@ -1,20 +1,20 @@
 ---
 Tags: tech
-Title: SwiftUI Cheatsheet
+Title: Aide-mémoire SwiftUI
 Date: 2025-08-03
 image: swiftui.png
-summary: Mon aide-mémoire, construit en suivant [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
+summary: Mon aide-mémoire, créé en suivant [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
 translation: fr
 source_language: en
-source_hash: d83e77e2a43c8ae966d62e933c71450af1eec306c629add35308f902eba592bc
+source_hash: 5d00b2e23be29e0bb68e67f99dead0139dd92336d2c2cabddd8ae37dd5ed3a4a
 translator: gpt-4o-2024-08-06
-translate_date: 2025-09-05T09:16:02.805616
+translate_date: 2026-02-05T15:43:59.714731
 generated_by: simplified-translation-system
 ---
 
-En juin 2025, j'ai commencé à suivre [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). C'est un excellent cours, et je suis vraiment impressionné par la qualité du contenu et des cours que Paul Hudson fournit - et maintient !! Paul, merci beaucoup pour cela ! 🙏🏼
+En juin 2025, j'ai commencé à travailler sur [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). C'est un excellent cours, et je suis vraiment impressionné par la quantité de contenu de qualité et de cours que Paul Hudson propose - et maintient !! Paul, merci beaucoup pour cela ! 🙏🏼
 
-Mais c'est beaucoup de contenu, donc voici mes notes - j'espère dans un format d'aide-mémoire facile à naviguer. J'ai une structure approximative en tête, mais je ne remplirai le contenu que lorsque j'en aurai besoin. Ne vous attendez donc pas à un aperçu complet !
+Mais c'est beaucoup de contenu, alors voici mes notes - j'espère dans un format d'aide-mémoire facile à naviguer. J'ai une structure approximative en tête, mais je ne remplirai le contenu que lorsque j'en aurai besoin. Ne vous attendez donc pas à un aperçu complet !
 
 [TOC]
 
@@ -42,9 +42,9 @@ struct Employee {
 
 - Les optionnels nous permettent de représenter l'absence de données, ce qui signifie que nous pouvons dire "cet entier n'a pas de valeur" – c'est différent d'un nombre fixe tel que 0.
   - Exemple : `var str:String?` peut contenir une chaîne ou nil
-- En conséquence, tout ce qui n'est pas optionnel a définitivement une valeur à l'intérieur, même si ce n'est qu'une chaîne vide.
+- En conséquence, tout ce qui n'est pas optionnel a définitivement une valeur à l'intérieur, même si c'est juste une chaîne vide.
 - Déballer un optionnel est le processus de regarder à l'intérieur d'une boîte pour voir ce qu'elle contient : s'il y a une valeur à l'intérieur, elle est renvoyée pour être utilisée, sinon il y aura nil à l'intérieur.
-- Nous pouvons utiliser `if let` pour exécuter du code si l'optionnel a une valeur, ou guard let pour exécuter du code si l'optionnel n'a pas de valeur – mais avec guard, nous devons toujours quitter la fonction ensuite.
+- Nous pouvons utiliser `if let` pour exécuter du code si l'optionnel a une valeur, ou `guard let` pour exécuter du code si l'optionnel n'a pas de valeur – mais avec `guard` nous devons toujours quitter la fonction par la suite.
 
 ```swift
 func printSquare(of number: Int?) {
@@ -57,14 +57,14 @@ func printSquare(of number: Int?) {
 }
 ```
 
-- L'opérateur de coalescence nil, ??, déballe et retourne la valeur d'un optionnel, ou utilise une valeur par défaut à la place.
+- L'opérateur de coalescence nil, ??, déballe et renvoie la valeur d'un optionnel, ou utilise une valeur par défaut à la place.
 
 ```swift
 let new = captains["Serenity"] ?? "N/A"
 ```
 
 - La chaîne optionnelle nous permet de lire un optionnel à l'intérieur d'un autre optionnel avec une syntaxe pratique.
-- Si une fonction peut générer des erreurs, vous pouvez la convertir en optionnel en utilisant try? – vous obtiendrez soit la valeur de retour de la fonction, soit nil si une erreur est générée.
+- Si une fonction peut générer des erreurs, vous pouvez la convertir en optionnel en utilisant `try?` – vous obtiendrez soit la valeur de retour de la fonction, soit nil si une erreur est générée.
 
 ### Protocoles et Extensions
 
@@ -88,7 +88,7 @@ extension String {
 Tous les tableaux ont des méthodes intégrées `sort()` et `sorted()` qui peuvent être utilisées pour trier le tableau.
 
 - `sort()` trie le tableau sur place
-- `sorted()` retourne un nouveau tableau trié.
+- `sorted()` renvoie un nouveau tableau trié.
 
 Si le tableau est simple, vous pouvez simplement appeler `sort()` directement, comme ceci, pour trier un tableau sur place :
 
@@ -97,7 +97,7 @@ var names = ["Jemima", "Peter", "David", "Kelly", "Isabella"]
 names.sort()
 ```
 
-Si vous avez des structures plus complexes, vous devez passer la comparaison :
+Si vous avez des structures plus complexes, vous devez transmettre la comparaison :
 
 ```swift
 struct User {
@@ -117,10 +117,10 @@ users.sort {
 }
 ```
 
-Nous pouvons faire en sorte que nos propres types se conforment à `Comparable`, et lorsque nous le faisons, nous obtenons également une méthode `sorted()` sans paramètres. Cela prend deux étapes :
+Nous pouvons faire en sorte que nos propres types soient conformes à `Comparable`, et lorsque nous le faisons, nous obtenons également une méthode `sorted()` sans paramètres. Cela prend deux étapes :
 
 1. Ajouter la conformité `Comparable` à la définition de User.
-2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et retourne vrai si le premier doit être trié avant le second.
+2. Ajouter une méthode appelée `<` qui prend deux utilisateurs et renvoie vrai si le premier doit être trié avant le second.
 
 Voici à quoi cela ressemble en code :
 
@@ -175,13 +175,13 @@ case .failed:
 
 ## SwiftUI
 
-- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil sympa pour naviguer et jouer avec les différentes vues et composants.
+- [Interactful](https://apps.apple.com/de/app/interactful/id1528095640?l=en-GB) est un outil agréable pour naviguer et explorer les différentes vues et composants.
 - [Human Interfaces Guideline](https://developer.apple.com/design/human-interface-guidelines/components)
 
 ### Vues
 
 - Tout est une vue dans SwiftUI 😜
-- Exécuter du code lorsqu'une vue est affichée, en utilisant `onAppear()`.
+- Exécution de code lorsqu'une vue est affichée, en utilisant `onAppear()`.
 
 Même `ForEach` est une vue, c'est pourquoi nous pouvons écrire
 
@@ -195,7 +195,7 @@ Remarque : Nous ne pouvons pas écrire `ForEach(0..<5)`, car `ForEach` attend un
 
 #### Vue `ForEach`
 
-`ForEach` est une vue, qui est composée des sous-vues créées à chaque instance de boucle.
+`ForEach` est une vue, composée des sous-vues créées à chaque instance de boucle.
 
 Nous l'utilisons généralement pour créer des sous-vues basées sur un compteur ou un tableau.
 
@@ -217,7 +217,7 @@ struct ContentView: View {
 }
 ```
 
-### Saisie de données
+### Entrée de données
 
 #### `TextField`
 
@@ -225,7 +225,7 @@ struct ContentView: View {
 
 `Picker` est utilisé pour choisir une option parmi plusieurs sélections possibles.
 
-Un picker régulier ressemble à ceci :
+Un sélecteur régulier ressemble à ceci :
 
 ```swift
 Picker("Nombre de personnes", selection: $numberOfPeople) {
@@ -275,7 +275,7 @@ var body: some View {
 
 #### Alertes
 
-Les alertes sont une extension d'une vue avec une variable Bool qui décide si elles sont affichées ou non.
+Les alertes sont une extension d'une vue avec une variable Booléenne qui décide si elles sont affichées ou non.
 
 ```swift
 struct ContentView: View {
@@ -294,7 +294,7 @@ struct ContentView: View {
 
 #### Dialogues de Confirmation
 
-Utilisez-les lorsque de nombreux boutons/options sont disponibles. Pour un exemple de code, consultez [ce dépôt](https://github.com/tillg/100DaysOfSwiftUI/blob/main/16.5-AlertAndConfirmation/AlertAndConfirmation/AlertAndConfirmation/ContentView.swift).
+Utilisez-les lorsque de nombreux boutons / options sont disponibles. Pour un exemple de code, consultez [ce dépôt](https://github.com/tillg/100DaysOfSwiftUI/blob/main/16.5-AlertAndConfirmation/AlertAndConfirmation/AlertAndConfirmation/ContentView.swift).
 
 **Remarque** : Avant iOS 26, ils glissaient depuis le bas, dans iOS 26, ils apparaissent à l'intérieur de l'écran.
 
@@ -308,7 +308,7 @@ Dialogue de Confirmation dans iOS 26 :
 
 `Text` est un champ de texte qui décrit du texte.
 
-Remarque : Les champs de texte avec différents styles peuvent être _additionnés_ pour former un grand champ de texte avec des parties ayant des styles différents à l'intérieur :
+Remarque : Les champs de texte avec des styles différents peuvent être _additionnés_ pour former un grand champ de texte avec des parties ayant des styles différents à l'intérieur :
 
 ```swift
 Text(page.title)
@@ -318,13 +318,13 @@ Text("Description de la page ici")
     .italic()
 ```
 
-Et vous obtenez un texte avec différents styles combinés :
+Et vous obtenez un texte avec des styles différents combinés :
 
 ![texte alternatif](image-4.png)
 
 ### Listes
 
-Construction de tables de données défilantes en utilisant `List`, en particulier comment elle peut créer des lignes directement à partir de tableaux de données.
+Construction de tableaux de données défilants en utilisant `List`, en particulier comment il peut créer des lignes directement à partir de tableaux de données.
 
 ```swift
 List {
@@ -336,7 +336,7 @@ List {
 }
 ```
 
-Boutons dans les listes : Lorsque vous placez un bouton dans une liste, TOUT l'élément de la liste devient cliquable ! S'il y a plus d'un bouton dans une liste, où que vous cliquiez sur l'élément de la liste, il clique sur TOUS les boutons l'un après l'autre !
+Boutons dans les listes : Lorsque vous placez un bouton dans une liste, l'ENTIER élément de la liste devient cliquable ! S'il y a plus d'un bouton dans une liste, où que vous cliquiez sur l'élément de la liste, cela clique sur TOUS les boutons les uns après les autres !
 
 Pour corriger cela et obtenir le comportement souhaité, utilisez `.buttonStyle(.plain)`
 
@@ -398,17 +398,17 @@ struct ContentView: View {
 
 ### Bundle
 
-Lecture de fichiers à partir de notre bundle d'application en recherchant leur chemin à l'aide de la classe `Bundle`, y compris le chargement de chaînes à partir de là.
+Lecture de fichiers depuis notre bundle d'application en recherchant leur chemin en utilisant la classe `Bundle`, y compris le chargement de chaînes depuis celui-ci.
 
 ### Animations
 
 Couvert dans [Jour 32-34](https://www.hackingwithswift.com/100/swiftui/32). TODO Je dois revoir les clips pour extraire mes notes/aide-mémoire.
 
 - Création d'animations implicitement en utilisant le modificateur `animation()`.
-- Personnalisation des animations avec des délais et des répétitions, et choix entre les animations ease-in-ease-out et spring.
-- Attachement du modificateur animation() aux liaisons, pour que nous puissions animer les changements directement à partir des contrôles de l'interface utilisateur.
+- Personnalisation des animations avec des délais et des répétitions, et choix entre des animations ease-in-ease-out et des animations à ressort.
+- Attachement du modificateur `animation()` aux liaisons, afin que nous puissions animer les changements directement depuis les contrôles UI.
 - Utilisation de `withAnimation()` pour créer des animations explicites.
-- Attachement de plusieurs modificateurs `animation()` à une seule vue pour que nous puissions contrôler la pile d'animations.
+- Attachement de plusieurs modificateurs `animation()` à une seule vue afin que nous puissions contrôler la pile d'animations.
 
 ### Chargement des données
 
@@ -425,7 +425,7 @@ View...
 
 Comme vu dans [Sélection et édition d'annotations de carte](https://www.hackingwithswift.com/books/ios-swiftui/selecting-and-editing-map-annotations)
 
-Imaginez que j'ai une vue qui est ouverte comme feuille et reçoit un `Location` (étant une `struct` définie par l'utilisateur) :
+Imaginez que j'ai une vue qui est ouverte en tant que feuille et reçoit une `Location` (étant une `struct` définie par l'utilisateur) :
 
 ```swift
 struct EditView: View {
@@ -439,11 +439,11 @@ struct EditView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Nom du lieu", text: $name)
+                    TextField("Nom de l'endroit", text: $name)
                     TextField("Description", text: $description)
                 }
             }
-            .navigationTitle("Détails du lieu")
+            .navigationTitle("Détails de l'endroit")
             .toolbar {
                 Button("Enregistrer") {
                     dismiss()
@@ -454,7 +454,7 @@ struct EditView: View {
 }
 ```
 
-Pour passer le `Location`, je fais un initialiseur supplémentaire :
+Pour passer la `Location`, je fais un initialiseur supplémentaire :
 
 ```swift
 init(location: Location) {
@@ -465,13 +465,13 @@ init(location: Location) {
 }
 ```
 
-Pour _retourner_ des données au code appelant, je passe une méthode `onSave`. D'abord, créez une variable supplémentaire dans ma structure de vue :
+Pour _retourner_ des données au code appelant, je passe une méthode `onSave`. Créez d'abord une variable supplémentaire dans ma structure de vue :
 
 ```swift
 var onSave: (Location) -> Void
 ```
 
-et ensuite étendez l'initialiseur comme ceci :
+et puis étendez l'initialiseur comme suit :
 
 ```swift
 init(location: Location, onSave: @escaping (Location) -> Void) {
@@ -487,7 +487,7 @@ Cette partie `@escaping` est importante, et signifie que la fonction est mise de
 
 ### `Sheet`s et `NavigationStack`s
 
-Pour ouvrir une vue comme feuille :
+Pour ouvrir une vue en tant que feuille :
 
 ```swift
 struct ContentView: View {
@@ -536,7 +536,7 @@ Voici comment envoyer quelque chose à un point de terminaison HTTPS :
             confirmationMessage = "Votre commande de \(decodedOrder.quantity)x cupcakes \(Order.types[decodedOrder.type].lowercased()) est en route !"
             showingConfirmation = true
         } catch {
-            print("Échec de la commande : \(error.localizedDescription)")
+            print("Échec du paiement : \(error.localizedDescription)")
         }
     }
 ```
@@ -546,17 +546,17 @@ Voici comment envoyer quelque chose à un point de terminaison HTTPS :
 Je connais 3 façons de sauvegarder des données dans Swift/UI :
 
 - UserDefaults : Mieux utilisé pour sauvegarder de petites quantités de données. Par exemple, les paramètres de l'application.
-- TODO Écriture dans le répertoire des documents
+- Écriture dans le répertoire des documents
 - SwiftData
 
-### UserDefaults
+### Écriture et lecture dans UserDefaults
 
 Nous avons besoin de quelques éléments :
 
-1. Nos données doivent être `Codable`, afin que nous puissions plus tard créer `JSONEncoder`
+1. Nos données doivent être `Codable`, afin que nous puissions créer plus tard un `JSONEncoder`
 2. UserDefaults pour sauvegarder et charger nos données
-3. Un initialiseur personnalisé pour la classe de données, afin qu'elle soit automatiquement chargée
-4. Un `didSet` pour les données, afin que chaque fois que des données sont ajoutées ou modifiées, elles soient automatiquement sauvegardées.
+3. Un initialiseur personnalisé pour la classe de données, afin qu'elle charge automatiquement
+4. Un `didSet` pour les données, donc chaque fois que des données sont ajoutées ou modifiées, elles sont automatiquement sauvegardées.
 
 Rendre les données `Codable` n'est souvent pas trop difficile : Tant que les composants sont `Codable`, la classe entière l'est aussi.
 
@@ -587,10 +587,13 @@ init() {
 }
 ```
 
-### SwiftData
+### Écriture et lecture dans le répertoire des documents
 
-Les éléments mobiles que nous avons sont
+Voici comment nous écrivons :
 
-- Le `Model` : C'est la structure des données. L'objet et ses champs
-- Le `ModelContainer` : C'est le stockage persistant. Pensez-y comme le fichier dans lequel les données sont écrites sur le serveur.
-- Le `ModelContext` : C'est la version en mémoire de vos données et où les modifications
+```swift
+let data = Data("Message de test".utf8)
+let url = URL.documentsDirectory.appending(path: "message.txt")
+
+do {
+    try data.write(to: url, options: [.atomic, .

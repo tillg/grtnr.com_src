@@ -1,22 +1,22 @@
 ---
 date: 2025-01-15
-excerpt: Ich verwende verschiedene Entwicklerwerkzeuge (Java, Python, Docker...), aber einige davon benutze ich nur selten. Daher vergesse ich, wie ich sie installiert habe, welchen Versionsmanager ich verwendet habe usw. Dies ist also die Notiz an mein zukünftiges Ich, um es nachzuschlagen.
+excerpt: Ich nutze verschiedene Entwicklerwerkzeuge (Java, Python, Docker...), aber einige davon verwende ich nur selten. Daher vergesse ich, wie ich sie installiert habe, welchen Versionsmanager ich verwendet habe usw. Dies ist also die Notiz an mein zukünftiges Ich, um es nachzuschlagen.
 image: dev_tools.png
 tags: Mac
 updates: 2025-05-05
 translation: de
 source_language: en
-source_hash: 7033de83ddf5f709d1c0537cf7c17d163ddf109292658515b549fc5ba7986c8f
+source_hash: 24d38d9c2e2f45130aedf37c7363273d49dd0e3f56191a888368eef4b0e3a296
 translator: gpt-4o-2024-08-06
-translate_date: 2025-07-18T21:58:16.420848
+translate_date: 2026-02-05T15:44:28.040451
 generated_by: simplified-translation-system
 ---
 
-![Lustiges Bild von AI](dev_tools.png)
+![Lustiges Bild von KI](dev_tools.png)
 
-Ich bin kein professioneller Entwickler, ich mache es aus Spaß. Und ich mag es, herumzuspielen, neue Technologien zu entdecken und alle möglichen kleinen Dinge zu entwickeln. Manchmal brauche ich Python, manchmal React/Typescript, Java und mehr. Für jedes Entwicklungswerkzeug oder jede Sprache gibt es mehrere Möglichkeiten, wie man sie installieren und ihre Versionen verwalten kann. Da ich dazu neige, Dinge wie "Wie habe ich Python auf diesem Rechner installiert?" zu vergessen, ist dies eine Notiz an mein zukünftiges Ich, die mir sagt, wie ich jedes Entwicklungswerkzeug installiert habe.
+Ich bin kein professioneller Entwickler, ich mache es zum Spaß. Und ich spiele gerne herum, entdecke neue Technologien, entwickle alle möglichen kleinen Dinge. Manchmal brauche ich Python, manchmal React/Typescript, Java und mehr. Für jedes Entwicklungswerkzeug oder jede Sprache gibt es mehrere Möglichkeiten, wie man sie installieren und ihre Versionen verwalten kann. Da ich dazu neige, Dinge wie "Wie habe ich Python auf diesem Rechner installiert?" zu vergessen, ist dies eine Notiz an mein zukünftiges Ich, die mir sagt, wie ich jedes Entwicklungswerkzeug installiert habe.
 
-Da sich die Art und Weise, wie bestimmte Pakete installiert werden, im Laufe der Zeit ändern kann, werde ich meinen Installationsentscheidungen Daten hinzufügen.
+Da sich die Art und Weise, wie bestimmte Pakete installiert werden, im Laufe der Zeit ändern kann, werde ich Daten zu meinen Installationsentscheidungen hinzufügen.
 
 [TOC]
 
@@ -47,11 +47,32 @@ chsh -s "$(which zsh)"
 
 ... oder VSCode-insiders
 
+**Erweiterungen:**
+
+- **markdownlint** von David Anson (`davidanson.vscode-markdownlint`) - Der De-facto-Standard für Markdown-Linting mit über 10 Millionen Downloads. Unterstreicht Probleme inline und kann beim Speichern automatisch korrigieren.
+  `code --install-extension davidanson.vscode-markdownlint`
+  Konfigurationsdateien werden in folgender Reihenfolge gesucht: `.markdownlint.jsonc`, `.markdownlint.json`, `.markdownlint.yaml`/`.yml` oder `.markdownlintrc`. (Hinzugefügt im Januar 2026)
+
+- **Prettier** (`esbenp.prettier-vscode`) - Code-Formatter.
+  `code --install-extension esbenp.prettier-vscode`
+  Formatierung beim Speichern in den VS Code-Einstellungen aktivieren:
+
+  ```json
+  {
+    "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    }
+  }
+  ```
+
+  (Hinzugefügt im Januar 2026)
+
 ## Docker
 
 **Januar 2025:** Ich bin von [Docker Desktop](https://www.docker.com/products/docker-desktop/) zu [Rancher Desktop](https://rancherdesktop.io) gewechselt.
 
-Installationshinweis: Die Apple Silicon-Version heruntergeladen, das DMG geöffnet und es in mein Anwendungsverzeichnis kopiert. Das einzige Detail, das ich tun musste, war das Ankreuzen des "Administrative Access"-Kästchens in den Einstellungen.
+Installationshinweis: Die Apple Silicon-Version heruntergeladen, das DMG geöffnet und in mein Anwendungsverzeichnis kopiert. Das einzige Detail, das ich tun musste, war, das Kontrollkästchen "Administrative Access" in den Einstellungen zu aktivieren.
 ![alt text](rancher_prefs.png)
 
 _Registry_: Ich verwende verschiedene Registries, wenn ich an verschiedenen Projekten arbeite.
@@ -70,13 +91,13 @@ Dies sind die Optionen, die ich gesehen habe:
 **Mini-Cheatsheet**
 
 - `sdk install java 17.0.12-jbr` installiert diese spezifische Java-Version
-- `sdk list java` zeigt alle verfügbaren Java-Versionen (zur Installation verfügbar)
+- `sdk list java` zeigt alle verfügbaren Java-Versionen (zum Installieren) an
 - Um die installierten Java-Versionen aufzulisten:
-  - `sdk offline enable`, damit werden nur lokal installierte Versionen aufgelistet
+  - `sdk offline enable`, sodass nur lokal installierte Versionen aufgelistet werden
   - `sdk list java`
   - `sdk offline disable`
 - `sdk default java 21.0.6-amzn` setzt diese Version als Standard
-  Um eine Java-Version als Standard innerhalb eines Verzeichnisses festzulegen, siehe den [Env-Befehl](https://sdkman.io/usage/#env-command)
+  Um eine Java-Version als Standard in einem Verzeichnis festzulegen, siehe den [Env-Befehl](https://sdkman.io/usage/#env-command)
 
 ## Maven
 
@@ -84,7 +105,7 @@ Ich verwende einfach `brew install maven`. Für ältere Versionen installiert `b
 
 ## Gradle
 
-**Januar 2025**: Ich entscheide mich auch für Gradle, SDK Man zu verwenden.
+**Januar 2025**: Ich habe mich entschieden, SDK Man auch für Gradle zu verwenden.
 
 Grund: `brew install gradle` installierte Gradle Version 8.12.1, aber für das aktuelle Projekt benötigte ich 8.5.
 
@@ -108,14 +129,18 @@ Grund: `brew install gradle` installierte Gradle Version 8.12.1, aber für das a
 
 **Mini-Cheatsheet**
 
-Um eine von Pyenv installierte Python-Version auszuwählen, führen Sie einen der folgenden Befehle aus:
+Um eine mit Pyenv installierte Python-Version auszuwählen, führen Sie einen der folgenden Befehle aus:
 
 ```shell
 pyenv install 3.12
 pyenv shell <version> -- nur für die aktuelle Shell-Sitzung auswählen
-pyenv local <version> -- automatisch auswählen, wann immer Sie sich im aktuellen Verzeichnis (oder dessen Unterverzeichnissen) befinden
+pyenv local <version> -- automatisch auswählen, wenn Sie sich im aktuellen Verzeichnis (oder dessen Unterverzeichnissen) befinden
 pyenv global <version> -- global für Ihr Benutzerkonto auswählen
 ```
+
+## Markdown Linting
+
+`brew install markdownlint-cli2`
 
 ## Ruby
 
