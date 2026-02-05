@@ -31,7 +31,7 @@ def copy_images_for_recipes(generator, writer):
     # Process recipes if available
     if hasattr(generator, "context") and "recipes" in generator.context:
         process_content_items(generator, generator.context["recipes"])
-        
+
         # Also copy images for localized recipe pages
         copy_images_for_localized_recipes(generator, generator.context["recipes"])
 
@@ -42,10 +42,10 @@ def copy_images_for_localized_recipes(generator, recipes):
     multilingual_enabled = generator.settings.get("MULTILINGUAL_ENABLED", False)
     if not multilingual_enabled:
         return
-    
+
     languages = generator.settings.get("MULTILINGUAL_LANGUAGES", ["en"])
     default_lang = generator.settings.get("MULTILINGUAL_DEFAULT_LANG", "en")
-    
+
     for lang in languages:
         if lang != default_lang:  # Skip default language as it's already processed
             for recipe in recipes:
@@ -56,18 +56,22 @@ def copy_images_for_localized_recipe(generator, recipe, language):
     """Copy images for a single localized recipe."""
     # Get source directory from original recipe
     source_dir = os.path.dirname(recipe.source_path)
-    
+
     # Create target directory for localized recipe (e.g., output/de/recipes/hummus-from-mr-jim/)
     localized_save_as = f"{language}/{recipe.save_as}"
-    output_path = os.path.join(generator.output_path, os.path.dirname(localized_save_as))
-    
+    output_path = os.path.join(
+        generator.output_path, os.path.dirname(localized_save_as)
+    )
+
     # Ensure the target directory exists
     os.makedirs(output_path, exist_ok=True)
-    
+
     # Copy all image files from source to localized output directory
     try:
         for fname in os.listdir(source_dir):
-            if fname.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".svg", ".pdf")):
+            if fname.lower().endswith(
+                (".jpg", ".jpeg", ".png", ".gif", ".svg", ".pdf")
+            ):
                 src = os.path.join(source_dir, fname)
                 dst = os.path.join(output_path, fname)
                 shutil.copy2(src, dst)
@@ -87,13 +91,11 @@ def copy_adjacent_images(generator, item):
     """Copy adjacent image files from source to output directory."""
     source_path = item.source_path
     slug = item.slug
-    
+
     # For recipes, use the save_as path if available, otherwise use slug
     if hasattr(item, "save_as"):
         # Extract directory from save_as (e.g., "recipes/hummus-from-mr-jim/index.html" -> "recipes/hummus-from-mr-jim")
-        output_path = os.path.join(
-            generator.output_path, os.path.dirname(item.save_as)
-        )
+        output_path = os.path.join(generator.output_path, os.path.dirname(item.save_as))
     else:
         output_path = os.path.join(generator.output_path, slug)
 
@@ -109,7 +111,7 @@ def copy_adjacent_images(generator, item):
             dst = os.path.join(output_path, fname)
             shutil.copy2(src, dst)
             copied_images.append(fname)
-    
+
     return copied_images
 
 

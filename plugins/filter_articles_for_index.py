@@ -7,13 +7,13 @@ def filter_articles_for_index(generators):
     # Find the ArticlesGenerator
     article_generator = None
     for generator in generators:
-        if generator.__class__.__name__ == 'ArticlesGenerator':
+        if generator.__class__.__name__ == "ArticlesGenerator":
             article_generator = generator
             break
-    
+
     if not article_generator:
         return
-    
+
     # Get the categories to include from settings
     categories_in_index = article_generator.settings.get("CATEGORIES_IN_INDEX", [])
 

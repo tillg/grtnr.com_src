@@ -1,7 +1,7 @@
 ---
 date: 2026-02-04
 excerpt: A curated collection of free online resources for interior and architectural design - covering room dimensions, clearances, kitchen planning, bathroom layouts, and more. Focused on European/metric standards.
-Tags: architecture, design, resources
+Tags: architecture, design
 image: kitchenplan.png
 ---
 

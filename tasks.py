@@ -125,18 +125,31 @@ def check_links(c):
     if result.return_code == 0:
         logger.info("Link check completed successfully - no broken links found")
     else:
-        logger.error("Link check failed - broken links found! See linkcheck-errors.txt for details")
+        logger.error(
+            "Link check failed - broken links found! See linkcheck-errors.txt for details"
+        )
         # Read and display first few errors for immediate visibility
         try:
             with open("linkcheck-errors.txt", "r") as f:
                 lines = f.readlines()
-                error_count = len([line for line in lines if line.startswith(("MISSING:", "ERROR:", "WARNING:"))])
+                error_count = len(
+                    [
+                        line
+                        for line in lines
+                        if line.startswith(("MISSING:", "ERROR:", "WARNING:"))
+                    ]
+                )
                 logger.error(f"Found {error_count} link issues:")
                 for line in lines[:10]:  # Show first 10 lines
-                    if line.strip() and (line.startswith(("MISSING:", "ERROR:", "WARNING:")) or "That's it" in line):
+                    if line.strip() and (
+                        line.startswith(("MISSING:", "ERROR:", "WARNING:"))
+                        or "That's it" in line
+                    ):
                         logger.error(f"  {line.strip()}")
                 if len(lines) > 10:
-                    logger.error(f"  ... and {len(lines) - 10} more issues (see linkcheck-errors.txt)")
+                    logger.error(
+                        f"  ... and {len(lines) - 10} more issues (see linkcheck-errors.txt)"
+                    )
         except FileNotFoundError:
             logger.error("linkcheck-errors.txt file not found")
         # Exit with error to fail the build
@@ -188,10 +201,10 @@ def lint_md(c, file=None):
     else:
         logger.info("Running markdownlint on all files...")
         result = c.run("npx markdownlint '**/*.md'", warn=True)
-    
+
     # Count violations and provide summary
     if result.stderr:
-        violations = result.stderr.strip().split('\n')
+        violations = result.stderr.strip().split("\n")
         violation_count = len([line for line in violations if line.strip()])
         logger.info(f"{violation_count} linting violations found")
     else:
@@ -286,29 +299,26 @@ def clean_translations(c):
     # Import file manager
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), "plugins"))
     from file_organization import ExtensionFileManager
-    
+
     # Initialize file manager
     content_path = SETTINGS.get("PATH", "content")
     file_manager = ExtensionFileManager(content_root=content_path)
-    
+
     print("🗑️  Cleaning up all translation files...")
-    
+
     try:
         removed_files, removed_dirs = file_manager.remove_all_translations_global()
-        
+
         if removed_files > 0:
             print(f"✅ Successfully removed:")
             print(f"   📄 {removed_files} translation files")
             print(f"   📁 {removed_dirs} empty extension directories")
         else:
             print("ℹ️  No translation files found to remove")
-            
-            
+
     except Exception as e:
         print(f"❌ Error during cleanup: {e}")
         sys.exit(1)
-
-
 
 
 def prepare_and_run_pelican(cmd):

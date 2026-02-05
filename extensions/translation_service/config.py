@@ -34,7 +34,6 @@ class TranslationConfig:
     exclude_categories: List[str] = field(default_factory=lambda: ["recipes"])
     exclude_paths: List[str] = field(default_factory=lambda: ["/pages/impressum/"])
 
-
     # API Behavior
     max_retries: int = 3
     timeout: int = 120
@@ -145,7 +144,6 @@ class TranslationConfig:
         config.exclude_paths = settings.get(
             "TRANSLATION_EXCLUDE_PATHS", config.exclude_paths
         )
-
 
         # API Behavior
         config.max_retries = settings.get("TRANSLATION_MAX_RETRIES", config.max_retries)

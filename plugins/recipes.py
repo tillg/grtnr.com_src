@@ -148,33 +148,33 @@ def generate_recipes(generator, writer):
 
     # Generate localized recipe pages
     _generate_localized_recipe_pages(generator, writer, recipes)
-    
+
     # Generate recipe indices (main + localized)
     _generate_recipe_indices(generator, writer, recipes)
 
 
 def _generate_localized_recipe_pages(generator, writer, recipes):
     """Generate localized recipe pages for all languages."""
-    
+
     # Check if multilingual is enabled
     multilingual_enabled = generator.settings.get("MULTILINGUAL_ENABLED", False)
     if not multilingual_enabled:
         return
-    
+
     languages = generator.settings.get("MULTILINGUAL_LANGUAGES", ["en"])
     default_lang = generator.settings.get("MULTILINGUAL_DEFAULT_LANG", "en")
-    
+
     for lang in languages:
         if lang != default_lang:  # Skip default language as it's already generated
             for recipe in recipes:
                 try:
                     # Create localized recipe
                     localized_recipe = _create_localized_recipe(recipe, lang)
-                    
+
                     # Create localized context
                     localized_context = generator.context.copy()
                     localized_context["LANGUAGE"] = lang
-                    
+
                     writer.write_file(
                         localized_recipe.save_as,
                         generator.get_template(recipe.template),
@@ -182,14 +182,19 @@ def _generate_localized_recipe_pages(generator, writer, recipes):
                         recipe=localized_recipe,
                         relative_urls=generator.settings.get("RELATIVE_URLS", False),
                     )
-                    logger.debug(f"Generated localized recipe page for {lang}: {recipe.title}")
+                    logger.debug(
+                        f"Generated localized recipe page for {lang}: {recipe.title}"
+                    )
                 except Exception as e:
-                    logger.error(f"Error writing localized recipe {recipe.title} for {lang}: {e}", exc_info=True)
+                    logger.error(
+                        f"Error writing localized recipe {recipe.title} for {lang}: {e}",
+                        exc_info=True,
+                    )
 
 
 def _generate_recipe_indices(generator, writer, recipes):
     """Generate recipe index pages for all languages."""
-    
+
     # Generate main recipe index
     try:
         writer.write_file(
@@ -202,26 +207,26 @@ def _generate_recipe_indices(generator, writer, recipes):
         logger.info("Generated main recipe index")
     except Exception as e:
         logger.error(f"Error writing main recipe index: {e}", exc_info=True)
-    
+
     # Check if multilingual is enabled and generate localized indices
     multilingual_enabled = generator.settings.get("MULTILINGUAL_ENABLED", False)
     if multilingual_enabled:
         languages = generator.settings.get("MULTILINGUAL_LANGUAGES", ["en"])
         default_lang = generator.settings.get("MULTILINGUAL_DEFAULT_LANG", "en")
-        
+
         for lang in languages:
             if lang != default_lang:  # Skip default language as it's already generated
                 try:
                     # Create localized context
                     localized_context = generator.context.copy()
                     localized_context["LANGUAGE"] = lang
-                    
+
                     # Create localized recipes with adjusted URLs
                     localized_recipes = []
                     for recipe in recipes:
                         localized_recipe = _create_localized_recipe(recipe, lang)
                         localized_recipes.append(localized_recipe)
-                    
+
                     writer.write_file(
                         f"{lang}/recipes/index.html",
                         generator.get_template("recipes_index"),
@@ -231,44 +236,49 @@ def _generate_recipe_indices(generator, writer, recipes):
                     )
                     logger.info(f"Generated localized recipe index for {lang}")
                 except Exception as e:
-                    logger.error(f"Error writing localized recipe index for {lang}: {e}", exc_info=True)
+                    logger.error(
+                        f"Error writing localized recipe index for {lang}: {e}",
+                        exc_info=True,
+                    )
 
 
 def _create_localized_recipe(recipe, lang):
     """Create a localized version of a recipe with adjusted URLs."""
-    
+
     class LocalizedRecipeAdapter:
         def __init__(self, original_recipe, language):
             # Copy all attributes from the original recipe, excluding properties
             for attr in dir(original_recipe):
-                if not attr.startswith('_') and not isinstance(getattr(type(original_recipe), attr, None), property):
+                if not attr.startswith("_") and not isinstance(
+                    getattr(type(original_recipe), attr, None), property
+                ):
                     try:
                         setattr(self, attr, getattr(original_recipe, attr))
                     except AttributeError:
                         # Skip attributes that can't be set
                         pass
-            
-            # Store original metadata separately 
+
+            # Store original metadata separately
             self._metadata = original_recipe.metadata
-            
+
             # Adjust URLs to include language prefix - ensure proper slash handling
             original_url = original_recipe.url
             # For localized recipes, we need to prepend the language code
             # but keep the same relative/absolute nature as the original
-            if original_url.startswith('/'):
+            if original_url.startswith("/"):
                 self._url = f"/{language}{original_url}"
             else:
                 self._url = f"{language}/{original_url}"
             self.save_as = f"{language}/{original_recipe.save_as}"
-        
+
         @property
         def url(self):
             return self._url
-            
+
         @property
         def metadata(self):
             return self._metadata
-    
+
     return LocalizedRecipeAdapter(recipe, lang)
 
 

@@ -5,10 +5,11 @@ import sys
 from pathlib import Path
 
 # Add extensions to path
-sys.path.insert(0, 'extensions')
+sys.path.insert(0, "extensions")
 
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
     print(f"✅ Loaded .env file")
 except ImportError:
@@ -27,28 +28,27 @@ else:
 
 # Test translation service
 try:
-    from translation_service import TranslationService, TranslationConfig
-    
+    from translation_service import TranslationConfig, TranslationService
+
     print("\n🔧 Testing configuration...")
     config = TranslationConfig.from_environment()
     print(f"✅ Config loaded: {config}")
-    
+
     print("\n🚀 Testing translation service...")
     service = TranslationService(config)
-    
+
     # Simple test translation
     result = service.translate_content(
-        content="Hello, world! This is a test.",
-        source_lang="en",
-        target_lang="de"
+        content="Hello, world! This is a test.", source_lang="en", target_lang="de"
     )
-    
+
     print(f"✅ Translation successful!")
     print(f"Original: Hello, world! This is a test.")
     print(f"German: {result.translation}")
     print(f"Cached: {result.cached}")
-    
+
 except Exception as e:
     print(f"❌ Translation test failed: {e}")
     import traceback
+
     traceback.print_exc()
