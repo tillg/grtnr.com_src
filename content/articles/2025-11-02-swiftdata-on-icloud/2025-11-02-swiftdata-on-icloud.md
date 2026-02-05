@@ -2,6 +2,7 @@
 title: SwiftData on iCloud
 tags: tech
 image: swiftdata.jpeg
+date:2025-11-02
 ---
 
 **Note**: The github repo that goes with this article is [here](https://github.com/tillg/SwiftDataOniCloud).
