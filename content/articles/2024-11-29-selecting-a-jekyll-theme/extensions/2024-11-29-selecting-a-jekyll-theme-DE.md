@@ -2,22 +2,23 @@
 date: 2024-11-29
 excerpt: Es ist eine Weile her, dass ich an meiner Seite gearbeitet habe. Jetzt habe ich auf die neuesten technischen Werkzeuge aufgerüstet - und wie üblich wird das Thema wieder überarbeitet...
 image: hydejack.jpg
+title: Auswahl eines Jekyll&nbsp;Themes
 translation: de
 source_language: en
-source_hash: bdd63aace4e02cd45080b66958f6a4408bce5f75c7b9a979b3e76bc2eb808f20
+source_hash: 3cc0d2b7385a6edcc46fed9603191555405671d2a669c7a5daef446cd46d49aa
 translator: gpt-4o-2024-08-06
-translate_date: 2025-07-18T22:12:14.469339
+translate_date: 2026-02-14T10:56:49.338272
 generated_by: simplified-translation-system
 ---
 
-Themen, die ich mit meinen Arbeitsnotizen betrachtet habe.
+Themen, die ich mir angesehen habe, mit meinen Arbeitsnotizen.
 
 ## Hydejack
 
-**Aktuell** ab Nov 2024.
+**Aktuell** Stand November 2024.
 
 ![hydejack](hydejack.jpg)
-[Hydejack](https://hydejack.com) ist mein aktuelles Thema (ab Nov 2024). Es sieht gut aus, aber
+[Hydejack](https://hydejack.com) ist mein aktuelles Theme (Stand November 2024). Es sieht gut aus, aber
 
 - Es hat zu viele Spielereien - ja, der Geschmack ändert sich mit der Zeit
 - Ich habe die Startseite satt, die ich nach links schieben muss
@@ -58,7 +59,7 @@ Themen, die ich mit meinen Arbeitsnotizen betrachtet habe.
 **Wird untersucht**
 
 ![Cayman](cayman.png)
-[Caysman](https://github.com/pages-themes/cayman)
+[Cayman](https://github.com/pages-themes/cayman)
 
 ---
 
@@ -94,7 +95,7 @@ Themen, die ich mit meinen Arbeitsnotizen betrachtet habe.
 
 ## Mediumish
 
-**Wird untersucht - wahrscheinlich zu extravagant**
+**Wird untersucht - wahrscheinlich zu ausgefallen**
 
 ![mediumish](mediumish.png)
 
@@ -104,7 +105,7 @@ Themen, die ich mit meinen Arbeitsnotizen betrachtet habe.
 
 ## al-folio
 
-**Abgelehnt** wegen zu hoher Komplexität.
+**Abgelehnt** wegen zu großer Komplexität.
 
 ![al-folio](al-folio-preview.png)
 ![al-folio-till](al-folio-till.png)

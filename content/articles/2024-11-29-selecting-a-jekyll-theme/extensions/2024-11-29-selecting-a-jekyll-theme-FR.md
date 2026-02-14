@@ -2,11 +2,12 @@
 date: 2024-11-29
 excerpt: Cela fait un moment que je n'ai pas travaillé sur mon site. Maintenant, j'ai mis à jour les outils techniques - et comme d'habitude, le thème est à nouveau retravaillé...
 image: hydejack.jpg
+title: Choisir un Thème&nbsp;Jekyll
 translation: fr
 source_language: en
-source_hash: bdd63aace4e02cd45080b66958f6a4408bce5f75c7b9a979b3e76bc2eb808f20
+source_hash: 3cc0d2b7385a6edcc46fed9603191555405671d2a669c7a5daef446cd46d49aa
 translator: gpt-4o-2024-08-06
-translate_date: 2025-07-18T22:12:23.598352
+translate_date: 2026-02-14T10:56:54.303547
 generated_by: simplified-translation-system
 ---
 
@@ -19,7 +20,7 @@ Thèmes que j'ai examinés avec mes notes de travail.
 ![hydejack](hydejack.jpg)
 [Hydejack](https://hydejack.com) est mon thème actuel (en novembre 2024). Il est joli, mais
 
-- Il a trop de fioritures - oui, les goûts changent avec le temps
+- Il a trop de gadgets - oui, les goûts changent avec le temps
 - J'en ai assez de la page d'entrée que je dois faire glisser vers la gauche
 
 ---
@@ -109,6 +110,6 @@ Thèmes que j'ai examinés avec mes notes de travail.
 ![al-folio](al-folio-preview.png)
 ![al-folio-till](al-folio-till.png)
 
-[al-folio](https://github.com/alshedivat/al-folio) a l'air bien - avec la photo d'Einstein. Il est beaucoup moins attrayant avec mon visage, il a trop de zones dont je n'ai pas besoin. J'ai joué avec (c'est-à-dire créé une petite démo personnalisée), et cela semble complexe.
+[al-folio](https://github.com/alshedivat/al-folio) a un bon aspect - avec la photo d'Einstein. Il est beaucoup moins attrayant avec mon visage, il a trop de zones dont je n'ai pas besoin. J'ai joué avec (c'est-à-dire créé une petite démo personnalisée), et il semble complexe.
 
 ---

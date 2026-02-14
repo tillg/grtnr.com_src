@@ -1,18 +1,19 @@
 ---
 date: 2025-02-05
 image: david_cursor_magic.png
-excerpt: Ich habe dieses Video eines Entwicklers mit VIELEN hilfreichen Tipps zur Nutzung von Cursor gefunden - hier sind meine Erkenntnisse.
+excerpt: Ich habe dieses Video eines Entwicklers mit VIELEN hilfreichen Tipps zur Verwendung von Cursor gefunden - hier sind meine Erkenntnisse.
+title: Cursor&nbsp;Magie
 translation: de
 source_language: en
-source_hash: 6f5f3859413aa8ee235065659ab80dc33db60f32d1c181831639b1989c52de3e
+source_hash: 0b72ffa69e5d22e9a4f1199bedbd9e3055f1bda0f131c859de6d6b4bfc5c43d5
 translator: gpt-4o-2024-08-06
-translate_date: 2025-07-18T21:57:15.009446
+translate_date: 2026-02-14T10:55:44.290596
 generated_by: simplified-translation-system
 ---
 
 [TOC]
 
-Letztes Wochenende entdeckte ich dieses Video von David Ondrej: [I spent 400+ hours in Cursor, here’s what I learned](https://youtu.be/gYLNxUxVomY?si=1Q2x2UWgqy1RHvLt). Der Titel ist nicht besonders ansprechend, aber der Inhalt war für mich sehr hilfreich. Hier sind also meine Notizen, damit ich alle seine Tipps nutzen und die verschiedenen Prompts und Snippets zur Hand haben kann, um sie beim Programmieren zu verwenden.
+Letztes Wochenende entdeckte ich dieses Video von David Ondrej: [I spent 400+ hours in Cursor, here’s what I learned](https://youtu.be/gYLNxUxVomY?si=1Q2x2UWgqy1RHvLt). Der Titel ist nicht besonders ansprechend, aber der Inhalt war für mich sehr hilfreich. Hier sind also meine Notizen, damit ich alle seine Tipps nutzen und die verschiedenen Prompts und Snippets griffbereit haben kann, um sie beim Programmieren zu verwenden.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gYLNxUxVomY?si=xQAMyMvQCsSwWztk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -21,7 +22,7 @@ Letztes Wochenende entdeckte ich dieses Video von David Ondrej: [I spent 400+ ho
 Die allgemeine Prompt-Struktur, die David vorschlägt:
 
 1. was wir tun
-2. relevante Dateien taggen
+2. relevante Dateien markieren
 3. wie ausführen // was nicht zu tun ist
 4. Kontext-Dump
 5. Kernanweisung wiederholen
@@ -29,7 +30,7 @@ Die allgemeine Prompt-Struktur, die David vorschlägt:
 
 ## Cursorrules
 
-`.cursorrules.md` ist eine Datei, die Sie in Ihr Projektverzeichnis auf oberster Ebene legen, um der KI mehr Kontext über Ihr Projekt zu geben. Hier ist die Struktur der Datei, die David vorschlägt:
+`.cursorrules.md` ist eine Datei, die Sie im obersten Verzeichnis Ihres Projekts ablegen, um der KI mehr Kontext über Ihr Projekt zu geben. Hier ist die Struktur der Datei, die David vorschlägt:
 
 ```markdown
 # PROJEKTÜBERSICHT
@@ -38,7 +39,7 @@ Die allgemeine Prompt-Struktur, die David vorschlägt:
 
 # TECH STACK
 
-- wählen Sie einen Tech-Stack mit sehr populären Sprachen
+- wählen Sie einen Tech-Stack mit sehr beliebten Sprachen
 
 # FEHLERBEHEBUNGSPROZESS
 
@@ -51,14 +52,14 @@ Schritt 3: Zeigen Sie, wie der Fehler behoben wird
 # Unsere - Umgebungsvariablen
 
 backend/.env
-frontend/.env
+frontend/. env
 
 # AKTUELLE DATEISTRUKTUR
 
-Hier fügen Sie den Inhalt dieses Befehls ein, damit Cursor über Ihre Projektstruktur informiert ist:
+Hier fügen Sie den Inhalt dieses Befehls ein, damit Cursor über Ihre Projektstruktur Bescheid weiß:
 tree -L 4 -a -I 'node*modules | -git|\_pycache*|.DS\_$
 
-# GITHUB PUSH PROZESS
+# GITHUB PUSH-PROZESS
 
 # WICHTIG
 
@@ -69,7 +70,7 @@ Er empfiehlt auch dringend, eine `.cursorignore` zu haben, in der Sie Ihre `.env
 
 ## KI-Regeln in den Cursor-Einstellungen
 
-KI-Regeln sollten in den Cursor-Einstellungen festgelegt werden. Sie sollten nichts Projektspezifisches enthalten, sondern nur Programmierprinzipien, die Sie immer anwenden möchten. Das ist der Unterschied zu den `.cursorrules`, die auch projektspezifische Details enthalten.
+KI-Regeln sind in den Cursor-Einstellungen festzulegen. Sie sollten nichts projektspezifisches enthalten, sondern nur Programmierprinzipien, die Sie immer anwenden möchten. Das ist der Unterschied zu den `.cursorrules`, die auch projektspezifische Details enthalten.
 
 Ein Beispiel:
 
@@ -90,14 +91,14 @@ Ein Beispiel:
 
 - NICHT VORSCHNELL SCHLUSSFOLGERN! Berücksichtigen Sie mehrere mögliche Ursachen, bevor Sie sich entscheiden.
 - Erklären Sie das Problem in einfachem Englisch
-- Machen Sie nur die minimal notwendigen Änderungen, ändern Sie so wenige Codezeilen wie möglich
+- Machen Sie die minimal notwendigen Änderungen und ändern Sie so wenige Codezeilen wie möglich
 - Bei seltsamen Fehlern bitten Sie den Benutzer, eine Perplexity-Websuche durchzuführen, um die neuesten Informationen zu erhalten
 
 # Bauprozess
 
-- ﻿﻿Überprüfen Sie, ob jede neue Funktion funktioniert, indem Sie dem Benutzer sagen, wie er sie testen kann
-- ﻿﻿Schreiben Sie KEINEN komplizierten und verwirrenden Code. Wählen Sie den einfachen und modularen Ansatz.
-- ﻿﻿Wenn Sie nicht sicher sind, was zu tun ist, sagen Sie dem Benutzer, dass er eine Websuche durchführen soll
+- ﻿﻿Verifizieren Sie jede neue Funktion, indem Sie dem Benutzer mitteilen, wie er sie testen kann
+- ﻿﻿Schreiben Sie KEINEN komplizierten und verwirrenden Code. Entscheiden Sie sich für den einfachen & modularen Ansatz.
+- ﻿﻿Wenn Sie nicht sicher sind, was zu tun ist, bitten Sie den Benutzer, eine Websuche durchzuführen
 
 # Kommentare
 
@@ -110,7 +111,7 @@ Ein Beispiel:
 
 ## Hilfreiche kleine Prompts
 
-David bietet eine Liste hilfreicher kleiner Prompts oder Prompt-Snippets. Ich habe einige davon hier für die Copy&Paste-Nutzung kopiert:
+David bietet eine Liste hilfreicher kleiner Prompts oder Prompt-Snippets an. Ich habe einige davon hier für die Copy&Paste-Nutzung kopiert:
 
 ```text
 Vorgehen wie ein Senior Developer mit Fokus auf klare Architektur.
@@ -125,29 +126,29 @@ Antworten Sie kurz
 
 LÖSCHEN SIE KEINE KOMMENTARE
 
-Sie sollten den Überlegungsabsatz mit viel Unsicherheit beginnen und langsam Vertrauen gewinnen, während Sie mehr über das Element nachdenken.
+Sie sollten den Überlegungsabsatz mit viel Unsicherheit beginnen und allmählich mehr Vertrauen gewinnen, während Sie mehr über das Thema nachdenken.
 ```
 
 ## Größere Prompts
 
-### Zusammenfassung des aktuellen Zustands
+### Zusammenfassung des aktuellen Stands
 
-Wird verwendet, um einen Compose-Flow zusammenzufassen und zu einem neuen Compose-Dialog überzugehen.
+Wird verwendet, um einen Compose-Flow zusammenzufassen und zu einem neuen Compose-Dialog zu wechseln.
 
 ```text
-Bevor wir fortfahren, benötige ich von Ihnen eine Zusammenfassung des aktuellen Projektzustands.
+Bevor wir fortfahren, brauche ich eine Zusammenfassung des aktuellen Stands des Projekts.
 
-Formatieren Sie dies als 3 prägnante Absätze, in denen Sie beschreiben, was wir gerade getan haben, was nicht funktioniert hat, welche Dateien aktualisiert/erstellt wurden, welche Fehler zu vermeiden sind, welche wichtigen Erkenntnisse/Lektionen wir gelernt haben, welche Probleme/Fehler wir haben,… und alles andere, was ein Programmierer benötigt, um produktiv an diesem Projekt zu arbeiten.
+Formatieren Sie dies als 3 prägnante Absätze, in denen Sie beschreiben, was wir gerade getan haben, was nicht funktioniert hat, welche Dateien aktualisiert/erstellt wurden, welche Fehler zu vermeiden sind, welche wichtigen Erkenntnisse/Lektionen wir gelernt haben, welche Probleme/Fehler wir haben,… und alles andere, was ein Programmierer braucht, um produktiv an diesem Projekt zu arbeiten.
 
-Schreiben Sie in einem gesprächigen, aber informativen Ton, ähnlich einer README-Datei auf GitHub, die sehr informationsdicht ist und ohne unnötigen Ballast. Schließen Sie keine Annahmen oder Theorien ein, nur die Fakten.
+Schreiben Sie in einem konversationellen, aber informativen Ton, ähnlich einer README-Datei auf GitHub, die sehr informationsdicht und ohne unnötigen Ballast ist. Schließen Sie keine Annahmen oder Theorien ein, nur die Fakten.
 
-Ich erwarte drei prägnante Absätze, geschrieben, als ob Sie einem anderen Programmierer Anweisungen geben würden und dies alles wäre, was Sie ihm sagen könnten.
+Ich erwarte drei prägnante Absätze, geschrieben, als ob Sie einem anderen Programmierer Anweisungen geben würden und dies ALLES wäre, was Sie ihm sagen könnten.
 ```
 
-### Unvoreingenommen 50/50
+### Unvoreingenommenes 50/50
 
 ```text
-BEVOR SIE ANTWORTEN, möchte ich, dass Sie zwei detaillierte Absätze schreiben, die jeweils für eine dieser Lösungen argumentieren - ziehen Sie keine voreiligen Schlüsse, betrachten Sie ernsthaft beide Ansätze
+BEVOR SIE ANTWORTEN, möchte ich, dass Sie zwei detaillierte Absätze schreiben, die jeweils für eine dieser Lösungen argumentieren - ziehen Sie keine voreiligen Schlüsse, ziehen Sie beide Ansätze ernsthaft in Betracht
 
 dann, nachdem Sie fertig sind, sagen Sie mir, ob eine dieser Lösungen offensichtlich besser ist als die andere und warum.
 ```
@@ -155,16 +156,16 @@ dann, nachdem Sie fertig sind, sagen Sie mir, ob eine dieser Lösungen offensich
 ### Ein-Absatz-Suchanfrage
 
 ```text
-Lassen Sie uns eine Websuche durchführen. Ihre Aufgabe ist es, eine Ein-Absatz-Suchanfrage zu schreiben, als ob Sie einem menschlichen Forscher sagen würden, was zu finden ist, einschließlich aller relevanten Kontexte. Formatieren Sie den Absatz als klare Anweisungen, die einen Forscher dazu auffordern, zu finden, wonach wir suchen. Fragen Sie nach Code-Snippets oder technischen Details, wenn relevant.
+Lassen Sie uns eine Websuche durchführen. Ihre Aufgabe ist es, eine Ein-Absatz-Suchanfrage zu schreiben, als ob Sie einem menschlichen Forscher sagen würden, was er finden soll, einschließlich des gesamten relevanten Kontexts. Formatieren Sie den Absatz als klare Anweisungen, die einen Forscher anweisen, wonach wir suchen. Fordern Sie Code-Snippets oder technische Details an, wenn relevant
 ```
 
 ## Anweisungen
 
-David schlägt vor, ein Verzeichnis `instructions` zu haben, das md-Dateien mit Tipps für die KI enthält. Auf diese Weise können Sie von der Composer-Eingabeaufforderung auf diese Dateien verweisen. Er bevorzugt diese Art von Anweisungsdateien gegenüber dem Verweis auf @Docs in Cursor, was anscheinend noch nicht so gut funktioniert.
+David schlägt vor, ein Verzeichnis `instructions` zu haben, das md-Dateien mit Tipps für die KI enthält. Auf diese Weise können Sie auf diese Dateien vom Composer-Prompt aus verweisen. Er bevorzugt diese Art von Anweisungsdateien gegenüber dem Verweis auf @Docs in Cursor, was anscheinend noch nicht so gut funktioniert.
 
-Erwähnte Anweisungsdateien:
+Anweisungsdateien, die er erwähnte:
 
-- `supabase.md`: Eine Datei, die die Struktur seiner Datenbank beschreibt, sodass Cursor über Tabellen, Felder, Pflichtfelder usw. informiert ist.
+- `supabase.md`: Eine Datei, die die Struktur seiner Datenbank beschreibt, damit Cursor über Tabellen, Felder, Pflichtfelder usw. Bescheid weiß.
 - `roadmap.md`: Eine Erklärung der Roadmap Ihres Projekts.
 
 ## Andere Werkzeuge
@@ -174,7 +175,7 @@ Neben Cursor verwendet David viele andere Werkzeuge. Einige der von ihm erwähnt
 - [ChatGPT](https://chatgpt.com)
 - [Claude](https://claude.ai) für Nebengespräche mit einer fortgeschrittenen KI.
 - [Perplexity](https://www.perplexity.ai) für intelligente Websuchen.
-- [WisprFlow](https://wisprflow.ai) um zu sprechen, anstatt zu tippen
+- [WisprFlow](https://wisprflow.ai) um zu sprechen anstatt zu tippen
 - [v0](https://v0.dev) ein Tool, um Web-Apps im Browser zu erstellen, indem man mit einer KI chattet.
-- [Lovable](https://lovable.dev) für den Aufbau von Backends, insbesondere mit [Supabase](https://supabase.com)
-- [Bolt](https://bolt.new) um Websites zu erstellen.
+- [Lovable](https://lovable.dev) zum Erstellen von Backends, insbesondere mit [Supabase](https://supabase.com)
+- [Bolt](https://bolt.new) zum Erstellen von Websites.

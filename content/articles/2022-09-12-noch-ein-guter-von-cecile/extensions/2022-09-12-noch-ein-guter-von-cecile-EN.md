@@ -1,13 +1,14 @@
 ---
 layout: post
 date: 2022-09-12
-excerpt: And Cecile invented it herself!
+excerpt: And Cecile invented that one herself!
 image: fumagalli.jpeg
+title: Another Good One From&nbsp;Cecile
 translation: en
 source_language: de
-source_hash: 2d2f47b623675c57e432850811a0cf5a74921cbde6ced335a1eeff7cf6fdaf3a
+source_hash: af5aa77e4a62ef13bc5dbf83393b928fffe34a7f332b23bdae08e055dc446adf
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-05T15:44:54.808643
+translate_date: 2026-02-14T10:57:16.243282
 generated_by: simplified-translation-system
 ---
 

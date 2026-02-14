@@ -1,18 +1,19 @@
 ---
 layout: post
 date: 2024-04-08
-excerpt: Configurer Python sur un Mac peut être délicat. Le nombre d'options est important, et elles peuvent interagir de manière étrange. De plus, vous devez vous rappeler quelle méthode d'installation vous avez utilisée une fois que vous souhaitez changer de version ou mettre à niveau. Ce post devrait me rappeler comment je l'ai fait 😉
+excerpt: Configurer Python sur un Mac peut être délicat. Le nombre d'options est important, et elles peuvent interagir de manière étrange. De plus, vous devez vous souvenir de la méthode d'installation utilisée une fois que vous souhaitez changer de version ou mettre à jour. Ce post devrait me rappeler comment je l'ai fait 😉
 image: python_on_mac.png
 tags: tech, Mac
+title: Configuration de Jupyter Lab sur&nbsp;Mac
 translation: fr
 source_language: en
-source_hash: e9efb8cbbfdf8c25b6429ef6055502c4d9c9ccffd0deece3f26bf5328cdb8392
+source_hash: d7fb30f801a74769871b23048d17d42fdf412619afb321dfcd873932a06004b3
 translator: gpt-4o-2024-08-06
-translate_date: 2025-07-18T22:12:02.343125
+translate_date: 2026-02-14T10:57:09.812631
 generated_by: simplified-translation-system
 ---
 
-Configurer Python sur un Mac peut être délicat. Le nombre d'options est important, et elles peuvent interagir de manière étrange. De plus, vous devez vous rappeler quelle méthode d'installation vous avez utilisée une fois que vous souhaitez changer de version ou mettre à niveau. Ce post devrait me rappeler comment je l'ai fait 😉
+Configurer Python sur un Mac peut être délicat. Le nombre d'options est important, et elles peuvent interagir de manière étrange. De plus, vous devez vous souvenir de la méthode d'installation utilisée une fois que vous souhaitez changer de version ou mettre à jour. Ce post devrait me rappeler comment je l'ai fait 😉
 
 ## Installer Python
 
@@ -27,11 +28,11 @@ Il existe de nombreuses façons d'installer Python sur Mac et de gérer ses vers
 Ce qui a le mieux fonctionné pour moi est **pyenv** :
 
 - Installez-le : `brew install pyenv`. Je suppose que vous avez [Homebrew](https://brew.sh) installé...
-- Voir les options et commandes offertes : `pyenv`
-- Lister toutes les versions de Python disponibles pour pyenv : `pyenv versions`
-- Installer une version : `pyenv install 3.12` (C'est la version de Python que j'utilise actuellement)
-- Définir la version utilisée globalement : `pyenv global 3.12`
-- Vérifier quelle version est définie globalement : `pyenv global` ou `python --version`
+- Consultez les options et commandes offertes : `pyenv`
+- Listez toutes les versions de Python disponibles pour pyenv : `pyenv versions`
+- Installez une version : `pyenv install 3.12` (C'est la version de Python que j'utilise actuellement)
+- Définissez la version utilisée globalement : `pyenv global 3.12`
+- Vérifiez quelle version est définie globalement : `pyenv global` ou `python --version`
 
 ## Créer un répertoire de travail
 
@@ -54,37 +55,37 @@ cd ~/git/my_python_project
 python3.12 -m venv .venv
 ```
 
-De cette façon, j'ai créé un environnement à l'intérieur du sous-répertoire `.env`. Pour l'activer, utilisez `source .venv/bin/activate`.
+De cette manière, j'ai créé un environnement à l'intérieur du sous-répertoire `.env`. Pour l'activer, utilisez `source .venv/bin/activate`.
 
 **Note** : Comme mon sous-répertoire `.env` ne doit pas être dans le dépôt git, il doit être listé dans le fichier `.gitignore`.
 
 ## Installer Jupyter Lab
 
-Maintenant que j'ai l'environnement Python, je peux installer Jupyter. Assurez-vous que je suis dans le bon répertoire et que l'environnement Python est activé :
+Maintenant que j'ai l'environnement Python, je peux installer Jupyter. Assurez-vous d'être dans le bon répertoire et que l'environnement Python est activé :
 
 ```bash
-# Aller dans mon répertoire de projet et activer son environnement Python
+# Allez dans le répertoire de mon projet et activez son environnement Python
 cd ~/git/my_python_project
 source .venv/bin/activate
 
-# Installer Jupyter Lab dans cet environnement
+# Installez Jupyter Lab dans cet environnement
 pip install jupyterlab
 
 # Très souvent, il me demande de mettre à jour pip lui-même
 pip install --upgrade pip
 
-# Démarrer Jupyter Lab
+# Démarrez Jupyter Lab
 jupyter lab
 # Attendez un peu et votre navigateur devrait s'ouvrir sur http://localhost:8888/lab
 ```
 
 ## Créer un nouveau notebook
 
-Votre navigateur devrait s'ouvrir dans un nouvel environnement Jupyter Lab :
+Votre navigateur devrait être ouvert dans un nouvel environnement Jupyter Lab :
 ![Un environnement Lab vide](jupyter_overview.png)
 
-Cliquez sur _Notebook > Python 3_ et votre premier Notebook devrait être prêt et fonctionnel :
+Cliquez sur _Notebook > Python 3_ et votre premier Notebook devrait être prêt à fonctionner :
 
-![Un nouveau notebook](jupyter_detail.png)
+![Un notebook vierge](jupyter_detail.png)
 
 Pour commencer avec Jupyter Lab, suivez leur [Guide de l'utilisateur](https://jupyterlab.readthedocs.io/en/latest/user/interface.html).

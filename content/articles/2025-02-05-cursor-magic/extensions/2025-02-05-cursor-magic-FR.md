@@ -2,26 +2,27 @@
 date: 2025-02-05
 image: david_cursor_magic.png
 excerpt: J'ai trouvé cette vidéo d'un développeur avec BEAUCOUP de conseils utiles sur l'utilisation de Cursor - voici mes conclusions.
+title: Cursor&nbsp;Magic
 translation: fr
 source_language: en
-source_hash: 6f5f3859413aa8ee235065659ab80dc33db60f32d1c181831639b1989c52de3e
+source_hash: 0b72ffa69e5d22e9a4f1199bedbd9e3055f1bda0f131c859de6d6b4bfc5c43d5
 translator: gpt-4o-2024-08-06
-translate_date: 2025-07-18T21:57:46.665345
+translate_date: 2026-02-14T10:56:08.271051
 generated_by: simplified-translation-system
 ---
 
 [TOC]
 
-Le week-end dernier, j'ai découvert cette vidéo de David Ondrej : [J'ai passé plus de 400 heures dans Cursor, voici ce que j'ai appris](https://youtu.be/gYLNxUxVomY?si=1Q2x2UWgqy1RHvLt). Le titre n'est pas très accrocheur, mais le contenu m'a été très utile. Voici donc mes notes pour pouvoir utiliser tous ses conseils et avoir les différents prompts et extraits à portée de main lorsque je code.
+Le week-end dernier, j'ai découvert cette vidéo de David Ondrej : [I spent 400+ hours in Cursor, here’s what I learned](https://youtu.be/gYLNxUxVomY?si=1Q2x2UWgqy1RHvLt). Le titre n'est pas très accrocheur, mais le contenu m'a été très utile. Voici donc mes notes pour que je puisse utiliser tous ses conseils et avoir les différents prompts et extraits à portée de main pour les utiliser lors du codage.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gYLNxUxVomY?si=xQAMyMvQCsSwWztk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Structure du Prompt
 
-La structure globale du prompt que David suggère :
+La structure générale du prompt que David suggère :
 
 1. ce que nous faisons
-2. marquer les fichiers pertinents
+2. taguer les fichiers pertinents
 3. comment exécuter // ce qu'il ne faut pas faire
 4. décharge de contexte
 5. répéter l'instruction principale
@@ -51,7 +52,7 @@ La structure globale du prompt que David suggère :
 # Nos - variables d'environnement
 
 backend/.env
-frontend/.env
+frontend/. env
 
 # STRUCTURE ACTUELLE DES FICHIERS
 
@@ -67,9 +68,9 @@ tree -L 4 -a -I 'node*modules | -git|\_pycache*|.DS\_$
 
 Il suggère également fortement d'avoir un `.cursorignore` dans lequel vous listez vos fichiers `.env`. Cela empêche le chat et Composer d'écrire accidentellement dans ces fichiers.
 
-## Règles de l'IA dans les Paramètres de Cursor
+## Règles IA dans les Paramètres de Cursor
 
-Les règles de l'IA doivent être définies dans les paramètres de cursor. Elles ne doivent contenir rien de spécifique au projet, juste des principes de codage que vous voudriez toujours appliquer. C'est la différence avec le `.cursorrules` qui contient également des détails spécifiques au projet.
+Les règles IA doivent être définies dans les paramètres de cursor. Elles ne doivent contenir rien de spécifique au projet, juste des principes de codage que vous voudriez toujours appliquer. C'est la différence avec les `.cursorrules` qui contiennent également des détails spécifiques au projet.
 
 Un exemple :
 
@@ -82,35 +83,35 @@ Un exemple :
 - Tester après chaque changement significatif
 - Se concentrer sur la fonctionnalité principale avant l'optimisation
 - Utiliser une nomenclature claire et cohérente
-- Réfléchir en profondeur avant de coder. Écrire 2-3 paragraphes de raisonnement.
+- Réfléchir soigneusement avant de coder. Écrire 2-3 paragraphes de raisonnement.
 - TOUJOURS écrire du code simple, propre et modulaire.
-- utiliser un langage clair et facile à comprendre. écrire en phrases courtes.
+- utiliser un langage clair et facile à comprendre. écrire des phrases courtes.
 
 # Correction d'Erreurs
 
 - NE PAS TIRER DE CONCLUSIONS HÂTIVES ! Considérer plusieurs causes possibles avant de décider.
 - Expliquer le problème en anglais simple
-- Apporter les modifications minimales nécessaires, en changeant le moins de lignes de code possible
+- Apporter les changements minimaux nécessaires, en modifiant le moins de lignes de code possible
 - en cas d'erreurs étranges, demander à l'utilisateur d'effectuer une recherche web Perplexity pour obtenir les informations les plus récentes
 
 # Processus de Construction
 
 - ﻿﻿Vérifier que chaque nouvelle fonctionnalité fonctionne en indiquant à l'utilisateur comment la tester
 - ﻿﻿NE PAS écrire de code compliqué et déroutant. Opter pour une approche simple et modulaire.
-- ﻿﻿en cas de doute sur ce qu'il faut faire, dire à l'utilisateur d'effectuer une recherche sur le web
+- ﻿﻿en cas de doute, dire à l'utilisateur d'effectuer une recherche web
 
 # Commentaires
 
-- TOUJOURS essayer d'ajouter plus de commentaires utiles et explicatifs dans notre code.
+- TOUJOURS essayer d'ajouter des commentaires plus utiles et explicatifs dans notre code.
 - NE JAMAIS supprimer d'anciens commentaires - sauf s'ils sont manifestement faux / obsolètes.
 - Inclure BEAUCOUP de commentaires explicatifs dans votre code. TOUJOURS écrire un code bien documenté.
 - Documenter tous les changements et leur raisonnement DANS LES COMMENTAIRES QUE VOUS ÉCRIVEZ
 - lors de l'écriture de commentaires, utiliser un langage clair et facile à comprendre. écrire des phrases courtes.
 ```
 
-## Petits prompts utiles
+## Petits Prompts Utiles
 
-David fournit une liste de petits prompts utiles ou d'extraits de prompt. J'en ai copié certains ici pour un usage copier/coller :
+David fournit une liste de petits prompts utiles ou d'extraits de prompts. J'en ai copié certains ici pour une utilisation copier-coller :
 
 ```text
 Procédez comme un développeur senior avec un accent sur une architecture claire.
@@ -121,14 +122,14 @@ Commencez par écrire 3 paragraphes de raisonnement analysant ce que l'erreur po
 
 NE PAS ARRÊTER DE TRAVAILLER jusqu'à ce que…
 
-Répondre brièvement
+Répondez brièvement
 
 NE PAS SUPPRIMER LES COMMENTAIRES
 
 Vous devriez commencer le paragraphe de raisonnement avec beaucoup d'incertitude, et gagner lentement en confiance à mesure que vous réfléchissez davantage à l'élément.
 ```
 
-## Prompts plus larges
+## Prompts Plus Grands
 
 ### Résumé de l'état actuel
 
@@ -137,9 +138,9 @@ Utilisé pour résumer un flux de composition et passer à un nouveau dialogue d
 ```text
 Avant de continuer, j'ai besoin que vous me donniez un résumé de l'état actuel du projet.
 
-Formatez cela en 3 paragraphes concis, où vous décrivez ce que nous venons de faire, ce qui n'a pas fonctionné, quels fichiers ont été mis à jour/créés, quelles erreurs éviter, les idées clés/leçons que nous avons apprises, les problèmes/erreurs auxquels nous sommes confrontés,… et tout autre élément dont un programmeur pourrait avoir besoin pour travailler de manière productive sur ce projet.
+Formatez cela en 3 paragraphes concis, où vous décrivez ce que nous venons de faire, ce qui n'a pas fonctionné, quels fichiers ont été mis à jour/créés, quelles erreurs éviter, les idées clés/leçons que nous avons apprises, les problèmes/erreurs auxquels nous faisons face,… et tout autre élément dont un programmeur pourrait avoir besoin pour travailler efficacement sur ce projet.
 
-Écrivez dans un ton conversationnel mais informatif, comme un fichier README sur GitHub qui est super dense en informations et sans fioritures ni bruit. NE PAS inclure d'hypothèses ou de théories, juste les faits.
+Écrivez dans un ton conversationnel mais informatif, comme un fichier README sur GitHub qui est très dense en informations et sans fioritures ni bruit. NE PAS inclure d'hypothèses ou de théories, juste les faits.
 
 Je m'attends à voir trois paragraphes concis, écrits comme si vous donniez des instructions à un autre programmeur et que c'était TOUT ce que vous pouviez lui dire.
 ```
@@ -149,27 +150,27 @@ Je m'attends à voir trois paragraphes concis, écrits comme si vous donniez des
 ```text
 AVANT DE RÉPONDRE, je veux que vous écriviez deux paragraphes détaillés, l'un argumentant pour chacune de ces solutions - ne tirez pas de conclusions hâtives, considérez sérieusement les deux approches
 
-puis, après avoir terminé, dites-moi si l'une de ces solutions est évidemment meilleure que l'autre, et pourquoi.
+ensuite, après avoir terminé, dites-moi si l'une de ces solutions est évidemment meilleure que l'autre, et pourquoi.
 ```
 
-### requête de recherche en un paragraphe
+### Requête de recherche en un paragraphe
 
 ```text
-effectuons une recherche sur le web. votre tâche est d'écrire une requête de recherche en un paragraphe, comme si vous disiez à un chercheur humain quoi trouver, en incluant tout le contexte pertinent. formatez le paragraphe comme des instructions claires, commandant à un chercheur de trouver ce que nous recherchons. demandez des extraits de code ou des détails techniques lorsque c'est pertinent
+effectuons une recherche web. votre tâche est d'écrire une requête de recherche en un paragraphe, comme si vous disiez à un chercheur humain ce qu'il faut trouver, en incluant tout le contexte pertinent. formatez le paragraphe comme des instructions claires, commandant à un chercheur de trouver ce que nous cherchons. demandez des extraits de code ou des détails techniques lorsque c'est pertinent
 ```
 
 ## Instructions
 
-David suggère d'avoir un répertoire `instructions` contenant des fichiers md avec des conseils pour l'IA. De cette façon, vous pouvez référencer ces fichiers depuis le prompt de Composer. Il préfère ce type de fichiers d'instructions à la référence @Docs dans cursor, qui semble ne pas très bien fonctionner pour le moment.
+David suggère d'avoir un répertoire `instructions` qui contient des fichiers md avec des conseils pour l'IA. De cette façon, vous pouvez référencer ces fichiers depuis le prompt de Composer. Il préfère ce type de fichiers d'instructions plutôt que de référencer @Docs dans cursor, ce qui semble ne pas encore bien fonctionner.
 
 Fichiers d'instructions qu'il a mentionnés :
 
-- `supabase.md` : Un fichier qui décrit la structure de sa base de données, afin que cursor connaisse les tables, champs, obligations, etc.
+- `supabase.md` : Un fichier qui décrit la structure de sa base de données, afin que cursor connaisse les tables, champs, mandatorité, etc.
 - `roadmap.md` : Une explication de la feuille de route de votre projet.
 
-## Autres outils
+## Autres Outils
 
-En plus de Cursor, David utilise de nombreux autres outils. Voici quelques-uns de ceux qu'il a mentionnés :
+En plus de Cursor, David utilise de nombreux autres outils. Certains de ceux qu'il a mentionnés :
 
 - [ChatGPT](https://chatgpt.com)
 - [Claude](https://claude.ai) pour des discussions parallèles avec une IA avancée.

@@ -1,16 +1,17 @@
 ---
 date: 2024-12-02
-excerpt: Ich praktiziere seit über 30 Jahren Sivananda Yoga, kann mich jedoch immer noch nicht an die Lieder am Ende der Yogastunden erinnern. Daher habe ich sie gesammelt...
+excerpt: Ich mache seit über 30 Jahren Sivananda Yoga, kann mich aber immer noch nicht an die Lieder am Ende der Yogastunden erinnern. Also habe ich sie gesammelt...
 image: yogi-lotus.jpg
+title: Sivananda&nbsp;Gebete
 translation: de
 source_language: en
-source_hash: 273e172dc9409dc9d675522c56d947a6beae04b93c51cbec87dbc777f418886d
+source_hash: 76fd4e0b756304228a206a4ba269adc2ccc8170ed93567425fe95c115af8023d
 translator: gpt-4o-2024-08-06
-translate_date: 2025-07-18T22:10:54.734199
+translate_date: 2026-02-14T10:56:38.575282
 generated_by: simplified-translation-system
 ---
 
-Ich praktiziere seit über 30 Jahren Sivananda Yoga in [München](https://muenchen.sivananda.yoga), kann mich jedoch immer noch nicht an die Lieder am Ende der Yogastunden erinnern. Daher habe ich sie gesammelt, um sie in druckbarer Form zu haben.
+Ich mache seit über 30 Jahren Sivananda Yoga in [München](https://muenchen.sivananda.yoga), kann mich aber immer noch nicht an die Lieder am Ende der Yogastunden erinnern. Daher habe ich sie gesammelt, um sie in druckbarer Form zu haben.
 
 ## Das Om Tryambakam
 
@@ -47,4 +48,4 @@ Pūrnamevāvaśisyate
 
 Kopiert von [hier](https://bodymindlight.com/opening-and-closing-prayers-in-sivananda-yoga)
 
-![Yogi im Lotussitz](yogi-lotus.jpg)
+![Yogi im Lotus](yogi-lotus.jpg)

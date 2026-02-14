@@ -1,36 +1,37 @@
 ---
 Tags: tech
-Title: Intégrations dans Swift sur Apple Silicon
+Title: Intégrations en Swift sur Apple Silicon
 Date: 2025-09-30
 image: embedding.png
 summary: Apple a introduit de nouveaux modèles d'intégration que je souhaite utiliser pour mesurer la proximité des textes. Voici mon parcours pour les créer et les rendre efficaces.
+title: Intégrations en Swift sur Apple&nbsp;Silicon
 translation: fr
 source_language: en
-source_hash: 99f94cce4e66af838911fcc4b2ab79dc8fc884f1793594d7b959118b261bcd38
+source_hash: 8b2fbfaaa52718af928c5eab776fb938ae205d82472d025ff8d495a508b3e5ce
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-05T15:41:21.330225
+translate_date: 2026-02-14T10:51:11.572366
 generated_by: simplified-translation-system
 ---
 
 **Travail en cours !!**
 
-Je suis en train d'apprendre le langage de programmation Swift. Je le fais en suivant l'excellent cours [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/) de Paul Hudson. C'est un cours fantastique, qui couvre d'abord les bases de Swift puis SwiftUI.
+Je suis en train d'apprendre le langage de programmation Swift. Je le fais en suivant le fantastique cours [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/) de Paul Hudson. C'est un cours formidable, qui couvre d'abord les bases de Swift puis SwiftUI.
 
-Lorsque j'essaie d'appliquer mes apprentissages à de petits projets, j'ai toujours beaucoup de questions qui surgissent, et la source la plus fiable pour chercher des réponses est le cours, c'est-à-dire ses pages. J'ai donc besoin de rechercher sur le site de Paul Hudson, plus précisément dans les pages de son cours.
+Lorsque j'essaie d'appliquer mes apprentissages à de petits projets, j'ai toujours beaucoup de questions qui surgissent, et la source la plus fiable pour chercher des réponses est le cours, c'est-à-dire ses pages. Je dois donc effectuer des recherches sur le site de Paul Hudson, plus précisément dans les pages de son cours.
 
-Comme je m'amuse aussi avec l'apprentissage automatique, j'ai prévu de construire une application que j'appellerais **AskPaul** : entrez votre question et obtenez des réponses construites par un système RAG (local !) : un système qui contient toutes les pages du cours, en Markdown, découpées et indexées avec leurs intégrations. Ensuite, recherchez les morceaux pertinents pour la question posée et transmettez-les au LLM avec la question. Et quand je dis LLM, je parle du LLM local sur votre appareil Apple 😜
+Comme je m'amuse aussi avec l'apprentissage automatique, j'ai prévu de créer une application que j'appellerais **AskPaul** : entrez votre question et obtenez des réponses construites par un système RAG (local !) : Un système qui contient toutes les pages du cours, en Markdown, découpées et indexées avec leurs intégrations. Ensuite, recherchez les morceaux pertinents pour la question posée et passez-les au LLM avec la question. Et quand je dis LLM, je parle du LLM local sur votre appareil Apple 😜
 
 Pour expérimenter avec les intégrations Swift, j'ai mis en place un dépôt [SwiftEmbeddings](https://github.com/tillg/SwiftEmbeddings). Il contient mon code et des [Playgrounds](https://github.com/tillg/SwiftEmbeddings/tree/main/SwiftEmbeddings/SwiftEmbeddings/Playgrounds).
 
-## Ce qui doit être fait
+## Ce qu'il faut faire
 
 Voici ce que je veux accomplir :
 
-Étant donné un ensemble de pages Web disponibles en Markdown, découpez-les en portions de taille pratique et créez leurs intégrations : un vecteur (c'est-à-dire une série de 512 valeurs Double) qui _représente leur contenu_ de manière mathématique.
+Étant donné un ensemble de pages web disponibles en Markdown, les découper en portions de taille pratique et créer leurs intégrations : Un vecteur (c'est-à-dire une série de 512 valeurs Double) qui _représente leur contenu_ de manière mathématique.
 
-Étant donné une question (pensez à quelque chose comme `En Swift, comment puis-je étendre un protocole ?`), le système doit trouver les morceaux avec un contenu pertinent en calculant le vecteur d'intégration de cette question, puis le comparer à tous les vecteurs des morceaux pour trouver le plus proche. Ces morceaux sont ensuite transmis au LLM avec la question.
+Étant donné une question (pensez à quelque chose comme `En Swift, comment puis-je étendre un protocole ?`), le système devrait trouver les morceaux avec un contenu pertinent en calculant le vecteur d'intégration de cette question, puis le comparer à tous les vecteurs des morceaux pour trouver le plus proche. Ces morceaux sont ensuite passés au LLM avec la question.
 
-Dans l'ancien système d'intégration d'Apple situé dans le [cadre Natural Language](https://developer.apple.com/documentation/NaturalLanguage), les fonctions pour y parvenir sont facilement accessibles et très bien expliquées dans l'article [Trouver des similitudes entre des morceaux de texte](https://developer.apple.com/documentation/naturallanguage/finding-similarities-between-pieces-of-text).
+Dans l'ancien système d'intégration d'Apple situé dans le [cadre de traitement du langage naturel](https://developer.apple.com/documentation/NaturalLanguage), les fonctions pour y parvenir sont facilement accessibles et très bien expliquées dans l'article [Trouver des similitudes entre des morceaux de texte](https://developer.apple.com/documentation/naturallanguage/finding-similarities-between-pieces-of-text).
 
 ## Le problème
 
@@ -38,39 +39,39 @@ Mais il y a un nouveau venu : [NLContextualEmbedding](https://developer.apple.co
 
 Voici pourquoi je veux utiliser le nouveau `NLContextualEmbedding` :
 
-- Capture le contexte : Il ferait la différence entre « river bank » et « investment bank ». L'ancien `NLEmbedding` ne faisait pas cette différence.
-- Est multilingue et interlinguistique : En s'entraînant sur plusieurs langues simultanément, le modèle aligne les espaces sémantiques entre les langues, de sorte que « chien » et « dog » sont intégrés à proximité.
+- Capture le contexte : Il ferait la différence entre "rivière" et "banque d'investissement". L'ancien `NLEmbedding` ne faisait pas cette différence.
+- Est multilingue et interlingual : En s'entraînant sur plusieurs langues simultanément, le modèle aligne les espaces sémantiques entre les langues, de sorte que "chien" et "dog" sont intégrés à proximité.
 - Prend en charge plus de langues
 - Fonctionne entièrement sur l'appareil : Le modèle respecte la confidentialité de l'utilisateur et fonctionne hors ligne. Seuls de petits fichiers de modèle sont téléchargés lorsque nécessaire, et ceux-ci sont mis en cache à l'échelle du système.
-- Offre des contrôles API robustes : Les développeurs peuvent inspecter les propriétés du modèle, gérer les ressources et intégrer les intégrations dans leurs propres pipelines ML.
+- Offre des contrôles API robustes : Les développeurs peuvent inspecter les propriétés du modèle, gérer les actifs et intégrer les intégrations dans leurs propres pipelines ML.
 
 Ce qui manque, ce sont
 
-- l'équivalent de `NLEmbedding`'s `vector(for:)` : Obtenir un vecteur pour une phrase ou un morceau
-- l'équivalent de `distanceBetweenString:andString:distanceType:` : Obtenir une mesure de la distance entre 2 phrases.
+- l'équivalent de `NLEmbedding`'s `vector(for:)`: Obtenir un vecteur pour une phrase ou un morceau
+- l'équivalent de `distanceBetweenString:andString:distanceType:`: Obtenir une mesure de la distance entre 2 phrases.
 
 Ce que `NLContextualEmbedding` fournit est une fonction `embeddingResult(for: String, language: NLLanguage?) throws -> NLContextualEmbeddingResult`. Mais si vous regardez la structure du `NLContextualEmbeddingResult`, vous voyez qu'il crée un vecteur pour chaque jeton, donc un vecteur de vecteurs. De plus, ces vecteurs sont accessibles avec un itérateur : `enumerateTokenVectors(in: Range<String.Index>, using: ([Double], Range<String.Index>) -> Bool)` - ce qui m'a demandé un peu de réflexion et d'apprentissage...
 
-J'ai donc décidé de construire un outil simple à utiliser basé sur le nouveau `NLContextualEmbedding`, similaire à ce que nous avons dans `NLEmbedding`.
+J'ai donc décidé de créer un outil simple à utiliser basé sur le nouveau `NLContextualEmbedding`, similaire à ce que nous avons dans `NLEmbedding`.
 
-Notez qu'un aspect crucial est la performance, car pour trouver les morceaux/vecteurs les plus proches dans un ensemble plus large, il faut de nombreuses comparaisons - et mes premières tentatives ont pris de nombreuses minutes pour rechercher...
+Notez qu'un aspect crucial est la performance, car pour trouver les meilleurs morceaux / vecteurs correspondants dans un ensemble plus large, il faut de nombreuses comparaisons - et mes premières tentatives ont pris de nombreuses minutes pour rechercher...
 
 ## Données de test
 
 Comme j'ai commencé avec l'idée de construire un système RAG sur appareil pour le cours SwiftUI de Paul Hudson, voici ce que j'ai fait :
 
-- Extraire les principales pages du cours SwiftUI en Markdown
+- Récupérer les principales pages du cours SwiftUI en Markdown
 - Les découper
 - Les écrire toutes dans un fichier JSON que je peux copier dans mon projet Swift
 
-Pour ce faire, j'ai assemblé quelques scripts dans [site2chunks](https://github.com/tillg/site2chunks). Un exemple de JSON est dans mon projet AskPaul : [merged_chunks](https://github.com/tillg/SwiftEmbeddings/blob/main/SwiftEmbeddings/SwiftEmbeddings/merged_chunks.json)
+Pour y parvenir, j'ai assemblé quelques scripts dans [site2chunks](https://github.com/tillg/site2chunks). Un exemple de JSON se trouve dans mon projet AskPaul : [merged_chunks](https://github.com/tillg/SwiftEmbeddings/blob/main/SwiftEmbeddings/SwiftEmbeddings/merged_chunks.json)
 
 Sur cette base, j'ai dans mon code Swift
 
 - Une `struct Chunk`. Si vous êtes curieux, allez voir le [code](https://github.com/tillg/AskPaul/blob/main/AskPaul/AskPaul/Chunk.swift) qui représente un morceau
-- Une `Extension de Bundle` qui lit les morceaux à partir du fichier JSON ([Code]()). Note : Cela est bien sûr inspiré du [cours de Paul Hudson](https://www.hackingwithswift.com/example-code/system/how-to-decode-json-from-your-app-bundle-the-easy-way) 😜
+- Une `Extension de Bundle` qui lit les morceaux à partir du fichier JSON ([Code]()). Note : Cela s'inspire bien sûr du [cours de Paul Hudson](https://www.hackingwithswift.com/example-code/system/how-to-decode-json-from-your-app-bundle-the-easy-way) 😜
 
-**Note** : Je commence avec seulement les _pages principales_ : la page d'entrée de chacune des 100 leçons. Je fais cela pour que l'ensemble de données soit facile à manipuler et que mes expériences soient rapides à exécuter. Ces 100 pages sont découpées en 722 morceaux. Une fois que j'aurai terminé les expériences, j'augmenterai l'ensemble de données pour inclure toutes les pages de hackingwithswift.com.
+**Note** : Je commence avec seulement les _pages principales_ : la page d'entrée de chacune des 100 leçons. Je fais cela pour que l'ensemble de données soit facile à manipuler et que mes expériences soient rapides à exécuter. Ces 100 pages sont découpées en 722 morceaux. Une fois que j'aurai terminé les expériences, j'augmenterai l'ensemble de données à toutes les pages de hackingwithswift.com.
 
 ## Le point de départ : `NLEmbedding`
 
@@ -79,7 +80,7 @@ Avec ces données de test en place, jouons avec l'ancien `NLEmbedding`. Vous pou
 La structure générale du code ressemble à ceci :
 
 ```swift
-#Playground("Basic embedding & distance")
+#Playground("Intégration de base & distance")
 {
     let question = "What is a protocol?"
     let potentialAnswer = """
@@ -97,11 +98,11 @@ La structure générale du code ressemble à ceci :
 
 ```
 
-Voici de quoi parle ce code :
+Voici ce que fait ce code :
 
 - Nous initialisons nos variables `question` et `potentialAnswer`
-- Nous créons notre objet `NLEmbedding` - qui pourrait (théoriquement) échouer. Si c'est le cas, il n'y a rien d'autre à faire que de tout arrêter.
-- Ensuite, nous calculons la [distance](<https://developer.apple.com/documentation/naturallanguage/nlembedding/distance(between:and:distancetype:)>) entre la question et l'affichons.
+- Nous créons notre objet `NLEmbedding` - qui pourrait (théoriquement) échouer. Si c'est le cas, nous ne pouvons rien faire d'autre que tout échouer.
+- Ensuite, nous calculons la [distance](<https://developer.apple.com/documentation/naturallanguage/nlembedding/distance(between:and:distancetype:)>) entre la question et l'imprimons.
 
 Ensuite, voyons combien de temps il faut pour calculer les vecteurs d'intégration pour les 722 morceaux de nos données de test. Sur mon MacBook Pro, cela prend 35'966 ms ~ 35 secondes ou ~ 49 ms / Vecteur.
 
@@ -111,9 +112,9 @@ L'autre test consiste à calculer les distances entre des paires de phrases :
 let distance = sentenceEmbedding.distance(between: chunk1.content, and: chunk2.content)
 ```
 
-Comme prévu, cela prend environ deux fois plus de temps, car pour chaque calcul de distance, 2 vecteurs d'intégration doivent être calculés : `⏱️ [Calculating distances with NLEmbedding] count=1  total=72.558420s  avg=72.558420s`
+Comme prévu, cela prend environ deux fois plus de temps, car pour chaque calcul de distance, 2 vecteurs d'intégration doivent être calculés : `⏱️ [Calcul des distances avec NLEmbedding] count=1  total=72.558420s  avg=72.558420s`
 
-Notez que si je fais tourner la boucle en calculant la distance toujours par rapport au même texte, cela prend presque exactement le même temps que de calculer un seul vecteur. En d'autres termes, cette boucle :
+Notez que si je fais tourner la boucle en calculant toujours la distance par rapport au même texte, cela prend presque exactement le même temps que de calculer un seul vecteur. En d'autres termes, cette boucle :
 
 ```swift
 for chunk in chunks {
@@ -123,7 +124,7 @@ for chunk in chunks {
 
 prend environ 36 secondes. Cela indiquerait que le calcul de la distance entre 2 vecteurs prend très peu de temps...
 
-La dernière chose que je voudrais faire est d'obtenir les `k` morceaux les plus proches d'une question donnée. Ma façon de faire cela est de trier le tableau de morceaux par leur distance par rapport à notre question :
+La dernière chose que je voudrais faire est d'obtenir les `k` morceaux les plus proches d'une question donnée. Ma façon de faire cela est de trier le tableau de morceaux par leur distance à notre question :
 
 ```swift
 func findClosest<T: Embeddable>(to question: String, in chunks: [T], k: Int = 3) -> [T] {
@@ -140,15 +141,15 @@ func findClosest<T: Embeddable>(to question: String, in chunks: [T], k: Int = 3)
     }
 ```
 
-Trouver les morceaux les plus proches d'une question donnée (ce qui équivaut à trier le tableau) prend assez longtemps : 1'554'280 ms ~ 1'554 sec ~ 25 MINUTES
+Trouver les morceaux les plus proches d'une question donnée (ce qui équivaut à trier le tableau) prend assez longtemps : 1'554'280 ms ~ 1'554 secs ~ 25 MINUTES
 
-Notez que nous avons besoin de 11'290 comparaisons. Comme je suppose qu'Apple met en cache le vecteur de la phrase utilisée dans chaque comparaison, cela signifie qu'il a utilisé le temps pour 11'290 x (calculer le vecteur + calculer la distance des vecteurs). Étrangement, cela fait ~ 137ms / (calculer le vecteur + calculer la distance)...
+Notez que nous avons besoin de 11'290 comparaisons. Comme je suppose qu'Apple met en cache le vecteur de la phrase qui est utilisée dans chaque comparaison, cela signifie qu'il a utilisé le temps pour 11'290 x (calculer le vecteur + calculer la distance des vecteurs). Étrangement, cela fait ~ 137ms / (calcul du vecteur + calcul de la distance)...
 
 Une tentative de mettre nos résultats dans un aperçu :
 
-| Ensemble de données : 722 morceaux | Calculer les vecteurs | Calculer les distances | Trier le tableau | ms / Vecteur |
-| ---------------------------------- | --------------------- | ---------------------- | --------------- | ------------ |
-| NLEmbedding                        | 35 sec                | 70 sec                 | 1'554 sec       | 49 ms        |
+| Ensemble de données : 722 morceaux | Calculer vecteurs | Calculer distances | Trier tableau | ms / Vecteur |
+| ---------------------------------- | ----------------- | ------------------ | ------------- | ------------ |
+| NLEmbedding                        | 35 sec            | 70 sec             | 1'554 sec     | 49 ms        |
 
 ## Mesurer le temps
 
@@ -158,7 +159,7 @@ Comme nous allons mesurer beaucoup de temps de traitement consommé par nos calc
 timerTrack("Nom du minuteur") {
     // Du code que je veux chronométrer ici
 }
-timerReport("Nom du minuteur") // Affiche mes statistiques de minuteur
+timerReport("Nom du minuteur") // Imprime les statistiques de mon minuteur
 ```
 
 Mon `timerTrack` renvoie également le résultat de son bloc et fonctionne de manière asynchrone. Nous pouvons donc faire des choses comme ceci :
@@ -171,7 +172,7 @@ let result = try timerTrack("Embedding") {
 
 ## Calculer un vecteur d'intégration basé sur `NLContextualEmbedding` de manière naïve
 
-Maintenant, si nous essayons de faire quelque chose de similaire en utilisant `NLContextualEmbedding`, nous devons d'abord faire un peu de codage de base : l'intégration contextuelle d'Apple génère une liste de vecteurs, spécifiquement un par jeton.
+Maintenant, si nous essayons de faire une chose similaire en utilisant `NLContextualEmbedding`, nous devons d'abord faire un peu de codage de base : l'intégration contextuelle d'Apple génère une liste de vecteurs, spécifiquement un par jeton.
 
 Nous devons donc les compiler en un seul vecteur. Une méthode standard pour y parvenir est le regroupement de vecteurs :
 
@@ -194,9 +195,9 @@ func enumerateTokenVectors(in: Range<String.Index>, using: ([Double], Range<Stri
 
 Il m'a fallu un certain temps pour digérer cela, mais voici ce à quoi cela se résume :
 
-Vous lui donnez une `Range<String.Index>` pour indiquer d'où à où vous voulez que les vecteurs soient listés. Pourquoi n'ont-ils pas simplement utilisé quelque chose comme `0...10` ? Le secret est que la `Range<String.Index>` ne parcourt pas le texte comme `T`, `h`, `ì`, `s`, `_`, `i`, `s`... mais à travers les **jetons**.
+Vous lui donnez une `Range<String.Index>` pour indiquer d'où à où vous voulez que les vecteurs soient listés. Pourquoi n'ont-ils pas simplement utilisé quelque chose comme `0...10` ? Le secret est que le `Range<String.Index>` ne parcourt pas le texte comme `T`, `h`, `ì`, `s`, `_`, `i`, `s`... mais à travers les **jetons**.
 
-Examinons à quoi ressemblent réellement les jetons :
+Examinons ce à quoi ressemblent réellement les jetons :
 
 ```swift
 result.enumerateTokenVectors(in: result.string.startIndex..<result.string.endIndex) { vector, range in
@@ -221,9 +222,9 @@ Vector for token [.]
 
 En voyant cela, il est logique que l'index ne compte pas simplement de 1 à `string.count`, mais soit un peu plus complexe.
 
-Vous avez déjà vu comment utiliser le deuxième argument de notre fonction `enumerateTokenVectors` : La fermeture `using` avec une signature de `([Double], Range<String.Index>) -> Bool`. Cela signifie essentiellement que vous lui donnez un tableau de `Double` (oui, c'est enfin notre vecteur 😜) et un index de chaîne et renvoyez un `Bool` : `true` si vous voulez qu'il continue, `false` si vous voulez qu'il s'arrête.
+Vous avez déjà vu comment utiliser le deuxième argument de notre fonction `enumerateTokenVectors` : La fermeture `using` avec une signature de `([Double], Range<String.Index>) -> Bool`. Cela signifie essentiellement que vous lui donnez un tableau de `Double` (oui, c'est enfin notre vecteur 😜) et un index de chaîne et retournez un `Bool` : `true` si vous voulez qu'il continue, `false` si vous voulez qu'il s'arrête.
 
-Avec cela en tête, écrivons une fonction qui calcule la moyenne de nos vecteurs qui sont à l'intérieur d'un `NLContextualResult` :
+Avec cela en tête, écrivons une fonction qui calcule la moyenne de nos vecteurs qui se trouvent dans un `NLContextualResult` :
 
 ```swift
 func meanVectorNaive(result: NLContextualEmbeddingResult) -> [Double]? {
@@ -259,7 +260,7 @@ func meanVectorNaive(result: NLContextualEmbeddingResult) -> [Double]? {
 Voici ce qui se passe dans le code :
 
 - Nous définissons notre `sumVector` et `count` (ce sera le nombre de vecteurs que nous avons additionnés).
-- Ensuite, nous appelons le `enumerateTokenVectors` avec une fermeture qui ajoute la valeur de chaque vecteur au `sumVector` et augmente `count` de +1 pour chaque vecteur. Nous commençons la boucle avec un `sumVector` étant `nil` et le définissons à la valeur du premier vecteur qui arrive.
+- Ensuite, nous appelons le `enumerateTokenVectors` avec une fermeture qui ajoute la valeur de chaque vecteur au `sumVector` et augmente `count` de +1 pour chaque vecteur. Nous commençons la boucle avec un `sumVector` étant `nil` et le définissant à la valeur du premier vecteur qui entre.
 - Ensuite, nous divisons chaque composant du `sumVector` par le nombre de vecteurs que nous avions initialement,
 - ...et nous entourons cela de quelques gardes pour éviter la division par zéro.
 
@@ -267,11 +268,11 @@ Notez que dans ma base de code, j'ai enveloppé cela comme [extensions à `NLCon
 
 Avant de mesurer le temps de notre regroupement moyen naïf, voyons combien de temps il faut pour simplement calculer les vecteurs d'intégration avec `NLContextualEmbedding` :
 
-Calculer 722 intégrations avec `NLContextualEmbedding` (sans les compiler à leur moyenne) prend 5245 ms ~ 5,2 secondes.
+Calculer 722 intégrations avec `NLContextualEmbedding` (sans les compiler en leur moyenne) prend 5245 ms ~ 5,2 secondes.
 
-Pour le mettre en relation, ajoutons cela à notre tableau de vue d'ensemble :
+Pour le mettre en relation, ajoutons cela à notre tableau récapitulatif :
 
-| Ensemble de données : 722 morceaux                       | Calculer les vecteurs | Calculer les distances | Trier le tableau | ms / Vecteur |
-| -------------------------------------------------------- | --------------------- | ---------------------- | --------------- | ------------ |
-| NLEmbedding                                              | 35 sec                | 70 sec                 | 1'554 sec       | 49 ms        |
-| NLContextualEmbedding (Juste l'intégration)              | 5 sec                 |                        |                 |
+| Ensemble de données : 722 morceaux                       | Calculer vecteurs | Calculer distances | Trier tableau | ms / Vecteur |
+| -------------------------------------------------------- | ----------------- | ------------------ | ------------- | ------------ |
+| NLEmbedding                                              | 35 sec            | 70 sec             | 1554 sec      | 49 ms        |
+| NLContextualEmbedding (Juste l'intégration)              | 5 sec             |                    |               |

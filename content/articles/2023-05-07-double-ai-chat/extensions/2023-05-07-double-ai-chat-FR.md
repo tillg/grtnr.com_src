@@ -3,15 +3,16 @@ layout: post
 date: 2023-05-07
 excerpt: Double AI Chat
 image: robots.png
+title: Double Ai&nbsp;Chat
 translation: fr
 source_language: de
-source_hash: 5814d7550731f02195445b278d9581f350c0ed526470e564ec8e2a71b64d0384
+source_hash: 05e8d75b29759b82a616bb9fd2b080fd8d51f2bd5407c3ecb12645d7bbb59502
 translator: gpt-4o-2024-08-06
-translate_date: 2025-07-18T22:29:58.843854
+translate_date: 2026-02-14T10:57:14.758217
 generated_by: simplified-translation-system
 ---
 
-Je me suis créé une interface de chat multi-AI et ça fonctionne !! 😀 [Regardez ici](/ai-chat){:target="\_blank"}
+Je me suis fabriqué une interface de chat multi-AI et ça fonctionne !! 😀 [Regardez ici](/ai-chat){:target="\_blank"}
 
 ## Ma liste de tâches :
 

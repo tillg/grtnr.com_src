@@ -1,22 +1,23 @@
 ---
 date: 2025-01-15
-excerpt: Ich nutze verschiedene Entwicklerwerkzeuge (Java, Python, Docker...), aber einige davon verwende ich nur selten. Daher vergesse ich, wie ich sie installiert habe, welchen Versionsmanager ich verwendet habe usw. Dies ist also die Notiz an mein zukünftiges Ich, um es nachzuschlagen.
+excerpt: Ich benutze verschiedene Entwicklerwerkzeuge (Java, Python, Docker...), aber einige davon nutze ich nur selten. Daher vergesse ich, wie ich sie installiert habe, welchen Versionsmanager ich verwendet habe usw. Dies ist also die Notiz an mein zukünftiges Ich, um es nachzuschlagen.
 image: dev_tools.png
 tags: Mac
 updates: 2025-05-05
+title: Entwicklungsumgebung auf&nbsp;Mac
 translation: de
 source_language: en
-source_hash: 24d38d9c2e2f45130aedf37c7363273d49dd0e3f56191a888368eef4b0e3a296
+source_hash: dd0feed209dcb799428caba2f36120418897d9123c2af4831d041dabd11b34c2
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-05T15:44:28.040451
+translate_date: 2026-02-14T10:56:20.728575
 generated_by: simplified-translation-system
 ---
 
 ![Lustiges Bild von KI](dev_tools.png)
 
-Ich bin kein professioneller Entwickler, ich mache es zum Spaß. Und ich spiele gerne herum, entdecke neue Technologien, entwickle alle möglichen kleinen Dinge. Manchmal brauche ich Python, manchmal React/Typescript, Java und mehr. Für jedes Entwicklungswerkzeug oder jede Sprache gibt es mehrere Möglichkeiten, wie man sie installieren und ihre Versionen verwalten kann. Da ich dazu neige, Dinge wie "Wie habe ich Python auf diesem Rechner installiert?" zu vergessen, ist dies eine Notiz an mein zukünftiges Ich, die mir sagt, wie ich jedes Entwicklungswerkzeug installiert habe.
+Ich bin kein professioneller Entwickler, ich mache es zum Spaß. Und ich spiele gerne herum, entdecke neue Technologien und entwickle alle möglichen kleinen Dinge. Manchmal brauche ich Python, manchmal React/Typescript, Java und mehr. Für jedes Entwicklungswerkzeug oder jede Sprache gibt es mehrere Möglichkeiten, wie man sie installieren und ihre Versionen verwalten kann. Da ich dazu neige, Dinge zu vergessen wie "Wie habe ich Python auf diesem Rechner installiert?", ist dies eine Notiz an mein zukünftiges Ich, die mir sagt, wie ich jedes Entwicklungswerkzeug installiert habe.
 
-Da sich die Art und Weise, wie bestimmte Pakete installiert werden, im Laufe der Zeit ändern kann, werde ich Daten zu meinen Installationsentscheidungen hinzufügen.
+Da sich die Art und Weise, wie bestimmte Pakete installiert werden, im Laufe der Zeit ändern kann, werde ich meinen Installationsentscheidungen Daten hinzufügen.
 
 [TOC]
 
@@ -28,9 +29,9 @@ Ich installiere es aus dem Apple App Store.
 
 ## Terminal
 
-Mein bevorzugtes Terminal ist [iTerm2](https://iterm2.com), und ich installiere es einfach von der Website. Siehe [hier](/setting-up-my-terminal/), wie ich es konfiguriere.
+Mein bevorzugtes Terminal ist [iTerm2](https://iterm2.com), und ich installiere es einfach von der Website. Sehen Sie [hier](/setting-up-my-terminal/), wie ich es konfiguriere.
 
-## zsh shell
+## zsh Shell
 
 Auf einem neuen Mac mache ich Folgendes:
 
@@ -55,7 +56,7 @@ chsh -s "$(which zsh)"
 
 - **Prettier** (`esbenp.prettier-vscode`) - Code-Formatter.
   `code --install-extension esbenp.prettier-vscode`
-  Formatierung beim Speichern in den VS Code-Einstellungen aktivieren:
+  Aktivieren Sie das Formatieren beim Speichern in den VS Code-Einstellungen:
 
   ```json
   {
@@ -72,7 +73,7 @@ chsh -s "$(which zsh)"
 
 **Januar 2025:** Ich bin von [Docker Desktop](https://www.docker.com/products/docker-desktop/) zu [Rancher Desktop](https://rancherdesktop.io) gewechselt.
 
-Installationshinweis: Die Apple Silicon-Version heruntergeladen, das DMG geöffnet und in mein Anwendungsverzeichnis kopiert. Das einzige Detail, das ich tun musste, war, das Kontrollkästchen "Administrative Access" in den Einstellungen zu aktivieren.
+Installationshinweis: Ich habe die Apple Silicon-Version heruntergeladen, das DMG geöffnet und in mein Anwendungsverzeichnis kopiert. Das einzige Detail, das ich tun musste, war das Ankreuzen des "Administrative Access"-Kästchens in den Einstellungen.
 ![alt text](rancher_prefs.png)
 
 _Registry_: Ich verwende verschiedene Registries, wenn ich an verschiedenen Projekten arbeite.
@@ -93,11 +94,11 @@ Dies sind die Optionen, die ich gesehen habe:
 - `sdk install java 17.0.12-jbr` installiert diese spezifische Java-Version
 - `sdk list java` zeigt alle verfügbaren Java-Versionen (zum Installieren) an
 - Um die installierten Java-Versionen aufzulisten:
-  - `sdk offline enable`, sodass nur lokal installierte Versionen aufgelistet werden
+  - `sdk offline enable`, damit werden nur lokal installierte Versionen aufgelistet
   - `sdk list java`
   - `sdk offline disable`
 - `sdk default java 21.0.6-amzn` setzt diese Version als Standard
-  Um eine Java-Version als Standard in einem Verzeichnis festzulegen, siehe den [Env-Befehl](https://sdkman.io/usage/#env-command)
+  Um eine Java-Version als Standard innerhalb eines Verzeichnisses festzulegen, siehe den [Env-Befehl](https://sdkman.io/usage/#env-command)
 
 ## Maven
 
@@ -134,7 +135,7 @@ Um eine mit Pyenv installierte Python-Version auszuwählen, führen Sie einen de
 ```shell
 pyenv install 3.12
 pyenv shell <version> -- nur für die aktuelle Shell-Sitzung auswählen
-pyenv local <version> -- automatisch auswählen, wenn Sie sich im aktuellen Verzeichnis (oder dessen Unterverzeichnissen) befinden
+pyenv local <version> -- automatisch auswählen, wann immer Sie sich im aktuellen Verzeichnis (oder dessen Unterverzeichnissen) befinden
 pyenv global <version> -- global für Ihr Benutzerkonto auswählen
 ```
 
