@@ -13,6 +13,18 @@
   "recipe_paths": ["recipes"],
   "default_pagination": 10,
   "google_analytics": "G-H8M7YDCSD4",
+  "relative_urls": true,
+  "links": [
+    ["Topics", "/tags"],
+    ["Recipes", "/recipes"],
+    ["About", "/about"],
+    ["Impressum", "/impressum"]
+  ],
+  "categories_in_index": [],
+  "date_formats": {
+    "en": "%B %-d, %Y",
+    "de": "%-d %b %Y"
+  },
   "translation": {
     "enabled": false,
     "target_languages": ["de", "fr"],

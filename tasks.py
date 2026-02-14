@@ -328,6 +328,48 @@ def process(c):
 
 
 @task
+def assemble(c):
+    """Run garten Phases 1-4: discover + process + assemble"""
+    from garten.assemble import assemble as run_assemble
+    from garten.assemble import write_artifacts as write_assemble_artifacts
+    from garten.config import load_config
+    from garten.discover import discover as run_discover
+    from garten.discover import write_manifest
+    from garten.process import process as run_process
+    from garten.process import write_artifacts
+
+    cfg = load_config("site.json")
+    manifest = run_discover(cfg)
+    write_manifest(manifest, cfg["build_path"])
+    run_process(manifest, cfg)
+    write_artifacts(manifest, cfg["build_path"])
+    site = run_assemble(manifest, cfg)
+    write_assemble_artifacts(site, cfg["build_path"])
+
+
+@task
+def render(c):
+    """Run garten Phases 1-5: discover + process + assemble + render"""
+    from garten.assemble import assemble as run_assemble
+    from garten.assemble import write_artifacts as write_assemble_artifacts
+    from garten.config import load_config
+    from garten.discover import discover as run_discover
+    from garten.discover import write_manifest
+    from garten.process import process as run_process
+    from garten.process import write_artifacts
+    from garten.render import render as run_render
+
+    cfg = load_config("site.json")
+    manifest = run_discover(cfg)
+    write_manifest(manifest, cfg["build_path"])
+    run_process(manifest, cfg)
+    write_artifacts(manifest, cfg["build_path"])
+    site = run_assemble(manifest, cfg)
+    write_assemble_artifacts(site, cfg["build_path"])
+    run_render(site, cfg)
+
+
+@task
 def preview_process(c, slug=None):
     """Preview processed HTML in browser. Use --slug to pick one, or omit to list."""
     import json

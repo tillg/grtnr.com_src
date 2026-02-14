@@ -491,6 +491,39 @@ Build markdown rendering + image copying + summaries. For each piece of content,
 
 Build tag/category grouping, pagination, and Jinja2 template rendering. Diff the full site output directory against Pelican's output. At this point we have a working (English-only) site generator.
 
+#### Increment 3 — Implementation Notes
+
+**Status: DONE** — 172 tests passing (41 discover + 59 process + 34 assemble + 38 render), `inv render` produces a complete English-only site in `output/`.
+
+**Decisions taken during implementation:**
+
+1. **English-only for Increment 3.** All multilingual features (language-prefixed URLs, language switcher data, translation content rendering, root redirect page, per-language index pages) are deferred to Increment 4. The output matches Pelican's English content output.
+2. **Tag/Category/Author are simple classes with `__str__` and `.slug`.** Templates use `{{ tag }}` for display and `tag.slug` for URL generation. Tag equality and hashing are slug-based (so `Tag("tech")` and `Tag("Tech")` with the same slug are equal).
+3. **Pagination uses `SimpleNamespace`** with `has_previous()` and `has_next()` as callables (lambdas), matching Pelican's pagination object interface. Page URLs: `index.html`, `index2.html`, ..., `indexN.html`.
+4. **RecipeWrapper provides both direct attributes and `.metadata` namespace.** `recipe.html` accesses `recipe.title`, `recipe.content`, `recipe.image` directly. `recipe_preview.html` accesses `recipe.metadata.prep_time`, `recipe.metadata.image`, etc. Both are served from the same wrapper class using `SimpleNamespace` for metadata.
+5. **SITEURL is empty string for dev** (via `relative_urls: true` in site.json), matching Pelican's `SITEURL = ""`. All template URLs are root-relative.
+6. **locale_date uses `strftime("%B %-d, %Y")`** for English (e.g., "February 14, 2026"), matching `DATE_FORMATS["en"]` in pelicanconf.py. `%-d` is POSIX (no zero-padding), works on macOS/Linux.
+7. **Articles sorted by date descending** (newest first) for index and archive pages.
+8. **Recipe image URL bug fixed.** Increment 2 noted a pre-existing Pelican bug where recipe image URLs used `/{slug}/image.jpg` instead of `/recipes/{slug}/image.jpg`. Fixed in process.py by using content_type to determine URL prefix: `recipes/{slug}` for recipes, `{slug}` for everything else.
+9. **Individual author page generated** at `author/{slug}.html` using the index template, matching Pelican's author page behavior. Only one author exists.
+10. **Global template context matches Pelican variable names exactly:** `SITENAME`, `SITEURL`, `DESCRIPTION`, `SITEDESCRIPTION`, `DEFAULT_LANG`, `LANG`, `current_language`, `BUILD_TIME`, `GOOGLE_ANALYTICS`, `LINKS`, `DEFAULT_PAGINATION`, `MULTILINGUAL_ENABLED`, and all feed variables (None for dev).
+11. **Jinja2 environment uses `trim_blocks=True` and `lstrip_blocks=True`** for clean HTML output. Templates are loaded from `pelicanyan/templates/` unchanged.
+12. **Static file copying has two sources:** theme static (`pelicanyan/static/` → `output/theme/`) and content static (`content/static/` → `output/` with extra path metadata for favicon, apple-touch-icon). Adjacent images are copied per content item to their output directory.
+13. **`site.json` extended** with `links`, `relative_urls`, `categories_in_index`, and `date_formats` keys. Links use arrays-of-arrays format (JSON doesn't have tuples).
+14. **Link validation: 1 pre-existing error** in content (WikiLink to non-existent `/todo/` page in About page). All other links (2,792 total) pass validation.
+
+**Files created:**
+
+- `garten/assemble.py` — Assemble phase with Tag/Category/Author classes, URL generation, locale dates, tag/category groupings, pagination, article filtering
+- `garten/render.py` — Render phase with ArticleWrapper/PageWrapper/RecipeWrapper, Jinja2 rendering for all template types, static file and image copying
+- `tests/test_assemble.py` — 34 tests (Tag/Category/Author classes, URL generation, locale dates, tag map, category map, pagination, filtering, sorting, integration on real content)
+- `tests/test_render.py` — 38 tests (wrapper objects, global context, Jinja2 env, static copying, full integration rendering)
+- Updated `tasks.py` with `inv assemble` and `inv render` tasks
+- Updated `site.json` with links, relative_urls, date_formats, categories_in_index
+- Updated `garten/process.py` — fixed recipe image URL prefix
+
+**Output inventory:** 118 HTML files, 6 paginated index pages, 56 article pages, 2 page pages, 35 recipe pages, 13 tag pages, 1 category page, 258 image files, plus sitemap.xml, robots.txt, humans.txt, archives.html, authors.html, categories.html, recipes/index.html.
+
 ### Increment 4: Translation + Multilingual
 
 Port the translation and multilingual URL systems to garten. Verify translated output matches.

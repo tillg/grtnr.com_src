@@ -203,7 +203,12 @@ def _process_item(item: dict) -> None:
     adjacent_files = find_adjacent_files(content_dir)
     if adjacent_files:
         slug = item["slug"]
-        html = fix_image_urls(html, slug, adjacent_files)
+        # Recipes use recipes/{slug}/ URL structure
+        if item["content_type"] == "recipe":
+            url_prefix = f"recipes/{slug}"
+        else:
+            url_prefix = slug
+        html = fix_image_urls(html, url_prefix, adjacent_files)
         item["adjacent_files"] = adjacent_files
 
     # 3.3 Summary (articles only)
