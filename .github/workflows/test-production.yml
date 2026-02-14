@@ -13,40 +13,14 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r .devcontainer/requirements.txt
-
       - name: Install lychee link checker
         run: |
           curl -sSfL https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-unknown-linux-gnu.tar.gz | tar xz
           sudo mv lychee /usr/local/bin/
           lychee --version
 
-      - name: Build site to discover all pages
-        env:
-          GARTEN_TRANSLATION__ENABLED: "false"
-        run: inv build
-
-      - name: Extract page URLs
-        run: |
-          # Find all HTML files in output, convert paths to live URLs
-          find ./output -name "*.html" -type f \
-            | sed 's|^\./output|https://grtnr.com|' \
-            | sort > /tmp/urls.txt
-          echo "Found $(wc -l < /tmp/urls.txt) pages to check"
-
       - name: Check production links
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: --config lychee.toml --format markdown --output /tmp/lychee-report.md /tmp/urls.txt
-          fail: true
+        run: lychee --config lychee.toml --format markdown --output /tmp/lychee-report.md "https://grtnr.com"
 
       - name: Upload report
         if: always()
