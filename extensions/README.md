@@ -1,6 +1,6 @@
 # Translation Service
 
-This directory contains the automatic translation service for the Pelican-based website. The service provides AI-powered translation of articles and pages using OpenAI's GPT API.
+This directory contains the automatic translation service for the grtnr.com website. The service provides AI-powered translation of articles and pages using OpenAI's GPT API.
 
 ## Quick Start
 
@@ -15,10 +15,9 @@ This directory contains the automatic translation service for the Pelican-based 
    pip install -r .devcontainer/requirements.txt
    ```
 
-3. **Enable Translation**: Add to your `pelicanconf.py`:
-   ```python
-   TRANSLATION_ENABLED = True
-   TRANSLATION_TARGET_LANGUAGES = ["de", "fr", "es"]
+3. **Enable Translation**: Set in `site.json` or via environment:
+   ```bash
+   GARTEN_TRANSLATION__ENABLED=true
    ```
 
 4. **Run Tests**: Test the service before using it:
@@ -37,8 +36,6 @@ extensions/
 │   ├── config.py              # Configuration management
 │   ├── prompts.py             # Translation prompts
 │   └── exceptions.py          # Custom exceptions
-├── plugins/
-│   └── automatic_translation.py  # Pelican plugin
 ├── tests/
 │   ├── run_tests.py           # Test runner
 │   ├── test_translation_service.py  # Manual testing framework
@@ -64,33 +61,27 @@ TRANSLATION_MAX_RETRIES=3
 TRANSLATION_TIMEOUT=30
 ```
 
-### Pelican Settings (pelicanconf.py)
+### Site Configuration (site.json)
 
-```python
-# Enable automatic translation
-TRANSLATION_ENABLED = True
-
-# Target languages (ISO 639-1 codes)
-TRANSLATION_TARGET_LANGUAGES = ["de", "fr", "es"]
-
-# Categories to exclude from translation
-TRANSLATION_EXCLUDE_CATEGORIES = ["recipes", "drafts"]
-
-# Paths to exclude from translation
-TRANSLATION_EXCLUDE_PATHS = ["/pages/impressum/", "/admin/"]
-
-# API configuration
-TRANSLATION_MODEL = "gpt-4"
-TRANSLATION_MAX_RETRIES = 3
-TRANSLATION_TIMEOUT = 30
-
+```json
+{
+  "translation": {
+    "enabled": true,
+    "target_languages": ["de", "fr", "es"],
+    "exclude_categories": ["recipes", "drafts"],
+    "exclude_paths": ["/pages/impressum/", "/admin/"]
+  }
+}
 ```
+
+Environment variable overrides use the `GARTEN_` prefix with double underscores for nesting:
+`GARTEN_TRANSLATION__ENABLED=true`
 
 ## Usage
 
-### Automatic Translation (Pelican Plugin)
+### Automatic Translation
 
-Once configured, the translation service runs automatically during Pelican site generation. It will:
+Once configured, the translation service runs automatically during site generation. It will:
 
 1. Scan all articles and pages
 2. Skip excluded categories and paths
@@ -265,9 +256,8 @@ print(health)
 Enable debug logging for detailed information:
 
 ```python
-# In pelicanconf.py
-from logger_config import setup_pelican_logging
-setup_pelican_logging('DEBUG')
+from garten.utils import get_logger
+logger = get_logger("translation", level="DEBUG")
 ```
 
 ## Contributing

@@ -302,35 +302,3 @@ class TestDiscoverIntegration:
         data = json.loads(path.read_text())
         assert len(data["articles"]) == 56
 
-
-# ===================================================================
-# Comparison: garten slugs vs. Pelican normalize_slug
-# ===================================================================
-
-
-class TestSlugCompatibility:
-    """Verify garten's normalize_slug matches the Pelican plugin's version."""
-
-    def test_matches_pelican_implementation(self):
-        """Both implementations should produce identical output."""
-        # Import Pelican's version
-        sys.path.insert(0, str(ROOT / "plugins"))
-        from normalize_slugs import normalize_slug as pelican_normalize
-
-        test_cases = [
-            "Käsekuchen",
-            "böhmischer-gulasch",
-            "apfel-orangen-chutney",
-            "Guláš à la Štepan",
-            "digital-garden",
-            "linzer torte",
-            "fond",
-            "crème-anglaise-au-earl-gray",
-            "Vietnamese Fast Food",
-        ]
-        for text in test_cases:
-            assert normalize_slug(text) == pelican_normalize(text), (
-                f"Slug mismatch for {text!r}: "
-                f"garten={normalize_slug(text)!r} vs "
-                f"pelican={pelican_normalize(text)!r}"
-            )

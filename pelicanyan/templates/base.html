@@ -17,12 +17,12 @@
     {% for lang_code, lang_url in article.multilingual_urls.items() %}
     <link rel="alternate" hreflang="{{ lang_code }}" href="{{ SITEURL }}{{ lang_url }}" />
     {% endfor %}
-    <link rel="canonical" href="{{ SITEURL }}{{ article.url }}" />
+    <link rel="canonical" href="{{ SITEURL }}/{{ article.url }}" />
   {% elif page is defined and page.multilingual_urls %}
     {% for lang_code, lang_url in page.multilingual_urls.items() %}
     <link rel="alternate" hreflang="{{ lang_code }}" href="{{ SITEURL }}{{ lang_url }}" />
     {% endfor %}
-    <link rel="canonical" href="{{ SITEURL }}{{ page.url }}" />
+    <link rel="canonical" href="{{ SITEURL }}/{{ page.url }}" />
   {% endif %}
   {% if FEED_ALL_ATOM %}
   <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate"

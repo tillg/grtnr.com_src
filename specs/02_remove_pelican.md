@@ -570,3 +570,33 @@ Port the translation and multilingual URL systems to garten. Verify translated o
 ### Increment 5: Switch
 
 Replace Pelican in `inv build`. Remove Pelican from requirements. Delete `plugins/` directory and `pelicanconf.py`. Clean up any remaining Pelican-specific code.
+
+#### Increment 5 — Implementation Notes
+
+**Status: DONE** — 254 tests passing, `inv build` produces a complete multilingual site using garten only.
+
+**What was removed:**
+
+1. **`pelicanconf.py`** — replaced by `site.json` + `GARTEN_` env overrides
+2. **`plugins/` directory** (15 Python files) — all functionality ported to `garten/` in Increments 1-4
+3. **5 Pelican packages** from requirements: `pelican`, `docutils`, `feedgenerator`, `blinker`, `ordered-set`
+4. **7 test files**: 6 root-level debug test files + `tests/test_discover_vs_pelican.py` (Pelican comparison test)
+5. **`tests/test_translation_service.py`** — imported `ExtensionFileManager` and mock classes from deleted plugins; these classes no longer exist
+6. **`from_pelican_settings()`** method from `extensions/translation_service/config.py`
+7. **`rebuild` and `regenerate` tasks** from `tasks.py` — Pelican-only, no garten equivalent needed
+
+**What was changed:**
+
+1. **`tasks.py`** — Complete rewrite: imports from `garten` instead of `pelican`, `_run_garten_pipeline()` replaces `prepare_and_run_pelican()`, `serve()` uses Python's `http.server` instead of Pelican's `RootedHTTPServer`, `livereload()` watches `garten/` instead of `plugins/`, `clean_translations()` uses `garten.utils.remove_all_translations()`
+2. **`garten/utils.py`** — Added `remove_all_translations()` function (ported from `ExtensionFileManager.remove_all_translations_global()`)
+3. **`.github/workflows/publish.yml`** — Renamed workflow, `PELICAN_SITENAME` → `GARTEN_SITENAME`, `inv rebuild` → `inv build`, removed separate lychee-action step (link checking is included in `inv build`), added `GARTEN_TRANSLATION__ENABLED` env var
+4. **`.github/workflows/test-production.yml`** — `inv rebuild` → `inv build`, `TRANSLATION_ENABLED` → `GARTEN_TRANSLATION__ENABLED`
+5. **`.devcontainer/requirements.txt`** — Removed 5 Pelican-specific packages
+6. **`CLAUDE.md`** and **`ARCHITECTURE.md`** — Updated to describe garten pipeline instead of Pelican
+
+**Key decisions:**
+
+1. **`build` and `preview` are identical** — both run the full garten pipeline + link checking. The production URL override for `preview` is handled via `GARTEN_SITEURL` env var in CI, not a separate publishconf.py.
+2. **`serve()` uses `functools.partial(SimpleHTTPRequestHandler, directory=...)`** instead of Pelican's custom `RootedHTTPServer`. Simpler and standard library only.
+3. **`livereload` does not watch `.rst` files** — only `.md`, matching garten's markdown-only pipeline.
+4. **`clean_translations_cache` task preserved** — clears `cache/translations/` directory for forcing re-translation.

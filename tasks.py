@@ -1,17 +1,12 @@
 import os
-import shlex
 import shutil
 import sys
+
 from dotenv import load_dotenv
 from invoke import task
-from invoke.main import program
-from pelican import main as pelican_main
-from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
-from pelican.settings import DEFAULT_CONFIG, get_settings_from_file
 
-# Import centralized logging
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "plugins"))
-from logger_config import get_logger
+from garten.config import load_config
+from garten.utils import get_logger
 
 # Setup logger for tasks
 logger = get_logger("tasks")
@@ -20,21 +15,36 @@ logger = get_logger("tasks")
 load_dotenv()
 
 OPEN_BROWSER_ON_SERVE = True
-SETTINGS_FILE_BASE = "pelicanconf.py"
-SETTINGS = {}
-SETTINGS.update(DEFAULT_CONFIG)
-LOCAL_SETTINGS = get_settings_from_file(SETTINGS_FILE_BASE)
-SETTINGS.update(LOCAL_SETTINGS)
+
+_CFG = load_config("site.json")
 
 CONFIG = {
-    "settings_base": SETTINGS_FILE_BASE,
-    "settings_publish": "publishconf.py",
-    # Output path. Can be absolute or relative to tasks.py. Default: 'output'
-    "deploy_path": SETTINGS["OUTPUT_PATH"],
-    # Host and port for `serve`
+    "deploy_path": str(_CFG["output_path"]),
     "host": "localhost",
     "port": 8000,
 }
+
+
+def _run_garten_pipeline():
+    """Run the full garten pipeline (discover → process → assemble → render)."""
+    from garten.assemble import assemble as run_assemble
+    from garten.assemble import write_artifacts as write_assemble_artifacts
+    from garten.discover import discover as run_discover
+    from garten.discover import write_manifest
+    from garten.process import process as run_process
+    from garten.process import write_artifacts
+
+    cfg = load_config("site.json")
+    manifest = run_discover(cfg)
+    write_manifest(manifest, cfg["build_path"])
+    run_process(manifest, cfg)
+    write_artifacts(manifest, cfg["build_path"])
+    site = run_assemble(manifest, cfg)
+    write_assemble_artifacts(site, cfg["build_path"])
+
+    from garten.render import render as run_render
+
+    run_render(site, cfg)
 
 
 @task
@@ -55,37 +65,21 @@ def clean(c):
 @task
 def build(c):
     """Build local version of site"""
-    prepare_and_run_pelican("-s {settings_base}".format(**CONFIG))
+    _run_garten_pipeline()
     check_links(c)
-
-
-@task
-def rebuild(c):
-    """`build` with the delete switch"""
-    prepare_and_run_pelican("-d -s {settings_base}".format(**CONFIG))
-
-
-@task
-def regenerate(c):
-    """Automatically regenerate site upon file modification"""
-    prepare_and_run_pelican("-r -s {settings_base}".format(**CONFIG))
 
 
 @task
 def serve(c):
     """Serve site at http://$HOST:$PORT/ (default is localhost:8000)"""
+    from functools import partial
+    from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-    class AddressReuseTCPServer(RootedHTTPServer):
-        allow_reuse_address = True
+    handler = partial(SimpleHTTPRequestHandler, directory=CONFIG["deploy_path"])
 
-    server = AddressReuseTCPServer(
-        CONFIG["deploy_path"],
-        (CONFIG["host"], CONFIG["port"]),
-        ComplexHTTPRequestHandler,
-    )
+    server = HTTPServer((CONFIG["host"], CONFIG["port"]), handler)
 
     if OPEN_BROWSER_ON_SERVE:
-        # Open site in default browser
         import webbrowser
 
         webbrowser.open("http://{host}:{port}".format(**CONFIG))
@@ -111,8 +105,7 @@ def reserve(c):
 @task
 def preview(c):
     """Build production version of site"""
-    # Use pelicanconf.py directly instead of publishconf.py to avoid import issues
-    prepare_and_run_pelican("-s " + CONFIG["settings_base"])
+    _run_garten_pipeline()
     check_links(c)
 
 
@@ -215,7 +208,13 @@ def lint_json(c, file=None):
         c.run(f"npx jsonlint '{file}' -q")
     else:
         c.run(
-            "find . -name '*.json' -not -path './node_modules/*' -not -path './output/*' -not -path './.venv/*' -not -path './venv/*' -not -path './.devcontainer/*' -exec npx jsonlint {} -q \\;"
+            "find . -name '*.json'"
+            " -not -path './node_modules/*'"
+            " -not -path './output/*'"
+            " -not -path './.venv/*'"
+            " -not -path './venv/*'"
+            " -not -path './.devcontainer/*'"
+            " -exec npx jsonlint {} -q \\;"
         )
 
 
@@ -232,20 +231,22 @@ def livereload(c):
     from livereload import Server
 
     def cached_build():
-        cmd = "-s {settings_base} -e CACHE_CONTENT=true " "LOAD_CONTENT_CACHE=true"
-        prepare_and_run_pelican(cmd.format(**CONFIG))
+        _run_garten_pipeline()
 
     cached_build()
     server = Server()
-    theme_path = SETTINGS["THEME"]
+
+    theme_path = str(_CFG["theme_path"])
+    content_path = str(_CFG["content_path"])
+
     watched_globs = [
-        CONFIG["settings_base"],
+        "site.json",
         f"{theme_path}/templates/**/*.html",
     ]
 
-    content_file_extensions = [".md", ".rst"]
+    content_file_extensions = [".md"]
     for extension in content_file_extensions:
-        content_glob = "{}/**/*{}".format(SETTINGS["PATH"], extension)
+        content_glob = f"{content_path}/**/*{extension}"
         watched_globs.append(content_glob)
 
     static_file_extensions = [".css", ".js"]
@@ -253,17 +254,16 @@ def livereload(c):
         static_file_glob = f"{theme_path}/static/**/*{extension}"
         watched_globs.append(static_file_glob)
 
-    # Watch plugin files for changes
-    plugin_file_extensions = [".py"]
-    for extension in plugin_file_extensions:
-        plugin_glob = f"plugins/**/*{extension}"
-        watched_globs.append(plugin_glob)
+    # Watch garten source files for changes
+    garten_file_extensions = [".py"]
+    for extension in garten_file_extensions:
+        garten_glob = f"garten/**/*{extension}"
+        watched_globs.append(garten_glob)
 
     for glob in watched_globs:
         server.watch(glob, cached_build)
 
     if OPEN_BROWSER_ON_SERVE:
-        # Open site in default browser
         import webbrowser
 
         webbrowser.open("http://{host}:{port}".format(**CONFIG))
@@ -274,35 +274,41 @@ def livereload(c):
 @task
 def clean_translations(c):
     """Remove all translation files from extensions directories"""
-    # Import file manager
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "plugins"))
-    from file_organization import ExtensionFileManager
+    from garten.utils import remove_all_translations
 
-    # Initialize file manager
-    content_path = SETTINGS.get("PATH", "content")
-    file_manager = ExtensionFileManager(content_root=content_path)
+    content_path = str(_CFG["content_path"])
 
-    print("🗑️  Cleaning up all translation files...")
+    print("Cleaning up all translation files...")
 
     try:
-        removed_files, removed_dirs = file_manager.remove_all_translations_global()
+        removed_files, removed_dirs = remove_all_translations(content_path)
 
         if removed_files > 0:
-            print(f"✅ Successfully removed:")
-            print(f"   📄 {removed_files} translation files")
-            print(f"   📁 {removed_dirs} empty extension directories")
+            print("Successfully removed:")
+            print(f"   {removed_files} translation files")
+            print(f"   {removed_dirs} empty extension directories")
         else:
-            print("ℹ️  No translation files found to remove")
+            print("No translation files found to remove")
 
     except Exception as e:
-        print(f"❌ Error during cleanup: {e}")
+        print(f"Error during cleanup: {e}")
         sys.exit(1)
+
+
+@task
+def clean_translations_cache(c):
+    """Clear translation cache only (forces re-translation on next build)"""
+    cache_dir = os.path.join(os.path.dirname(__file__), "cache", "translations")
+    if os.path.isdir(cache_dir):
+        shutil.rmtree(cache_dir)
+        print("Translation cache cleared")
+    else:
+        print("No translation cache found")
 
 
 @task
 def discover(c):
     """Run garten Phase 1: content discovery"""
-    from garten.config import load_config
     from garten.discover import discover as run_discover
     from garten.discover import write_manifest
 
@@ -314,7 +320,6 @@ def discover(c):
 @task
 def process(c):
     """Run garten Phases 1-3: discover + process"""
-    from garten.config import load_config
     from garten.discover import discover as run_discover
     from garten.discover import write_manifest
     from garten.process import process as run_process
@@ -332,7 +337,6 @@ def assemble(c):
     """Run garten Phases 1-4: discover + process + assemble"""
     from garten.assemble import assemble as run_assemble
     from garten.assemble import write_artifacts as write_assemble_artifacts
-    from garten.config import load_config
     from garten.discover import discover as run_discover
     from garten.discover import write_manifest
     from garten.process import process as run_process
@@ -352,7 +356,6 @@ def render(c):
     """Run garten Phases 1-5: discover + process + assemble + render"""
     from garten.assemble import assemble as run_assemble
     from garten.assemble import write_artifacts as write_assemble_artifacts
-    from garten.config import load_config
     from garten.discover import discover as run_discover
     from garten.discover import write_manifest
     from garten.process import process as run_process
@@ -372,7 +375,6 @@ def render(c):
 @task
 def preview_process(c, slug=None):
     """Preview processed HTML in browser. Use --slug to pick one, or omit to list."""
-    import json
     import tempfile
     import webbrowser
 
@@ -453,11 +455,3 @@ def preview_process(c, slug=None):
 
     webbrowser.open(f"file://{tmp_path}")
     print(f"Opened preview for '{slug}'")
-
-
-def prepare_and_run_pelican(cmd):
-    # allows to pass-through args to pelican
-    remainder = getattr(program.core, "remainder", None) or ""
-    if remainder:
-        cmd += " " + remainder
-    pelican_main(shlex.split(cmd))

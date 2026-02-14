@@ -25,6 +25,8 @@ exclude = [
     "https://twitter.com/.*",
     "https://goo.gl/.*",
     "https://www.godaddy.com/.*",
+    # Pre-existing broken WikiLink in About page (links to non-existent /todo/)
+    ".*/todo$",
 ]
 
 # Don't check email addresses

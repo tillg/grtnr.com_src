@@ -25,8 +25,8 @@ jobs:
 
       - name: Build site to discover all pages
         env:
-          TRANSLATION_ENABLED: "false"
-        run: inv rebuild
+          GARTEN_TRANSLATION__ENABLED: "false"
+        run: inv build
 
       - name: Extract page URLs
         run: |

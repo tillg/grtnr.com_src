@@ -6,8 +6,7 @@ Configuration management for the translation service.
 
 import os
 from dataclasses import dataclass, field
-from pathlib import Path
-from typing import List, Optional
+from typing import List
 
 from .exceptions import ConfigurationError
 
@@ -113,57 +112,6 @@ class TranslationConfig:
         # Boolean flags
         config.auto_detect_language = (
             os.getenv("TRANSLATION_AUTO_DETECT", "true").lower() == "true"
-        )
-
-        return config
-
-    @classmethod
-    def from_pelican_settings(cls, settings: dict) -> "TranslationConfig":
-        """Create configuration from Pelican settings"""
-
-        config = cls()
-
-        # API Configuration
-        config.api_key = settings.get(
-            "TRANSLATION_API_KEY", os.getenv("OPENAI_API_KEY", "")
-        )
-        if not config.api_key:
-            raise ConfigurationError(
-                "Translation API key not found in settings or environment"
-            )
-
-        config.model = settings.get("TRANSLATION_MODEL", config.model)
-
-        # Language Configuration
-        config.target_languages = settings.get(
-            "TRANSLATION_TARGET_LANGUAGES", config.target_languages
-        )
-        config.exclude_categories = settings.get(
-            "TRANSLATION_EXCLUDE_CATEGORIES", config.exclude_categories
-        )
-        config.exclude_paths = settings.get(
-            "TRANSLATION_EXCLUDE_PATHS", config.exclude_paths
-        )
-
-        # API Behavior
-        config.max_retries = settings.get("TRANSLATION_MAX_RETRIES", config.max_retries)
-        config.timeout = settings.get("TRANSLATION_TIMEOUT", config.timeout)
-        config.rate_limit_delay = settings.get(
-            "TRANSLATION_RATE_LIMIT_DELAY", config.rate_limit_delay
-        )
-        config.max_concurrent_translations = settings.get(
-            "TRANSLATION_MAX_CONCURRENT", config.max_concurrent_translations
-        )
-        config.max_concurrent_content = settings.get(
-            "TRANSLATION_MAX_CONCURRENT_CONTENT", config.max_concurrent_content
-        )
-
-        # Language Detection
-        config.auto_detect_language = settings.get(
-            "TRANSLATION_AUTO_DETECT", config.auto_detect_language
-        )
-        config.default_source_language = settings.get(
-            "TRANSLATION_DEFAULT_SOURCE_LANG", config.default_source_language
         )
 
         return config

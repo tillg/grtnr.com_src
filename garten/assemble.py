@@ -168,7 +168,7 @@ def prefix_internal_links(
         return html
 
     lang_prefixes = "|".join(languages)
-    skip_prefixes = ("/theme/", "/static/", "/favicon")
+    skip_prefixes = ("/theme/", "/static/", "/favicon", "/recipes")
 
     def replace_href(match):
         prefix = match.group(1)
@@ -514,12 +514,18 @@ def load_menu_translations(base_path: Path) -> dict:
         return json.load(f)
 
 
+# Paths that exist only at root level, never under language prefixes.
+_NO_LANG_PREFIX_PATHS = {"/recipes"}
+
+
 def build_translated_links(
     links: list, lang: str, menu_translations: dict
 ) -> list:
     """Build language-specific menu links.
 
-    Translates menu titles and adds language prefix to hrefs.
+    Translates menu titles and adds language prefix to hrefs for
+    non-English languages, except for paths that only exist at root
+    (e.g. ``/recipes``).
     """
     lang_trans = menu_translations.get(lang, {})
     result = []
@@ -528,7 +534,7 @@ def build_translated_links(
         href = link[1] if isinstance(link, (list, tuple)) else "#"
 
         translated_title = lang_trans.get(title, title)
-        if lang != "en":
+        if lang != "en" and href not in _NO_LANG_PREFIX_PATHS:
             translated_href = f"/{lang}{href}"
         else:
             translated_href = href

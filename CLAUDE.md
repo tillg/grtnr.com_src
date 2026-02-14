@@ -6,17 +6,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website/blog built with **Pelican** (Python static site generator) using a custom theme called "pelicanyan". The site supports multiple content types: articles, pages, and recipes with automatic image handling and WikiLinks for digital garden-style navigation.
+This is a personal website/blog built with **garten**, a custom Python static site generator using a "pelicanyan" theme. The site supports multiple content types: articles, pages, and recipes with automatic image handling, multilingual support, and WikiLinks for digital garden-style navigation.
 
 ## Development Commands
 
 **Primary development workflow:**
 
 - `inv livereload` - Development server with auto-reload (recommended)
-- `inv build` - Build local version
+- `inv build` - Build local version (includes link checking)
 - `inv serve` - Static file server at localhost:8000
 - `inv preview` - Production build for testing
 - `inv clean` - Remove generated files
+
+**Garten pipeline phases (for debugging):**
+
+- `inv discover` - Phase 1: content discovery
+- `inv process` - Phases 1-3: discover + process
+- `inv assemble` - Phases 1-4: discover + process + assemble
+- `inv render` - Phases 1-5: full pipeline without link checking
 
 **Setup:**
 
@@ -35,7 +42,7 @@ This is a personal website/blog built with **Pelican** (Python static site gener
 Link checking uses [`lychee`](https://github.com/lycheeverse/lychee) and is integrated at multiple levels:
 - **Build Process**: Both `inv build` and `inv preview` include automatic link validation via lychee
 - **Git Pre-commit Hook**: Prevents commits with broken links when content files are modified
-- **GitHub Actions**: CI pipeline uses `lycheeverse/lychee-action` to validate links before deployment
+- **GitHub Actions**: CI pipeline validates links as part of `inv build`
 - **Production Check**: Daily scheduled workflow checks all links on the live site (grtnr.com)
 
 Configuration is in `lychee.toml`. The system validates all links and ensures no broken images or references are deployed.
@@ -46,33 +53,26 @@ For detailed code quality standards and tool configurations, see [CODE_GUIDELINE
 
 For detailed system architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
-## Plugin System Architecture
+## Pipeline Architecture
 
-The system's power comes from **9 coordinated custom plugins** that execute in specific order:
+The site generator uses a phase-based pipeline with inspectable intermediate artifacts in `.build/`:
 
-1. **auto_title** - Generates titles from directory names (removes date prefixes)
-2. **normalize_slugs** - German character normalization (ä→ae, ß→ss) used across all plugins
-3. **recipes** - Custom content type with RecipeAdapter pattern
-4. **set_proper_category** - Category assignment from directory structure
-5. **filter_articles_for_index** - Homepage article filtering
-6. **copy_adjacent_images** - Auto-copy images and fix relative URLs
-7. **excerpt_to_summary** - Summary generation for articles
-8. **external_links** - Add target="_blank" to external links
-9. **automatic_translation** - AI-powered automatic translation with hash-based caching
+1. **Discover** (`garten/discover.py`) - Scan content directories, parse frontmatter, auto-title, assign categories, find translation files
+2. **Process** (`garten/process.py`) - Markdown to HTML (with WikiLinks extension), copy adjacent images, generate summaries, external link processing, process translations
+3. **Assemble** (`garten/assemble.py`) - Generate URLs, multilingual URL mapping, tag/category groupings, pagination, menu translations, language switcher data, article filtering
+4. **Render** (`garten/render.py`) - Jinja2 template rendering for all content types, per-language pages, static file copying, image copying to language dirs
 
 **Key architectural patterns:**
-- **Signal-based coordination** - Uses Pelican's signal system for plugin communication
-- **Centralized utilities** - `normalize_slug()` and logging used across plugins
-- **Content Adapter pattern** - RecipeAdapter for custom content types
-- **Dual WikiLinks implementation** - Both markdown extension and plugin for robust processing
+- **Phase-based pipeline** - Each phase is an independent Python module with inspectable intermediate artifacts
+- **Centralized utilities** - `garten/utils.py` provides `normalize_slug()`, `get_logger()`, `localize_date()`
+- **JSON configuration** - `site.json` with `GARTEN_` environment variable overrides
+- **WikiLinks** - Custom markdown extension (`garten/markdown_wikilinks.py`) at priority 175
 
 ## WikiLinks Implementation
 
 **Syntax:** `[[Page Name]]` or `[[Page Name|Display Text]]`
 
-**Dual processing:**
-- `markdown_wikilinks.py` - Markdown extension with high priority (175)
-- `wikilinks.py` - Pelican plugin for additional processing
+**Implementation:** `garten/markdown_wikilinks.py` - Markdown extension with high priority (175)
 
 **Features:**
 - Works across all content types (articles, pages, recipes)
@@ -81,18 +81,25 @@ The system's power comes from **9 coordinated custom plugins** that execute in s
 
 ## Content Processing Pipeline
 
-**Execution order is critical:**
+**Pipeline phases with sub-phases:**
 
-1. **Initialization** - Load config, register plugins, setup logging
-2. **Content Reading** - auto_title, recipes, set_proper_category
-3. **Processing** - Markdown with WikiLinks, image copying, summary generation
-4. **Generation** - Template rendering, pagination, tag pages
-5. **Finalization** - URL fixing, external link processing, validation
+1. **Discover** - Scan directories, parse frontmatter, auto-title from dir names, assign categories, find translation files
+2. **Process** - Markdown rendering (WikiLinks, TOC, CodeHilite), image URL fixing, summary generation, external link processing, translation file processing
+3. **Assemble** - URL generation, multilingual URLs, internal link prefixing, tag/category maps, pagination, menu translations, language switcher, article filtering
+4. **Render** - Template rendering (articles, pages, recipes, indexes, tags), static files, image copying, root redirect page
+
+## Configuration
+
+Site configuration uses `site.json` with environment variable overrides:
+
+- **`GARTEN_SITEURL`** - Override site URL (e.g., for staging)
+- **`GARTEN_SITENAME`** - Override site name
+- **`GARTEN_TRANSLATION__ENABLED`** - Enable/disable translation (double underscore for nested keys)
 
 ## Logging System
 
 **Centralized logging with colored output:**
-- `from logger_config import get_logger`
+- `from garten.utils import get_logger`
 - Format: `YYYY-MM-DD HH:MM LEVEL Message`
 - Colors: INFO=green, WARNING=yellow, ERROR=red
 - Use `logger.info()`, `logger.warning()`, `logger.error()`
@@ -104,13 +111,13 @@ GitHub Actions automated pipeline:
 - **Main branch** → grtnr.com (production)
 - **Feature branches** → test.grtnr.com (staging)
 - Uses external repositories for hosting
+- Environment variables: `GARTEN_SITENAME`, `GARTEN_TRANSLATION__ENABLED`
 
 ## Development Notes
 
 - **WikiLinks**: Use `[[Page Name]]` syntax to link between content
 - **Images**: Place images adjacent to content files - they're auto-copied and URLs fixed
 - **Recipes**: Use recipe content type for cooking content with dedicated templates
-- **Caching**: Development builds use caching for faster regeneration
 - **Linting**: Flake8 with 88 character line length, W504 ignored
 
 ## Automatic Translation System
@@ -133,11 +140,19 @@ content/articles/2025-01-01-example/
     └── 2025-01-01-example-ES.md   # Spanish translation
 ```
 
-**Configuration (pelicanconf.py):**
-- `TRANSLATION_ENABLED = True` - Enable automatic translation
-- `TRANSLATION_TARGET_LANGUAGES = ["de", "fr", "es"]` - Target languages (ISO 639-1 codes)
-- `TRANSLATION_EXCLUDE_CATEGORIES = ["recipes"]` - Skip categories
-- `TRANSLATION_EXCLUDE_PATHS = ["/pages/impressum/"]` - Skip paths
+**Configuration (site.json):**
+```json
+{
+  "translation": {
+    "enabled": false,
+    "target_languages": ["de", "fr"],
+    "exclude_categories": ["recipes"],
+    "exclude_paths": ["/pages/impressum/"]
+  }
+}
+```
+
+Environment override: `GARTEN_TRANSLATION__ENABLED=true`
 
 **Translation Files Include:**
 - Source and target language metadata
@@ -146,14 +161,13 @@ content/articles/2025-01-01-example/
 
 **Management Commands:**
 
-- `inv clean-translations` - Remove all translation files and cache
+- `inv clean-translations` - Remove all translation files
 - `inv clean-translations-cache` - Clear cache only (forces re-translation)
 
 **Testing:**
 
-- Run tests: `python tests/test_translation_service.py -v`
-- 22 comprehensive tests covering all functionality
-- Mock implementations included for development/testing
+- Run tests: `python -m pytest tests/ -q`
+- 254+ tests covering all pipeline phases
 
 ## Content Guidelines
 

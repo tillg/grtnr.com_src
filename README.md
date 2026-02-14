@@ -74,15 +74,20 @@ This project includes an automatic translation system that can create multilingu
 
 ### Enabling Translation
 
-Edit `pelicanconf.py` to configure the translation system:
+Edit `site.json` to configure the translation system:
 
-```python
-# Translation settings
-TRANSLATION_ENABLED = True  # Set to True to enable automatic translation
-TRANSLATION_TARGET_LANGUAGES = ["de", "fr", "es"]  # Languages to translate to
-TRANSLATION_EXCLUDE_CATEGORIES = ["recipes"]  # Categories to skip translation
-TRANSLATION_EXCLUDE_PATHS = ["/pages/impressum/"]  # Specific paths to skip
+```json
+{
+  "translation": {
+    "enabled": true,
+    "target_languages": ["de", "fr", "es"],
+    "exclude_categories": ["recipes"],
+    "exclude_paths": ["/pages/impressum/"]
+  }
+}
 ```
+
+Or use environment variables: `GARTEN_TRANSLATION__ENABLED=true`
 
 ### Configuration Options
 
@@ -146,7 +151,7 @@ content/articles/2025-01-01-example/
     └── 2025-01-01-example-ES.md   # Spanish translation
 ```
 
-**Note**: Translation files in `extensions/` directories are automatically excluded from Pelican processing to avoid conflicts.
+**Note**: Translation files in `extensions/` directories are automatically discovered by the garten pipeline during the discover phase.
 
 ### Managing Translations
 

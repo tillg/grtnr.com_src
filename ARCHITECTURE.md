@@ -6,12 +6,13 @@ This document provides comprehensive technical architecture documentation for th
 
 ## 1. Project Overview - The Big Picture
 
-grtnr.com is a personal blog/website built with **Pelican** (Python static site generator) that transforms Markdown files into fast, secure static HTML pages. Think of it as a sophisticated content management system that generates websites without requiring databases or server-side code when visitors browse.
+grtnr.com is a personal blog/website built with **garten**, a custom Python static site generator that transforms Markdown files into fast, secure static HTML pages. It uses the same underlying libraries as Pelican (Jinja2, Python-Markdown, Pygments) but calls them directly in an explicit, debuggable pipeline.
 
 **Key Features:**
 - **Digital Garden Navigation**: WikiLinks (`[[Page Name]]`) for interconnected content
 - **Multi-Content Support**: Articles, pages, and recipes with specialized templates
 - **Automatic Translation**: AI-powered translations in multiple languages
+- **Multilingual Site**: Full en/de/fr site with language switcher
 - **Adjacent Image Handling**: Automatic image copying and URL fixing
 - **Code Quality**: Comprehensive linting and formatting pipeline
 
@@ -27,10 +28,11 @@ This approach provides:
 - **Scalability**: CDN-friendly static files
 
 ### Technology Stack
-- **Static Site Generator**: Pelican 4.11.0 (Python-based)
+- **Static Site Generator**: garten (custom Python pipeline)
 - **Language**: Python 3.12
 - **Theme**: Custom "pelicanyan" theme (based on Lanyon/Poole)
 - **Markdown**: Enhanced with TOC, WikiLinks, and syntax highlighting
+- **Templates**: Jinja2 with direct rendering
 - **Deployment**: GitHub Actions with dual-environment setup
 - **Development**: Invoke task automation with livereload
 
@@ -44,22 +46,34 @@ This approach provides:
 ### Main Directory Layout
 ```text
 grtnr.com_src/
+├── garten/               # Site generator package (pipeline modules)
+│   ├── __init__.py
+│   ├── config.py         # Config loader (reads site.json + env overrides)
+│   ├── discover.py       # Phase 1: content discovery
+│   ├── process.py        # Phase 3: markdown → HTML
+│   ├── assemble.py       # Phase 4: site structure + multilingual
+│   ├── render.py         # Phase 5: template rendering
+│   ├── models.py         # Content dataclasses
+│   ├── markdown_wikilinks.py  # WikiLinks markdown extension
+│   └── utils.py          # Slug normalization, logging, date localization
 ├── content/              # All website content (articles, pages, recipes)
-├── plugins/              # 14 custom Python plugins extending Pelican
+├── extensions/           # Translation service package
+│   └── translation_service/
 ├── pelicanyan/           # Custom theme (templates, CSS, JS)
-├── extensions/           # Translation service and tests
-├── cache/                # Build caches for performance
+├── tests/                # Test suites (254+ tests)
 ├── output/               # Generated static site files
+├── .build/               # Intermediate pipeline artifacts (gitignored)
 ├── .github/workflows/    # GitHub Actions deployment
-├── tests/                # Test suites
 └── .devcontainer/        # Development environment config
 ```
 
 ### Key Configuration Files
-- **pelicanconf.py**: Main Pelican configuration (218 lines)
-- **tasks.py**: Invoke task automation (309 lines)
+- **site.json**: Site configuration (replaces pelicanconf.py)
+- **tasks.py**: Invoke task automation
 - **pyproject.toml**: Python tool configuration (Black, isort)
 - **package.json**: Node.js dependencies for code quality
+- **menu_translations.json**: Menu item translations (en/de/fr)
+- **tag_translations.json**: Tag name translations
 
 ## 4. Content Types and Organization
 
@@ -102,10 +116,16 @@ content/
 inv livereload    # Development server with auto-reload
 
 # Building
-inv build         # Build local version  
+inv build         # Build local version (includes link checking)
 inv serve         # Static file server at localhost:8000
 inv preview       # Production build for testing
 inv clean         # Remove generated files
+
+# Pipeline phases (for debugging)
+inv discover      # Phase 1: content discovery
+inv process       # Phases 1-3: discover + process
+inv assemble      # Phases 1-4: discover + process + assemble
+inv render        # Phases 1-5: full pipeline without link checking
 
 # Code Quality
 inv check-py      # Format and lint Python files
@@ -114,8 +134,8 @@ inv check-json    # Format and lint JSON files
 ```
 
 ### Development Features
-- **Live Reload**: Watches templates, content, CSS, JS, and plugin files
-- **Caching**: Development builds use `CACHE_CONTENT=true` for speed
+- **Live Reload**: Watches templates, content, CSS, JS, and garten source files
+- **Pipeline Artifacts**: Intermediate results in `.build/` for debugging
 - **Auto-formatting**: On-save formatting for Python, Markdown, and JSON
 - **VS Code Integration**: DevContainer with pre-configured extensions
 
@@ -137,60 +157,58 @@ npm install
 inv livereload
 ```
 
-## 6. Plugin System - The Secret Sauce
+## 6. Pipeline Architecture
 
-### Plugin Architecture
-The system's power comes from **9 coordinated custom plugins** executing in specific order:
+### Phase-Based Pipeline
 
-```python
-PLUGINS = [
-    "auto_title",              # 1. Generate titles from directory names
-    "normalize_slugs",         # 2. German character normalization (ä→ae, ß→ss)
-    "recipes",                 # 3. Custom content type with RecipeAdapter
-    "set_proper_category",     # 4. Category assignment from directory structure
-    "filter_articles_for_index", # 5. Homepage article filtering
-    "copy_adjacent_images",    # 6. Auto-copy images and fix relative URLs
-    "excerpt_to_summary",      # 7. Summary generation for articles
-    "external_links",          # 8. Add target="_blank" to external links
-    "automatic_translation",   # 9. AI-powered translation with caching
-]
-```
+The garten pipeline processes content through 5 phases, each an independent Python module with inspectable intermediate artifacts in `.build/`:
 
-### Key Plugin Patterns
-- **Signal-Based Coordination**: Uses Pelican's signal system for plugin communication
-- **Centralized Utilities**: `normalize_slug()` and logging shared across plugins
-- **Content Adapter Pattern**: `RecipeAdapter` for custom content types
-- **Execution Order**: Critical sequence for proper content processing
+#### Phase 1: Discover (`garten/discover.py`)
+- Scan content directories for `.md` files
+- Parse frontmatter (title, date, tags, excerpt, etc.)
+- Auto-generate titles from directory names (removes date prefixes)
+- Assign categories from directory structure
+- Find translation files in `extensions/` subdirectories
+- **Output**: `.build/discover/manifest.json`
 
-### Essential Plugins
+#### Phase 2: Process (`garten/process.py`)
+- Markdown → HTML with extensions (WikiLinks, TOC, CodeHilite, Extra, Meta)
+- Copy adjacent images and fix relative URLs in HTML
+- Generate summaries from excerpt metadata
+- External link processing (add `target="_blank"`, `rel="noopener noreferrer"`)
+- Process translation files through the same pipeline
+- Apply typogrify (smart quotes, proper dashes)
+- **Output**: `.build/process/manifest.json` + `html/` fragments
 
-#### auto_title.py
-- **Purpose**: Generates titles from directory names
-- **Function**: Removes date prefixes, converts hyphens to spaces, capitalizes
-- **Example**: `2025-01-15-something-cool/` → "Something Cool"
+#### Phase 3: Assemble (`garten/assemble.py`)
+- Generate URLs for all content (`{slug}/`, `recipes/{slug}/`)
+- Generate multilingual URLs (`/{lang}/{slug}/`)
+- Prefix internal links with language codes for non-English content
+- Build tag and category groupings per language
+- Build pagination per language
+- Build translated menu and language switcher data
+- Filter articles for index pages
+- **Output**: `.build/assemble/site.json`
 
-#### copy_adjacent_images.py
-- **Purpose**: Automatically handles image files
-- **Function**: Copies images from content directories, fixes relative URLs
-- **Benefit**: Eliminates manual image path management
+#### Phase 4: Render (`garten/render.py`)
+- Render articles, pages, recipes via Jinja2 templates
+- Render paginated index pages per language
+- Render tag and category pages per language
+- Render sitemap.xml, robots.txt, humans.txt
+- Render root redirect page (auto-detects browser language)
+- Copy static assets (theme files, content static)
+- Copy images to language directories
+- **Output**: `output/` directory (final site)
 
-#### recipes.py
-- **Purpose**: Creates custom recipe content type
-- **Pattern**: Content Adapter with dedicated templates
-- **URL**: `/recipes/{slug}/` structure
-
-#### normalize_slugs.py
-- **Purpose**: Centralized German character handling
-- **Function**: `ä→ae`, `ö→oe`, `ü→ue`, `ß→ss`
-- **Usage**: Used by articles, recipes, WikiLinks, tag pages
+### Key Patterns
+- **Centralized utilities** in `garten/utils.py`: `normalize_slug()`, `slugify()`, `get_logger()`, `localize_date()`, `remove_all_translations()`
+- **WikiLinks** as a Markdown extension (`garten/markdown_wikilinks.py`) at priority 175
+- **Content Adapter pattern**: Wrapper classes (`ArticleWrapper`, `PageWrapper`, `RecipeWrapper`) bridge data dicts to template variable names
 
 ## 7. WikiLinks Feature - Digital Garden Navigation
 
 ### Implementation
-**Dual processing approach** for robust WikiLink handling:
-
-1. **markdown_wikilinks.py**: Markdown extension with high priority (175)
-2. **wikilinks.py**: Pelican plugin for additional processing
+**Markdown extension** (`garten/markdown_wikilinks.py`) processes WikiLinks during Markdown rendering at priority 175.
 
 ### Syntax and Features
 - **Basic**: `[[Page Name]]` → links to `/page-name/`
@@ -256,7 +274,7 @@ AI-powered translation system providing automatic multilingual content using Ope
 class TranslationService:
     def translate_content(self, content: str, source_lang: str, target_lang: str) -> str:
         """Translate markdown content while preserving structure"""
-    
+
     def detect_language(self, content: str) -> str:
         """Detect source language of content"""
 ```
@@ -278,16 +296,22 @@ content/articles/2025-01-01-example/
 ```
 
 ### Configuration
-```python
-# pelicanconf.py
-TRANSLATION_ENABLED = True
-TRANSLATION_TARGET_LANGUAGES = ["de", "fr", "es"]
-TRANSLATION_EXCLUDE_CATEGORIES = ["recipes"]
-TRANSLATION_EXCLUDE_PATHS = ["/pages/impressum/"]
+```json
+// site.json
+{
+  "translation": {
+    "enabled": false,
+    "target_languages": ["de", "fr"],
+    "exclude_categories": ["recipes"],
+    "exclude_paths": ["/pages/impressum/"]
+  }
+}
 ```
 
+Environment override: `GARTEN_TRANSLATION__ENABLED=true`
+
 ### Translation Process
-1. **Content Discovery**: Scans articles/pages during generation
+1. **Content Discovery**: Scans articles/pages during discover phase
 2. **Cache Check**: Generates content hash, checks existing translations
 3. **Translation**: Sends to OpenAI API with specialized prompts
 4. **File Management**: Creates translation files with metadata
@@ -302,10 +326,11 @@ TRANSLATION_EXCLUDE_PATHS = ["/pages/impressum/"]
 - **Line Length**: 88 characters for Python, W504 ignored
 
 ### Testing Framework
-- **Translation Tests**: 22 comprehensive tests covering all functionality
-- **Mock Implementations**: For development without API dependencies
-- **Integration Tests**: Full workflow testing
-- **Manual Testing**: Quality assurance framework
+- **254+ tests** covering all pipeline phases
+- **Phase-isolated tests**: Each phase testable independently
+- **Integration tests**: Full pipeline testing on real content
+- **Spot checks**: Verify specific content rendering details
+- Run tests: `python -m pytest tests/ -q`
 
 ### Tool Configuration
 - **pyproject.toml**: Python tool settings
@@ -335,91 +360,77 @@ Steps:
 1. Checkout source code
 2. Setup Python 3.12 environment
 3. Install dependencies from requirements.txt
-4. Run production build (inv preview)
-5. Deploy to appropriate external repository
-6. Configure CNAME for custom domain
+4. Configure translation service
+5. Run build (inv build - includes link checking)
+6. Deploy to appropriate external repository
+7. Configure CNAME for custom domain
 ```
 
 ### Deployment Features
-- **Environment Variables**: `PELICAN_SITENAME` set based on branch
+- **Environment Variables**: `GARTEN_SITENAME` set based on branch
 - **External Repository Pattern**: Source code separate from hosting
 - **Automatic CNAME**: Custom domain configuration
 - **Build Artifacts**: Static files only in hosting repositories
+- **Translation Caching**: GitHub Actions cache for translation files
 
-## 12. Content Processing Pipeline
+## 12. Configuration System
 
-### Execution Flow
-The system processes content through these coordinated phases:
+### site.json
+The primary configuration file replacing the old `pelicanconf.py`. Static settings live in JSON; dynamic/environment-specific values use `GARTEN_` prefixed environment variables.
 
-#### 1. Initialization Phase
-- Load configuration (pelicanconf.py)
-- Register plugins in execution order
-- Configure Markdown extensions
-- Setup theme and template paths
+**Layering (highest priority wins):**
+1. Environment variables with `GARTEN_` prefix (e.g., `GARTEN_SITEURL=https://test.grtnr.com`)
+2. `site.json` values
 
-#### 2. Content Reading Phase
-- **auto_title**: Generate titles from directory names
-- **recipes**: Identify and process recipe content
-- **set_proper_category**: Assign categories from paths
-- **normalize_slugs**: Apply German character normalization
+**Runtime values** like `BUILD_TIME` are computed by the config loader at startup.
 
-#### 3. Content Processing Phase
-- **Markdown Processing**: Convert content with extensions
-- **WikiLink Processing**: Convert `[[links]]` to HTML
-- **Image Processing**: Copy adjacent images, fix URLs
-- **Summary Generation**: Create excerpts for articles
+**Nested key override**: Use double underscores for nested keys: `GARTEN_TRANSLATION__ENABLED=true` maps to `translation.enabled`.
 
-#### 4. Generation Phase
-- **Template Rendering**: Apply theme templates
-- **Pagination**: Generate paginated index pages
-- **Tag Pages**: Auto-generate tag-specific pages
-- **Static Files**: Copy theme assets and static content
-
-#### 5. Finalization Phase
-- **URL Fixing**: Ensure consistent internal links
-- **External Link Processing**: Add target attributes
-- **Translation**: Generate multilingual versions
-- **Output Organization**: Structure final static site
+### Translation Configuration Files
+- **menu_translations.json**: Menu item translations (en/de/fr)
+- **tag_translations.json**: Tag name translations
 
 ## 13. Advanced Features and Extensions
 
 ### Logging System
 **Centralized logging with colored output:**
 ```python
-from logger_config import get_logger
-logger = get_logger('plugin_name')
+from garten.utils import get_logger
+logger = get_logger('module_name')
 
-logger.info("Plugin initialized")     # Green
-logger.warning("Configuration issue") # Yellow
-logger.error("Failed to process")     # Red
+logger.info("Processing started")       # Green
+logger.warning("Configuration issue")   # Yellow
+logger.error("Failed to process")       # Red
 ```
 
 ### Digital Garden Features
 - **WikiLinks**: Create interconnected content web
-- **Tag System**: Automatic tag page generation
+- **Tag System**: Automatic tag page generation per language
 - **Cross-references**: Automatic content linking
 - **Navigation**: Context-aware sidebar navigation
 
-### Performance Optimizations
-- **Caching**: Development builds with content caching
-- **Image Optimization**: Automatic adjacent image handling
-- **CSS Minification**: Production build optimizations
-- **Plugin Efficiency**: Optimized execution order
+### Multilingual Features
+- **Language-prefixed URLs**: `/de/slug/`, `/fr/slug/`
+- **Root redirect**: Auto-detects browser language
+- **Language switcher**: Globe button in sidebar
+- **Per-language pagination**: Independent article counts per language
+- **hreflang tags**: SEO-friendly alternate language links
 
 ## 14. Development Guidelines
 
 ### Adding New Content Types
-1. Create content adapter following `RecipeAdapter` pattern
-2. Add to plugin system with appropriate signals
-3. Create dedicated templates in theme
-4. Update URL generation and slug normalization
+1. Add dataclass fields in `garten/models.py`
+2. Extend discovery in `garten/discover.py`
+3. Add processing logic in `garten/process.py`
+4. Generate URLs in `garten/assemble.py`
+5. Create Jinja2 templates and render in `garten/render.py`
 
-### Creating New Plugins
-1. Follow signal-based architecture
-2. Use centralized `normalize_slug()` function
-3. Implement centralized logging
-4. Consider execution order dependencies
-5. Add to `PLUGINS` list in proper sequence
+### Modifying the Pipeline
+1. Each phase is an independent module — modify in isolation
+2. Run phase-specific tasks (`inv discover`, `inv process`, etc.) for testing
+3. Inspect intermediate artifacts in `.build/` for debugging
+4. Use centralized `get_logger()` for consistent logging
+5. Add tests in `tests/test_<phase>.py`
 
 ### Theme Customization
 1. Modify templates in `pelicanyan/templates/`
@@ -434,24 +445,4 @@ logger.error("Failed to process")     # Red
 - WikiLinks create interconnected navigation
 - Images placed adjacent to content files
 
-## 15. Monitoring and Maintenance
-
-### Analytics
-- Google Analytics 4 integration
-- Comment system metrics via Giscus
-- GitHub repository insights for development
-
-### Performance Monitoring
-- Static site generation for optimal speed
-- Image optimization through adjacent copying
-- CSS minification in production builds
-- Efficient plugin execution order
-
-### Content Management
-- Automated title generation reduces manual work
-- Image copying eliminates path management
-- WikiLinks provide easy cross-referencing
-- Tag system enables content organization
-- Translation system maintains multilingual content
-
-This architecture creates a powerful, maintainable static site that combines the simplicity of static generation with advanced features like automatic translation, digital garden navigation, and multiple content types. The modular plugin system allows for easy extension and customization while maintaining clean separation of concerns.
+This architecture creates a powerful, maintainable static site that combines the simplicity of static generation with advanced features like automatic translation, digital garden navigation, and multiple content types. The phase-based pipeline provides transparency and debuggability while maintaining clean separation of concerns.

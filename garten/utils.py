@@ -1,6 +1,7 @@
 """Shared utilities: slug normalization, logging, date helpers."""
 
 import logging
+import os
 import re
 import sys
 import unicodedata
@@ -207,3 +208,47 @@ def localize_date(dt: Union[datetime, str, None], lang: str = "en") -> str:
         # English: "February 14, 2026"
         mon = cfg["months"][month_idx]
         return f"{mon} {dt.day}, {dt.year}"
+
+
+# ---------------------------------------------------------------------------
+# Translation file cleanup
+# ---------------------------------------------------------------------------
+
+_cleanup_logger = get_logger("cleanup")
+
+
+def remove_all_translations(content_root: str) -> tuple[int, int]:
+    """Remove all translation files from extensions/ directories.
+
+    Walks *content_root*, finds ``extensions/`` subdirectories, deletes
+    every ``.md`` file inside them, and removes the directory if empty.
+
+    Returns ``(removed_files, removed_dirs)``.
+    """
+    removed_files = 0
+    removed_dirs = 0
+
+    for root, dirs, _files in os.walk(content_root):
+        if "extensions" not in dirs:
+            continue
+
+        ext_path = os.path.join(root, "extensions")
+        try:
+            for fname in os.listdir(ext_path):
+                if fname.endswith(".md"):
+                    os.remove(os.path.join(ext_path, fname))
+                    removed_files += 1
+
+            if not os.listdir(ext_path):
+                os.rmdir(ext_path)
+                removed_dirs += 1
+        except Exception as e:
+            _cleanup_logger.warning(
+                f"Failed to process extensions directory {ext_path}: {e}"
+            )
+
+    _cleanup_logger.info(
+        f"Cleanup complete: removed {removed_files} translation files "
+        f"and {removed_dirs} empty directories"
+    )
+    return removed_files, removed_dirs
