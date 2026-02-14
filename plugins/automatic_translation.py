@@ -211,8 +211,13 @@ class TranslationGenerator(Generator):
                 target_path = get_translation_path(source_path, target_lang)
 
                 # Use the simplified translate_document function
+                # Pass content.title so auto-generated titles get translated
                 was_updated = translate_document(
-                    source_path, target_lang, target_path, self.settings
+                    source_path,
+                    target_lang,
+                    target_path,
+                    self.settings,
+                    title=content.title,
                 )
 
                 if was_updated:
