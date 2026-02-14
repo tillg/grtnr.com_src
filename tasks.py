@@ -311,6 +311,108 @@ def discover(c):
     write_manifest(manifest, cfg["build_path"])
 
 
+@task
+def process(c):
+    """Run garten Phases 1-3: discover + process"""
+    from garten.config import load_config
+    from garten.discover import discover as run_discover
+    from garten.discover import write_manifest
+    from garten.process import process as run_process
+    from garten.process import write_artifacts
+
+    cfg = load_config("site.json")
+    manifest = run_discover(cfg)
+    write_manifest(manifest, cfg["build_path"])
+    run_process(manifest, cfg)
+    write_artifacts(manifest, cfg["build_path"])
+
+
+@task
+def preview_process(c, slug=None):
+    """Preview processed HTML in browser. Use --slug to pick one, or omit to list."""
+    import json
+    import tempfile
+    import webbrowser
+
+    build_dir = os.path.join(os.path.dirname(__file__), ".build", "process")
+    html_dir = os.path.join(build_dir, "html")
+
+    if not os.path.isdir(html_dir):
+        print("No process artifacts found. Run `inv process` first.")
+        sys.exit(1)
+
+    # Collect all available slugs
+    all_files = {}
+    for content_type in ("articles", "pages", "recipes"):
+        type_dir = os.path.join(html_dir, content_type)
+        if os.path.isdir(type_dir):
+            for f in sorted(os.listdir(type_dir)):
+                if f.endswith(".html"):
+                    name = f[:-5]
+                    all_files[name] = os.path.join(type_dir, f)
+
+    if not slug:
+        print("Available content (pass --slug to preview):\n")
+        for name in sorted(all_files):
+            print(f"  {name}")
+        print(f"\nTotal: {len(all_files)} items")
+        return
+
+    if slug not in all_files:
+        # Try partial match
+        matches = [k for k in all_files if slug in k]
+        if len(matches) == 1:
+            slug = matches[0]
+        elif len(matches) > 1:
+            print(f"Multiple matches for '{slug}':")
+            for m in matches:
+                print(f"  {m}")
+            return
+        else:
+            print(f"No match for '{slug}'")
+            return
+
+    content = open(all_files[slug]).read()
+    wrapper = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{slug}</title>
+<style>
+  body {{ max-width: 48rem; margin: 2rem auto; padding: 0 1rem;
+         font-family: -apple-system, system-ui, sans-serif;
+         line-height: 1.6; color: #333; }}
+  img {{ max-width: 100%; height: auto; }}
+  pre {{ background: #f5f5f5; padding: 1rem; overflow-x: auto;
+         border-radius: 4px; }}
+  code {{ background: #f5f5f5; padding: 0.15em 0.3em; border-radius: 3px; }}
+  pre code {{ background: none; padding: 0; }}
+  blockquote {{ border-left: 3px solid #ccc; margin-left: 0;
+                padding-left: 1rem; color: #666; }}
+  table {{ border-collapse: collapse; width: 100%; }}
+  th, td {{ border: 1px solid #ddd; padding: 0.5rem; text-align: left; }}
+  .toc {{ background: #f9f9f9; padding: 1rem; border-radius: 4px;
+          margin-bottom: 1.5rem; }}
+  .highlight pre {{ margin: 0; }}
+  a {{ color: #0066cc; }}
+</style>
+</head>
+<body>
+<h1>{slug.replace('-', ' ').title()}</h1>
+<hr>
+{content}
+</body>
+</html>"""
+
+    with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False) as f:
+        f.write(wrapper)
+        tmp_path = f.name
+
+    webbrowser.open(f"file://{tmp_path}")
+    print(f"Opened preview for '{slug}'")
+
+
 def prepare_and_run_pelican(cmd):
     # allows to pass-through args to pelican
     remainder = getattr(program.core, "remainder", None) or ""

@@ -33,6 +33,10 @@ This project uses invoke for task automation. Here are the available commands:
 - `inv clean-translations` - Remove all translation files and cache
 - `inv clean-translations-cache` - Remove only the translation cache file
 
+## TODO
+
+- Generate summaries by AI if not created by editor.
+
 ## Code Quality
 
 This project uses automated Python code formatting and linting. For detailed guidelines, tool configurations, and development workflows, see [CODE_GUIDELINES.md](CODE_GUIDELINES.md).

@@ -459,6 +459,34 @@ Build content discovery that produces a JSON manifest of all content (articles, 
 
 Build markdown rendering + image copying + summaries. For each piece of content, diff the HTML output against Pelican's. This validates the core rendering pipeline.
 
+#### Increment 2 — Implementation Notes
+
+**Status: DONE** — 59 tests passing, `inv process` produces `.build/process/manifest.json` + individual HTML fragments.
+
+**Decisions taken during implementation:**
+
+1. **Typogrify included in Process phase.** Pelican applies `typogrify` to `article._content` (smart quotes, proper dashes, etc.). Garten applies it identically after markdown rendering + external link processing to match output. Applied unconditionally (matching `TYPOGRIFY = True` in pelicanconf.py). Config option deferred until needed.
+2. **Image URL prefix uses `item["slug"]` for all content types**, matching the Pelican `copy_adjacent_images` plugin exactly. This means recipe image URLs use `/banh-xeo/image.jpg` rather than `/recipes/banh-xeo/image.jpg`. This appears to be a pre-existing bug in the Pelican plugin (images are copied to `output/recipes/{slug}/` but URLs reference `/{slug}/`). Matched for now; will fix in a later increment when we can verify against the live site.
+3. **Image file copying deferred to Render phase (Phase 5).** Process only discovers adjacent files and fixes URLs in HTML. The actual `shutil.copy2` to output directories happens in Render, keeping Process focused on content transformation.
+4. **Date localization (sub-phase 3.5) deferred to Increment 4** (Translation + Multilingual). Date localization is inherently language-dependent and belongs with the multilingual pipeline.
+5. **WikiLinks extension ported to `garten/markdown_wikilinks.py`.** Identical logic to `plugins/markdown_wikilinks.py` but imports `normalize_slug` from `garten.utils` instead of via `sys.path` manipulation. Registered at priority 175 (same as Pelican version).
+6. **Markdown extensions match pelicanconf.py exactly:** toc (permalink=False, anchorlink=False, toc_depth=3, marker=[TOC]), codehilite (css_class="highlight"), extra, meta, plus custom WikiLinks. Output format is html5.
+7. **Frontmatter stripping reuses the same regex** from `discover.py` (`^---\s*\n(.*?)\n---\s*\n`). The body after stripping starts with content, so the `meta` markdown extension doesn't accidentally parse content lines as metadata.
+8. **New markdown instance per document.** Python-Markdown maintains internal state (e.g., footnote counters, TOC data). A fresh `Markdown()` instance is created for each content item, matching Pelican's behaviour.
+9. **Process manifest stores content by reference.** The `.build/process/manifest.json` replaces inline content with file paths (`html/articles/{slug}.html`) to keep the manifest readable. Full HTML is in the individual files.
+10. **Summary generation is simple excerpt copy** (matching `excerpt_to_summary` plugin). Strips surrounding quotes. Only applied to articles (pages and recipes don't have summaries in the current templates).
+11. **External link processing uses BeautifulSoup** (html.parser) to add `target="_blank"` and `rel="noopener noreferrer"` to all `http://` and `https://` links. Matches the Pelican `external_links` plugin exactly.
+12. **Attachments directory supported.** Files in `{content_dir}/attachments/` are included in adjacent file discovery, matching the Pelican plugin's behaviour for PDF downloads and other non-image files.
+
+**Files created:**
+
+- `garten/process.py` — Process phase with all sub-phases (3.1–3.4)
+- `garten/markdown_wikilinks.py` — Ported WikiLinks markdown extension
+- `tests/test_process.py` — 59 tests (unit + integration + spot checks)
+- Updated `tasks.py` with `inv process` task (runs discover + process)
+
+**Test coverage:** 59 tests covering strip_frontmatter (4), markdown rendering (12), image URL fixing (8), adjacent file discovery (5), summary generation (6), external links (7), typogrify (2), integration on real content (11), and spot checks for specific features (4).
+
 ### Increment 3: Assemble + Render
 
 Build tag/category grouping, pagination, and Jinja2 template rendering. Diff the full site output directory against Pelican's output. At this point we have a working (English-only) site generator.
