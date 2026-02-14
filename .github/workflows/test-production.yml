@@ -13,16 +13,30 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v3
 
-      - name: Fetch sitemap and extract URLs
+      - name: Install lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --help
+          fail: false
+
+      - name: Fetch sitemap and build URL list
         run: |
           curl -sS https://grtnr.com/sitemap.xml \
             | grep -oP '<loc>\K[^<]+' \
+            | sed 's|^/|https://grtnr.com/|' \
             | sort > /tmp/urls.txt
           echo "Found $(wc -l < /tmp/urls.txt) URLs from sitemap"
-          head -10 /tmp/urls.txt
+          head -5 /tmp/urls.txt
 
-      - name: Check production links
-        uses: lycheeverse/lychee-action@v2
+      - name: Check all links on production pages
+        run: |
+          lychee --config lychee.toml --format markdown \
+            --output /tmp/lychee-report.md \
+            $(cat /tmp/urls.txt | tr '\n' ' ')
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          args: --config lychee.toml --format markdown /tmp/urls.txt
-          fail: true
+          name: lychee-report
+          path: /tmp/lychee-report.md
