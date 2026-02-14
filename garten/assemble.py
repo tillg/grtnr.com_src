@@ -390,7 +390,7 @@ def _build_lang_article(
     trans = original.get("translations", {}).get(lang, {})
     slug = original["slug"]
 
-    art = copy.copy(original)
+    art = copy.deepcopy(original)
     art["lang"] = lang
     art["url"] = f"{lang}/{slug}/"
     art["save_as"] = f"{lang}/{slug}/index.html"
@@ -428,7 +428,7 @@ def _build_lang_page(
     trans = original.get("translations", {}).get(lang, {})
     slug = original["slug"]
 
-    pg = copy.copy(original)
+    pg = copy.deepcopy(original)
     pg["lang"] = lang
     pg["url"] = f"{lang}/{slug}/"
     pg["save_as"] = f"{lang}/{slug}/index.html"
