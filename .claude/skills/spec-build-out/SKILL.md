@@ -7,6 +7,6 @@ Please read thru the spec document, and add your thoughts:
 - Architecture: What thoughts do you have? What options? What are the pros and cons of each?
 - UI: What thoughts do you have? What options? What are the pros and cons of each approach?
 
-Are there functional gaps? 
+Are there functional gaps?
 
 Please keep the document short! Add code snippets only if they are REALLY key!!

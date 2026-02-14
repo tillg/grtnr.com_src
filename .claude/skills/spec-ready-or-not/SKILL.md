@@ -1,6 +1,6 @@
 # Spec Ready or not
 
-I (Till) wrote a spec and want to know if you think it's ready for implementation. 
+I (Till) wrote a spec and want to know if you think it's ready for implementation.
 
 Pls check if
 - The functionality is coherent
@@ -11,4 +11,3 @@ Pls check if
 Also check for missing information.
 
 If you find some problems that you think cannot be covered while implementing, add a chapter "Questions / Open topics" at the end of the document and list them out.
-
