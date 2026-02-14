@@ -1,4 +1,4 @@
-name: Build and Deploy Pelican Site
+name: Build and Deploy Site
 
 on:
   push:
@@ -30,6 +30,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r .devcontainer/requirements.txt
 
+      - name: Install lychee link checker
+        run: |
+          curl -sSfL https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          sudo mv lychee /usr/local/bin/
+          lychee --version
+
       - name: Cache translations
         uses: actions/cache@v3
         with:
@@ -43,9 +49,9 @@ jobs:
       - name: Set site name based on branch
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "PELICAN_SITENAME=grtnr.com" >> $GITHUB_ENV
+            echo "GARTEN_SITENAME=grtnr.com" >> $GITHUB_ENV
           else
-            echo "PELICAN_SITENAME=test.grtnr.com" >> $GITHUB_ENV
+            echo "GARTEN_SITENAME=test.grtnr.com" >> $GITHUB_ENV
           fi
 
       - name: Configure translation service
@@ -56,12 +62,14 @@ jobs:
           echo "TRANSLATION_TIMEOUT=60" >> $GITHUB_ENV
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             # Production: Full translation
+            echo "GARTEN_TRANSLATION__ENABLED=true" >> $GITHUB_ENV
             echo "TRANSLATION_ENABLED=true" >> $GITHUB_ENV
             echo "TRANSLATION_TARGET_LANGUAGES=en,de,fr" >> $GITHUB_ENV
             echo "TRANSLATION_MODEL=gpt-4o" >> $GITHUB_ENV
             echo "TRANSLATION_EXCLUDE_CATEGORIES=recipes" >> $GITHUB_ENV
           else
             # Test/staging: Limited translation to save costs
+            echo "GARTEN_TRANSLATION__ENABLED=true" >> $GITHUB_ENV
             echo "TRANSLATION_ENABLED=true" >> $GITHUB_ENV
             echo "TRANSLATION_TARGET_LANGUAGES=de" >> $GITHUB_ENV
             echo "TRANSLATION_MODEL=gpt-4o" >> $GITHUB_ENV
@@ -70,12 +78,11 @@ jobs:
 
       - name: Debug translation configuration
         run: |
-          echo "🔍 Translation Debug Information:"
+          echo "Translation Debug Information:"
+          echo "GARTEN_TRANSLATION__ENABLED=$GARTEN_TRANSLATION__ENABLED"
           echo "TRANSLATION_ENABLED=$TRANSLATION_ENABLED"
           echo "TRANSLATION_TARGET_LANGUAGES=$TRANSLATION_TARGET_LANGUAGES"
           echo "OPENAI_API_KEY set: $(if [ -n "$OPENAI_API_KEY" ]; then echo 'Yes (***hidden***)'; else echo 'No'; fi)"
-          echo "Python path:"
-          python -c "import sys; print('\n'.join(sys.path))"
           echo "Translation service test:"
           python -c "
           import sys, os
@@ -83,31 +90,19 @@ jobs:
           try:
               from translation_service import TranslationConfig
               config = TranslationConfig.from_environment()
-              print(f'✅ Config loaded: {config}')
+              print(f'Config loaded: {config}')
           except Exception as e:
-              print(f'❌ Config failed: {e}')
+              print(f'Config failed: {e}')
               import traceback
               traceback.print_exc()
           "
 
       - name: Build site
-        run: inv rebuild
-
-      - name: Check links
-        uses: lycheeverse/lychee-action@v2
-        with:
-          # Offline: only check internal file links (external links checked by daily cron)
-          args: >-
-            --config lychee.toml
-            --offline
-            --root-dir ${{ github.workspace }}/output
-            --index-files index.html
-            ./output
-          fail: true
+        run: inv build
 
       - name: Show translation statistics
         run: |
-          echo "📊 Translation Statistics:"
+          echo "Translation Statistics:"
           echo "Cache directory contents:"
           ls -la cache/ 2>/dev/null || echo "No cache directory found"
           if [ -d "cache/translations" ]; then
@@ -119,10 +114,6 @@ jobs:
           find content -name "extensions" -type d 2>/dev/null || echo "No extensions directories found"
           echo "Generated translation files:"
           find content -name "*-[A-Z][A-Z].md" 2>/dev/null | head -10 || echo "No translation files found in content"
-          echo "Build log for translation mentions:"
-          echo "Checking for translation activity in recent output..."
-          echo "Directory structure:"
-          ls -la
 
       - name: Commit translations back to repo
         if: github.ref == 'refs/heads/main'
@@ -149,7 +140,7 @@ jobs:
             echo "Committing new translations..."
             git commit -m "Add auto-generated translations [skip ci]"
             git push
-            echo "✅ Translations committed and pushed"
+            echo "Translations committed and pushed"
           fi
 
       - name: Upload site as artifact
@@ -167,7 +158,7 @@ jobs:
         with:
           name: site-output
           path: ./output
-          
+
       - name: Deploy to grtnr.com
         if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
@@ -177,7 +168,7 @@ jobs:
           publish_branch: main
           external_repository: tillg/grtnr.com
           cname: grtnr.com
-      
+
       - name: Deploy to test.grtnr.com
         if: github.ref != 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3

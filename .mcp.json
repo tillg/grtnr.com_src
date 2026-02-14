@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["--registry", "https://registry.npmjs.org", "@playwright/mcp@latest"],
+      "color": "orange"
+    }
+  }
+}

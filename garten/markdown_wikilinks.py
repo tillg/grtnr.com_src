@@ -1,21 +1,21 @@
-"""
-Custom markdown extension for WikiLinks that uses proper slug normalization.
+"""Custom markdown extension for WikiLinks with slug normalization.
+
+Ported from plugins/markdown_wikilinks.py to use garten.utils.normalize_slug
+instead of the Pelican plugin's version.
+
+Registered as a Python-Markdown preprocessor at priority 175 (high priority,
+runs before other preprocessors).
 """
 
-import os
 import re
-
-# Import the central normalize_slug function
-import sys
 
 from markdown import Extension
 from markdown.preprocessors import Preprocessor
 
-sys.path.insert(0, os.path.dirname(__file__))
-from normalize_slugs import normalize_slug
+from .utils import normalize_slug
 
 
-class CustomWikiLinksPreprocessor(Preprocessor):
+class WikiLinksPreprocessor(Preprocessor):
     """Preprocessor to handle [[WikiLinks]] with custom slug normalization."""
 
     def run(self, lines):
@@ -38,29 +38,26 @@ class CustomWikiLinksPreprocessor(Preprocessor):
             if not page_name.strip():
                 return match.group(0)
 
-            # Convert to slug with hyphens, then normalize using central function
+            # Convert to slug with hyphens, then normalize
             slug = page_name.lower().replace(" ", "-")
             slug = normalize_slug(slug)
 
-            # Return markdown link format
             return f"[{display_text}](/{slug}/)"
 
-        wikilink_pattern = r"\[\[([^\]]+)\]\]"
-        text = re.sub(wikilink_pattern, replace_wikilink, text)
-
+        text = re.sub(r"\[\[([^\]]+)\]\]", replace_wikilink, text)
         return text.split("\n")
 
 
-class CustomWikiLinksExtension(Extension):
+class WikiLinksExtension(Extension):
     """Markdown extension for custom WikiLinks."""
 
     def extendMarkdown(self, md):
         md.preprocessors.register(
-            CustomWikiLinksPreprocessor(md),
+            WikiLinksPreprocessor(md),
             "custom_wikilinks",
-            175,  # High priority to run before other preprocessors
+            175,
         )
 
 
 def makeExtension(**kwargs):
-    return CustomWikiLinksExtension(**kwargs)
+    return WikiLinksExtension(**kwargs)

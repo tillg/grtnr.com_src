@@ -87,13 +87,16 @@ content/articles/2025-01-01-example/
 
 ## Configuration
 
-The multilingual plugin is configured in `pelicanconf.py`:
+The multilingual system is configured in `site.json`:
 
-```python
-# Multilingual site settings
-MULTILINGUAL_ENABLED = os.environ.get("MULTILINGUAL_ENABLED", "false").lower() == "true"
-MULTILINGUAL_LANGUAGES = os.environ.get("MULTILINGUAL_LANGUAGES", "en,de,fr").split(",")
-MULTILINGUAL_DEFAULT_LANG = os.environ.get("MULTILINGUAL_DEFAULT_LANG", "en")
+```json
+{
+  "multilingual": {
+    "enabled": true,
+    "languages": ["en", "de", "fr"],
+    "default_lang": "en"
+  }
+}
 ```
 
 ## Next Steps for Full Implementation
@@ -125,9 +128,11 @@ To test the current implementation:
 
 The implementation consists of:
 
-- `plugins/multilingual_site.py`: Main multilingual plugin
+- `garten/assemble.py`: Multilingual URL generation, link prefixing, language switcher data
+- `garten/render.py`: Per-language page rendering, root redirect
+- `garten/process.py`: Translation file processing
 - Enhanced templates with language-aware features
 - CSS styling for language switcher
-- Configuration integration in `pelicanconf.py`
+- Configuration in `site.json`
 
-For detailed architecture information, see `ARCHITECTURE.md` sections on "Multilingual Site Architecture".
+For detailed architecture information, see `ARCHITECTURE.md`.

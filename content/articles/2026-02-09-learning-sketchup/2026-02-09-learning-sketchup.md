@@ -5,7 +5,7 @@ Tags: architecture
 image: SketchUp.svg
 ---
 
-I want to learn SketchUp. Here's a curated list of free online resources for beginners.
+I want to learn SketchUp. Here's my list of online resources for beginners.
 
 ## Official Resources
 
@@ -16,11 +16,11 @@ I want to learn SketchUp. Here's a curated list of free online resources for beg
 
 ## Free Courses (Structured Learning)
 
-| Resource                                                                                                        | Format        | Level             | Notes                                                                            |
-| --------------------------------------------------------------------------------------------------------------- | ------------- | ----------------- | -------------------------------------------------------------------------------- |
-| [MasterSketchUp - SketchUp Free for Beginners](https://mastersketchup.com/courses/sketchup-free-for-beginners/) | Video course  | Absolute beginner | Complete browser-based course, no installation needed. Perfect for first-timers. |
-| [LinkedIn Learning - Learning SketchUp Free](https://www.linkedin.com/learning/learning-sketchup-free-17590493) | Video course  | Beginner          | Free with library card in many libraries. Instructor: George Maestri.            |
-| [SketchUp School - Definitive Guide](https://www.sketchupschool.com/sketchup-guide)                             | Written guide | Beginner          | Covers 7 critical concepts self-taught users often miss.                         |
+| Resource                                                                                                        | Format        | Level             | Notes                                                                                               |
+| --------------------------------------------------------------------------------------------------------------- | ------------- | ----------------- | --------------------------------------------------------------------------------------------------- |
+| [MasterSketchUp - SketchUp Free for Beginners](https://mastersketchup.com/courses/sketchup-free-for-beginners/) | Web course    | Absolute beginner | Complete browser-based course, no installation needed. Perfect for first-timers. 2026-02: Did it ✅ |
+| [LinkedIn Learning - Learning SketchUp Free](https://www.linkedin.com/learning/learning-sketchup-free-17590493) | Video course  | Beginner          | Free with library card in many libraries. Instructor: George Maestri.                               |
+| [SketchUp School - Definitive Guide](https://www.sketchupschool.com/sketchup-guide)                             | Written guide | Beginner          | Covers 7 critical concepts self-taught users often miss.                                            |
 
 ## YouTube Channels (Video Tutorials)
 
