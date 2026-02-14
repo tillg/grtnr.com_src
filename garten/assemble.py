@@ -305,26 +305,27 @@ def build_pagination(
         end = start + per_page
         page_articles = articles[start:end]
 
-        # Page 1: index.html  (URL: / or /de/)
-        # Page N: page/N/index.html  (URL: /page/N/ or /de/page/N/)
+        # URLs use clean directory paths (served by index.html inside)
+        # Page 1: URL "de/"         save_as "de/index.html"
+        # Page N: URL "de/page/N/"  save_as "de/page/N/index.html"
         if page_num == 1:
-            url = f"{url_prefix}index.html"
-            save_as = url
+            url = url_prefix if url_prefix else ""
+            save_as = f"{url_prefix}index.html"
         else:
-            url = f"{url_prefix}page/{page_num}/index.html"
-            save_as = url
+            url = f"{url_prefix}page/{page_num}/"
+            save_as = f"{url_prefix}page/{page_num}/index.html"
 
         prev_url = None
         if page_num > 1:
             prev_url = (
-                f"{url_prefix}index.html"
+                (url_prefix if url_prefix else "")
                 if page_num == 2
-                else f"{url_prefix}page/{page_num - 1}/index.html"
+                else f"{url_prefix}page/{page_num - 1}/"
             )
 
         next_url = None
         if page_num < total_pages:
-            next_url = f"{url_prefix}page/{page_num + 1}/index.html"
+            next_url = f"{url_prefix}page/{page_num + 1}/"
 
         pages.append(
             {

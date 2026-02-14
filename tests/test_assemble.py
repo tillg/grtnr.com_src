@@ -243,7 +243,8 @@ class TestBuildPagination:
         pages = build_pagination(articles, per_page=10)
         assert len(pages) == 1
         assert pages[0]["page_num"] == 1
-        assert pages[0]["url"] == "index.html"
+        assert pages[0]["url"] == ""
+        assert pages[0]["save_as"] == "index.html"
         assert pages[0]["has_previous"] is False
         assert pages[0]["has_next"] is False
 
@@ -252,24 +253,27 @@ class TestBuildPagination:
         pages = build_pagination(articles, per_page=10)
         assert len(pages) == 3
 
-        # First page
+        # First page — clean directory URL, file save_as
         assert pages[0]["has_previous"] is False
         assert pages[0]["has_next"] is True
-        assert pages[0]["url"] == "index.html"
-        assert pages[0]["next_url"] == "page/2/index.html"
+        assert pages[0]["url"] == ""
+        assert pages[0]["save_as"] == "index.html"
+        assert pages[0]["next_url"] == "page/2/"
         assert len(pages[0]["articles"]) == 10
 
         # Middle page
         assert pages[1]["has_previous"] is True
         assert pages[1]["has_next"] is True
-        assert pages[1]["url"] == "page/2/index.html"
-        assert pages[1]["previous_url"] == "index.html"
-        assert pages[1]["next_url"] == "page/3/index.html"
+        assert pages[1]["url"] == "page/2/"
+        assert pages[1]["save_as"] == "page/2/index.html"
+        assert pages[1]["previous_url"] == ""
+        assert pages[1]["next_url"] == "page/3/"
 
         # Last page
         assert pages[2]["has_previous"] is True
         assert pages[2]["has_next"] is False
-        assert pages[2]["url"] == "page/3/index.html"
+        assert pages[2]["url"] == "page/3/"
+        assert pages[2]["save_as"] == "page/3/index.html"
         assert len(pages[2]["articles"]) == 5
 
     def test_empty_articles(self):
@@ -578,15 +582,18 @@ class TestBuildPaginationWithPrefix:
     def test_url_prefix(self):
         articles = [_make_article(slug=f"a{i}") for i in range(15)]
         pages = build_pagination(articles, per_page=10, url_prefix="de/")
-        assert pages[0]["url"] == "de/index.html"
-        assert pages[1]["url"] == "de/page/2/index.html"
-        assert pages[0]["next_url"] == "de/page/2/index.html"
-        assert pages[1]["previous_url"] == "de/index.html"
+        assert pages[0]["url"] == "de/"
+        assert pages[0]["save_as"] == "de/index.html"
+        assert pages[1]["url"] == "de/page/2/"
+        assert pages[1]["save_as"] == "de/page/2/index.html"
+        assert pages[0]["next_url"] == "de/page/2/"
+        assert pages[1]["previous_url"] == "de/"
 
     def test_single_page_with_prefix(self):
         articles = [_make_article(slug=f"a{i}") for i in range(5)]
         pages = build_pagination(articles, per_page=10, url_prefix="fr/")
-        assert pages[0]["url"] == "fr/index.html"
+        assert pages[0]["url"] == "fr/"
+        assert pages[0]["save_as"] == "fr/index.html"
 
 
 # ---------------------------------------------------------------------------
@@ -753,7 +760,7 @@ class TestBuildPerLanguageContent:
             manifest, ["en", "de"], "en", cfg
         )
         assert len(per_lang["de"]["pagination"]) == 2
-        assert per_lang["de"]["pagination"][0]["url"] == "de/index.html"
+        assert per_lang["de"]["pagination"][0]["url"] == "de/"
 
 
 # ---------------------------------------------------------------------------
