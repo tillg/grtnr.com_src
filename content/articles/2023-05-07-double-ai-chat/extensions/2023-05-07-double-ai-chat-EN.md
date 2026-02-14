@@ -12,7 +12,7 @@ translate_date: 2026-02-14T10:57:11.707583
 generated_by: simplified-translation-system
 ---
 
-I built myself a multi-AI chat UI and it works!! 😀 [Check it out here](/ai-chat){:target="\_blank"}
+I built myself a multi-AI chat UI and it works!! 😀
 
 ## My To-Do List:
 

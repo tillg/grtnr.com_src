@@ -44,8 +44,6 @@ Pūrnasya Pūrnam Ādāya
 Pūrnamevāvaśisyate
 ```
 
-[Obtenez-le en PDF](/public/om_tryambakam.pdf){:target="\_blank"}
-
 Copié de [ici](https://bodymindlight.com/opening-and-closing-prayers-in-sivananda-yoga)
 
 ![Yogi en position du lotus](yogi-lotus.jpg)

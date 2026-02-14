@@ -16,6 +16,4 @@ generated_by: simplified-translation-system
 
 Pendant ma semaine de vacances, j'ai expérimenté avec [D3 js](https://d3js.org/). J'ai été fasciné par D3 dès la première fois que je l'ai vu, mais je n'avais jamais eu le temps de vraiment l'explorer. Maintenant, je l'ai fait - un petit peu...
 
-Mes données d'exemple étaient le nombre de kilomètres que j'ai parcourus avec ma Vespa à Đà Nẵng au fil du temps. J'ai suivi ces données en prenant une _capture d'écran_ de mon compteur kilométrique de temps en temps. J'ai donc feuilleté ma galerie de photos et cherché des images de mon compteur de vitesse. J'ai saisi les données dans un [fichier texte brut](/assets/playgroundd3/vespa.tsv). Ensuite, j'ai suivi quelques tutoriels et bricolé jusqu'à obtenir une courbe comme je le souhaitais.
-
-Voyez ma page finale [ici](/assets/playgroundd3/sample2.html) et la manière dont j'y suis arrivé [ici](/assets/playgroundd3/index.html).
+Mes données d'exemple étaient le nombre de kilomètres que j'ai parcourus avec ma Vespa à Đà Nẵng au fil du temps. J'ai suivi ces données en prenant une _capture d'écran_ de mon compteur kilométrique de temps en temps. J'ai donc feuilleté ma galerie de photos et cherché des images de mon compteur de vitesse. J'ai saisi les données dans un fichier texte brut. Ensuite, j'ai suivi quelques tutoriels et bricolé jusqu'à obtenir une courbe comme je le souhaitais.

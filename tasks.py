@@ -131,7 +131,7 @@ def check_links(c):
     excludes = " ".join(f"--exclude '{p}'" for p in patterns)
     output_dir = os.path.abspath(CONFIG["deploy_path"])
     result = c.run(
-        f"lychee --root-dir '{output_dir}' --index-files index.html"
+        f"lychee --offline --root-dir '{output_dir}' --index-files index.html"
         f" {excludes} ./output",
         warn=True,
     )

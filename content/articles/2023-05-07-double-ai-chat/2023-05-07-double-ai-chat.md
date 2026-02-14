@@ -5,7 +5,7 @@ excerpt: Double AI Chat
 image: robots.png
 ---
 
-Ich habe mir ein multi-Ai-Chat-UI gebastelt und es funktioniert!! 😀 [Guckst Du hier](/ai-chat){:target="\_blank"}
+Ich habe mir ein multi-Ai-Chat-UI gebastelt und es funktioniert!! 😀
 
 ## Meine To-Do-Liste:
 

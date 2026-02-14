@@ -12,7 +12,7 @@ translate_date: 2026-02-14T10:57:14.758217
 generated_by: simplified-translation-system
 ---
 
-Je me suis fabriqué une interface de chat multi-AI et ça fonctionne !! 😀 [Regardez ici](/ai-chat){:target="\_blank"}
+Je me suis fabriqué une interface de chat multi-AI et ça fonctionne !! 😀
 
 ## Ma liste de tâches :
 

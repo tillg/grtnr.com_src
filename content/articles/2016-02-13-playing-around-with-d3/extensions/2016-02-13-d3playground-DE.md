@@ -16,6 +16,4 @@ generated_by: simplified-translation-system
 
 Während meiner Urlaubswoche habe ich mit [D3 js](https://d3js.org/) herumgespielt. Ich war von D3 fasziniert, seit ich es das erste Mal gesehen habe, aber ich hatte nie Zeit, wirklich damit zu experimentieren. Jetzt habe ich es getan - ein bisschen...
 
-Meine Beispieldaten waren die Anzahl der Kilometer, die ich mit meiner Vespa in Đà Nẵng über die Zeit gefahren bin. Ich habe diese Daten verfolgt, indem ich von Zeit zu Zeit einen _Screenshot_ meines Kilometerzählers gemacht habe. Also habe ich einfach meine Fotogalerie durchgeblättert und nach Bildern meines Tachometers gesucht. Die Daten habe ich in eine [einfache Textdatei](/assets/playgroundd3/vespa.tsv) eingetragen. Dann folgte ich einigen Tutorials und bastelte herum, bis ich eine Kurve hatte, die mir gefiel.
-
-Sehen Sie meine finale Seite [hier](/assets/playgroundd3/sample2.html) und den Weg, wie ich dorthin gelangt bin, [hier](/assets/playgroundd3/index.html).
+Meine Beispieldaten waren die Anzahl der Kilometer, die ich mit meiner Vespa in Đà Nẵng über die Zeit gefahren bin. Ich habe diese Daten verfolgt, indem ich von Zeit zu Zeit einen _Screenshot_ meines Kilometerzählers gemacht habe. Also habe ich einfach meine Fotogalerie durchgeblättert und nach Bildern meines Tachometers gesucht. Die Daten habe ich in eine einfache Textdatei eingetragen. Dann folgte ich einigen Tutorials und bastelte herum, bis ich eine Kurve hatte, die mir gefiel.
