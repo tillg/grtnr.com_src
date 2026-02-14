@@ -6,9 +6,9 @@ image: robots.png
 title: Double Ai&nbsp;Chat
 translation: en
 source_language: de
-source_hash: 05e8d75b29759b82a616bb9fd2b080fd8d51f2bd5407c3ecb12645d7bbb59502
+source_hash: d564a6e70cdbd15f4c857a696048fa480bbaafffe3324076a10234b51a9a2503
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-14T10:57:11.707583
+translate_date: 2026-02-14T11:40:07.597556
 generated_by: simplified-translation-system
 ---
 
