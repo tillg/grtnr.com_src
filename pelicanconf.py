@@ -27,12 +27,12 @@ THEME = "pelicanyan"
 PATH = "content"
 ARTICLE_PATHS = ["articles"]
 PAGE_PATHS = ["pages"]
-PAGE_EXCLUDES = ["extensions", "**/extensions", "**/extensions/**"]
+PAGE_EXCLUDES = ["extensions", "**/extensions", "**/extensions/**", "attachments", "**/attachments", "**/attachments/**"]
 STATIC_PATHS = ["static"]
-ARTICLE_EXCLUDES = ["recipes", "extensions", "**/extensions", "**/extensions/**"]
+ARTICLE_EXCLUDES = ["recipes", "extensions", "**/extensions", "**/extensions/**", "attachments", "**/attachments", "**/attachments/**"]
 
 # Additional ignore patterns to prevent extensions directories from being processed
-IGNORE_FILES = [".#*", "extensions/*", "**/extensions/**", "**extensions**"]
+IGNORE_FILES = [".#*", "extensions/*", "**/extensions/**", "**extensions**", "attachments/*", "**/attachments/**", "**attachments**"]
 
 # Add static files mapping
 EXTRA_PATH_METADATA = {

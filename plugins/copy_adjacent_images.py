@@ -112,6 +112,16 @@ def copy_adjacent_images(generator, item):
             shutil.copy2(src, dst)
             copied_images.append(fname)
 
+    # Copy all files from attachments/ subdirectory
+    attachments_dir = os.path.join(source_dir, "attachments")
+    if os.path.isdir(attachments_dir):
+        for fname in os.listdir(attachments_dir):
+            src = os.path.join(attachments_dir, fname)
+            if os.path.isfile(src):
+                dst = os.path.join(output_path, fname)
+                shutil.copy2(src, dst)
+                copied_images.append(fname)
+
     return copied_images
 
 
