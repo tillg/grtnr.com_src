@@ -444,10 +444,13 @@ class MultilingualContentProcessor:
         self, original_article: Article, translation_content: str, lang: str
     ) -> Article:
         """Create a translated article object"""
-        # For now, create a copy of the original article with language-specific properties
-        # This avoids the complex Article constructor issues
+        # Create a copy of the original article with language-specific properties
+        # Prefix internal links in the content with the language code
+        prefixed_content = self._prefix_internal_links(
+            original_article._content, lang
+        )
         translated_article = type(original_article)(
-            original_article._content,
+            prefixed_content,
             metadata=original_article.metadata.copy(),
             source_path=original_article.source_path,
             context=original_article._context,
@@ -498,6 +501,9 @@ class MultilingualContentProcessor:
 
         # Process the markdown content to HTML using Pelican's markdown processor
         processed_content = self._process_markdown_content(content)
+
+        # Prefix internal links with language code
+        processed_content = self._prefix_internal_links(processed_content, lang)
         logger.debug(f"Processed content length: {len(processed_content)} chars")
 
         # Create a new metadata dict with language-specific URL settings
@@ -653,6 +659,9 @@ class MultilingualContentProcessor:
             logger.debug(
                 f"Using original content as fallback for page '{original_page.title}' in {lang}"
             )
+
+        # Prefix internal links with language code
+        processed_content = self._prefix_internal_links(processed_content, lang)
 
         # Build metadata with language-specific paths
         new_metadata = original_page.metadata.copy()
@@ -852,6 +861,34 @@ class MultilingualContentProcessor:
             logger.error(f"Failed to process markdown content: {e}")
             # Fall back to returning the original content if processing fails
             return content
+
+
+    def _prefix_internal_links(self, html_content: str, lang: str) -> str:
+        """Prefix internal content links with language code.
+
+        Rewrites href="/slug/" to href="/de/slug/" for translated pages,
+        while leaving theme assets, static files, and already-prefixed
+        links untouched.
+        """
+        lang_prefixes = "|".join(self.supported_langs)
+        skip_prefixes = ("/theme/", "/static/", "/favicon")
+
+        def replace_href(match):
+            prefix = match.group(1)  # e.g. 'href="'
+            path = match.group(2)  # the URL path
+            suffix = match.group(3)  # closing quote
+
+            # Already has a language prefix
+            if re.match(rf"^/({lang_prefixes})/", path):
+                return match.group(0)
+
+            # Static / theme assets
+            if any(path.startswith(s) for s in skip_prefixes):
+                return match.group(0)
+
+            return f"{prefix}/{lang}{path}{suffix}"
+
+        return re.sub(r'(href=["\'])(/[^"\']*?)(["\'])', replace_href, html_content)
 
 
 class LanguageSwitcher:
@@ -1239,9 +1276,11 @@ class MultilingualSiteGenerator(Generator):
 
         logger.info("Starting multilingual site generation")
 
-        # Process articles and pages
+        # Process articles and pages (including hidden pages)
         articles = self.context.get("articles", [])
-        pages = self.context.get("pages", [])
+        pages = list(self.context.get("pages", []))
+        hidden_pages = list(self.context.get("hidden_pages", []))
+        pages += hidden_pages
 
         logger.info(
             f"Starting to process {len(articles)} articles for multilingual generation"
