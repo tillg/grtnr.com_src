@@ -1,12 +1,6 @@
 # lychee link checker configuration
 # https://github.com/lycheeverse/lychee
 
-# Root directory for resolving root-relative links (e.g., /about -> ./output/about)
-root_dir = "./output"
-
-# When checking local directories, treat /path as /path/index.html
-index_files = ["index.html"]
-
 # Timeout per request in seconds
 timeout = 30
 

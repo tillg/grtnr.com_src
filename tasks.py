@@ -129,7 +129,12 @@ def check_links(c):
     patterns = list(config.get("exclude", []))
     patterns += [".*/output/(de|fr|en)/.*", "^/(de|fr|en)/"]
     excludes = " ".join(f"--exclude '{p}'" for p in patterns)
-    result = c.run(f"lychee {excludes} ./output", warn=True)
+    output_dir = os.path.abspath(CONFIG["deploy_path"])
+    result = c.run(
+        f"lychee --root-dir '{output_dir}' --index-files index.html"
+        f" {excludes} ./output",
+        warn=True,
+    )
     if result.return_code == 0:
         logger.info("Link check completed successfully - no broken links found")
     else:

@@ -96,7 +96,7 @@ jobs:
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --config lychee.toml ./output
+          args: --config lychee.toml --root-dir ${{ github.workspace }}/output --index-files index.html ./output
           fail: true
 
       - name: Show translation statistics
