@@ -1102,6 +1102,19 @@ class MultilingualOutputGenerator:
                             copied_images.append(filename)
                             logger.debug(f"Copied image {filename} to {output_dir}")
 
+            # Copy all files from attachments/ subdirectory
+            attachments_dir = os.path.join(source_dir, "attachments")
+            if os.path.isdir(attachments_dir):
+                for filename in os.listdir(attachments_dir):
+                    src_file = os.path.join(attachments_dir, filename)
+                    if os.path.isfile(src_file):
+                        dst_file = os.path.join(output_dir, filename)
+                        if not os.path.exists(dst_file) or os.path.getmtime(
+                            src_file
+                        ) > os.path.getmtime(dst_file):
+                            shutil.copy2(src_file, dst_file)
+                            copied_images.append(filename)
+
             if copied_images:
                 logger.debug(
                     f"Copied {len(copied_images)} images for translated article {article.title}"
