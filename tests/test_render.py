@@ -313,7 +313,7 @@ class TestRenderIntegration:
         # paginated indexes are under language dirs (e.g. en/index.html)
         assert (rendered_output / "index.html").exists()
         assert (rendered_output / "en" / "index.html").exists()
-        assert (rendered_output / "en" / "index2.html").exists()
+        assert (rendered_output / "en" / "page" / "2" / "index.html").exists()
 
     def test_article_pages_created(self, rendered_output):
         assert (

@@ -256,20 +256,20 @@ class TestBuildPagination:
         assert pages[0]["has_previous"] is False
         assert pages[0]["has_next"] is True
         assert pages[0]["url"] == "index.html"
-        assert pages[0]["next_url"] == "index2.html"
+        assert pages[0]["next_url"] == "page/2/index.html"
         assert len(pages[0]["articles"]) == 10
 
         # Middle page
         assert pages[1]["has_previous"] is True
         assert pages[1]["has_next"] is True
-        assert pages[1]["url"] == "index2.html"
+        assert pages[1]["url"] == "page/2/index.html"
         assert pages[1]["previous_url"] == "index.html"
-        assert pages[1]["next_url"] == "index3.html"
+        assert pages[1]["next_url"] == "page/3/index.html"
 
         # Last page
         assert pages[2]["has_previous"] is True
         assert pages[2]["has_next"] is False
-        assert pages[2]["url"] == "index3.html"
+        assert pages[2]["url"] == "page/3/index.html"
         assert len(pages[2]["articles"]) == 5
 
     def test_empty_articles(self):
@@ -579,8 +579,8 @@ class TestBuildPaginationWithPrefix:
         articles = [_make_article(slug=f"a{i}") for i in range(15)]
         pages = build_pagination(articles, per_page=10, url_prefix="de/")
         assert pages[0]["url"] == "de/index.html"
-        assert pages[1]["url"] == "de/index2.html"
-        assert pages[0]["next_url"] == "de/index2.html"
+        assert pages[1]["url"] == "de/page/2/index.html"
+        assert pages[0]["next_url"] == "de/page/2/index.html"
         assert pages[1]["previous_url"] == "de/index.html"
 
     def test_single_page_with_prefix(self):
