@@ -309,11 +309,14 @@ class MultilingualContentProcessor:
                         # Fall back to original if translation fails
                         processed_articles[lang].append(article)
                 else:
-                    # Add original article as fallback if no translation available
+                    # Fallback: use original content at language path
                     logger.debug(
                         f"No translation for '{article.title}' in '{lang}', using original"
                     )
-                    processed_articles[lang].append(article)
+                    fallback_article = self._create_translated_article(
+                        article, "", lang
+                    )
+                    processed_articles[lang].append(fallback_article)
 
         return processed_articles
 
@@ -336,12 +339,21 @@ class MultilingualContentProcessor:
 
             # Process translations
             translations = self._find_translations(page)
-            for lang, translated_content in translations.items():
-                if lang != original_lang:
+
+            # For each supported language, add either the translation or the original as fallback
+            for lang in self.supported_langs:
+                if lang == original_lang:
+                    continue  # Already added above
+
+                if lang in translations:
                     translated_page = self._create_translated_page(
-                        page, translated_content, lang
+                        page, translations[lang], lang
                     )
                     processed_pages[lang].append(translated_page)
+                else:
+                    # Fallback: use original content at language path
+                    fallback_page = self._create_translated_page(page, "", lang)
+                    processed_pages[lang].append(fallback_page)
 
         return processed_pages
 
@@ -459,7 +471,7 @@ class MultilingualContentProcessor:
         # Set language-specific attributes
         translated_article.lang = lang
         translated_article.original_article = original_article
-        translated_article.multilingual_urls = original_article.multilingual_urls
+        translated_article.multilingual_urls = {}
 
         # Override metadata to include language-specific URLs
         translated_article.metadata = translated_article.metadata.copy()
@@ -651,7 +663,7 @@ class MultilingualContentProcessor:
         # Set language-specific attributes
         translated_page.lang = lang
         translated_page.original_page = original_page
-        translated_page.multilingual_urls = original_page.multilingual_urls
+        translated_page.multilingual_urls = {}
 
         # Override metadata to include language-specific URLs
         translated_page.metadata = translated_page.metadata.copy()
@@ -1050,6 +1062,24 @@ class MultilingualOutputGenerator:
             override_output=self.output_path,
         )
 
+    def generate_language_tags_page(
+        self, writer, lang: str, context: Dict, template_getter
+    ):
+        """Generate tags page for a specific language"""
+        tags_save_as = f"{lang}/tags/index.html"
+        tags_context = context.copy()
+
+        try:
+            writer.write_file(
+                tags_save_as,
+                template_getter("tags"),
+                tags_context,
+                override_output=self.output_path,
+            )
+            logger.debug(f"Generated tags page: {tags_save_as}")
+        except Exception as e:
+            logger.warning(f"Failed to generate tags page for {lang}: {e}")
+
     def generate_root_page_with_default_language(
         self, writer, context: Dict, articles: List[Article], template_getter
     ):
@@ -1254,6 +1284,11 @@ class MultilingualSiteGenerator(Generator):
             writer, lang, articles, lang_context, self.get_template
         )
 
+        # Generate language-specific tags page
+        self.output_generator.generate_language_tags_page(
+            writer, lang, lang_context, self.get_template
+        )
+
 
 def get_generators(pelican_object):
     """Register the multilingual site generator"""
@@ -1277,29 +1312,37 @@ def enhance_content_with_multilingual_data(content_generator):
         f"Enhancing content with multilingual data for languages: {supported_langs}"
     )
 
-    # Simple language switcher that generates basic links
-    def generate_simple_language_links(content_url, current_lang):
+    lang_names = {
+        "en": "English",
+        "de": "Deutsch",
+        "fr": "Français",
+        "es": "Español",
+        "it": "Italiano",
+    }
+
+    def generate_language_links_for_content(content):
+        """Generate language links for all supported languages.
+
+        Since all language versions always exist (either translated or
+        fallback copies of the original), we always generate links for
+        every supported language except the default one.
+        """
+        content_url = getattr(content, "url", "")
         links = []
         for lang in supported_langs:
-            if lang != current_lang:
-                # Simple URL replacement - this is a basic implementation
-                if content_url.startswith("/"):
-                    lang_url = f"/{lang}{content_url}"
-                else:
-                    lang_url = f"/{lang}/{content_url}"
-                links.append(
-                    {
-                        "code": lang,
-                        "name": {
-                            "en": "English",
-                            "de": "Deutsch",
-                            "fr": "Français",
-                            "es": "Español",
-                            "it": "Italiano",
-                        }.get(lang, lang.upper()),
-                        "url": lang_url,
-                    }
-                )
+            if lang == default_lang:
+                continue  # Skip default language (we're viewing it)
+            if content_url.startswith("/"):
+                lang_url = f"/{lang}{content_url}"
+            else:
+                lang_url = f"/{lang}/{content_url}"
+            links.append(
+                {
+                    "code": lang,
+                    "name": lang_names.get(lang, lang.upper()),
+                    "url": lang_url,
+                }
+            )
         return links
 
     # Process articles
@@ -1307,8 +1350,8 @@ def enhance_content_with_multilingual_data(content_generator):
         for article in content_generator.articles:
             try:
                 article.multilingual_urls = {}
-                article.language_links = generate_simple_language_links(
-                    getattr(article, "url", ""), default_lang
+                article.language_links = generate_language_links_for_content(
+                    article
                 )
                 # Add localized date if not already set
                 if (
@@ -1332,9 +1375,7 @@ def enhance_content_with_multilingual_data(content_generator):
         for page in content_generator.pages:
             try:
                 page.multilingual_urls = {}
-                page.language_links = generate_simple_language_links(
-                    getattr(page, "url", ""), default_lang
-                )
+                page.language_links = generate_language_links_for_content(page)
                 logger.debug(f"Enhanced page: {page.title}")
             except Exception as e:
                 logger.warning(

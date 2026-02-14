@@ -2,8 +2,6 @@ import os
 import shlex
 import shutil
 import sys
-import tomllib
-
 from dotenv import load_dotenv
 from invoke import task
 from invoke.main import program
@@ -122,17 +120,11 @@ def preview(c):
 def check_links(c):
     """Check links in the generated site using lychee"""
     logger.info("Running lychee on output directory...")
-    # Read base excludes from lychee.toml (single source of truth),
-    # then add local-only patterns for translation paths that don't exist locally.
-    with open("lychee.toml", "rb") as f:
-        config = tomllib.load(f)
-    patterns = list(config.get("exclude", []))
-    patterns += [".*/output/(de|fr|en)/.*", "^/(de|fr|en)/"]
-    excludes = " ".join(f"--exclude '{p}'" for p in patterns)
     output_dir = os.path.abspath(CONFIG["deploy_path"])
     result = c.run(
-        f"lychee --offline --root-dir '{output_dir}' --index-files index.html"
-        f" {excludes} ./output",
+        f"lychee --config lychee.toml --offline"
+        f" --root-dir '{output_dir}' --index-files index.html"
+        f" ./output",
         warn=True,
     )
     if result.return_code == 0:

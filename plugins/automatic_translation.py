@@ -302,8 +302,46 @@ def translate_all_articles(article_generator):
         logger.error(f"Failed to run translation process: {e}")
 
 
+def translate_all_pages(page_generator):
+    """Translate all pages after they're loaded"""
+
+    if not page_generator.settings.get("TRANSLATION_ENABLED", False):
+        return
+
+    logger.info(
+        f"Translation plugin running with {len(page_generator.pages)} pages"
+    )
+
+    try:
+        translation_generator = TranslationGenerator(
+            context=page_generator.context,
+            settings=page_generator.settings,
+            path=page_generator.path,
+            theme=page_generator.theme,
+            output_path=page_generator.output_path,
+        )
+
+        if translation_generator.config:
+            # Set pages in context for translation
+            translation_generator.context["pages"] = page_generator.pages
+            # Clear articles so only pages are processed
+            original_articles = translation_generator.context.get("articles", [])
+            translation_generator.context["articles"] = []
+            logger.info(
+                f"Using all {len(page_generator.pages)} pages for translation"
+            )
+
+            translation_generator.generate_output(None)
+
+            # Restore articles
+            translation_generator.context["articles"] = original_articles
+
+    except Exception as e:
+        logger.error(f"Failed to run page translation process: {e}")
+
+
 def register():
     """Register plugin with Pelican"""
     signals.initialized.connect(initialize_translation_service)
-    # Register to run after articles are loaded but before filtering
     signals.article_generator_finalized.connect(translate_all_articles)
+    signals.page_generator_finalized.connect(translate_all_pages)

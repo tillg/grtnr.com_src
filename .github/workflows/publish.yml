@@ -97,14 +97,11 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           # Offline: only check internal file links (external links checked by daily cron)
-          # Exclude translation paths for pages that don't get translated (about, impressum, tags)
           args: >-
             --config lychee.toml
             --offline
             --root-dir ${{ github.workspace }}/output
             --index-files index.html
-            --exclude '.*/output/(de|fr|en)/.*'
-            --exclude '^/(de|fr|en)/'
             ./output
           fail: true
 
