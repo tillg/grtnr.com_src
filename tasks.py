@@ -299,6 +299,18 @@ def clean_translations(c):
         sys.exit(1)
 
 
+@task
+def discover(c):
+    """Run garten Phase 1: content discovery"""
+    from garten.config import load_config
+    from garten.discover import discover as run_discover
+    from garten.discover import write_manifest
+
+    cfg = load_config("site.json")
+    manifest = run_discover(cfg)
+    write_manifest(manifest, cfg["build_path"])
+
+
 def prepare_and_run_pelican(cmd):
     # allows to pass-through args to pelican
     remainder = getattr(program.core, "remainder", None) or ""

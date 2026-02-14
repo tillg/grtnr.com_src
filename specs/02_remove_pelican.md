@@ -428,6 +428,33 @@ Build `garten` alongside Pelican in increments, using HTML diff to verify correc
 
 Build content discovery that produces a JSON manifest of all content (articles, pages, recipes) with metadata. Write a comparison test that runs both Pelican and garten's Discover phase and asserts they find the same content with the same metadata.
 
+#### Increment 1 — Implementation Notes
+
+**Status: DONE** — 41 tests passing, `inv discover` produces `.build/discover/manifest.json`.
+
+**Decisions taken during implementation:**
+
+1. **Date fallback chain:** frontmatter `date:` → directory name date prefix → file mtime. Pelican used `DEFAULT_DATE = "fs"` (filesystem). Garten prefers the directory name date prefix (more reliable across git clones where mtime isn't preserved).
+2. **YYYY-MM directory prefix** (e.g., `2025-07-swiftui-cheatsheet`) is accepted alongside YYYY-MM-DD. The day defaults to 1.
+3. **Markdown filename ≠ directory name** in 5 articles (e.g., `2012-04-10-indien-tag1/` contains `2012-04-10_indien_tag_1.md`). The discover phase finds any `.md` file in the directory, not just one matching the dir name.
+4. **`type: post`** field found in some older articles is ignored — content type is determined by directory path (articles/, pages/, recipes/).
+5. **`summary` and `excerpt`** both map to the `excerpt` field in the dataclass.
+6. **Slug derivation for articles:** derived from the markdown filename (not directory name), with date prefix stripped, then normalized. This matches Pelican's `SLUGIFY_SOURCE = "title"` behaviour for articles that have titles, and falls back to filename-based slugs for those that don't.
+7. **Frontmatter parser** is a simple `key: value` line parser (not full YAML). This matches the content's actual format and avoids YAML library dependencies. Keys are lowercased for case-insensitive matching (`Tags:` → `tags`).
+8. **Comparison test** compares garten's `normalize_slug()` against Pelican's plugin implementation to verify slug compatibility.
+9. **Tags are lowercased** during parsing (e.g., `Tags: Tech, AI` → `["tech", "ai"]`).
+10. **`updates` field** is parsed from frontmatter but ignored for now (stored in the Article dataclass for future use).
+
+**Files created:**
+
+- `garten/__init__.py`, `garten/utils.py`, `garten/models.py`, `garten/config.py`, `garten/discover.py`
+- `site.json` — config file replacing `pelicanconf.py`
+- `tests/test_discover.py` — 41 tests (unit + integration + Pelican comparison)
+- Updated `tasks.py` with `inv discover` task
+- Updated `.gitignore` with `.build/`
+
+**Content inventory:** 56 articles, 3 pages, 35 recipes.
+
 ### Increment 2: Process
 
 Build markdown rendering + image copying + summaries. For each piece of content, diff the HTML output against Pelican's. This validates the core rendering pipeline.

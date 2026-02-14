@@ -10,6 +10,7 @@ Thumbs.db
 output
 test_output
 .lychee.cache
+.build/
 
 # Cache files (keep translation cache, ignore others)
 cache/*

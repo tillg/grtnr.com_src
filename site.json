@@ -1,0 +1,27 @@
+{
+  "sitename": "grtnr.com",
+  "author": "Till Gartner",
+  "siteurl": "https://grtnr.com",
+  "description": "Stuff that keeps me busy, like family, coding, math, mountains and more.",
+  "timezone": "Europe/Rome",
+  "default_lang": "en",
+  "theme_path": "pelicanyan",
+  "content_path": "content",
+  "output_path": "output",
+  "article_paths": ["articles"],
+  "page_paths": ["pages"],
+  "recipe_paths": ["recipes"],
+  "default_pagination": 10,
+  "google_analytics": "G-H8M7YDCSD4",
+  "translation": {
+    "enabled": false,
+    "target_languages": ["de", "fr"],
+    "exclude_categories": ["recipes"],
+    "exclude_paths": ["/pages/impressum/"]
+  },
+  "multilingual": {
+    "enabled": true,
+    "languages": ["en", "de", "fr"],
+    "default_lang": "en"
+  }
+}
