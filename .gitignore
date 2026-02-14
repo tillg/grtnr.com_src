@@ -11,6 +11,7 @@ output
 test_output
 .lychee.cache
 .build/
+.playwright-mcp/
 
 # Cache files (keep translation cache, ignore others)
 cache/*

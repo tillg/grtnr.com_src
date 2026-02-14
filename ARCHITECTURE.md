@@ -59,7 +59,7 @@ grtnr.com_src/
 ├── content/              # All website content (articles, pages, recipes)
 ├── extensions/           # Translation service package
 │   └── translation_service/
-├── pelicanyan/           # Custom theme (templates, CSS, JS)
+├── theme/pelicanyan/           # Custom theme (templates, CSS, JS)
 ├── tests/                # Test suites (254+ tests)
 ├── output/               # Generated static site files
 ├── .build/               # Intermediate pipeline artifacts (gitignored)
@@ -229,7 +229,7 @@ The garten pipeline processes content through 4 phases, each an independent Pyth
 
 ### pelicanyan Theme Structure
 ```text
-pelicanyan/
+theme/pelicanyan/
 ├── templates/
 │   ├── base.html              # Core layout with sidebar, analytics
 │   ├── index.html             # Homepage with article pagination
@@ -435,8 +435,8 @@ logger.error("Failed to process")       # Red
 5. Add tests in `tests/test_<phase>.py`
 
 ### Theme Customization
-1. Modify templates in `pelicanyan/templates/`
-2. Update CSS in `pelicanyan/static/css/`
+1. Modify templates in `theme/pelicanyan/templates/`
+2. Update CSS in `theme/pelicanyan/static/css/`
 3. Test responsive design across devices
 4. Maintain accessibility standards
 

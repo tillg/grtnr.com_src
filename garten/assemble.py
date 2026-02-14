@@ -358,7 +358,7 @@ def filter_articles_for_index(
     """Filter articles for the homepage index.
 
     If *categories_in_index* is empty or None, all published articles
-    are included (matching Pelican's ``CATEGORIES_IN_INDEX = []``).
+    are included (configured via ``categories_in_index`` in site.json).
     """
     result = [a for a in articles if a.get("status") != "hidden"]
     if categories_in_index:

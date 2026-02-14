@@ -32,7 +32,7 @@ IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".svg", ".pdf"}
 
 
 def _create_markdown_processor() -> markdown.Markdown:
-    """Create a Python-Markdown instance with the same extensions as Pelican.
+    """Create a Python-Markdown instance with standard extensions.
 
     A new instance is created per document because Python-Markdown
     maintains internal state between calls.
@@ -95,8 +95,7 @@ def find_adjacent_files(content_dir: Path) -> list[str]:
 def fix_image_urls(html: str, slug: str, image_names: list[str]) -> str:
     """Fix relative image/file URLs to absolute slug-based paths.
 
-    Matches the Pelican copy_adjacent_images plugin behaviour: URLs are
-    rewritten to ``/{slug}/{filename}``.
+    Rewrites relative URLs to ``/{slug}/{filename}``.
     """
     for img_name in image_names:
         escaped = re.escape(img_name)
@@ -137,7 +136,7 @@ def fix_image_urls(html: str, slug: str, image_names: list[str]) -> str:
 def generate_summary(excerpt: str | None) -> str:
     """Generate a summary string from an excerpt.
 
-    Strips surrounding quotes (Pelican compat).
+    Strips surrounding quotes from the excerpt value.
     """
     if not excerpt:
         return ""
@@ -205,7 +204,7 @@ def _process_item(item: dict) -> None:
     # 3.4 External links
     html = process_external_links(html)
 
-    # Typogrify (matches Pelican's TYPOGRIFY = True)
+    # Typogrify (smart quotes, proper dashes)
     html = typogrify(html)
 
     item["content"] = html

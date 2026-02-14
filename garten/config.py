@@ -69,7 +69,7 @@ def load_config(site_json: Path | str = "site.json") -> dict:
     cfg["base_path"] = base
     cfg["content_path"] = base / cfg.get("content_path", "content")
     cfg["output_path"] = base / cfg.get("output_path", "output")
-    cfg["theme_path"] = base / cfg.get("theme_path", "pelicanyan")
+    cfg["theme_path"] = base / cfg.get("theme_path", "theme/pelicanyan")
     cfg["build_path"] = base / ".build"
 
     logger.info(f"Loaded config from {site_json}")

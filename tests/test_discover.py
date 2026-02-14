@@ -5,7 +5,7 @@ Two kinds of tests:
 1. **Unit tests** for individual helpers (frontmatter parsing, title
    generation, slug normalisation, date parsing).
 2. **Comparison test** that runs garten's Discover phase on the real
-   content directory and asserts the results match what Pelican produces.
+   content directory and asserts the results are correct.
 """
 
 from __future__ import annotations

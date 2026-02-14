@@ -130,7 +130,7 @@ def normalize_slug(text: str) -> str:
     return text
 
 
-# Pelican's default SLUG_REGEX_SUBSTITUTIONS
+# Default slug regex substitutions
 _SLUG_REGEX_SUBS = [
     (r"[^\w\s-]", ""),
     (r"(?u)\A\s*", ""),
@@ -142,10 +142,9 @@ _SLUG_REGEX_SUBS = [
 def slugify(text: str) -> str:
     """Generate a URL slug from a title string.
 
-    Replicates Pelican's ``slugify(value, regex_subs=...)`` behaviour:
     Unidecode → regex substitutions → lowercase.
 
-    Used for articles and pages where ``SLUGIFY_SOURCE = "title"``.
+    Used for articles and pages where slugs are derived from titles.
     """
     if not text:
         return text
@@ -212,8 +211,7 @@ def localize_date(dt: Union[datetime, str, None], lang: str = "en") -> str:
     """Format a date for display in the given language.
 
     Accepts a ``datetime`` object or an ISO date string.  Returns a
-    locale-appropriate display string matching the Pelican multilingual
-    plugin format:
+    locale-appropriate display string:
 
     - English: ``February 14, 2026``  (used for articles)
     - German:  ``Mi 14. Feb 2026``

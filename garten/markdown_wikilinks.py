@@ -1,7 +1,6 @@
 """Custom markdown extension for WikiLinks with slug normalization.
 
-Ported from plugins/markdown_wikilinks.py to use garten.utils.normalize_slug
-instead of the Pelican plugin's version.
+Uses garten.utils.normalize_slug for consistent URL generation.
 
 Registered as a Python-Markdown preprocessor at priority 175 (high priority,
 runs before other preprocessors).

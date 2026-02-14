@@ -167,7 +167,7 @@ def _make_pagination_context(page_data: dict) -> dict:
     """Build pagination template variables from a page data dict.
 
     Returns dict with ``articles_page``, ``articles_previous_page``,
-    ``articles_next_page`` — matching Pelican's template variables.
+    ``articles_next_page`` used by the index template.
     """
     has_prev = page_data["has_previous"]
     has_next = page_data["has_next"]
@@ -218,7 +218,7 @@ def create_jinja_env(theme_path: Path) -> Environment:
 def build_global_context(cfg: dict) -> dict:
     """Build the global template context shared by all templates.
 
-    Matches Pelican's template variable names for compatibility.
+    Provides variables like SITENAME, SITEURL, LINKS used by templates.
     """
     siteurl = cfg.get("siteurl", "")
     # For local dev, SITEURL should be empty (relative URLs)
@@ -512,7 +512,7 @@ def render_authors_page(
     out_file.parent.mkdir(parents=True, exist_ok=True)
     out_file.write_text(html, encoding="utf-8")
 
-    # Individual author page (uses index template like Pelican)
+    # Individual author page (uses index template)
     idx_template = env.get_template("index.html")
     pag_data = {
         "articles": articles,

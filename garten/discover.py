@@ -128,7 +128,7 @@ def _build_article(md_path: Path, content_root: Path) -> Article:
     title = meta.get("title", "")
     if not title:
         title = title_from_dirname(content_dir.name)
-    # Strip surrounding quotes (Pelican compat)
+    # Strip surrounding quotes
     if title.startswith('"') and title.endswith('"'):
         title = title[1:-1]
 
@@ -136,7 +136,7 @@ def _build_article(md_path: Path, content_root: Path) -> Article:
     rel = md_path.relative_to(content_root)
     category = rel.parts[0] if len(rel.parts) > 1 else ""
 
-    # Slug: derived from title (matching Pelican's SLUGIFY_SOURCE = "title")
+    # Slug: derived from title
     slug = slugify(title)
 
     # "summary" and "excerpt" map to the same field

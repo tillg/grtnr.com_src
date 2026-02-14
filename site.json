@@ -5,7 +5,7 @@
   "description": "Stuff that keeps me busy, like family, coding, math, mountains and more.",
   "timezone": "Europe/Rome",
   "default_lang": "en",
-  "theme_path": "pelicanyan",
+  "theme_path": "theme/pelicanyan",
   "content_path": "content",
   "output_path": "output",
   "article_paths": ["articles"],

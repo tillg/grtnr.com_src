@@ -8,30 +8,33 @@ This guide covers how to deploy the site with automatic translation enabled.
 
 Go to your repository **Settings** → **Secrets and variables** → **Actions** and add:
 
-| Secret Name | Description | Example |
-|-------------|-------------|---------|
-| `OPENAI_API_KEY` | OpenAI API key for translation service | `sk-...` |
-| `DEPLOYMENT_TOKEN` | GitHub token for deployment | `ghp_...` |
+| Secret Name        | Description                          | Example  |
+| ------------------ | ------------------------------------ | -------- |
+| `OPENAI_API_KEY`   | OpenAI API key for translation service | `sk-...`  |
+| `DEPLOYMENT_TOKEN` | GitHub token for deployment          | `ghp_...` |
 
 ### 2. Environment Configuration
 
 The workflow automatically configures translation based on the branch:
 
 #### Production (main branch)
+
 - **Site**: grtnr.com
-- **Translation**: Full (German, French, Spanish)
-- **Model**: GPT-4
+- **Translation**: Full (English, German, French)
+- **Model**: GPT-4o
 - **Excludes**: recipes only
 
-#### Staging (feature branches)  
+#### Staging (feature branches)
+
 - **Site**: test.grtnr.com
 - **Translation**: Limited (German only)
-- **Model**: GPT-4
+- **Model**: GPT-4o
 - **Excludes**: recipes, drafts
 
 ### 3. Translation Cache
 
 The workflow caches translations to avoid re-translating unchanged content:
+
 - Cache key includes content hash and branch
 - Reduces API costs and build time
 - Automatically invalidates when content changes
@@ -41,6 +44,7 @@ The workflow caches translations to avoid re-translating unchanged content:
 ### 1. Environment Setup
 
 Create a `.env` file:
+
 ```bash
 cp .env.example .env
 # Edit .env and add your OpenAI API key
@@ -49,55 +53,57 @@ cp .env.example .env
 ### 2. Enable Translation
 
 Set environment variables or update `.env`:
+
 ```bash
-TRANSLATION_ENABLED=true
+GARTEN_TRANSLATION__ENABLED=true
 TRANSLATION_TARGET_LANGUAGES=de,fr
-TRANSLATION_MODEL=gpt-4
+TRANSLATION_MODEL=gpt-4o
 ```
 
-### 3. Test Translation
+### 3. Build and Test
 
 ```bash
-# Run quick test
-python test_api.py
+# Full build with link checking
+inv build
 
-# Test with sample files  
-python test_sample_files.py
+# Run test suite
+python -m pytest tests/ -q
 
-# Full test suite
-cd extensions/tests && python run_tests.py --all
+# Development server with auto-reload
+inv livereload
 ```
 
 ## Translation Workflow
 
 ### Content Processing
 
-1. **Content Discovery**: Scans all articles and pages
+1. **Content Discovery**: Scans all articles and pages during discover phase
 2. **Language Detection**: Automatically detects source language
-3. **Cache Check**: Checks for existing translations
+3. **Cache Check**: Checks for existing translations (hash-based)
 4. **Translation**: Uses OpenAI API for new/changed content
 5. **File Generation**: Creates translation files in `extensions/` directories
 
 ### Generated Structure
 
-```
+```text
 content/articles/2025-01-01-example/
 ├── 2025-01-01-example.md          # Original
 └── extensions/
+    ├── 2025-01-01-example-EN.md   # English (if original is not English)
     ├── 2025-01-01-example-DE.md   # German
-    ├── 2025-01-01-example-FR.md   # French  
-    └── 2025-01-01-example-ES.md   # Spanish
+    └── 2025-01-01-example-FR.md   # French
 ```
 
 ### Translation Metadata
 
 Each translation includes metadata:
+
 ```yaml
 ---
 Translation: de
 Source-Language: en
 Source-File: /path/to/original.md
-Generated-By: automatic-translation-plugin
+Source-Hash: abc123def456
 Generated-Date: 2025-01-15T10:30:00
 ---
 ```
@@ -106,7 +112,7 @@ Generated-Date: 2025-01-15T10:30:00
 
 ### API Usage Optimization
 
-- **Caching**: Avoids re-translating unchanged content
+- **Caching**: Avoids re-translating unchanged content (hash-based)
 - **Staging Limits**: Test environment uses fewer languages
 - **Content Exclusion**: Skip categories/paths that don't need translation
 - **Rate Limiting**: Built-in delays between API calls
@@ -114,18 +120,19 @@ Generated-Date: 2025-01-15T10:30:00
 ### Monitoring Usage
 
 Check translation statistics in GitHub Actions logs:
-```
-📊 Translation Statistics:
+
+```text
+Translation Statistics:
 Cache directory contents: 25 files
 Generated translations: 120 files
 ```
 
 ### Cost Estimates
 
-Approximate costs for GPT-4:
+Approximate costs for GPT-4o:
+
 - **Article** (~2000 chars): $0.03-0.06 per language
 - **Page** (~1000 chars): $0.015-0.03 per language
-- **Recipe** (~1500 chars): $0.02-0.045 per language
 
 Cache hit rate typically 80-90% after initial translation.
 
@@ -143,13 +150,12 @@ Cache hit rate typically 80-90% after initial translation.
    - Check workflow logs for specific errors
 
 3. **Cache Issues**
-   - Clear cache: Delete `cache/translations/` directory
-   - Force rebuild: Change cache key in workflow
+   - Clear translations: `inv clean-translations`
+   - Clear cache only: `inv clean-translations-cache`
 
 4. **Quality Issues**
-   - Run manual quality tests locally
-   - Adjust prompts in `translation_service/prompts.py`
-   - Review generated translations
+   - Review generated translations in `extensions/` directories
+   - Adjust prompts in `extensions/translation_service/`
 
 ### Debug Commands
 
@@ -166,7 +172,7 @@ print(f'Config: {config}')
 # Health check
 python -c "
 import sys; sys.path.insert(0, 'extensions')
-from translation_service import TranslationService, TranslationConfig  
+from translation_service import TranslationService, TranslationConfig
 from dotenv import load_dotenv; load_dotenv()
 config = TranslationConfig.from_environment()
 service = TranslationService(config)
@@ -181,21 +187,3 @@ print(service.health_check())
 3. **Access Control**: Limit repository access to trusted collaborators
 4. **Monitoring**: Review API usage regularly
 5. **Rotation**: Rotate API keys periodically
-
-## Performance Tips
-
-1. **Selective Translation**: Use exclusion patterns for unnecessary content
-2. **Branch Strategy**: Use feature branches for testing
-3. **Cache Management**: Monitor cache hit rates
-4. **Content Organization**: Group related content to optimize cache usage
-5. **Model Selection**: Consider gpt-4-turbo for better cost/performance balance
-
-## Future Enhancements
-
-Planned improvements:
-- Batch translation for better efficiency
-- Translation quality scoring
-- Custom terminology dictionaries
-- Multi-model fallback strategy
-- Real-time translation updates
-- Web interface for translation review
