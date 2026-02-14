@@ -11,7 +11,7 @@ translate_date: 2026-02-14T12:05:18.864670
 generated_by: simplified-translation-system
 ---
 
-Ceci est le [[jardin numérique]] de Till Gartner. Je suis un homme simple avec des passe-temps simples, comme
+Ceci est le [[digital garden|jardin numérique]] de Till Gartner. Je suis un homme simple avec des passe-temps simples, comme
 
 - Ma **famille** et mes **enfants**
 - Mon entreprise (je suis manager dans une entreprise de logiciels vraiment cool appelée [**mgm technology partners**](https://mgm-tp.com))

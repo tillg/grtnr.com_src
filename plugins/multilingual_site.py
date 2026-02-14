@@ -635,44 +635,55 @@ class MultilingualContentProcessor:
     def _create_translated_page(
         self, original_page: Page, translation_content: str, lang: str
     ) -> Page:
-        """Create a translated page object"""
-        # For now, create a copy of the original page with language-specific properties
-        # This avoids the complex Page constructor issues
+        """Create a translated page object.
+
+        If translation_content is provided, it is parsed and rendered as the
+        page body.  Otherwise the original content is used as a fallback.
+        """
+        # Determine the HTML content to use
+        if translation_content:
+            metadata, body = self._parse_translation_content(translation_content)
+            processed_content = self._process_markdown_content(body)
+            logger.debug(
+                f"Using translated content for page '{original_page.title}' in {lang}"
+            )
+        else:
+            metadata = {}
+            processed_content = original_page._content
+            logger.debug(
+                f"Using original content as fallback for page '{original_page.title}' in {lang}"
+            )
+
+        # Build metadata with language-specific paths
+        new_metadata = original_page.metadata.copy()
+        original_slug = getattr(original_page, "slug", "unknown")
+        new_metadata["save_as"] = f"{lang}/{original_slug}/index.html"
+        new_metadata["url"] = f"{lang}/{original_slug}"
+        new_metadata["lang"] = lang
+
+        # Override title if translated metadata provides one
+        if "title" in metadata:
+            new_metadata["title"] = metadata["title"]
+
         translated_page = type(original_page)(
-            original_page._content,
-            metadata=original_page.metadata.copy(),
+            processed_content,
+            metadata=new_metadata,
             source_path=original_page.source_path,
             context=original_page._context,
         )
 
-        # Copy essential attributes from original (skip read-only properties)
-        skipped_attrs = {"save_as", "url", "filename", "source_path", "_content"}
-        for attr in dir(original_page):
-            if (
-                not attr.startswith("_")
-                and hasattr(original_page, attr)
-                and attr not in skipped_attrs
-            ):
+        # Copy essential attributes from original (skip computed properties)
+        for attr in ["slug", "date", "author"]:
+            if hasattr(original_page, attr):
                 try:
-                    value = getattr(original_page, attr)
-                    if not callable(value):  # Skip methods
-                        setattr(translated_page, attr, value)
-                except (AttributeError, TypeError):
-                    pass  # Skip problematic attributes
+                    setattr(translated_page, attr, getattr(original_page, attr))
+                except AttributeError:
+                    pass
 
         # Set language-specific attributes
         translated_page.lang = lang
         translated_page.original_page = original_page
         translated_page.multilingual_urls = {}
-
-        # Override metadata to include language-specific URLs
-        translated_page.metadata = translated_page.metadata.copy()
-        translated_page.metadata["lang"] = lang
-
-        # Set language-specific save path and URL through metadata
-        original_slug = getattr(translated_page, "slug", "unknown")
-        translated_page.metadata["save_as"] = f"{lang}/{original_slug}/index.html"
-        translated_page.metadata["url"] = f"/{lang}/{original_slug}/"
 
         return translated_page
 
@@ -945,6 +956,9 @@ class MultilingualOutputGenerator:
         if not save_as:
             logger.warning(f"No save_as metadata for page '{page.title}', skipping")
             return
+
+        # Copy images for this language-specific page
+        self._copy_images_for_translated_article(page)
 
         page_context = context.copy()
         page_context["page"] = page

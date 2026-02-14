@@ -11,7 +11,7 @@ translate_date: 2026-02-14T12:05:13.419405
 generated_by: simplified-translation-system
 ---
 
-Dies ist der [[digitale Garten]] von Till Gartner. Ich bin ein einfacher Mensch mit einfachen Hobbys, wie
+Dies ist der [[digital garden|digitale Garten]] von Till Gartner. Ich bin ein einfacher Mensch mit einfachen Hobbys, wie
 
 - Meine **Familie** und **Kinder**
 - Mein Geschäft (Ich bin Manager in einem wirklich coolen Softwareunternehmen namens [**mgm technology partners**](https://mgm-tp.com))
