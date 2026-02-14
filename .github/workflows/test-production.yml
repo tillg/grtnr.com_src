@@ -13,18 +13,8 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v3
 
-      - name: Install lychee link checker
-        run: |
-          curl -sSfL https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-unknown-linux-gnu.tar.gz | tar xz
-          sudo mv lychee /usr/local/bin/
-          lychee --version
-
       - name: Check production links
-        run: lychee --config lychee.toml --format markdown --output /tmp/lychee-report.md "https://grtnr.com"
-
-      - name: Upload report
-        if: always()
-        uses: actions/upload-artifact@v4
+        uses: lycheeverse/lychee-action@v2
         with:
-          name: lychee-report
-          path: /tmp/lychee-report.md
+          args: --config lychee.toml --format markdown "https://grtnr.com"
+          fail: true
