@@ -9,7 +9,7 @@ Thumbs.db
 
 output
 test_output
-linkcheck-errors.txt
+.lychee.cache
 
 # Cache files (keep translation cache, ignore others)
 cache/*

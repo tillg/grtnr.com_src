@@ -12,6 +12,7 @@ In order to get things running
 - Create a local python environment: `python -m venv .venv` anc activate it: `source .venv/bin/activate`
 - Upgrade your pip: `pip install --upgrade pip`
 - Install the required packages: `pip install -r .devcontainer/requirements.txt`
+- Install lychee for link checking: `brew install lychee`
 - Build it: `inv build`
 - In the dev process, you probably want to run it with live reloading: `inv livereload`
 

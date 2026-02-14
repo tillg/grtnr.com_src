@@ -2,6 +2,7 @@ import os
 import shlex
 import shutil
 import sys
+import tomllib
 
 from dotenv import load_dotenv
 from invoke import task
@@ -119,40 +120,20 @@ def preview(c):
 
 @task
 def check_links(c):
-    """Check links in the generated site"""
-    logger.info("Running linkchecker on output directory...")
-    result = c.run("./check-links.sh", warn=True)
+    """Check links in the generated site using lychee"""
+    logger.info("Running lychee on output directory...")
+    # Read base excludes from lychee.toml (single source of truth),
+    # then add local-only patterns for translation paths that don't exist locally.
+    with open("lychee.toml", "rb") as f:
+        config = tomllib.load(f)
+    patterns = list(config.get("exclude", []))
+    patterns += [".*/output/(de|fr|en)/.*", "^/(de|fr|en)/"]
+    excludes = " ".join(f"--exclude '{p}'" for p in patterns)
+    result = c.run(f"lychee {excludes} ./output", warn=True)
     if result.return_code == 0:
         logger.info("Link check completed successfully - no broken links found")
     else:
-        logger.error(
-            "Link check failed - broken links found! See linkcheck-errors.txt for details"
-        )
-        # Read and display first few errors for immediate visibility
-        try:
-            with open("linkcheck-errors.txt", "r") as f:
-                lines = f.readlines()
-                error_count = len(
-                    [
-                        line
-                        for line in lines
-                        if line.startswith(("MISSING:", "ERROR:", "WARNING:"))
-                    ]
-                )
-                logger.error(f"Found {error_count} link issues:")
-                for line in lines[:10]:  # Show first 10 lines
-                    if line.strip() and (
-                        line.startswith(("MISSING:", "ERROR:", "WARNING:"))
-                        or "That's it" in line
-                    ):
-                        logger.error(f"  {line.strip()}")
-                if len(lines) > 10:
-                    logger.error(
-                        f"  ... and {len(lines) - 10} more issues (see linkcheck-errors.txt)"
-                    )
-        except FileNotFoundError:
-            logger.error("linkcheck-errors.txt file not found")
-        # Exit with error to fail the build
+        logger.error("Link check failed - broken links found!")
         sys.exit(1)
 
 

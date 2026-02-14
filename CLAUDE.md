@@ -28,16 +28,17 @@ This is a personal website/blog built with **Pelican** (Python static site gener
 - `inv check-py` - Format and lint Python files
 - `inv check-md` - Format and lint Markdown files
 - `inv check-json` - Format and lint JSON files
-- `inv check-links` - Validate all links in the generated site
+- `inv check-links` - Validate all links in the generated site (requires `lychee`: `brew install lychee`)
 
 **Link Validation:**
 
-Link checking is integrated at multiple levels:
-- **Build Process**: Both `inv build` and `inv preview` include automatic link validation
+Link checking uses [`lychee`](https://github.com/lycheeverse/lychee) and is integrated at multiple levels:
+- **Build Process**: Both `inv build` and `inv preview` include automatic link validation via lychee
 - **Git Pre-commit Hook**: Prevents commits with broken links when content files are modified
-- **GitHub Actions**: CI pipeline fails if any links are broken, preventing deployment
+- **GitHub Actions**: CI pipeline uses `lycheeverse/lychee-action` to validate links before deployment
+- **Production Check**: Daily scheduled workflow checks all links on the live site (grtnr.com)
 
-The system validates all 1800+ links and ensures no broken images or references are deployed.
+Configuration is in `lychee.toml`. The system validates all links and ensures no broken images or references are deployed.
 
 For detailed code quality standards and tool configurations, see [CODE_GUIDELINES.md](CODE_GUIDELINES.md).
 

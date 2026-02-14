@@ -29,9 +29,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r .devcontainer/requirements.txt
-          # Install linkchecker for link validation
-          sudo apt-get update
-          sudo apt-get install -y linkchecker
 
       - name: Cache translations
         uses: actions/cache@v3
@@ -94,7 +91,13 @@ jobs:
           "
 
       - name: Build site
-        run: inv preview
+        run: inv rebuild
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --config lychee.toml ./output
+          fail: true
 
       - name: Show translation statistics
         run: |
