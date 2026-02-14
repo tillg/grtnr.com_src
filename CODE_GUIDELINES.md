@@ -131,7 +131,7 @@ The following directories are excluded from formatting and linting:
 
 - `.venv/`, `venv/`: Virtual environment files
 - `__pycache__/`: Python bytecode cache
-- `output/`: Generated Pelican output
+- `output/`: Generated site output
 - `node_modules/`: Node.js dependencies
 - `.git/`: Git repository files
 

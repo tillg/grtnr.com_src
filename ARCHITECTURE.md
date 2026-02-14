@@ -6,7 +6,7 @@ This document provides comprehensive technical architecture documentation for th
 
 ## 1. Project Overview - The Big Picture
 
-grtnr.com is a personal blog/website built with **garten**, a custom Python static site generator that transforms Markdown files into fast, secure static HTML pages. It uses the same underlying libraries as Pelican (Jinja2, Python-Markdown, Pygments) but calls them directly in an explicit, debuggable pipeline.
+grtnr.com is a personal blog/website built with **garten**, a custom Python static site generator that transforms Markdown files into fast, secure static HTML pages. It uses Jinja2, Python-Markdown, and Pygments in an explicit, debuggable pipeline.
 
 **Key Features:**
 - **Digital Garden Navigation**: WikiLinks (`[[Page Name]]`) for interconnected content
@@ -50,9 +50,9 @@ grtnr.com_src/
 │   ├── __init__.py
 │   ├── config.py         # Config loader (reads site.json + env overrides)
 │   ├── discover.py       # Phase 1: content discovery
-│   ├── process.py        # Phase 3: markdown → HTML
-│   ├── assemble.py       # Phase 4: site structure + multilingual
-│   ├── render.py         # Phase 5: template rendering
+│   ├── process.py        # Phase 2: markdown → HTML
+│   ├── assemble.py       # Phase 3: site structure + multilingual
+│   ├── render.py         # Phase 4: template rendering
 │   ├── models.py         # Content dataclasses
 │   ├── markdown_wikilinks.py  # WikiLinks markdown extension
 │   └── utils.py          # Slug normalization, logging, date localization
@@ -68,7 +68,7 @@ grtnr.com_src/
 ```
 
 ### Key Configuration Files
-- **site.json**: Site configuration (replaces pelicanconf.py)
+- **site.json**: Site configuration
 - **tasks.py**: Invoke task automation
 - **pyproject.toml**: Python tool configuration (Black, isort)
 - **package.json**: Node.js dependencies for code quality
@@ -161,7 +161,7 @@ inv livereload
 
 ### Phase-Based Pipeline
 
-The garten pipeline processes content through 5 phases, each an independent Python module with inspectable intermediate artifacts in `.build/`:
+The garten pipeline processes content through 4 phases, each an independent Python module with inspectable intermediate artifacts in `.build/`:
 
 #### Phase 1: Discover (`garten/discover.py`)
 - Scan content directories for `.md` files
@@ -172,6 +172,7 @@ The garten pipeline processes content through 5 phases, each an independent Pyth
 - **Output**: `.build/discover/manifest.json`
 
 #### Phase 2: Process (`garten/process.py`)
+
 - Markdown → HTML with extensions (WikiLinks, TOC, CodeHilite, Extra, Meta)
 - Copy adjacent images and fix relative URLs in HTML
 - Generate summaries from excerpt metadata
@@ -181,9 +182,10 @@ The garten pipeline processes content through 5 phases, each an independent Pyth
 - **Output**: `.build/process/manifest.json` + `html/` fragments
 
 #### Phase 3: Assemble (`garten/assemble.py`)
+
 - Generate URLs for all content (`{slug}/`, `recipes/{slug}/`)
 - Generate multilingual URLs (`/{lang}/{slug}/`)
-- Prefix internal links with language codes for non-English content
+- Prefix internal links with language codes for non-default-language content
 - Build tag and category groupings per language
 - Build pagination per language
 - Build translated menu and language switcher data
@@ -376,7 +378,7 @@ Steps:
 ## 12. Configuration System
 
 ### site.json
-The primary configuration file replacing the old `pelicanconf.py`. Static settings live in JSON; dynamic/environment-specific values use `GARTEN_` prefixed environment variables.
+The primary configuration file. Static settings live in JSON; dynamic/environment-specific values use `GARTEN_` prefixed environment variables.
 
 **Layering (highest priority wins):**
 1. Environment variables with `GARTEN_` prefix (e.g., `GARTEN_SITEURL=https://test.grtnr.com`)

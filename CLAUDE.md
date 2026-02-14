@@ -21,9 +21,9 @@ This is a personal website/blog built with **garten**, a custom Python static si
 **Garten pipeline phases (for debugging):**
 
 - `inv discover` - Phase 1: content discovery
-- `inv process` - Phases 1-3: discover + process
-- `inv assemble` - Phases 1-4: discover + process + assemble
-- `inv render` - Phases 1-5: full pipeline without link checking
+- `inv process` - Phases 1-2: discover + process
+- `inv assemble` - Phases 1-3: discover + process + assemble
+- `inv render` - Phases 1-4: full pipeline without link checking
 
 **Setup:**
 
