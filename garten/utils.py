@@ -1,4 +1,4 @@
-"""Shared utilities: slug normalization, logging, date helpers."""
+"""Shared utilities: slug normalization, logging, date helpers, frontmatter."""
 
 import logging
 import os
@@ -9,6 +9,48 @@ from datetime import datetime
 from typing import Union
 
 from unidecode import unidecode
+
+
+# ---------------------------------------------------------------------------
+# Logging (ported from plugins/logger_config.py)
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
+# Frontmatter parsing
+# ---------------------------------------------------------------------------
+
+_FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
+
+
+def parse_frontmatter(text: str) -> dict[str, str]:
+    """Parse YAML-style frontmatter between ``---`` markers.
+
+    Returns a dict with **lowercase** keys.  Values are raw strings;
+    type coercion happens in the caller.
+    """
+    m = _FRONTMATTER_RE.match(text)
+    if not m:
+        return {}
+
+    meta: dict[str, str] = {}
+    for line in m.group(1).splitlines():
+        if ":" not in line:
+            continue
+        key, _, value = line.partition(":")
+        key = key.strip().lower()
+        value = value.strip()
+        # Strip surrounding quotes
+        if len(value) >= 2 and value[0] in ('"', "'") and value[-1] == value[0]:
+            value = value[1:-1]
+        meta[key] = value
+    return meta
+
+
+def strip_frontmatter(text: str) -> str:
+    """Remove the YAML frontmatter block and return just the body."""
+    m = _FRONTMATTER_RE.match(text)
+    return text[m.end() :] if m else text
 
 
 # ---------------------------------------------------------------------------

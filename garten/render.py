@@ -797,6 +797,7 @@ def render(site: dict, cfg: dict) -> None:
 
     ml_enabled = site.get("multilingual_enabled", False)
     languages = site.get("languages", [cfg.get("default_lang", "en")])
+    default_lang = site.get("default_lang", cfg.get("default_lang", "en"))
     menu_translations = site.get("menu_translations", {})
 
     # Clean output directory
@@ -896,7 +897,7 @@ def render(site: dict, cfg: dict) -> None:
 
             # Translate menu links
             translated_links = build_translated_links(
-                links, lang, menu_translations
+                links, lang, menu_translations, default_lang
             )
 
             lang_ctx = {

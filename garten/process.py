@@ -19,25 +19,11 @@ from bs4 import BeautifulSoup
 from typogrify.filters import typogrify
 
 from .markdown_wikilinks import WikiLinksExtension
-from .utils import get_logger
+from .utils import get_logger, parse_frontmatter, strip_frontmatter
 
 logger = get_logger("process")
 
-# Reuse the frontmatter regex from discover
-_FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
-
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".svg", ".pdf"}
-
-
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
-
-def strip_frontmatter(text: str) -> str:
-    """Remove the YAML frontmatter block and return just the body."""
-    m = _FRONTMATTER_RE.match(text)
-    return text[m.end() :] if m else text
 
 
 # ---------------------------------------------------------------------------
@@ -230,28 +216,6 @@ def _process_item(item: dict) -> None:
 # ---------------------------------------------------------------------------
 
 
-def _parse_translation_frontmatter(text: str) -> dict[str, str]:
-    """Parse frontmatter from a translation file.
-
-    Returns a dict with lowercase keys and raw string values.
-    """
-    m = _FRONTMATTER_RE.match(text)
-    if not m:
-        return {}
-
-    meta: dict[str, str] = {}
-    for line in m.group(1).splitlines():
-        if ":" not in line:
-            continue
-        key, _, value = line.partition(":")
-        key = key.strip().lower()
-        value = value.strip()
-        if len(value) >= 2 and value[0] in ('"', "'") and value[-1] == value[0]:
-            value = value[1:-1]
-        meta[key] = value
-    return meta
-
-
 def _process_translation(
     item: dict, lang: str, translation_path: str
 ) -> dict | None:
@@ -270,7 +234,7 @@ def _process_translation(
         logger.warning(f"Failed to read translation file {path}: {e}")
         return None
 
-    meta = _parse_translation_frontmatter(text)
+    meta = parse_frontmatter(text)
     body = strip_frontmatter(text)
 
     # 3.1 Render markdown

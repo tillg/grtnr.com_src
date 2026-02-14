@@ -544,6 +544,18 @@ class TestPrefixInternalLinks:
         assert 'href="/fr/about/"' in result
         assert 'href="/fr/tags/"' in result
 
+    def test_default_lang_not_prefixed_with_custom_default(self):
+        """When default_lang is 'de', German links should not be prefixed."""
+        html = '<a href="/about/">About</a>'
+        result = prefix_internal_links(html, "de", ["de", "en"], default_lang="de")
+        assert 'href="/about/"' in result
+
+    def test_non_default_prefixed_with_custom_default(self):
+        """When default_lang is 'de', English links should be prefixed."""
+        html = '<a href="/about/">About</a>'
+        result = prefix_internal_links(html, "en", ["de", "en"], default_lang="de")
+        assert 'href="/en/about/"' in result
+
 
 # ---------------------------------------------------------------------------
 # 4.7 Language switcher links
@@ -661,6 +673,20 @@ class TestBuildTranslatedLinks:
         menu_trans = {"de": {}}
         result = build_translated_links(links, "de", menu_trans)
         assert result[0][0] == "Custom"
+
+    def test_default_lang_hrefs_unchanged_with_custom_default(self):
+        """When default_lang is 'de', German hrefs should not be prefixed."""
+        links = [["Themen", "/tags"]]
+        menu_trans = {"de": {"Themen": "Themen"}}
+        result = build_translated_links(links, "de", menu_trans, default_lang="de")
+        assert result[0][1] == "/tags"
+
+    def test_non_default_hrefs_prefixed_with_custom_default(self):
+        """When default_lang is 'de', English hrefs should be prefixed."""
+        links = [["Topics", "/tags"]]
+        menu_trans = {"en": {"Topics": "Topics"}}
+        result = build_translated_links(links, "en", menu_trans, default_lang="de")
+        assert result[0][1] == "/en/tags"
 
 
 # ---------------------------------------------------------------------------
@@ -822,3 +848,36 @@ class TestAssembleMultilingualIntegration:
     def test_has_menu_translations(self, site):
         assert "menu_translations" in site
         assert "de" in site["menu_translations"]
+
+    def test_german_original_has_en_translation_in_per_lang(self, site):
+        """German-original articles should have English content in per_lang['en']."""
+        en_articles = site["per_lang"]["en"]["articles"]
+        crowdsourcing = [
+            a for a in en_articles if "crowdsourcing" in a["slug"]
+        ]
+        assert len(crowdsourcing) == 1
+        art = crowdsourcing[0]
+        # Should use the English translation, not German original
+        assert art["translation"] == "en"
+        # Title should be the English translation
+        assert "Coat of Arms" in art["title"]
+
+    def test_german_original_root_level_has_english_content(self, site):
+        """Root-level content for German originals should show English (Option A)."""
+        crowdsourcing = [
+            a for a in site["articles"] if "crowdsourcing" in a["slug"]
+        ]
+        assert len(crowdsourcing) == 1
+        art = crowdsourcing[0]
+        # The English translation title should be used at root level
+        assert "Coat of Arms" in art["title"]
+
+    def test_german_original_de_version_has_german_content(self, site):
+        """The /de/ version of a German original should show German content."""
+        de_articles = site["per_lang"]["de"]["articles"]
+        crowdsourcing = [
+            a for a in de_articles if "crowdsourcing" in a["slug"]
+        ]
+        assert len(crowdsourcing) == 1
+        # Should use the original German content (no DE translation exists)
+        assert crowdsourcing[0]["translation"] is False

@@ -485,32 +485,32 @@ class TestSpotChecks:
 
 class TestParseTranslationFrontmatter:
     def test_basic_frontmatter(self):
-        from garten.process import _parse_translation_frontmatter
+        from garten.utils import parse_frontmatter
 
         text = '---\ntitle: "Hallo Welt"\nlang: de\n---\nBody'
-        meta = _parse_translation_frontmatter(text)
+        meta = parse_frontmatter(text)
         assert meta["title"] == "Hallo Welt"
         assert meta["lang"] == "de"
 
     def test_no_frontmatter(self):
-        from garten.process import _parse_translation_frontmatter
+        from garten.utils import parse_frontmatter
 
-        meta = _parse_translation_frontmatter("Just body text")
+        meta = parse_frontmatter("Just body text")
         assert meta == {}
 
     def test_strips_quotes(self):
-        from garten.process import _parse_translation_frontmatter
+        from garten.utils import parse_frontmatter
 
         text = "---\ntitle: 'Quoted'\nexcerpt: \"Double\"\n---\nBody"
-        meta = _parse_translation_frontmatter(text)
+        meta = parse_frontmatter(text)
         assert meta["title"] == "Quoted"
         assert meta["excerpt"] == "Double"
 
     def test_keys_lowercased(self):
-        from garten.process import _parse_translation_frontmatter
+        from garten.utils import parse_frontmatter
 
         text = "---\nTitle: Hello\nSource_Hash: abc123\n---\nBody"
-        meta = _parse_translation_frontmatter(text)
+        meta = parse_frontmatter(text)
         assert "title" in meta
         assert "source_hash" in meta
 

@@ -16,40 +16,9 @@ from datetime import datetime
 from pathlib import Path
 
 from .models import Article, Page, Recipe
-from .utils import get_logger, normalize_slug, slugify
+from .utils import get_logger, normalize_slug, parse_frontmatter, slugify
 
 logger = get_logger("discover")
-
-
-# ---------------------------------------------------------------------------
-# 1.2  Frontmatter parsing
-# ---------------------------------------------------------------------------
-
-_FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
-
-
-def parse_frontmatter(text: str) -> dict[str, str]:
-    """Parse YAML-style frontmatter between ``---`` markers.
-
-    Returns a dict with **lowercase** keys.  Values are raw strings;
-    type coercion happens in the caller.
-    """
-    m = _FRONTMATTER_RE.match(text)
-    if not m:
-        return {}
-
-    meta: dict[str, str] = {}
-    for line in m.group(1).splitlines():
-        if ":" not in line:
-            continue
-        key, _, value = line.partition(":")
-        key = key.strip().lower()
-        value = value.strip()
-        # Strip surrounding quotes
-        if len(value) >= 2 and value[0] in ('"', "'") and value[-1] == value[0]:
-            value = value[1:-1]
-        meta[key] = value
-    return meta
 
 
 # ---------------------------------------------------------------------------
@@ -271,8 +240,6 @@ def _find_translation_files(
     base_name = content_item.source_path.stem
     found: dict[str, Path] = {}
     for lang in languages:
-        if lang == default_lang:
-            continue
         candidate = ext_dir / f"{base_name}-{lang.upper()}.md"
         if candidate.exists():
             found[lang] = candidate

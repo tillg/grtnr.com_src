@@ -9,6 +9,7 @@ Sub-phases:
     4.6  Build menu with translations
     4.7  Build language switcher data
     4.8  Filter articles for index
+    4.9  Apply default-language translations to root-level content
 """
 
 from __future__ import annotations
@@ -154,7 +155,10 @@ def generate_multilingual_urls(
 
 
 def prefix_internal_links(
-    html: str, lang: str, languages: list[str]
+    html: str,
+    lang: str,
+    languages: list[str],
+    default_lang: str = "en",
 ) -> str:
     """Prefix internal content links with language code.
 
@@ -162,8 +166,8 @@ def prefix_internal_links(
     while leaving theme assets, static files, and already-prefixed
     links untouched.
     """
-    if not html or lang == "en":
-        # English content at root level doesn't need prefixing
+    if not html or lang == default_lang:
+        # Default-language content at root level doesn't need prefixing
         # (language-prefixed copies are handled separately)
         return html
 
@@ -369,9 +373,13 @@ def filter_articles_for_index(
 # ---------------------------------------------------------------------------
 
 
-def sort_articles_by_date(articles: list[dict], reverse: bool = True) -> list[dict]:
+def sort_articles_by_date(
+    articles: list[dict], reverse: bool = True
+) -> list[dict]:
     """Sort articles by date (newest first by default)."""
-    return sorted(articles, key=lambda a: a.get("date", ""), reverse=reverse)
+    return sorted(
+        articles, key=lambda a: a.get("date", ""), reverse=reverse
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -380,7 +388,10 @@ def sort_articles_by_date(articles: list[dict], reverse: bool = True) -> list[di
 
 
 def _build_lang_article(
-    original: dict, lang: str, languages: list[str]
+    original: dict,
+    lang: str,
+    languages: list[str],
+    default_lang: str = "en",
 ) -> dict:
     """Build a language-specific article dict from original + translation.
 
@@ -399,17 +410,24 @@ def _build_lang_article(
     if trans:
         art["content"] = prefix_internal_links(
             trans.get("content", original.get("content", "")),
-            lang, languages,
+            lang,
+            languages,
+            default_lang,
         )
         art["title"] = trans.get("title") or original.get("title", "")
-        art["summary"] = trans.get("summary") or original.get("summary", "")
+        art["summary"] = (
+            trans.get("summary") or original.get("summary", "")
+        )
         art["excerpt"] = trans.get("excerpt") or original.get("excerpt")
         art["translation"] = trans.get("translation", lang)
         art["translator"] = trans.get("translator", "")
         art["original_url"] = f"/{original['slug']}/"
     else:
         art["content"] = prefix_internal_links(
-            original.get("content", ""), lang, languages
+            original.get("content", ""),
+            lang,
+            languages,
+            default_lang,
         )
         art["translation"] = False
         art["translator"] = ""
@@ -422,7 +440,10 @@ def _build_lang_article(
 
 
 def _build_lang_page(
-    original: dict, lang: str, languages: list[str]
+    original: dict,
+    lang: str,
+    languages: list[str],
+    default_lang: str = "en",
 ) -> dict:
     """Build a language-specific page dict from original + translation."""
     trans = original.get("translations", {}).get(lang, {})
@@ -437,12 +458,17 @@ def _build_lang_page(
     if trans:
         pg["content"] = prefix_internal_links(
             trans.get("content", original.get("content", "")),
-            lang, languages,
+            lang,
+            languages,
+            default_lang,
         )
         pg["title"] = trans.get("title") or original.get("title", "")
     else:
         pg["content"] = prefix_internal_links(
-            original.get("content", ""), lang, languages
+            original.get("content", ""),
+            lang,
+            languages,
+            default_lang,
         )
 
     pg.pop("translations", None)
@@ -460,7 +486,8 @@ def build_per_language_content(
     For the default language, creates copies at /{lang}/{slug}/ path.
 
     Returns a dict keyed by language code, each containing:
-    ``articles``, ``pages``, ``tag_map``, ``pagination``, ``index_articles``.
+    ``articles``, ``pages``, ``tag_map``, ``pagination``,
+    ``index_articles``.
     """
     categories_in_index = cfg.get("categories_in_index", [])
     per_page = cfg.get("default_pagination", 10)
@@ -470,7 +497,9 @@ def build_per_language_content(
         # Build language-specific articles
         lang_articles = []
         for art in manifest["articles"]:
-            lang_art = _build_lang_article(art, lang, languages)
+            lang_art = _build_lang_article(
+                art, lang, languages, default_lang
+            )
             lang_articles.append(lang_art)
 
         lang_articles = sort_articles_by_date(lang_articles)
@@ -478,7 +507,9 @@ def build_per_language_content(
         # Build language-specific pages
         lang_pages = []
         for pg in manifest["pages"]:
-            lang_pg = _build_lang_page(pg, lang, languages)
+            lang_pg = _build_lang_page(
+                pg, lang, languages, default_lang
+            )
             lang_pages.append(lang_pg)
 
         # Build tag map and pagination for this language
@@ -500,10 +531,46 @@ def build_per_language_content(
 
         logger.info(
             f"Language '{lang}': {len(lang_articles)} articles, "
-            f"{len(lang_pages)} pages, {len(lang_pagination)} index pages"
+            f"{len(lang_pages)} pages, "
+            f"{len(lang_pagination)} index pages"
         )
 
     return per_lang
+
+
+# ---------------------------------------------------------------------------
+# 4.9  Apply default-language translations to root-level content
+# ---------------------------------------------------------------------------
+
+
+def _apply_default_lang_translations(
+    manifest: dict, default_lang: str
+) -> None:
+    """Swap root-level content with default-language translations.
+
+    For articles originally written in a non-default language
+    (e.g. German), the root-level version should show the default
+    language (e.g. English) translation, since root URLs serve the
+    default language.
+
+    Must be called **after** ``build_per_language_content()`` so that
+    per-language copies have already been created from the original data.
+    """
+    for item in manifest["articles"] + manifest["pages"]:
+        trans = item.get("translations", {}).get(default_lang)
+        if not trans:
+            continue
+        item["content"] = trans.get(
+            "content", item.get("content", "")
+        )
+        item["title"] = trans.get("title") or item.get("title", "")
+        if item.get("content_type") == "article":
+            item["summary"] = (
+                trans.get("summary") or item.get("summary", "")
+            )
+            item["excerpt"] = (
+                trans.get("excerpt") or item.get("excerpt")
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -525,12 +592,15 @@ _NO_LANG_PREFIX_PATHS = {"/recipes"}
 
 
 def build_translated_links(
-    links: list, lang: str, menu_translations: dict
+    links: list,
+    lang: str,
+    menu_translations: dict,
+    default_lang: str = "en",
 ) -> list:
     """Build language-specific menu links.
 
     Translates menu titles and adds language prefix to hrefs for
-    non-English languages, except for paths that only exist at root
+    non-default languages, except for paths that only exist at root
     (e.g. ``/recipes``).
     """
     lang_trans = menu_translations.get(lang, {})
@@ -540,7 +610,7 @@ def build_translated_links(
         href = link[1] if isinstance(link, (list, tuple)) else "#"
 
         translated_title = lang_trans.get(title, title)
-        if lang != "en" and href not in _NO_LANG_PREFIX_PATHS:
+        if lang != default_lang and href not in _NO_LANG_PREFIX_PATHS:
             translated_href = f"/{lang}{href}"
         else:
             translated_href = href
@@ -562,7 +632,9 @@ def assemble(manifest: dict, cfg: dict) -> dict:
     """
     multilingual = cfg.get("multilingual", {})
     ml_enabled = multilingual.get("enabled", False)
-    languages = multilingual.get("languages", [cfg.get("default_lang", "en")])
+    languages = multilingual.get(
+        "languages", [cfg.get("default_lang", "en")]
+    )
     default_lang = multilingual.get(
         "default_lang", cfg.get("default_lang", "en")
     )
@@ -580,7 +652,8 @@ def assemble(manifest: dict, cfg: dict) -> dict:
     if ml_enabled:
         generate_multilingual_urls(
             manifest["articles"] + manifest["pages"],
-            languages, default_lang,
+            languages,
+            default_lang,
         )
 
     # 4.7 Build language links (sidebar language switcher)
@@ -624,12 +697,17 @@ def assemble(manifest: dict, cfg: dict) -> dict:
     # Build per-language content
     if ml_enabled:
         # 4.6 Load menu translations
-        menu_translations = load_menu_translations(cfg.get("base_path", Path(".")))
+        menu_translations = load_menu_translations(
+            cfg.get("base_path", Path("."))
+        )
         site["menu_translations"] = menu_translations
 
         site["per_lang"] = build_per_language_content(
             manifest, languages, default_lang, cfg
         )
+
+        # 4.9 Swap root-level content for non-default-language originals
+        _apply_default_lang_translations(manifest, default_lang)
 
     logger.info(
         f"Assembled site: {len(site['articles'])} articles, "
@@ -639,7 +717,8 @@ def assemble(manifest: dict, cfg: dict) -> dict:
     )
     if ml_enabled:
         logger.info(
-            f"Multilingual: {len(languages)} languages ({', '.join(languages)})"
+            f"Multilingual: {len(languages)} languages "
+            f"({', '.join(languages)})"
         )
 
     return site
