@@ -1,0 +1,23 @@
+{
+  "en": {
+    "Home": "Home",
+    "Topics": "Topics",
+    "Recipes": "Recipes",
+    "About": "About",
+    "Impressum": "Impressum"
+  },
+  "de": {
+    "Home": "Startseite",
+    "Topics": "Themen",
+    "Recipes": "Rezepte",
+    "About": "Über",
+    "Impressum": "Impressum"
+  },
+  "fr": {
+    "Home": "Accueil",
+    "Topics": "Sujets",
+    "Recipes": "Recettes",
+    "About": "À propos",
+    "Impressum": "Mentions légales"
+  }
+}

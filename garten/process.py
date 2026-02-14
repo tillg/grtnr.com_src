@@ -5,6 +5,7 @@ Sub-phases:
     3.2  Fix image URLs (adjacent images)
     3.3  Generate summaries from excerpts
     3.4  External link post-processing (add target=_blank)
+    3.5  Process translation files
 """
 
 from __future__ import annotations
@@ -225,6 +226,115 @@ def _process_item(item: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
+# 3.5  Process translation files
+# ---------------------------------------------------------------------------
+
+
+def _parse_translation_frontmatter(text: str) -> dict[str, str]:
+    """Parse frontmatter from a translation file.
+
+    Returns a dict with lowercase keys and raw string values.
+    """
+    m = _FRONTMATTER_RE.match(text)
+    if not m:
+        return {}
+
+    meta: dict[str, str] = {}
+    for line in m.group(1).splitlines():
+        if ":" not in line:
+            continue
+        key, _, value = line.partition(":")
+        key = key.strip().lower()
+        value = value.strip()
+        if len(value) >= 2 and value[0] in ('"', "'") and value[-1] == value[0]:
+            value = value[1:-1]
+        meta[key] = value
+    return meta
+
+
+def _process_translation(
+    item: dict, lang: str, translation_path: str
+) -> dict | None:
+    """Process a single translation file.
+
+    Returns a dict with translated content and metadata, or None on error.
+    """
+    path = Path(translation_path)
+    if not path.exists():
+        logger.warning(f"Translation file not found: {path}")
+        return None
+
+    try:
+        text = path.read_text(encoding="utf-8")
+    except Exception as e:
+        logger.warning(f"Failed to read translation file {path}: {e}")
+        return None
+
+    meta = _parse_translation_frontmatter(text)
+    body = strip_frontmatter(text)
+
+    # 3.1 Render markdown
+    html = render_markdown(body)
+
+    # 3.2 Fix image URLs (same images as original)
+    adjacent_files = item.get("adjacent_files", [])
+    if adjacent_files:
+        slug = item["slug"]
+        if item["content_type"] == "recipe":
+            url_prefix = f"recipes/{slug}"
+        else:
+            url_prefix = slug
+        html = fix_image_urls(html, url_prefix, adjacent_files)
+
+    # 3.4 External links
+    html = process_external_links(html)
+
+    # Typogrify
+    html = typogrify(html)
+
+    # Extract translated metadata
+    title = meta.get("title", item.get("title", ""))
+    excerpt = meta.get("excerpt") or meta.get("summary") or None
+    summary = generate_summary(excerpt) if item["content_type"] == "article" else ""
+
+    return {
+        "lang": lang,
+        "title": title,
+        "content": html,
+        "excerpt": excerpt,
+        "summary": summary,
+        "source_hash": meta.get("source_hash", ""),
+        "translator": meta.get("translator", ""),
+        "translate_date": meta.get("translate_date", ""),
+        "translation": meta.get("translation", lang),
+    }
+
+
+def _process_translations(item: dict) -> None:
+    """Process all translation files for a content item.
+
+    Adds an ``item["translations"]`` dict keyed by language code.
+    """
+    translation_files = item.get("translation_files", {})
+    if not translation_files:
+        item["translations"] = {}
+        return
+
+    translations = {}
+    for lang, path in translation_files.items():
+        result = _process_translation(item, lang, path)
+        if result:
+            translations[lang] = result
+
+    item["translations"] = translations
+    if translations:
+        logger.info(
+            f"Processed {len(translations)} translations for '{item['slug']}': "
+            f"{list(translations.keys())}"
+        )
+
+
+# ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
 
@@ -232,8 +342,9 @@ def _process_item(item: dict) -> None:
 def process(manifest: dict, cfg: dict) -> dict:
     """Run the full Process phase on a discover manifest.
 
-    Enriches each content item with ``content`` (rendered HTML) and
-    ``summary`` (for articles).  Returns the same manifest dict, mutated.
+    Enriches each content item with ``content`` (rendered HTML),
+    ``summary`` (for articles), and ``translations`` (processed
+    translation files).  Returns the same manifest dict, mutated.
     """
     all_items = (
         manifest["articles"] + manifest["pages"] + manifest["recipes"]
@@ -241,10 +352,18 @@ def process(manifest: dict, cfg: dict) -> dict:
     for item in all_items:
         _process_item(item)
 
+    # 3.5 Process translations
+    translatable = manifest["articles"] + manifest["pages"]
+    trans_count = 0
+    for item in translatable:
+        _process_translations(item)
+        trans_count += len(item.get("translations", {}))
+
     logger.info(
         f"Processed {len(manifest['articles'])} articles, "
         f"{len(manifest['pages'])} pages, "
-        f"{len(manifest['recipes'])} recipes"
+        f"{len(manifest['recipes'])} recipes, "
+        f"{trans_count} translations"
     )
     return manifest
 
@@ -266,13 +385,19 @@ def write_artifacts(manifest: dict, build_path: Path) -> Path:
 
     html_dir = out_dir / "html"
 
-    # Write individual HTML files
+    # Write individual HTML files (including translations)
     for content_type in ("articles", "pages", "recipes"):
         type_dir = html_dir / content_type
         type_dir.mkdir(parents=True, exist_ok=True)
         for item in manifest[content_type]:
             html_file = type_dir / f"{item['slug']}.html"
             html_file.write_text(item.get("content", ""), encoding="utf-8")
+            # Write translation HTML files
+            for lang, trans in item.get("translations", {}).items():
+                trans_file = type_dir / f"{item['slug']}-{lang}.html"
+                trans_file.write_text(
+                    trans.get("content", ""), encoding="utf-8"
+                )
 
     # Write manifest (without inline content to keep it readable)
     manifest_slim = _slim_manifest(manifest)
@@ -290,8 +415,19 @@ def _slim_manifest(manifest: dict) -> dict:
     for content_type in ("articles", "pages", "recipes"):
         items = []
         for item in manifest[content_type]:
-            slim = {k: v for k, v in item.items() if k != "content"}
+            slim = {k: v for k, v in item.items() if k not in ("content",)}
             slim["content_file"] = f"html/{content_type}/{item['slug']}.html"
+            # Slim down translations too
+            if "translations" in slim:
+                slim_trans = {}
+                for lang, trans in slim["translations"].items():
+                    slim_trans[lang] = {
+                        k: v for k, v in trans.items() if k != "content"
+                    }
+                    slim_trans[lang]["content_file"] = (
+                        f"html/{content_type}/{item['slug']}-{lang}.html"
+                    )
+                slim["translations"] = slim_trans
             items.append(slim)
         result[content_type] = items
     return result

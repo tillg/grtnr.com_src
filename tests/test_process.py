@@ -420,9 +420,13 @@ class TestProcessIntegration:
         assert (html_dir / "pages").is_dir()
         assert (html_dir / "recipes").is_dir()
 
-        # Check at least some files exist
+        # Check files exist: original + translations
         article_htmls = list((html_dir / "articles").glob("*.html"))
-        assert len(article_htmls) == len(manifest["articles"])
+        total_translations = sum(
+            len(a.get("translations", {})) for a in manifest["articles"]
+        )
+        expected = len(manifest["articles"]) + total_translations
+        assert len(article_htmls) == expected
 
     def test_recipe_content_has_html(self, manifest, cfg):
         """Recipes have no separate structured data -- all structure
@@ -472,3 +476,166 @@ class TestSpotChecks:
             content = banh[0]["content"]
             # The inline image should have a fixed URL
             assert "Vietnamesisches-Banh-xeo-Rezept.jpg" in content
+
+
+# ===================================================================
+# Unit tests -- 3.5 Translation processing
+# ===================================================================
+
+
+class TestParseTranslationFrontmatter:
+    def test_basic_frontmatter(self):
+        from garten.process import _parse_translation_frontmatter
+
+        text = '---\ntitle: "Hallo Welt"\nlang: de\n---\nBody'
+        meta = _parse_translation_frontmatter(text)
+        assert meta["title"] == "Hallo Welt"
+        assert meta["lang"] == "de"
+
+    def test_no_frontmatter(self):
+        from garten.process import _parse_translation_frontmatter
+
+        meta = _parse_translation_frontmatter("Just body text")
+        assert meta == {}
+
+    def test_strips_quotes(self):
+        from garten.process import _parse_translation_frontmatter
+
+        text = "---\ntitle: 'Quoted'\nexcerpt: \"Double\"\n---\nBody"
+        meta = _parse_translation_frontmatter(text)
+        assert meta["title"] == "Quoted"
+        assert meta["excerpt"] == "Double"
+
+    def test_keys_lowercased(self):
+        from garten.process import _parse_translation_frontmatter
+
+        text = "---\nTitle: Hello\nSource_Hash: abc123\n---\nBody"
+        meta = _parse_translation_frontmatter(text)
+        assert "title" in meta
+        assert "source_hash" in meta
+
+
+class TestProcessTranslation:
+    def test_processes_translation_file(self, tmp_path):
+        from garten.process import _process_translation
+
+        # Create a translation file
+        trans_file = tmp_path / "test-de.md"
+        trans_file.write_text(
+            '---\ntitle: "Deutscher Titel"\n'
+            "translator: Claude\n---\n\n"
+            "Dies ist der **übersetzte** Inhalt.\n",
+            encoding="utf-8",
+        )
+
+        item = {
+            "slug": "test",
+            "content_type": "article",
+            "adjacent_files": [],
+        }
+
+        result = _process_translation(item, "de", str(trans_file))
+        assert result is not None
+        assert result["lang"] == "de"
+        assert result["title"] == "Deutscher Titel"
+        assert result["translator"] == "Claude"
+        assert "<strong>" in result["content"]
+
+    def test_missing_file_returns_none(self):
+        from garten.process import _process_translation
+
+        item = {"slug": "test", "content_type": "article", "adjacent_files": []}
+        result = _process_translation(item, "de", "/nonexistent/file.md")
+        assert result is None
+
+    def test_falls_back_to_original_title(self, tmp_path):
+        from garten.process import _process_translation
+
+        trans_file = tmp_path / "test-de.md"
+        trans_file.write_text("---\nlang: de\n---\nTranslated body\n")
+
+        item = {
+            "slug": "test",
+            "title": "Original Title",
+            "content_type": "article",
+            "adjacent_files": [],
+        }
+
+        result = _process_translation(item, "de", str(trans_file))
+        assert result["title"] == "Original Title"
+
+
+class TestProcessTranslations:
+    def test_adds_translations_dict(self, tmp_path):
+        from garten.process import _process_translations
+
+        # Create translation files
+        de_file = tmp_path / "test-de.md"
+        de_file.write_text('---\ntitle: "DE Title"\n---\nDeutsch\n')
+
+        item = {
+            "slug": "test",
+            "content_type": "article",
+            "adjacent_files": [],
+            "translation_files": {"de": str(de_file)},
+        }
+
+        _process_translations(item)
+        assert "translations" in item
+        assert "de" in item["translations"]
+        assert item["translations"]["de"]["title"] == "DE Title"
+
+    def test_empty_translation_files(self):
+        from garten.process import _process_translations
+
+        item = {
+            "slug": "test",
+            "content_type": "article",
+            "translation_files": {},
+        }
+        _process_translations(item)
+        assert item["translations"] == {}
+
+    def test_no_translation_files_key(self):
+        from garten.process import _process_translations
+
+        item = {"slug": "test", "content_type": "article"}
+        _process_translations(item)
+        assert item["translations"] == {}
+
+
+class TestProcessIntegrationTranslations:
+    """Integration tests for translation processing on real content."""
+
+    def test_articles_have_translations_dict(self, manifest, cfg):
+        process(manifest, cfg)
+        for art in manifest["articles"]:
+            assert "translations" in art
+
+    def test_pages_have_translations_dict(self, manifest, cfg):
+        process(manifest, cfg)
+        for page in manifest["pages"]:
+            assert "translations" in page
+
+    def test_translated_articles_have_html(self, manifest, cfg):
+        process(manifest, cfg)
+        for art in manifest["articles"]:
+            for lang, trans in art.get("translations", {}).items():
+                assert trans.get("content"), (
+                    f"Translation {lang} for {art['slug']} has empty content"
+                )
+                assert "<" in trans["content"], (
+                    f"Translation {lang} for {art['slug']} is not HTML"
+                )
+
+    def test_write_artifacts_includes_translations(self, manifest, cfg, tmp_path):
+        process(manifest, cfg)
+        write_artifacts(manifest, tmp_path)
+        html_dir = tmp_path / "process" / "html" / "articles"
+        # Check for translation HTML files
+        for art in manifest["articles"]:
+            for lang in art.get("translations", {}):
+                trans_file = html_dir / f"{art['slug']}-{lang}.html"
+                assert trans_file.exists(), (
+                    f"Missing translation HTML: {trans_file.name}"
+                )

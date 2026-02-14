@@ -5,10 +5,8 @@ Sub-phases:
     5.2  Render index pages (paginated)
     5.3  Render tag + category pages
     5.5  Render sitemap, robots.txt, humans.txt
-    5.7  Copy static assets + images
-
-Multilingual rendering (per-language pages, feeds, root redirect) is
-deferred to Increment 4.
+    5.6  Render root redirect page
+    5.7  Copy static assets + images to language dirs
 """
 
 from __future__ import annotations
@@ -19,7 +17,7 @@ from types import SimpleNamespace
 
 from jinja2 import Environment, FileSystemLoader
 
-from .assemble import Author, Category, Tag
+from .assemble import Author, Category, Tag, build_translated_links
 from .utils import get_logger
 
 logger = get_logger("render")
@@ -62,13 +60,13 @@ class ArticleWrapper:
 
                 self.tags.append(Tag(tag_name, slugify(tag_name)))
 
-        # Multilingual (empty for Increment 3)
+        # Multilingual
         self.multilingual_urls = data.get("multilingual_urls", {})
-        self.language_links = []
+        self.language_links = data.get("language_links", [])
         self.translations = []
-        self.translation = False
-        self.translator = ""
-        self.original_url = ""
+        self.translation = data.get("translation", False)
+        self.translator = data.get("translator", "")
+        self.original_url = data.get("original_url", "")
 
         # Meta tags (empty lists for template compat)
         self.keywords = []
@@ -92,9 +90,9 @@ class PageWrapper:
         self.image = data.get("image")
         self.status = data.get("status", "published")
 
-        # Multilingual (empty for Increment 3)
+        # Multilingual
         self.multilingual_urls = data.get("multilingual_urls", {})
-        self.language_links = []
+        self.language_links = data.get("language_links", [])
         self.translations = []
         self.modified = False
         self.locale_modified = ""
@@ -142,7 +140,7 @@ class RecipeWrapper:
 
                 self.tags.append(Tag(tag_name, slugify(tag_name)))
 
-        # Multilingual (empty for Increment 3)
+        # Multilingual
         self.multilingual_urls = data.get("multilingual_urls", {})
 
         # Metadata namespace for recipe_preview.html
@@ -395,6 +393,7 @@ def render_tag_pages(
     tag_objects: dict[str, Tag],
     global_ctx: dict,
     output_path: Path,
+    url_prefix: str = "",
 ) -> int:
     """Render individual tag pages (one per tag)."""
     template = env.get_template("tag.html")
@@ -403,7 +402,7 @@ def render_tag_pages(
         wrapped = wrap_articles(articles, tag_objects)
         ctx = {**global_ctx, "tag": tag, "articles": wrapped}
         html = template.render(ctx)
-        out_file = output_path / f"tag/{tag.slug}/index.html"
+        out_file = output_path / f"{url_prefix}tag/{tag.slug}/index.html"
         out_file.parent.mkdir(parents=True, exist_ok=True)
         out_file.write_text(html, encoding="utf-8")
         count += 1
@@ -415,13 +414,14 @@ def render_tags_page(
     tag_map: dict[Tag, list[dict]],
     global_ctx: dict,
     output_path: Path,
+    url_prefix: str = "",
 ) -> None:
     """Render the tags overview page (all tags with counts)."""
     template = env.get_template("tags.html")
     tags_list = [(tag, articles) for tag, articles in tag_map.items()]
     ctx = {**global_ctx, "tags": tags_list}
     html = template.render(ctx)
-    out_file = output_path / "tags/index.html"
+    out_file = output_path / f"{url_prefix}tags/index.html"
     out_file.parent.mkdir(parents=True, exist_ok=True)
     out_file.write_text(html, encoding="utf-8")
 
@@ -583,6 +583,24 @@ def render_recipes_index(
 
 
 # ---------------------------------------------------------------------------
+# 5.6  Render root redirect page
+# ---------------------------------------------------------------------------
+
+
+def render_root_redirect(
+    env: Environment,
+    global_ctx: dict,
+    output_path: Path,
+) -> None:
+    """Render the root index.html with auto-redirect to detected language."""
+    template = env.get_template("auto_redirect.html")
+    html = template.render(global_ctx)
+    out_file = output_path / "index.html"
+    out_file.parent.mkdir(parents=True, exist_ok=True)
+    out_file.write_text(html, encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
 # 5.7  Copy static assets + images
 # ---------------------------------------------------------------------------
 
@@ -671,6 +689,98 @@ def copy_adjacent_images(
     return count
 
 
+def copy_images_for_language(
+    original_items: list[dict], lang_items: list[dict], output_path: Path
+) -> int:
+    """Copy images from original content dirs to language-specific output dirs.
+
+    For each language-specific item, copies the images from the original
+    content directory to the language output directory (e.g. output/de/slug/).
+    """
+    count = 0
+    # Build a slug -> original item lookup
+    orig_by_slug = {item["slug"]: item for item in original_items}
+
+    for lang_item in lang_items:
+        slug = lang_item["slug"]
+        orig = orig_by_slug.get(slug)
+        if not orig:
+            continue
+
+        adjacent = orig.get("adjacent_files", [])
+        if not adjacent:
+            continue
+
+        content_dir = Path(orig["content_dir"])
+        save_as = lang_item.get("save_as", "")
+        if not save_as:
+            continue
+
+        out_dir = output_path / Path(save_as).parent
+
+        for filename in adjacent:
+            src = content_dir / filename
+            if not src.exists():
+                src = content_dir / "attachments" / filename
+            if src.exists():
+                out_dir.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(src, out_dir / filename)
+                count += 1
+
+    return count
+
+
+# ---------------------------------------------------------------------------
+# Multilingual rendering
+# ---------------------------------------------------------------------------
+
+
+def _render_language(
+    env: Environment,
+    lang: str,
+    lang_data: dict,
+    tag_objects: dict[str, Tag],
+    lang_ctx: dict,
+    output_path: Path,
+) -> dict:
+    """Render all content for a single language.
+
+    Returns a dict of counts.
+    """
+    articles = wrap_articles(lang_data["articles"], tag_objects)
+    pages = wrap_pages(lang_data["pages"])
+
+    # 5.1 Per-language articles
+    art_count = render_articles(env, articles, lang_ctx, output_path)
+
+    # 5.1 Per-language pages
+    page_count = render_pages(env, pages, lang_ctx, output_path)
+
+    # 5.2 Per-language paginated index
+    idx_count = render_index_pages(
+        env, lang_data["pagination"], tag_objects, lang_ctx, output_path
+    )
+
+    # 5.3 Per-language tag pages
+    lang_tag_map = lang_data.get("tag_map", {})
+    lang_tag_objects = _build_tag_object_map(lang_tag_map)
+    tag_count = render_tag_pages(
+        env, lang_tag_map, lang_tag_objects, lang_ctx, output_path,
+        url_prefix=f"{lang}/",
+    )
+    render_tags_page(
+        env, lang_tag_map, lang_ctx, output_path,
+        url_prefix=f"{lang}/",
+    )
+
+    return {
+        "articles": art_count,
+        "pages": page_count,
+        "index_pages": idx_count,
+        "tag_pages": tag_count,
+    }
+
+
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
@@ -684,6 +794,10 @@ def render(site: dict, cfg: dict) -> None:
     output_path: Path = cfg["output_path"]
     theme_path: Path = cfg["theme_path"]
     content_path: Path = cfg["content_path"]
+
+    ml_enabled = site.get("multilingual_enabled", False)
+    languages = site.get("languages", [cfg.get("default_lang", "en")])
+    menu_translations = site.get("menu_translations", {})
 
     # Clean output directory
     if output_path.exists():
@@ -708,7 +822,7 @@ def render(site: dict, cfg: dict) -> None:
     published_articles = [a for a in articles if a.status != "hidden"]
     published_pages = [p for p in pages if p.status != "hidden"]
 
-    # 5.1 Render individual content
+    # 5.1 Render individual content (root-level English)
     art_count = render_articles(env, articles, global_ctx, output_path)
     page_count = render_pages(env, pages, global_ctx, output_path)
     recipe_count = render_recipes(env, recipes, global_ctx, output_path)
@@ -717,13 +831,18 @@ def render(site: dict, cfg: dict) -> None:
         f"{recipe_count} recipes"
     )
 
-    # 5.2 Render paginated index pages
-    idx_count = render_index_pages(
-        env, site["pagination"], tag_objects, global_ctx, output_path
-    )
-    logger.info(f"Rendered {idx_count} index pages")
+    if ml_enabled:
+        # 5.6 Root redirect page replaces the root index
+        render_root_redirect(env, global_ctx, output_path)
+        logger.info("Rendered root redirect page")
+    else:
+        # 5.2 Render paginated index pages (root-level, English only)
+        idx_count = render_index_pages(
+            env, site["pagination"], tag_objects, global_ctx, output_path
+        )
+        logger.info(f"Rendered {idx_count} index pages")
 
-    # 5.3 Render tag + category pages
+    # 5.3 Render tag + category pages (root-level)
     tag_count = render_tag_pages(
         env, site["tag_map"], tag_objects, global_ctx, output_path
     )
@@ -760,7 +879,48 @@ def render(site: dict, cfg: dict) -> None:
         f"Copied {theme_count} theme files, {static_count} content static files"
     )
 
-    # Copy adjacent images for all content types
+    # Copy adjacent images for all root-level content types
     all_items = site["articles"] + site["pages"] + site["recipes"]
     img_count = copy_adjacent_images(all_items, output_path)
     logger.info(f"Copied {img_count} adjacent images/files")
+
+    # --- Multilingual rendering ---
+    if ml_enabled and "per_lang" in site:
+        links = cfg.get("links", [])
+
+        for lang, lang_data in site["per_lang"].items():
+            # Build language-specific template context
+            lang_tag_objects = _build_tag_object_map(
+                lang_data.get("tag_map", {})
+            )
+
+            # Translate menu links
+            translated_links = build_translated_links(
+                links, lang, menu_translations
+            )
+
+            lang_ctx = {
+                **global_ctx,
+                "LANG": lang,
+                "current_language": lang,
+                "LINKS": translated_links,
+            }
+
+            counts = _render_language(
+                env, lang, lang_data, lang_tag_objects, lang_ctx, output_path
+            )
+
+            # Copy images for this language
+            lang_img_count = copy_images_for_language(
+                site["articles"], lang_data["articles"], output_path
+            )
+            lang_img_count += copy_images_for_language(
+                site["pages"], lang_data["pages"], output_path
+            )
+
+            logger.info(
+                f"Language '{lang}': {counts['articles']} articles, "
+                f"{counts['pages']} pages, {counts['index_pages']} index, "
+                f"{counts['tag_pages']} tag pages, "
+                f"{lang_img_count} images copied"
+            )

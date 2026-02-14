@@ -12,14 +12,21 @@ from garten.assemble import (
     Category,
     Tag,
     build_category_map,
+    build_language_links,
     build_pagination,
+    build_per_language_content,
     build_tag_map,
+    build_translated_links,
     filter_articles_for_index,
+    generate_multilingual_urls,
     generate_urls,
+    load_menu_translations,
+    prefix_internal_links,
     set_locale_dates,
     sort_articles_by_date,
 )
 from garten.config import load_config
+from garten.utils import localize_date
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -388,3 +395,423 @@ class TestAssembleIntegration:
             len(site["index_articles"]) / per_page
         )
         assert len(site["pagination"]) == expected
+
+
+# ---------------------------------------------------------------------------
+# Date localization (utils.localize_date)
+# ---------------------------------------------------------------------------
+
+
+class TestLocalizeDateEnglish:
+    def test_english_format(self):
+        assert localize_date("2025-06-15T00:00:00", "en") == "June 15, 2025"
+
+    def test_english_january(self):
+        assert localize_date("2026-01-01T00:00:00", "en") == "January 1, 2026"
+
+    def test_english_december(self):
+        assert localize_date("2025-12-25T00:00:00", "en") == "December 25, 2025"
+
+
+class TestLocalizeDateGerman:
+    def test_german_format(self):
+        # 2025-06-15 is a Sunday
+        result = localize_date("2025-06-15T00:00:00", "de")
+        assert result == "So 15. Jun 2025"
+
+    def test_german_weekday(self):
+        # 2026-02-14 is a Saturday
+        result = localize_date("2026-02-14T00:00:00", "de")
+        assert result == "Sa 14. Feb 2026"
+
+
+class TestLocalizeDateFrench:
+    def test_french_format(self):
+        # 2025-06-15 is a Sunday (dimanche)
+        result = localize_date("2025-06-15T00:00:00", "fr")
+        assert result == "dimanche 15 juin 2025"
+
+    def test_french_weekday(self):
+        # 2026-02-14 is a Saturday (samedi)
+        result = localize_date("2026-02-14T00:00:00", "fr")
+        assert result == "samedi 14 février 2026"
+
+
+class TestLocalizeDateEdgeCases:
+    def test_none_returns_empty(self):
+        assert localize_date(None) == ""
+
+    def test_empty_string_returns_empty(self):
+        assert localize_date("") == ""
+
+    def test_iso_date_only(self):
+        assert localize_date("2025-06-15") == "June 15, 2025"
+
+    def test_unknown_lang_falls_back_to_english(self):
+        result = localize_date("2025-06-15T00:00:00", "xx")
+        assert result == "June 15, 2025"
+
+    def test_datetime_object(self):
+        from datetime import datetime
+
+        dt = datetime(2025, 3, 15)
+        assert localize_date(dt, "en") == "March 15, 2025"
+
+    def test_unparseable_string_returned_as_is(self):
+        assert localize_date("not-a-date", "en") == "not-a-date"
+
+
+# ---------------------------------------------------------------------------
+# 4.2 Multilingual URLs
+# ---------------------------------------------------------------------------
+
+
+class TestGenerateMultilingualUrls:
+    def test_sets_multilingual_urls(self):
+        items = [{"slug": "my-post", "url": "my-post/"}]
+        generate_multilingual_urls(items, ["en", "de", "fr"], "en")
+        urls = items[0]["multilingual_urls"]
+        assert urls["en"] == "/my-post/"
+        assert urls["de"] == "/de/my-post/"
+        assert urls["fr"] == "/fr/my-post/"
+
+    def test_single_language(self):
+        items = [{"slug": "test", "url": "test/"}]
+        generate_multilingual_urls(items, ["en"], "en")
+        assert items[0]["multilingual_urls"] == {"en": "/test/"}
+
+    def test_non_english_default(self):
+        items = [{"slug": "test", "url": "test/"}]
+        generate_multilingual_urls(items, ["de", "en"], "de")
+        urls = items[0]["multilingual_urls"]
+        assert urls["de"] == "/test/"
+        assert urls["en"] == "/en/test/"
+
+
+# ---------------------------------------------------------------------------
+# 4.3 Prefix internal links
+# ---------------------------------------------------------------------------
+
+
+class TestPrefixInternalLinks:
+    def test_prefixes_internal_links(self):
+        html = '<a href="/about/">About</a>'
+        result = prefix_internal_links(html, "de", ["en", "de", "fr"])
+        assert 'href="/de/about/"' in result
+
+    def test_english_not_prefixed(self):
+        html = '<a href="/about/">About</a>'
+        result = prefix_internal_links(html, "en", ["en", "de", "fr"])
+        assert 'href="/about/"' in result
+
+    def test_theme_links_not_prefixed(self):
+        html = '<a href="/theme/css/style.css">CSS</a>'
+        result = prefix_internal_links(html, "de", ["en", "de", "fr"])
+        assert 'href="/theme/css/style.css"' in result
+
+    def test_static_links_not_prefixed(self):
+        html = '<a href="/static/file.txt">File</a>'
+        result = prefix_internal_links(html, "de", ["en", "de", "fr"])
+        assert 'href="/static/file.txt"' in result
+
+    def test_favicon_not_prefixed(self):
+        html = '<link href="/favicon.ico">'
+        result = prefix_internal_links(html, "de", ["en", "de", "fr"])
+        assert 'href="/favicon.ico"' in result
+
+    def test_already_prefixed_not_doubled(self):
+        html = '<a href="/de/about/">About</a>'
+        result = prefix_internal_links(html, "de", ["en", "de", "fr"])
+        assert 'href="/de/about/"' in result
+        assert "/de/de/" not in result
+
+    def test_external_links_unchanged(self):
+        # External links don't match the /path pattern
+        html = '<a href="https://example.com">External</a>'
+        result = prefix_internal_links(html, "de", ["en", "de", "fr"])
+        assert 'href="https://example.com"' in result
+
+    def test_empty_html(self):
+        assert prefix_internal_links("", "de", ["en", "de"]) == ""
+
+    def test_multiple_links(self):
+        html = '<a href="/about/">A</a> <a href="/tags/">B</a>'
+        result = prefix_internal_links(html, "fr", ["en", "fr"])
+        assert 'href="/fr/about/"' in result
+        assert 'href="/fr/tags/"' in result
+
+
+# ---------------------------------------------------------------------------
+# 4.7 Language switcher links
+# ---------------------------------------------------------------------------
+
+
+class TestBuildLanguageLinks:
+    def test_returns_non_default_languages(self):
+        item = {"slug": "test", "url": "test/"}
+        links = build_language_links(item, ["en", "de", "fr"], "en")
+        assert len(links) == 2
+        codes = [l["code"] for l in links]
+        assert "de" in codes
+        assert "fr" in codes
+
+    def test_urls_have_language_prefix(self):
+        item = {"slug": "my-post", "url": "my-post/"}
+        links = build_language_links(item, ["en", "de"], "en")
+        assert links[0]["url"] == "/de/my-post/"
+
+    def test_includes_language_names(self):
+        item = {"slug": "test", "url": "test/"}
+        links = build_language_links(item, ["en", "de", "fr"], "en")
+        de = [l for l in links if l["code"] == "de"][0]
+        fr = [l for l in links if l["code"] == "fr"][0]
+        assert de["name"] == "Deutsch"
+        assert fr["name"] == "Français"
+
+
+# ---------------------------------------------------------------------------
+# 4.5 Pagination with url_prefix
+# ---------------------------------------------------------------------------
+
+
+class TestBuildPaginationWithPrefix:
+    def test_url_prefix(self):
+        articles = [_make_article(slug=f"a{i}") for i in range(15)]
+        pages = build_pagination(articles, per_page=10, url_prefix="de/")
+        assert pages[0]["url"] == "de/index.html"
+        assert pages[1]["url"] == "de/index2.html"
+        assert pages[0]["next_url"] == "de/index2.html"
+        assert pages[1]["previous_url"] == "de/index.html"
+
+    def test_single_page_with_prefix(self):
+        articles = [_make_article(slug=f"a{i}") for i in range(5)]
+        pages = build_pagination(articles, per_page=10, url_prefix="fr/")
+        assert pages[0]["url"] == "fr/index.html"
+
+
+# ---------------------------------------------------------------------------
+# Locale dates with language
+# ---------------------------------------------------------------------------
+
+
+class TestSetLocaleDatesMultilingual:
+    def test_german_dates(self):
+        manifest = _make_manifest(
+            articles=[_make_article(date="2025-06-15T00:00:00")]
+        )
+        set_locale_dates(manifest, lang="de")
+        assert manifest["articles"][0]["locale_date"] == "So 15. Jun 2025"
+
+    def test_french_dates(self):
+        manifest = _make_manifest(
+            articles=[_make_article(date="2025-06-15T00:00:00")]
+        )
+        set_locale_dates(manifest, lang="fr")
+        assert manifest["articles"][0]["locale_date"] == "dimanche 15 juin 2025"
+
+
+# ---------------------------------------------------------------------------
+# 4.6 Menu translations
+# ---------------------------------------------------------------------------
+
+
+class TestLoadMenuTranslations:
+    def test_loads_from_file(self):
+        menu = load_menu_translations(ROOT)
+        assert "en" in menu
+        assert "de" in menu
+        assert menu["de"]["Topics"] == "Themen"
+
+    def test_missing_file_returns_empty(self, tmp_path):
+        menu = load_menu_translations(tmp_path)
+        assert menu == {}
+
+
+class TestBuildTranslatedLinks:
+    def test_translates_titles(self):
+        links = [["Topics", "/tags"], ["About", "/about"]]
+        menu_trans = {
+            "de": {"Topics": "Themen", "About": "Über"},
+        }
+        result = build_translated_links(links, "de", menu_trans)
+        assert result[0][0] == "Themen"
+        assert result[1][0] == "Über"
+
+    def test_prefixes_hrefs_for_non_english(self):
+        links = [["Topics", "/tags"]]
+        menu_trans = {"de": {"Topics": "Themen"}}
+        result = build_translated_links(links, "de", menu_trans)
+        assert result[0][1] == "/de/tags"
+
+    def test_english_hrefs_unchanged(self):
+        links = [["Topics", "/tags"]]
+        menu_trans = {"en": {"Topics": "Topics"}}
+        result = build_translated_links(links, "en", menu_trans)
+        assert result[0][1] == "/tags"
+
+    def test_missing_translation_falls_back(self):
+        links = [["Custom", "/custom"]]
+        menu_trans = {"de": {}}
+        result = build_translated_links(links, "de", menu_trans)
+        assert result[0][0] == "Custom"
+
+
+# ---------------------------------------------------------------------------
+# Build per-language content
+# ---------------------------------------------------------------------------
+
+
+class TestBuildPerLanguageContent:
+    def test_builds_all_languages(self):
+        articles = [
+            _make_article(
+                slug="test",
+                date="2025-01-01T00:00:00",
+                tags=["tech"],
+            )
+        ]
+        articles[0]["translations"] = {}
+        articles[0]["translation_files"] = {}
+        articles[0]["content"] = "<p>Hello</p>"
+
+        pages = [_make_page(slug="about")]
+        pages[0]["translations"] = {}
+        pages[0]["translation_files"] = {}
+        pages[0]["content"] = "<p>About</p>"
+
+        manifest = _make_manifest(articles=articles, pages=pages)
+        generate_urls(manifest)
+
+        cfg = {"categories_in_index": [], "default_pagination": 10}
+
+        per_lang = build_per_language_content(
+            manifest, ["en", "de"], "en", cfg
+        )
+        assert "en" in per_lang
+        assert "de" in per_lang
+        assert len(per_lang["en"]["articles"]) == 1
+        assert len(per_lang["de"]["articles"]) == 1
+
+    def test_lang_articles_have_prefixed_urls(self):
+        articles = [_make_article(slug="test", date="2025-01-01T00:00:00")]
+        articles[0]["translations"] = {}
+        articles[0]["translation_files"] = {}
+        articles[0]["content"] = "<p>Hello</p>"
+
+        manifest = _make_manifest(articles=articles)
+        generate_urls(manifest)
+
+        cfg = {"categories_in_index": [], "default_pagination": 10}
+        per_lang = build_per_language_content(
+            manifest, ["en", "de"], "en", cfg
+        )
+        assert per_lang["de"]["articles"][0]["url"] == "de/test/"
+        assert per_lang["de"]["articles"][0]["save_as"] == "de/test/index.html"
+        assert per_lang["en"]["articles"][0]["url"] == "en/test/"
+
+    def test_translations_used_when_available(self):
+        articles = [_make_article(slug="test", date="2025-01-01T00:00:00")]
+        articles[0]["translations"] = {
+            "de": {
+                "content": "<p>Hallo Welt</p>",
+                "title": "Deutscher Titel",
+                "summary": "Deutsche Zusammenfassung",
+                "translation": "de",
+                "translator": "Claude",
+            }
+        }
+        articles[0]["translation_files"] = {}
+        articles[0]["content"] = "<p>Hello World</p>"
+
+        manifest = _make_manifest(articles=articles)
+        generate_urls(manifest)
+
+        cfg = {"categories_in_index": [], "default_pagination": 10}
+        per_lang = build_per_language_content(
+            manifest, ["en", "de"], "en", cfg
+        )
+        de_art = per_lang["de"]["articles"][0]
+        assert de_art["title"] == "Deutscher Titel"
+        assert "Hallo Welt" in de_art["content"]
+        assert de_art["translator"] == "Claude"
+
+    def test_pagination_per_language(self):
+        articles = [
+            _make_article(slug=f"a{i}", date=f"2025-01-{i+1:02d}T00:00:00")
+            for i in range(15)
+        ]
+        for a in articles:
+            a["translations"] = {}
+            a["translation_files"] = {}
+            a["content"] = f"<p>{a['slug']}</p>"
+
+        manifest = _make_manifest(articles=articles)
+        generate_urls(manifest)
+
+        cfg = {"categories_in_index": [], "default_pagination": 10}
+        per_lang = build_per_language_content(
+            manifest, ["en", "de"], "en", cfg
+        )
+        assert len(per_lang["de"]["pagination"]) == 2
+        assert per_lang["de"]["pagination"][0]["url"] == "de/index.html"
+
+
+# ---------------------------------------------------------------------------
+# Integration: full assemble with multilingual
+# ---------------------------------------------------------------------------
+
+
+class TestAssembleMultilingualIntegration:
+    """Integration tests for assemble with multilingual enabled."""
+
+    @pytest.fixture
+    def site(self, cfg):
+        from garten.assemble import assemble
+        from garten.discover import discover
+        from garten.process import process
+
+        manifest = discover(cfg)
+        process(manifest, cfg)
+        return assemble(manifest, cfg)
+
+    def test_multilingual_enabled(self, site):
+        assert site["multilingual_enabled"] is True
+
+    def test_has_languages(self, site):
+        assert site["languages"] == ["en", "de", "fr"]
+
+    def test_has_per_lang(self, site):
+        assert "per_lang" in site
+        assert "en" in site["per_lang"]
+        assert "de" in site["per_lang"]
+        assert "fr" in site["per_lang"]
+
+    def test_per_lang_has_articles(self, site):
+        for lang in site["languages"]:
+            lang_data = site["per_lang"][lang]
+            assert len(lang_data["articles"]) > 0
+
+    def test_per_lang_has_pagination(self, site):
+        for lang in site["languages"]:
+            lang_data = site["per_lang"][lang]
+            assert len(lang_data["pagination"]) > 0
+
+    def test_per_lang_has_tag_map(self, site):
+        for lang in site["languages"]:
+            lang_data = site["per_lang"][lang]
+            assert len(lang_data["tag_map"]) > 0
+
+    def test_articles_have_multilingual_urls(self, site):
+        for art in site["articles"]:
+            assert "multilingual_urls" in art
+            assert len(art["multilingual_urls"]) == 3
+
+    def test_articles_have_language_links(self, site):
+        for art in site["articles"]:
+            assert "language_links" in art
+            # Should have links for non-default languages
+            assert len(art["language_links"]) == 2
+
+    def test_has_menu_translations(self, site):
+        assert "menu_translations" in site
+        assert "de" in site["menu_translations"]

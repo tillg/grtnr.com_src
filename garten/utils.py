@@ -5,6 +5,7 @@ import re
 import sys
 import unicodedata
 from datetime import datetime
+from typing import Union
 
 from unidecode import unidecode
 
@@ -109,3 +110,100 @@ def slugify(text: str) -> str:
     for pattern, repl in _SLUG_REGEX_SUBS:
         text = re.sub(pattern, repl, text)
     return text.lower()
+
+
+# ---------------------------------------------------------------------------
+# Date localization (ported from plugins/multilingual_site.py)
+# ---------------------------------------------------------------------------
+
+_LANG_DATE_CONFIG = {
+    "en": {
+        "months_short": [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        ],
+        "weekdays_short": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        "weekdays": [
+            "Monday", "Tuesday", "Wednesday", "Thursday",
+            "Friday", "Saturday", "Sunday",
+        ],
+        "months": [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December",
+        ],
+    },
+    "de": {
+        "months_short": [
+            "Jan", "Feb", "Mär", "Apr", "Mai", "Jun",
+            "Jul", "Aug", "Sep", "Okt", "Nov", "Dez",
+        ],
+        "weekdays_short": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
+        "weekdays": [
+            "Montag", "Dienstag", "Mittwoch", "Donnerstag",
+            "Freitag", "Samstag", "Sonntag",
+        ],
+        "months": [
+            "Januar", "Februar", "März", "April", "Mai", "Juni",
+            "Juli", "August", "September", "Oktober", "November", "Dezember",
+        ],
+    },
+    "fr": {
+        "months_short": [
+            "jan", "fév", "mar", "avr", "mai", "jun",
+            "jul", "aoû", "sep", "oct", "nov", "déc",
+        ],
+        "weekdays_short": ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"],
+        "weekdays": [
+            "lundi", "mardi", "mercredi", "jeudi",
+            "vendredi", "samedi", "dimanche",
+        ],
+        "months": [
+            "janvier", "février", "mars", "avril", "mai", "juin",
+            "juillet", "août", "septembre", "octobre", "novembre", "décembre",
+        ],
+    },
+}
+
+
+def localize_date(dt: Union[datetime, str, None], lang: str = "en") -> str:
+    """Format a date for display in the given language.
+
+    Accepts a ``datetime`` object or an ISO date string.  Returns a
+    locale-appropriate display string matching the Pelican multilingual
+    plugin format:
+
+    - English: ``February 14, 2026``  (used for articles)
+    - German:  ``Mi 14. Feb 2026``
+    - French:  ``vendredi 14 février 2026``
+    """
+    if dt is None:
+        return ""
+
+    if isinstance(dt, str):
+        if not dt:
+            return ""
+        for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M:%S.%f", "%Y-%m-%d"):
+            try:
+                dt = datetime.strptime(dt.replace("Z", ""), fmt)
+                break
+            except ValueError:
+                continue
+        else:
+            return dt  # unparseable, return as-is
+
+    cfg = _LANG_DATE_CONFIG.get(lang, _LANG_DATE_CONFIG["en"])
+    month_idx = dt.month - 1
+    weekday_idx = dt.weekday()
+
+    if lang == "de":
+        wd = cfg["weekdays_short"][weekday_idx]
+        mon = cfg["months_short"][month_idx]
+        return f"{wd} {dt.day}. {mon} {dt.year}"
+    elif lang == "fr":
+        wd = cfg["weekdays"][weekday_idx]
+        mon = cfg["months"][month_idx]
+        return f"{wd} {dt.day} {mon} {dt.year}"
+    else:
+        # English: "February 14, 2026"
+        mon = cfg["months"][month_idx]
+        return f"{mon} {dt.day}, {dt.year}"

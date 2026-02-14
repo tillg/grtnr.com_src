@@ -91,13 +91,13 @@ During migration, both `plugins/` (old) and `garten/` coexist. After Increment 5
 
 **Utility module mapping** (current plugins/ → garten/):
 
-| Current utility module     | Not a Pelican plugin | Goes to            |
-| -------------------------- | -------------------- | ------------------ |
-| `logger_config.py`         | Logging infra, used by 11 files | `garten/utils.py` |
-| `translation_utils.py`     | Hash caching, frontmatter parsing, used by `automatic_translation.py` | `garten/translate.py` |
-| `file_organization.py`     | Translation file management, used only by `tasks.py` | `garten/translate.py` |
-| `normalize_slugs.py`       | German character normalization | `garten/utils.py` |
-| `markdown_wikilinks.py`    | Markdown extension (not a signal-based plugin) | `garten/markdown_wikilinks.py` (kept as Markdown extension) |
+| Current utility module  | Not a Pelican plugin                                                  | Goes to                                                     |
+| ----------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `logger_config.py`      | Logging infra, used by 11 files                                       | `garten/utils.py`                                           |
+| `translation_utils.py`  | Hash caching, frontmatter parsing, used by `automatic_translation.py` | `garten/translate.py`                                       |
+| `file_organization.py`  | Translation file management, used only by `tasks.py`                  | `garten/translate.py`                                       |
+| `normalize_slugs.py`    | German character normalization                                        | `garten/utils.py`                                           |
+| `markdown_wikilinks.py` | Markdown extension (not a signal-based plugin)                        | `garten/markdown_wikilinks.py` (kept as Markdown extension) |
 
 ## Data Models
 
@@ -300,18 +300,18 @@ The ordering within Process is critical due to dependencies:
 
 The current `multilingual_site.py` (1,445 lines) is decomposed across phases:
 
-| Logic group                 | Lines in current plugin | Target phase |
-| --------------------------- | ----------------------- | ------------ |
-| Find translation files      | ~50 lines               | 1.5 Discover |
-| Parse translation frontmatter + markdown → HTML | ~270 lines | 3.1 Process |
-| Date localization           | ~30 lines               | 3.5 Process |
-| Generate language-prefixed URLs | ~50 lines           | 4.2 Assemble |
-| Prefix internal links with lang codes | ~30 lines     | 4.3 Assemble |
-| Language switcher data      | ~50 lines               | 4.7 Assemble |
-| Write per-language output files | ~250 lines          | 5.1-5.2 Render |
-| Copy images to language dirs | ~60 lines              | 5.7 Render |
-| Root redirect page          | ~15 lines               | 5.6 Render |
-| Context management / init   | ~50 lines               | Config / utils |
+| Logic group                                     | Lines in current plugin | Target phase   |
+| ----------------------------------------------- | ----------------------- | -------------- |
+| Find translation files                          | ~50 lines               | 1.5 Discover   |
+| Parse translation frontmatter + markdown → HTML | ~270 lines              | 3.1 Process    |
+| Date localization                               | ~30 lines               | 3.5 Process    |
+| Generate language-prefixed URLs                 | ~50 lines               | 4.2 Assemble   |
+| Prefix internal links with lang codes           | ~30 lines               | 4.3 Assemble   |
+| Language switcher data                          | ~50 lines               | 4.7 Assemble   |
+| Write per-language output files                 | ~250 lines              | 5.1-5.2 Render |
+| Copy images to language dirs                    | ~60 lines               | 5.7 Render     |
+| Root redirect page                              | ~15 lines               | 5.6 Render     |
+| Context management / init                       | ~50 lines               | Config / utils |
 
 ### Intermediate artifacts
 
@@ -350,35 +350,35 @@ Use file content hashes to skip unchanged work. Each phase checks if its inputs 
 
 ## Feature Inventory
 
-| Feature                   | Current                                 | New approach                                       |
-| ------------------------- | --------------------------------------- | -------------------------------------------------- |
-| Markdown → HTML           | Python-Markdown + extensions            | Same library, direct call                          |
-| Jinja2 templates          | Via Pelican theme                       | Direct Jinja2 rendering                            |
-| WikiLinks                 | Custom markdown extension + plugin      | Keep markdown extension, simplify plugin           |
-| Content types             | Articles, Pages, Recipes (via plugin)   | Python dataclasses (see Data Models)               |
-| Adjacent images           | copy_adjacent_images plugin             | Keep logic, run in sub-phase 3.2                   |
-| German slug normalization | normalize_slugs plugin                  | Reuse existing functions in `garten/utils.py`      |
-| Auto-title from directory | auto_title plugin                       | Keep logic in sub-phase 1.3                        |
-| Category from directory   | set_proper_category plugin              | Keep logic in sub-phase 1.4                        |
-| External link processing  | external_links plugin                   | HTML post-processing in sub-phase 3.4              |
-| Summary/excerpt           | excerpt_to_summary plugin               | Sub-phase 3.3                                      |
-| Homepage filtering        | filter_articles_for_index plugin        | Keep logic in sub-phase 4.8                        |
-| Translation (AI)          | automatic_translation plugin            | Keep, run in sub-phase 2.2                         |
-| Multilingual URLs         | multilingual_site plugin (1,445 lines)  | Decomposed across phases (see table above)         |
-| Pagination                | Pelican built-in                        | Sub-phase 4.5                                      |
-| Tag/category pages        | Pelican built-in                        | Sub-phases 4.4 + 5.3                               |
-| Sitemap                   | Pelican direct template                 | Keep as template in sub-phase 5.5                  |
-| RSS/Atom feeds            | Pelican built-in                        | `feedgenerator` library in sub-phase 5.4           |
-| Static files              | Pelican STATIC_PATHS                    | Simple file copy in sub-phase 5.7                  |
-| Dev server + livereload   | Pelican server + livereload             | Keep livereload, use `http.server`                 |
-| SEO tags                  | hreflang/canonical in templates         | Populated from multilingual URL map in 4.2         |
-| Build timestamp           | `BUILD_TIME` variable in pelicanconf.py | Computed by config loader at startup               |
-| Google Analytics          | Config variable in templates            | Pass config to templates                           |
-| Typogrify                 | Pelican built-in                        | Use `typogrify` library directly                   |
-| Recipe content type       | recipes plugin + dedicated templates    | Dataclass + own templates (see Data Models)        |
-| Date localization         | multilingual_site plugin                | Sub-phase 3.5 in `garten/utils.py`                |
-| Language switcher         | multilingual_site plugin                | Sub-phase 4.7                                      |
-| Root redirect page        | multilingual_site plugin                | Sub-phase 5.6                                      |
+| Feature                   | Current                                 | New approach                                  |
+| ------------------------- | --------------------------------------- | --------------------------------------------- |
+| Markdown → HTML           | Python-Markdown + extensions            | Same library, direct call                     |
+| Jinja2 templates          | Via Pelican theme                       | Direct Jinja2 rendering                       |
+| WikiLinks                 | Custom markdown extension + plugin      | Keep markdown extension, simplify plugin      |
+| Content types             | Articles, Pages, Recipes (via plugin)   | Python dataclasses (see Data Models)          |
+| Adjacent images           | copy_adjacent_images plugin             | Keep logic, run in sub-phase 3.2              |
+| German slug normalization | normalize_slugs plugin                  | Reuse existing functions in `garten/utils.py` |
+| Auto-title from directory | auto_title plugin                       | Keep logic in sub-phase 1.3                   |
+| Category from directory   | set_proper_category plugin              | Keep logic in sub-phase 1.4                   |
+| External link processing  | external_links plugin                   | HTML post-processing in sub-phase 3.4         |
+| Summary/excerpt           | excerpt_to_summary plugin               | Sub-phase 3.3                                 |
+| Homepage filtering        | filter_articles_for_index plugin        | Keep logic in sub-phase 4.8                   |
+| Translation (AI)          | automatic_translation plugin            | Keep, run in sub-phase 2.2                    |
+| Multilingual URLs         | multilingual_site plugin (1,445 lines)  | Decomposed across phases (see table above)    |
+| Pagination                | Pelican built-in                        | Sub-phase 4.5                                 |
+| Tag/category pages        | Pelican built-in                        | Sub-phases 4.4 + 5.3                          |
+| Sitemap                   | Pelican direct template                 | Keep as template in sub-phase 5.5             |
+| RSS/Atom feeds            | Pelican built-in                        | `feedgenerator` library in sub-phase 5.4      |
+| Static files              | Pelican STATIC_PATHS                    | Simple file copy in sub-phase 5.7             |
+| Dev server + livereload   | Pelican server + livereload             | Keep livereload, use `http.server`            |
+| SEO tags                  | hreflang/canonical in templates         | Populated from multilingual URL map in 4.2    |
+| Build timestamp           | `BUILD_TIME` variable in pelicanconf.py | Computed by config loader at startup          |
+| Google Analytics          | Config variable in templates            | Pass config to templates                      |
+| Typogrify                 | Pelican built-in                        | Use `typogrify` library directly              |
+| Recipe content type       | recipes plugin + dedicated templates    | Dataclass + own templates (see Data Models)   |
+| Date localization         | multilingual_site plugin                | Sub-phase 3.5 in `garten/utils.py`            |
+| Language switcher         | multilingual_site plugin                | Sub-phase 4.7                                 |
+| Root redirect page        | multilingual_site plugin                | Sub-phase 5.6                                 |
 
 ## Translation
 
@@ -485,7 +485,7 @@ Build markdown rendering + image copying + summaries. For each piece of content,
 - `tests/test_process.py` — 59 tests (unit + integration + spot checks)
 - Updated `tasks.py` with `inv process` task (runs discover + process)
 
-**Test coverage:** 59 tests covering strip_frontmatter (4), markdown rendering (12), image URL fixing (8), adjacent file discovery (5), summary generation (6), external links (7), typogrify (2), integration on real content (11), and spot checks for specific features (4).
+**Test coverage:** 59 tests covering strip_frontmatter (4), markdown rendering (12), image URL fixing (8), adjacent file discovery (5), summary generation (6), external links (7), typogrify (2), integration on real content (11), and spot checks for specific features trty (4).
 
 ### Increment 3: Assemble + Render
 
@@ -527,6 +527,45 @@ Build tag/category grouping, pagination, and Jinja2 template rendering. Diff the
 ### Increment 4: Translation + Multilingual
 
 Port the translation and multilingual URL systems to garten. Verify translated output matches.
+
+#### Increment 4 — Implementation Notes
+
+**Status: DONE** — 212 tests passing (73 process + 84 assemble + 55 render), `inv render` produces a complete multilingual site with en/de/fr language variants.
+
+**Scope:** Ported the multilingual site generation from `plugins/multilingual_site.py` (1,446 lines) into garten's existing phase modules. No new modules created — all multilingual logic lives in process.py, assemble.py, render.py, and utils.py.
+
+**Decisions taken during implementation:**
+
+1. **Date localization in `utils.py`, not a separate module.** `localize_date()` accepts a datetime or ISO string and language code, returning locale-formatted strings: English "February 14, 2026", German "Mi 14. Feb 2026", French "vendredi 14 février 2026". Month/weekday lookup tables for en/de/fr are in `_LANG_DATE_CONFIG`. Unknown languages fall back to English format.
+2. **Translation processing added to Phase 3 (Process) as sub-phase 3.5.** Translation files are read, their frontmatter parsed, and content rendered through the same pipeline as original content (markdown → HTML → image URL fixing → external links → typogrify). Results stored in `item["translations"]` dict keyed by language code.
+3. **Translation frontmatter parser is intentionally simple** — same line-by-line `key: value` approach as discover.py, not full YAML. Handles quoted values (single and double quotes stripped). Keys are lowercased for case-insensitive matching.
+4. **English articles rendered at root (`/{slug}/`) AND at `/en/{slug}/`.** Root-level English content provides canonical URLs and backwards compatibility. Per-language copies (including English) provide the multilingual URL structure. This matches the Pelican multilingual plugin's behavior.
+5. **Root `index.html` is auto-redirect when multilingual enabled.** Instead of a paginated article list at root, `index.html` renders `auto_redirect.html` which detects browser language and redirects to `/{lang}/`. Paginated indexes move to `/{lang}/index.html`, `/{lang}/index2.html`, etc.
+6. **Per-language content uses `copy.copy()` (shallow copy) of original dicts.** `translations` and `translation_files` keys are popped from copies so they don't carry over to language-specific items. This avoids deep-copying large HTML content strings unnecessarily.
+7. **Internal link prefixing skips known prefixes:** `/theme/`, `/static/`, `/favicon`, and already-language-prefixed links. English content is never prefixed (it lives at root). Only non-English language copies get `href="/de/..."` prefixes.
+8. **Recipes are NOT translated** — they exist at root level only (`/recipes/{slug}/`), not under language directories. This matches the existing `TRANSLATION_EXCLUDE_CATEGORIES = ["recipes"]` config.
+9. **`build_per_language_content()` produces independent data structures per language:** articles, pages, tag_map, pagination, index_articles. Each language gets its own tag groupings and pagination, ensuring proper article counts and page numbers per language.
+10. **Menu translations loaded from `menu_translations.json`** (5 entries × 3 languages). `build_translated_links()` translates menu titles and prefixes hrefs for non-English languages. Created `menu_translations.json` with en/de/fr for Home, Topics, Recipes, About, Impressum.
+11. **hreflang tags generated per article/page** via `generate_multilingual_urls()`. Sets `multilingual_urls` dict mapping each language to its URL. Templates render `<link rel="alternate" hreflang="..." href="..."/>` from this data.
+12. **Language switcher data** (`language_links`) provides `[{code, name, url}]` for non-default languages. Used by the globe button + dropdown in the sidebar template.
+13. **Images are copied to all language directories.** `copy_images_for_language()` copies images from original content directories to each language's output directory (e.g., `output/de/how-i-code-with-claude/claude.png`). Total: 234 images × 3 languages = 702 image copies for language dirs, plus 255 at root.
+14. **Per-language tag/tags pages** at `/{lang}/tag/{slug}/index.html` and `/{lang}/tags/index.html`. Each language gets its own tag groupings.
+15. **Template context extended** with `LANG`, `current_language`, and translated `LINKS` per language. Templates already supported these variables from the Pelican multilingual plugin.
+16. **`ArticleWrapper` now populates** `translation`, `translator`, `original_url`, and `language_links` from the data dict (were hardcoded to empty defaults in Increment 3).
+17. **Existing Increment 3 tests updated** to account for multilingual changes: `test_write_artifacts` now counts translation HTML files, `test_index_pages_created` checks `en/index.html` instead of root `index.html`, `test_index_contains_article_titles` and `test_index_has_pagination` check `en/index.html`.
+
+**Files modified:**
+
+- `garten/utils.py` — Added `localize_date()`, `_LANG_DATE_CONFIG`, `Union` import
+- `garten/process.py` — Added sub-phase 3.5: `_parse_translation_frontmatter()`, `_process_translation()`, `_process_translations()`. Updated `process()`, `write_artifacts()`, `_slim_manifest()` for translations
+- `garten/assemble.py` — Full multilingual assembly: `LANG_NAMES`, `generate_multilingual_urls()` (4.2), `prefix_internal_links()` (4.3), `build_language_links()` (4.7), `_build_lang_article()`, `_build_lang_page()`, `build_per_language_content()`, `load_menu_translations()`, `build_translated_links()` (4.6). Updated `set_locale_dates()`, `build_pagination()`, `assemble()`, `write_artifacts()`
+- `garten/render.py` — Multilingual rendering: `render_root_redirect()` (5.6), `copy_images_for_language()` (5.7), `_render_language()`. Updated `ArticleWrapper`, `PageWrapper`, `render_tag_pages()`, `render_tags_page()`, `render()`
+- `menu_translations.json` — Created with en/de/fr translations
+- `tests/test_process.py` — Added 18 tests for translation processing (frontmatter parsing, translation file processing, integration)
+- `tests/test_assemble.py` — Added 50 tests for multilingual assembly (date localization, multilingual URLs, link prefixing, language links, pagination with prefix, menu translations, per-language content, integration)
+- `tests/test_render.py` — Added 17 tests for multilingual rendering (wrapper attributes, image copying, root redirect, full integration)
+
+**Output inventory (multilingual):** Root-level: 56 articles + 2 pages + 35 recipes + sitemap + robots + humans + archives + authors + categories + recipes index + 13 tag pages + 1 category page + auto-redirect index. Per language (×3): 56 articles + 2 pages + 6 index pages + 13 tag pages + tags overview. Images: 255 at root + 234×3 per language = 957 total image copies. Total: ~600 HTML files.
 
 ### Increment 5: Switch
 
