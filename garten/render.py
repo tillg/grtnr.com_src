@@ -802,7 +802,7 @@ def render(site: dict, cfg: dict) -> None:
 
     # Clean output directory
     if output_path.exists():
-        shutil.rmtree(output_path)
+        shutil.rmtree(output_path, ignore_errors=True)
     output_path.mkdir(parents=True, exist_ok=True)
 
     # Create Jinja2 environment

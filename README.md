@@ -36,6 +36,8 @@ This project uses invoke for task automation. Here are the available commands:
 ## TODO
 
 - Generate summaries by AI if not created by editor.
+- write article about how we build our site now
+- Add Update date & comment to MD frontmatter and to templatea
 
 ## Code Quality
 
@@ -52,16 +54,19 @@ This project uses automated Python code formatting and linting. For detailed gui
 The project includes comprehensive tests for the translation service functionality.
 
 **Run all tests:**
+
 ```bash
 python tests/test_translation_service.py
 ```
 
 **Run tests with verbose output:**
+
 ```bash
 python tests/test_translation_service.py -v
 ```
 
 **Run using unittest module:**
+
 ```bash
 python -m unittest tests.test_translation_service -v
 ```
@@ -101,8 +106,9 @@ Or use environment variables: `GARTEN_TRANSLATION__ENABLED=true`
 This system uses **ISO 639-1 two-letter language codes**. Here are common examples:
 
 **European Languages:**
+
 - `en` - English
-- `de` - German (Deutsch)  
+- `de` - German (Deutsch)
 - `fr` - French (Français)
 - `es` - Spanish (Español)
 - `it` - Italian (Italiano)
@@ -116,6 +122,7 @@ This system uses **ISO 639-1 two-letter language codes**. Here are common exampl
 - `pl` - Polish (Polski)
 
 **Asian Languages:**
+
 - `zh` - Chinese (中文)
 - `ja` - Japanese (日本語)
 - `ko` - Korean (한국어)
@@ -125,6 +132,7 @@ This system uses **ISO 639-1 two-letter language codes**. Here are common exampl
 - `vi` - Vietnamese (Tiếng Việt)
 
 **Other Languages:**
+
 - `tr` - Turkish (Türkçe)
 - `he` - Hebrew (עברית)
 - `fa` - Persian (فارسی)
@@ -156,11 +164,13 @@ content/articles/2025-01-01-example/
 ### Managing Translations
 
 **Clean up all translations** (useful when switching translation services):
+
 ```bash
 inv clean-translations
 ```
 
 **Clear only the translation cache** (forces re-translation without removing files):
+
 ```bash
 inv clean-translations-cache
 ```
