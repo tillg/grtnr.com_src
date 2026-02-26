@@ -169,6 +169,36 @@ Environment override: `GARTEN_TRANSLATION__ENABLED=true`
 - Run tests: `python -m pytest tests/ -q`
 - 254+ tests covering all pipeline phases
 
+## Writing a New Article
+
+Each article lives in its own directory under `content/articles/` with a date-prefixed slug:
+
+```text
+content/articles/YYYY-MM-DD-slug/
+├── YYYY-MM-DD-slug.md   # Article content (filename must match directory name)
+└── hero.png             # Hero image (referenced in frontmatter)
+```
+
+**Required frontmatter fields:**
+
+```yaml
+---
+date: YYYY-MM-DD
+excerpt: One-sentence summary of the article
+Tags: tag1, tag2
+image: hero.png
+---
+```
+
+- `date` — Publication date
+- `excerpt` (or `summary`) — Short description shown in article listings
+- `Tags` — Comma-separated list of tags (capitalized key)
+- `image` — Hero/thumbnail image filename (file must exist in the article directory)
+
+**Images:** Every article should have a hero image. If the user doesn't provide one, find a suitable image from the internet (e.g. a relevant icon, illustration, or logo — prefer SVG or PNG) and save it into the article's directory. Then reference it in the `image` frontmatter field.
+
+**After creating an article**, run `inv render` to verify it builds without errors.
+
 ## Content Guidelines
 
 - Articles use date-prefixed directory structure: `YYYY-MM-DD-slug/`
