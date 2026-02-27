@@ -154,6 +154,8 @@ content/articles/2025-01-01-example/
 
 Environment override: `GARTEN_TRANSLATION__ENABLED=true`
 
+**IMPORTANT: Never edit translation files in `extensions/` directories.** They are auto-generated at build time from the original content files. Only edit the original source `.md` file — translations will be regenerated automatically.
+
 **Translation Files Include:**
 - Source and target language metadata
 - Creation timestamp and source file hash

@@ -29,14 +29,83 @@ jobs:
           head -5 /tmp/urls.txt
 
       - name: Check all links on production pages
+        id: lychee
+        continue-on-error: true
         run: |
           lychee --config lychee.toml --format markdown \
             --output /tmp/lychee-report.md \
             $(cat /tmp/urls.txt | tr '\n' ' ')
+
+      - name: Generate report table
+        if: always()
+        run: |
+          python3 << 'PYEOF'
+          import re
+
+          with open("/tmp/lychee-report.md") as f:
+              raw = f.read()
+
+          lines = raw.splitlines()
+
+          # Extract summary section (everything up to "## Errors per input")
+          summary_lines = []
+          for line in lines:
+              if line.startswith("## Errors per input"):
+                  break
+              summary_lines.append(line)
+          summary = "\n".join(summary_lines).strip()
+
+          # Parse errors: "### Errors in <URL>" followed by "* ..." bullets
+          errors = []
+          current_page = None
+          for line in lines:
+              header = re.match(r"^### Errors in (.+)$", line)
+              if header:
+                  current_page = header.group(1)
+                  continue
+              if current_page and line.startswith("* "):
+                  error_text = line[2:].strip()
+                  # Extract status and broken URL for a cleaner display
+                  m = re.match(r"\[(\w+)\]\s*<([^>]+)>", error_text)
+                  if m:
+                      status, broken_url = m.group(1), m.group(2)
+                      error_text = f"[{status}] {broken_url}"
+                  errors.append((current_page, error_text))
+
+          # Build output
+          out = [summary, ""]
+
+          if errors:
+              out.append("## Broken Links")
+              out.append("")
+              out.append("| Page | Error |")
+              out.append("|------|-------|")
+              for page, error in errors:
+                  slug = page.rstrip("/").split("/")[-1]
+                  page_link = f"[{slug}]({page})"
+                  # Escape pipes in error text
+                  error_safe = error.replace("|", "\\|")
+                  out.append(f"| {page_link} | {error_safe} |")
+          else:
+              out.append("## No broken links found!")
+
+          out.append("")
+
+          with open("/tmp/lychee-table.md", "w") as f:
+              f.write("\n".join(out))
+
+          print("\n".join(out))
+          PYEOF
 
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lychee-report
-          path: /tmp/lychee-report.md
+          path: |
+            /tmp/lychee-table.md
+            /tmp/lychee-report.md
+
+      - name: Fail if broken links found
+        if: steps.lychee.outcome == 'failure'
+        run: exit 1
