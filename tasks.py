@@ -66,7 +66,10 @@ def clean(c):
 def search_index(c):
     """Build Pagefind search index from the generated site"""
     logger.info("Building Pagefind search index...")
-    c.run("python -m pagefind --site output")
+    c.run(
+        "python -m pagefind --site output"
+        " --exclude-selectors 'pre,code,.highlight'"
+    )
 
 
 @task

@@ -340,6 +340,7 @@ def render_recipes(
     recipes: list[RecipeWrapper],
     global_ctx: dict,
     output_path: Path,
+    url_prefix: str = "",
 ) -> int:
     """Render each recipe to its own page."""
     template = env.get_template("recipe.html")
@@ -347,7 +348,7 @@ def render_recipes(
     for recipe in recipes:
         ctx = {**global_ctx, "recipe": recipe}
         html = template.render(ctx)
-        out_file = output_path / recipe.save_as
+        out_file = output_path / f"{url_prefix}{recipe.save_as}"
         out_file.parent.mkdir(parents=True, exist_ok=True)
         out_file.write_text(html, encoding="utf-8")
         count += 1
@@ -765,6 +766,7 @@ def _render_language(
     tag_objects: dict[str, Tag],
     lang_ctx: dict,
     output_path: Path,
+    recipes: list | None = None,
 ) -> dict:
     """Render all content for a single language.
 
@@ -778,6 +780,13 @@ def _render_language(
 
     # 5.1 Per-language pages
     page_count = render_pages(env, pages, lang_ctx, output_path)
+
+    # 5.1 Per-language recipes (shared across languages)
+    recipe_count = 0
+    if recipes is not None:
+        recipe_count = render_recipes(
+            env, recipes, lang_ctx, output_path, url_prefix=f"{lang}/"
+        )
 
     # 5.2 Per-language paginated index
     idx_count = render_index_pages(
@@ -802,6 +811,7 @@ def _render_language(
     return {
         "articles": art_count,
         "pages": page_count,
+        "recipes": recipe_count,
         "index_pages": idx_count,
         "tag_pages": tag_count,
     }
@@ -936,7 +946,8 @@ def render(site: dict, cfg: dict) -> None:
             }
 
             counts = _render_language(
-                env, lang, lang_data, lang_tag_objects, lang_ctx, output_path
+                env, lang, lang_data, lang_tag_objects, lang_ctx, output_path,
+                recipes=recipes,
             )
 
             # Copy images for this language
