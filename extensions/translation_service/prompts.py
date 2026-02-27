@@ -82,7 +82,7 @@ LANGUAGE CODE:"""
     # Language-specific adaptations
     LANGUAGE_ADAPTATIONS = {
         "de": {
-            "style_notes": "Use formal German (Sie form) for technical content. Compound words should be properly formed.",
+            "style_notes": "Use informal German (Du form), never the formal Sie form. Compound words should be properly formed.",
             "technical_terms": "Keep English technical terms when they are commonly used in German tech contexts.",
         },
         "fr": {
