@@ -36,16 +36,6 @@ jobs:
           sudo mv lychee /usr/local/bin/
           lychee --version
 
-      - name: Cache translations
-        uses: actions/cache@v3
-        with:
-          path: cache/translations
-          key: translations-${{ hashFiles('content/**/*.md', 'extensions/translation_service/**/*.py') }}-v2
-          restore-keys: |
-            translations-${{ hashFiles('content/**/*.md', 'extensions/translation_service/**/*.py') }}-
-            translations-v2-
-            translations-
-
       - name: Set site name based on branch
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
