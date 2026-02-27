@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ LANG or DEFAULT_LANG }}"{% if current_language %} data-lang="{{ current_language }}"{% endif %}>
+<html lang="{{ current_language or DEFAULT_LANG }}"{% if current_language %} data-lang="{{ current_language }}"{% endif %}>
 
 <head>
   {% block head %}
@@ -95,33 +95,42 @@
           {% endif %}
         </h3>
         
-        <!-- Language Switcher -->
-        {% if MULTILINGUAL_ENABLED %}
-        <div class="language-switcher-top">
-          <button class="language-globe-btn" onclick="toggleLanguageMenu()">
-            <svg class="globe-icon" viewBox="0 0 24 24" width="20" height="20">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        <div class="masthead-icons">
+          <a href="{{ SITEURL }}/{{ current_language or 'en' }}/search/" class="search-icon-btn" aria-label="Search">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
-          </button>
-          <div class="language-menu" id="languageMenu">
-            {% set current_lang = current_language or 'en' %}
-            {% for lang in ['en', 'de', 'fr'] %}
-              {% if lang != current_lang %}
-                <a href="#" class="language-option" data-lang="{{ lang }}" onclick="switchLanguage('{{ lang }}')">
-                  {% if lang == 'en' %}English
-                  {% elif lang == 'de' %}Deutsch
-                  {% elif lang == 'fr' %}Français
-                  {% endif %}
-                </a>
-              {% endif %}
-            {% endfor %}
+          </a>
+          {% if MULTILINGUAL_ENABLED %}
+          <div class="language-switcher-top">
+            <button class="language-globe-btn" onclick="toggleLanguageMenu()">
+              <svg class="globe-icon" viewBox="0 0 24 24" width="20" height="20">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+            </button>
+            <div class="language-menu" id="languageMenu">
+              {% set current_lang = current_language or 'en' %}
+              {% for lang in ['en', 'de', 'fr'] %}
+                {% if lang != current_lang %}
+                  <a href="#" class="language-option" data-lang="{{ lang }}" onclick="switchLanguage('{{ lang }}')">
+                    {% if lang == 'en' %}English
+                    {% elif lang == 'de' %}Deutsch
+                    {% elif lang == 'fr' %}Français
+                    {% endif %}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
+          {% endif %}
         </div>
-        {% endif %}
       </div>
     </div>
 
-    <div class="container content">
+    <div class="container content" data-pagefind-body>
       {% block content %}{% endblock %}
     </div>
 
@@ -243,6 +252,7 @@
     </script>
     {% endif %}
     <script src="{{ '/theme/js/giscus-comments.js' }}"></script>
+    {% block scripts %}{% endblock %}
 
   </div>
 </body>

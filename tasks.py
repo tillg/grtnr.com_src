@@ -63,9 +63,17 @@ def clean(c):
 
 
 @task
+def search_index(c):
+    """Build Pagefind search index from the generated site"""
+    logger.info("Building Pagefind search index...")
+    c.run("python -m pagefind --site output")
+
+
+@task
 def build(c):
     """Build local version of site"""
     _run_garten_pipeline()
+    search_index(c)
     check_links(c)
 
 
@@ -106,6 +114,7 @@ def reserve(c):
 def preview(c):
     """Build production version of site"""
     _run_garten_pipeline()
+    search_index(c)
     check_links(c)
 
 

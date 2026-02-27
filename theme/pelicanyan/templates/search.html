@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Search - {{ SITENAME }}{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link href="{{ SITEURL }}/pagefind/pagefind-ui.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="post">
+  <h1 class="post-title">Search</h1>
+  <div id="search"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ SITEURL }}/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      showImages: false,
+      translations: {
+        placeholder: "Search {{ SITENAME }}..."
+      }
+    });
+  });
+</script>
+{% endblock %}

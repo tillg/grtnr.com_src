@@ -92,12 +92,39 @@ td img {
   margin-bottom: 0.5rem;
 }
 
-/* Top-right language switcher styles */
-.language-switcher-top {
+/* Masthead icons container (search + language switcher) */
+.masthead-icons {
   position: absolute;
   top: 1rem;
   right: 1rem;
   z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Search icon button */
+.search-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.search-icon-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #268bd2;
+  text-decoration: none;
+}
+
+/* Top-right language switcher styles */
+.language-switcher-top {
+  position: relative;
 }
 
 .language-globe-btn {
@@ -157,13 +184,143 @@ td img {
 }
 
 
+/* Pagefind search page overrides */
+.pagefind-ui {
+  /* Use Pagefind CSS custom properties for global overrides */
+  --pagefind-ui-scale: 1;
+  --pagefind-ui-primary: #268bd2;
+  --pagefind-ui-text: #515151;
+  --pagefind-ui-background: #fff;
+  --pagefind-ui-border: #eee;
+  --pagefind-ui-tag: #f5f5f5;
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 4px;
+  --pagefind-ui-font: "PT Serif", Georgia, "Times New Roman", serif;
+}
+
+/* Search input — use sans-serif like headings */
+.pagefind-ui .pagefind-ui__search-input {
+  font-family: "PT Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 1rem !important;
+  color: #515151 !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  padding: 0.6rem 0.75rem 0.6rem 2.75rem !important;
+}
+
+.pagefind-ui .pagefind-ui__search-input::placeholder {
+  color: #9a9a9a !important;
+}
+
+/* Result count message — muted like post-date */
+.pagefind-ui .pagefind-ui__message {
+  font-family: "PT Sans", Helvetica, Arial, sans-serif !important;
+  color: #9a9a9a !important;
+  font-size: 0.85rem !important;
+  padding: 0.75rem 0 !important;
+}
+
+/* Each result — spaced like .post */
+.pagefind-ui .pagefind-ui__result {
+  padding: 1.5em 0 !important;
+  border-top: 1px solid #eee !important;
+}
+
+/* Result title — match h1 post-title style (40px = 2.5rem at 16px base)
+   !important needed: Pagefind Svelte selectors have 3-class specificity */
+.pagefind-ui .pagefind-ui__result-title {
+  font-family: "PT Sans", Helvetica, Arial, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 2.5rem !important;
+  letter-spacing: -0.025rem !important;
+  color: #313131 !important;
+  line-height: 1.25 !important;
+}
+
+.pagefind-ui .pagefind-ui__result-link {
+  color: #303030 !important;
+  text-decoration: none !important;
+}
+
+.pagefind-ui .pagefind-ui__result-link:hover {
+  color: #268bd2 !important;
+  text-decoration: underline !important;
+}
+
+/* Result excerpt — match body text size */
+.pagefind-ui .pagefind-ui__result-excerpt {
+  font-family: "PT Serif", Georgia, "Times New Roman", serif !important;
+  font-size: 1rem !important;
+  color: #515151 !important;
+  line-height: 1.5 !important;
+  margin-top: 0.25rem !important;
+}
+
+/* Highlighted search terms */
+.pagefind-ui mark {
+  background-color: #fff3cd;
+  color: inherit;
+  padding: 0.1em 0.15em;
+  border-radius: 2px;
+}
+
+/* Sub-results (nested sections) */
+.pagefind-ui .pagefind-ui__result-nested {
+  border-left: 2px solid #eee !important;
+  padding-left: 0.75rem !important;
+  margin-top: 0.5rem !important;
+  margin-left: 0.25rem !important;
+}
+
+.pagefind-ui .pagefind-ui__result-nested .pagefind-ui__result-link {
+  font-family: "PT Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
+  color: #268bd2 !important;
+}
+
+/* Hide thumbnail column (we don't use images in results) */
+.pagefind-ui .pagefind-ui__result-thumb {
+  display: none !important;
+}
+
+.pagefind-ui .pagefind-ui__result-inner {
+  margin-left: 0 !important;
+}
+
+/* "Load more" button — match pagination style */
+.pagefind-ui .pagefind-ui__button {
+  font-family: "PT Sans", Helvetica, Arial, sans-serif !important;
+  color: #515151 !important;
+  background: none !important;
+  border: 1px solid #eee !important;
+  border-radius: 4px !important;
+  padding: 0.75rem 1.5rem !important;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagefind-ui .pagefind-ui__button:hover {
+  background-color: #f5f5f5 !important;
+}
+
+/* Clear button */
+.pagefind-ui .pagefind-ui__search-clear {
+  font-family: "PT Sans", Helvetica, Arial, sans-serif !important;
+  color: #9a9a9a !important;
+}
+
+.pagefind-ui .pagefind-ui__search-clear:hover {
+  color: #515151 !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .language-switcher-top {
+  .masthead-icons {
     top: 0.5rem;
     right: 0.5rem;
   }
-  
+
   .language-menu {
     min-width: 100px;
   }

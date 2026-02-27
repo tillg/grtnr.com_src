@@ -31,3 +31,6 @@ exclude = [
 
 # Don't check email addresses
 include_mail = false
+
+# Exclude paths from checking
+exclude_path = ["output/pagefind"]

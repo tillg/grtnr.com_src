@@ -7,9 +7,9 @@
 <h1 class="tag-heading">
     Articles about <span class="tag-inline">{{ tag_pills.render_tag_pills([tag], size='large') }}</span>
 </h1>
-<ul>
+<div class="posts">
     {% for article in articles %}
-    <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a> - {{ article.locale_date }}</li>
+      {% include 'article_preview.html' %}
     {% endfor %}
-</ul>
+</div>
 {% endblock %}

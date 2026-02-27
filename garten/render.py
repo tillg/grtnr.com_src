@@ -587,6 +587,25 @@ def render_recipes_index(
 
 
 # ---------------------------------------------------------------------------
+# 5.5b Render search page
+# ---------------------------------------------------------------------------
+
+
+def render_search_page(
+    env: Environment,
+    global_ctx: dict,
+    output_path: Path,
+    url_prefix: str = "",
+) -> None:
+    """Render the dedicated search page."""
+    template = env.get_template("search.html")
+    html = template.render(global_ctx)
+    out_file = output_path / f"{url_prefix}search/index.html"
+    out_file.parent.mkdir(parents=True, exist_ok=True)
+    out_file.write_text(html, encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
 # 5.6  Render root redirect page
 # ---------------------------------------------------------------------------
 
@@ -777,6 +796,9 @@ def _render_language(
         url_prefix=f"{lang}/",
     )
 
+    # Search page for this language
+    render_search_page(env, lang_ctx, output_path, url_prefix=f"{lang}/")
+
     return {
         "articles": art_count,
         "pages": page_count,
@@ -875,6 +897,7 @@ def render(site: dict, cfg: dict) -> None:
     render_robots(env, global_ctx, output_path)
     render_humans(env, global_ctx, output_path)
     render_recipes_index(env, recipes, global_ctx, output_path)
+    render_search_page(env, global_ctx, output_path)
     logger.info("Rendered direct templates (archives, sitemap, robots, etc.)")
 
     # 5.7 Copy static assets
