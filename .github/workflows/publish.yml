@@ -100,24 +100,6 @@ jobs:
       - name: Generate translations
         run: inv translate
 
-      - name: Build site
-        run: inv build
-
-      - name: Show translation statistics
-        run: |
-          echo "Translation Statistics:"
-          echo "Cache directory contents:"
-          ls -la cache/ 2>/dev/null || echo "No cache directory found"
-          if [ -d "cache/translations" ]; then
-            ls -la cache/translations/
-          else
-            echo "No translations cache directory"
-          fi
-          echo "Content extensions directories:"
-          find content -name "extensions" -type d 2>/dev/null || echo "No extensions directories found"
-          echo "Generated translation files:"
-          find content -name "*-[A-Z][A-Z].md" 2>/dev/null | head -10 || echo "No translation files found in content"
-
       - name: Commit translations back to repo
         if: github.ref == 'refs/heads/main'
         run: |
@@ -145,6 +127,9 @@ jobs:
             git push
             echo "Translations committed and pushed"
           fi
+
+      - name: Build site
+        run: inv build
 
       - name: Upload site as artifact
         uses: actions/upload-artifact@v4

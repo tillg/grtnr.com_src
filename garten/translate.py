@@ -8,7 +8,9 @@ to detect stale translations and skip up-to-date ones.
 from __future__ import annotations
 
 import hashlib
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -190,63 +192,101 @@ def translate_content(
     svc_config.target_languages = target_languages
     service = TranslationService(svc_config)
 
+    # Pre-scan to count how many translations are needed
+    work_items: list[tuple[Path, str]] = []  # (source_path, lang)
     for source_path in source_files:
-        source_text = source_path.read_text(encoding="utf-8")
-        source_meta = parse_frontmatter(source_text)
-        source_hash = _compute_source_hash(source_path)
         stem = source_path.stem
         ext_dir = source_path.parent / "extensions"
-
-        # Detect source language
+        source_text = source_path.read_text(encoding="utf-8")
         body = strip_frontmatter(source_text)
         source_lang = service.detect_language(body)
 
-        # Determine which languages to translate into
-        langs_for_file = []
-        for lang in target_languages:
-            if lang == source_lang:
-                continue
-            langs_for_file.append(lang)
-        # If source is not default lang, also translate to default lang
+        langs_for_file = [l for l in target_languages if l != source_lang]
         if source_lang != default_lang and default_lang not in langs_for_file:
             langs_for_file.append(default_lang)
 
         for lang in langs_for_file:
             trans_path = ext_dir / f"{stem}-{lang.upper()}.md"
             stats["total"] += 1
-
-            if not _needs_translation(source_path, trans_path, force):
+            if _needs_translation(source_path, trans_path, force):
+                work_items.append((source_path, lang))
+            else:
                 stats["skipped"] += 1
-                continue
 
-            action = "Regenerating" if trans_path.exists() else "Translating"
-            logger.info(
-                f"{action} {source_path.name} -> {lang.upper()}"
+    todo = len(work_items)
+    max_workers = svc_config.max_concurrent_translations
+    logger.info(
+        f"{todo} translations to generate ({max_workers} workers), "
+        f"{stats['skipped']} already up-to-date"
+    )
+
+    start_time = time.time()
+    done = 0
+    lock = threading.Lock()
+
+    def _translate_one(item: tuple[Path, str]) -> tuple[bool, str]:
+        """Translate a single item. Returns (success, description)."""
+        source_path, lang = item
+        source_text = source_path.read_text(encoding="utf-8")
+        source_meta = parse_frontmatter(source_text)
+        source_hash = _compute_source_hash(source_path)
+        stem = source_path.stem
+        ext_dir = source_path.parent / "extensions"
+        trans_path = ext_dir / f"{stem}-{lang.upper()}.md"
+
+        body = strip_frontmatter(source_text)
+        source_lang = service.detect_language(body)
+
+        desc = f"{source_path.name} -> {lang.upper()}"
+
+        try:
+            result = service.translate_content(
+                source_text, source_lang, lang
             )
+            _write_translation_file(
+                path=trans_path,
+                source_meta=source_meta,
+                translated_text=result.translation,
+                source_hash=source_hash,
+                target_lang=lang,
+                source_lang=source_lang,
+                model=result.model or svc_config.model,
+            )
+            return True, desc
+        except Exception as e:
+            logger.error(f"Failed to translate {desc}: {e}")
+            return False, desc
 
-            try:
-                result = service.translate_content(
-                    source_text, source_lang, lang
-                )
-                _write_translation_file(
-                    path=trans_path,
-                    source_meta=source_meta,
-                    translated_text=result.translation,
-                    source_hash=source_hash,
-                    target_lang=lang,
-                    source_lang=source_lang,
-                    model=result.model or svc_config.model,
-                )
-                stats["translated"] += 1
-                # Rate limiting between API calls
-                time.sleep(svc_config.rate_limit_delay)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {
+            executor.submit(_translate_one, item): item
+            for item in work_items
+        }
+        for future in as_completed(futures):
+            success, desc = future.result()
+            with lock:
+                done += 1
+                if success:
+                    stats["translated"] += 1
+                else:
+                    stats["failed"] += 1
 
-            except Exception as e:
-                logger.error(
-                    f"Failed to translate {source_path.name} -> "
-                    f"{lang.upper()}: {e}"
+                # ETA calculation
+                elapsed = time.time() - start_time
+                avg_per_item = elapsed / done
+                remaining = avg_per_item * (todo - done)
+                mins = int(remaining // 60)
+                secs = int(remaining % 60)
+                eta = (
+                    f", ~{mins}m{secs:02d}s remaining"
+                    if mins
+                    else f", ~{secs}s remaining"
                 )
-                stats["failed"] += 1
+
+                status = "OK" if success else "FAILED"
+                logger.info(
+                    f"[{done}/{todo}] {status}: {desc}{eta}"
+                )
 
     logger.info(
         f"Translation complete: {stats['translated']} translated, "

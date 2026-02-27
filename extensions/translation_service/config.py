@@ -37,7 +37,7 @@ class TranslationConfig:
     max_retries: int = 3
     timeout: int = 120
     rate_limit_delay: int = 1  # seconds between requests
-    max_concurrent_translations: int = 3  # maximum parallel translations per content
+    max_concurrent_translations: int = 10  # maximum parallel translations per content
     max_concurrent_content: int = 2  # maximum content items to process in parallel
 
     # Language Detection
