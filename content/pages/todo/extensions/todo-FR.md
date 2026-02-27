@@ -1,25 +1,19 @@
 ---
 date: 2025-05-12
-title: TODO
+title: À FAIRE
 translation: fr
 source_language: en
-source_hash: 4583fed3d2bbddb726c95e9b0768f9fdc386acacd1f3b27d9781ca656440c19b
+source_hash: 3f70c9ccbf0efff5a321d72042c75d8ece182d5d3b71840c1127ab4aa605352b
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T12:20:09.659398+00:00
+translate_date: 2026-02-27T13:12:28.165895+00:00
 generated_by: simplified-translation-system
 ---
 
-## TODO
+## À FAIRE
 
-Mes fonctionnalités et modifications prévues, sans ordre particulier :
+Mes fonctionnalités et changements prévus, sans ordre particulier :
 
 - Afficher les données de suivi Google aux visiteurs
-- Afficher l'historique Git aux visiteurs sur le site
-- Concevoir la page d'accueil
-- Multilingue
 - Ajouter un historique des modifications par article, avec date et commentaires
 - Redimensionnement intelligent des images
-- Ajouter un plan du site
-- Vérifier les liens dans la chaîne de construction
-- Nuage de pages
-- Nuage de tags
+- Pages de balises spécifiques pour les balises sélectionnées
