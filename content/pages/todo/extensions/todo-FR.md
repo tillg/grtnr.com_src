@@ -3,15 +3,15 @@ date: 2025-05-12
 title: TODO
 translation: fr
 source_language: en
-source_hash: 7f7eafc75016ed7ee32b0d909c220d109b5a0e9ae5e1dd150735f67b7e3d47dd
+source_hash: 39c185f65c347ae4993abe0b2844c168f4c4096388e3fc92194c02017036093f
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T10:22:02.560295+00:00
+translate_date: 2026-02-27T10:24:43.760354+00:00
 generated_by: simplified-translation-system
 ---
 
 ## TODO
 
-Mes fonctionnalités et modifications prévues, sans ordre particulier :
+Mes fonctionnalités et changements prévus, sans ordre particulier :
 
 - BUG : Corriger l'article "2016-02-13 Playing around with D3.js"
 - Fonctionnalité de recherche
