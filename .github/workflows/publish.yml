@@ -97,6 +97,9 @@ jobs:
               traceback.print_exc()
           "
 
+      - name: Generate translations
+        run: inv translate
+
       - name: Build site
         run: inv build
 
