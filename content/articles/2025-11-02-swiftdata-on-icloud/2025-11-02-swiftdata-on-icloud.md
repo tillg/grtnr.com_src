@@ -3,6 +3,7 @@ title: SwiftData on iCloud
 tags: tech
 image: swiftdata.jpeg
 date:2025-11-02
+excerpt: A step-by-step guide to adding iCloud sync to a SwiftData app using CloudKit, including setup, debugging, and common pitfalls.
 ---
 
 **Note**: The github repo that goes with this article is [here](https://github.com/tillg/SwiftDataOniCloud).
