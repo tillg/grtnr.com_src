@@ -8,6 +8,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal website/blog built with **garten**, a custom Python static site generator using a "pelicanyan" theme. The site supports multiple content types: articles, pages, and recipes with automatic image handling, multilingual support, and WikiLinks for digital garden-style navigation.
 
+## Temporary Files
+
+Screenshots and other temporary files should always be saved to the `tmp/` directory in the project root. This directory is gitignored.
+
 ## Development Commands
 
 **Primary development workflow:**
