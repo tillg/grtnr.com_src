@@ -41,7 +41,7 @@ TASK: Translate the following markdown content from {source_lang} to {target_lan
 
 CRITICAL REQUIREMENTS:
 1. Preserve ALL markdown formatting exactly (headers, links, code blocks, lists, tables, etc.)
-2. Maintain WikiLinks syntax: [[Page Name]] -> [[Translated Page Name]]
+2. NEVER translate WikiLink targets. Keep the original page name: [[Page Name]] stays [[Page Name]], or use display text syntax: [[Page Name|Translated Display Text]]
 3. Keep code blocks and technical terms untranslated unless they are comments
 4. Translate alt text in images: ![description](image.jpg) -> ![translated description](image.jpg)
 5. Preserve metadata sections (YAML front matter) completely untranslated
