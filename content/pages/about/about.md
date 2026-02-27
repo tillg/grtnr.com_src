@@ -17,4 +17,4 @@ Find me on <a href="https://x.com/tillg" target="blank" style="display: inline-b
 
 ![Till](till-comic.png)
 
-[These](/todo/) are the things I plan to do in my Digital Garden.
+If you are curious see my planned [To Dos](/todo/) and my [Change log](/change-log/).

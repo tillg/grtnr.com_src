@@ -205,6 +205,14 @@ image: hero.png
 
 **After creating an article**, run `inv render` to verify it builds without errors.
 
+## Change Log
+
+The site has a change log at `content/pages/changelog/changelog.md`. It is a human-readable timeline of user-visible changes, ordered oldest-first (newest at the bottom).
+
+**When committing:** Review the change log and add an entry if the commit includes technical changes to the site (new features, visual changes, bug fixes that affect visitors). Do **not** add entries for new articles or content, internal refactors, CI tweaks, translation regeneration, or code-only changes.
+
+**Format:** Group entries under `### YYYY-MM-DD` date headings. Multiple changes on the same day share one heading. Write entries as short, plain-language bullet points.
+
 ## Content Guidelines
 
 - Articles use date-prefixed directory structure: `YYYY-MM-DD-slug/`
