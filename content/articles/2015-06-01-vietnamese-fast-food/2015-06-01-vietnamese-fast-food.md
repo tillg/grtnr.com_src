@@ -2,6 +2,7 @@
 title: Vietnamese Fast Food
 tags: trip, Vietnam
 excerpt: A visit to Star Beef, a Vietnamese fast food place serving hot stone beef cut tableside with scissors.
+image: fast_food1.jpg
 ---
 
 Tonight I learned a new thing: Vietnamese also have Fast Food. Like McDonaldViet. My showed me such a place tonight. It’s called Star Beef. Believe it or not, we had something like a “Hot Stone” menu. Except that the stone was metal.

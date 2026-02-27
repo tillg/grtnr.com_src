@@ -2,6 +2,7 @@
 title: A Proxy for offline surfing
 tags: softwareweneed
 excerpt: A wish for a local proxy that intelligently caches websites so you can keep browsing them when you go offline.
+image: hero.svg
 ---
 
 This is a piece of software I would love to have: A proxy that runs on my notebook and that intelligently caches certain websites so I can surf them when being offline.

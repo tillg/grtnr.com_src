@@ -5,6 +5,7 @@ slug: life-is-good-cycling-to-work
 date_published: 2021-12-03T09:52:15.000Z
 date_updated: 2021-12-06T15:54:36.000Z
 excerpt: Life is good because I can cycle to work 😜
+image: hero.svg
 ---
 
 Another reason why life is good: I can cycle to work (almost) every day. It's up to me wether I do it or not. Wether I think the weather is too bad, to cold, to wet - or wether I just put on my rain gear and do it anyways.

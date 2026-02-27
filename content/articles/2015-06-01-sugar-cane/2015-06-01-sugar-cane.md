@@ -2,6 +2,7 @@
 title: Sugar cane drink
 tags: , Vietnam]
 excerpt: Discovering freshly squeezed sugar cane juice at a small food shop in Da Nang on my last lunch there.
+image: sugarcane1.jpg
 ---
 
 Just because it’s my last food shop in Da Nang (for this time), and because I never mentioned it.

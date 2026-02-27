@@ -3,6 +3,7 @@ title: Playing with JavaScript
 tags: tech
 date: 2015-12-06
 excerpt: Experimenting with HTML canvas and JavaScript to create animated geometric spirograph patterns.
+image: hero.svg
 ---
 
 I've been playing around with HTML & JavaScript. And Geometry is just it ;)
