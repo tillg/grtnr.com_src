@@ -44,6 +44,7 @@ class ArticleWrapper:
         self.content = data.get("content", "")
         self.summary = data.get("summary", "")
         self.locale_date = data.get("locale_date", "")
+        self.date = data.get("date", "")
         self.image = data.get("image")
         self.excerpt = data.get("excerpt")
         self.category = data.get("category", "")
@@ -68,9 +69,9 @@ class ArticleWrapper:
         self.translator = data.get("translator", "")
         self.original_url = data.get("original_url", "")
 
-        # Meta tags (empty lists for template compat)
+        # Meta tags
         self.keywords = []
-        self.description = []
+        self.description = data.get("excerpt", "") or data.get("summary", "")
 
     def __repr__(self) -> str:
         return f"ArticleWrapper({self.slug!r})"
@@ -220,7 +221,8 @@ def build_global_context(cfg: dict) -> dict:
 
     Provides variables like SITENAME, SITEURL, LINKS used by templates.
     """
-    siteurl = cfg.get("siteurl", "")
+    absolute_siteurl = cfg.get("siteurl", "").rstrip("/")
+    siteurl = absolute_siteurl
     # For local dev, SITEURL should be empty (relative URLs)
     if cfg.get("relative_urls", True):
         siteurl = ""
@@ -228,6 +230,8 @@ def build_global_context(cfg: dict) -> dict:
     return {
         "SITENAME": cfg.get("sitename", ""),
         "SITEURL": siteurl,
+        "ABSOLUTE_SITEURL": absolute_siteurl,
+        "AUTHOR": cfg.get("author", ""),
         "DESCRIPTION": cfg.get("description", ""),
         "SITEDESCRIPTION": "",
         "DEFAULT_LANG": cfg.get("default_lang", "en"),

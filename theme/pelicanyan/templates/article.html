@@ -1,17 +1,59 @@
 {% extends "base.html" %}
+{% block title %}{{ article.title }} - {{ SITENAME }}{% endblock %}
 {% block head %}
   {{ super() }}
-  {% for keyword in article.keywords %}
-    <meta name="keywords" contents="{{keyword}}" />
-  {% endfor %}
+  {% if article.description %}
+    <meta name="description" content="{{ article.description }}" />
+  {% endif %}
+  {% if article.keywords %}
+    <meta name="keywords" content="{{ article.keywords|join(', ') }}" />
+  {% endif %}
+  {% if article.tags %}
+    <meta name="tags" content="{{ article.tags|join(', ') }}" />
+  {% endif %}
 
-  {% for description in article.description %}
-    <meta name="description" contents="{{description}}" />
-  {% endfor %}
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ article.title }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ ABSOLUTE_SITEURL }}/{{ article.url }}" />
+  {% if article.description %}
+  <meta property="og:description" content="{{ article.description }}" />
+  {% endif %}
+  {% if article.image %}
+  <meta property="og:image" content="{{ ABSOLUTE_SITEURL }}/{{ article.url }}{{ article.image }}" />
+  {% endif %}
+  <meta property="og:site_name" content="{{ SITENAME }}" />
 
-  {% for tag in article.tags %}
-    <meta name="tags" contents="{{tag}}" />
-  {% endfor %}
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ article.title }}" />
+  {% if article.description %}
+  <meta name="twitter:description" content="{{ article.description }}" />
+  {% endif %}
+  {% if article.image %}
+  <meta name="twitter:image" content="{{ ABSOLUTE_SITEURL }}/{{ article.url }}{{ article.image }}" />
+  {% endif %}
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": {{ article.title|tojson }},
+    "url": "{{ ABSOLUTE_SITEURL }}/{{ article.url }}",
+    {% if article.description %}"description": {{ article.description|tojson }},{% endif %}
+    {% if article.image %}"image": "{{ ABSOLUTE_SITEURL }}/{{ article.url }}{{ article.image }}",{% endif %}
+    {% if article.date %}"datePublished": "{{ article.date }}",{% endif %}
+    "author": {
+      "@type": "Person",
+      "name": {{ AUTHOR|tojson }}
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": {{ AUTHOR|tojson }}
+    }
+  }
+  </script>
 
 {% endblock %}
 

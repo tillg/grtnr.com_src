@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  {% for article in articles %}
+{% for article in articles %}
   <url>
-    <loc>{{ SITEURL }}/{{ article.url }}</loc>
+    <loc>{{ ABSOLUTE_SITEURL }}/{{ article.url }}</loc>
+    {% if article.date -%}
+    <lastmod>{{ article.date[:10] }}</lastmod>
+    {% endif -%}
     <priority>0.8</priority>
   </url>
-
   {% for translation in article.translations %}
   <url>
-    <loc>{{ SITEURL }}/{{ translation.url }}</loc>
+    <loc>{{ ABSOLUTE_SITEURL }}/{{ translation.url }}</loc>
+    {% if article.date -%}
+    <lastmod>{{ article.date[:10] }}</lastmod>
+    {% endif -%}
     <priority>0.8</priority>
   </url>
   {% endfor %}
-  {% endfor %}
-
-  {% for page in pages %}
+{% endfor %}
+{% for page in pages %}
   <url>
-    <loc>{{ SITEURL }}/{{ page.url }}</loc>
+    <loc>{{ ABSOLUTE_SITEURL }}/{{ page.url }}</loc>
     <priority>1.0</priority>
   </url>
-
   {% for translation in page.translations %}
   <url>
-    <loc>{{ SITEURL }}/{{ translation.url }}</loc>
+    <loc>{{ ABSOLUTE_SITEURL }}/{{ translation.url }}</loc>
     <priority>1.0</priority>
   </url>
   {% endfor %}
-  {% endfor %}
-
+{% endfor %}
 </urlset>

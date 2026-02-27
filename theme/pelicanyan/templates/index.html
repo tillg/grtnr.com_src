@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block head %}
+  {{ super() }}
+  <link rel="canonical" href="{{ ABSOLUTE_SITEURL }}/{{ current_language or 'en' }}/" />
+  <meta name="description" content="{{ DESCRIPTION }}" />
+{% endblock %}
 {% block content %}
 <div class="content-title">
 {% block content_title %}
