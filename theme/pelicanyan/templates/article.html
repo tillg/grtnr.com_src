@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block pagefind_attrs %}data-pagefind-body{% endblock %}
+{% block pagefind_attrs %}{% if PAGEFIND_INDEX %}data-pagefind-body{% endif %}{% endblock %}
 {% block title %}{{ article.title }} - {{ SITENAME }}{% endblock %}
 {% block head %}
   {{ super() }}

@@ -932,6 +932,7 @@ def render(site: dict, cfg: dict) -> None:
                 "LANG": lang,
                 "current_language": lang,
                 "LINKS": translated_links,
+                "PAGEFIND_INDEX": True,
             }
 
             counts = _render_language(
