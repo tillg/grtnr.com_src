@@ -10,6 +10,7 @@ Sub-phases:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -273,18 +274,59 @@ def _process_translation(
     }
 
 
-def _process_translations(item: dict) -> None:
+def _check_translation_staleness(
+    item: dict, lang: str, translation_path: str
+) -> bool:
+    """Check if a translation file is stale (source changed since translation).
+
+    Returns True if the translation is stale.
+    """
+    raw = item.get("source_path")
+    if not raw:
+        return False
+    source_path = Path(raw)
+    trans_path = Path(translation_path)
+
+    if not source_path.exists() or not trans_path.exists():
+        return False
+
+    # Compute current source hash
+    current_hash = hashlib.sha256(
+        source_path.read_bytes()
+    ).hexdigest()
+
+    # Read stored hash from translation file
+    text = trans_path.read_text(encoding="utf-8")
+    meta = parse_frontmatter(text)
+    stored_hash = meta.get("source_hash", "")
+
+    if not stored_hash:
+        return False
+
+    return current_hash != stored_hash
+
+
+def _process_translations(item: dict) -> list[str]:
     """Process all translation files for a content item.
 
     Adds an ``item["translations"]`` dict keyed by language code.
+    Returns a list of stale translation paths (for summary logging).
     """
     translation_files = item.get("translation_files", {})
     if not translation_files:
         item["translations"] = {}
-        return
+        return []
 
     translations = {}
+    stale: list[str] = []
     for lang, path in translation_files.items():
+        # Check staleness before processing
+        if _check_translation_staleness(item, lang, path):
+            stale.append(str(path))
+            logger.warning(
+                f"Stale translation: {path} "
+                f"(source changed since translation)"
+            )
         result = _process_translation(item, lang, path)
         if result:
             translations[lang] = result
@@ -295,6 +337,7 @@ def _process_translations(item: dict) -> None:
             f"Processed {len(translations)} translations for '{item['slug']}': "
             f"{list(translations.keys())}"
         )
+    return stale
 
 
 # ---------------------------------------------------------------------------
@@ -318,9 +361,17 @@ def process(manifest: dict, cfg: dict) -> dict:
     # 3.5 Process translations
     translatable = manifest["articles"] + manifest["pages"]
     trans_count = 0
+    all_stale: list[str] = []
     for item in translatable:
-        _process_translations(item)
+        stale = _process_translations(item)
+        all_stale.extend(stale)
         trans_count += len(item.get("translations", {}))
+
+    if all_stale:
+        logger.warning(
+            f"{len(all_stale)} stale translation(s) detected — "
+            f"run 'inv translate' to regenerate"
+        )
 
     logger.info(
         f"Processed {len(manifest['articles'])} articles, "

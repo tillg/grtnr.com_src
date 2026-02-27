@@ -272,6 +272,24 @@ def livereload(c):
 
 
 @task
+def translate(c, dry_run=False, force=False):
+    """Generate or regenerate translations for all content."""
+    from garten.translate import translate_content
+
+    cfg = load_config("site.json")
+    stats = translate_content(cfg, dry_run=dry_run, force=force)
+
+    print(f"\nTranslation summary:")
+    print(f"  Translated: {stats['translated']}")
+    print(f"  Skipped:    {stats['skipped']}")
+    print(f"  Failed:     {stats['failed']}")
+    print(f"  Total:      {stats['total']}")
+
+    if stats["failed"] > 0:
+        sys.exit(1)
+
+
+@task
 def clean_translations(c):
     """Remove all translation files from extensions directories"""
     from garten.utils import remove_all_translations
