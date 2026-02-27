@@ -313,16 +313,6 @@ def clean_translations(c):
         sys.exit(1)
 
 
-@task
-def clean_translations_cache(c):
-    """Clear translation cache only (forces re-translation on next build)"""
-    cache_dir = os.path.join(os.path.dirname(__file__), "cache", "translations")
-    if os.path.isdir(cache_dir):
-        shutil.rmtree(cache_dir)
-        print("Translation cache cleared")
-    else:
-        print("No translation cache found")
-
 
 @task
 def discover(c):
