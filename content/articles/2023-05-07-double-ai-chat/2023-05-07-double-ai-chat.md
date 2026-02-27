@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2023-05-07
-excerpt: Double AI Chat
+excerpt: Ich habe mir ein multi-AI-Chat-UI gebastelt, mit dem man mehrere KI-Modelle gleichzeitig vergleichen kann.
 image: robots.png
 ---
 

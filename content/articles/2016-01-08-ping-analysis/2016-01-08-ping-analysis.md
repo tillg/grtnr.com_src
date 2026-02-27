@@ -2,6 +2,7 @@
 title: Ping Visualization and Analysis
 tags: tech
 image: ping.png
+excerpt: A simple two-component tool for long-term ping logging and visualization that finally answers whether it's the WIFI, the internet access, or the application that's slow.
 ---
 
 So this is the situation I am facing: I use an internet access that doesn't feel reliable. Sometimes it's really fast, sometimes it just feels being very unreliable. And I never know what part exactly is just failing: Is the the application that is slow, is it the WIFI, is it the Internet access.

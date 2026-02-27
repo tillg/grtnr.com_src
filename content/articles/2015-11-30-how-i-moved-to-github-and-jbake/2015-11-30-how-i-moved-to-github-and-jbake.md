@@ -3,6 +3,7 @@ title: How I moved to GitHub & JBake
 tags: tech, webSite
 image: github.png
 date: 2015-11-30
+excerpt: How I set up my blog using JBake as a static site generator and GitHub Pages for hosting.
 ---
 
 **\*** This page is ~~under construction~~ unfinished... **\***

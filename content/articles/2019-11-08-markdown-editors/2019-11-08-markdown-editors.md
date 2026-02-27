@@ -5,6 +5,7 @@ slug: markdown-editors
 date_published: 2019-11-08T00:00:00.000Z
 date_updated: 2021-12-06T12:11:23.000Z
 image: 1200px-Markdown-mark.svg.png
+excerpt: A hands-on comparison of Markdown editors for diary writing, evaluating image preview support, usability, and editing experience.
 ---
 
 I'm looking for a proper Markdown editor. Here are the usage scenarios and criteria I have in mind:

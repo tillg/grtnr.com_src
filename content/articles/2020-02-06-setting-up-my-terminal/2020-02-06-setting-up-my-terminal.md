@@ -2,6 +2,7 @@
 title: Setting up my terminal
 tags: tech, Mac
 image: terminal.png
+excerpt: A guide to setting up a macOS terminal with zsh, Oh My Zsh, and powerlevel10k, focusing on how the pieces fit together rather than just step-by-step installation.
 ---
 
 I know, there are lots of articles and explanations out there on how to configure and set up your terminal. Yet, it took me more than 2 hours to get things working the way I wanted. Reason was, lots of the articles and explanations provide step by step guide on installing things, but to little background information on how things relate and work together in the background. And that's what was missing to me...

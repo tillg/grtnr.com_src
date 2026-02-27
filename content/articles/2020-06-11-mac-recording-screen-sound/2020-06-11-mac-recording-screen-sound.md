@@ -6,6 +6,7 @@ date_published: 2020-06-11T10:06:49.000Z
 date_updated: 2020-06-11T17:50:04.000Z
 tags:
 image: MacSoundFlower.png
+excerpt: How to record your Mac screen together with system sound using Soundflower and QuickTime Player.
 ---
 
 **TL;DR** In order to record the screen of your Mac together with the sound (i.e. a Zoom session) you can use Soundflower.

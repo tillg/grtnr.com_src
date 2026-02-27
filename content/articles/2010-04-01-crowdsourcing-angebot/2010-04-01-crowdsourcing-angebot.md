@@ -2,6 +2,7 @@
 title: Crowdsourcing! Zahle 100,- € für Wappen
 tags: tech
 image: gartner_wappen.jpg
+excerpt: Ein Crowdsourcing-Aufruf mit 100 Euro Belohnung fuer ein modernisiertes Design des historischen Gartner-Familienwappens von 1699.
 ---
 
 Diese Webseite heißt gartnerich.com weil sie von der Familie Gartner ist. Und wir Gartners sind adelig – also so bissi zumindest… An sich ist das noch nicht spektakulär, weil solange man kein von im Namen trägt (oder noch besser einen Graf) bringt das nix.

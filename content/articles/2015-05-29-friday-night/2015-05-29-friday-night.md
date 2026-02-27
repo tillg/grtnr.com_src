@@ -1,6 +1,7 @@
 ---
 title: Friday night in Da Nang
 tags: trip, Vietnam
+excerpt: A Friday night bar-hopping tour through Da Nang -- from street food and a haircut to beer gardens, rooftop bars, and whiskey sours at the hotel.
 ---
 
 Ok, it’s Friday night, the hard work part of my stay in Da Nang is mostly done – so I hit the road for a bar hopping tour.

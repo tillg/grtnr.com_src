@@ -7,6 +7,7 @@ date_updated: 2021-12-06T11:50:39.000Z
 tags:
 date: 2016-01-06
 image: command_line.png
+excerpt: A recommendation of "The Art of Command Line," a helpful resource with tips, hints, and a suggested learning path for occasional command line users.
 ---
 
 A really helpful resource I found yesterday:

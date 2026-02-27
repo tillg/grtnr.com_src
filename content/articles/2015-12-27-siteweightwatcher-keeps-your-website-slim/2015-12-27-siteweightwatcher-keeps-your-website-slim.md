@@ -6,6 +6,7 @@ date_published: 2015-12-27T00:00:00.000Z
 date_updated: 2021-12-06T14:38:49.000Z
 tags: Tech
 image: kickz_dashboard.png
+excerpt: An idea for a monitoring tool that continuously tests production websites for performance degradation, tracking page weight and load times over time.
 ---
 
 Good software developers test their stuff. And the [TDD (Test Driven Development)](https://www.wikiwand.com/en/Test-driven_development) addicts are maniacs when it comes to testing. Those guys usually think in code, be it Java, Python, nodeJS, you name it. TDD means you write tests first, then you code just as much as it takes to let the tests become green. Then you rework your code and only then you start writing tests for new requirements.

@@ -3,6 +3,7 @@ tags: Mac
 date: 2025-05-06
 title: Setting up a Mac
 image: mac.jpg
+excerpt: A structured checklist of apps, tools, and settings to install when setting up a new Mac from scratch.
 ---
 
 Every couple of years you get the opportunity to setup a new Mac. It's typically a enjoyable process, yet it eats up some time. In order top make it a _structured_ enjoyable process, here is my note to future-me of what I have to install, and in what order.

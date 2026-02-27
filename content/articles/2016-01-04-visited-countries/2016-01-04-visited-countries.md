@@ -2,6 +2,7 @@
 layout: post
 title: Visited countries
 tags: tech
+excerpt: A fun interactive map showing all the countries I've visited, built with a neat little JavaScript tool.
 ---
 
 A nice tool to play around - because it's nice to see where you've been and because it's a nice piece of JS:

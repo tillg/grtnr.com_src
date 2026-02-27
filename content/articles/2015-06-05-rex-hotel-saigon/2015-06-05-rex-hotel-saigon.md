@@ -2,6 +2,7 @@
 title: Rex Hotel in Saigon
 tags: trip, Vietnam
 image: img_1681.jpg
+excerpt: Staying at the historic Rex Hotel in Saigon, famous for its American War history, rooftop bar, and a tennis court in the middle of the city.
 ---
 
 The first one to mention it to me was my father in law (Danke Henry!). He said: “When you go to HCMC, do you stay in the famous Hotel Rex?”. I had never heard about it, but he told me about the Americans staying there during the American War (that’s how they call this war here in Vietnam).
