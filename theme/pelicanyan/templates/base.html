@@ -130,7 +130,7 @@
       </div>
     </div>
 
-    <div class="container content" data-pagefind-body>
+    <div class="container content" {% block pagefind_attrs %}{% endblock %}>
       {% block content %}{% endblock %}
     </div>
 
