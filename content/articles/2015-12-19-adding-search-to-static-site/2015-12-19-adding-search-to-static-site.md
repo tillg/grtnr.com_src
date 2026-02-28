@@ -12,7 +12,7 @@ These are the steps I took to get there:
 
 ## Create the Custom Search Engine
 
-Nothing easiere: Just go to the [Google CSE page](http://www.google.com/cse) and create it. The process is self explanatory: You need a name for your search engine, you tell it what content should be made available. In my case this would be all from [tillgartner.com](https://tillgartner.com) and that's basically it. We will return at the end to this site in order to fine tune the look & feel of the results.
+Nothing easiere: Just go to the [Google CSE page](http://www.google.com/cse) and create it. The process is self explanatory: You need a name for your search engine, you tell it what content should be made available. In my case this would be all from [tillgartner.com](https://tillgartner.com) [site not existing anymore] and that's basically it. We will return at the end to this site in order to fine tune the look & feel of the results.
 
 ![Google CSE administration](Custom_Search_-_Basic.jpg)
 

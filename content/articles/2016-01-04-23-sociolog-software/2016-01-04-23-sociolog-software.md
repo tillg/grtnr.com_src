@@ -12,7 +12,7 @@ I write or blog in different media:
 - Twitter
 - Facebook
 - A private blog with restricted access (because it contains family pictures)
-- This [blog](http://tillgartner.com)
+- This [blog](http://tillgartner.com) [site not existing anymore]
 
 From time to time I find it nice to scroll through my past. I do this most often on our family blog, because it contains the most interesting content and because it is easy to scroll through. I would like to be able to scroll through all my past across all media.
 
