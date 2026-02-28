@@ -72,20 +72,43 @@ jobs:
                       error_text = f"[{status}] {broken_url}"
                   errors.append((current_page, error_text))
 
+          # Map status codes to human-readable explanations
+          STATUS_DETAILS = {
+              "400": "Bad Request — server rejected the request",
+              "401": "Unauthorized — requires authentication",
+              "403": "Forbidden — site blocks automated crawlers",
+              "404": "Not Found — page no longer exists",
+              "410": "Gone — page was permanently removed",
+              "429": "Rate Limited — site throttles bot traffic (page likely fine)",
+              "500": "Server Error — remote server problem",
+              "502": "Bad Gateway — upstream server error",
+              "503": "Service Unavailable — server temporarily down",
+              "522": "Connection Timed Out — server did not respond (Cloudflare)",
+              "ERROR": "Network/DNS failure — could not connect to server",
+          }
+
+          def get_details(error_text):
+              m2 = re.match(r"\[(\w+)\]", error_text)
+              if m2:
+                  code = m2.group(1)
+                  return STATUS_DETAILS.get(code, f"HTTP {code}")
+              return ""
+
           # Build output
           out = [summary, ""]
 
           if errors:
               out.append("## Broken Links")
               out.append("")
-              out.append("| Page | Error |")
-              out.append("|------|-------|")
+              out.append("| Page | Error | Details |")
+              out.append("|------|-------|---------|")
               for page, error in errors:
                   slug = page.rstrip("/").split("/")[-1]
                   page_link = f"[{slug}]({page})"
                   # Escape pipes in error text
                   error_safe = error.replace("|", "\\|")
-                  out.append(f"| {page_link} | {error_safe} |")
+                  details = get_details(error)
+                  out.append(f"| {page_link} | {error_safe} | {details} |")
           else:
               out.append("## No broken links found!")
 

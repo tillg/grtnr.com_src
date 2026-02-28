@@ -11,7 +11,7 @@ max_retries = 3
 max_concurrency = 16
 
 # User agent string
-user_agent = "Mozilla/5.0 (compatible; lychee-link-checker)"
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15"
 
 # Accept these status codes as valid (202 = Accepted, used by some sites)
 accept = [200, 202, 204, 301, 302, 307, 308]
