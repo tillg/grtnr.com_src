@@ -1,4 +1,5 @@
 ---
+date: 2015-06-01
 title: Vietnamese Fast Food
 tags: trip, Vietnam
 excerpt: A visit to Star Beef, a Vietnamese fast food place serving hot stone beef cut tableside with scissors.

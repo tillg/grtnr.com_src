@@ -1,4 +1,5 @@
 ---
+date: 2010-04-01
 title: Crowdsourcing! Zahle 100,- € für Wappen
 tags: tech
 image: gartner_wappen.jpg

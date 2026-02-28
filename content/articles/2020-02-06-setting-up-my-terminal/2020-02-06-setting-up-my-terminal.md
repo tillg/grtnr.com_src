@@ -1,4 +1,5 @@
 ---
+date: 2020-02-06
 title: Setting up my terminal
 tags: tech, Mac
 image: terminal.png

@@ -1,4 +1,5 @@
 ---
+date: 2016-01-08
 title: Ping Visualization and Analysis
 tags: tech
 image: ping.png

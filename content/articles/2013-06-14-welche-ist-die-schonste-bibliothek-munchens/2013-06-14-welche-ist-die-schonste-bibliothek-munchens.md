@@ -1,4 +1,5 @@
 ---
+date: 2013-06-14
 layout: post
 title: Welche ist die schönste Bibliothek Münchens?!
 slug: welche-ist-die-schonste-bibliothek-munchens

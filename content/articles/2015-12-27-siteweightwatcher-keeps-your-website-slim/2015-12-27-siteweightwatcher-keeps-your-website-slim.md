@@ -1,4 +1,5 @@
 ---
+date: 2015-12-27
 layout: post
 title: SiteWeightWatcher - keeps your website slim
 slug: siteweightwatcher-keeps-your-website-slim

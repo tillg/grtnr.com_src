@@ -1,4 +1,5 @@
 ---
+date: 2016-01-04
 layout: post
 title: Visited countries
 tags: tech

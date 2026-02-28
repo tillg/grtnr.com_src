@@ -1,4 +1,5 @@
 ---
+date: 2021-12-03
 layout: post
 title: "Life is good: Cycling to work"
 slug: life-is-good-cycling-to-work

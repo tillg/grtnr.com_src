@@ -1,4 +1,5 @@
 ---
+date: 2019-11-08
 layout: post
 title: Markdown editors
 slug: markdown-editors

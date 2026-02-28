@@ -1,4 +1,5 @@
 ---
+date: 2019-04-15
 layout: post
 title: SVG programming
 date_published: 2019-04-15T00:00:00.000Z

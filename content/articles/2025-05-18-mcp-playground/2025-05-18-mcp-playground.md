@@ -1,4 +1,5 @@
 ---
+date: 2025-05-18
 title: MCP Playground
 image: mcp.png
 summary: Notes about findings and _understandings_ around [Model Context Protocol aka _MCP](https://modelcontextprotocol.io/introduction).

@@ -1,4 +1,5 @@
 ---
+date: 2015-06-05
 title: Rex Hotel in Saigon
 tags: trip, Vietnam
 image: img_1681.jpg

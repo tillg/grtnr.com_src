@@ -1,4 +1,5 @@
 ---
+date: 2019-11-17
 layout: post
 title: Tips for travelling Vietnam
 slug: tips-for-travelling-vietnam

@@ -1,4 +1,5 @@
 ---
+date: 2016-02-13
 layout: post
 title: Playing around with D3
 date_published: 2016-02-13T00:00:00.000Z

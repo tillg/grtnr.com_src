@@ -1,4 +1,5 @@
 ---
+date: 2019-04-15
 title: Image encoding in Node JS
 layout: post
 date_published: 2019-04-15T00:00:00.000Z

@@ -247,6 +247,35 @@ def _find_translation_files(
 
 
 # ---------------------------------------------------------------------------
+# Validation
+# ---------------------------------------------------------------------------
+
+
+def _validate_article_dates(articles: list[Article]) -> None:
+    """Ensure every article has an explicit ``date:`` in its frontmatter.
+
+    Raises ``SystemExit`` listing all offending files so the author can fix
+    them in one pass instead of playing whack-a-mole.
+    """
+    missing: list[Path] = []
+    for article in articles:
+        text = article.source_path.read_text(encoding="utf-8")
+        meta = parse_frontmatter(text)
+        if not meta.get("date"):
+            missing.append(article.source_path)
+
+    if missing:
+        file_list = "\n  ".join(str(p) for p in missing)
+        logger.error(
+            f"{len(missing)} article(s) missing 'date' in frontmatter:\n"
+            f"  {file_list}\n"
+            "Every article must have an explicit 'date: YYYY-MM-DD' "
+            "in its YAML frontmatter."
+        )
+        raise SystemExit(1)
+
+
+# ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
 
@@ -285,14 +314,13 @@ def discover(cfg: dict) -> dict:
 
     # --- 1.5 Find translation files ---
     for item in articles:
-        item.translation_files = _find_translation_files(
-            item, languages, default_lang
-        )
+        item.translation_files = _find_translation_files(item, languages, default_lang)
     for item in pages:
-        item.translation_files = _find_translation_files(
-            item, languages, default_lang
-        )
+        item.translation_files = _find_translation_files(item, languages, default_lang)
     # Recipes don't have translations per spec (excluded category)
+
+    # --- Validate: every article must have a date in frontmatter ---
+    _validate_article_dates(articles)
 
     logger.info(
         f"Discovered {len(articles)} articles, "

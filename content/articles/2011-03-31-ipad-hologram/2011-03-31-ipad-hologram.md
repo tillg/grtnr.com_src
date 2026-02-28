@@ -1,4 +1,5 @@
 ---
+date: 2011-03-31
 layout: post
 title: iPad Hologram
 slug: ipad-hologram

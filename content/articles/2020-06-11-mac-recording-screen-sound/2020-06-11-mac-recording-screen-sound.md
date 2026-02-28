@@ -1,4 +1,5 @@
 ---
+date: 2020-06-11
 layout: post
 title: Mac: Recording screen & sound
 slug: mac-recording-screen-sound

@@ -1,4 +1,5 @@
 ---
+date: 2010-07-29
 title: A Proxy for offline surfing
 tags: softwareweneed
 excerpt: A wish for a local proxy that intelligently caches websites so you can keep browsing them when you go offline.
