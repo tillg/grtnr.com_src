@@ -2,30 +2,30 @@
 date: 2015-12-19
 image: search.jpg
 excerpt: Comment ajouter une fonctionnalité de recherche à un site statique en utilisant Google Custom Search Engine et une barre de navigation Bootstrap.
-title: Ajouter une recherche à un site statique
+title: Ajouter une fonction de recherche à un site statique
 translation: fr
 source_language: en
-source_hash: aebd3204dffe603f26df3504a07cc2c5c408ca3517c4e1c4e8b36207f8aa6cef
+source_hash: b726deb5e0431efb8a963f41c4db8668a942537dbd3e3ded4ee4eb154965b74b
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T10:01:30.085862+00:00
+translate_date: 2026-02-28T14:26:10.443607+00:00
 generated_by: simplified-translation-system
 ---
 
-J'ai maintenant un site statique généré par jBake. Jusqu'ici tout va bien. Mais qu'est-ce qu'un site sans recherche ? La recherche est indispensable. Alors, comment ajouter une fonctionnalité de recherche à un site statique ? Facile : Nous utilisons la fonctionnalité Custom Search des géants de la recherche ;)
+J'ai maintenant un site statique généré par jBake. Jusqu'ici tout va bien. Mais qu'est-ce qu'un site sans recherche ? La recherche est indispensable. Alors, comment ajouter une fonctionnalité de recherche à un site statique ? Facile : Nous utilisons la fonctionnalité de recherche personnalisée des géants de la recherche ;)
 
 Voici les étapes que j'ai suivies pour y parvenir :
 
 ## Créer le moteur de recherche personnalisé
 
-Rien de plus simple : Il suffit d'aller sur la [page Google CSE](http://www.google.com/cse) et de le créer. Le processus est explicite : Vous avez besoin d'un nom pour votre moteur de recherche, vous indiquez quel contenu doit être rendu disponible. Dans mon cas, ce serait tout le contenu de [tillgartner.com](https://tillgartner.com) et c'est à peu près tout. Nous reviendrons à la fin sur ce site afin d'affiner l'apparence des résultats.
+Rien de plus simple : Il suffit d'aller sur la [page Google CSE](http://www.google.com/cse) et de le créer. Le processus est explicite : Vous avez besoin d'un nom pour votre moteur de recherche, vous indiquez quel contenu doit être rendu disponible. Dans mon cas, cela inclurait tout le contenu de [tillgartner.com](https://tillgartner.com) [site n'existant plus] et c'est à peu près tout. Nous reviendrons à la fin sur ce site pour affiner l'apparence des résultats.
 
-![Administration Google CSE](Custom_Search_-_Basic.jpg)
+![Administration de Google CSE](Custom_Search_-_Basic.jpg)
 
 La seule chose dont nous avons besoin ici est le code pour intégrer la recherche. Vous obtenez ce code en cliquant sur le bouton "**Get Code**".
 
 ## Ajouter le champ de recherche
 
-Ensuite, nous avons besoin d'une boîte de recherche sur nos pages. Je veux une boîte de recherche en haut à droite de chaque page de l'ensemble du site. Je l'ajoute donc au modèle Freemarker qui crée le menu.
+Ensuite, nous avons besoin d'une boîte de recherche sur nos pages. Je veux une boîte de recherche en haut à droite de chaque page de l'ensemble du site. Je l'ajoute donc au modèle freemarker qui crée le menu.
 
 Dans mon cas, le `menu.ftl` ressemble à ceci :
 
@@ -65,11 +65,11 @@ Dans mon cas, le `menu.ftl` ressemble à ceci :
     <div class="container">
 ```
 
-_Remarque :_ J'ai corrigé le code sur mon site et dans le code ci-dessus le 29.12.2015. Le code pour le bouton qui apparaît lorsque la largeur de l'écran fait s'effondrer le menu manquait. Juste au cas où vous auriez lu ceci plus tôt et vous vous demanderiez pourquoi c'est différent maintenant...
+_Remarque :_ J'ai corrigé le code sur mon site et dans le code ci-dessus le 29.12.2015. Le code pour le bouton qui apparaît lorsque la largeur de l'écran fait s'effondrer le menu, manquait. Juste au cas où vous auriez lu ceci plus tôt et vous vous demandez pourquoi c'est différent maintenant...
 
 J'ai trouvé que la partie du menu et comment elle s'effondre n'était pas triviale. La meilleure explication que j'ai trouvée était [cette vidéo](https://bootstrapbay.com/blog/bootstrap-tutorial-navbar/).
 
-C'est le menu standard de Bootstrap. Ce qui est spécial dans notre cas, c'est l'attribut `action` dans le formulaire qui lie à la page de résultats de recherche (appelée `search.html` dans mon cas).
+C'est un menu standard de Bootstrap. Ce qui est spécial dans notre cas, c'est l'attribut `action` dans le formulaire qui renvoie à la page de résultats de recherche (appelée `search.html` dans mon cas).
 
 Le résultat est une petite boîte de recherche en haut à droite :
 
@@ -83,11 +83,11 @@ Enfin, nous avons besoin de la page de résultats de recherche. Cette page sera 
 http://tillgartner.com/search.html?q=huhu
 ```
 
-Dans mon cas, la page de résultats de recherche ne contiendra **que** le résultat de la recherche. Si l'utilisateur souhaite modifier sa recherche, il a toujours la boîte de recherche omniprésente en haut à droite.
+Dans mon cas, la page de résultats de recherche contiendra **uniquement** le résultat de la recherche. Si l'utilisateur souhaite modifier sa recherche, il a toujours la boîte de recherche omniprésente en haut à droite.
 La page de résultats de recherche contiendra le code que nous avons copié lors de la configuration du moteur de recherche personnalisé. Dans mon cas, l'ensemble du fichier Markdown ressemble à ceci :
 
 ```javascript
-title=Search
+title=Recherche
 type=page
 date=2015-12-17
 status=published
@@ -108,12 +108,12 @@ status=published
 <div markdown = "0"><gcse:searchresults-only>Résultats de recherche...</gcse:searchresults-only></div>
 ```
 
-Il m'a fallu un certain temps pour comprendre comment dire à markdown que c'est du pur HTML et qu'il doit le prendre tel quel sans le transformer ni le citer. La solution était la balise `<div markdown="0">`.
+Il m'a fallu un certain temps pour comprendre comment indiquer à markdown que c'est du pur HTML et qu'il doit le prendre tel quel sans le transformer ou le citer. La solution était la balise `<div markdown="0">`.
 
 ## Ressources
 
 Quelques lectures qui m'ont aidé à trouver mon chemin :
 
 - [Créez votre propre moteur de recherche](http://www.google.com/cse)
-- [Comment intégrer une fenêtre contextuelle de recherche personnalisée Google dans une barre de navigation Bootstrap](http://www.cambiaresearch.com/articles/84/how-to-integrate-a-google-custom-search-popup-in-a-bootstrap-navbar)
+- [Comment intégrer une fenêtre de recherche Google personnalisée dans une barre de navigation Bootstrap](http://www.cambiaresearch.com/articles/84/how-to-integrate-a-google-custom-search-popup-in-a-bootstrap-navbar)
 - [Implémentation de la boîte de recherche, par Google](https://developers.google.com/custom-search/docs/tutorial/implementingsearchbox)

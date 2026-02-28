@@ -1,31 +1,31 @@
 ---
 date: 2015-12-19
 image: search.jpg
-excerpt: Wie man Suchfunktionen zu einer statischen Website mit Google Custom Search Engine und einer Bootstrap-Navigationsleiste hinzufügt.
-title: Hinzufügen von Suchfunktionen zu einer statischen Website
+excerpt: Wie man eine Suchfunktion zu einer statischen Website mit der Google Custom Search Engine und einer Bootstrap-Navigationsleiste hinzufügt.
+title: Suche zu einer statischen Website hinzufügen
 translation: de
 source_language: en
-source_hash: aebd3204dffe603f26df3504a07cc2c5c408ca3517c4e1c4e8b36207f8aa6cef
+source_hash: b726deb5e0431efb8a963f41c4db8668a942537dbd3e3ded4ee4eb154965b74b
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T10:01:19.292316+00:00
+translate_date: 2026-02-28T14:26:10.073367+00:00
 generated_by: simplified-translation-system
 ---
 
-Nun habe ich also eine statische Website, die von jBake generiert wird. So weit, so gut. Aber was ist eine Website ohne Suche? Eine Suche ist ein Muss. Wie fügen wir also einer statischen Website Suchfunktionen hinzu? Ganz einfach: Wir nutzen die Custom Search-Funktionalität der Suchgiganten ;)
+Jetzt habe ich also eine statische Website, die von jBake generiert wird. Bisher so gut. Aber was ist eine Website ohne Suche? Suche ist ein Muss. Also, wie fügen wir einer statischen Website eine Suchfunktion hinzu? Ganz einfach: Wir nutzen die Custom Search-Funktionalität der Suchgiganten ;)
 
 Dies sind die Schritte, die ich unternommen habe, um dorthin zu gelangen:
 
-## Erstellen der Custom Search Engine
+## Erstelle die Custom Search Engine
 
-Nichts einfacher als das: Gehen Sie einfach zur [Google CSE-Seite](http://www.google.com/cse) und erstellen Sie sie. Der Prozess erklärt sich von selbst: Sie benötigen einen Namen für Ihre Suchmaschine und geben an, welche Inhalte verfügbar gemacht werden sollen. In meinem Fall wäre dies alles von [tillgartner.com](https://tillgartner.com) und das war's im Grunde. Am Ende kehren wir zu dieser Seite zurück, um das Aussehen und die Benutzerfreundlichkeit der Ergebnisse fein abzustimmen.
+Nichts einfacher als das: Geh einfach zur [Google CSE-Seite](http://www.google.com/cse) und erstelle sie. Der Prozess ist selbsterklärend: Du brauchst einen Namen für deine Suchmaschine und gibst an, welche Inhalte verfügbar gemacht werden sollen. In meinem Fall wäre das alles von [tillgartner.com](https://tillgartner.com) [Seite existiert nicht mehr] und das war's im Grunde. Wir werden am Ende zu dieser Seite zurückkehren, um das Aussehen und die Bedienung der Ergebnisse fein abzustimmen.
 
 ![Google CSE-Verwaltung](Custom_Search_-_Basic.jpg)
 
-Das eine, was wir von hier benötigen, ist der Code, um die Suche einzubetten. Sie erhalten diesen Code, indem Sie auf den Button "**Get Code**" klicken.
+Das Einzige, was wir hier benötigen, ist der Code, um die Suche einzubetten. Diesen Code erhältst du, indem du auf den Button "**Get Code**" klickst.
 
-## Hinzufügen des Suchfeldes
+## Suchfeld hinzufügen
 
-Als Nächstes benötigen wir ein Suchfeld auf unseren Seiten. Ich möchte ein Suchfeld oben rechts auf jeder Seite der gesamten Website. Also füge ich es zur Freemarker-Vorlage hinzu, die das Menü erstellt.
+Als Nächstes brauchen wir ein Suchfeld auf unseren Seiten. Ich möchte ein Suchfeld oben rechts auf jeder Seite der gesamten Website. Also füge ich es zur Freemarker-Vorlage hinzu, die das Menü erstellt.
 
 In meinem Fall sieht das `menu.ftl` ungefähr so aus:
 
@@ -65,19 +65,19 @@ In meinem Fall sieht das `menu.ftl` ungefähr so aus:
     <div class="container">
 ```
 
-_Hinweis:_ Ich habe den Code auf meiner Website und im obigen Code am 29.12.2015 korrigiert. Der Code für den Button, der erscheint, wenn die Breite des Bildschirms das Menü zusammenklappen lässt, fehlte. Nur für den Fall, dass Sie dies früher gelesen haben und sich wundern, warum es jetzt anders ist...
+_Hinweis:_ Ich habe den Code auf meiner Seite und im obigen Code am 29.12.2015 korrigiert. Der Code für den Button, der erscheint, wenn die Breite des Bildschirms das Menü zusammenklappen lässt, fehlte. Nur für den Fall, dass du dies früher gelesen hast und dich fragst, warum es jetzt anders ist...
 
-Ich fand, dass der Teil des Menüs und wie es sich zusammenklappt, nicht trivial war. Die beste Erklärung, die ich fand, war [dieses Video](https://bootstrapbay.com/blog/bootstrap-tutorial-navbar/).
+Ich fand, dass der Teil des Menüs und wie es sich zusammenklappt, nicht trivial war. Die beste Erklärung, die ich gefunden habe, war [dieses Video](https://bootstrapbay.com/blog/bootstrap-tutorial-navbar/).
 
-Es ist das Standard-Bootstrap-Menü. Was in unserem Fall besonders ist, ist das `action`-Attribut im Formular, das auf die Suchergebnisseite verweist (in meinem Fall `search.html` genannt).
+Es ist das Standard-Bootstrap-Menü-Gewusel. Was in unserem Fall besonders ist, ist das `action`-Attribut im Formular, das auf die Suchergebnisseite verweist (in meinem Fall `search.html` genannt).
 
-Das Ergebnis ist ein kleines, ordentliches Suchfeld in der oberen rechten Ecke:
+Das Ergebnis ist ein schickes kleines Suchfeld in der oberen rechten Ecke:
 
 ![Suchfeld](search_box.jpg)
 
 ## Suchergebnisseite
 
-Zu guter Letzt benötigen wir die Suchergebnisseite. Diese Seite wird vom Suchformular, das wir gerade erstellt haben, aufgerufen (d.h. verlinkt). Ihre URL wird in etwa so aussehen:
+Zu guter Letzt brauchen wir die Suchergebnisseite. Diese Seite wird vom Suchformular, das wir gerade erstellt haben, aufgerufen (d.h. verlinkt). Ihre URL wird etwa so aussehen:
 
 ```url
 http://tillgartner.com/search.html?q=huhu
@@ -108,12 +108,12 @@ status=published
 <div markdown = "0"><gcse:searchresults-only>Suchergebnisse...</gcse:searchresults-only></div>
 ```
 
-Es hat eine Weile gedauert, bis ich herausgefunden habe, wie man Markdown mitteilt, dass dies reines HTML ist und es als solches ohne Transformation oder Zitatzeichen behandelt werden soll. Die Lösung war das `<div markdown="0">`-Tag.
+Es hat eine Weile gedauert, bis ich herausgefunden habe, wie man Markdown sagt, dass dies reines HTML ist und es als solches genommen werden sollte, ohne es zu transformieren oder zu zitieren. Die Lösung war das `<div markdown="0">`-Tag.
 
 ## Ressourcen
 
-Einige Lektüren, die mir geholfen haben, meinen Weg zu finden:
+Einige Lektüre, die mir geholfen hat, meinen Weg zu finden:
 
-- [Erstellen Sie Ihre eigene Suchmaschine](http://www.google.com/cse)
+- [Erstelle deine eigene Suchmaschine](http://www.google.com/cse)
 - [Wie man ein Google Custom Search Popup in eine Bootstrap-Navigationsleiste integriert](http://www.cambiaresearch.com/articles/84/how-to-integrate-a-google-custom-search-popup-in-a-bootstrap-navbar)
-- [Implementierung eines Suchfeldes, von Google](https://developers.google.com/custom-search/docs/tutorial/implementingsearchbox)
+- [Implementierung des Suchfelds, von Google](https://developers.google.com/custom-search/docs/tutorial/implementingsearchbox)
