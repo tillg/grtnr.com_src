@@ -215,11 +215,13 @@ def build_language_links(
             lang_url = f"/{lang}{item_url}"
         else:
             lang_url = f"/{lang}/{item_url}"
-        links.append({
-            "code": lang,
-            "name": LANG_NAMES.get(lang, lang.upper()),
-            "url": lang_url,
-        })
+        links.append(
+            {
+                "code": lang,
+                "name": LANG_NAMES.get(lang, lang.upper()),
+                "url": lang_url,
+            }
+        )
     return links
 
 
@@ -362,9 +364,7 @@ def filter_articles_for_index(
     """
     result = [a for a in articles if a.get("status") != "hidden"]
     if categories_in_index:
-        result = [
-            a for a in result if a.get("category") in categories_in_index
-        ]
+        result = [a for a in result if a.get("category") in categories_in_index]
     return result
 
 
@@ -373,13 +373,9 @@ def filter_articles_for_index(
 # ---------------------------------------------------------------------------
 
 
-def sort_articles_by_date(
-    articles: list[dict], reverse: bool = True
-) -> list[dict]:
+def sort_articles_by_date(articles: list[dict], reverse: bool = True) -> list[dict]:
     """Sort articles by date (newest first by default)."""
-    return sorted(
-        articles, key=lambda a: a.get("date", ""), reverse=reverse
-    )
+    return sorted(articles, key=lambda a: a.get("date", ""), reverse=reverse)
 
 
 # ---------------------------------------------------------------------------
@@ -415,9 +411,7 @@ def _build_lang_article(
             default_lang,
         )
         art["title"] = trans.get("title") or original.get("title", "")
-        art["summary"] = (
-            trans.get("summary") or original.get("summary", "")
-        )
+        art["summary"] = trans.get("summary") or original.get("summary", "")
         art["excerpt"] = trans.get("excerpt") or original.get("excerpt")
         art["translation"] = trans.get("translation", lang)
         art["translator"] = trans.get("translator", "")
@@ -497,9 +491,7 @@ def build_per_language_content(
         # Build language-specific articles
         lang_articles = []
         for art in manifest["articles"]:
-            lang_art = _build_lang_article(
-                art, lang, languages, default_lang
-            )
+            lang_art = _build_lang_article(art, lang, languages, default_lang)
             lang_articles.append(lang_art)
 
         lang_articles = sort_articles_by_date(lang_articles)
@@ -507,19 +499,13 @@ def build_per_language_content(
         # Build language-specific pages
         lang_pages = []
         for pg in manifest["pages"]:
-            lang_pg = _build_lang_page(
-                pg, lang, languages, default_lang
-            )
+            lang_pg = _build_lang_page(pg, lang, languages, default_lang)
             lang_pages.append(lang_pg)
 
         # Build tag map and pagination for this language
-        lang_index = filter_articles_for_index(
-            lang_articles, categories_in_index
-        )
+        lang_index = filter_articles_for_index(lang_articles, categories_in_index)
         lang_tag_map = build_tag_map(lang_articles)
-        lang_pagination = build_pagination(
-            lang_index, per_page, url_prefix=f"{lang}/"
-        )
+        lang_pagination = build_pagination(lang_index, per_page, url_prefix=f"{lang}/")
 
         per_lang[lang] = {
             "articles": lang_articles,
@@ -543,9 +529,7 @@ def build_per_language_content(
 # ---------------------------------------------------------------------------
 
 
-def _apply_default_lang_translations(
-    manifest: dict, default_lang: str
-) -> None:
+def _apply_default_lang_translations(manifest: dict, default_lang: str) -> None:
     """Swap root-level content with default-language translations.
 
     For articles originally written in a non-default language
@@ -560,17 +544,11 @@ def _apply_default_lang_translations(
         trans = item.get("translations", {}).get(default_lang)
         if not trans:
             continue
-        item["content"] = trans.get(
-            "content", item.get("content", "")
-        )
+        item["content"] = trans.get("content", item.get("content", ""))
         item["title"] = trans.get("title") or item.get("title", "")
         if item.get("content_type") == "article":
-            item["summary"] = (
-                trans.get("summary") or item.get("summary", "")
-            )
-            item["excerpt"] = (
-                trans.get("excerpt") or item.get("excerpt")
-            )
+            item["summary"] = trans.get("summary") or item.get("summary", "")
+            item["excerpt"] = trans.get("excerpt") or item.get("excerpt")
 
 
 # ---------------------------------------------------------------------------
@@ -632,12 +610,8 @@ def assemble(manifest: dict, cfg: dict) -> dict:
     """
     multilingual = cfg.get("multilingual", {})
     ml_enabled = multilingual.get("enabled", False)
-    languages = multilingual.get(
-        "languages", [cfg.get("default_lang", "en")]
-    )
-    default_lang = multilingual.get(
-        "default_lang", cfg.get("default_lang", "en")
-    )
+    languages = multilingual.get("languages", [cfg.get("default_lang", "en")])
+    default_lang = multilingual.get("default_lang", cfg.get("default_lang", "en"))
 
     # 4.1 Generate URLs (root-level English)
     generate_urls(manifest)
@@ -659,13 +633,9 @@ def assemble(manifest: dict, cfg: dict) -> dict:
     # 4.7 Build language links (sidebar language switcher)
     if ml_enabled:
         for item in manifest["articles"]:
-            item["language_links"] = build_language_links(
-                item, languages, default_lang
-            )
+            item["language_links"] = build_language_links(item, languages, default_lang)
         for item in manifest["pages"]:
-            item["language_links"] = build_language_links(
-                item, languages, default_lang
-            )
+            item["language_links"] = build_language_links(item, languages, default_lang)
 
     # 4.8 Filter articles for index
     categories_in_index = cfg.get("categories_in_index", [])
@@ -697,9 +667,7 @@ def assemble(manifest: dict, cfg: dict) -> dict:
     # Build per-language content
     if ml_enabled:
         # 4.6 Load menu translations
-        menu_translations = load_menu_translations(
-            cfg.get("base_path", Path("."))
-        )
+        menu_translations = load_menu_translations(cfg.get("base_path", Path(".")))
         site["menu_translations"] = menu_translations
 
         site["per_lang"] = build_per_language_content(
@@ -717,8 +685,7 @@ def assemble(manifest: dict, cfg: dict) -> dict:
     )
     if ml_enabled:
         logger.info(
-            f"Multilingual: {len(languages)} languages "
-            f"({', '.join(languages)})"
+            f"Multilingual: {len(languages)} languages " f"({', '.join(languages)})"
         )
 
     return site
@@ -740,8 +707,7 @@ def write_artifacts(site: dict, build_path: Path) -> Path:
         "page_count": len(site["pages"]),
         "recipe_count": len(site["recipes"]),
         "tags": {
-            str(tag): [a["slug"] for a in arts]
-            for tag, arts in site["tag_map"].items()
+            str(tag): [a["slug"] for a in arts] for tag, arts in site["tag_map"].items()
         },
         "categories": {
             str(cat): [a["slug"] for a in arts]

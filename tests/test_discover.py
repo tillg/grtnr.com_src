@@ -37,7 +37,6 @@ from garten.discover import (
 )
 from garten.utils import normalize_slug, slugify
 
-
 # ===================================================================
 # Unit tests — frontmatter
 # ===================================================================
@@ -230,16 +229,12 @@ class TestDiscoverIntegration:
     def test_translation_files_found(self, cfg):
         manifest = discover(cfg)
         # Most articles should have DE and FR translation files
-        with_translations = [
-            a for a in manifest["articles"] if a["translation_files"]
-        ]
+        with_translations = [a for a in manifest["articles"] if a["translation_files"]]
         # At least some should have translations
         assert len(with_translations) > 0
         # Check a specific one we know has translations
         claude = [
-            a
-            for a in manifest["articles"]
-            if "how-i-code-with-claude" in a["slug"]
+            a for a in manifest["articles"] if "how-i-code-with-claude" in a["slug"]
         ]
         if claude:
             assert "de" in claude[0]["translation_files"]
@@ -249,9 +244,7 @@ class TestDiscoverIntegration:
         """German-original articles should have EN translation files discovered."""
         manifest = discover(cfg)
         crowdsourcing = [
-            a
-            for a in manifest["articles"]
-            if "crowdsourcing" in a["slug"]
+            a for a in manifest["articles"] if "crowdsourcing" in a["slug"]
         ]
         assert len(crowdsourcing) == 1
         assert "en" in crowdsourcing[0]["translation_files"]
@@ -260,9 +253,7 @@ class TestDiscoverIntegration:
         """Articles without explicit title get one from directory name."""
         manifest = discover(cfg)
         # digital-garden has no title in frontmatter
-        garden = [
-            a for a in manifest["articles"] if "digital-garden" in a["slug"]
-        ]
+        garden = [a for a in manifest["articles"] if "digital-garden" in a["slug"]]
         assert len(garden) == 1
         assert garden[0]["title"] == "Digital Garden"
 
@@ -280,26 +271,20 @@ class TestDiscoverIntegration:
     def test_recipe_slug_normalized(self, cfg):
         manifest = discover(cfg)
         # "Böhmischer Gulasch" has slug "bohmischer-gulasch"
-        gulasch = [
-            r for r in manifest["recipes"] if "bohmischer-gulasch" in r["slug"]
-        ]
+        gulasch = [r for r in manifest["recipes"] if "bohmischer-gulasch" in r["slug"]]
         assert len(gulasch) == 1
 
     def test_summary_and_excerpt_both_work(self, cfg):
         """The SwiftUI cheatsheet uses 'summary' instead of 'excerpt'."""
         manifest = discover(cfg)
-        swift = [
-            a for a in manifest["articles"] if "swiftui" in a["slug"]
-        ]
+        swift = [a for a in manifest["articles"] if "swiftui" in a["slug"]]
         assert len(swift) == 1
         assert swift[0]["excerpt"] is not None
 
     def test_tags_parsed(self, cfg):
         manifest = discover(cfg)
         claude = [
-            a
-            for a in manifest["articles"]
-            if "how-i-code-with-claude" in a["slug"]
+            a for a in manifest["articles"] if "how-i-code-with-claude" in a["slug"]
         ]
         if claude:
             assert "code" in claude[0]["tags"]
@@ -312,4 +297,3 @@ class TestDiscoverIntegration:
 
         data = json.loads(path.read_text())
         assert len(data["articles"]) >= 50
-

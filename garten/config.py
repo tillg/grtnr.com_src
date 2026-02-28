@@ -55,13 +55,13 @@ def load_config(site_json: Path | str = "site.json") -> dict:
             continue
         # GARTEN_SITEURL -> ["siteurl"]
         # GARTEN_TRANSLATION__ENABLED -> ["translation", "enabled"]
-        parts = key[len("GARTEN_"):].lower().split("__")
+        parts = key[len("GARTEN_") :].lower().split("__")
         _set_nested(cfg, parts, _coerce(value))
 
     # --- Compute runtime values ---
     tz = pytz.timezone(cfg.get("timezone", "UTC"))
-    cfg["build_time"] = datetime.now(pytz.UTC).astimezone(tz).strftime(
-        "%d.%m.%Y %H:%M:%S"
+    cfg["build_time"] = (
+        datetime.now(pytz.UTC).astimezone(tz).strftime("%d.%m.%Y %H:%M:%S")
     )
 
     # Resolve paths relative to site.json location

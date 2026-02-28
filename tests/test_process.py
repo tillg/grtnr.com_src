@@ -32,7 +32,6 @@ from garten.process import (
     write_artifacts,
 )
 
-
 # ===================================================================
 # Unit tests -- strip_frontmatter
 # ===================================================================
@@ -334,33 +333,23 @@ class TestProcessIntegration:
     def test_all_articles_have_content(self, manifest, cfg):
         process(manifest, cfg)
         for art in manifest["articles"]:
-            assert art["content"], (
-                f"Article {art['slug']} has empty content"
-            )
+            assert art["content"], f"Article {art['slug']} has empty content"
 
     def test_all_pages_have_content(self, manifest, cfg):
         process(manifest, cfg)
         for page in manifest["pages"]:
-            assert page["content"], (
-                f"Page {page['slug']} has empty content"
-            )
+            assert page["content"], f"Page {page['slug']} has empty content"
 
     def test_all_recipes_have_content(self, manifest, cfg):
         process(manifest, cfg)
         for recipe in manifest["recipes"]:
-            assert recipe["content"], (
-                f"Recipe {recipe['slug']} has empty content"
-            )
+            assert recipe["content"], f"Recipe {recipe['slug']} has empty content"
 
     def test_articles_with_excerpt_have_summary(self, manifest, cfg):
         process(manifest, cfg)
-        articles_with_excerpt = [
-            a for a in manifest["articles"] if a.get("excerpt")
-        ]
+        articles_with_excerpt = [a for a in manifest["articles"] if a.get("excerpt")]
         for art in articles_with_excerpt:
-            assert art["summary"], (
-                f"Article {art['slug']} has excerpt but no summary"
-            )
+            assert art["summary"], f"Article {art['slug']} has excerpt but no summary"
 
     def test_external_links_have_target_blank(self, manifest, cfg):
         process(manifest, cfg)
@@ -375,15 +364,13 @@ class TestProcessIntegration:
 
     def test_wikilinks_resolved(self, manifest, cfg):
         process(manifest, cfg)
-        garden = [
-            a for a in manifest["articles"] if "digital-garden" in a["slug"]
-        ]
+        garden = [a for a in manifest["articles"] if "digital-garden" in a["slug"]]
         assert len(garden) == 1
         content = garden[0]["content"]
         # WikiLinks should be resolved to proper href links
-        assert "[[" not in content, (
-            "Unresolved WikiLinks found in digital-garden article"
-        )
+        assert (
+            "[[" not in content
+        ), "Unresolved WikiLinks found in digital-garden article"
 
     def test_image_urls_fixed(self, manifest, cfg):
         process(manifest, cfg)
@@ -393,9 +380,7 @@ class TestProcessIntegration:
                 # Image URLs in content should be absolute
                 for img_name in art["adjacent_files"]:
                     if img_name in art["content"]:
-                        assert (
-                            f'/{art["slug"]}/{img_name}' in art["content"]
-                        ), (
+                        assert f'/{art["slug"]}/{img_name}' in art["content"], (
                             f"Image {img_name} not properly prefixed "
                             f"in article {art['slug']}"
                         )
@@ -405,9 +390,9 @@ class TestProcessIntegration:
         process(manifest, cfg)
         # All content should contain HTML tags
         for art in manifest["articles"][:5]:
-            assert "<" in art["content"], (
-                f"Article {art['slug']} content doesn't look like HTML"
-            )
+            assert (
+                "<" in art["content"]
+            ), f"Article {art['slug']} content doesn't look like HTML"
 
     def test_write_artifacts(self, manifest, cfg, tmp_path):
         process(manifest, cfg)
@@ -433,9 +418,9 @@ class TestProcessIntegration:
         is in the markdown body rendered as HTML."""
         process(manifest, cfg)
         for recipe in manifest["recipes"]:
-            assert "<p>" in recipe["content"] or "<h" in recipe["content"], (
-                f"Recipe {recipe['slug']} content missing HTML structure"
-            )
+            assert (
+                "<p>" in recipe["content"] or "<h" in recipe["content"]
+            ), f"Recipe {recipe['slug']} content missing HTML structure"
 
 
 # ===================================================================
@@ -449,29 +434,21 @@ class TestSpotChecks:
     def test_code_highlighting(self, manifest, cfg):
         """Articles with code blocks should have syntax highlighting."""
         process(manifest, cfg)
-        js = [
-            a
-            for a in manifest["articles"]
-            if "playing-with-javascript" in a["slug"]
-        ]
+        js = [a for a in manifest["articles"] if "playing-with-javascript" in a["slug"]]
         if js:
             assert "highlight" in js[0]["content"]
 
     def test_toc_generation(self, manifest, cfg):
         """Articles using [TOC] should have a table of contents."""
         process(manifest, cfg)
-        garden = [
-            a for a in manifest["articles"] if "digital-garden" in a["slug"]
-        ]
+        garden = [a for a in manifest["articles"] if "digital-garden" in a["slug"]]
         if garden:
             assert '<div class="toc">' in garden[0]["content"]
 
     def test_recipe_with_image(self, manifest, cfg):
         """Recipe with inline image should have fixed URL."""
         process(manifest, cfg)
-        banh = [
-            r for r in manifest["recipes"] if r["slug"] == "banh-xeo"
-        ]
+        banh = [r for r in manifest["recipes"] if r["slug"] == "banh-xeo"]
         if banh:
             content = banh[0]["content"]
             # The inline image should have a fixed URL
@@ -621,12 +598,12 @@ class TestProcessIntegrationTranslations:
         process(manifest, cfg)
         for art in manifest["articles"]:
             for lang, trans in art.get("translations", {}).items():
-                assert trans.get("content"), (
-                    f"Translation {lang} for {art['slug']} has empty content"
-                )
-                assert "<" in trans["content"], (
-                    f"Translation {lang} for {art['slug']} is not HTML"
-                )
+                assert trans.get(
+                    "content"
+                ), f"Translation {lang} for {art['slug']} has empty content"
+                assert (
+                    "<" in trans["content"]
+                ), f"Translation {lang} for {art['slug']} is not HTML"
 
     def test_write_artifacts_includes_translations(self, manifest, cfg, tmp_path):
         process(manifest, cfg)
@@ -636,6 +613,6 @@ class TestProcessIntegrationTranslations:
         for art in manifest["articles"]:
             for lang in art.get("translations", {}):
                 trans_file = html_dir / f"{art['slug']}-{lang}.html"
-                assert trans_file.exists(), (
-                    f"Missing translation HTML: {trans_file.name}"
-                )
+                assert (
+                    trans_file.exists()
+                ), f"Missing translation HTML: {trans_file.name}"

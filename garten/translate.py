@@ -34,9 +34,7 @@ def _get_stored_hash(translation_path: Path) -> str:
     return meta.get("source_hash", "")
 
 
-def _needs_translation(
-    source_path: Path, translation_path: Path, force: bool
-) -> bool:
+def _needs_translation(source_path: Path, translation_path: Path, force: bool) -> bool:
     """Check whether a translation file needs to be (re)generated."""
     if force:
         return True
@@ -136,9 +134,7 @@ def _find_content_files(content_path: Path, cfg: dict) -> list[Path]:
     return files
 
 
-def translate_content(
-    cfg: dict, dry_run: bool = False, force: bool = False
-) -> dict:
+def translate_content(cfg: dict, dry_run: bool = False, force: bool = False) -> dict:
     """Translate all content files that need translation.
 
     Args:
@@ -175,9 +171,7 @@ def translate_content(
                 stats["total"] += 1
                 if _needs_translation(source_path, trans_path, force):
                     status = "STALE" if trans_path.exists() else "MISSING"
-                    logger.info(
-                        f"[{status}] {source_path.name} -> {lang.upper()}"
-                    )
+                    logger.info(f"[{status}] {source_path.name} -> {lang.upper()}")
                     stats["translated"] += 1
                 else:
                     stats["skipped"] += 1
@@ -240,9 +234,7 @@ def translate_content(
         desc = f"{source_path.name} -> {lang.upper()}"
 
         try:
-            result = service.translate_content(
-                source_text, source_lang, lang
-            )
+            result = service.translate_content(source_text, source_lang, lang)
             _write_translation_file(
                 path=trans_path,
                 source_meta=source_meta,
@@ -258,10 +250,7 @@ def translate_content(
             return False, desc
 
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = {
-            executor.submit(_translate_one, item): item
-            for item in work_items
-        }
+        futures = {executor.submit(_translate_one, item): item for item in work_items}
         for future in as_completed(futures):
             success, desc = future.result()
             with lock:
@@ -284,9 +273,7 @@ def translate_content(
                 )
 
                 status = "OK" if success else "FAILED"
-                logger.info(
-                    f"[{done}/{todo}] {status}: {desc}{eta}"
-                )
+                logger.info(f"[{done}/{todo}] {status}: {desc}{eta}")
 
     logger.info(
         f"Translation complete: {stats['translated']} translated, "

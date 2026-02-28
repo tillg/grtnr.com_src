@@ -240,9 +240,7 @@ def build_global_context(cfg: dict) -> dict:
         "BUILD_TIME": cfg.get("build_time", ""),
         "GOOGLE_ANALYTICS": cfg.get("google_analytics", ""),
         "GA_ACCOUNT": "",
-        "MULTILINGUAL_ENABLED": cfg.get("multilingual", {}).get(
-            "enabled", False
-        ),
+        "MULTILINGUAL_ENABLED": cfg.get("multilingual", {}).get("enabled", False),
         "DEFAULT_PAGINATION": cfg.get("default_pagination", 10),
         "LINKS": cfg.get("links", []),
         "RELATIVE_URLS": cfg.get("relative_urls", True),
@@ -469,9 +467,7 @@ def render_categories_page(
 ) -> None:
     """Render the categories overview page."""
     template = env.get_template("categories.html")
-    categories_list = [
-        (cat, articles) for cat, articles in category_map.items()
-    ]
+    categories_list = [(cat, articles) for cat, articles in category_map.items()]
     ctx = {**global_ctx, "categories": categories_list}
     html = template.render(ctx)
     out_file = output_path / "categories.html"
@@ -550,9 +546,7 @@ def render_sitemap(
     out_file.write_text(xml, encoding="utf-8")
 
 
-def render_robots(
-    env: Environment, global_ctx: dict, output_path: Path
-) -> None:
+def render_robots(env: Environment, global_ctx: dict, output_path: Path) -> None:
     """Render robots.txt."""
     template = env.get_template("robots.html")
     txt = template.render(global_ctx)
@@ -561,9 +555,7 @@ def render_robots(
     out_file.write_text(txt, encoding="utf-8")
 
 
-def render_humans(
-    env: Environment, global_ctx: dict, output_path: Path
-) -> None:
+def render_humans(env: Environment, global_ctx: dict, output_path: Path) -> None:
     """Render humans.txt."""
     template = env.get_template("humans.html")
     txt = template.render(global_ctx)
@@ -678,9 +670,7 @@ def copy_content_static(content_path: Path, output_path: Path) -> int:
     return count
 
 
-def copy_adjacent_images(
-    manifest_items: list[dict], output_path: Path
-) -> int:
+def copy_adjacent_images(manifest_items: list[dict], output_path: Path) -> int:
     """Copy adjacent images from content directories to output.
 
     Each content item's adjacent files are copied to the output directory
@@ -797,11 +787,18 @@ def _render_language(
     lang_tag_map = lang_data.get("tag_map", {})
     lang_tag_objects = _build_tag_object_map(lang_tag_map)
     tag_count = render_tag_pages(
-        env, lang_tag_map, lang_tag_objects, lang_ctx, output_path,
+        env,
+        lang_tag_map,
+        lang_tag_objects,
+        lang_ctx,
+        output_path,
         url_prefix=f"{lang}/",
     )
     render_tags_page(
-        env, lang_tag_map, lang_ctx, output_path,
+        env,
+        lang_tag_map,
+        lang_ctx,
+        output_path,
         url_prefix=f"{lang}/",
     )
 
@@ -864,8 +861,7 @@ def render(site: dict, cfg: dict) -> None:
     page_count = render_pages(env, pages, global_ctx, output_path)
     recipe_count = render_recipes(env, recipes, global_ctx, output_path)
     logger.info(
-        f"Rendered {art_count} articles, {page_count} pages, "
-        f"{recipe_count} recipes"
+        f"Rendered {art_count} articles, {page_count} pages, " f"{recipe_count} recipes"
     )
 
     if ml_enabled:
@@ -887,9 +883,7 @@ def render(site: dict, cfg: dict) -> None:
     cat_count = render_category_pages(
         env, site["category_map"], tag_objects, global_ctx, output_path
     )
-    render_categories_page(
-        env, site["category_map"], global_ctx, output_path
-    )
+    render_categories_page(env, site["category_map"], global_ctx, output_path)
     logger.info(f"Rendered {tag_count} tag pages, {cat_count} category pages")
 
     # 5.5 Render direct templates
@@ -901,9 +895,7 @@ def render(site: dict, cfg: dict) -> None:
         global_ctx,
         output_path,
     )
-    render_sitemap(
-        env, published_articles, published_pages, global_ctx, output_path
-    )
+    render_sitemap(env, published_articles, published_pages, global_ctx, output_path)
     render_robots(env, global_ctx, output_path)
     render_humans(env, global_ctx, output_path)
     render_recipes_index(env, recipes, global_ctx, output_path)
@@ -928,9 +920,7 @@ def render(site: dict, cfg: dict) -> None:
 
         for lang, lang_data in site["per_lang"].items():
             # Build language-specific template context
-            lang_tag_objects = _build_tag_object_map(
-                lang_data.get("tag_map", {})
-            )
+            lang_tag_objects = _build_tag_object_map(lang_data.get("tag_map", {}))
 
             # Translate menu links
             translated_links = build_translated_links(
@@ -946,7 +936,12 @@ def render(site: dict, cfg: dict) -> None:
             }
 
             counts = _render_language(
-                env, lang, lang_data, lang_tag_objects, lang_ctx, output_path,
+                env,
+                lang,
+                lang_data,
+                lang_tag_objects,
+                lang_ctx,
+                output_path,
                 recipes=recipes,
             )
 

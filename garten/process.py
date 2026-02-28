@@ -103,9 +103,7 @@ def fix_image_urls(html: str, slug: str, image_names: list[str]) -> str:
 
         # HTML img tags with relative src
         html = re.sub(
-            r'<img([^>]*) src=["\'](?!https?://|/)([^"\']*'
-            + escaped
-            + ")[\"']",
+            r'<img([^>]*) src=["\'](?!https?://|/)([^"\']*' + escaped + ")[\"']",
             r'<img\1 src="/' + slug + r'/\2"',
             html,
         )
@@ -119,9 +117,7 @@ def fix_image_urls(html: str, slug: str, image_names: list[str]) -> str:
 
         # HTML anchor tags with relative href (PDFs, attachments)
         html = re.sub(
-            r'<a([^>]*) href=["\'](?!https?://|/|#)([^"\']*'
-            + escaped
-            + ")[\"']",
+            r'<a([^>]*) href=["\'](?!https?://|/|#)([^"\']*' + escaped + ")[\"']",
             r'<a\1 href="/' + slug + r'/\2"',
             html,
         )
@@ -216,9 +212,7 @@ def _process_item(item: dict) -> None:
 # ---------------------------------------------------------------------------
 
 
-def _process_translation(
-    item: dict, lang: str, translation_path: str
-) -> dict | None:
+def _process_translation(item: dict, lang: str, translation_path: str) -> dict | None:
     """Process a single translation file.
 
     Returns a dict with translated content and metadata, or None on error.
@@ -274,9 +268,7 @@ def _process_translation(
     }
 
 
-def _check_translation_staleness(
-    item: dict, lang: str, translation_path: str
-) -> bool:
+def _check_translation_staleness(item: dict, lang: str, translation_path: str) -> bool:
     """Check if a translation file is stale (source changed since translation).
 
     Returns True if the translation is stale.
@@ -291,9 +283,7 @@ def _check_translation_staleness(
         return False
 
     # Compute current source hash
-    current_hash = hashlib.sha256(
-        source_path.read_bytes()
-    ).hexdigest()
+    current_hash = hashlib.sha256(source_path.read_bytes()).hexdigest()
 
     # Read stored hash from translation file
     text = trans_path.read_text(encoding="utf-8")
@@ -324,8 +314,7 @@ def _process_translations(item: dict) -> list[str]:
         if _check_translation_staleness(item, lang, path):
             stale.append(str(path))
             logger.warning(
-                f"Stale translation: {path} "
-                f"(source changed since translation)"
+                f"Stale translation: {path} " f"(source changed since translation)"
             )
         result = _process_translation(item, lang, path)
         if result:
@@ -352,9 +341,7 @@ def process(manifest: dict, cfg: dict) -> dict:
     ``summary`` (for articles), and ``translations`` (processed
     translation files).  Returns the same manifest dict, mutated.
     """
-    all_items = (
-        manifest["articles"] + manifest["pages"] + manifest["recipes"]
-    )
+    all_items = manifest["articles"] + manifest["pages"] + manifest["recipes"]
     for item in all_items:
         _process_item(item)
 
@@ -409,9 +396,7 @@ def write_artifacts(manifest: dict, build_path: Path) -> Path:
             # Write translation HTML files
             for lang, trans in item.get("translations", {}).items():
                 trans_file = type_dir / f"{item['slug']}-{lang}.html"
-                trans_file.write_text(
-                    trans.get("content", ""), encoding="utf-8"
-                )
+                trans_file.write_text(trans.get("content", ""), encoding="utf-8")
 
     # Write manifest (without inline content to keep it readable)
     manifest_slim = _slim_manifest(manifest)
@@ -438,9 +423,9 @@ def _slim_manifest(manifest: dict) -> dict:
                     slim_trans[lang] = {
                         k: v for k, v in trans.items() if k != "content"
                     }
-                    slim_trans[lang]["content_file"] = (
-                        f"html/{content_type}/{item['slug']}-{lang}.html"
-                    )
+                    slim_trans[lang][
+                        "content_file"
+                    ] = f"html/{content_type}/{item['slug']}-{lang}.html"
                 slim["translations"] = slim_trans
             items.append(slim)
         result[content_type] = items

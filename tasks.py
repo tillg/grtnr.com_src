@@ -67,8 +67,7 @@ def search_index(c):
     """Build Pagefind search index from the generated site"""
     logger.info("Building Pagefind search index...")
     c.run(
-        "python -m pagefind --site output"
-        " --exclude-selectors 'pre,code,.highlight'"
+        "python -m pagefind --site output" " --exclude-selectors 'pre,code,.highlight'"
     )
 
 
@@ -323,7 +322,6 @@ def clean_translations(c):
     except Exception as e:
         print(f"Error during cleanup: {e}")
         sys.exit(1)
-
 
 
 @task

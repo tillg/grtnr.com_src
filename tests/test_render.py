@@ -316,9 +316,7 @@ class TestRenderIntegration:
         assert (rendered_output / "en" / "page" / "2" / "index.html").exists()
 
     def test_article_pages_created(self, rendered_output):
-        assert (
-            rendered_output / "how-i-code-with-claude" / "index.html"
-        ).exists()
+        assert (rendered_output / "how-i-code-with-claude" / "index.html").exists()
 
     def test_page_pages_created(self, rendered_output):
         assert (rendered_output / "about" / "index.html").exists()
@@ -354,9 +352,7 @@ class TestRenderIntegration:
 
     def test_images_copied_to_article_dirs(self, rendered_output):
         # Check a known article with an image
-        assert (
-            rendered_output / "how-i-code-with-claude" / "claude.png"
-        ).exists()
+        assert (rendered_output / "how-i-code-with-claude" / "claude.png").exists()
 
     def test_index_contains_article_titles(self, rendered_output):
         # With multilingual, check en/index.html for article titles
@@ -376,9 +372,7 @@ class TestRenderIntegration:
         assert "<loc>" in xml
 
     def test_category_page_created(self, rendered_output):
-        assert (
-            rendered_output / "category" / "articles" / "index.html"
-        ).exists()
+        assert (rendered_output / "category" / "articles" / "index.html").exists()
 
 
 # ---------------------------------------------------------------------------
@@ -426,9 +420,7 @@ class TestPageWrapperMultilingual:
         assert len(wrapper.language_links) == 1
 
     def test_multilingual_urls(self):
-        data = _make_page(
-            multilingual_urls={"en": "/about/", "de": "/de/about/"}
-        )
+        data = _make_page(multilingual_urls={"en": "/about/", "de": "/de/about/"})
         wrapper = PageWrapper(data)
         assert wrapper.multilingual_urls["de"] == "/de/about/"
 
@@ -530,9 +522,7 @@ class TestRenderMultilingualIntegration:
 
     def test_english_articles_at_root(self, rendered_output):
         # Root-level articles should still exist
-        assert (
-            rendered_output / "how-i-code-with-claude" / "index.html"
-        ).exists()
+        assert (rendered_output / "how-i-code-with-claude" / "index.html").exists()
 
     def test_language_dirs_created(self, rendered_output):
         for lang in ["en", "de", "fr"]:
@@ -548,9 +538,7 @@ class TestRenderMultilingualIntegration:
         # Check that a known article is rendered per language
         for lang in ["en", "de", "fr"]:
             art_dir = rendered_output / lang / "how-i-code-with-claude"
-            assert art_dir.exists(), (
-                f"Missing {lang}/how-i-code-with-claude/"
-            )
+            assert art_dir.exists(), f"Missing {lang}/how-i-code-with-claude/"
             assert (art_dir / "index.html").exists()
 
     def test_per_language_pages(self, rendered_output):
@@ -565,9 +553,7 @@ class TestRenderMultilingualIntegration:
 
     def test_per_language_images_copied(self, rendered_output):
         # Check images are copied to at least one language dir
-        en_img = (
-            rendered_output / "en" / "how-i-code-with-claude" / "claude.png"
-        )
+        en_img = rendered_output / "en" / "how-i-code-with-claude" / "claude.png"
         assert en_img.exists(), "Missing en/how-i-code-with-claude/claude.png"
 
     def test_theme_and_static_only_at_root(self, rendered_output):

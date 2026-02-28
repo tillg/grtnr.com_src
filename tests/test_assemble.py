@@ -143,9 +143,7 @@ class TestAuthor:
 
 class TestGenerateUrls:
     def test_article_urls(self):
-        manifest = _make_manifest(
-            articles=[_make_article(slug="my-post")]
-        )
+        manifest = _make_manifest(articles=[_make_article(slug="my-post")])
         generate_urls(manifest)
         art = manifest["articles"][0]
         assert art["url"] == "my-post/"
@@ -173,9 +171,7 @@ class TestGenerateUrls:
 
 class TestLocaleDates:
     def test_article_date_formatted(self):
-        manifest = _make_manifest(
-            articles=[_make_article(date="2025-06-15T00:00:00")]
-        )
+        manifest = _make_manifest(articles=[_make_article(date="2025-06-15T00:00:00")])
         set_locale_dates(manifest)
         assert manifest["articles"][0]["locale_date"] == "June 15, 2025"
 
@@ -316,9 +312,7 @@ class TestFilterArticlesForIndex:
             _make_article(slug="a1", category="articles"),
             _make_article(slug="a2", category="other"),
         ]
-        result = filter_articles_for_index(
-            articles, categories_in_index=["articles"]
-        )
+        result = filter_articles_for_index(articles, categories_in_index=["articles"])
         assert len(result) == 1
         assert result[0]["slug"] == "a1"
 
@@ -375,9 +369,7 @@ class TestAssembleIntegration:
         assert len(site["tag_map"]) > 0
 
     def test_pagination_matches_article_count(self, site):
-        total = sum(
-            len(p["articles"]) for p in site["pagination"]
-        )
+        total = sum(len(p["articles"]) for p in site["pagination"])
         index_count = len(site["index_articles"])
         assert total == index_count
 
@@ -389,15 +381,11 @@ class TestAssembleIntegration:
     def test_locale_dates_set(self, site):
         for art in site["articles"]:
             if art["date"]:
-                assert art["locale_date"], (
-                    f"Article {art['slug']} missing locale_date"
-                )
+                assert art["locale_date"], f"Article {art['slug']} missing locale_date"
 
     def test_expected_pagination_pages(self, site, cfg):
         per_page = cfg.get("default_pagination", 10)
-        expected = math.ceil(
-            len(site["index_articles"]) / per_page
-        )
+        expected = math.ceil(len(site["index_articles"]) / per_page)
         assert len(site["pagination"]) == expected
 
 
@@ -615,16 +603,12 @@ class TestBuildPaginationWithPrefix:
 
 class TestSetLocaleDatesMultilingual:
     def test_german_dates(self):
-        manifest = _make_manifest(
-            articles=[_make_article(date="2025-06-15T00:00:00")]
-        )
+        manifest = _make_manifest(articles=[_make_article(date="2025-06-15T00:00:00")])
         set_locale_dates(manifest, lang="de")
         assert manifest["articles"][0]["locale_date"] == "So 15. Jun 2025"
 
     def test_french_dates(self):
-        manifest = _make_manifest(
-            articles=[_make_article(date="2025-06-15T00:00:00")]
-        )
+        manifest = _make_manifest(articles=[_make_article(date="2025-06-15T00:00:00")])
         set_locale_dates(manifest, lang="fr")
         assert manifest["articles"][0]["locale_date"] == "dimanche 15 juin 2025"
 
@@ -717,9 +701,7 @@ class TestBuildPerLanguageContent:
 
         cfg = {"categories_in_index": [], "default_pagination": 10}
 
-        per_lang = build_per_language_content(
-            manifest, ["en", "de"], "en", cfg
-        )
+        per_lang = build_per_language_content(manifest, ["en", "de"], "en", cfg)
         assert "en" in per_lang
         assert "de" in per_lang
         assert len(per_lang["en"]["articles"]) == 1
@@ -735,9 +717,7 @@ class TestBuildPerLanguageContent:
         generate_urls(manifest)
 
         cfg = {"categories_in_index": [], "default_pagination": 10}
-        per_lang = build_per_language_content(
-            manifest, ["en", "de"], "en", cfg
-        )
+        per_lang = build_per_language_content(manifest, ["en", "de"], "en", cfg)
         assert per_lang["de"]["articles"][0]["url"] == "de/test/"
         assert per_lang["de"]["articles"][0]["save_as"] == "de/test/index.html"
         assert per_lang["en"]["articles"][0]["url"] == "en/test/"
@@ -760,9 +740,7 @@ class TestBuildPerLanguageContent:
         generate_urls(manifest)
 
         cfg = {"categories_in_index": [], "default_pagination": 10}
-        per_lang = build_per_language_content(
-            manifest, ["en", "de"], "en", cfg
-        )
+        per_lang = build_per_language_content(manifest, ["en", "de"], "en", cfg)
         de_art = per_lang["de"]["articles"][0]
         assert de_art["title"] == "Deutscher Titel"
         assert "Hallo Welt" in de_art["content"]
@@ -782,9 +760,7 @@ class TestBuildPerLanguageContent:
         generate_urls(manifest)
 
         cfg = {"categories_in_index": [], "default_pagination": 10}
-        per_lang = build_per_language_content(
-            manifest, ["en", "de"], "en", cfg
-        )
+        per_lang = build_per_language_content(manifest, ["en", "de"], "en", cfg)
         assert len(per_lang["de"]["pagination"]) == 2
         assert per_lang["de"]["pagination"][0]["url"] == "de/"
 
@@ -852,9 +828,7 @@ class TestAssembleMultilingualIntegration:
     def test_german_original_has_en_translation_in_per_lang(self, site):
         """German-original articles should have English content in per_lang['en']."""
         en_articles = site["per_lang"]["en"]["articles"]
-        crowdsourcing = [
-            a for a in en_articles if "crowdsourcing" in a["slug"]
-        ]
+        crowdsourcing = [a for a in en_articles if "crowdsourcing" in a["slug"]]
         assert len(crowdsourcing) == 1
         art = crowdsourcing[0]
         # Should use the English translation, not German original
@@ -864,9 +838,7 @@ class TestAssembleMultilingualIntegration:
 
     def test_german_original_root_level_has_english_content(self, site):
         """Root-level content for German originals should show English (Option A)."""
-        crowdsourcing = [
-            a for a in site["articles"] if "crowdsourcing" in a["slug"]
-        ]
+        crowdsourcing = [a for a in site["articles"] if "crowdsourcing" in a["slug"]]
         assert len(crowdsourcing) == 1
         art = crowdsourcing[0]
         # The English translation title should be used at root level
@@ -875,9 +847,7 @@ class TestAssembleMultilingualIntegration:
     def test_german_original_de_version_has_german_content(self, site):
         """The /de/ version of a German original should show German content."""
         de_articles = site["per_lang"]["de"]["articles"]
-        crowdsourcing = [
-            a for a in de_articles if "crowdsourcing" in a["slug"]
-        ]
+        crowdsourcing = [a for a in de_articles if "crowdsourcing" in a["slug"]]
         assert len(crowdsourcing) == 1
         # Should use the original German content (no DE translation exists)
         assert crowdsourcing[0]["translation"] is False
