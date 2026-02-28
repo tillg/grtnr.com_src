@@ -5,9 +5,9 @@ excerpt: Das Leben ist schön, weil ich mit dem Fahrrad zur Arbeit fahren kann �
 title: Das Leben ist schön: Mit dem Fahrrad zur Arbeit
 translation: de
 source_language: en
-source_hash: 4731fed631e92ae512e0a1ecadd02c62838baa8c3230fe5fb93446e36bfe823c
+source_hash: a7c266a2f8ce45d8fc144ac19e0fdb1c8341cd9f38ef8c24c3e38b00b3e6f25e
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-28T09:26:50.278181+00:00
+translate_date: 2026-02-28T09:40:34.210694+00:00
 generated_by: simplified-translation-system
 ---
 

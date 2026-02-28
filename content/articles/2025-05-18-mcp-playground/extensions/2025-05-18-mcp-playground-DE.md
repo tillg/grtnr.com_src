@@ -1,18 +1,18 @@
 ---
 date: 2025-05-18
 image: mcp.png
-excerpt: Notizen über Erkenntnisse und _Verständnisse_ rund um [Model Context Protocol aka _MCP](https://modelcontextprotocol.io/introduction).
+excerpt: Notizen über Erkenntnisse und _Verständnisse_ rund um das Model Context Protocol, auch bekannt als MCP.
 title: MCP Playground
 tags: Tech, AI
 translation: de
 source_language: en
-source_hash: 27b0ec9547681fc0a02ea7c7663930c1aeade9ed535e0189777c61a531c2fbfa
+source_hash: 5b6a2f789f63743b4bd4c86550d220561bd96627e391e09ab952c23229592dd5
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-28T09:26:52.316309+00:00
+translate_date: 2026-02-28T09:40:37.397487+00:00
 generated_by: simplified-translation-system
 ---
 
-Notizen über Erkenntnisse und _Verständnisse_ rund um [Model Context Protocol aka \_MCP](https://modelcontextprotocol.io/introduction).
+Notizen über Erkenntnisse und _Verständnisse_ rund um das [Model Context Protocol aka \_MCP](https://modelcontextprotocol.io/introduction).
 
 [TOC]
 
@@ -20,8 +20,8 @@ Notizen über Erkenntnisse und _Verständnisse_ rund um [Model Context Protocol 
 
 Offene Fragen, die ich habe.
 
-- Kann ich Claude mit verschiedenen MCP Server-Konfigurationen ausführen? D.h. ich habe eine Konfiguration pro Projekt, sagen wir eine für mein Python-Projekt (einschließlich Zugriff nur auf mein Python-Projektverzeichnis), eine für mein Swift/Xcode-Projekt (mit einem anderen Verzeichnis und anderen Tools).
-- Test: Mit MCP Inspector und [Xcode Build MCP Server](https://github.com/cameroncooke/XcodeBuildMCP) herumspielen.
+- Kann ich Claude mit verschiedenen MCP-Serverkonfigurationen ausführen? D.h. ich habe eine Konfiguration pro Projekt, sagen wir eine für mein Python-Projekt (einschließlich Zugriff nur auf mein Python-Projektverzeichnis), eine für mein Swift/Xcode-Projekt (mit einem anderen Verzeichnis und anderen Tools).
+- Test: Mit dem MCP Inspector und [Xcode Build MCP Server](https://github.com/cameroncooke/XcodeBuildMCP) herumspielen.
 
 ## Zugriff auf einen MCP-Server
 
@@ -34,7 +34,7 @@ Loslegen:
 nvm use 24
 npx @modelcontextprotocol/inspector node build/index.js
 
-# Es lädt herunter und startet den MCP UI Client und stellt ihn lokal bereit.
+# Es lädt & startet den MCP UI Client und stellt ihn lokal bereit.
 ```
 
 **Konfiguration**
@@ -68,7 +68,7 @@ MCP-Server, die ich verwendet oder angesehen habe:
 ### Filesystem MCP Server
 
 - [Filesystem MCP Server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
-- Einer der [Referenz-Server](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#-reference-servers)
+- Einer der [Referenzserver](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#-reference-servers)
 
 Hauptkonfiguration:
 

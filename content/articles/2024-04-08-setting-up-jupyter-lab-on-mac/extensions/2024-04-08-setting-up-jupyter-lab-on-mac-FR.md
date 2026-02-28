@@ -1,17 +1,17 @@
 ---
 date: 2024-04-08
 image: python_on_mac.png
-excerpt: Configurer Python sur un Mac peut être délicat. Le nombre d'options est grand, et elles peuvent interagir de manière étrange. De plus, vous devez vous rappeler quelle méthode d'installation vous avez utilisée lorsque vous souhaitez changer de version ou mettre à jour. Ce post devrait me rappeler comment je l'ai fait 😉
+excerpt: Configurer Python sur un Mac peut être délicat. Le nombre d'options est important, et elles peuvent interagir de manière étrange. De plus, il faut se souvenir de la méthode d'installation utilisée lorsque vous souhaitez changer de version ou effectuer une mise à jour. Ce post devrait me rappeler comment je l'ai fait 😉
 tags: tech, Mac
 translation: fr
 source_language: en
-source_hash: e9efb8cbbfdf8c25b6429ef6055502c4d9c9ccffd0deece3f26bf5328cdb8392
+source_hash: 4a8f45fb063e6cdd92c63bb49f28bac7e91f4cd86fa9962c74171a557061123e
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T10:08:21.256888+00:00
+translate_date: 2026-02-28T09:40:36.461891+00:00
 generated_by: simplified-translation-system
 ---
 
-Configurer Python sur un Mac peut être délicat. Le nombre d'options est grand, et elles peuvent interagir de manière étrange. De plus, vous devez vous rappeler quelle méthode d'installation vous avez utilisée lorsque vous souhaitez changer de version ou mettre à jour. Ce post devrait me rappeler comment je l'ai fait 😉
+Configurer Python sur un Mac peut être délicat. Le nombre d'options est important, et elles peuvent interagir de manière étrange. De plus, il faut se souvenir de la méthode d'installation utilisée lorsque vous souhaitez changer de version ou effectuer une mise à jour. Ce post devrait me rappeler comment je l'ai fait 😉
 
 ## Installer Python
 
@@ -59,7 +59,7 @@ De cette manière, j'ai créé un environnement à l'intérieur du sous-réperto
 
 ## Installer Jupyter Lab
 
-Maintenant que j'ai l'environnement Python, je peux installer Jupyter. Assurez-vous que je suis dans le bon répertoire et que l'environnement Python est activé :
+Maintenant que j'ai l'environnement Python, je peux installer Jupyter. Assurez-vous d'être dans le bon répertoire et que l'environnement Python est activé :
 
 ```bash
 # Allez dans mon répertoire de projet et activez son environnement Python
@@ -79,11 +79,11 @@ jupyter lab
 
 ## Créer un nouveau notebook
 
-Votre navigateur devrait être ouvert dans un nouvel environnement Jupyter Lab :
+Votre navigateur devrait s'ouvrir dans un nouvel environnement Jupyter Lab :
 ![Un environnement Lab vide](jupyter_overview.png)
 
-Cliquez sur _Notebook > Python 3_ et votre premier Notebook devrait être prêt à fonctionner :
+Cliquez sur _Notebook > Python 3_ et votre premier Notebook devrait être opérationnel :
 
-![Un notebook vierge](jupyter_detail.png)
+![Un nouveau notebook](jupyter_detail.png)
 
 Pour commencer avec Jupyter Lab, suivez leur [Guide de l'utilisateur](https://jupyterlab.readthedocs.io/en/latest/user/interface.html).
