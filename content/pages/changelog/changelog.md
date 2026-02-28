@@ -56,4 +56,8 @@ status: published
 - Improve automatic translations (parallel processing, Du-form for German)
 - Add client-side search with Pagefind
 
+### 2026-02-28
+
+- Add frontmatter validation to the build pipeline (missing dates, malformed tags, unquoted emoji, stray brackets)
+
 Fo a more detailed view, check my [commit history](https://github.com/tillg/grtnr.com_src/commits/main/).
