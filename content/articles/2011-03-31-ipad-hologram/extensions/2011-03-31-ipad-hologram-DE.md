@@ -1,13 +1,14 @@
 ---
+date: 2011-03-31
 image: hero.svg
 excerpt: Versteckte Funktionen des iPads 😜
 title: iPad-Hologramm
 tags: Tech
 translation: de
 source_language: en
-source_hash: 626759e95929efe62044ac5f54b1d0bf7e5714fab6fddf1f89cc24ee014d8915
+source_hash: d3e5d3f6ad3c8ee5f7bc8e8d8d602e9dda24f3d8bba7660d5e9e632cef1a03a6
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T09:58:03.709514+00:00
+translate_date: 2026-02-28T09:26:24.944481+00:00
 generated_by: simplified-translation-system
 ---
 

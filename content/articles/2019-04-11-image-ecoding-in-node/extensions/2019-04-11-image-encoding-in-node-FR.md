@@ -1,19 +1,20 @@
 ---
+date: 2019-04-15
 image: base64.png
 excerpt: En traitant des images dans une application node, j'ai dû apprendre à lire et potentiellement décoder les données d'image.
 title: Encodage d'image dans Node JS
 tags: Tech
 translation: fr
 source_language: en
-source_hash: 6ea1e653541e40ff79fe22531cc7177e4ece5d7e49f0645f7e445ebe89755089
+source_hash: 746d178ed5f8f8c507134090528224c25f1bce1e0614d2002a2cba5e38cf0631
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T10:04:12.845798+00:00
+translate_date: 2026-02-28T09:26:39.424216+00:00
 generated_by: simplified-translation-system
 ---
 
 **Cet article est en cours de rédaction !**
 
-En programmant sur un projet parallèle, j'ai dû gérer des images dans une application node. Mon application utilise [Express](https://expressjs.com/), [Amazon Rekognition](https://aws.amazon.com/rekognition/) ainsi que [Pouchdb](https://pouchdb.com/).
+En programmant un projet parallèle, j'ai dû gérer des images dans une application node. Mon application utilise [Express](https://expressjs.com/), [Amazon Rekognition](https://aws.amazon.com/rekognition/) ainsi que [Pouchdb](https://pouchdb.com/).
 
 Je traitais différentes sources et cibles :
 
@@ -22,11 +23,11 @@ Je traitais différentes sources et cibles :
 - J'envoie une image à AWS
 - Je stocke une image dans mon pouchDB
 
-En explorant les différentes sources, j'ai rencontré divers formats sur la manière dont les images peuvent être traitées dans node :
+En explorant les différentes sources, j'ai rencontré divers formats sur la façon dont les images peuvent être traitées dans node :
 
-- Comme un buffer contenant des données binaires
-- Comme une chaîne contenant des données encodées en Base64, commençant par quelque chose comme `data:image/jpeg;base64,` (ou avec `png`)
-- Comme une chaîne contenant des données encodées en base64 sans le début spécial
+- En tant que buffer contenant des données binaires
+- En tant que chaîne contenant des données encodées en Base64, commençant par quelque chose comme `data:image/jpeg;base64,` (ou avec `png`)
+- En tant que chaîne contenant des données encodées en base64 sans le début spécial
 
 Voici les différentes opérations que je réalise et ce qu'elles fournissent comme sortie :
 
@@ -38,8 +39,8 @@ Voici les sources et cibles à partir desquelles les données d'image sont trans
 
 ## Lecture
 
-Ressources utiles que j'ai trouvées sur les sujets :
+Informations utiles que j'ai trouvées sur le sujet :
 
-- [Comment convertir une image en URL de données encodées en base64 dans sails.js ou généralement dans le JavaScript côté serveur ? StackOverflow](https://stackoverflow.com/questions/24523532/how-do-i-convert-an-image-to-a-base64-encoded-data-url-in-sails-js-or-generally)
+- [Comment convertir une image en une URL de données encodées en base64 dans sails.js ou généralement dans le JavaScript côté serveur ? StackOverflow](https://stackoverflow.com/questions/24523532/how-do-i-convert-an-image-to-a-base64-encoded-data-url-in-sails-js-or-generally)
 - [Encodage/décodage d'image base64 dans NodeJS ne fonctionne pas tout à fait, StackOverflow](https://stackoverflow.com/questions/8110294/nodejs-base64-image-encoding-decoding-not-quite-working)
-- [Inkjet, bibliothèque de décodage, encodage d'image JPEG et de lecture EXIF pour un navigateur et node.js, Github](https://github.com/gchudnov/inkjet/blob/master/README.md)
+- [Inkjet, bibliothèque de décodage, encodage d'images JPEG et de lecture EXIF pour un navigateur et node.js, Github](https://github.com/gchudnov/inkjet/blob/master/README.md)
