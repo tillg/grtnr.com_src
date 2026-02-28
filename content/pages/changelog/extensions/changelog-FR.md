@@ -3,9 +3,9 @@ date: 2022-08-08
 title: Journal des modifications
 translation: fr
 source_language: en
-source_hash: b1c34f3d7f6aab166fa0d4fa6d640883a0b9e70a6ac8599b58910ebcbd35d866
+source_hash: 72251ef44b030138cf197924fbeb0ed61a8d4fa64bbe9c6a0805a148f82e00e8
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T13:12:31.744973+00:00
+translate_date: 2026-02-28T09:49:46.196634+00:00
 generated_by: simplified-translation-system
 ---
 
@@ -20,8 +20,8 @@ generated_by: simplified-translation-system
 
 ### 2022-08-27
 
-- Ajout d'une section de recettes avec une mise en page dédiée
-- Mise en place de Google Analytics
+- Ajout d'une section recettes avec une mise en page dédiée
+- Configuration de Google Analytics
 
 ### 2022-08-28
 
@@ -59,5 +59,9 @@ generated_by: simplified-translation-system
 - Ajout d'images héroïques et d'extraits à tous les articles
 - Amélioration des traductions automatiques (traitement parallèle, forme Du pour l'allemand)
 - Ajout de la recherche côté client avec Pagefind
+
+### 2026-02-28
+
+- Ajout de la validation des métadonnées à la chaîne de construction (dates manquantes, balises mal formées, emoji non cités, crochets égarés)
 
 Pour une vue plus détaillée, consultez mon [historique des commits](https://github.com/tillg/grtnr.com_src/commits/main/).

@@ -3,9 +3,9 @@ date: 2022-08-08
 title: Änderungsprotokoll
 translation: de
 source_language: en
-source_hash: b1c34f3d7f6aab166fa0d4fa6d640883a0b9e70a6ac8599b58910ebcbd35d866
+source_hash: 72251ef44b030138cf197924fbeb0ed61a8d4fa64bbe9c6a0805a148f82e00e8
 translator: gpt-4o-2024-08-06
-translate_date: 2026-02-27T13:12:31.909355+00:00
+translate_date: 2026-02-28T09:49:46.556408+00:00
 generated_by: simplified-translation-system
 ---
 
@@ -16,16 +16,16 @@ generated_by: simplified-translation-system
 ### 2022-08-25
 
 - Wechsel zum Hydejack-Theme
-- Linküberprüfung zum Build-Prozess hinzugefügt
+- Link-Überprüfung zum Build-Prozess hinzugefügt
 
 ### 2022-08-27
 
-- Rezeptbereich mit eigenem Layout hinzugefügt
+- Rezeptbereich mit speziellem Layout hinzugefügt
 - Google Analytics eingerichtet
 
 ### 2022-08-28
 
-- Bilder neben ihren Inhaltsdateien organisiert anstatt in einem gemeinsamen Assets-Ordner
+- Bilder neben ihren Inhaltsdateien organisiert statt in einem gemeinsamen Assets-Ordner
 
 ### 2023-03-11
 
@@ -50,14 +50,18 @@ generated_by: simplified-translation-system
 ### 2026-02-14
 
 - Pelican durch garten ersetzt, einen benutzerdefinierten Python-Static-Site-Generator
-- Linküberprüfung mit lychee verbessert
-- Tägliche Produktionslinkprüfungen hinzugefügt
+- Link-Überprüfung mit lychee verbessert
+- Tägliche Produktions-Link-Checks hinzugefügt
 
 ### 2026-02-27
 
 - SEO-Meta-Tags hinzugefügt (Open Graph, Twitter Cards, JSON-LD)
 - Hero-Bilder und Auszüge zu allen Artikeln hinzugefügt
-- Automatische Übersetzungen verbessert (Parallelverarbeitung, Du-Form für Deutsch)
+- Automatische Übersetzungen verbessert (parallele Verarbeitung, Du-Form für Deutsch)
 - Client-seitige Suche mit Pagefind hinzugefügt
+
+### 2026-02-28
+
+- Frontmatter-Validierung zur Build-Pipeline hinzugefügt (fehlende Daten, fehlerhafte Tags, nicht zitierte Emojis, herumirrende Klammern)
 
 Für eine detailliertere Ansicht, schau dir meinen [Commit-Verlauf](https://github.com/tillg/grtnr.com_src/commits/main/) an.
