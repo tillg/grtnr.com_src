@@ -5,7 +5,7 @@ title: "Life is good: Cycling to work"
 slug: life-is-good-cycling-to-work
 date_published: 2021-12-03T09:52:15.000Z
 date_updated: 2021-12-06T15:54:36.000Z
-excerpt: Life is good because I can cycle to work 😜
+excerpt: "Life is good because I can cycle to work 😜"
 image: hero.svg
 ---
 

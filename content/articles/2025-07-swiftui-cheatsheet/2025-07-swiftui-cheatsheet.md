@@ -3,7 +3,7 @@ Tags: tech
 Title: SwiftUI Cheatsheet
 Date: 2025-08-03
 image: swiftui.png
-summary: My Cheatsheet, built while following [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/).
+summary: "My Cheatsheet, built while following 100 Days of SwiftUI."
 ---
 
 In June 2025 I started working thru [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui/). It's a great course, and I am truly impressed how much quality content & courses Paul Hudson is providing - and maintaining!! Paul, thank you sooo much for this! 🙏🏼

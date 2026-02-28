@@ -16,7 +16,13 @@ from datetime import datetime
 from pathlib import Path
 
 from .models import Article, Page, Recipe
-from .utils import get_logger, normalize_slug, parse_frontmatter, slugify
+from .utils import (
+    _FRONTMATTER_RE,
+    get_logger,
+    normalize_slug,
+    parse_frontmatter,
+    slugify,
+)
 
 logger = get_logger("discover")
 
@@ -250,27 +256,118 @@ def _find_translation_files(
 # Validation
 # ---------------------------------------------------------------------------
 
+_EMOJI_RE = re.compile(
+    "["
+    "\U0001f600-\U0001f64f"  # emoticons
+    "\U0001f300-\U0001f5ff"  # symbols & pictographs
+    "\U0001f680-\U0001f6ff"  # transport & map
+    "\U0001f900-\U0001f9ff"  # supplemental symbols
+    "\U0001fa00-\U0001fa6f"  # chess symbols
+    "\U0001fa70-\U0001faff"  # symbols extended-A
+    "\u2600-\u26ff"  # misc symbols
+    "\u2700-\u27bf"  # dingbats
+    "]"
+)
 
-def _validate_article_dates(articles: list[Article]) -> None:
+
+def _validate_frontmatter(
+    items: list[Article | Page | Recipe],
+    label: str,
+) -> list[str]:
+    """Check frontmatter of *items* for common formatting issues.
+
+    Returns a list of human-readable error strings (empty = all good).
+    Checks for:
+    - Missing space after colon  (``date:2025-11-02``)
+    - Stray brackets in values   (``tags: , Vietnam]``)
+    - Unquoted values containing emoji
+    """
+    errors: list[str] = []
+    for item in items:
+        text = item.source_path.read_text(encoding="utf-8")
+        m = _FRONTMATTER_RE.match(text)
+        if not m:
+            continue
+        for lineno, line in enumerate(m.group(1).splitlines(), start=2):
+            if ":" not in line:
+                continue
+            key, _, value = line.partition(":")
+            key = key.strip()
+
+            # Missing space after colon
+            if value and not value[0].isspace():
+                errors.append(
+                    f"{item.source_path}:{lineno}: "
+                    f"missing space after colon in '{key}:'"
+                )
+
+            # Stray brackets
+            if "[" in value or "]" in value:
+                errors.append(
+                    f"{item.source_path}:{lineno}: "
+                    f"stray bracket in '{key}' value"
+                )
+
+            # Leading/trailing commas in value
+            stripped = value.strip()
+            if stripped.startswith(",") or stripped.endswith(","):
+                errors.append(
+                    f"{item.source_path}:{lineno}: "
+                    f"leading or trailing comma in '{key}' value"
+                )
+
+            # Unquoted emoji
+            if _EMOJI_RE.search(value):
+                is_quoted = (
+                    len(stripped) >= 2
+                    and stripped[0] in ('"', "'")
+                    and stripped[-1] == stripped[0]
+                )
+                if not is_quoted:
+                    errors.append(
+                        f"{item.source_path}:{lineno}: "
+                        f"unquoted emoji in '{key}' — wrap value in quotes"
+                    )
+    return errors
+
+
+def _validate_article_dates(articles: list[Article]) -> list[str]:
     """Ensure every article has an explicit ``date:`` in its frontmatter.
 
-    Raises ``SystemExit`` listing all offending files so the author can fix
-    them in one pass instead of playing whack-a-mole.
+    Returns a list of error strings (empty = all good).
     """
-    missing: list[Path] = []
+    errors: list[str] = []
     for article in articles:
         text = article.source_path.read_text(encoding="utf-8")
         meta = parse_frontmatter(text)
         if not meta.get("date"):
-            missing.append(article.source_path)
+            errors.append(
+                f"{article.source_path}: missing 'date' field — "
+                "every article needs 'date: YYYY-MM-DD'"
+            )
+    return errors
 
-    if missing:
-        file_list = "\n  ".join(str(p) for p in missing)
+
+def _run_validations(
+    articles: list[Article],
+    pages: list[Page],
+    recipes: list[Recipe],
+) -> None:
+    """Run all frontmatter validations; raise ``SystemExit`` on failure."""
+    errors: list[str] = []
+    errors.extend(_validate_article_dates(articles))
+    all_items: list[Article | Page | Recipe] = [
+        *articles,
+        *pages,
+        *recipes,
+    ]
+    errors.extend(_validate_frontmatter(all_items, "content"))
+
+    if errors:
+        error_list = "\n  ".join(errors)
         logger.error(
-            f"{len(missing)} article(s) missing 'date' in frontmatter:\n"
-            f"  {file_list}\n"
-            "Every article must have an explicit 'date: YYYY-MM-DD' "
-            "in its YAML frontmatter."
+            f"{len(errors)} frontmatter problem(s) found:\n"
+            f"  {error_list}"
         )
         raise SystemExit(1)
 
@@ -319,8 +416,8 @@ def discover(cfg: dict) -> dict:
         item.translation_files = _find_translation_files(item, languages, default_lang)
     # Recipes don't have translations per spec (excluded category)
 
-    # --- Validate: every article must have a date in frontmatter ---
-    _validate_article_dates(articles)
+    # --- Validate frontmatter ---
+    _run_validations(articles, pages, recipes)
 
     logger.info(
         f"Discovered {len(articles)} articles, "

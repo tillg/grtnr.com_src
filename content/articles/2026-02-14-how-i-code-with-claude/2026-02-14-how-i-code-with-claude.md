@@ -1,6 +1,6 @@
 ---
 date: 2026-02-14
-excerpt: An overview of how I code with claude code (as of today, mid-Feb 2026). Expect it to be outdated as of March '26 😉
+excerpt: "An overview of how I code with claude code (as of today, mid-Feb 2026). Expect it to be outdated as of March '26 😉"
 Tags: code
 image: claude.png
 ---
