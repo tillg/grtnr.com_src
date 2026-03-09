@@ -13,12 +13,13 @@ max_concurrency = 16
 # User agent string
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15"
 
-# Accept these status codes as valid (202 = Accepted, used by some sites)
-accept = [200, 202, 204, 301, 302, 307, 308]
+# Accept these status codes as valid (202 = Accepted, used by some sites;
+# 403 = Forbidden, typically means bot-blocked but site is alive)
+accept = [200, 202, 204, 301, 302, 307, 308, 403]
 
 # Exclude URLs matching these patterns
 exclude = [
-    # Crawler-hostile sites
+    # Crawler-hostile sites that block even with 403 acceptance
     "https://www.linkedin.com/.*",
     "https://linkedin.com/.*",
     "https://x.com/.*",
