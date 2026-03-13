@@ -135,4 +135,4 @@ The implementation consists of:
 - CSS styling for language switcher
 - Configuration in `site.json`
 
-For detailed architecture information, see `ARCHITECTURE.md`.
+For detailed architecture information, see `docs/ARCHITECTURE.md`.

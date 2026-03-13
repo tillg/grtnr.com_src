@@ -51,11 +51,11 @@ Link checking uses [`lychee`](https://github.com/lycheeverse/lychee) and is inte
 
 Configuration is in `lychee.toml`. The system validates all links and ensures no broken images or references are deployed.
 
-For detailed code quality standards and tool configurations, see [CODE_GUIDELINES.md](CODE_GUIDELINES.md).
+For detailed code quality standards and tool configurations, see [CODE_GUIDELINES.md](docs/CODE_GUIDELINES.md).
 
 ## Architecture
 
-For detailed system architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
+For detailed system architecture documentation, see [ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Pipeline Architecture
 

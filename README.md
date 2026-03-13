@@ -41,7 +41,7 @@ This project uses invoke for task automation. Here are the available commands:
 
 ## Code Quality
 
-This project uses automated Python code formatting and linting. For detailed guidelines, tool configurations, and development workflows, see [CODE_GUIDELINES.md](CODE_GUIDELINES.md).
+This project uses automated Python code formatting and linting. For detailed guidelines, tool configurations, and development workflows, see [CODE_GUIDELINES.md](docs/CODE_GUIDELINES.md).
 
 **Quick commands:**
 
