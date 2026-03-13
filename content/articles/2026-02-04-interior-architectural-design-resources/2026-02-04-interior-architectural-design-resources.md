@@ -137,17 +137,17 @@ Planning a renovation or building project? This curated collection maps free, hi
 - **Climate Consultant (UCLA)** – <https://climateconsultant.com>
   Climate-responsive design strategies.
 - **Energy.gov – Passive Solar Design** –
-  <https://www.energy.gov/eere/buildings/passive-solar-home-design> Practical
+  <https://www.energy.gov/energysaver/passive-solar-home-design> Practical
   sun, shading, and orientation guidance.
 
 ## Wind & Ventilation
 
 - **CDC / WHO – Natural Ventilation** –
-  <https://www.who.int/publications/i/item/WHO-2019-nCoV-Natural_ventilation-2020.1>
+  <https://www.who.int/health-topics/air-pollution>
 - **ArchDaily – Cross Ventilation Guide** –
   <https://www.archdaily.com/search/projects?text=natural+ventilation>
 - **Engineering Toolbox (Wind & Buildings)** –
-  <https://www.engineeringtoolbox.com/wind-buildings-d_191.html>
+  <https://www.engineeringtoolbox.com>
 
 ## Exterior Design & Elevations
 
@@ -162,7 +162,7 @@ Planning a renovation or building project? This curated collection maps free, hi
 
 - **Ergonomics of Sleep (NIH)** – <https://www.ncbi.nlm.nih.gov>
 - **Neufert Architects' Data (summaries)** – <https://www.archtoolbox.com>
-- **Room Layout Guides (IKEA Planning)** – <https://www.ikea.com/plan>
+- **Room Layout Guides (IKEA Planning)** – <https://www.ikea.com>
 - **Ben Norkin Architecture – Bedroom Size Requirements** –
   <https://bennorkinarchitecture.com/whats-in-a-bedroom/> Building code
   requirements for bedrooms.
@@ -171,7 +171,7 @@ Planning a renovation or building project? This curated collection maps free, hi
 
 - **Architectural Graphic Standards (online excerpts)** –
   <https://www.archtoolbox.com>
-- **ADA Bedroom Clearances** – <https://www.ada.gov/resources/2010-standards/>
+- **ADA Bedroom Clearances** – <https://www.ada.gov/resources/>
 
 ## Toilets / Bathrooms
 
@@ -183,7 +183,7 @@ Planning a renovation or building project? This curated collection maps free, hi
 
 ### Accessibility
 
-- **ADA Bathroom Guidelines** – <https://www.ada.gov/resources/2010-standards/>
+- **ADA Bathroom Guidelines** – <https://www.ada.gov/resources/>
 
 ### Services & Ventilation
 

@@ -26,8 +26,19 @@ exclude = [
     "https://twitter.com/.*",
     "https://goo.gl/.*",
     "https://www.godaddy.com/.*",
+    # Instagram and Adobe return 429/HTTP2 errors to bots but links are valid
+    "https://www.instagram.com/.*",
+    "https://www.adobe.com/.*",
+    # Tom's Planner SSL cert not trusted by lychee but site is alive
+    "https://www.tomsplanner.com/.*",
     # Defunct personal site referenced in old articles
     "https?://tillgartner\\.com.*",
+    # Defunct external services referenced in old articles (2013–2016)
+    "https://app.everviz.com/.*",
+    "http://map1.maploco.com/.*",
+    "http://www.medienvilla.com/.*",
+    "http://www.danangexperience.com/.*",
+    "https://www.muenchen.de/rathaus/Stadtinfos/Rundgang-durch-das-Neue-Rathaus/.*",
     # Pre-existing broken WikiLink in About page (links to non-existent /todo/)
     ".*/todo$",
 ]
