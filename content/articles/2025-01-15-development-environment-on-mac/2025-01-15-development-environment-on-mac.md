@@ -3,7 +3,7 @@ date: 2025-01-15
 excerpt: I use different dev tools (Java, Python, Docker...) but I use some of them only rarely. So I forget how I installed them, what version manager I used etc. So this is the note to future me to look it up.
 image: dev_tools.png
 tags: Mac
-updates: 2025-05-05
+updates: 2026-06-16
 ---
 
 ![Funny pic from AI](dev_tools.png)
@@ -131,6 +131,26 @@ pyenv shell <version> -- select just for current shell session
 pyenv local <version> -- automatically select whenever you are in the current directory (or its subdirectories)
 pyenv global <version> -- select globally for your user account
 ```
+
+## uv (Python CLI tools)
+
+[uv](https://docs.astral.sh/uv/) is a fast Python package manager written in Rust. I use it for one specific job: installing standalone Python command-line tools in their own isolated environments, without touching the Python that [pyenv](#python) manages for my projects. So pyenv stays my per-project Python version manager, and uv is how I install global Python apps.
+
+**June 2026**: Installed via Homebrew. uv itself is a single self-contained binary with no Python runtime of its own, so brew is the right channel:
+
+`brew install uv`
+
+uv does not bundle Python: when a tool needs an interpreter, uv either reuses one it finds or downloads a managed standalone Python automatically and caches it. That means a tool installed this way keeps working no matter what I later do with pyenv.
+
+**Mini-Cheatsheet**
+
+- `uv tool install <package>` installs a Python CLI tool in its own isolated environment (binaries land in `~/.local/bin`)
+- `uv tool list` lists installed tools and the commands they expose
+- `uv tool upgrade <package>` / `uv tool upgrade --all` upgrades them
+- `uv tool uninstall <package>` removes a tool
+- `uv tool install --python 3.12 <package>` pins the interpreter for that tool
+
+For example, I installed [graphify](https://pypi.org/project/graphifyy/) (a knowledge-graph CLI) with `uv tool install graphifyy` — note the PyPI package is `graphifyy` (double y) while the command is `graphify`.
 
 ## Markdown Linting
 
