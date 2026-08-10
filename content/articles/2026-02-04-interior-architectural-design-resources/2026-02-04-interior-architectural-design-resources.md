@@ -136,8 +136,8 @@ Planning a renovation or building project? This curated collection maps free, hi
   location.
 - **Climate Consultant (UCLA)** – <https://climateconsultant.com>
   Climate-responsive design strategies.
-- **Energy.gov – Passive Solar Design** –
-  <https://www.energy.gov/energysaver/passive-solar-home-design> Practical
+- **WBDG – Passive Solar Heating** –
+  <https://www.wbdg.org/resources/passive-solar-heating> Practical
   sun, shading, and orientation guidance.
 
 ## Wind & Ventilation

@@ -85,11 +85,11 @@ When scanning the literature (and Github). this is the list of generators rthat 
 | [Lektor](https://www.getlektor.com/)         | Python --                |           |                                                |                                                                                                                       |
 | [Gatsby](https://github.com/gatsbyjs/gatsby) | Node JS, React           | No --     | Markdown 00                                    | Looks very flexible, but pretty complex...                                                                            |
 | [Expose](https://github.com/Jack000/Expose)  | Shell scripts --         |           | Markdown and picture folders                   | Specifically for picture sites.                                                                                       |
-| _[Wintersmith](http://wintersmith.io/)_      | Node JS, CoffeeScript ++ | Little -- | Markdown, Jade, ...                            | Looks very flexible, LESS, Sass, Stylus. Might be a bit complex...                                                    |
+| _[Wintersmith](https://github.com/jnordberg/wintersmith)_      | Node JS, CoffeeScript ++ | Little -- | Markdown, Jade, ...                            | Looks very flexible, LESS, Sass, Stylus. Might be a bit complex...                                                    |
 | [DocPad](http://docpad.org/)                 | Node JS ++               | No --     | Markdown and others ++                         | Looks flexible but complex                                                                                            |
 | [kirby](https://getkirby.com/)               | PHP --                   |           | Markdown                                       |                                                                                                                       |
 
-As a result I should have a closer look at _[Harp JS](https://harpjs.com/)_, _[Metalsmith](http://www.metalsmith.io/)_, _[Hexo](https://hexo.io/)_ and _[Wintersmith](http://wintersmith.io/)_.
+As a result I should have a closer look at _[Harp JS](https://harpjs.com/)_, _[Metalsmith](http://www.metalsmith.io/)_, _[Hexo](https://hexo.io/)_ and _[Wintersmith](https://github.com/jnordberg/wintersmith)_.
 
 After quickly reading thru the websites of the above tools I decided to give it a try with _[Metalsmith](http://www.metalsmith.io/)_.
 

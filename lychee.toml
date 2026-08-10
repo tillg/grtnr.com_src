@@ -39,6 +39,8 @@ exclude = [
     "http://www.medienvilla.com/.*",
     "http://www.danangexperience.com/.*",
     "https://www.muenchen.de/rathaus/Stadtinfos/Rundgang-durch-das-Neue-Rathaus/.*",
+    # SWM pool occupancy page: alive from Germany, times out from CI runners
+    "https://www.swm.de/baeder/auslastung.*",
     # Pre-existing broken WikiLink in About page (links to non-existent /todo/)
     ".*/todo$",
 ]
